@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { createIcons, Menu, X, ArrowRight, Microscope, Activity, Sprout } from 'lucide';
+import { initGlobe } from './globe.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -135,6 +136,7 @@ const initShader = () => {
 };
 
 initShader();
+initGlobe();
 
 // --- GSAP Animations ---
 
@@ -179,7 +181,14 @@ tl.fromTo(".hero-text-part",
   0.5
 );
 
-// Features
+// 6. Globe canvas — scale up from center
+tl.fromTo("#globe-canvas",
+  { opacity: 0, scale: 0.85 },
+  { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" },
+  0.6
+);
+
+
 gsap.from(".feature-card", {
   scrollTrigger: {
     trigger: "#servicos",
