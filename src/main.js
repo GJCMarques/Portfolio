@@ -392,85 +392,198 @@ gsap.from(".cta-anim", {
   ease: "power3.out"
 });
 
-// --- Interactive Cards Logic ---
+// --- Portfolio Carousel ---
+const initPortfolioCarousel = () => {
+  const carousel = document.getElementById('portfolio-carousel');
+  const track = document.getElementById('portfolio-track');
+  const prevBtn = document.getElementById('portfolio-prev');
+  const nextBtn = document.getElementById('portfolio-next');
+  const counter = document.getElementById('portfolio-counter');
+  const dots = document.querySelectorAll('.portfolio-dot');
+  if (!carousel || !track) return;
 
-// 1. Diagnostic Shuffler
-const shufflerContainer = document.getElementById('shuffler-container');
+  const cards = track.querySelectorAll('.portfolio-card');
+  const total = cards.length;
+  let currentIndex = 0;
+  let isDragging = false;
+  let startX = 0;
+  let startTranslate = 0;
+  let currentTranslate = 0;
+  let velocity = 0;
+  let lastX = 0;
+  let lastTime = 0;
+  let dragDistance = 0;
 
-function initShuffler() {
-  for (let i = 0; i < 3; i++) {
-    const card = document.createElement('div');
-    // Updated classes for Noir theme: bg-paper, border-ink/10
-    card.className = `absolute inset-x-0 bottom-0 h-24 bg-paper rounded-xl border border-ink/10 shadow-lg transition-all duration-500 flex items-center px-4 gap-3`;
-    card.style.transform = `translateY(${i * -10}px) scale(${1 - i * 0.05})`;
-    card.style.zIndex = 3 - i;
-    card.style.opacity = 1 - i * 0.2;
+  const getCardWidth = () => {
+    if (!cards[0]) return 380;
+    const style = getComputedStyle(track);
+    const gap = parseFloat(style.gap) || 20;
+    return cards[0].offsetWidth + gap;
+  };
 
-    card.innerHTML = `
-            <div class="w-2 h-2 rounded-full bg-carbon animate-pulse"></div>
-            <div class="h-2 w-24 bg-ink/10 rounded-full"></div>
-        `;
-    shufflerContainer.appendChild(card);
-  }
+  const getMaxScroll = () => Math.max(0, track.scrollWidth - carousel.clientWidth);
 
-  setInterval(() => {
-    const cards = Array.from(shufflerContainer.children);
-    const lastCard = cards.pop();
-    shufflerContainer.insertBefore(lastCard, shufflerContainer.firstChild);
+  const updateUI = () => {
+    // Arrows disabled states
+    if (prevBtn) prevBtn.disabled = currentIndex <= 0;
+    if (nextBtn) nextBtn.disabled = currentIndex >= total - 1;
 
-    // Re-apply styles
-    Array.from(shufflerContainer.children).forEach((card, i) => {
-      card.style.transform = `translateY(${i * -10}px) scale(${1 - i * 0.05})`;
-      card.style.zIndex = 3 - i;
-      card.style.opacity = 1 - i * 0.2;
+    // Counter
+    if (counter) counter.textContent = `${currentIndex + 1}/${total}`;
+
+    // Dots
+    dots.forEach((dot, i) => {
+      dot.className = `portfolio-dot w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${i === currentIndex ? 'bg-ink w-6' : 'bg-ink/20'
+        }`;
     });
-  }, 3000);
-}
-initShuffler();
+  };
 
-// 2. Telemetry Typewriter
-const typewriterText = document.getElementById('typewriter-text');
-const messages = [
-  "> analyzing_bio_data...",
-  "> synthesizing_dna...",
-  "> optimizing_growth...",
-  "> system_stable."
-];
-let msgIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+  const scrollTo = (index, duration = 0.5) => {
+    const cardWidth = getCardWidth();
+    const maxScroll = getMaxScroll();
+    currentIndex = Math.max(0, Math.min(index, total - 1));
+    currentTranslate = Math.min(currentIndex * cardWidth, maxScroll);
 
-function typeLoop() {
-  const currentMsg = messages[msgIndex];
+    gsap.to(track, {
+      x: -currentTranslate,
+      duration,
+      ease: "power3.out",
+      overwrite: true,
+    });
 
-  if (isDeleting) {
-    typewriterText.innerHTML = currentMsg.substring(0, charIndex - 1) + '<br/>';
-    charIndex--;
-  } else {
-    typewriterText.innerHTML = currentMsg.substring(0, charIndex + 1) + '<br/>';
-    charIndex++;
-  }
+    updateUI();
+  };
 
-  let typeSpeed = isDeleting ? 30 : 80;
+  // Arrow navigation
+  if (prevBtn) prevBtn.addEventListener('click', () => scrollTo(currentIndex - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => scrollTo(currentIndex + 1));
 
-  if (!isDeleting && charIndex === currentMsg.length) {
-    typeSpeed = 2000;
-    isDeleting = true;
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting = false;
-    msgIndex = (msgIndex + 1) % messages.length;
-    typeSpeed = 500;
-  }
+  // Dot navigation
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => scrollTo(parseInt(dot.dataset.index)));
+  });
 
-  setTimeout(typeLoop, typeSpeed);
-}
-typeLoop();
+  // --- Drag Engine ---
+  const onDragStart = (x) => {
+    isDragging = true;
+    startX = x;
+    lastX = x;
+    lastTime = Date.now();
+    velocity = 0;
+    dragDistance = 0;
+    startTranslate = currentTranslate;
+    gsap.killTweensOf(track);
+    carousel.classList.add('active');
+  };
 
-// 3. Calendar Grid
-const calendarGrid = document.getElementById('calendar-grid');
-for (let i = 0; i < 21; i++) {
-  const cell = document.createElement('div');
-  // Updated classes for Noir theme: bg-carbon, bg-ink/10
-  cell.className = `aspect-square rounded-sm ${i === 10 ? 'bg-carbon animate-pulse' : 'bg-ink/10'}`;
-  calendarGrid.appendChild(cell);
-}
+  const onDragMove = (x) => {
+    if (!isDragging) return;
+    const now = Date.now();
+    const dt = now - lastTime;
+    if (dt > 0) velocity = (lastX - x) / dt;
+    lastX = x;
+    lastTime = now;
+
+    const walk = startX - x;
+    dragDistance = Math.abs(walk);
+    const maxScroll = getMaxScroll();
+
+    let newTranslate = startTranslate + walk;
+
+    // Elastic overscroll at edges
+    if (newTranslate < 0) {
+      newTranslate = newTranslate * 0.3;
+    } else if (newTranslate > maxScroll) {
+      newTranslate = maxScroll + (newTranslate - maxScroll) * 0.3;
+    }
+
+    currentTranslate = newTranslate;
+    gsap.set(track, { x: -currentTranslate });
+  };
+
+  const onDragEnd = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    carousel.classList.remove('active');
+
+    const cardWidth = getCardWidth();
+    const maxScroll = getMaxScroll();
+
+    // Clamp overscroll back
+    if (currentTranslate < 0 || currentTranslate > maxScroll) {
+      currentTranslate = Math.max(0, Math.min(currentTranslate, maxScroll));
+      const nearest = Math.round(currentTranslate / cardWidth);
+      scrollTo(nearest, 0.6);
+      return;
+    }
+
+    // Apply momentum — if flicked fast, jump an extra card
+    const threshold = 0.4; // px/ms
+    let targetIndex;
+
+    if (Math.abs(velocity) > threshold) {
+      // Flick detected
+      targetIndex = velocity > 0
+        ? Math.min(currentIndex + 1, total - 1)
+        : Math.max(currentIndex - 1, 0);
+    } else {
+      // Snap to nearest
+      targetIndex = Math.round(currentTranslate / cardWidth);
+    }
+
+    scrollTo(targetIndex, 0.5);
+  };
+
+  // Mouse events
+  carousel.addEventListener('mousedown', (e) => { e.preventDefault(); onDragStart(e.pageX); });
+  window.addEventListener('mousemove', (e) => { if (isDragging) { e.preventDefault(); onDragMove(e.pageX); } });
+  window.addEventListener('mouseup', onDragEnd);
+
+  // Touch events
+  carousel.addEventListener('touchstart', (e) => onDragStart(e.touches[0].pageX), { passive: true });
+  carousel.addEventListener('touchmove', (e) => onDragMove(e.touches[0].pageX), { passive: true });
+  carousel.addEventListener('touchend', onDragEnd);
+
+  // Prevent click after drag
+  carousel.addEventListener('click', (e) => {
+    if (dragDistance > 8) e.preventDefault();
+  }, true);
+
+  // Keyboard
+  carousel.setAttribute('tabindex', '0');
+  carousel.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') scrollTo(currentIndex - 1);
+    if (e.key === 'ArrowRight') scrollTo(currentIndex + 1);
+  });
+
+  updateUI();
+};
+
+initPortfolioCarousel();
+
+// Portfolio scroll animations
+gsap.from(".portfolio-anim", {
+  scrollTrigger: {
+    trigger: "#portfolio",
+    start: "top 75%",
+  },
+  y: 40,
+  opacity: 0,
+  filter: "blur(4px)",
+  duration: 1,
+  stagger: 0.12,
+  ease: "power3.out"
+});
+
+gsap.from(".portfolio-card", {
+  scrollTrigger: {
+    trigger: "#portfolio",
+    start: "top 60%",
+  },
+  y: 60,
+  opacity: 0,
+  scale: 0.95,
+  duration: 1.2,
+  stagger: 0.15,
+  ease: "power3.out"
+});
