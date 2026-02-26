@@ -421,7 +421,11 @@ const initPortfolioCarousel = () => {
     return cards[0].offsetWidth + gap;
   };
 
-  const getMaxScroll = () => Math.max(0, track.scrollWidth - carousel.clientWidth);
+  const getMaxScroll = () => {
+    const paddingLeft = parseFloat(getComputedStyle(carousel).paddingLeft) || 0;    
+    const espacoExtra = 50;
+    return Math.max(0, track.scrollWidth - carousel.clientWidth + paddingLeft + espacoExtra);
+  };
 
   const getVisibleCount = () => {
     const cardWidth = getCardWidth();
