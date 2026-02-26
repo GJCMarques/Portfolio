@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import { createIcons, Menu, X, ArrowRight, Microscope, Activity, Sprout } from 'lucide';
+import { createIcons, Menu, X, ArrowRight, Microscope, Activity, Sprout, Mail, Phone, Instagram, Linkedin, MapPin, Clock } from 'lucide';
 import { initGlobe } from './globe.js';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,7 +14,13 @@ createIcons({
     ArrowRight,
     Microscope,
     Activity,
-    Sprout
+    Sprout,
+    Mail,
+    Phone,
+    Instagram,
+    Linkedin,
+    MapPin,
+    Clock
   }
 });
 
@@ -126,8 +132,15 @@ const initShader = () => {
   onWindowResize();
   window.addEventListener("resize", onWindowResize, false);
 
+  let shaderVisible = true;
+  const heroEl = document.getElementById('hero');
+  if (heroEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { shaderVisible = e.isIntersecting; }, { threshold: 0 }).observe(heroEl);
+  }
+
   const animate = () => {
     requestAnimationFrame(animate);
+    if (!shaderVisible) return;
     uniforms.time.value += 0.07;
     renderer.render(scene, camera);
   };

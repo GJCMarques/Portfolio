@@ -129,7 +129,7 @@ export function initGlobe() {
 
     function processFeatures(features) {
         const dots = [];
-        const spacing = 1.4; // degrees between dots
+        const spacing = 1.8; // degrees between dots (fewer = faster)
 
         for (const feature of features) {
             const geom = feature.geometry;
@@ -194,16 +194,17 @@ export function initGlobe() {
 
     function drawLandDots() {
         const dotR = 1.1 * scale;
-        ctx.fillStyle = 'rgba(51, 51, 51, 0.5)'; // carbon/50
+        ctx.fillStyle = 'rgba(51, 51, 51, 0.5)';
+        ctx.beginPath();
 
         for (const dot of landDots) {
             const p = project(dot[0], dot[1]);
             if (p) {
-                ctx.beginPath();
+                ctx.moveTo(p[0] + dotR, p[1]);
                 ctx.arc(p[0], p[1], dotR, 0, Math.PI * 2);
-                ctx.fill();
             }
         }
+        ctx.fill();
     }
 
     // ── Render ─────────────────────────────────────────────────────────────────
@@ -364,7 +365,19 @@ export function initGlobe() {
     const HOME_LAT = 25;
     const HOME_SCALE = 1;
 
-    function tick() {
+    let globeVisible = true;
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => { globeVisible = e.isIntersecting; }, { threshold: 0 }).observe(canvas);
+    }
+
+    let lastTick = 0;
+    function tick(now) {
+        requestAnimationFrame(tick);
+        if (!globeVisible) return;
+
+        // Throttle to ~30fps when auto-rotating
+        if (autoRotate && !dragging && now - lastTick < 33) return;
+        lastTick = now;
         if (autoRotate) {
             rotLng += rotSpeed;
             if (rotLng > 360) rotLng -= 360;
@@ -392,7 +405,6 @@ export function initGlobe() {
             if (settled) returningHome = false;
         }
         render();
-        requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
 
