@@ -10,6 +10,10 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
     rel="stylesheet">
   <title>Monrion | Portfolio</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/favicon.ico" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -243,19 +247,38 @@
         transform: scale(0.96) translateY(1px);
       }
 
-      /* Custom Scrollbar */
+      /* Hide native scrollbar but allow scrolling */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 0px;
+        background: transparent;
       }
-      ::-webkit-scrollbar-track {
-        background: var(--color-paper);
+
+      /* Custom Floating Scroll Indicator */
+      #custom-scrollbar {
+        position: fixed;
+        top: 0;
+        right: 4px;
+        width: 6px;
+        height: 100vh;
+        z-index: 9998; /* Just below noise-overlay (9999) but above content */
+        pointer-events: none;
       }
-      ::-webkit-scrollbar-thumb {
-        background: var(--color-carbon);
-        border-radius: 4px;
+
+      #scrollbar-thumb {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 6px;
+        height: 60px;
+        background-color: var(--color-ink); /* Default: Black on light background */
+        border-radius: 100px;
+        transition: background-color 0.4s ease;
+        will-change: transform, height;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: var(--color-ink);
+
+      /* When over dark sections, make scrollbar light */
+      #scrollbar-thumb.is-dark {
+        background-color: #FAF8F5; /* Ivory/White on dark background */
       }
 
       /* Footer Link Hover Animation */
@@ -586,7 +609,8 @@
   </section>
 
   <!-- Philosophy Section -->
-  <section id="sobre" class="py-40 px-6 md:px-12 lg:px-24 bg-ink relative overflow-hidden text-paper">
+  <section id="sobre" data-scrollbar-theme="dark"
+    class="py-40 px-6 md:px-12 lg:px-24 bg-ink relative overflow-hidden text-paper">
     <div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay">
       <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2564&auto=format&fit=crop"
         alt="Noir Texture" class="w-full h-full object-cover grayscale" />
@@ -773,7 +797,8 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-ink rounded-t-[4rem] pt-24 pb-8 mt-[-4rem] relative z-30 text-paper overflow-hidden"
+  <footer data-scrollbar-theme="dark"
+    class="bg-ink rounded-t-[4rem] pt-24 pb-8 mt-[-4rem] relative z-30 text-paper overflow-hidden"
     style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
 
     <!-- Footer Background -->
@@ -904,6 +929,11 @@
         setInterval(update, 30000);
       })();
   </script>
+
+  <!-- Custom Scrollbar Indicator -->
+  <div id="custom-scrollbar">
+    <div id="scrollbar-thumb"></div>
+  </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>

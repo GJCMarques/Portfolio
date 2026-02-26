@@ -6,6 +6,58 @@ import { initGlobe } from './globe.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// --- Custom Scrollbar Logic ---
+const initCustomScrollbar = () => {
+  const thumb = document.getElementById('scrollbar-thumb');
+  if (!thumb) return;
+
+  const updateScrollbar = () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    const scrollY = window.scrollY;
+
+    // Calculate thumb height proportional to viewport
+    const viewportRatio = clientHeight / scrollHeight;
+    const thumbHeight = Math.max(clientHeight * viewportRatio, 40); // Min 40px
+
+    // Calculate position
+    const scrollableDistance = scrollHeight - clientHeight;
+    const scrollPercent = scrollableDistance > 0 ? scrollY / scrollableDistance : 0;
+    const thumbTravelDistance = clientHeight - thumbHeight;
+    const thumbPosition = scrollPercent * thumbTravelDistance;
+
+    gsap.set(thumb, {
+      height: thumbHeight,
+      y: thumbPosition,
+      overwrite: true
+    });
+  };
+
+  // Theme Detection Logic
+  const darkSections = document.querySelectorAll('[data-scrollbar-theme="dark"]');
+  darkSections.forEach(section => {
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top 50%",
+      end: "bottom 50%",
+      onEnter: () => thumb.classList.add('is-dark'),
+      onEnterBack: () => thumb.classList.add('is-dark'),
+      onLeave: () => thumb.classList.remove('is-dark'),
+      onLeaveBack: () => thumb.classList.remove('is-dark'),
+    });
+  });
+
+  window.addEventListener('scroll', updateScrollbar, { passive: true });
+  window.addEventListener('resize', updateScrollbar, { passive: true });
+  // Observe DOM changes to recalculate if content grows
+  const observer = new MutationObserver(updateScrollbar);
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  updateScrollbar();
+};
+
+initCustomScrollbar();
+
 // --- Icons ---
 createIcons({
   icons: {
@@ -422,7 +474,7 @@ const initPortfolioCarousel = () => {
   };
 
   const getMaxScroll = () => {
-    const paddingLeft = parseFloat(getComputedStyle(carousel).paddingLeft) || 0;    
+    const paddingLeft = parseFloat(getComputedStyle(carousel).paddingLeft) || 0;
     const espacoExtra = 50;
     return Math.max(0, track.scrollWidth - carousel.clientWidth + paddingLeft + espacoExtra);
   };
