@@ -105,14 +105,20 @@
       /* Menu Typography & Hover (Cinematic Double Line) */
       .nav-link {
         font-family: var(--font-mono);
-        font-size: clamp(0.65rem, 0.75vw, 0.9rem);
+        font-size: clamp(0.7rem, 0.85vw, 0.95rem);
         font-weight: 500;
         color: var(--color-ink);
         position: relative;
         padding: 0.2rem 0;
-        text-decoration: none;
+        text-decoration: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
         letter-spacing: 0.05em;
         text-transform: uppercase;
+      }
+
+      .nav-link:hover {
+        text-decoration: none !important;
       }
 
       /* Top Line */
@@ -171,8 +177,8 @@
       }
 
       .logo-container {
-        width: clamp(2.5rem, 3vw, 4rem);
-        height: clamp(2.5rem, 3vw, 4rem);
+        width: clamp(2.5rem, 3.2vw, 4.2rem);
+        height: clamp(2.5rem, 3.2vw, 4.2rem);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -181,7 +187,7 @@
       /* Updated Logo Text Classes */
       .logo-text {
         display: block;
-        font-size: clamp(14px, 1.3vw, 22px);
+        font-size: clamp(15px, 1.4vw, 24px);
         font-weight: 800;
         text-transform: uppercase;
         font-family: var(--font-sans);
@@ -277,7 +283,7 @@
 
   <!-- Navbar -->
   <nav id="navbar" class="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] rounded-full flex items-center justify-between"
-    style="top: clamp(0.75rem, 2vh, 1.5rem); max-width: clamp(500px, 85vw, 72rem); padding: clamp(0.75rem, 1.2vw, 1.25rem) clamp(1.25rem, 2.5vw, 2rem);">
+    style="top: clamp(0.75rem, 2vh, 1.5rem); max-width: clamp(500px, 88vw, 76rem); padding: clamp(0.85rem, 1.5vw, 1.4rem) clamp(1.5rem, 3vw, 2.5rem);">
     <!-- Logo Link -->
     <a href="#" class="logo-link group relative z-20">
       <div class="logo-container text-ink">
@@ -304,10 +310,10 @@
 
     <div class="hidden md:block relative z-20">
       <button class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden"
-        style="padding: clamp(0.5rem, 0.8vw, 0.75rem) clamp(1.25rem, 2vw, 2rem); font-size: clamp(0.75rem, 0.85vw, 1rem);">
+        style="padding: clamp(0.6rem, 1vw, 0.85rem) clamp(1.5rem, 2.5vw, 2.25rem); font-size: clamp(0.8rem, 0.9vw, 1rem);">
         <span class="relative z-10 group-hover:text-ink transition-colors duration-300">Contactar</span>
         <span
-          class="absolute inset-0 bg-paper translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+          class="absolute inset-0 bg-paper translate-y-[105%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
       </button>
     </div>
 
