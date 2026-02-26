@@ -38,8 +38,8 @@ const initCustomScrollbar = () => {
   darkSections.forEach(section => {
     ScrollTrigger.create({
       trigger: section,
-      start: "top 50%",
-      end: "bottom 50%",
+      start: "top 88%", // Trigger earlier (as it enters from bottom)
+      end: "bottom 12%", // Keep active longer
       onEnter: () => thumb.classList.add('is-dark'),
       onEnterBack: () => thumb.classList.add('is-dark'),
       onLeave: () => thumb.classList.remove('is-dark'),
@@ -47,10 +47,20 @@ const initCustomScrollbar = () => {
     });
   });
 
+  // Ensure triggers are updated after everything is loaded
+  ScrollTrigger.refresh();
+
   window.addEventListener('scroll', updateScrollbar, { passive: true });
-  window.addEventListener('resize', updateScrollbar, { passive: true });
+  window.addEventListener('resize', () => {
+    updateScrollbar();
+    ScrollTrigger.refresh();
+  }, { passive: true });
+
   // Observe DOM changes to recalculate if content grows
-  const observer = new MutationObserver(updateScrollbar);
+  const observer = new MutationObserver(() => {
+    updateScrollbar();
+    ScrollTrigger.refresh();
+  });
   observer.observe(document.body, { childList: true, subtree: true });
 
   updateScrollbar();
