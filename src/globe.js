@@ -477,8 +477,11 @@ export function initGlobe() {
     // Scroll zoom
     canvas.addEventListener('wheel', (e) => {
         e.preventDefault();
+        autoRotate = false;
+        returningHome = false;
         const factor = e.deltaY > 0 ? 0.95 : 1.05;
         scale = Math.max(0.5, Math.min(2.5, scale * factor));
+        scheduleResume();
     }, { passive: false });
 
     canvas.style.cursor = 'grab';
