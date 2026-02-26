@@ -252,6 +252,145 @@ protocolCards.forEach((card, index) => {
   });
 });
 
+// --- CTA Section Shader ---
+const initCtaShader = () => {
+  const container = document.getElementById('cta-canvas-container');
+  if (!container) return;
+
+  const ctaVertexShader = `
+    void main() {
+      gl_Position = vec4(position, 1.0);
+    }
+  `;
+
+  const ctaFragmentShader = `
+    precision highp float;
+    uniform vec2 resolution;
+    uniform float time;
+
+    // Simplex-like noise helpers
+    vec3 mod289(vec3 x) { return x - floor(x / 289.0) * 289.0; }
+    vec2 mod289(vec2 x) { return x - floor(x / 289.0) * 289.0; }
+    vec3 permute(vec3 x) { return mod289((x * 34.0 + 1.0) * x); }
+
+    float snoise(vec2 v) {
+      const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+                         -0.577350269189626, 0.024390243902439);
+      vec2 i = floor(v + dot(v, C.yy));
+      vec2 x0 = v - i + dot(i, C.xx);
+      vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+      vec4 x12 = x0.xyxy + C.xxzz;
+      x12.xy -= i1;
+      i = mod289(i);
+      vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+      vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+      m = m * m;
+      m = m * m;
+      vec3 x_ = 2.0 * fract(p * C.www) - 1.0;
+      vec3 h = abs(x_) - 0.5;
+      vec3 a0 = x_ - floor(x_ + 0.5);
+      m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+      vec3 g;
+      g.x = a0.x * x0.x + h.x * x0.y;
+      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+      return 130.0 * dot(m, g);
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / resolution.xy;
+      float t = time * 0.06;
+
+      // Organic flowing noise layers — higher amplitude
+      float n1 = snoise(uv * 2.5 + t);
+      float n2 = snoise(uv * 4.0 - t * 1.5) * 0.6;
+      float n3 = snoise(uv * 7.0 + vec2(t * 0.8, -t * 0.6)) * 0.35;
+      float noise = n1 + n2 + n3;
+
+      // Warm dirty white palette — wider range for more contrast
+      vec3 paper  = vec3(0.875, 0.860, 0.835);
+      vec3 cream  = vec3(0.80, 0.79, 0.76);
+      vec3 silver = vec3(0.68, 0.67, 0.65);
+      vec3 warm   = vec3(0.85, 0.83, 0.79);
+
+      // Mix colors with more visible transitions
+      vec3 color = mix(paper, cream, smoothstep(-0.4, 0.4, noise));
+      color = mix(color, silver, smoothstep(0.2, 0.9, noise) * 0.4);
+      color = mix(color, warm, smoothstep(-0.8, -0.2, noise) * 0.3);
+
+      // Stronger vignette
+      float vignette = 1.0 - length((uv - 0.5) * 1.3);
+      vignette = smoothstep(0.0, 0.7, vignette);
+      color = mix(color * 0.88, color, vignette);
+
+      gl_FragColor = vec4(color, 1.0);
+    }
+  `;
+
+  const camera = new THREE.Camera();
+  camera.position.z = 1;
+
+  const scene = new THREE.Scene();
+  const geometry = new THREE.PlaneGeometry(2, 2);
+
+  const uniforms = {
+    time: { type: "f", value: 0.0 },
+    resolution: { type: "v2", value: new THREE.Vector2() },
+  };
+
+  const material = new THREE.ShaderMaterial({
+    uniforms,
+    vertexShader: ctaVertexShader,
+    fragmentShader: ctaFragmentShader,
+  });
+
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  const onResize = () => {
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    renderer.setSize(w, h);
+    uniforms.resolution.value.x = renderer.domElement.width;
+    uniforms.resolution.value.y = renderer.domElement.height;
+  };
+  onResize();
+  window.addEventListener('resize', onResize);
+
+  // Only animate when visible
+  let ctaVisible = false;
+  const ctaSection = document.getElementById('contacto');
+  if (ctaSection && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { ctaVisible = e.isIntersecting; }, { threshold: 0 }).observe(ctaSection);
+  }
+
+  const animateCta = () => {
+    requestAnimationFrame(animateCta);
+    if (!ctaVisible) return;
+    uniforms.time.value += 0.05;
+    renderer.render(scene, camera);
+  };
+  animateCta();
+};
+
+initCtaShader();
+
+// CTA content scroll animations
+gsap.from(".cta-anim", {
+  scrollTrigger: {
+    trigger: "#contacto",
+    start: "top 70%",
+  },
+  y: 50,
+  opacity: 0,
+  filter: "blur(6px)",
+  duration: 1.2,
+  stagger: 0.18,
+  ease: "power3.out"
+});
 
 // --- Interactive Cards Logic ---
 
