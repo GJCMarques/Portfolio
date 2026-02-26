@@ -1,21 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <!-- Background -->
-  <rect width="100" height="100" rx="18" fill="#0D0D12"/>
-
-  <!-- M letterform — Champagne gold on Obsidian -->
-  <polygon
-    points="12,12 28,12 50,46 72,12 88,12 88,88 72,88 72,32 50,62 28,32 28,88 12,88"
-    fill="#C9A84C"
-  />
-
-  <!-- Subtle inner shine line along the top of the M -->
-  <polyline
-    points="12,12 28,12 50,46 72,12 88,12"
-    fill="none"
-    stroke="#F5E4A8"
-    stroke-width="1.5"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    opacity="0.4"
-  />
+<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+  <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z"
+        stroke="#0D0D12" stroke-width="1"/>
+  <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z"
+        fill="#0D0D12" fill-opacity="0.2"/>
+  <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z"
+        stroke="#0D0D12" stroke-width="0.7"/>
+  <circle cx="20" cy="19" r="1.5" fill="#0D0D12"/>
 </svg>

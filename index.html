@@ -232,6 +232,7 @@
         border: 1px solid var(--color-ink);
         transition: all 0.3s ease;
         cursor: pointer; /* Explicitly set pointer cursor */
+        background-clip: padding-box; /* Prevent background bleeding */
       }
 
       .btn-contact:hover {
@@ -352,7 +353,7 @@
         style="padding: clamp(0.6rem, 1vw, 0.85rem) clamp(1.5rem, 2.5vw, 2.25rem); font-size: clamp(0.8rem, 0.9vw, 1rem);">
         <span class="relative z-10 group-hover:text-ink transition-colors duration-300">Contactar</span>
         <span
-          class="absolute inset-0 bg-paper translate-y-[105%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+          class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
       </button>
     </div>
 
@@ -430,7 +431,7 @@
               <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
             </span>
             <span
-              class="absolute inset-0 bg-paper translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+              class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
           </button>
 
           <!-- Secondary (outline) -->
@@ -780,7 +781,7 @@
             <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
           </span>
           <span
-            class="absolute inset-0 bg-paper translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+            class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
         </button>
 
         <!-- Secondary -->
