@@ -141,7 +141,7 @@ const initShader = () => {
   const animate = () => {
     requestAnimationFrame(animate);
     if (!shaderVisible) return;
-    uniforms.time.value += 0.07;
+    uniforms.time.value += 0.04;
     renderer.render(scene, camera);
   };
 
