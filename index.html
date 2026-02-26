@@ -70,6 +70,8 @@
         font-family: var(--font-sans);
         overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
+        /* Anti-FOUC: hidden until GSAP sets autoAlpha: 1 */
+        visibility: hidden;
       }
 
       /* Noise Overlay - Enhanced for Film Grain feel */

@@ -153,10 +153,18 @@ initGlobe();
 
 // --- GSAP Animations ---
 
+// Anti-FOUC: Pre-set all animated elements to their "from" states
+// so nothing flashes when the body becomes visible.
+gsap.set("#navbar", { y: -40, opacity: 0, filter: "blur(10px)" });
+gsap.set("#canvas-container", { opacity: 0 });
+gsap.set(".bg-gradient-to-t", { opacity: 0 });
+gsap.set(".hero-text-part", { y: 40, opacity: 0, filter: "blur(6px)" });
+gsap.set("#globe-canvas", { opacity: 0, scale: 0.85 });
+
 // Entrance Animations — Cinematic sequence (compressed)
 const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-// 1. Page ready
+// 1. Page ready — body visibility flips on, but everything above is already hidden
 tl.set("body", { autoAlpha: 1 });
 
 // 2. Navbar: blur dissolve, snappy
