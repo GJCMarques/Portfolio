@@ -423,6 +423,11 @@ const initPortfolioCarousel = () => {
 
   const getMaxScroll = () => Math.max(0, track.scrollWidth - carousel.clientWidth);
 
+  const getVisibleCount = () => {
+    const cardWidth = getCardWidth();
+    return Math.max(1, Math.floor(carousel.clientWidth / cardWidth));
+  };
+
   const updateUI = () => {
     // Arrows disabled states
     if (prevBtn) prevBtn.disabled = currentIndex <= 0;
@@ -454,9 +459,9 @@ const initPortfolioCarousel = () => {
     updateUI();
   };
 
-  // Arrow navigation
-  if (prevBtn) prevBtn.addEventListener('click', () => scrollTo(currentIndex - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => scrollTo(currentIndex + 1));
+  // Arrow navigation — scroll by visible count
+  if (prevBtn) prevBtn.addEventListener('click', () => scrollTo(currentIndex - getVisibleCount()));
+  if (nextBtn) nextBtn.addEventListener('click', () => scrollTo(currentIndex + getVisibleCount()));
 
   // Dot navigation
   dots.forEach(dot => {
@@ -473,7 +478,6 @@ const initPortfolioCarousel = () => {
     dragDistance = 0;
     startTranslate = currentTranslate;
     gsap.killTweensOf(track);
-    carousel.classList.add('active');
   };
 
   const onDragMove = (x) => {
@@ -504,7 +508,6 @@ const initPortfolioCarousel = () => {
   const onDragEnd = () => {
     if (!isDragging) return;
     isDragging = false;
-    carousel.classList.remove('active');
 
     const cardWidth = getCardWidth();
     const maxScroll = getMaxScroll();
