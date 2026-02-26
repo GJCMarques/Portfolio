@@ -343,6 +343,12 @@
     <!-- Text content — foreground left -->
     <div class="relative z-30 max-w-5xl w-full">
       <div class="flex flex-col gap-2">
+
+        <!-- Mono badge -->
+        <span class="hero-text-part font-mono text-xs md:text-sm tracking-[0.25em] uppercase text-silver mb-4">
+          Estúdio Criativo — Est. 2024
+        </span>
+
         <h1 class="flex flex-col">
           <span
             class="hero-text-part font-sans font-bold text-5xl md:text-7xl lg:text-8xl tracking-tighter text-ink leading-[0.9]">
@@ -353,16 +359,40 @@
             Digital Orgânico.
           </span>
         </h1>
-        <p class="hero-text-part mt-8 max-w-lg text-ink/70 text-lg md:text-xl font-light leading-relaxed">
-          Cultivamos ecossistemas digitais vivos que respiram, evoluem e conectam marcas à sua essência biológica.
-        </p>
-        <div class="hero-text-part mt-8">
-          <button
-            class="group flex items-center gap-3 px-8 py-4 rounded-full bg-ink text-paper font-bold text-lg transition-all hover:scale-105">
-            <span>Explorar Ecossistema</span>
-            <i data-lucide="arrow-right" class="w-5 h-5 transition-transform group-hover:translate-x-1"></i>
-          </button>
+
+        <!-- Description with accent bar -->
+        <div class="hero-text-part mt-10 flex items-start gap-4 max-w-lg">
+          <div class="w-[2px] min-h-[60px] bg-carbon/30 rounded-full mt-1 shrink-0"></div>
+          <div>
+            <p class="text-ink/60 text-base md:text-lg font-light leading-[1.7] tracking-wide">
+              Cultivamos ecossistemas digitais vivos — plataformas que respiram, evoluem e conectam marcas à sua
+              essência.
+            </p>
+          </div>
         </div>
+
+        <!-- Dual CTA -->
+        <div class="hero-text-part mt-10 flex items-center gap-4 flex-wrap">
+          <!-- Primary -->
+          <button
+            class="btn-contact group relative px-8 py-4 rounded-full bg-ink text-paper font-semibold text-base overflow-hidden transition-transform hover:scale-[1.03] active:scale-[0.97]">
+            <span class="relative z-10 flex items-center gap-3 group-hover:text-ink transition-colors duration-300">
+              Explorar Ecossistema
+              <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+            </span>
+            <span
+              class="absolute inset-0 bg-paper translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+          </button>
+
+          <!-- Secondary (outline) -->
+          <a href="#trabalhos"
+            class="group flex items-center gap-2 px-6 py-4 rounded-full border border-ink/15 text-ink/70 font-mono text-sm tracking-wide hover:border-ink/40 hover:text-ink transition-all duration-300">
+            <span>Ver Trabalhos</span>
+            <i data-lucide="arrow-right"
+              class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 opacity-50 group-hover:opacity-100"></i>
+          </a>
+        </div>
+
       </div>
     </div>
   </section>

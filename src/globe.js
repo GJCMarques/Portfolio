@@ -406,7 +406,7 @@ export function initGlobe() {
         resumeTimer = setTimeout(() => {
             autoRotate = true;
             returningHome = true;
-        }, 1000);
+        }, 2000);
     }
 
     canvas.addEventListener('mousedown', (e) => {
