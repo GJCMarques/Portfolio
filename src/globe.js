@@ -222,7 +222,7 @@ export function initGlobe() {
         drawGraticule();
         drawLandOutlines();
         drawLandDots();
-        drawPortoMarker();
+        drawMarkers();
     }
 
     // ── Load GeoJSON ───────────────────────────────────────────────────────────
@@ -243,52 +243,153 @@ export function initGlobe() {
 
     loadData();
 
-    // ── Porto Marker ─────────────────────────────────────────────────────────
-    const PORTO = { lng: -8.61, lat: 41.15 };
+    // ── City Markers ─────────────────────────────────────────────────────────
+    const CITIES = [
+        // ── Principal (pulsing markers) ──
+        { name: 'Porto', lng: -8.61, lat: 41.15, home: true },
+        { name: 'Orléans', lng: 1.91, lat: 47.90, home: true },
+        { name: 'Vilnius', lng: 25.28, lat: 54.69, home: true },
+        { name: 'Tallinn', lng: 24.75, lat: 59.44, home: true },
+
+        // ── Europa ──
+        { name: 'Londres', lng: -0.13, lat: 51.51 },
+        { name: 'Paris', lng: 2.35, lat: 48.86 },
+        { name: 'Madrid', lng: -3.70, lat: 40.42 },
+        { name: 'Berlim', lng: 13.41, lat: 52.52 },
+        { name: 'Roma', lng: 12.50, lat: 41.90 },
+        { name: 'Genebra', lng: 6.14, lat: 46.20 },
+        { name: 'Amesterdão', lng: 4.90, lat: 52.37 },
+        { name: 'Bruxelas', lng: 4.35, lat: 50.85 },
+        { name: 'Viena', lng: 16.37, lat: 48.21 },
+        { name: 'Praga', lng: 14.42, lat: 50.08 },
+        { name: 'Varsóvia', lng: 21.01, lat: 52.23 },
+        { name: 'Copenhaga', lng: 12.57, lat: 55.68 },
+        { name: 'Estocolmo', lng: 18.07, lat: 59.33 },
+        { name: 'Helsínquia', lng: 24.94, lat: 60.17 },
+        { name: 'Oslo', lng: 10.75, lat: 59.91 },
+        { name: 'Atenas', lng: 23.73, lat: 37.98 },
+        { name: 'Bucareste', lng: 26.10, lat: 44.43 },
+        { name: 'Moscovo', lng: 37.62, lat: 55.76 },
+        { name: 'Kiev', lng: 30.52, lat: 50.45 },
+        { name: 'Dublin', lng: -6.26, lat: 53.35 },
+        { name: 'Lisboa', lng: -9.14, lat: 38.72 },
+
+        // ── Américas ──
+        { name: 'Nova York', lng: -74.01, lat: 40.71 },
+        { name: 'Washington', lng: -77.04, lat: 38.91 },
+        { name: 'Ottawa', lng: -75.70, lat: 45.42 },
+        { name: 'Cidade México', lng: -99.13, lat: 19.43 },
+        { name: 'Brasília', lng: -47.93, lat: -15.78 },
+        { name: 'Buenos Aires', lng: -58.38, lat: -34.60 },
+        { name: 'Lima', lng: -77.04, lat: -12.05 },
+        { name: 'Bogotá', lng: -74.07, lat: 4.71 },
+        { name: 'Santiago', lng: -70.67, lat: -33.45 },
+
+        // ── Ásia & Médio Oriente ──
+        { name: 'Tóquio', lng: 139.69, lat: 35.69 },
+        { name: 'Pequim', lng: 116.40, lat: 39.90 },
+        { name: 'Seul', lng: 126.98, lat: 37.57 },
+        { name: 'Nova Deli', lng: 77.21, lat: 28.61 },
+        { name: 'Dubai', lng: 55.27, lat: 25.20 },
+        { name: 'Singapura', lng: 103.82, lat: 1.35 },
+        { name: 'Ancara', lng: 32.87, lat: 39.93 },
+        { name: 'Riade', lng: 46.68, lat: 24.69 },
+        { name: 'Bangkok', lng: 100.50, lat: 13.76 },
+
+        // ── África & Oceânia ──
+        { name: 'Cairo', lng: 31.24, lat: 30.04 },
+        { name: 'Nairobi', lng: 36.82, lat: -1.29 },
+        { name: 'Cidade Cabo', lng: 18.42, lat: -33.93 },
+        { name: 'Canberra', lng: 149.13, lat: -35.28 },
+        { name: 'Wellington', lng: 174.78, lat: -41.29 },
+    ];
     let markerPulse = 0;
 
-    function drawPortoMarker() {
-        const p = project(PORTO.lng, PORTO.lat);
-        if (!p) return;
-
+    function drawMarkers() {
         const s = scale;
         markerPulse += 0.04;
-        const pulseR = 3 * s + Math.sin(markerPulse) * 1.5 * s;
 
-        // Outer pulsing ring
-        ctx.beginPath();
-        ctx.arc(p[0], p[1], pulseR + 4 * s, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(51, 51, 51, ${0.15 + Math.sin(markerPulse) * 0.1})`;
-        ctx.lineWidth = 1.2 * s;
-        ctx.stroke();
+        for (const city of CITIES) {
+            const p = project(city.lng, city.lat);
+            if (!p) continue;
 
-        // Solid dot
-        ctx.beginPath();
-        ctx.arc(p[0], p[1], 3 * s, 0, Math.PI * 2);
-        ctx.fillStyle = '#333333';
-        ctx.fill();
+            if (city.home) {
+                // ── Porto: special pulsing marker ──
+                const pulseR = 3.5 * s + Math.sin(markerPulse) * 1.5 * s;
 
-        // Inner bright core
-        ctx.beginPath();
-        ctx.arc(p[0], p[1], 1.2 * s, 0, Math.PI * 2);
-        ctx.fillStyle = '#EBE9E4';
-        ctx.fill();
+                // Outer pulsing ring
+                ctx.beginPath();
+                ctx.arc(p[0], p[1], pulseR + 4 * s, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(51, 51, 51, ${0.15 + Math.sin(markerPulse) * 0.1})`;
+                ctx.lineWidth = 1.2 * s;
+                ctx.stroke();
 
-        // Label
-        ctx.font = `${10 * s}px "Plus Jakarta Sans", sans-serif`;
-        ctx.fillStyle = '#333333';
-        ctx.textAlign = 'left';
-        ctx.fillText('Porto, PT', p[0] + 8 * s, p[1] + 4 * s);
+                // Solid dot
+                ctx.beginPath();
+                ctx.arc(p[0], p[1], 3.5 * s, 0, Math.PI * 2);
+                ctx.fillStyle = '#333333';
+                ctx.fill();
+
+                // Inner core
+                ctx.beginPath();
+                ctx.arc(p[0], p[1], 1.3 * s, 0, Math.PI * 2);
+                ctx.fillStyle = '#EBE9E4';
+                ctx.fill();
+
+                // Label (bolder)
+                ctx.font = `600 ${10 * s}px "Plus Jakarta Sans", sans-serif`;
+                ctx.fillStyle = '#1A1A1A';
+                ctx.textAlign = 'left';
+                ctx.fillText(city.name, p[0] + 9 * s, p[1] + 4 * s);
+            } else {
+                // ── Other cities: small dot + label ──
+                ctx.beginPath();
+                ctx.arc(p[0], p[1], 2 * s, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(51, 51, 51, 0.6)';
+                ctx.fill();
+
+                // Label
+                ctx.font = `${8 * s}px "Plus Jakarta Sans", sans-serif`;
+                ctx.fillStyle = 'rgba(51, 51, 51, 0.55)';
+                ctx.textAlign = 'left';
+                ctx.fillText(city.name, p[0] + 6 * s, p[1] + 3 * s);
+            }
+        }
     }
 
     // ── Auto-rotation ──────────────────────────────────────────────────────────
     let autoRotate = true;
-    const rotSpeed = 0.15; // degrees per frame
+    let returningHome = false;
+    const rotSpeed = 0.15;
+    const HOME_LAT = 25;
+    const HOME_SCALE = 1;
 
     function tick() {
         if (autoRotate) {
             rotLng += rotSpeed;
             if (rotLng > 360) rotLng -= 360;
+        }
+        // Smoothly lerp rotLat and scale back to defaults when returning
+        if (returningHome && !dragging) {
+            const latDiff = HOME_LAT - rotLat;
+            const scaleDiff = HOME_SCALE - scale;
+            let settled = true;
+
+            if (Math.abs(latDiff) > 0.1) {
+                rotLat += latDiff * 0.015;
+                settled = false;
+            } else {
+                rotLat = HOME_LAT;
+            }
+
+            if (Math.abs(scaleDiff) > 0.005) {
+                scale += scaleDiff * 0.03;
+                settled = false;
+            } else {
+                scale = HOME_SCALE;
+            }
+
+            if (settled) returningHome = false;
         }
         render();
         requestAnimationFrame(tick);
@@ -298,10 +399,21 @@ export function initGlobe() {
     // ── Drag interaction ───────────────────────────────────────────────────────
     let dragging = false;
     let dragStartX, dragStartY, dragStartLng, dragStartLat;
+    let resumeTimer = null;
+
+    function scheduleResume() {
+        if (resumeTimer) clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+            autoRotate = true;
+            returningHome = true;
+        }, 1000);
+    }
 
     canvas.addEventListener('mousedown', (e) => {
         dragging = true;
         autoRotate = false;
+        returningHome = false;
+        if (resumeTimer) clearTimeout(resumeTimer);
         dragStartX = e.clientX;
         dragStartY = e.clientY;
         dragStartLng = rotLng;
@@ -321,7 +433,7 @@ export function initGlobe() {
         if (!dragging) return;
         dragging = false;
         canvas.style.cursor = 'grab';
-        setTimeout(() => { autoRotate = true; }, 2000);
+        scheduleResume();
     });
 
     // Touch
@@ -329,6 +441,8 @@ export function initGlobe() {
         if (e.touches.length !== 1) return;
         dragging = true;
         autoRotate = false;
+        returningHome = false;
+        if (resumeTimer) clearTimeout(resumeTimer);
         dragStartX = e.touches[0].clientX;
         dragStartY = e.touches[0].clientY;
         dragStartLng = rotLng;
@@ -345,7 +459,7 @@ export function initGlobe() {
 
     canvas.addEventListener('touchend', () => {
         dragging = false;
-        setTimeout(() => { autoRotate = true; }, 2000);
+        scheduleResume();
     });
 
     // Scroll zoom
