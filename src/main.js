@@ -225,7 +225,7 @@ gsap.from(".feature-card", {
 // Philosophy
 gsap.from(".philosophy-line", {
   scrollTrigger: {
-    trigger: "#filosofia",
+    trigger: "#sobre",
     start: "top 70%",
   },
   y: 50,
