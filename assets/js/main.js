@@ -393,188 +393,92 @@ gsap.from(".cta-anim", {
   ease: "power3.out"
 });
 
-// --- Portfolio Carousel ---
-const initPortfolioCarousel = () => {
-  const carousel = document.getElementById('portfolio-carousel');
-  const track = document.getElementById('portfolio-track');
-  const prevBtn = document.getElementById('portfolio-prev');
-  const nextBtn = document.getElementById('portfolio-next');
-  const counter = document.getElementById('portfolio-counter');
-  const dots = document.querySelectorAll('.portfolio-dot');
-  if (!carousel || !track) return;
+// --- Elegant Portfolio Showcase ---
+const initElegantCarousel = () => {
+  const container = document.getElementById('proj-container');
+  const slides = Array.from(document.querySelectorAll('.proj-slide'));
+  const bars = Array.from(document.querySelectorAll('.proj-progress'));
+  const counter = document.getElementById('proj-counter');
+  const prevBtn = document.getElementById('proj-prev');
+  const nextBtn = document.getElementById('proj-next');
 
-  const cards = track.querySelectorAll('.portfolio-card');
-  const total = cards.length;
-  let currentIndex = 0;
-  let isDragging = false;
-  let startX = 0;
-  let startTranslate = 0;
-  let currentTranslate = 0;
-  let velocity = 0;
-  let lastX = 0;
-  let lastTime = 0;
-  let dragDistance = 0;
+  if (!container || !slides.length) return;
 
-  const getCardWidth = () => {
-    if (!cards[0]) return 380;
-    const style = getComputedStyle(track);
-    const gap = parseFloat(style.gap) || 20;
-    return cards[0].offsetWidth + gap;
+  const TOTAL = slides.length;
+  let cur = 0;
+  let endListener = null;
+
+  // Staggered text animation on each slide change
+  const animateInfo = (slideEl) => {
+    const info = slideEl.querySelector('.proj-info');
+    if (!info) return;
+    info.classList.remove('anim-in');
+    void info.offsetWidth; // force reflow to restart animations
+    info.classList.add('anim-in');
   };
 
-  const getMaxScroll = () => {
-    const paddingLeft = parseFloat(getComputedStyle(carousel).paddingLeft) || 0;
-    const espacoExtra = 50;
-    return Math.max(0, track.scrollWidth - carousel.clientWidth + paddingLeft + espacoExtra);
-  };
-
-  const getVisibleCount = () => {
-    const cardWidth = getCardWidth();
-    return Math.max(1, Math.floor(carousel.clientWidth / cardWidth));
-  };
-
-  const updateUI = () => {
-    // Arrows disabled states
-    if (prevBtn) prevBtn.disabled = currentIndex <= 0;
-    if (nextBtn) nextBtn.disabled = currentIndex >= total - 1;
-
-    // Counter
-    if (counter) counter.textContent = `${currentIndex + 1}/${total}`;
-
-    // Dots
-    dots.forEach((dot, i) => {
-      dot.className = `portfolio-dot w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${i === currentIndex ? 'bg-ink w-6' : 'bg-ink/20'
-        }`;
+  const resetBars = () => {
+    bars.forEach(bar => {
+      bar.classList.remove('active', 'proj-paused');
+      const fill = bar.querySelector('.proj-progress-fill');
+      if (fill) {
+        fill.style.animation = 'none';
+        void fill.offsetWidth;
+        fill.style.animation = '';
+      }
     });
   };
 
-  const scrollTo = (index, duration = 0.5) => {
-    const cardWidth = getCardWidth();
-    const maxScroll = getMaxScroll();
-    currentIndex = Math.max(0, Math.min(index, total - 1));
-    currentTranslate = Math.min(currentIndex * cardWidth, maxScroll);
+  const go = (idx) => {
+    idx = ((idx % TOTAL) + TOTAL) % TOTAL;
 
-    gsap.to(track, {
-      x: -currentTranslate,
-      duration,
-      ease: "power3.out",
-      overwrite: true,
-    });
-
-    updateUI();
-  };
-
-  // Arrow navigation — scroll by visible count
-  if (prevBtn) prevBtn.addEventListener('click', () => scrollTo(currentIndex - getVisibleCount()));
-  if (nextBtn) nextBtn.addEventListener('click', () => scrollTo(currentIndex + getVisibleCount()));
-
-  // Dot navigation
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => scrollTo(parseInt(dot.dataset.index)));
-  });
-
-  // --- Drag Engine ---
-  const onDragStart = (x) => {
-    isDragging = true;
-    startX = x;
-    lastX = x;
-    lastTime = Date.now();
-    velocity = 0;
-    dragDistance = 0;
-    startTranslate = currentTranslate;
-    gsap.killTweensOf(track);
-  };
-
-  const onDragMove = (x) => {
-    if (!isDragging) return;
-    const now = Date.now();
-    const dt = now - lastTime;
-    if (dt > 0) velocity = (lastX - x) / dt;
-    lastX = x;
-    lastTime = now;
-
-    const walk = startX - x;
-    dragDistance = Math.abs(walk);
-    const maxScroll = getMaxScroll();
-
-    let newTranslate = startTranslate + walk;
-
-    // Elastic overscroll at edges
-    if (newTranslate < 0) {
-      newTranslate = newTranslate * 0.3;
-    } else if (newTranslate > maxScroll) {
-      newTranslate = maxScroll + (newTranslate - maxScroll) * 0.3;
+    // Remove previous animationend listener before resetting bars
+    if (endListener) {
+      const prevFill = bars[cur]?.querySelector('.proj-progress-fill');
+      if (prevFill) prevFill.removeEventListener('animationend', endListener);
+      endListener = null;
     }
 
-    currentTranslate = newTranslate;
-    gsap.set(track, { x: -currentTranslate });
-  };
+    // Switch slide
+    slides[cur].classList.remove('active');
+    cur = idx;
+    slides[cur].classList.add('active');
+    animateInfo(slides[cur]);
 
-  const onDragEnd = () => {
-    if (!isDragging) return;
-    isDragging = false;
+    // Reset + start active progress bar
+    resetBars();
+    bars[cur].classList.add('active');
 
-    const cardWidth = getCardWidth();
-    const maxScroll = getMaxScroll();
-
-    // Clamp overscroll back
-    if (currentTranslate < 0 || currentTranslate > maxScroll) {
-      currentTranslate = Math.max(0, Math.min(currentTranslate, maxScroll));
-      const nearest = Math.round(currentTranslate / cardWidth);
-      scrollTo(nearest, 0.6);
-      return;
+    // Use animationend for perfect sync — zero gap between bar and slide change
+    const activeFill = bars[cur].querySelector('.proj-progress-fill');
+    if (activeFill) {
+      endListener = () => go(cur + 1);
+      activeFill.addEventListener('animationend', endListener, { once: true });
     }
 
-    // Apply momentum — if flicked fast, jump an extra card
-    const threshold = 0.4; // px/ms
-    let targetIndex;
-
-    if (Math.abs(velocity) > threshold) {
-      // Flick detected
-      targetIndex = velocity > 0
-        ? Math.min(currentIndex + 1, total - 1)
-        : Math.max(currentIndex - 1, 0);
-    } else {
-      // Snap to nearest
-      targetIndex = Math.round(currentTranslate / cardWidth);
-    }
-
-    scrollTo(targetIndex, 0.5);
+    if (counter) counter.textContent = `${String(cur + 1).padStart(2, '0')} / ${String(TOTAL).padStart(2, '0')}`;
   };
 
-  // Mouse events
-  carousel.addEventListener('mousedown', (e) => { e.preventDefault(); onDragStart(e.pageX); });
-  window.addEventListener('mousemove', (e) => { if (isDragging) { e.preventDefault(); onDragMove(e.pageX); } });
-  window.addEventListener('mouseup', onDragEnd);
+  if (prevBtn) prevBtn.addEventListener('click', () => go(cur - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => go(cur + 1));
+  bars.forEach(bar => bar.addEventListener('click', () => go(+bar.dataset.index)));
 
-  // Touch events
-  carousel.addEventListener('touchstart', (e) => onDragStart(e.touches[0].pageX), { passive: true });
-  carousel.addEventListener('touchmove', (e) => onDragMove(e.touches[0].pageX), { passive: true });
-  carousel.addEventListener('touchend', onDragEnd);
+  // Touch swipe
+  let touchStartX = 0;
+  container.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  container.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) go(diff > 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
 
-  // Prevent click after drag
-  carousel.addEventListener('click', (e) => {
-    if (dragDistance > 8) e.preventDefault();
-  }, true);
-
-  // Keyboard
-  carousel.setAttribute('tabindex', '0');
-  carousel.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') scrollTo(currentIndex - 1);
-    if (e.key === 'ArrowRight') scrollTo(currentIndex + 1);
-  });
-
-  updateUI();
+  go(0);
 };
 
-initPortfolioCarousel();
+initElegantCarousel();
 
 // Portfolio scroll animations
 gsap.from(".portfolio-anim", {
-  scrollTrigger: {
-    trigger: "#portfolio",
-    start: "top 75%",
-  },
+  scrollTrigger: { trigger: "#portfolio", start: "top 75%" },
   y: 40,
   opacity: 0,
   filter: "blur(4px)",
@@ -583,15 +487,11 @@ gsap.from(".portfolio-anim", {
   ease: "power3.out"
 });
 
-gsap.from(".portfolio-card", {
-  scrollTrigger: {
-    trigger: "#portfolio",
-    start: "top 60%",
-  },
-  y: 60,
+gsap.from("#proj-container", {
+  scrollTrigger: { trigger: "#portfolio", start: "top 60%" },
+  y: 50,
   opacity: 0,
-  scale: 0.95,
+  scale: 0.98,
   duration: 1.2,
-  stagger: 0.15,
   ease: "power3.out"
 });
