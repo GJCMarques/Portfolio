@@ -210,6 +210,36 @@ tl.fromTo("#globe-canvas",
   0.6
 );
 
+// --- Hero ↔ Portfolio snap magnet ---
+// If scroll stops mid-spacer, snaps to either hero (0) or portfolio (1).
+ScrollTrigger.create({
+  trigger: ".hero-spacer",
+  start: "top top",
+  end: "bottom top",
+  snap: {
+    snapTo: [0, 1],
+    ease: "power2.inOut",
+    duration: { min: 0.35, max: 0.65 },
+    delay: 0.05,
+  },
+});
+
+// --- Hero: Curtain Reveal Effect ---
+// Hero is position:fixed (z-0). Portfolio (z-20, bg-paper) slides over it naturally.
+// A 100dvh spacer div before portfolio creates the scroll space.
+// Hero content fades out gently as portfolio covers it.
+gsap.timeline({
+  scrollTrigger: {
+    trigger: ".hero-spacer",
+    start: "top top",
+    end: "bottom top",
+    scrub: 1,
+  }
+})
+.to(".hero-text-part", { opacity: 0, ease: "none" }, 0)
+.to("#globe-canvas",   { opacity: 0, scale: 0.96, ease: "none" }, 0)
+.to("#canvas-container, .bg-gradient-to-t", { opacity: 0.3, ease: "none" }, 0);
+
 
 gsap.from(".feature-card", {
   scrollTrigger: {
@@ -478,7 +508,7 @@ initElegantCarousel();
 
 // Portfolio scroll animations
 gsap.from(".portfolio-anim", {
-  scrollTrigger: { trigger: "#portfolio", start: "top 75%" },
+  scrollTrigger: { trigger: "#portfolio", start: "top 88%" },
   y: 40,
   opacity: 0,
   filter: "blur(4px)",
