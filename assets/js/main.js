@@ -57,10 +57,7 @@ const initCustomScrollbar = () => {
   }, { passive: true });
 
   // Observe DOM changes to recalculate if content grows
-  const observer = new MutationObserver(() => {
-    updateScrollbar();
-    ScrollTrigger.refresh();
-  });
+  const observer = new MutationObserver(updateScrollbar);
   observer.observe(document.body, { childList: true, subtree: true });
 
   updateScrollbar();
