@@ -245,39 +245,6 @@
         transform: scale(0.96) translateY(1px);
       }
 
-      /* Hide native scrollbar but allow scrolling */
-      ::-webkit-scrollbar {
-        width: 0px;
-        background: transparent;
-      }
-
-      /* Custom Floating Scroll Indicator */
-      #custom-scrollbar {
-        position: fixed;
-        top: 0;
-        right: 4px;
-        width: 6px;
-        height: 100vh;
-        z-index: 9998; /* Just below noise-overlay (9999) but above content */
-        pointer-events: none;
-      }
-
-      #scrollbar-thumb {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 6px;
-        height: 60px;
-        background-color: var(--color-ink); /* Default: Black on light background */
-        border-radius: 100px;
-        transition: background-color 0.4s ease;
-        will-change: transform, height;
-      }
-
-      /* When over dark sections, make scrollbar light */
-      #scrollbar-thumb.is-dark {
-        background-color: #FAF8F5; /* Ivory/White on dark background */
-      }
 
       /* Footer Link Hover Animation */
       .footer-link {
@@ -607,7 +574,7 @@
   </section>
 
   <!-- Philosophy Section -->
-  <section id="sobre" data-scrollbar-theme="dark"
+  <section id="sobre"
     class="py-40 px-6 md:px-12 lg:px-24 bg-ink relative overflow-hidden text-paper">
     <div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay">
       <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2564&auto=format&fit=crop"
@@ -795,7 +762,7 @@
   </section>
 
   <!-- Footer -->
-  <footer data-scrollbar-theme="dark"
+  <footer
     class="bg-ink rounded-t-[4rem] pt-24 pb-8 mt-[-4rem] relative z-30 text-paper overflow-hidden"
     style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
 
@@ -927,11 +894,6 @@
         setInterval(update, 30000);
       })();
   </script>
-
-  <!-- Custom Scrollbar Indicator -->
-  <div id="custom-scrollbar">
-    <div id="scrollbar-thumb"></div>
-  </div>
 
   <script type="module" src="assets/js/main.js"></script>
 </body>
