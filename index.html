@@ -1155,16 +1155,12 @@
 
     <!-- Footer Background -->
     <!-- Dot grid pattern -->
-    <div class="absolute inset-0 pointer-events-none opacity-[0.24]"
+    <div class="footer-dots absolute inset-0 pointer-events-none opacity-[0.24]"
       style="background-image: radial-gradient(circle, rgba(235,233,228,0.5) 1px, transparent 1px); background-size: 24px 24px;">
-    </div>
-    <!-- Top edge glow -->
-    <div class="absolute top-0 left-[10%] right-[10%] h-[1px] pointer-events-none"
-      style="background: linear-gradient(90deg, transparent, rgba(235,233,228,0.15) 40%, rgba(235,233,228,0.2) 50%, rgba(235,233,228,0.15) 60%, transparent);">
     </div>
 
     <!-- Main Footer Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
+    <div class="footer-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
 
       <!-- Col 1: Logo + Tagline -->
       <div class="lg:col-span-1 relative z-10">
@@ -1254,7 +1250,8 @@
     </div>
 
     <!-- Bottom Bar: Copyright left, Legal right -->
-    <div class="border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div
+      class="footer-bottom border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="text-paper/30 font-mono text-xs tracking-wide">© 2026 Monrion. Todos os direitos reservados.</p>
       <div class="flex items-center gap-6">
         <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Termos e

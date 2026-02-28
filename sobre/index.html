@@ -389,21 +389,23 @@
   </svg>
 
   <!-- ── Navbar ──────────────────────────────────────────────────────── -->
-  <nav id="navbar"
-    class="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] rounded-full flex items-center justify-between"
+  <nav id="navbar" class="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] rounded-full flex items-center justify-between"
     style="top: clamp(0.75rem, 2vh, 1.5rem); max-width: clamp(500px, 88vw, 76rem); padding: clamp(0.85rem, 1.5vw, 1.4rem) clamp(1.5rem, 3vw, 2.5rem);"
     role="navigation" aria-label="Navegação principal">
 
     <a href="/" class="logo-link group relative z-20" aria-label="Monrion — página inicial">
       <div class="logo-container text-ink">
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" class="opacity-100" />
+          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1"
+            class="opacity-100" />
           <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
-          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7" class="opacity-100" />
+          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7"
+            class="opacity-100" />
           <circle cx="20" cy="19" r="1.5" fill="currentColor" class="opacity-100" />
         </svg>
       </div>
-      <span class="logo-text block text-[22px] font-extrabold uppercase text-ink font-sans select-none group-hover:text-carbon">MONRION</span>
+      <span
+        class="logo-text block text-[22px] font-extrabold uppercase text-ink font-sans select-none group-hover:text-carbon">MONRION</span>
     </a>
 
     <!-- Centered nav links -->
@@ -419,7 +421,8 @@
         class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden inline-block"
         style="padding: clamp(0.6rem, 1vw, 0.85rem) clamp(1.5rem, 2.5vw, 2.25rem); font-size: clamp(0.8rem, 0.9vw, 1rem);">
         <span class="relative z-10 group-hover:text-ink transition-colors duration-300">Contactar</span>
-        <span class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+        <span
+          class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
       </a>
     </div>
 
@@ -436,7 +439,8 @@
       <i data-lucide="x"></i>
     </button>
     <a href="/portfolio/" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Portfólio</a>
-    <a href="/sobre/" class="text-2xl font-medium text-ink hover:text-carbon nav-link" data-navpage="sobre">Sobre Nós</a>
+    <a href="/sobre/" class="text-2xl font-medium text-ink hover:text-carbon nav-link" data-navpage="sobre">Sobre
+      Nós</a>
     <a href="/servicos/" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Serviços</a>
     <a href="/contactos/"
       class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block">Contactar</a>
@@ -448,8 +452,7 @@
   <main>
 
     <!-- ── 01. HERO ─────────────────────────────────────────────────────── -->
-    <section id="sbn-hero"
-      class="relative w-full bp-grid overflow-hidden flex flex-col justify-end"
+    <section id="sbn-hero" class="relative w-full bp-grid overflow-hidden flex flex-col justify-end"
       style="min-height: 100svh; padding: clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 6rem) clamp(3.5rem, 6vh, 5rem);">
 
       <!-- Technical ref — top left -->
@@ -467,7 +470,8 @@
       </div>
 
       <!-- Ghost serif text -->
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden" aria-hidden="true">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
+        aria-hidden="true">
         <span class="hero-ghost" style="font-size: clamp(20vw, 28vw, 38vw);">Sobre</span>
       </div>
 
@@ -521,7 +525,8 @@
         </div>
 
         <!-- Scroll cue -->
-        <div id="hero-scroll-cue" class="flex flex-col items-center gap-2 mt-10 w-fit" style="opacity: 0;" aria-hidden="true">
+        <div id="hero-scroll-cue" class="flex flex-col items-center gap-2 mt-10 w-fit" style="opacity: 0;"
+          aria-hidden="true">
           <div class="scroll-cue-line"></div>
           <span class="t-label" style="opacity: 0.4;">Scroll</span>
         </div>
@@ -578,25 +583,24 @@
 
         <!-- LEFT: Pull quote -->
         <blockquote class="pull-quote">
-          <p class="font-serif italic text-ink"
-            style="font-size: clamp(2rem, 4vw, 4.5rem); line-height: 1.1;">
+          <p class="font-serif italic text-ink" style="font-size: clamp(2rem, 4vw, 4.5rem); line-height: 1.1;">
             "Nasceu da frustração com websites genéricos — feitos com pressa e sem alma."
           </p>
         </blockquote>
 
         <!-- RIGHT: Body paragraphs + date -->
         <div class="flex flex-col gap-6">
-          <p class="story-para font-sans text-ink/65"
-            style="font-size: 0.875rem; line-height: 1.8; max-width: 60ch;">
-            A Monrion foi criada em 2023, no Porto, com uma missão clara: construir experiências digitais que se distinguem pela qualidade, pela atenção ao detalhe e pela honestidade no processo.
+          <p class="story-para font-sans text-ink/65" style="font-size: 0.875rem; line-height: 1.8; max-width: 60ch;">
+            A Monrion foi criada em 2023, no Porto, com uma missão clara: construir experiências digitais que se
+            distinguem pela qualidade, pela atenção ao detalhe e pela honestidade no processo.
           </p>
-          <p class="story-para font-sans text-ink/65"
-            style="font-size: 0.875rem; line-height: 1.8; max-width: 60ch;">
-            Não somos uma agência de 50 pessoas. Somos um estúdio focado, que trabalha com um número limitado de clientes em simultâneo — porque é a única forma de garantir o nível de cuidado que cada projecto merece.
+          <p class="story-para font-sans text-ink/65" style="font-size: 0.875rem; line-height: 1.8; max-width: 60ch;">
+            Não somos uma agência de 50 pessoas. Somos um estúdio focado, que trabalha com um número limitado de
+            clientes em simultâneo — porque é a única forma de garantir o nível de cuidado que cada projecto merece.
           </p>
-          <p class="story-para font-sans text-ink/65"
-            style="font-size: 0.875rem; line-height: 1.8; max-width: 60ch;">
-            Cada website que entregamos foi pensado, discutido e construído com intenção. O nosso trabalho não termina no lançamento — começa aí.
+          <p class="story-para font-sans text-ink/65" style="font-size: 0.875rem; line-height: 1.8; max-width: 60ch;">
+            Cada website que entregamos foi pensado, discutido e construído com intenção. O nosso trabalho não termina
+            no lançamento — começa aí.
           </p>
 
           <!-- Date label with dashed line -->
@@ -617,29 +621,35 @@
 
         <!-- 2023 -->
         <div class="timeline-item flex-1 min-w-[180px] relative py-4 pr-6" role="listitem">
-          <div class="absolute right-0 top-1/4 bottom-1/4 w-px hidden sm:block" style="background: rgba(18,18,18,0.1);" aria-hidden="true"></div>
+          <div class="absolute right-0 top-1/4 bottom-1/4 w-px hidden sm:block" style="background: rgba(18,18,18,0.1);"
+            aria-hidden="true"></div>
           <div class="font-mono text-ink/20 leading-none mb-3 select-none"
             style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.04em;">2023</div>
           <div class="t-label mb-1" style="opacity: 0.7;">Fundação</div>
-          <p class="font-sans text-ink/50" style="font-size: 0.78rem; line-height: 1.6;">Primeiros projectos lançados</p>
+          <p class="font-sans text-ink/50" style="font-size: 0.78rem; line-height: 1.6;">Primeiros projectos lançados
+          </p>
         </div>
 
         <!-- 2024 -->
         <div class="timeline-item flex-1 min-w-[180px] relative py-4 px-6" role="listitem">
-          <div class="absolute right-0 top-1/4 bottom-1/4 w-px hidden sm:block" style="background: rgba(18,18,18,0.1);" aria-hidden="true"></div>
+          <div class="absolute right-0 top-1/4 bottom-1/4 w-px hidden sm:block" style="background: rgba(18,18,18,0.1);"
+            aria-hidden="true"></div>
           <div class="font-mono text-ink/20 leading-none mb-3 select-none"
             style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.04em;">2024</div>
           <div class="t-label mb-1" style="opacity: 0.7;">Crescimento</div>
-          <p class="font-sans text-ink/50" style="font-size: 0.78rem; line-height: 1.6;">Primeiros clientes internacionais</p>
+          <p class="font-sans text-ink/50" style="font-size: 0.78rem; line-height: 1.6;">Primeiros clientes
+            internacionais</p>
         </div>
 
         <!-- 2025 -->
         <div class="timeline-item flex-1 min-w-[180px] relative py-4 px-6" role="listitem">
-          <div class="absolute right-0 top-1/4 bottom-1/4 w-px hidden sm:block" style="background: rgba(18,18,18,0.1);" aria-hidden="true"></div>
+          <div class="absolute right-0 top-1/4 bottom-1/4 w-px hidden sm:block" style="background: rgba(18,18,18,0.1);"
+            aria-hidden="true"></div>
           <div class="font-mono text-ink/20 leading-none mb-3 select-none"
             style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.04em;">2025</div>
           <div class="t-label mb-1" style="opacity: 0.7;">Expansão</div>
-          <p class="font-sans text-ink/50" style="font-size: 0.78rem; line-height: 1.6;">E-commerce e web applications</p>
+          <p class="font-sans text-ink/50" style="font-size: 0.78rem; line-height: 1.6;">E-commerce e web applications
+          </p>
         </div>
 
         <!-- 2026 -->
@@ -676,7 +686,8 @@
             style="font-size: clamp(3.5rem, 7vw, 7rem); -webkit-text-stroke: 1px rgba(235,233,228,0.1); line-height: 1;">
             01
           </div>
-          <h3 class="font-sans font-bold text-paper mb-3" style="font-size: 1.1rem; letter-spacing: 0.01em;">Precisão</h3>
+          <h3 class="font-sans font-bold text-paper mb-3" style="font-size: 1.1rem; letter-spacing: 0.01em;">Precisão
+          </h3>
           <p class="font-mono text-paper/40" style="font-size: 0.76rem; line-height: 1.75; letter-spacing: 0.03em;">
             Cada detalhe tem propósito. Nada é acidental — do espaçamento à paleta de cores.
           </p>
@@ -688,7 +699,8 @@
             style="font-size: clamp(3.5rem, 7vw, 7rem); -webkit-text-stroke: 1px rgba(235,233,228,0.1); line-height: 1;">
             02
           </div>
-          <h3 class="font-sans font-bold text-paper mb-3" style="font-size: 1.1rem; letter-spacing: 0.01em;">Transparência</h3>
+          <h3 class="font-sans font-bold text-paper mb-3" style="font-size: 1.1rem; letter-spacing: 0.01em;">
+            Transparência</h3>
           <p class="font-mono text-paper/40" style="font-size: 0.76rem; line-height: 1.75; letter-spacing: 0.03em;">
             Comunicação clara, sem jargão. Sabe sempre o que está a acontecer com o seu projecto.
           </p>
@@ -700,7 +712,8 @@
             style="font-size: clamp(3.5rem, 7vw, 7rem); -webkit-text-stroke: 1px rgba(235,233,228,0.1); line-height: 1;">
             03
           </div>
-          <h3 class="font-sans font-bold text-paper mb-3" style="font-size: 1.1rem; letter-spacing: 0.01em;">Qualidade</h3>
+          <h3 class="font-sans font-bold text-paper mb-3" style="font-size: 1.1rem; letter-spacing: 0.01em;">Qualidade
+          </h3>
           <p class="font-mono text-paper/40" style="font-size: 0.76rem; line-height: 1.75; letter-spacing: 0.03em;">
             Não existem atalhos. Código limpo, design cuidado, resultado duradouro.
           </p>
@@ -712,7 +725,8 @@
             style="font-size: clamp(3.5rem, 7vw, 7rem); -webkit-text-stroke: 1px rgba(235,233,228,0.1); line-height: 1;">
             04
           </div>
-          <h3 class="font-sans font-bold text-paper mb-3" style="font-size: 1.1rem; letter-spacing: 0.01em;">Parceria</h3>
+          <h3 class="font-sans font-bold text-paper mb-3" style="font-size: 1.1rem; letter-spacing: 0.01em;">Parceria
+          </h3>
           <p class="font-mono text-paper/40" style="font-size: 0.76rem; line-height: 1.75; letter-spacing: 0.03em;">
             Não somos fornecedores — somos parceiros no seu crescimento digital.
           </p>
@@ -732,8 +746,7 @@
       </div>
 
       <!-- Card -->
-      <div class="founder-card relative border rounded-2xl overflow-hidden"
-        style="border-color: rgba(18,18,18,0.09);">
+      <div class="founder-card relative border rounded-2xl overflow-hidden" style="border-color: rgba(18,18,18,0.09);">
 
         <!-- Blueprint corner marks -->
         <div class="card-corner tl" style="border-color: rgba(18,18,18,0.15);" aria-hidden="true"></div>
@@ -756,7 +769,8 @@
 
             <div class="flex flex-col items-center gap-4">
               <div class="text-ink" style="width: 60px; height: 60px;" aria-hidden="true">
-                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" style="opacity: 0.22;">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full"
+                  style="opacity: 0.22;">
                   <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
                   <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
                   <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7" />
@@ -765,7 +779,8 @@
               </div>
               <div class="text-center">
                 <p class="font-mono text-ink/40" style="font-size: 0.68rem; letter-spacing: 0.1em;">Guilherme</p>
-                <p class="font-mono text-ink/25 mt-1" style="font-size: 0.6rem; letter-spacing: 0.08em;">Fotografia em breve</p>
+                <p class="font-mono text-ink/25 mt-1" style="font-size: 0.6rem; letter-spacing: 0.08em;">Fotografia em
+                  breve</p>
               </div>
             </div>
           </div>
@@ -783,7 +798,8 @@
             <!-- Bio -->
             <div class="mt-6">
               <p class="font-sans text-ink/65" style="font-size: 0.875rem; line-height: 1.8;">
-                Combino design estratégico com desenvolvimento técnico para criar websites que são simultaneamente belos e funcionais. Com base no Porto, trabalho com clientes em Portugal e no mundo.
+                Combino design estratégico com desenvolvimento técnico para criar websites que são simultaneamente belos
+                e funcionais. Com base no Porto, trabalho com clientes em Portugal e no mundo.
               </p>
             </div>
 
@@ -970,7 +986,8 @@
       style="border-radius: 4rem 4rem 0 0; padding: clamp(7rem, 12vh, 12rem) clamp(1.5rem, 5vw, 6rem) clamp(6rem, 10vh, 10rem);">
 
       <!-- Ghost serif text behind -->
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden" aria-hidden="true">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
+        aria-hidden="true">
         <span class="font-serif italic text-transparent select-none"
           style="font-size: clamp(18vw, 26vw, 36vw); -webkit-text-stroke: 1px rgba(235,233,228,0.028); white-space: nowrap; font-weight: 300;">
           Início
@@ -1005,9 +1022,11 @@
           style="background: #EBE9E4; color: #121212; padding: clamp(0.85rem, 1.2vw, 1.2rem) clamp(2rem, 3vw, 3rem); font-size: clamp(0.78rem, 0.9vw, 0.95rem); letter-spacing: 0.05em; opacity: 0; transform: translateY(16px);">
           <span class="relative z-10 group-hover:text-paper transition-colors duration-300 flex items-center gap-3">
             Iniciar projecto
-            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1" aria-hidden="true"></i>
+            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"
+              aria-hidden="true"></i>
           </span>
-          <span class="absolute inset-0 bg-ink translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+          <span
+            class="absolute inset-0 bg-ink translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
         </a>
 
         <a href="/servicos/"
@@ -1024,20 +1043,15 @@
 
   <!-- ── Footer ──────────────────────────────────────────────────────── -->
   <footer class="bg-ink rounded-t-[4rem] pt-24 pb-8 mt-[-4rem] relative z-30 text-paper overflow-hidden"
-    style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);"
-    role="contentinfo">
+    style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);" role="contentinfo">
 
     <!-- Dot grid pattern -->
-    <div class="absolute inset-0 pointer-events-none opacity-[0.24]" aria-hidden="true"
+    <div class="footer-dots absolute inset-0 pointer-events-none opacity-[0.24]" aria-hidden="true"
       style="background-image: radial-gradient(circle, rgba(235,233,228,0.5) 1px, transparent 1px); background-size: 24px 24px;">
-    </div>
-    <!-- Top edge glow -->
-    <div class="absolute top-0 left-[10%] right-[10%] h-[1px] pointer-events-none" aria-hidden="true"
-      style="background: linear-gradient(90deg, transparent, rgba(235,233,228,0.15) 40%, rgba(235,233,228,0.2) 50%, rgba(235,233,228,0.15) 60%, transparent);">
     </div>
 
     <!-- Main Footer Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
+    <div class="footer-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
 
       <!-- Col 1: Brand -->
       <div class="lg:col-span-1 relative z-10">
@@ -1063,10 +1077,14 @@
         <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Páginas</h4>
         <ul class="space-y-3">
           <li><a href="/" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Início</a></li>
-          <li><a href="/portfolio/" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Portfólio</a></li>
-          <li><a href="/sobre/" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Sobre Nós</a></li>
-          <li><a href="/servicos/" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Serviços</a></li>
-          <li><a href="/contactos/" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Contactos</a></li>
+          <li><a href="/portfolio/"
+              class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Portfólio</a></li>
+          <li><a href="/sobre/" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Sobre
+              Nós</a></li>
+          <li><a href="/servicos/"
+              class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Serviços</a></li>
+          <li><a href="/contactos/"
+              class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Contactos</a></li>
         </ul>
       </nav>
 
@@ -1076,11 +1094,13 @@
         <ul class="space-y-3">
           <li class="flex items-center gap-2">
             <i data-lucide="mail" class="w-3.5 h-3.5 text-paper/40" aria-hidden="true"></i>
-            <a href="mailto:geral@monrion.com" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">geral@monrion.com</a>
+            <a href="mailto:geral@monrion.com"
+              class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">geral@monrion.com</a>
           </li>
           <li class="flex items-center gap-2">
             <i data-lucide="phone" class="w-3.5 h-3.5 text-paper/40" aria-hidden="true"></i>
-            <a href="tel:+351000000000" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">+351 000 000 000</a>
+            <a href="tel:+351000000000"
+              class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">+351 000 000 000</a>
           </li>
           <li class="flex items-center gap-2">
             <i data-lucide="instagram" class="w-3.5 h-3.5 text-paper/40" aria-hidden="true"></i>
@@ -1104,7 +1124,8 @@
           <div class="flex items-center gap-2">
             <i data-lucide="clock" class="w-3.5 h-3.5 text-paper/40" aria-hidden="true"></i>
             <div class="flex items-center gap-2">
-              <span class="font-mono text-sm text-paper/70" id="footer-gmt-time" aria-live="polite" aria-label="Hora GMT">--:--</span>
+              <span class="font-mono text-sm text-paper/70" id="footer-gmt-time" aria-live="polite"
+                aria-label="Hora GMT">--:--</span>
               <span class="font-mono text-xs text-paper/40">GMT+0</span>
             </div>
           </div>
@@ -1118,13 +1139,16 @@
     </div>
 
     <!-- Bottom Bar -->
-    <div class="border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+    <div
+      class="footer-bottom border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
       <p class="text-paper/30 font-mono text-xs tracking-wide">
         <small>&copy; 2026 Monrion. Todos os direitos reservados.</small>
       </p>
       <div class="flex items-center gap-6">
-        <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Termos e Condições</a>
-        <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Política de Privacidade</a>
+        <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Termos e
+          Condições</a>
+        <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Política
+          de Privacidade</a>
       </div>
     </div>
 
@@ -1226,6 +1250,17 @@
       });
       ctaTL.to('.cta-line', { y: '0%', duration: 1.2, stagger: 0.12, ease: 'power3.out' }, 0);
       ctaTL.to('#sbn-cta .cta-fade', { opacity: 1, y: 0, duration: 0.9, stagger: 0.1 }, 0.4);
+
+      // ── 09 Footer ──────────────────────────────────────────────────────
+      gsap.from('.footer-dots', {
+        scrollTrigger: { trigger: 'footer', start: 'top 85%' },
+        opacity: 0, duration: 1.5, ease: 'power2.out'
+      });
+
+      gsap.from('.footer-grid > div, .footer-bottom', {
+        scrollTrigger: { trigger: 'footer', start: 'top 85%' },
+        y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out'
+      });
     }
 
     // Wait for page.js loader to set body.style.visibility before running animations.

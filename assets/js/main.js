@@ -519,3 +519,14 @@ const initElegantCarousel = () => {
 
 initElegantCarousel();
 
+// ── Footer ────────────────────────────────────────────────────────
+gsap.from('.footer-dots', {
+  scrollTrigger: { trigger: 'footer', start: 'top 85%' },
+  opacity: 0, duration: 1.5, ease: 'power2.out'
+});
+
+gsap.from('.footer-grid > div, .footer-bottom', {
+  scrollTrigger: { trigger: 'footer', start: 'top 85%' },
+  y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out'
+});
+
