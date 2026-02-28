@@ -241,25 +241,27 @@ gsap.timeline({
 .to("#canvas-container, .bg-gradient-to-t", { opacity: 0.3, ease: "none" }, 0);
 
 
-// ── Portfolio — Entrance Cinematic Sequence ──────────────────────────────────
+// ── Portfolio — Scroll Animations ────────────────────────────────────────────
 
-// Linhas decorativas de fundo visíveis em CSS — só o conteúdo anima
-gsap.set(".portfolio-pull-tab", { scaleX: 0, transformOrigin: "center" });
-gsap.set(".portfolio-anim",     { y: 38, opacity: 0, filter: "blur(5px)" });
-gsap.set(".portfolio-nav",      { y: 14, opacity: 0 });
-gsap.set("#proj-container",     { y: 56, opacity: 0, scale: 0.97 });
-gsap.set("#proj-progress-row",  { y: 14, opacity: 0 });
+gsap.from(".portfolio-anim", {
+  scrollTrigger: { trigger: "#portfolio", start: "top 88%" },
+  y: 30, opacity: 0, duration: 0.7, stagger: 0.1, ease: "power3.out"
+});
 
-const portfolioTL = gsap.timeline({
-  scrollTrigger: { trigger: "#portfolio", start: "top 85%", once: true },
-}).timeScale(0.82);
+gsap.from(".portfolio-nav", {
+  scrollTrigger: { trigger: "#portfolio", start: "top 88%" },
+  opacity: 0, duration: 0.5, ease: "power2.out"
+});
 
-portfolioTL
-  .to(".portfolio-pull-tab", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0)
-  .to(".portfolio-anim",     { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.05, stagger: 0.1, ease: "power3.out" }, 0.15)
-  .to(".portfolio-nav",      { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, 0.35)
-  .to("#proj-container",     { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" }, 0.4)
-  .to("#proj-progress-row",  { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.7);
+gsap.from("#proj-container", {
+  scrollTrigger: { trigger: "#portfolio", start: "top 60%" },
+  y: 40, opacity: 0, scale: 0.98, duration: 0.8, ease: "power3.out"
+});
+
+gsap.from("#proj-progress-row", {
+  scrollTrigger: { trigger: "#portfolio", start: "top 55%" },
+  opacity: 0, duration: 0.4, ease: "power2.out"
+});
 
 // ── Manifesto ────────────────────────────────────────────────────────────────
 
@@ -525,22 +527,3 @@ const initElegantCarousel = () => {
 
 initElegantCarousel();
 
-// Portfolio scroll animations
-gsap.from(".portfolio-anim", {
-  scrollTrigger: { trigger: "#portfolio", start: "top 88%" },
-  y: 40,
-  opacity: 0,
-  filter: "blur(4px)",
-  duration: 1,
-  stagger: 0.12,
-  ease: "power3.out"
-});
-
-gsap.from("#proj-container", {
-  scrollTrigger: { trigger: "#portfolio", start: "top 60%" },
-  y: 50,
-  opacity: 0,
-  scale: 0.98,
-  duration: 1.2,
-  ease: "power3.out"
-});

@@ -539,8 +539,28 @@
 
     <!-- Background decorations — Architectural Drawing -->
     <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-      <!-- Dot grid -->
-      <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(18,18,18,0.048) 1px,transparent 1px);background-size:30px 30px;"></div>
+      <!-- Padrão diagonal suave — hachura de planta arquitetónica -->
+      <div style="position:absolute;inset:0;
+        background-image:
+          repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 28px,
+            rgba(18,18,18,0.032) 28px,
+            rgba(18,18,18,0.032) 29px
+          );"></div>
+      <!-- Segunda família de diagonais (cross-hatch leve, opacidade menor) -->
+      <div style="position:absolute;inset:0;
+        background-image:
+          repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 56px,
+            rgba(18,18,18,0.018) 56px,
+            rgba(18,18,18,0.018) 57px
+          );"></div>
+      <!-- Fade radial para suavizar nas bordas -->
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(250,248,245,0.7) 100%);"></div>
 
       <!-- Linhas de curva de nível / topografia (concentric arcs) -->
       <div class="portfolio-arc" style="position:absolute;top:-22rem;right:-14rem;width:52rem;height:52rem;border-radius:50%;border:1px solid rgba(18,18,18,0.055);"></div>
