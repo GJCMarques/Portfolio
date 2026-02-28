@@ -1,58 +1,79 @@
-/**
- * Monrion — Loading Screen
- *
- * Canvas 2D + requestAnimationFrame — GPU-composited, always smooth.
- *
- * Replicates the BackgroundPaths React component faithfully:
- *   pathLength  : 0.3   → visible segment = 30% of path
- *   pathOffset  : [0,1,0] → triangle wave, segment travels forward then back
- *   opacity     : [0.3,0.6,0.3] → element opacity triangle wave
- *   strokeOpacity: 0.1 + i*0.03 → per-path base opacity (fixed)
- *   36 paths × 2 sides = 72 total
- *
- * SVG stroke-dashoffset is NOT GPU-composited → causes jank with 72 paths.
- * Canvas clearRect + stroke IS composited → always 60 fps.
- */
-
 export function initLoader(onComplete) {
-  const SHOW_MS   = 1880;   // 20 ms after 3rd dot fills (1400+180+280+20)
-  const FADE_MS   = 700;
-  const REVEAL_MS = 250;
+  const isHome = !!document.getElementById('canvas-container');
+  const SHOW_MS = 2800;
+  const MORPH_MS = 1000;
 
-  // ── Styles (dot animation only — Canvas handles paths) ───────────────────
+  // ── Styles ───────────────────
   const style = document.createElement('style');
   style.id = '_ldr-style';
   style.textContent = `
     #_ldr {
       position: fixed; inset: 0; z-index: 99999;
       background: #EBE9E4;
-      display: flex; align-items: center; justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       visibility: visible !important;
+      
+      /* STARTING STATE: Hidden to perform the Morph-IN loop! */
+      clip-path: circle(0% at 50% 50%);
+      opacity: 0;
+      
+      /* Will transition both in and out */
+      transition: clip-path cubic-bezier(0.85, 0, 0.15, 1) ${MORPH_MS * 0.8}ms, 
+                  opacity cubic-bezier(0.85, 0, 0.15, 1) ${MORPH_MS * 0.8}ms, 
+                  background-color cubic-bezier(0.85, 0, 0.15, 1) ${MORPH_MS}ms;
+    }
+    
+    /* When active, it opens up entirely */
+    #_ldr.morph-in {
+      clip-path: circle(150% at 50% 50%);
       opacity: 1;
     }
+    
+    /* When exiting, it closes down and darkens */
+    #_ldr.morph-out {
+      clip-path: circle(0% at 50% 50%);
+      background: #121212; /* Darkens before revealing the page underneath */
+    }
+
     #_ldr canvas {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       pointer-events: none;
+      opacity: 0.15;
+      transition: opacity 0.5s ease;
     }
-    @keyframes _ldr-draw {
-      from { stroke-dashoffset: var(--c, 15.71); }
-      to   { stroke-dashoffset: 0; }
+    
+    #_ldr.morph-out canvas, #_ldr.morph-out .content-wrapper,
+    #_ldr:not(.morph-in) .content-wrapper {
+        opacity: 0;
     }
-    @keyframes _ldr-fill {
-      from { fill: transparent; }
-      to   { fill: rgba(18,18,18,0.52); }
+    
+    .content-wrapper {
+        position: relative; z-index: 10;
+        display: flex; flex-direction: column; align-items: center;
+        transition: opacity 0.6s ease 0.2s, transform 0.8s cubic-bezier(0.85, 0, 0.15, 1) 0.1s;
+        /* Start slightly scaled down for the entry pop */
+        transform: translateY(20px) scale(0.95);
     }
-    #_ldr .ld {
-      --c: 15.71;
-      stroke-dasharray: var(--c) var(--c);
-      stroke-dashoffset: var(--c);
-      fill: transparent;
+    
+    #_ldr.morph-in .content-wrapper {
+        transform: translateY(0) scale(1);
+        opacity: 1;
     }
-    #_ldr .ld.on {
-      animation:
-        _ldr-draw 0.42s cubic-bezier(0.4, 0, 0.2, 1) forwards,
-        _ldr-fill 0.28s 0.18s ease forwards;
+    
+    #_ldr.morph-out .content-wrapper {
+        transform: translateY(-40px) scale(0.9);
+        opacity: 0;
+        transition-delay: 0s; /* Exiting is fast */
+    }
+
+    .ldr-dot { opacity: 0; animation: ldr-blink 1.4s infinite; display: inline-block; }
+    .ldr-dot:nth-child(1) { animation-delay: 0s; }
+    .ldr-dot:nth-child(2) { animation-delay: 0.25s; }
+    .ldr-dot:nth-child(3) { animation-delay: 0.5s; }
+    @keyframes ldr-blink {
+      0%, 100% { opacity: 0; transform: translateY(0); }
+      30%, 70% { opacity: 1; transform: translateY(-1px); }
     }
   `;
   document.head.appendChild(style);
@@ -63,129 +84,95 @@ export function initLoader(onComplete) {
   loader.setAttribute('aria-hidden', 'true');
   loader.innerHTML = `
     <canvas></canvas>
-    <div style="position:relative;z-index:10;display:flex;align-items:center;gap:0.65rem;">
-      <span style="
-        font-family:'IBM Plex Mono',monospace;
-        font-size:clamp(0.58rem,1vw,0.75rem);
-        letter-spacing:0.35em;text-transform:uppercase;
-        color:rgba(18,18,18,0.48);white-space:nowrap;user-select:none;
-      ">A Carregar</span>
-      <svg width="42" height="10" viewBox="0 0 42 10" fill="none" overflow="visible" aria-label="a carregar">
-        <circle id="ld1" class="ld" cx="5"  cy="5" r="2.5"
-          stroke="rgba(18,18,18,0.52)" stroke-width="1.5" stroke-linecap="round"/>
-        <circle id="ld2" class="ld" cx="21" cy="5" r="2.5"
-          stroke="rgba(18,18,18,0.52)" stroke-width="1.5" stroke-linecap="round"/>
-        <circle id="ld3" class="ld" cx="37" cy="5" r="2.5"
-          stroke="rgba(18,18,18,0.52)" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+    <div class="content-wrapper">
+        <svg viewBox="0 0 40 40" fill="none" class="w-10 h-10 mb-8 text-[#121212] opacity-80" style="animation: pulse 3s infinite alternate;">
+            <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1.5" />
+            <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7" opacity="0.4" />
+            <circle cx="20" cy="19" r="1.5" fill="currentColor"/>
+        </svg>
+        <div class="flex items-baseline font-mono tracking-[0.25em] uppercase text-[10px] md:text-xs text-[#121212]">
+            <span>A carregar</span>
+            <span class="flex items-baseline ml-1 w-6">
+                <span class="ldr-dot">.</span>
+                <span class="ldr-dot">.</span>
+                <span class="ldr-dot">.</span>
+            </span>
+        </div>
     </div>
   `;
   document.body.prepend(loader);
+  // Trigger entry animation !
+  setTimeout(() => {
+    loader.classList.add('morph-in');
+  }, 10);
 
-  // ── Canvas ────────────────────────────────────────────────────────────────
+  // ── Wave / Topography ANIMATION LOGIC ──────────────────────────────
   const canvas = loader.querySelector('canvas');
-  const ctx    = canvas.getContext('2d');
-  let   dpr    = window.devicePixelRatio || 1;
+  const ctx = canvas.getContext('2d');
+  let dpr = window.devicePixelRatio || 1;
 
   function resize() {
     dpr = window.devicePixelRatio || 1;
-    canvas.width  = window.innerWidth  * dpr;
+    // Scale down resolution slightly to ensure butter smooth 60fps on mobile
+    canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
   }
   resize();
   window.addEventListener('resize', resize, { passive: true });
 
-  // ── Paths — identical formula to React FloatingPaths × 2 ─────────────────
-  const VBW = 696, VBH = 316;
-  const paths = [];
+  const points = [];
+  const lines = 18;
+  const segments = 60;
 
-  for (const pos of [1, -1]) {
-    for (let i = 0; i < 36; i++) {
-      paths.push({
-        // Segment A: M(x0,y0) C(x0,y0)(xc1,y1)(xe1,ye1)
-        x0:  -(380 - i * 5 * pos),  y0:  -(189 + i * 6),
-        xc1: -(312 - i * 5 * pos),  y1:   216 - i * 6,
-        xe1:  152 - i * 5 * pos,    ye1:  343 - i * 6,
-        // Segment B: C(xc2,y2)(xe2,ye2)(xe2,ye2)
-        xc2:  616 - i * 5 * pos,    y2:   470 - i * 6,
-        xe2:  684 - i * 5 * pos,    ye2:  875 - i * 6,
-        // strokeOpacity={0.1 + path.id * 0.03} from React component
-        strokeOpacity: Math.min(0.1 + i * 0.03, 1),
-        width:  0.5 + i * 0.03,
-        // duration: 20 + Math.random() * 10  (seconds)
-        period: 20 + Math.random() * 10,
-        phase:  Math.random(),
-      });
-    }
-  }
+  let rafId = null, running = true, time = 0;
 
-  // ── Bezier evaluation ─────────────────────────────────────────────────────
-  function cubic(p0, c1, c2, p1, t) {
-    const m = 1 - t;
-    return m*m*m*p0 + 3*m*m*t*c1 + 3*m*t*t*c2 + t*t*t*p1;
-  }
-
-  // Point along the compound 2-segment path, parameter t ∈ [0, 1] (split 50/50)
-  function pt(p, t) {
-    if (t <= 0.5) {
-      const u = t * 2;
-      return [cubic(p.x0, p.x0, p.xc1, p.xe1, u),
-              cubic(p.y0, p.y0, p.y1,  p.ye1, u)];
-    }
-    const u = (t - 0.5) * 2;
-    return [cubic(p.xe1, p.xc2, p.xe2, p.xe2, u),
-            cubic(p.ye1, p.y2,  p.ye2, p.ye2, u)];
-  }
-
-  // ── Render loop ───────────────────────────────────────────────────────────
-  const SEG   = 0.30;   // pathLength: 0.3 — visible segment fraction
-  const STEPS = 32;     // polyline resolution
-
-  let rafId = null, running = true, t0 = null;
-
-  function draw(now) {
+  function draw() {
     if (!running) return;
-    if (t0 === null) t0 = now;
-    const elapsed = (now - t0) / 1000;
 
-    const W = window.innerWidth;
-    const H = window.innerHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Apply DPR + xMidYMid-slice viewport transform
-    const scl = Math.max(W / VBW, H / VBH);
-    const ox  = (W - VBW * scl) / 2;
-    const oy  = (H - VBH * scl) / 2;
-    ctx.setTransform(dpr * scl, 0, 0, dpr * scl, dpr * ox, dpr * oy);
-    ctx.clearRect(-ox / scl, -oy / scl, W / scl, H / scl);
+    const w = canvas.width;
+    const h = canvas.height;
+    const centerY = h / 2;
+    const stepX = w / segments;
 
-    ctx.lineCap  = 'round';
+    time += 0.008; // speed of waves
+
+    ctx.lineWidth = 1 * dpr;
+    ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
-    for (const p of paths) {
-      // Triangle wave 0→1→0  (matches pathOffset: [0, 1, 0], linear)
-      const cycle = ((elapsed / p.period) + p.phase) % 1;
-      const wave  = cycle < 0.5 ? cycle * 2 : (1 - cycle) * 2;
-
-      // Element opacity [0.3, 0.6, 0.3]  (matches opacity: [0.3, 0.6, 0.3])
-      const eOp = 0.3 + 0.3 * wave;
-
-      // Segment position along path — same clipping as stroke-dashoffset/array
-      const tS = wave;
-      const tE = Math.min(tS + SEG, 1.0);
-      if (tE <= tS) continue;
-
-      // Effective alpha = per-path strokeOpacity × animated element opacity
-      const alpha = p.strokeOpacity * eOp;
-
+    // Draw wireframe waves (Simulating 3D plane distortion / Topography)
+    for (let i = 0; i < lines; i++) {
       ctx.beginPath();
-      let first = true;
-      for (let s = 0; s <= STEPS; s++) {
-        const [vx, vy] = pt(p, tS + (s / STEPS) * (tE - tS));
-        if (first) { ctx.moveTo(vx, vy); first = false; }
-        else        ctx.lineTo(vx, vy);
+
+      // Calculate dynamic opacity based on depth (i)
+      const depthOpacity = 1 - (i / lines);
+      ctx.strokeStyle = `rgba(18, 18, 18, ${depthOpacity * 0.7})`;
+
+      const yOffset = (i - lines / 2) * (h * 0.04);
+
+      for (let j = 0; j <= segments; j++) {
+        const x = j * stepX;
+
+        // Complex wave math combining sine/cosine at different frequencies
+        // to create an organic, unpredictable terrain feel
+        const noise = Math.sin(x * 0.003 + time + i * 0.2) *
+          Math.cos(x * 0.008 - time * 0.8) *
+          Math.sin(j * 0.1 - time * 1.2 + i * 0.1);
+
+        // Amplitude falls off near edges using a rough bell curve
+        const edgeFalloff = Math.sin((j / segments) * Math.PI);
+        const amplitude = (h * 0.15) * edgeFalloff * (1 - depthOpacity * 0.5);
+
+        const y = centerY + yOffset + (noise * amplitude);
+
+        if (j === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
       }
-      ctx.strokeStyle = `rgba(15,23,42,${alpha.toFixed(3)})`;
-      ctx.lineWidth   = p.width;
       ctx.stroke();
     }
 
@@ -194,41 +181,169 @@ export function initLoader(onComplete) {
 
   rafId = requestAnimationFrame(draw);
 
-  // ── Dot sequencing ────────────────────────────────────────────────────────
-  const d1 = loader.querySelector('#ld1');
-  const d2 = loader.querySelector('#ld2');
-  const d3 = loader.querySelector('#ld3');
-
-  const t1 = setTimeout(() => d1?.classList.add('on'), 500);
-  const t2 = setTimeout(() => d2?.classList.add('on'), 950);
-  const t3 = setTimeout(() => d3?.classList.add('on'), 1400);
-
-  // ── Exit ──────────────────────────────────────────────────────────────────
+  // ── Morph Exit ──────────────────────────────────────────────────────────────────
   const tExit = setTimeout(() => {
-    loader.style.transition = `opacity ${FADE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-    loader.style.opacity    = '0';
+    // 1. Trigger morph animation via CSS class
+    loader.classList.add('morph-out');
 
-    const tReveal = setTimeout(() => onComplete(), REVEAL_MS);
+    // 2. Call onComplete halfway through the morph so elements underneath
+    //    can start animating in *while* the circle closes
+    const tReveal = setTimeout(() => onComplete(), MORPH_MS * 0.4);
 
+    // 3. Cleanup fully after morph finishes
     setTimeout(() => {
       running = false;
       cancelAnimationFrame(rafId);
-      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
       clearTimeout(tReveal);
       window.removeEventListener('resize', resize);
       loader.remove();
       style.remove();
-    }, FADE_MS);
+    }, MORPH_MS);
   }, SHOW_MS);
 
   return () => {
     running = false;
     cancelAnimationFrame(rafId);
-    clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
     clearTimeout(tExit);
     window.removeEventListener('resize', resize);
     loader.remove();
     style.remove();
     onComplete();
   };
+}
+
+// ── Global Effects: Custom Cursor & Seamless Page Exit Morph Loop ─────────
+export function initGlobalEffects() {
+  // 1. Inject Cursor Styles (if not matching mobile)
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const style = document.createElement('style');
+  style.id = 'cursor-style';
+  style.textContent = `
+    .cursor-dot, .cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99998;
+      will-change: transform;
+      transition: width 0.3s ease, height 0.3s ease,
+                  background 0.3s ease, border-color 0.3s ease;
+    }
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--color-ink, #121212);
+      margin-top: -4px; margin-left: -4px;
+    }
+    .cursor-ring {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(18, 18, 18, 0.25);
+      margin-top: -20px; margin-left: -20px;
+    }
+    .cursor-ring.cursor-expand {
+      width: 64px; height: 64px;
+      background: rgba(18, 18, 18, 0.06);
+      border-color: rgba(18, 18, 18, 0.5);
+      margin-top: -32px; margin-left: -32px;
+    }
+    
+    /* The Loop Exit Transition */
+    .cursor-ring.morph-loop-exit {
+      width: 250vw; height: 250vw;
+      margin-top: -125vw; margin-left: -125vw;
+      background: #EBE9E4; /* Changes to paper to match the loading screen background */
+      border-width: 0;
+      opacity: 1;
+      transition: width 0.8s cubic-bezier(0.85, 0, 0.15, 1), 
+                  height 0.8s cubic-bezier(0.85, 0, 0.15, 1), 
+                  margin 0.8s cubic-bezier(0.85, 0, 0.15, 1),
+                  background 0.3s ease;
+      z-index: 100000;
+    }
+    .cursor-dot.morph-loop-exit {
+      opacity: 0;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // 2. Inject Elements OR Select Existing ones
+  let dot = document.querySelector('.cursor-dot');
+  let ring = document.querySelector('.cursor-ring');
+
+  // Clean up any duplicated ones that might be lingering
+  document.querySelectorAll('.cursor-dot, .cursor-ring').forEach(el => el.remove());
+
+  // Re-create them clean for the Global logic to take over completely
+  dot = document.createElement('div');
+  ring = document.createElement('div');
+  dot.className = 'cursor-dot';
+  ring.className = 'cursor-ring';
+  document.body.appendChild(dot);
+  document.body.appendChild(ring);
+
+  // 3. Logic
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  let dx = mx, dy = my;
+  let rx = mx, ry = my;
+
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+  });
+
+  function animCursor() {
+    dx += (mx - dx) * 0.14;
+    dy += (my - dy) * 0.14;
+    rx += (mx - rx) * 0.55;
+    ry += (my - ry) * 0.55;
+
+    dot.style.transform = `translate(${rx}px, ${ry}px)`;
+    ring.style.transform = `translate(${dx}px, ${dy}px)`;
+
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
+  // 4. Hover States
+  const attachHovers = () => {
+    document.querySelectorAll('a, button, [data-cursor-expand]').forEach(el => {
+      // Remove to avoid duplicates just in case
+      el.removeEventListener('mouseenter', () => ring.classList.add('cursor-expand'));
+      el.removeEventListener('mouseleave', () => ring.classList.remove('cursor-expand'));
+
+      el.addEventListener('mouseenter', () => ring.classList.add('cursor-expand'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('cursor-expand'));
+    });
+  }
+
+  // Run on mount and allow mutation if needed (lazy load fix)
+  attachHovers();
+  setTimeout(attachHovers, 2000);
+
+  // 5. Page Transition Interception (The Loop!)
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      // If valid internal page navigation (not anchor link or external)
+      if (href && href.startsWith('/') && !href.startsWith('#') || (link.hostname === window.location.hostname && href !== '#')) {
+        // Only trigger if we're actually changing pages
+        if (link.pathname === window.location.pathname) return;
+
+        e.preventDefault();
+
+        // Lock the cursor position
+        mx = e.clientX;
+        my = e.clientY;
+
+        // Trigger the explosion of the ring!
+        ring.classList.add('morph-loop-exit');
+        dot.classList.add('morph-loop-exit');
+
+        // Allow time for the circle to cover the screen before redirecting
+        setTimeout(() => {
+          window.location.href = href;
+        }, 800);
+      }
+    });
+  });
 }

@@ -4,12 +4,15 @@ import {
   Mail, Phone, Instagram, Linkedin, MapPin, Clock
 } from 'lucide';
 
-import { initLoader } from './loading.js';
+import { initLoader, initGlobalEffects } from './loading.js';
 
 // ── Lucide icons — render while body is still hidden so they're ready on reveal
 createIcons({
   icons: { Menu, X, ArrowRight, Mail, Phone, Instagram, Linkedin, MapPin, Clock }
 });
+
+// ── Global Custom Cursor and Morph Leave Transition
+initGlobalEffects();
 
 // ── Loading screen → reveal ───────────────────────────────────────────────
 initLoader(() => {
@@ -25,11 +28,11 @@ initLoader(() => {
   }
 
   // Mobile menu toggle
-  const menuBtn      = document.getElementById('menu-btn');
+  const menuBtn = document.getElementById('menu-btn');
   const closeMenuBtn = document.getElementById('close-menu-btn');
-  const mobileMenu   = document.getElementById('mobile-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-  menuBtn?.addEventListener('click',      () => mobileMenu?.classList.remove('translate-y-full'));
+  menuBtn?.addEventListener('click', () => mobileMenu?.classList.remove('translate-y-full'));
   closeMenuBtn?.addEventListener('click', () => mobileMenu?.classList.add('translate-y-full'));
 
   // Close mobile menu on any nav link click

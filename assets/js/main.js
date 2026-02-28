@@ -3,28 +3,17 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { createIcons, Menu, X, ArrowRight, Microscope, Activity, Sprout, Mail, Phone, Instagram, Linkedin, MapPin, Clock } from 'lucide';
 import { initGlobe } from './globe.js';
-import { initLoader } from './loading.js';
+import { initLoader, initGlobalEffects } from './loading.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
-
-// --- Icons ---
+// ── Icons ────────────────────────────────────────────────────────
 createIcons({
-  icons: {
-    Menu,
-    X,
-    ArrowRight,
-    Microscope,
-    Activity,
-    Sprout,
-    Mail,
-    Phone,
-    Instagram,
-    Linkedin,
-    MapPin,
-    Clock
-  }
+  icons: { Menu, X, ArrowRight, Microscope, Activity, Sprout, Mail, Phone, Instagram, Linkedin, MapPin, Clock }
 });
+
+// ── Global Custom Cursor and Morph Leave Transition ───────────────
+initGlobalEffects();
 
 // --- Navbar Logic ---
 const navbar = document.getElementById('navbar');
@@ -150,7 +139,7 @@ const initShader = () => {
   animate();
 };
 
-try { initShader(); } catch(e) { console.warn('[Shader] WebGL unavailable:', e.message); }
+try { initShader(); } catch (e) { console.warn('[Shader] WebGL unavailable:', e.message); }
 initGlobe();
 
 // --- GSAP Animations ---
@@ -167,21 +156,28 @@ gsap.set("#globe-canvas", { opacity: 0, scale: 0.85 });
 initLoader(() => {
   const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-  // Body reveal — loader has already faded, so this is instantaneous
+  // Body reveal — loader has already faded or is morphing out, so this is instantaneous
   tl.set("body", { autoAlpha: 1 });
+
+  // Hero canvas FAST reveal (during morph out)
+  tl.fromTo("#canvas-container",
+    { opacity: 0 },
+    { opacity: 1, duration: 2.0, ease: "power2.out" },
+    0
+  );
+
+  // Globe canvas FAST reveal (during morph out)
+  tl.fromTo("#globe-canvas",
+    { opacity: 0, scale: 0.85 },
+    { opacity: 1, scale: 1, duration: 2.0, ease: "power2.out" },
+    0.1
+  );
 
   // Navbar: blur dissolve
   tl.fromTo("#navbar",
     { y: -40, opacity: 0, filter: "blur(10px)" },
     { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.9, ease: "power3.out" },
-    0.1
-  );
-
-  // Hero canvas
-  tl.fromTo("#canvas-container",
-    { opacity: 0 },
-    { opacity: 1, duration: 1.2, ease: "power2.inOut" },
-    0.15
+    0.2
   );
 
   // Hero gradient overlay
@@ -202,14 +198,7 @@ initLoader(() => {
       stagger: 0.14,
       ease: "power3.out"
     },
-    0.5
-  );
-
-  // Globe canvas — scale up from centre
-  tl.fromTo("#globe-canvas",
-    { opacity: 0, scale: 0.85 },
-    { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" },
-    0.6
+    0.4
   );
 });
 
@@ -239,9 +228,9 @@ gsap.timeline({
     scrub: 1,
   }
 })
-.to(".hero-text-part", { opacity: 0, ease: "none" }, 0)
-.to("#globe-canvas",   { opacity: 0, scale: 0.96, ease: "none" }, 0)
-.to("#canvas-container, .bg-gradient-to-t", { opacity: 0.3, ease: "none" }, 0);
+  .to(".hero-text-part", { opacity: 0, ease: "none" }, 0)
+  .to("#globe-canvas", { opacity: 0, scale: 0.96, ease: "none" }, 0)
+  .to("#canvas-container, .bg-gradient-to-t", { opacity: 0.3, ease: "none" }, 0);
 
 
 // ── Portfolio — Scroll Animations ────────────────────────────────────────────
@@ -431,7 +420,7 @@ const initCtaShader = () => {
   animateCta();
 };
 
-try { initCtaShader(); } catch(e) { console.warn('[CtaShader] WebGL unavailable:', e.message); }
+try { initCtaShader(); } catch (e) { console.warn('[CtaShader] WebGL unavailable:', e.message); }
 
 // CTA content scroll animations
 gsap.from(".cta-anim", {
