@@ -570,10 +570,38 @@
         style="background-image: repeating-linear-gradient(45deg, transparent, transparent 15px, var(--color-ink) 15px, var(--color-ink) 16px);">
       </div>
 
-      <!-- Hero Decorative Right Blueprint -> Topological Terrain Wave -->
-      <div class="hero-blueprint hidden md:block absolute right-[-5%] top-0 h-full w-[60vw]"
-        style="color: var(--color-ink); mix-blend-mode: multiply; pointer-events: none; max-width: 900px; opacity: 0.6; z-index: 0;">
-        <canvas id="hero-terrain" class="w-full h-full"></canvas>
+      <!-- Elegant Vertical Image Placeholder - Hero Right -->
+      <div
+        class="hero-image-frame hidden md:flex absolute right-[10%] lg:right-[12%] top-[55%] -translate-y-[45%] z-10 flex-col items-center">
+        <!-- Floating Wrapper in 'Polaroid/Print' style -->
+        <div
+          class="relative w-[36vw] max-w-[500px] aspect-[4/5] p-3.5 bg-paper border border-ink/15 shadow-[12px_24px_50px_rgba(0,0,0,0.08)] transition-transform duration-700 hover:-translate-y-4 hover:scale-[1.02] rotate-[-2deg] hover:rotate-0"
+          style="backdrop-filter: blur(10px);">
+
+          <!-- Subtle subtle top tape effect for realism -->
+          <div
+            class="absolute top-[-10px] left-1/2 -translate-x-1/2 w-20 h-6 bg-ink/5 mix-blend-multiply rotate-1 filter blur-[1px]">
+          </div>
+
+          <!-- Image Container -->
+          <div class="relative w-full h-full overflow-hidden bg-ink/10 border border-ink/10">
+            <!-- Sleek Unsplash image (Brutalist modern building / Abstract workspace) -->
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
+              alt="Monrion Architecture"
+              class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply transition-all duration-700 hover:grayscale-[10%] hover:opacity-100 hover:scale-105" />
+
+            <!-- Corner crosshairs inside the image -->
+            <div class="absolute top-2 left-2 w-3 h-3 border-t border-l border-ink/60"></div>
+            <div class="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-ink/60"></div>
+          </div>
+
+          <!-- Small monospace caption under the image -->
+          <div
+            class="absolute bottom-[-2rem] left-0 w-full flex justify-between items-center px-1 font-mono text-[0.6rem] tracking-[0.2em] text-ink/40 uppercase">
+            <span>FIG. 01</span>
+            <span>HQ_CONNECTION</span>
+          </div>
+        </div>
       </div>
 
       <!-- Interactive Crosshair -->
