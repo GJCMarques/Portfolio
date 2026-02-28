@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
     rel="stylesheet">
   <title>Monrion | Portfólio</title>
   <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
@@ -30,10 +30,7 @@
             serif: ['"Cormorant Garamond"', 'serif'],
             mono: ['"IBM Plex Mono"', 'monospace'],
           },
-          borderRadius: {
-            '2xl': '2rem',
-            '3xl': '3rem',
-          }
+          borderRadius: { '2xl': '2rem', '3xl': '3rem' }
         }
       }
     }
@@ -71,146 +68,310 @@
     }
 
     .noise-overlay {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.08;
-      filter: url(#noiseFilter);
-      mix-blend-mode: overlay;
+      pointer-events: none; z-index: 9999;
+      opacity: 0.08; filter: url(#noiseFilter); mix-blend-mode: overlay;
     }
 
+    /* ── Navbar ─────────────────────────────────────── */
     #navbar {
       transition: background-color 0.5s ease, border-color 0.5s ease,
-                  backdrop-filter 0.5s ease, box-shadow 0.5s ease,
-                  padding 0.5s ease;
+                  backdrop-filter 0.5s ease, box-shadow 0.5s ease, padding 0.5s ease;
       border: 1px solid transparent;
     }
-
     #navbar.scrolled {
       background-color: rgba(235, 233, 228, 0.85);
       backdrop-filter: blur(16px);
       border-color: rgba(18, 18, 18, 0.08);
       box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-      padding-top: 0.55rem;
-      padding-bottom: 0.55rem;
+      padding-top: 0.55rem; padding-bottom: 0.55rem;
     }
-
     .nav-link {
-      font-family: var(--font-mono);
-      font-size: clamp(0.7rem, 0.85vw, 0.95rem);
-      font-weight: 500;
-      color: var(--color-ink);
-      position: relative;
-      padding: 0.2rem 0;
-      text-decoration: none !important;
-      border-bottom: none !important;
-      box-shadow: none !important;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      font-family: var(--font-mono); font-size: clamp(0.7rem, 0.85vw, 0.95rem);
+      font-weight: 500; color: var(--color-ink); position: relative;
+      padding: 0.2rem 0; text-decoration: none !important; border-bottom: none !important;
+      box-shadow: none !important; letter-spacing: 0.05em; text-transform: uppercase;
     }
-
     .nav-link:hover { text-decoration: none !important; }
-
     .nav-link::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 1px;
-      background-color: var(--color-ink);
-      transform: scaleX(0) translateZ(0);
-      transform-origin: right;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform;
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+      background-color: var(--color-ink); transform: scaleX(0) translateZ(0);
+      transform-origin: right; transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
     .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 100%; height: 1px;
-      background-color: var(--color-ink);
-      transform: scaleX(0) translateZ(0);
-      transform-origin: left;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform;
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px;
+      background-color: var(--color-ink); transform: scaleX(0) translateZ(0);
+      transform-origin: left; transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
+    .nav-link:hover::before, .nav-link.active::before { transform: scaleX(1) translateZ(0); transform-origin: left; }
+    .nav-link:hover::after,  .nav-link.active::after  { transform: scaleX(1) translateZ(0); transform-origin: right; }
 
-    .nav-link:hover::before,
-    .nav-link.active::before { transform: scaleX(1) translateZ(0); transform-origin: left; }
-
-    .nav-link:hover::after,
-    .nav-link.active::after  { transform: scaleX(1) translateZ(0); transform-origin: right; }
-
-    .logo-link {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
+    .logo-link { display: flex; align-items: center; gap: 1.5rem; }
     .logo-container {
-      width: clamp(2.5rem, 3.2vw, 4.2rem);
-      height: clamp(2.5rem, 3.2vw, 4.2rem);
+      width: clamp(2.5rem, 3.2vw, 4.2rem); height: clamp(2.5rem, 3.2vw, 4.2rem);
       display: flex; align-items: center; justify-content: center;
     }
-
     .logo-text {
-      display: block;
-      font-size: clamp(15px, 1.4vw, 24px);
-      font-weight: 800;
-      text-transform: uppercase;
-      font-family: var(--font-sans);
-      user-select: none;
-      letter-spacing: 0.06em;
-      transition: letter-spacing 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: block; font-size: clamp(15px, 1.4vw, 24px); font-weight: 800;
+      text-transform: uppercase; font-family: var(--font-sans); user-select: none;
+      letter-spacing: 0.06em; transition: letter-spacing 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
     .logo-link:hover .logo-text { letter-spacing: 0.38em; }
-
-    .logo-container svg {
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      width: 100%; height: 100%;
-    }
-
+    .logo-container svg { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); width: 100%; height: 100%; }
     .logo-link:hover .logo-container svg { transform: scale(1.1) rotate(-5deg); }
-
     .btn-contact {
-      font-family: var(--font-sans);
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      border: 1px solid var(--color-ink);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      background-clip: padding-box;
+      font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; border: 1px solid var(--color-ink);
+      transition: all 0.3s ease; cursor: pointer; background-clip: padding-box;
     }
-
     .btn-contact:hover { background-color: transparent; color: var(--color-ink); }
     .btn-contact span.absolute { background-color: var(--color-paper); }
     .btn-contact:active { transform: scale(0.96) translateY(1px); }
 
-    .footer-link {
-      position: relative;
-      display: inline-block;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
-
+    /* ── Footer ─────────────────────────────────────── */
+    .footer-link { position: relative; display: inline-block; transition: color 0.3s ease, transform 0.3s ease; }
     .footer-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 1px;
+      content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px;
       background-color: rgba(235, 233, 228, 0.5);
       transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
     .footer-link:hover { color: rgba(235, 233, 228, 1) !important; transform: translateX(4px); }
     .footer-link:hover::after { width: 100%; }
+
+    /* ══════════════════════════════════════════════════
+       PORTFÓLIO — PAGE SPECIFIC
+    ══════════════════════════════════════════════════ */
+
+    /* Blueprint grids */
+    .bp-grid {
+      background-image:
+        linear-gradient(rgba(18,18,18,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18,18,18,0.028) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .bp-grid-dark {
+      background-image:
+        linear-gradient(rgba(235,233,228,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(235,233,228,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    /* Technical labels */
+    .t-label {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.22em; text-transform: uppercase; color: rgba(18,18,18,0.32);
+    }
+    .t-label-light {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.22em; text-transform: uppercase; color: rgba(235,233,228,0.3);
+    }
+
+    /* Crosshair mark */
+    .crosshair-mark { position: relative; width: 13px; height: 13px; flex-shrink: 0; }
+    .crosshair-mark::before { content:''; position:absolute; width:1px; height:100%; left:50%; background:currentColor; opacity:0.22; }
+    .crosshair-mark::after  { content:''; position:absolute; height:1px; width:100%; top:50%; background:currentColor; opacity:0.22; }
+
+    /* Hero ghost text */
+    .hero-ghost {
+      font-family: var(--font-serif); font-style: italic; font-weight: 300;
+      line-height: 0.85; letter-spacing: -0.02em; color: transparent;
+      -webkit-text-stroke: 1px rgba(18,18,18,0.045);
+      user-select: none; pointer-events: none; white-space: nowrap;
+    }
+
+    /* Animated line (GSAP draws it) */
+    .h-line { height: 1px; background: rgba(18,18,18,0.12); transform-origin: left center; transform: scaleX(0); }
+
+    /* Scroll cue */
+    @keyframes scroll-cue { 0%,100%{ transform:translateY(0); opacity:0.3; } 50%{ transform:translateY(10px); opacity:0.08; } }
+    .scroll-cue-line { width:1px; height:48px; background:var(--color-ink); opacity:0.3; animation: scroll-cue 2.2s ease-in-out infinite; }
+
+    /* ── Filter bar ──────────────────────────────────── */
+    .pf-filter-bar {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding: clamp(2rem,4vh,3.5rem) clamp(1.5rem,5vw,6rem);
+      border-bottom: 1px solid rgba(18,18,18,0.07);
+    }
+    .pf-filter-btn {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      border: 1px solid rgba(18,18,18,0.12); padding: 0.5rem 1.1rem;
+      border-radius: 100px; color: rgba(18,18,18,0.45);
+      cursor: pointer; background: transparent;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .pf-filter-btn:hover { border-color: rgba(18,18,18,0.3); color: var(--color-ink); }
+    .pf-filter-btn.active {
+      background: var(--color-ink); border-color: var(--color-ink);
+      color: var(--color-paper);
+    }
+
+    /* ── Project rows ────────────────────────────────── */
+    .pf-project {
+      border-bottom: 1px solid rgba(18,18,18,0.07);
+      overflow: hidden; position: relative;
+    }
+
+    .pf-inner {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: clamp(420px, 52vw, 640px);
+    }
+    /* Even rows: image on right */
+    .pf-project:nth-child(even) .pf-inner {
+      grid-template-columns: 45% 55%;
+    }
+    .pf-project:nth-child(even) .pf-img-col { order: 2; }
+    .pf-project:nth-child(even) .pf-info-col { order: 1; }
+
+    @media (max-width: 768px) {
+      .pf-inner { grid-template-columns: 1fr; min-height: auto; }
+      .pf-project:nth-child(even) .pf-img-col { order: 1; }
+      .pf-project:nth-child(even) .pf-info-col { order: 2; }
+    }
+
+    /* Image column */
+    .pf-img-col { position: relative; overflow: hidden; }
+    .pf-img-col img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+      display: block;
+    }
+    .pf-project:hover .pf-img-col img { transform: scale(1.05); }
+
+    /* Image overlay */
+    .pf-img-overlay {
+      position: absolute; inset: 0;
+      background: rgba(18,18,18,0);
+      transition: background 0.5s ease;
+      display: flex; align-items: flex-end;
+      padding: 2rem;
+    }
+    .pf-project:hover .pf-img-overlay { background: rgba(18,18,18,0.18); }
+
+    .pf-view-link {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--color-paper); background: rgba(18,18,18,0.6);
+      backdrop-filter: blur(8px);
+      padding: 0.65rem 1.2rem;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      text-decoration: none;
+    }
+    .pf-project:hover .pf-view-link { opacity: 1; transform: translateY(0); }
+
+    /* Info column */
+    .pf-info-col {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: clamp(3rem,5vw,5rem) clamp(2.5rem,4vw,5rem);
+      position: relative; overflow: hidden;
+    }
+
+    /* Ghost project number */
+    .pf-ghost-num {
+      position: absolute; bottom: -0.1em; right: clamp(1rem,3vw,2.5rem);
+      font-family: var(--font-serif); font-style: italic; font-weight: 300;
+      line-height: 1; color: transparent;
+      -webkit-text-stroke: 1px rgba(18,18,18,0.06);
+      user-select: none; pointer-events: none;
+      font-size: clamp(8rem, 16vw, 18rem);
+    }
+
+    /* Category tag */
+    .pf-cat {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      border: 1px solid rgba(18,18,18,0.13); padding: 0.3rem 0.7rem;
+      border-radius: 100px; color: rgba(18,18,18,0.45);
+      display: inline-block; margin-bottom: 1.25rem; align-self: flex-start;
+    }
+
+    /* Project name */
+    .pf-name {
+      font-family: var(--font-serif); font-style: italic; font-weight: 400;
+      line-height: 0.92; color: var(--color-ink); margin-bottom: 1.25rem;
+      font-size: clamp(2.75rem, 5.5vw, 6.5rem);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .pf-project:hover .pf-name { transform: translateX(6px); }
+
+    /* Description */
+    .pf-desc {
+      font-size: clamp(0.8rem, 0.95vw, 0.875rem);
+      color: rgba(18,18,18,0.5); line-height: 1.7;
+      max-width: 36ch; margin-bottom: 1.75rem;
+    }
+
+    /* Stack tags */
+    .pf-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }
+    .pf-stack-tag {
+      font-family: var(--font-mono); font-size: 0.56rem;
+      letter-spacing: 0.1em; color: rgba(18,18,18,0.38);
+      border: 1px solid rgba(18,18,18,0.09); padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+    }
+
+    /* Bottom row: year + arrow */
+    .pf-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto; padding-top: 1.5rem;
+      border-top: 1px solid rgba(18,18,18,0.06);
+    }
+    .pf-year {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      letter-spacing: 0.12em; color: rgba(18,18,18,0.3);
+    }
+    .pf-arrow-btn {
+      width: 2.5rem; height: 2.5rem; border: 1px solid rgba(18,18,18,0.13);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: var(--color-ink); text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .pf-project:hover .pf-arrow-btn {
+      background: var(--color-ink); border-color: var(--color-ink);
+      color: var(--color-paper); transform: rotate(45deg);
+    }
+
+    /* Mobile image height */
+    @media (max-width: 768px) {
+      .pf-img-col { min-height: 280px; }
+      .pf-info-col { padding: 2.5rem 1.5rem; }
+    }
+
+    /* ── GSAP initial states ─────────────────────────── */
+    .reveal-up { opacity: 0; transform: translateY(36px); will-change: transform, opacity; }
+
+    /* Animate pulse */
+    @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.4; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite; }
+
+    /* CTA button */
+    .btn-cta-paper {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-family: var(--font-mono); font-size: 0.62rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      background: var(--color-paper); color: var(--color-ink);
+      padding: 1rem 2.25rem;
+      transition: background 0.3s ease;
+    }
+    .btn-cta-paper:hover { background: rgba(235,233,228,0.88); }
+    .btn-cta-bordered {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-family: var(--font-mono); font-size: 0.62rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      border: 1px solid rgba(235,233,228,0.18); color: rgba(235,233,228,0.65);
+      padding: 1rem 2.25rem;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+    .btn-cta-bordered:hover { border-color: rgba(235,233,228,0.4); color: var(--color-paper); }
   </style>
 </head>
 
-<body class="bg-paper text-ink font-sans antialiased overflow-x-hidden selection:bg-silver selection:text-paper">
+<body class="bg-paper text-ink font-sans antialiased overflow-x-hidden selection:bg-ink/10">
 
   <!-- Noise Overlay -->
   <div class="noise-overlay"></div>
@@ -227,13 +388,13 @@
     <a href="/" class="logo-link group relative z-20">
       <div class="logo-container text-ink">
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" class="opacity-100" />
+          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
           <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
-          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7" class="opacity-100" />
-          <circle cx="20" cy="19" r="1.5" fill="currentColor" class="opacity-100" />
+          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7" />
+          <circle cx="20" cy="19" r="1.5" fill="currentColor" />
         </svg>
       </div>
-      <span class="logo-text block font-extrabold uppercase text-ink font-sans select-none group-hover:text-carbon">MONRION</span>
+      <span class="logo-text text-ink">MONRION</span>
     </a>
 
     <div class="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
@@ -263,24 +424,402 @@
     <button id="close-menu-btn" class="absolute top-8 right-8 text-ink cursor-pointer">
       <i data-lucide="x"></i>
     </button>
-    <a href="/portfolio/" class="text-2xl font-medium text-ink hover:text-carbon nav-link" data-navpage="portfolio">Portfólio</a>
-    <a href="/sobre/"     class="text-2xl font-medium text-ink hover:text-carbon nav-link" data-navpage="sobre">Sobre Nós</a>
-    <a href="/servicos/"  class="text-2xl font-medium text-ink hover:text-carbon nav-link" data-navpage="servicos">Serviços</a>
+    <a href="/portfolio/" class="text-2xl font-medium text-ink nav-link" data-navpage="portfolio">Portfólio</a>
+    <a href="/sobre/"     class="text-2xl font-medium text-ink nav-link" data-navpage="sobre">Sobre Nós</a>
+    <a href="/servicos/"  class="text-2xl font-medium text-ink nav-link" data-navpage="servicos">Serviços</a>
     <a href="/contactos/" class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block">Contactar</a>
   </div>
 
-  <!-- ═══════════════════════════════════════════════
-       HERO + CONTEÚDO DA PÁGINA — A ADICIONAR
-  ════════════════════════════════════════════════ -->
-  <main class="min-h-screen pt-40 pb-32 bg-paper relative z-10">
-    <div class="min-h-[60vh] flex items-center justify-center">
-      <span class="font-mono text-ink/25 uppercase tracking-[0.35em]" style="font-size: 0.6rem;">
-        Portfólio — em construção
-      </span>
+  <!-- ══════════════════════════════════════════════════
+       PORTFÓLIO — CONTEÚDO PRINCIPAL
+  ═══════════════════════════════════════════════════ -->
+  <main class="relative z-10 overflow-hidden">
+
+    <!-- ── 01. HERO ─────────────────────────────────────────── -->
+    <section id="pf-hero"
+      class="relative min-h-screen flex flex-col justify-end bg-paper bp-grid overflow-hidden"
+      style="padding: clamp(7rem,12vh,10rem) clamp(1.5rem,5vw,6rem) clamp(3.5rem,6vh,5.5rem);">
+
+      <!-- Ghost text -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
+        <span class="hero-ghost" style="font-size: clamp(18vw,26vw,36vw);">Portfólio</span>
+      </div>
+
+      <!-- Top-left ref -->
+      <div class="absolute flex items-center gap-2.5 pointer-events-none"
+        style="top: clamp(5.5rem,9.5vh,8.5rem); left: clamp(1.5rem,5vw,6rem);">
+        <div class="crosshair-mark text-ink"></div>
+        <span class="t-label">REF: MON-PFL-001 / 2026</span>
+      </div>
+
+      <!-- Top-right -->
+      <div class="absolute flex items-center gap-2.5 pointer-events-none justify-end"
+        style="top: clamp(5.5rem,9.5vh,8.5rem); right: clamp(1.5rem,5vw,6rem);">
+        <span class="t-label">2023 — 2026 · PORTO</span>
+        <div class="crosshair-mark text-ink"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10">
+
+        <!-- Rule + label -->
+        <div class="flex items-center gap-5 mb-10">
+          <div class="h-line flex-1" id="hero-line-l"></div>
+          <span class="t-label whitespace-nowrap">01 — TRABALHO SELECCIONADO</span>
+          <div class="h-line flex-1" id="hero-line-r"></div>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="font-serif italic leading-[0.88] text-ink mb-10 overflow-hidden"
+          style="font-size: clamp(4.5rem,11.5vw,14rem);">
+          <span class="block overflow-hidden">
+            <span id="hero-w1" class="block" style="transform:translateY(110%); will-change:transform;">O nosso</span>
+          </span>
+          <span class="block overflow-hidden" style="padding-left: clamp(0px,16%,16%);">
+            <span id="hero-w2" class="block" style="transform:translateY(110%); will-change:transform;">trabalho.</span>
+          </span>
+        </h1>
+
+        <!-- Bottom row -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <p id="hero-desc" class="font-mono text-silver leading-[1.8] max-w-xs"
+            style="font-size: clamp(0.68rem,0.82vw,0.8rem); opacity:0;">
+            Uma selecção dos projectos que<br>
+            criámos com mais orgulho. Cada um,<br>
+            uma história de colaboração.
+          </p>
+          <div class="flex items-start gap-10 md:gap-14">
+            <div id="stat-1" style="opacity:0; transform:translateY(20px);">
+              <div class="font-mono font-light text-ink" style="font-size:clamp(2.25rem,4.5vw,4rem); letter-spacing:-0.03em; line-height:1;">6</div>
+              <div class="t-label mt-1.5">Projectos</div>
+            </div>
+            <div id="stat-2" style="opacity:0; transform:translateY(20px);">
+              <div class="font-mono font-light text-ink" style="font-size:clamp(2.25rem,4.5vw,4rem); letter-spacing:-0.03em; line-height:1;">4</div>
+              <div class="t-label mt-1.5">Categorias</div>
+            </div>
+            <div id="stat-3" style="opacity:0; transform:translateY(20px);">
+              <div class="font-mono font-light text-ink" style="font-size:clamp(2.25rem,4.5vw,4rem); letter-spacing:-0.03em; line-height:1;">3</div>
+              <div class="t-label mt-1.5">Anos</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scroll cue -->
+        <div class="flex items-center gap-3 mt-14" id="hero-scroll-cue" style="opacity:0;">
+          <div class="scroll-cue-line"></div>
+          <span class="t-label">Scroll para ver projectos</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 02. FILTER BAR ────────────────────────────────────── -->
+    <div class="pf-filter-bar" id="pf-filters">
+      <button class="pf-filter-btn active" data-filter="all">Todos</button>
+      <button class="pf-filter-btn" data-filter="landing-page">Landing Pages</button>
+      <button class="pf-filter-btn" data-filter="website">Websites</button>
+      <button class="pf-filter-btn" data-filter="ecommerce">E-Commerce</button>
+      <button class="pf-filter-btn" data-filter="webapp">Web Apps</button>
     </div>
+
+    <!-- ── 03. PROJECTS ──────────────────────────────────────── -->
+    <div id="pf-list">
+
+      <!-- 01 · Arcadia ─────────────────────────────────────── -->
+      <article class="pf-project" data-cat="landing-page">
+        <div class="pf-inner">
+          <!-- Image -->
+          <div class="pf-img-col">
+            <img
+              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85&fit=crop"
+              alt="Arcadia — Restaurante fine-dining"
+              loading="lazy"
+            />
+            <div class="pf-img-overlay">
+              <a href="#" class="pf-view-link">
+                <span>Ver Projecto</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+          <!-- Info -->
+          <div class="pf-info-col">
+            <span class="pf-ghost-num" aria-hidden="true">01</span>
+            <span class="pf-cat">Landing Page</span>
+            <h2 class="pf-name">Arcadia</h2>
+            <p class="pf-desc">
+              Website de apresentação para restaurante fine-dining no Porto.
+              Animações imersivas, reservas online e experiência sensorial digital.
+            </p>
+            <div class="pf-stack">
+              <span class="pf-stack-tag">React</span>
+              <span class="pf-stack-tag">GSAP</span>
+              <span class="pf-stack-tag">Tailwind CSS</span>
+              <span class="pf-stack-tag">Framer Motion</span>
+            </div>
+            <div class="pf-bottom">
+              <span class="pf-year">2025</span>
+              <a href="#" class="pf-arrow-btn" aria-label="Ver Projecto Arcadia">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 · Studio Norte ────────────────────────────────── -->
+      <article class="pf-project" data-cat="website">
+        <div class="pf-inner">
+          <div class="pf-img-col">
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85&fit=crop"
+              alt="Studio Norte — Atelier de arquitectura"
+              loading="lazy"
+            />
+            <div class="pf-img-overlay">
+              <a href="#" class="pf-view-link">
+                <span>Ver Projecto</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="pf-info-col">
+            <span class="pf-ghost-num" aria-hidden="true">02</span>
+            <span class="pf-cat">Website Institucional</span>
+            <h2 class="pf-name">Studio Norte</h2>
+            <p class="pf-desc">
+              Presença digital para atelier de arquitectura contemporânea.
+              Portfólio de projectos com galeria interactiva e gestão de conteúdo.
+            </p>
+            <div class="pf-stack">
+              <span class="pf-stack-tag">Next.js</span>
+              <span class="pf-stack-tag">Sanity CMS</span>
+              <span class="pf-stack-tag">GSAP</span>
+              <span class="pf-stack-tag">TypeScript</span>
+            </div>
+            <div class="pf-bottom">
+              <span class="pf-year">2025</span>
+              <a href="#" class="pf-arrow-btn" aria-label="Ver Projecto Studio Norte">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 · Bloom ───────────────────────────────────────── -->
+      <article class="pf-project" data-cat="ecommerce">
+        <div class="pf-inner">
+          <div class="pf-img-col">
+            <img
+              src="https://images.unsplash.com/photo-1487530811015-780a88a7d0bc?w=1200&q=85&fit=crop"
+              alt="Bloom — Loja online de floricultura"
+              loading="lazy"
+            />
+            <div class="pf-img-overlay">
+              <a href="#" class="pf-view-link">
+                <span>Ver Projecto</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="pf-info-col">
+            <span class="pf-ghost-num" aria-hidden="true">03</span>
+            <span class="pf-cat">E-Commerce</span>
+            <h2 class="pf-name">Bloom</h2>
+            <p class="pf-desc">
+              Loja online de floricultura artesanal. Catálogo visual, carrinho de compras
+              e checkout optimizado para conversão, com entrega programada.
+            </p>
+            <div class="pf-stack">
+              <span class="pf-stack-tag">Next.js</span>
+              <span class="pf-stack-tag">Stripe</span>
+              <span class="pf-stack-tag">Sanity</span>
+              <span class="pf-stack-tag">Vercel</span>
+            </div>
+            <div class="pf-bottom">
+              <span class="pf-year">2024</span>
+              <a href="#" class="pf-arrow-btn" aria-label="Ver Projecto Bloom">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 · Atlântico ───────────────────────────────────── -->
+      <article class="pf-project" data-cat="webapp">
+        <div class="pf-inner">
+          <div class="pf-img-col">
+            <img
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=85&fit=crop"
+              alt="Atlântico — Plataforma de gestão"
+              loading="lazy"
+            />
+            <div class="pf-img-overlay">
+              <a href="#" class="pf-view-link">
+                <span>Ver Projecto</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="pf-info-col">
+            <span class="pf-ghost-num" aria-hidden="true">04</span>
+            <span class="pf-cat">Web Application</span>
+            <h2 class="pf-name">Atlântico</h2>
+            <p class="pf-desc">
+              Plataforma de gestão para empresa do sector marítimo. Dashboard analítico,
+              relatórios exportáveis, gestão de frotas e equipas.
+            </p>
+            <div class="pf-stack">
+              <span class="pf-stack-tag">React</span>
+              <span class="pf-stack-tag">Node.js</span>
+              <span class="pf-stack-tag">PostgreSQL</span>
+              <span class="pf-stack-tag">Chart.js</span>
+            </div>
+            <div class="pf-bottom">
+              <span class="pf-year">2024</span>
+              <a href="#" class="pf-arrow-btn" aria-label="Ver Projecto Atlântico">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 · Brisa Solar ─────────────────────────────────── -->
+      <article class="pf-project" data-cat="landing-page">
+        <div class="pf-inner">
+          <div class="pf-img-col">
+            <img
+              src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=85&fit=crop"
+              alt="Brisa Solar — Campanha digital"
+              loading="lazy"
+            />
+            <div class="pf-img-overlay">
+              <a href="#" class="pf-view-link">
+                <span>Ver Projecto</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="pf-info-col">
+            <span class="pf-ghost-num" aria-hidden="true">05</span>
+            <span class="pf-cat">Landing Page</span>
+            <h2 class="pf-name">Brisa Solar</h2>
+            <p class="pf-desc">
+              Campanha digital para empresa de energia solar. Animações 3D interactivas,
+              simulador de poupança e formulário de orçamento optimizado.
+            </p>
+            <div class="pf-stack">
+              <span class="pf-stack-tag">Vite</span>
+              <span class="pf-stack-tag">GSAP</span>
+              <span class="pf-stack-tag">Three.js</span>
+              <span class="pf-stack-tag">Tailwind CSS</span>
+            </div>
+            <div class="pf-bottom">
+              <span class="pf-year">2024</span>
+              <a href="#" class="pf-arrow-btn" aria-label="Ver Projecto Brisa Solar">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 · Forma ───────────────────────────────────────── -->
+      <article class="pf-project" data-cat="website">
+        <div class="pf-inner">
+          <div class="pf-img-col">
+            <img
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=85&fit=crop"
+              alt="Forma Studio — Estúdio de fitness premium"
+              loading="lazy"
+            />
+            <div class="pf-img-overlay">
+              <a href="#" class="pf-view-link">
+                <span>Ver Projecto</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="pf-info-col">
+            <span class="pf-ghost-num" aria-hidden="true">06</span>
+            <span class="pf-cat">Website Institucional</span>
+            <h2 class="pf-name">Forma Studio</h2>
+            <p class="pf-desc">
+              Website para estúdio de fitness premium. Sistema de agendamento integrado,
+              área de membros e programa de treino personalizável.
+            </p>
+            <div class="pf-stack">
+              <span class="pf-stack-tag">Next.js</span>
+              <span class="pf-stack-tag">Supabase</span>
+              <span class="pf-stack-tag">Tailwind CSS</span>
+              <span class="pf-stack-tag">Framer Motion</span>
+            </div>
+            <div class="pf-bottom">
+              <span class="pf-year">2025</span>
+              <a href="#" class="pf-arrow-btn" aria-label="Ver Projecto Forma Studio">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /#pf-list -->
+
+    <!-- ── 04. CTA ───────────────────────────────────────────── -->
+    <section id="pf-cta" class="relative bg-ink text-paper bp-grid-dark overflow-hidden"
+      style="padding: clamp(7rem,13vh,13rem) clamp(1.5rem,5vw,6rem); border-radius: 4rem 4rem 0 0;">
+
+      <!-- Ghost text -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
+        <span class="font-serif italic text-paper" style="font-size:clamp(18vw,26vw,36vw); opacity:0.028; white-space:nowrap; line-height:0.85;">Projecto</span>
+      </div>
+
+      <!-- Technical label -->
+      <div class="absolute flex items-center gap-2.5 pointer-events-none"
+        style="top: clamp(3rem,6vh,5rem); left: clamp(1.5rem,5vw,6rem);">
+        <div class="crosshair-mark" style="color: rgba(235,233,228,0.3);"></div>
+        <span class="t-label-light">04 — PRÓXIMO PASSO</span>
+      </div>
+
+      <div class="relative z-10 text-center">
+
+        <h2 class="font-serif italic text-paper mb-6 overflow-hidden"
+          style="font-size: clamp(3.5rem,9.5vw,12rem); line-height: 0.88; letter-spacing: -0.02em;">
+          <span class="block overflow-hidden">
+            <span class="cta-line block" style="transform:translateY(110%); will-change:transform;">O próximo</span>
+          </span>
+          <span class="block overflow-hidden">
+            <span class="cta-line block" style="transform:translateY(110%); will-change:transform;">é o seu.</span>
+          </span>
+        </h2>
+
+        <p class="font-mono text-paper/35 mb-12 mx-auto leading-relaxed cta-fade"
+          style="font-size:clamp(0.68rem,0.9vw,0.82rem); max-width:38ch; opacity:0; transform:translateY(16px);">
+          Cada projecto começa com uma conversa.<br>
+          Conte-nos o que tem em mente.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 cta-fade"
+          style="opacity:0; transform:translateY(16px);">
+          <a href="/contactos/" class="btn-cta-paper">
+            <span>Iniciar projecto</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/servicos/" class="btn-cta-bordered">
+            <span>Ver Serviços</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer -->
+  <!-- ── Footer ─────────────────────────────────────────────── -->
   <footer
     class="bg-ink rounded-t-[4rem] pt-24 pb-8 relative z-30 text-paper overflow-hidden"
     style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
@@ -294,7 +833,7 @@
 
       <div class="lg:col-span-1">
         <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-12 flex items-center justify-content text-paper">
+          <div class="w-12 h-12 flex items-center text-paper">
             <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
               <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
               <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
@@ -374,7 +913,89 @@
 
   </footer>
 
+  <!-- ── Scripts ────────────────────────────────────────────── -->
   <script type="module" src="../assets/js/page.js"></script>
+
+  <script type="module">
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
+
+    function initAnimations() {
+
+      // ── Hero entrance ──────────────────────────────────────
+      const heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      heroTL.to(['#hero-line-l', '#hero-line-r'], { scaleX: 1, duration: 1.1 }, 0);
+      heroTL.to(['#hero-w1', '#hero-w2'], { y: '0%', duration: 1.3, stagger: 0.12 }, 0.15);
+      heroTL.to('#hero-desc',             { opacity: 1, duration: 0.9 }, 0.6);
+      heroTL.to(['#stat-1','#stat-2','#stat-3'], { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, 0.75);
+      heroTL.to('#hero-scroll-cue',       { opacity: 1, duration: 0.7 }, 1.1);
+
+      // ── Filter bar ─────────────────────────────────────────
+      gsap.from('#pf-filters', {
+        scrollTrigger: { trigger: '#pf-filters', start: 'top 90%' },
+        opacity: 0, y: 20, duration: 0.7, ease: 'power2.out'
+      });
+
+      // ── Project rows reveal on scroll ──────────────────────
+      gsap.utils.toArray('.pf-project').forEach((proj, i) => {
+        gsap.from(proj, {
+          scrollTrigger: { trigger: proj, start: 'top 85%', toggleActions: 'play none none none' },
+          opacity: 0,
+          y: 40,
+          duration: 0.85,
+          ease: 'power2.out'
+        });
+      });
+
+      // ── CTA section ────────────────────────────────────────
+      const ctaTL = gsap.timeline({
+        scrollTrigger: { trigger: '#pf-cta', start: 'top 78%' }
+      });
+      ctaTL.to('.cta-line',  { y: '0%', duration: 1.2, stagger: 0.12, ease: 'power3.out' }, 0);
+      ctaTL.to('.cta-fade',  { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: 'power2.out' }, 0.4);
+
+      // ── Filter logic ───────────────────────────────────────
+      const filterBtns = document.querySelectorAll('.pf-filter-btn');
+      const projects   = document.querySelectorAll('.pf-project');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const cat = btn.dataset.filter;
+
+          // Update active button
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          // Animate projects in/out
+          projects.forEach(proj => {
+            const match = cat === 'all' || proj.dataset.cat === cat;
+            if (match) {
+              proj.style.display = '';
+              gsap.to(proj, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', delay: 0.05 });
+            } else {
+              gsap.to(proj, {
+                opacity: 0, y: -12, duration: 0.3, ease: 'power2.in',
+                onComplete: () => { proj.style.display = 'none'; }
+              });
+            }
+          });
+        });
+      });
+
+    }
+
+    // Wait for page.js initLoader to reveal body
+    const obs = new MutationObserver(() => {
+      if (document.body.style.visibility !== '') {
+        obs.disconnect();
+        requestAnimationFrame(initAnimations);
+      }
+    });
+    obs.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+  </script>
+
 </body>
 
 </html>

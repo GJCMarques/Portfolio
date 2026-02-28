@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resize();
 
     // Vamos buscar a cor do container para a stroke
-    let parentColor = getComputedStyle(canvas.parentElement).color || "rgba(18, 18, 18, 0.4)";
+    let parentColor = 'rgba(18, 18, 18, 0.7)';
 
     function animate() {
         requestAnimationFrame(animate);
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const rotX = 1.05 + mouseY * 0.15; // Inclinado para parecer um terreno
         const rotY = time * 0.05 + mouseX * 0.3; // Rotação contínua lenta no eixo Y
 
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 1; // Linhas mais visíveis
 
         // Matriz de pontos 3D calculados
         const grid = [];
@@ -97,7 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 const scale = fov / zDist;
 
                 // Offset do desenho para o centro (-yOffset para subir o globo um bocado)
-                const yOffset = 100;
+                const yOffset = 0;
+
+                // sx and sy relative to normal width/height 
+                // the canvas is already scaled by dpr in ctx.scale()
                 const sx = width / 2 + rx * scale;
                 const sy = height / 2 + ryy * scale - yOffset;
 
@@ -114,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const minZDist = 600;
 
             let alpha = 1.0 - (avgZ - minZDist) / (maxZDist - minZDist);
-            alpha = Math.max(0.02, Math.min(1.0, alpha)) * 0.6; // Opacidade máxima 60%
+            alpha = Math.max(0.1, Math.min(1.0, alpha)) * 0.9; // Opacidade máxima 90%
 
             ctx.strokeStyle = parentColor;
             ctx.globalAlpha = alpha;
