@@ -13,8 +13,10 @@ export function initLoader(onComplete) {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       visibility: visible !important;
       
-      /* STARTING STATE: Hidden to perform the Morph-IN loop! */
-      clip-path: circle(0% at 50% 50%);
+      /* STARTING STATE */
+      --origin-x: 50%;
+      --origin-y: 50%;
+      clip-path: circle(0% at var(--origin-x) var(--origin-y)); 
       opacity: 0;
       
       /* Will transition both in and out */
@@ -25,14 +27,15 @@ export function initLoader(onComplete) {
     
     /* When active, it opens up entirely */
     #_ldr.morph-in {
-      clip-path: circle(150% at 50% 50%);
+      clip-path: circle(150% at var(--origin-x) var(--origin-y));
       opacity: 1;
     }
     
-    /* When exiting, it closes down and darkens */
+    /* When exiting, it closes down and darkens exactly to the cursor */
     #_ldr.morph-out {
-      clip-path: circle(0% at 50% 50%);
-      background: #121212; /* Darkens before revealing the page underneath */
+      clip-path: circle(0% at var(--origin-x) var(--origin-y));
+      opacity: 1; /* Opaque while it shrinks into the cursor hole */
+      background-color: #121212; /* Darkens before revealing the page underneath */
     }
 
     #_ldr canvas {
@@ -101,6 +104,13 @@ export function initLoader(onComplete) {
     </div>
   `;
   document.body.prepend(loader);
+  // Attempt to recover the last click position of the Custom Cursor before the navigation happened
+  const exitX = sessionStorage.getItem('morphExitX');
+  const exitY = sessionStorage.getItem('morphExitY');
+
+  if (exitX !== null) loader.style.setProperty('--origin-x', `${exitX}px`);
+  if (exitY !== null) loader.style.setProperty('--origin-y', `${exitY}px`);
+
   // Trigger entry animation !
   setTimeout(() => {
     loader.classList.add('morph-in');
@@ -183,14 +193,41 @@ export function initLoader(onComplete) {
 
   // ── Morph Exit ──────────────────────────────────────────────────────────────────
   const tExit = setTimeout(() => {
-    // 1. Trigger morph animation via CSS class
+    // 1. Get the current physical coordinates of the cursor (From the running global tracker inside ring memory!)
+    const exitRing = document.querySelector('.cursor-ring');
+    let outX = '50%';
+    let outY = '50%';
+
+    // Attempt to extract the transform matrix to know where the active circle loop currently is
+    if (exitRing) {
+      const matrix = window.getComputedStyle(exitRing).transform;
+      if (matrix !== 'none') {
+        const values = matrix.split('(')[1].split(')')[0].split(',');
+        outX = values[4] + 'px';
+        outY = values[5] + 'px';
+      }
+    }
+
+    // Save this new coordinate for the *Next* page load to blossom from!
+    sessionStorage.setItem('morphExitX', parseFloat(outX) || window.innerWidth / 2);
+    sessionStorage.setItem('morphExitY', parseFloat(outY) || window.innerHeight / 2);
+
+    // 2. Trigger morph animation dynamically shrinking back to the Mouse Ball coordinates
+    loader.style.setProperty('--origin-x', outX);
+    loader.style.setProperty('--origin-y', outY);
+    loader.classList.remove('morph-in');
     loader.classList.add('morph-out');
 
-    // 2. Call onComplete halfway through the morph so elements underneath
+    // We make sure the custom dots jump to position quickly instead of dragging
+    const activeDot = document.querySelector('.cursor-dot');
+    if (activeDot) activeDot.style.opacity = '1';
+    if (exitRing) exitRing.style.opacity = '1';
+
+    // 3. Call onComplete halfway through the morph so elements underneath
     //    can start animating in *while* the circle closes
     const tReveal = setTimeout(() => onComplete(), MORPH_MS * 0.4);
 
-    // 3. Cleanup fully after morph finishes
+    // 4. Cleanup fully after morph finishes
     setTimeout(() => {
       running = false;
       cancelAnimationFrame(rafId);
@@ -225,7 +262,7 @@ export function initGlobalEffects() {
       top: 0; left: 0;
       border-radius: 50%;
       pointer-events: none;
-      z-index: 99998;
+      z-index: 99998; /* Under the Loading Screen, waiting to be revealed as it shrinks! */
       will-change: transform;
       transition: width 0.3s ease, height 0.3s ease,
                   background 0.3s ease, border-color 0.3s ease;
@@ -270,16 +307,17 @@ export function initGlobalEffects() {
   let dot = document.querySelector('.cursor-dot');
   let ring = document.querySelector('.cursor-ring');
 
-  // Clean up any duplicated ones that might be lingering
-  document.querySelectorAll('.cursor-dot, .cursor-ring').forEach(el => el.remove());
+  if (!dot) {
+    dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    document.body.appendChild(dot);
+  }
 
-  // Re-create them clean for the Global logic to take over completely
-  dot = document.createElement('div');
-  ring = document.createElement('div');
-  dot.className = 'cursor-dot';
-  ring.className = 'cursor-ring';
-  document.body.appendChild(dot);
-  document.body.appendChild(ring);
+  if (!ring) {
+    ring = document.createElement('div');
+    ring.className = 'cursor-ring';
+    document.body.appendChild(ring);
+  }
 
   // 3. Logic
   let mx = window.innerWidth / 2, my = window.innerHeight / 2;
@@ -331,11 +369,15 @@ export function initGlobalEffects() {
 
         e.preventDefault();
 
-        // Lock the cursor position
-        mx = e.clientX;
-        my = e.clientY;
+        // Lock the cursor position globally
+        const mxFixed = e.clientX;
+        const myFixed = e.clientY;
 
-        // Trigger the explosion of the ring!
+        // Remember it for the next page so the loader expands from exactly the same physical pixel
+        sessionStorage.setItem('morphExitX', mxFixed);
+        sessionStorage.setItem('morphExitY', myFixed);
+
+        // Trigger the explosion of the ring! (Doesn't transform away its translation, just scales wildly)
         ring.classList.add('morph-loop-exit');
         dot.classList.add('morph-loop-exit');
 
