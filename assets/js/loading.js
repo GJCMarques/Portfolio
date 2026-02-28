@@ -292,6 +292,7 @@ export function initGlobalEffects() {
       background: #EBE9E4; /* Changes to paper to match the loading screen background */
       border-width: 0;
       opacity: 1;
+      mix-blend-mode: normal; /* Force normal so it doesn't invert into black against paper background! */
       transition: width 0.8s cubic-bezier(0.85, 0, 0.15, 1), 
                   height 0.8s cubic-bezier(0.85, 0, 0.15, 1), 
                   margin 0.8s cubic-bezier(0.85, 0, 0.15, 1),
