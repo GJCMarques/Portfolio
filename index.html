@@ -425,18 +425,19 @@
     <!-- Centered Menu (Absolute) -->
     <div class="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
       style="gap: clamp(1.5rem, 2.5vw, 2.5rem);">
-      <a href="#portfolio" class="nav-link">Portfólio</a>
-      <a href="#sobre" class="nav-link">Sobre Nós</a>
-      <a href="#servicos" class="nav-link">Serviços</a>
+      <a href="/portfolio/" class="nav-link">Portfólio</a>
+      <a href="/sobre/"     class="nav-link">Sobre Nós</a>
+      <a href="/servicos/"  class="nav-link">Serviços</a>
     </div>
 
     <div class="hidden md:block relative z-20">
-      <button class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden"
+      <a href="/contactos/"
+        class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden inline-block"
         style="padding: clamp(0.6rem, 1vw, 0.85rem) clamp(1.5rem, 2.5vw, 2.25rem); font-size: clamp(0.8rem, 0.9vw, 1rem);">
         <span class="relative z-10 group-hover:text-ink transition-colors duration-300">Contactar</span>
         <span
           class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
-      </button>
+      </a>
     </div>
 
     <button class="md:hidden text-ink cursor-pointer relative z-20" id="menu-btn">
@@ -450,10 +451,10 @@
     <button id="close-menu-btn" class="absolute top-8 right-8 text-ink cursor-pointer">
       <i data-lucide="x"></i>
     </button>
-    <a href="#portfolio" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Portfólio</a>
-    <a href="#sobre" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Sobre Nós</a>
-    <a href="#servicos" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Serviços</a>
-    <button class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg">Contactar</button>
+    <a href="/portfolio/" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Portfólio</a>
+    <a href="/sobre/"     class="text-2xl font-medium text-ink hover:text-carbon nav-link">Sobre Nós</a>
+    <a href="/servicos/"  class="text-2xl font-medium text-ink hover:text-carbon nav-link">Serviços</a>
+    <a href="/contactos/" class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block">Contactar</a>
   </div>
 
   <!-- Hero Section -->
@@ -951,79 +952,6 @@
     </div>
   </section>
 
-  <!-- Protocol Section -->
-  <section class="bg-paper py-32 px-6 md:px-12 lg:px-24">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-ink/40 font-mono text-sm tracking-widest uppercase mb-16">O Nosso Ciclo</h2>
-
-      <div class="space-y-32">
-        <!-- Step 1 -->
-        <div class="sticky top-32 group protocol-card">
-          <div
-            class="bg-white border border-ink/10 rounded-[3rem] p-12 md:p-20 shadow-xl transition-all duration-500 group-hover:border-carbon/20">
-            <div class="flex flex-col md:flex-row gap-12 md:items-start">
-              <div class="font-mono text-carbon text-6xl md:text-8xl opacity-50">01</div>
-              <div class="flex-1">
-                <h3 class="text-4xl md:text-5xl font-sans font-bold text-ink mb-6">Germinação</h3>
-                <p class="text-xl text-ink/60 max-w-2xl leading-relaxed">
-                  Plantamos as sementes da identidade, analisando o solo do mercado e nutrindo as primeiras ideias.
-                </p>
-              </div>
-              <div
-                class="w-full md:w-64 aspect-square rounded-full border border-ink/10 flex items-center justify-center relative overflow-hidden bg-ink/5">
-                <div class="w-32 h-32 border-2 border-carbon/40 rounded-full animate-[spin_10s_linear_infinite]"></div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="w-2 h-2 bg-carbon rounded-full"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="sticky top-32 group protocol-card">
-          <div
-            class="bg-white border border-ink/10 rounded-[3rem] p-12 md:p-20 shadow-xl transition-all duration-500 group-hover:border-carbon/20">
-            <div class="flex flex-col md:flex-row gap-12 md:items-start">
-              <div class="font-mono text-carbon text-6xl md:text-8xl opacity-50">02</div>
-              <div class="flex-1">
-                <h3 class="text-4xl md:text-5xl font-sans font-bold text-ink mb-6">Simbiose</h3>
-                <p class="text-xl text-ink/60 max-w-2xl leading-relaxed">
-                  Integramos design e tecnologia num organismo coeso, onde cada componente fortalece o todo.
-                </p>
-              </div>
-              <div
-                class="w-full md:w-64 aspect-square rounded-full border border-ink/10 flex items-center justify-center relative overflow-hidden bg-ink/5">
-                <div class="w-full h-1 bg-carbon/40 animate-pulse"></div>
-                <div class="absolute w-1 h-full bg-carbon/40 animate-pulse delay-75"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="sticky top-32 group protocol-card">
-          <div
-            class="bg-white border border-ink/10 rounded-[3rem] p-12 md:p-20 shadow-xl transition-all duration-500 group-hover:border-carbon/20">
-            <div class="flex flex-col md:flex-row gap-12 md:items-start">
-              <div class="font-mono text-carbon text-6xl md:text-8xl opacity-50">03</div>
-              <div class="flex-1">
-                <h3 class="text-4xl md:text-5xl font-sans font-bold text-ink mb-6">Floração</h3>
-                <p class="text-xl text-ink/60 max-w-2xl leading-relaxed">
-                  O lançamento não é o fim, mas o início de uma nova estação de colheita e adaptação contínua.
-                </p>
-              </div>
-              <div
-                class="w-full md:w-64 aspect-square rounded-full border border-ink/10 flex items-center justify-center relative overflow-hidden bg-ink/5">
-                <div class="w-32 h-32 bg-carbon/20 rounded-full animate-ping" style="animation-duration: 3s"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Section — Contact -->
   <section id="contacto" class="relative min-h-[100dvh] w-full overflow-hidden flex items-center justify-center"
     style="background-color: #DDD9D2;">
@@ -1157,15 +1085,11 @@
       <div>
         <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Páginas</h4>
         <ul class="space-y-3">
-          <li><a href="#" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Início</a></li>
-          <li><a href="#portfolio"
-              class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Portfólio</a></li>
-          <li><a href="#sobre" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Sobre
-              Nós</a></li>
-          <li><a href="#servicos"
-              class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Serviços</a></li>
-          <li><a href="#" class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Contactos</a>
-          </li>
+          <li><a href="/"            class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Início</a></li>
+          <li><a href="/portfolio/"  class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Portfólio</a></li>
+          <li><a href="/sobre/"      class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Sobre Nós</a></li>
+          <li><a href="/servicos/"   class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Serviços</a></li>
+          <li><a href="/contactos/"  class="text-paper/70 hover:text-paper transition-colors text-sm footer-link">Contactos</a></li>
         </ul>
       </div>
 

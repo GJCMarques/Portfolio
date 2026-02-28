@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { createIcons, Menu, X, ArrowRight, Microscope, Activity, Sprout, Mail, Phone, Instagram, Linkedin, MapPin, Clock } from 'lucide';
 import { initGlobe } from './globe.js';
+import { initLoader } from './loading.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -162,53 +163,55 @@ gsap.set(".bg-gradient-to-t", { opacity: 0 });
 gsap.set(".hero-text-part", { y: 40, opacity: 0, filter: "blur(6px)" });
 gsap.set("#globe-canvas", { opacity: 0, scale: 0.85 });
 
-// Entrance Animations — Cinematic sequence (compressed)
-const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+// Entrance Animations — deferred until the loading screen exits
+initLoader(() => {
+  const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-// 1. Page ready — body visibility flips on, but everything above is already hidden
-tl.set("body", { autoAlpha: 1 });
+  // Body reveal — loader has already faded, so this is instantaneous
+  tl.set("body", { autoAlpha: 1 });
 
-// 2. Navbar: blur dissolve, snappy
-tl.fromTo("#navbar",
-  { y: -40, opacity: 0, filter: "blur(10px)" },
-  { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.9, ease: "power3.out" },
-  0.1
-);
+  // Navbar: blur dissolve
+  tl.fromTo("#navbar",
+    { y: -40, opacity: 0, filter: "blur(10px)" },
+    { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.9, ease: "power3.out" },
+    0.1
+  );
 
-// 3. Hero canvas fades in
-tl.fromTo("#canvas-container",
-  { opacity: 0 },
-  { opacity: 1, duration: 1.2, ease: "power2.inOut" },
-  0.15
-);
+  // Hero canvas
+  tl.fromTo("#canvas-container",
+    { opacity: 0 },
+    { opacity: 1, duration: 1.2, ease: "power2.inOut" },
+    0.15
+  );
 
-// 4. Hero gradient overlay
-tl.fromTo(".bg-gradient-to-t",
-  { opacity: 0 },
-  { opacity: 1, duration: 0.9, ease: "power2.out" },
-  0.3
-);
+  // Hero gradient overlay
+  tl.fromTo(".bg-gradient-to-t",
+    { opacity: 0 },
+    { opacity: 1, duration: 0.9, ease: "power2.out" },
+    0.3
+  );
 
-// 5. Hero text — rise + blur clear, tighter stagger
-tl.fromTo(".hero-text-part",
-  { y: 40, opacity: 0, filter: "blur(6px)" },
-  {
-    y: 0,
-    opacity: 1,
-    filter: "blur(0px)",
-    duration: 1.1,
-    stagger: 0.14,
-    ease: "power3.out"
-  },
-  0.5
-);
+  // Hero text — rise + blur clear
+  tl.fromTo(".hero-text-part",
+    { y: 40, opacity: 0, filter: "blur(6px)" },
+    {
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      duration: 1.1,
+      stagger: 0.14,
+      ease: "power3.out"
+    },
+    0.5
+  );
 
-// 6. Globe canvas — scale up from center
-tl.fromTo("#globe-canvas",
-  { opacity: 0, scale: 0.85 },
-  { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" },
-  0.6
-);
+  // Globe canvas — scale up from centre
+  tl.fromTo("#globe-canvas",
+    { opacity: 0, scale: 0.85 },
+    { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" },
+    0.6
+  );
+});
 
 // --- Hero ↔ Portfolio snap magnet ---
 // If scroll stops mid-spacer, snaps to either hero (0) or portfolio (1).
