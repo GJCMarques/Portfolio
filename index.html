@@ -535,23 +535,62 @@
 
   <!-- Portfolio Section -->
   <section id="portfolio" class="pb-20 bg-paper relative z-20 overflow-hidden"
-    style="padding-top: clamp(1.2rem, 3vh, 2rem); border-radius: 2.5rem 2.5rem 0 0; box-shadow: 0 -20px 80px rgba(0,0,0,0.07);">
+    style="padding-top: clamp(5.5rem, 9vh, 8rem); border-radius: 2.5rem 2.5rem 0 0; box-shadow: 0 -20px 80px rgba(0,0,0,0.07);">
 
-    <!-- Background decorations -->
+    <!-- Background decorations — Architectural Drawing -->
     <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
       <!-- Dot grid -->
       <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(18,18,18,0.048) 1px,transparent 1px);background-size:30px 30px;"></div>
-      <!-- Concentric arcs — echo the hero globe -->
-      <div style="position:absolute;top:-22rem;right:-14rem;width:52rem;height:52rem;border-radius:50%;border:1px solid rgba(18,18,18,0.055);"></div>
-      <div style="position:absolute;top:-14rem;right:-8rem;width:36rem;height:36rem;border-radius:50%;border:1px solid rgba(18,18,18,0.042);"></div>
-      <div style="position:absolute;top:-7rem;right:-3rem;width:22rem;height:22rem;border-radius:50%;border:1px solid rgba(18,18,18,0.03);"></div>
-      <!-- Subtle bottom-left accent -->
-      <div style="position:absolute;bottom:-8rem;left:-6rem;width:22rem;height:22rem;border-radius:50%;border:1px solid rgba(18,18,18,0.03);"></div>
+
+      <!-- Linhas de curva de nível / topografia (concentric arcs) -->
+      <div class="portfolio-arc" style="position:absolute;top:-22rem;right:-14rem;width:52rem;height:52rem;border-radius:50%;border:1px solid rgba(18,18,18,0.055);"></div>
+      <div class="portfolio-arc" style="position:absolute;top:-14rem;right:-8rem;width:36rem;height:36rem;border-radius:50%;border:1px solid rgba(18,18,18,0.042);"></div>
+      <div class="portfolio-arc" style="position:absolute;top:-7rem;right:-3rem;width:22rem;height:22rem;border-radius:50%;border:1px solid rgba(18,18,18,0.03);"></div>
+      <div class="portfolio-arc" style="position:absolute;bottom:-8rem;left:-6rem;width:22rem;height:22rem;border-radius:50%;border:1px solid rgba(18,18,18,0.03);"></div>
+
+      <!-- Linha de cota B -->
+      <div class="portfolio-dim-line" style="position:absolute;top:63%;left:12%;right:12%;">
+        <div style="position:absolute;left:0;top:-6px;width:1px;height:13px;background:rgba(18,18,18,0.11);"></div>
+        <div style="position:absolute;left:0;right:0;top:6px;height:1px;background:rgba(18,18,18,0.06);"></div>
+        <div style="position:absolute;right:0;top:-6px;width:1px;height:13px;background:rgba(18,18,18,0.11);"></div>
+      </div>
+
+      <!-- Linha de cota vertical (esquerda) -->
+      <div class="portfolio-dim-line" style="position:absolute;top:18%;bottom:18%;left:5%;">
+        <div style="position:absolute;top:0;left:-6px;width:13px;height:1px;background:rgba(18,18,18,0.13);"></div>
+        <div style="position:absolute;top:0;bottom:0;left:6px;width:1px;background:rgba(18,18,18,0.07);"></div>
+        <div style="position:absolute;bottom:0;left:-6px;width:13px;height:1px;background:rgba(18,18,18,0.13);"></div>
+      </div>
+
+      <!-- Marcador de cruzamento B -->
+      <div class="portfolio-crosshair" style="position:absolute;top:63%;right:12%;transform:translate(0,-50%);">
+        <div style="position:absolute;top:0;left:-11px;width:23px;height:1px;background:rgba(18,18,18,0.13);"></div>
+        <div style="position:absolute;left:0;top:-11px;width:1px;height:23px;background:rgba(18,18,18,0.13);"></div>
+        <div style="position:absolute;top:-4px;left:-4px;width:9px;height:9px;border-radius:50%;border:1px solid rgba(18,18,18,0.11);"></div>
+      </div>
+
+      <!-- Marcas de registo de canto (L-brackets) -->
+      <div class="portfolio-corner-mark" style="position:absolute;top:3.5rem;left:clamp(1.5rem,5vw,6rem);">
+        <div style="position:absolute;top:0;left:0;width:22px;height:1px;background:rgba(18,18,18,0.2);"></div>
+        <div style="position:absolute;top:0;left:0;width:1px;height:22px;background:rgba(18,18,18,0.2);"></div>
+      </div>
+      <div class="portfolio-corner-mark" style="position:absolute;top:3.5rem;right:clamp(1.5rem,5vw,6rem);">
+        <div style="position:absolute;top:0;right:0;width:22px;height:1px;background:rgba(18,18,18,0.2);"></div>
+        <div style="position:absolute;top:0;right:0;width:1px;height:22px;background:rgba(18,18,18,0.2);"></div>
+      </div>
+      <div class="portfolio-corner-mark" style="position:absolute;bottom:3rem;left:clamp(1.5rem,5vw,6rem);">
+        <div style="position:absolute;bottom:0;left:0;width:22px;height:1px;background:rgba(18,18,18,0.14);"></div>
+        <div style="position:absolute;bottom:0;left:0;width:1px;height:22px;background:rgba(18,18,18,0.14);"></div>
+      </div>
+      <div class="portfolio-corner-mark" style="position:absolute;bottom:3rem;right:clamp(1.5rem,5vw,6rem);">
+        <div style="position:absolute;bottom:0;right:0;width:22px;height:1px;background:rgba(18,18,18,0.14);"></div>
+        <div style="position:absolute;bottom:0;right:0;width:1px;height:22px;background:rgba(18,18,18,0.14);"></div>
+      </div>
     </div>
 
     <!-- Pull-tab indicator -->
     <div class="flex justify-center mb-6 pt-2">
-      <div style="width: 2.5rem; height: 3px; border-radius: 99px; background: rgba(18,18,18,0.12);"></div>
+      <div class="portfolio-pull-tab" style="width: 2.5rem; height: 3px; border-radius: 99px; background: rgba(18,18,18,0.12);"></div>
     </div>
 
     <!-- Header -->
@@ -572,10 +611,16 @@
             style="font-size: clamp(2.6rem, 5.5vw, 6.5rem); line-height: 0.92; letter-spacing: -0.03em; margin-bottom: 0.15em;">Portfólio</span>
           <span class="font-serif italic text-ink block"
             style="font-size: clamp(1.5rem, 3.2vw, 3.8rem); line-height: 1; opacity: 0.3; margin-left: clamp(0.5rem, 2vw, 2.5rem);">de excelência.</span>
+          <!-- Linha decorativa — ancorada ao texto, responsiva garantida -->
+          <span class="block" style="margin-top: 0.9em; margin-left: clamp(0.5rem, 2vw, 2.5rem); display: flex; align-items: center; gap: 0.5rem;">
+            <span style="width: 1px; height: 10px; background: rgba(18,18,18,0.22); flex-shrink:0;"></span>
+            <span style="width: clamp(4rem, 10vw, 12rem); height: 1px; background: linear-gradient(to right, rgba(18,18,18,0.22), transparent);"></span>
+            <span style="width: 1px; height: 10px; background: rgba(18,18,18,0.12); flex-shrink:0;"></span>
+          </span>
         </h2>
 
       </div>
-      <div class="hidden md:flex items-center gap-3 mb-2">
+      <div class="portfolio-nav hidden md:flex items-center gap-3 mb-2">
         <button id="proj-prev" class="proj-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
             stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
@@ -744,7 +789,7 @@
     </div><!-- /proj-container -->
 
     <!-- Progress Bars + Counter -->
-    <div class="flex items-center gap-5 mt-6" style="padding: 0 clamp(1.5rem, 5vw, 6rem);">
+    <div id="proj-progress-row" class="flex items-center gap-5 mt-6" style="padding: 0 clamp(1.5rem, 5vw, 6rem);">
       <div class="flex flex-1 gap-2">
         <div class="proj-progress flex-1 active" data-index="0"><div class="proj-progress-fill"></div></div>
         <div class="proj-progress flex-1" data-index="1"><div class="proj-progress-fill"></div></div>
@@ -757,25 +802,131 @@
 
   </section>
 
-  <!-- Philosophy Section -->
+  <!-- Manifesto Section -->
   <section id="sobre"
     class="py-40 px-6 md:px-12 lg:px-24 bg-ink relative overflow-hidden text-paper">
-    <div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay">
+    <div class="absolute inset-0 opacity-15 pointer-events-none mix-blend-overlay">
       <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2564&auto=format&fit=crop"
         alt="Noir Texture" class="w-full h-full object-cover grayscale" />
     </div>
 
     <div class="relative z-10 max-w-6xl mx-auto">
-      <div class="mb-12">
-        <p class="philosophy-line text-paper/60 text-xl md:text-2xl font-sans font-light">
-          A indústria foca em: <span class="line-through decoration-carbon/70">artificialidade estéril.</span>
+      <!-- Mono label -->
+      <p class="manifesto-label font-mono uppercase text-silver tracking-[0.25em] mb-16"
+        style="font-size: clamp(0.6rem, 0.8vw, 0.875rem);">A Nossa Abordagem</p>
+
+      <!-- Manifesto lines — revealed on scroll -->
+      <div class="manifesto-body space-y-8 max-w-4xl">
+        <p class="manifesto-line font-sans font-light leading-tight text-paper/40"
+          style="font-size: clamp(1.6rem, 3.5vw, 3.5rem);">
+          Design não é decoração.
+        </p>
+        <p class="manifesto-line font-serif italic leading-tight"
+          style="font-size: clamp(2rem, 4.5vw, 5rem); color: #C9A84C;">
+          É intenção materializada.
+        </p>
+        <p class="manifesto-line font-sans font-light leading-relaxed text-paper/50"
+          style="font-size: clamp(1rem, 1.8vw, 1.5rem); max-width: 42ch;">
+          Cada projeto começa com uma pergunta honesta sobre quem és,
+          o que ofereces e a quem te diriges. O que se segue é
+          artesanato digital rigoroso — sem atalhos, sem ruído.
+        </p>
+        <p class="manifesto-line font-sans font-semibold text-paper leading-tight"
+          style="font-size: clamp(1.6rem, 3vw, 3rem);">
+          O resultado? Presença que perdura.
         </p>
       </div>
-      <div>
-        <p class="philosophy-line text-4xl md:text-6xl lg:text-7xl font-serif italic text-paper leading-tight">
-          Nós focamos em: <span class="text-silver">biologia digital</span> e <span class="text-silver">adaptação
-            natural.</span>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="servicos" class="py-32 px-6 md:px-12 lg:px-24 bg-paper relative overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
+        <div>
+          <p class="serv-anim font-mono uppercase text-ink/40 tracking-[0.25em] mb-4"
+            style="font-size: clamp(0.6rem, 0.8vw, 0.875rem);">Especialidade</p>
+          <h2 class="serv-anim font-sans font-bold tracking-tighter text-ink leading-[0.9]"
+            style="font-size: clamp(2.2rem, 4.5vw, 5rem);">
+            O que<br>
+            <span class="font-serif italic font-light text-carbon">construímos.</span>
+          </h2>
+        </div>
+        <p class="serv-anim text-ink/50 font-light leading-relaxed max-w-xs"
+          style="font-size: clamp(0.85rem, 1vw, 1rem);">
+          Cada serviço é um sistema vivo — criado para crescer com a tua marca.
         </p>
+      </div>
+
+      <!-- Services list -->
+      <div class="divide-y divide-ink/8">
+
+        <div class="serv-item group flex items-center gap-6 py-8 cursor-default transition-colors duration-300 hover:bg-ink/[0.02] rounded-2xl px-4 -mx-4">
+          <span class="font-mono text-[#C9A84C] shrink-0"
+            style="font-size: clamp(0.65rem, 0.8vw, 0.8rem); letter-spacing: 0.15em;">01</span>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-sans font-semibold text-ink group-hover:text-carbon transition-colors"
+              style="font-size: clamp(1.1rem, 2vw, 1.75rem);">Web Design &amp; Desenvolvimento</h3>
+            <p class="text-ink/45 font-light mt-1" style="font-size: clamp(0.8rem, 0.95vw, 0.95rem);">
+              Sites e plataformas que equilibram estética e performance — do wireframe ao deploy.
+            </p>
+          </div>
+          <div class="shrink-0 w-8 h-8 rounded-full border border-ink/15 flex items-center justify-center
+            opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-ink/60"></i>
+          </div>
+        </div>
+
+        <div class="serv-item group flex items-center gap-6 py-8 cursor-default transition-colors duration-300 hover:bg-ink/[0.02] rounded-2xl px-4 -mx-4">
+          <span class="font-mono text-[#C9A84C] shrink-0"
+            style="font-size: clamp(0.65rem, 0.8vw, 0.8rem); letter-spacing: 0.15em;">02</span>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-sans font-semibold text-ink group-hover:text-carbon transition-colors"
+              style="font-size: clamp(1.1rem, 2vw, 1.75rem);">Identidade Visual &amp; Branding</h3>
+            <p class="text-ink/45 font-light mt-1" style="font-size: clamp(0.8rem, 0.95vw, 0.95rem);">
+              Sistemas de marca coesos — logótipo, paleta, tipografia e diretrizes que sobrevivem ao tempo.
+            </p>
+          </div>
+          <div class="shrink-0 w-8 h-8 rounded-full border border-ink/15 flex items-center justify-center
+            opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-ink/60"></i>
+          </div>
+        </div>
+
+        <div class="serv-item group flex items-center gap-6 py-8 cursor-default transition-colors duration-300 hover:bg-ink/[0.02] rounded-2xl px-4 -mx-4">
+          <span class="font-mono text-[#C9A84C] shrink-0"
+            style="font-size: clamp(0.65rem, 0.8vw, 0.8rem); letter-spacing: 0.15em;">03</span>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-sans font-semibold text-ink group-hover:text-carbon transition-colors"
+              style="font-size: clamp(1.1rem, 2vw, 1.75rem);">UI/UX &amp; Produto Digital</h3>
+            <p class="text-ink/45 font-light mt-1" style="font-size: clamp(0.8rem, 0.95vw, 0.95rem);">
+              Interfaces que guiam, envolvem e convertem — criadas com Figma e validadas com dados reais.
+            </p>
+          </div>
+          <div class="shrink-0 w-8 h-8 rounded-full border border-ink/15 flex items-center justify-center
+            opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-ink/60"></i>
+          </div>
+        </div>
+
+        <div class="serv-item group flex items-center gap-6 py-8 cursor-default transition-colors duration-300 hover:bg-ink/[0.02] rounded-2xl px-4 -mx-4">
+          <span class="font-mono text-[#C9A84C] shrink-0"
+            style="font-size: clamp(0.65rem, 0.8vw, 0.8rem); letter-spacing: 0.15em;">04</span>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-sans font-semibold text-ink group-hover:text-carbon transition-colors"
+              style="font-size: clamp(1.1rem, 2vw, 1.75rem);">Experiências WebGL &amp; 3D</h3>
+            <p class="text-ink/45 font-light mt-1" style="font-size: clamp(0.8rem, 0.95vw, 0.95rem);">
+              Interações imersivas com Three.js e shaders — para marcas que exigem o extraordinário.
+            </p>
+          </div>
+          <div class="shrink-0 w-8 h-8 rounded-full border border-ink/15 flex items-center justify-center
+            opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-ink/60"></i>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>

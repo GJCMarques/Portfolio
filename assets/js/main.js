@@ -241,29 +241,48 @@ gsap.timeline({
 .to("#canvas-container, .bg-gradient-to-t", { opacity: 0.3, ease: "none" }, 0);
 
 
-gsap.from(".feature-card", {
-  scrollTrigger: {
-    trigger: "#servicos",
-    start: "top 80%",
-  },
-  y: 40,
-  opacity: 0,
-  duration: 1,
-  stagger: 0.2,
-  ease: "power3.out"
+// ── Portfolio — Entrance Cinematic Sequence ──────────────────────────────────
+
+// Linhas decorativas de fundo visíveis em CSS — só o conteúdo anima
+gsap.set(".portfolio-pull-tab", { scaleX: 0, transformOrigin: "center" });
+gsap.set(".portfolio-anim",     { y: 38, opacity: 0, filter: "blur(5px)" });
+gsap.set(".portfolio-nav",      { y: 14, opacity: 0 });
+gsap.set("#proj-container",     { y: 56, opacity: 0, scale: 0.97 });
+gsap.set("#proj-progress-row",  { y: 14, opacity: 0 });
+
+const portfolioTL = gsap.timeline({
+  scrollTrigger: { trigger: "#portfolio", start: "top 85%", once: true },
+}).timeScale(0.82);
+
+portfolioTL
+  .to(".portfolio-pull-tab", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0)
+  .to(".portfolio-anim",     { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.05, stagger: 0.1, ease: "power3.out" }, 0.15)
+  .to(".portfolio-nav",      { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, 0.35)
+  .to("#proj-container",     { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" }, 0.4)
+  .to("#proj-progress-row",  { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.7);
+
+// ── Manifesto ────────────────────────────────────────────────────────────────
+
+gsap.from(".manifesto-label", {
+  scrollTrigger: { trigger: "#sobre", start: "top 75%" },
+  y: 20, opacity: 0, duration: 1, ease: "power3.out"
 });
 
-// Philosophy
-gsap.from(".philosophy-line", {
-  scrollTrigger: {
-    trigger: "#sobre",
-    start: "top 70%",
-  },
-  y: 50,
-  opacity: 0,
-  duration: 1.5,
-  stagger: 0.2,
-  ease: "power3.out"
+gsap.from(".manifesto-line", {
+  scrollTrigger: { trigger: "#sobre", start: "top 60%", end: "bottom 40%", scrub: 0.8 },
+  y: 40, opacity: 0, stagger: 0.15, ease: "power2.out"
+});
+
+// ── Services ─────────────────────────────────────────────────────────────────
+
+gsap.from(".serv-anim", {
+  scrollTrigger: { trigger: "#servicos", start: "top 75%" },
+  y: 30, opacity: 0, duration: 1, stagger: 0.12, ease: "power3.out"
+});
+
+gsap.from(".serv-item", {
+  scrollTrigger: { trigger: "#servicos", start: "top 65%" },
+  x: -20, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out"
 });
 
 // Protocol Cards Stacking
