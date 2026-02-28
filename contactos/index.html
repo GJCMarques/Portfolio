@@ -312,63 +312,99 @@
     .social-link:hover { color: var(--color-ink); }
     .social-link:hover::after { width: 100%; }
 
-    /* ── Floating label form ─────────────────────────────────── */
-    .form-field { position: relative; padding-top: 1.5rem; }
+    /* ── Floating label form & Blueprint Grid ────────────────── */
+    .blueprint-form {
+      border: 1px solid rgba(18,18,18,0.15);
+      background: rgba(235, 233, 228, 0.4);
+      backdrop-filter: blur(10px);
+    }
+    .form-field { 
+      position: relative; 
+      padding: 1.5rem 1.5rem 0; 
+      border-bottom: 1px solid rgba(18, 18, 18, 0.15);
+      transition: background 0.3s ease;
+    }
+    .form-field:hover {
+      background: rgba(18, 18, 18, 0.02);
+    }
     .form-field label {
       position: absolute;
       top: 1.5rem;
-      left: 0;
+      left: 1.5rem;
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(235, 233, 228, 0.35);
+      color: rgba(18, 18, 18, 0.4);
       pointer-events: none;
       transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                   color 0.3s ease;
       transform-origin: left top;
     }
     .form-field.focused label,
+    .form-field select.has-value ~ label,
     .form-field input.has-value ~ label,
     .form-field textarea.has-value ~ label {
-      transform: translateY(-1.35rem) scale(0.78);
-      color: #C9A84C;
+      transform: translateY(-0.9rem) scale(0.8);
+      color: var(--color-ink);
     }
     .form-field input,
+    .form-field select,
     .form-field textarea {
       background: transparent;
       border: none;
-      border-bottom: 1px solid rgba(235, 233, 228, 0.15);
-      color: #EBE9E4;
+      color: var(--color-ink);
       width: 100%;
       padding: 0.75rem 0 0.5rem;
       font-family: var(--font-sans);
       font-size: clamp(0.9rem, 1.1vw, 1rem);
+      font-weight: 500;
       outline: none;
-      transition: border-color 0.3s ease;
-      caret-color: #C9A84C;
+      caret-color: var(--color-ink);
     }
-    .form-field.focused input,
-    .form-field.focused textarea { border-color: #C9A84C; }
+    .form-field select {
+      cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%23121212" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>');
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      background-size: 1rem;
+      padding-right: 2rem;
+    }
+    .form-field select option {
+      background: var(--color-paper);
+      color: var(--color-ink);
+    }
     .form-field textarea { resize: none; min-height: 6rem; }
     .form-field input::placeholder,
     .form-field textarea::placeholder { color: transparent; }
 
+    /* Right side border for the grid cols */
+    .grid-border-r {
+       border-right: 1px solid rgba(18,18,18,0.15);
+    }
+
     /* ── Submit button ───────────────────────────────────────── */
     .btn-submit {
       font-family: var(--font-mono);
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      background: #C9A84C;
-      color: #121212;
-      border: none;
+      background: var(--color-ink);
+      color: var(--color-paper);
+      border: 1px solid var(--color-ink);
       cursor: pointer;
       transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  background 0.4s ease;
+                  background 0.4s ease, color 0.4s ease;
       will-change: transform;
     }
-    .btn-submit:hover { transform: scale(1.02); }
+    .btn-submit:hover { 
+      transform: scale(1.02); 
+      background: transparent;
+      color: var(--color-ink);
+    }
     .btn-submit:active { transform: scale(0.97); }
     .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
 
@@ -403,14 +439,50 @@
       .cursor-dot, .cursor-ring { display: none; }
     }
 
-    /* ── Champagne accent line ───────────────────────────────── */
+    /* ── Architect Accent line ───────────────────────────────── */
     .accent-line {
       display: inline-block;
-      width: 2rem;
+      width: 2.5rem;
       height: 1px;
-      background: #C9A84C;
+      background: var(--color-ink);
       vertical-align: middle;
-      margin-right: 0.6rem;
+      margin-right: 0.8rem;
+    }
+
+    /* ── Hero Rulers (Removed by request) ────────────────────── */
+    .drafting-crosshair {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .drafting-ch-x {
+      position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+      background: rgba(18,18,18,0.15);
+      will-change: transform;
+      mix-blend-mode: multiply;
+    }
+    .drafting-ch-y {
+      position: absolute; top: 0; left: 0; width: 1px; height: 100%;
+      background: rgba(18,18,18,0.15);
+      will-change: transform;
+      mix-blend-mode: multiply;
+    }
+    .coord-tooltip {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--color-ink);
+      background: var(--color-paper);
+      padding: 0.2rem 0.4rem;
+      border: 1px solid rgba(18,18,18,0.15);
+      transform: translate(10px, 10px);
+      will-change: transform;
+      opacity: 0.8;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
   </style>
 </head>
@@ -488,20 +560,49 @@
   <main class="bg-paper relative z-10">
 
     <!-- 1. HERO ──────────────────────────────────────────────────────── -->
-    <section class="relative min-h-screen flex flex-col justify-end overflow-hidden"
+    <section
+      class="hero-section relative min-h-screen flex flex-col justify-end overflow-hidden border-b border-ink/10 cursor-crosshair"
       style="padding: clamp(7rem, 10vh, 10rem) clamp(1.5rem, 6vw, 7rem) clamp(3rem, 6vh, 5rem);">
 
+      <!-- Diagonal Hatching Background instead of Grid -->
+      <div class="absolute inset-0 pointer-events-none opacity-[0.05]"
+        style="background-image: repeating-linear-gradient(45deg, transparent, transparent 15px, var(--color-ink) 15px, var(--color-ink) 16px);">
+      </div>
+
+      <!-- Hero Decorative Right Blueprint -->
+      <div
+        class="hero-blueprint hidden md:block absolute right-[-2%] top-1/2 -translate-y-1/2 w-[45vw] h-[45vw] lg:w-[45vw] lg:h-[45vw] max-w-[650px] max-h-[650px] pointer-events-none mix-blend-multiply opacity-[0.04]"
+        style="transform: perspective(1000px) translateY(-50%); color: var(--color-ink); transform-origin: center;">
+        <svg viewBox="0 0 100 100" class="w-full h-full animate-[spin_60s_linear_infinite]" style="overflow: visible;">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="0.1" stroke-dasharray="2 3" />
+          <circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="0.3" />
+          <circle cx="50" cy="50" r="26" fill="none" stroke="currentColor" stroke-width="0.2" stroke-dasharray="4 6" />
+          <circle cx="50" cy="50" r="14" fill="none" stroke="currentColor" stroke-width="0.1" />
+          <path d="M50 4 L50 96 M4 50 L96 50" stroke="currentColor" stroke-width="0.15" />
+          <path d="M18 18 L82 82 M18 82 L82 18" stroke="currentColor" stroke-width="0.1" stroke-dasharray="1 2" />
+          <path d="M42 58 L42 42 L50 50 L58 42 L58 58" fill="none" stroke="currentColor" stroke-width="0.5"
+            stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <!-- Interactive Crosshair -->
+      <div class="drafting-crosshair">
+        <div class="drafting-ch-x"></div>
+        <div class="drafting-ch-y"></div>
+        <div class="coord-tooltip">x: 0, y: 0</div>
+      </div>
+
       <!-- Ghost decorative text -->
-      <span class="hero-ghost" aria-hidden="true">Contacto</span>
+      <span class="hero-ghost" aria-hidden="true" style="opacity: 0.02;">Contacto</span>
 
       <!-- Top-left label -->
-      <div class="absolute top-[clamp(7rem,10vh,10rem)] left-[clamp(1.5rem,6vw,7rem)]">
+      <div class="absolute top-[clamp(7rem,10vh,10rem)] left-[clamp(3.5rem,6vw,7rem)] z-10">
         <span class="hero-label font-mono uppercase tracking-[0.35em] text-ink/40"
           style="font-size: 0.7rem; opacity: 0; transform: translateY(8px);">— Contactos</span>
       </div>
 
       <!-- Giant stacked heading -->
-      <div class="relative z-10 mb-10 md:mb-14" style="line-height: 0.88;">
+      <div class="relative z-10 mb-10 md:mb-14" style="line-height: 0.88; pointer-events: none;">
         <div class="hero-line-wrap">
           <span class="hero-line font-serif italic text-ink" style="font-size: clamp(5rem, 13vw, 15rem);">Vamos</span>
         </div>
@@ -511,14 +612,14 @@
       </div>
 
       <!-- Bottom row: description + scroll indicator -->
-      <div class="relative z-10 flex items-end justify-between gap-8">
-        <p class="hero-desc font-mono text-ink/50 max-w-xs leading-relaxed"
+      <div class="relative z-10 flex items-end justify-between gap-8 pointer-events-none">
+        <p class="hero-desc font-mono text-ink/50 max-w-xs leading-relaxed mix-blend-multiply"
           style="font-size: clamp(0.65rem, 0.9vw, 0.8rem); letter-spacing: 0.06em; opacity: 0; transform: translateY(12px);">
-          Pronto para começar um projecto?<br>
-          Fale connosco — respondemos em 24 horas.
+          Pronto para desenhar o seu próximo projecto?<br>
+          Fornecemos as coordenadas — respondemos em 24h.
         </p>
 
-        <div class="hero-scroll-wrap flex flex-col items-center gap-3" style="opacity: 0;">
+        <div class="hero-scroll-wrap flex flex-col items-center gap-3 mix-blend-multiply" style="opacity: 0;">
           <span class="font-mono uppercase tracking-[0.25em] text-ink/30 rotate-90 origin-center"
             style="font-size: 0.55rem; transform: rotate(90deg); margin-bottom: 0.5rem;">Scroll</span>
           <div class="scroll-line">
@@ -534,34 +635,30 @@
         <!-- Set A -->
         <span
           class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          geral@monrion.com
-          <span class="text-ink/20">●</span>
-          +351 000 000 000
-          <span class="text-ink/20">●</span>
-          Porto, Portugal
-          <span class="text-ink/20">●</span>
-          Disponível
-          <span class="text-ink/20">●</span>
-          Resposta em 24h
-          <span class="text-ink/20">●</span>
-          @monrion
-          <span class="text-ink/20">●</span>
+          geral@monrion.com <span class="text-ink/20">●</span> +351 000 000 000 <span class="text-ink/20">●</span>
+          Porto, Portugal <span class="text-ink/20">●</span> Disponível <span class="text-ink/20">●</span> Resposta em
+          24h <span class="text-ink/20">●</span> @monrion <span class="text-ink/20">●</span>
         </span>
-        <!-- Set B (duplicate for seamless loop) -->
+        <!-- Set B -->
         <span
           class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          geral@monrion.com
-          <span class="text-ink/20">●</span>
-          +351 000 000 000
-          <span class="text-ink/20">●</span>
-          Porto, Portugal
-          <span class="text-ink/20">●</span>
-          Disponível
-          <span class="text-ink/20">●</span>
-          Resposta em 24h
-          <span class="text-ink/20">●</span>
-          @monrion
-          <span class="text-ink/20">●</span>
+          geral@monrion.com <span class="text-ink/20">●</span> +351 000 000 000 <span class="text-ink/20">●</span>
+          Porto, Portugal <span class="text-ink/20">●</span> Disponível <span class="text-ink/20">●</span> Resposta em
+          24h <span class="text-ink/20">●</span> @monrion <span class="text-ink/20">●</span>
+        </span>
+        <!-- Set C -->
+        <span
+          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
+          geral@monrion.com <span class="text-ink/20">●</span> +351 000 000 000 <span class="text-ink/20">●</span>
+          Porto, Portugal <span class="text-ink/20">●</span> Disponível <span class="text-ink/20">●</span> Resposta em
+          24h <span class="text-ink/20">●</span> @monrion <span class="text-ink/20">●</span>
+        </span>
+        <!-- Set D -->
+        <span
+          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
+          geral@monrion.com <span class="text-ink/20">●</span> +351 000 000 000 <span class="text-ink/20">●</span>
+          Porto, Portugal <span class="text-ink/20">●</span> Disponível <span class="text-ink/20">●</span> Resposta em
+          24h <span class="text-ink/20">●</span> @monrion <span class="text-ink/20">●</span>
         </span>
       </div>
     </div>
@@ -582,7 +679,9 @@
 
         <!-- Email -->
         <div class="contact-item mb-8">
-          <span class="block font-mono text-xs uppercase tracking-[0.2em] text-ink/30 mb-3">E-mail</span>
+          <span class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/30 mb-3">
+            <i data-lucide="mail" class="w-3.5 h-3.5"></i> E-mail
+          </span>
           <a href="mailto:geral@monrion.com" class="contact-link text-ink font-sans font-bold"
             style="font-size: clamp(1.4rem, 2.8vw, 2.8rem);">
             geral@monrion.com
@@ -592,7 +691,9 @@
 
         <!-- Phone -->
         <div class="contact-item mb-14">
-          <span class="block font-mono text-xs uppercase tracking-[0.2em] text-ink/30 mb-3">Telefone</span>
+          <span class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/30 mb-3">
+            <i data-lucide="phone" class="w-3.5 h-3.5"></i> Telefone
+          </span>
           <a href="tel:+351000000000" class="contact-link text-ink font-sans font-bold"
             style="font-size: clamp(1.1rem, 2vw, 2rem);">
             +351 000 000 000
@@ -604,61 +705,81 @@
 
         <!-- Availability -->
         <div class="contact-item flex items-center gap-3 mb-10">
-          <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0"></div>
+          <div class="w-2 h-2 rounded-full bg-ink animate-pulse flex-shrink-0"></div>
           <span class="font-mono text-xs uppercase tracking-[0.15em] text-ink/60">
             Disponível — Resposta em 24h
           </span>
         </div>
 
-        <!-- Social links -->
-        <div class="contact-item flex items-center gap-8">
-          <a href="#" class="social-link">Instagram</a>
-          <span class="text-ink/20 font-mono text-xs">/</span>
-          <a href="#" class="social-link">LinkedIn</a>
+        <!-- Social links horizontal -->
+        <div class="contact-item mt-4">
+          <span class="block font-mono text-xs uppercase tracking-[0.2em] text-ink/25 mb-4 text-left">
+            Redes
+          </span>
+          <div class="flex flex-row items-center gap-10">
+            <a href="#" class="social-link w-fit flex items-center gap-2"><i data-lucide="instagram"
+                class="w-3.5 h-3.5"></i> Instagram</a>
+            <a href="#" class="social-link w-fit flex items-center gap-2"><i data-lucide="linkedin"
+                class="w-3.5 h-3.5"></i> LinkedIn</a>
+          </div>
         </div>
 
-        <!-- Address (subtle) -->
-        <div class="contact-item mt-14 pt-10 border-t border-ink/8">
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-ink/25 block mb-1">Sede</span>
-          <span class="font-mono text-xs tracking-[0.1em] text-ink/40">Porto, Portugal</span>
+        <!-- Address & Fuso Horário -->
+        <div class="contact-item mt-14 pt-10 border-t border-ink/8 grid grid-cols-2 gap-8">
+          <div>
+            <span
+              class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/25 mb-2 text-left">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Sede
+            </span>
+            <span class="font-mono text-xs tracking-[0.1em] text-ink/40">Porto, Portugal</span>
+          </div>
+          <div>
+            <span
+              class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/25 mb-2 text-left">
+              <i data-lucide="clock" class="w-3.5 h-3.5"></i> Fuso
+            </span>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-xs tracking-[0.1em] text-ink/40" id="contact-gmt-time">--:--</span>
+              <span class="font-mono text-[0.65rem] tracking-wider text-ink/25">GMT+0</span>
+            </div>
+          </div>
         </div>
 
       </div>
 
       <!-- RIGHT: Form ────────────────────────────────────────────────── -->
-      <div class="form-section relative overflow-hidden" style="background: #121212;">
+      <div class="form-section relative overflow-hidden bg-paper" style="border-left: 1px solid rgba(18,18,18,0.1);">
 
-        <!-- Subtle dot grid background -->
+        <!-- Drafting dot grid background -->
         <div class="absolute inset-0 pointer-events-none"
-          style="background-image: radial-gradient(circle, rgba(235,233,228,0.04) 1px, transparent 1px); background-size: 28px 28px; opacity: 1;">
+          style="background-image: radial-gradient(circle, rgba(18,18,18,0.06) 1px, transparent 1px); background-size: 28px 28px; opacity: 1;">
         </div>
 
         <div class="relative z-10"
-          style="padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 8%, 7rem) clamp(4rem, 8vw, 7rem);">
+          style="padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 8%, 6rem) clamp(4rem, 8vw, 7rem);">
 
           <!-- Section label -->
           <div class="form-field-label mb-10">
-            <span class="font-mono text-xs uppercase tracking-[0.25em]" style="color: rgba(235,233,228,0.4);">
-              <span
-                style="display:inline-block; width:2rem; height:1px; background:#C9A84C; vertical-align:middle; margin-right:0.6rem;"></span>
-              02 — Formulário
+            <span class="font-mono text-xs uppercase tracking-[0.25em]" style="color: rgba(18,18,18,0.4);">
+              <span class="accent-line"></span>
+              02 — Especificações
             </span>
           </div>
 
           <!-- Form heading -->
           <div class="mb-14 overflow-hidden">
-            <h2 class="font-serif italic leading-[0.92]" style="font-size: clamp(2.5rem, 5vw, 4.5rem); color: #EBE9E4;">
+            <h2 class="font-serif italic leading-[0.92]" style="font-size: clamp(2.5rem, 5vw, 4.5rem); color: #121212;">
               Envie-nos<br>
-              <span style="color: rgba(235,233,228,0.45);">uma mensagem</span>
+              <span style="color: rgba(18,18,18,0.3);">os detalhes</span>
             </h2>
           </div>
 
-          <!-- Form -->
-          <form id="contact-form" class="space-y-8" novalidate>
+          <!-- Form Grid Blueprint -->
+          <form id="contact-form" class="blueprint-form flex flex-col" novalidate>
 
             <!-- Row: Nome + Apelido -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div class="form-field">
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+              <div class="form-field sm:grid-border-r">
                 <input type="text" id="field-nome" name="nome" autocomplete="given-name" />
                 <label for="field-nome">Nome</label>
               </div>
@@ -675,21 +796,34 @@
             </div>
 
             <!-- Assunto -->
-            <div class="form-field">
-              <input type="text" id="field-assunto" name="assunto" />
-              <label for="field-assunto">Assunto</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+              <div class="form-field sm:grid-border-r">
+                <input type="text" id="field-assunto" name="assunto" />
+                <label for="field-assunto">Assunto</label>
+              </div>
+              <!-- Orçamento (Combo Box) -->
+              <div class="form-field">
+                <select id="field-orcamento" name="orcamento" required>
+                  <option value="" disabled selected></option>
+                  <option value="Abaixo de 1.000€">Abaixo de 1.000€</option>
+                  <option value="1.000€ - 3.000€">1.000€ - 3.000€</option>
+                  <option value="3.000€ - 5.000€">3.000€ - 5.000€</option>
+                  <option value="Acima de 5.000€">Acima de 5.000€</option>
+                </select>
+                <label for="field-orcamento">Orçamento Estimado</label>
+              </div>
             </div>
 
             <!-- Mensagem -->
-            <div class="form-field">
+            <div class="form-field" style="border-bottom: none;">
               <textarea id="field-mensagem" name="mensagem" rows="4"></textarea>
               <label for="field-mensagem">Mensagem</label>
             </div>
 
             <!-- Submit -->
-            <div class="pt-4">
-              <button type="submit" class="btn-submit btn-magnetic w-full rounded-full py-5 text-sm" data-cursor-expand>
-                Enviar Mensagem
+            <div class="submit-wrap p-4 border-t border-ink/15" style="background: rgba(18,18,18,0.02);">
+              <button type="submit" class="btn-submit btn-magnetic w-full py-5 text-sm rounded-full" data-cursor-expand>
+                Validar e Enviar
               </button>
             </div>
 
@@ -778,7 +912,7 @@
             <span class="font-mono text-xs text-paper/40">GMT+0</span>
           </div>
           <div class="flex items-center gap-2 mt-2">
-            <div class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-paper animate-pulse"></div>
             <span class="font-mono text-xs text-paper/40 uppercase tracking-wider">Disponível</span>
           </div>
         </div>
@@ -822,11 +956,16 @@
     onPageReady(() => {
 
       /* 1. Hero entrance timeline ─────────────────────────────── */
-      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-      tl.to('.hero-line', { y: '0%', duration: 1.4, stagger: 0.1 }, 0)
-        .to('.hero-label', { opacity: 1, y: 0, duration: 0.8 }, 0.1)
-        .to('.hero-desc', { opacity: 1, y: 0, duration: 0.8 }, 0.3)
-        .to('.hero-scroll-wrap', { opacity: 1, duration: 0.6 }, 0.5);
+      gsap.set('.hero-line', { y: '110%' });
+      gsap.set('.hero-label, .hero-desc, .hero-scroll-wrap', { opacity: 0, y: 15 });
+      gsap.set('.hero-blueprint', { scale: 0.8, opacity: 0, rotate: -20 });
+
+      const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+      tl.to('.hero-line', { y: '0%', duration: 1.6, stagger: 0.1 }, 0.4)
+        .to('.hero-blueprint', { scale: 1, opacity: 0.04, rotate: 0, duration: 2.5 }, 0.5)
+        .to('.hero-label', { opacity: 1, y: 0, duration: 1.2 }, 0.7)
+        .to('.hero-desc', { opacity: 1, y: 0, duration: 1.2 }, 0.9)
+        .to('.hero-scroll-wrap', { opacity: 1, y: 0, duration: 1.2 }, 1.1);
 
       /* 2. Scroll-line loop ────────────────────────────────────── */
       gsap.fromTo(
@@ -861,8 +1000,8 @@
         ease: 'power3.out',
       });
 
-      /* Also animate the form heading and label */
-      gsap.from('.form-field-label, .form-section h2', {
+      /* Also animate the form heading, label and submit button row */
+      gsap.from('.form-field-label, .form-section h2, .submit-wrap', {
         scrollTrigger: {
           trigger: '.form-section',
           start: 'top 78%',
@@ -872,6 +1011,17 @@
         duration: 0.8,
         stagger: 0.1,
         ease: 'power3.out',
+      });
+
+      /* 5. ScrollTrigger — Marquee strip and Footer ──────────────── */
+      gsap.from('.marquee-track', {
+        scrollTrigger: { trigger: '.marquee-track', start: 'top 95%' },
+        opacity: 0, duration: 1.2, ease: 'power2.out'
+      });
+
+      gsap.from('footer > div', {
+        scrollTrigger: { trigger: 'footer', start: 'top 85%' },
+        y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out'
       });
 
       /* 6. Magnetic submit button ──────────────────────────────── */
@@ -889,13 +1039,13 @@
       }
 
       /* 7. Floating labels ─────────────────────────────────────── */
-      document.querySelectorAll('.form-field input, .form-field textarea').forEach(el => {
+      document.querySelectorAll('.form-field input, .form-field select, .form-field textarea').forEach(el => {
         /* Initialise has-value on page load (e.g. browser autofill) */
         el.classList.toggle('has-value', el.value.length > 0);
 
-        el.addEventListener('input', () => {
-          el.classList.toggle('has-value', el.value.length > 0);
-        });
+        el.addEventListener('input', () => { el.classList.toggle('has-value', el.value.length > 0); });
+        el.addEventListener('change', () => { el.classList.toggle('has-value', el.value.length > 0); });
+
         el.addEventListener('focus', () => {
           el.closest('.form-field').classList.add('focused');
         });
@@ -912,19 +1062,56 @@
         btn.disabled = true;
 
         setTimeout(() => {
-          btn.textContent = 'Enviado ✓';
-          btn.style.background = '#22c55e';
-          btn.style.color = '#fff';
+          btn.textContent = 'VALIDADO ✓';
+          btn.style.background = 'var(--color-ink)';
+          btn.style.color = 'var(--color-paper)';
 
           /* Reset after 4 s */
           setTimeout(() => {
-            btn.textContent = 'Enviar Mensagem';
+            btn.textContent = 'Validar e Enviar';
             btn.style.background = '';
             btn.style.color = '';
             btn.disabled = false;
           }, 4000);
         }, 1800);
       });
+
+      /* 9. Interactive Drafting Crosshair ──────────────────────── */
+      const heroSection = document.querySelector('.hero-section');
+      const crosshair = document.querySelector('.drafting-crosshair');
+      const chX = document.querySelector('.drafting-ch-x');
+      const chY = document.querySelector('.drafting-ch-y');
+      const coordTip = document.querySelector('.coord-tooltip');
+
+      if (heroSection && crosshair) {
+        heroSection.addEventListener('mouseenter', () => { crosshair.style.opacity = '1'; });
+        heroSection.addEventListener('mouseleave', () => { crosshair.style.opacity = '0'; });
+        heroSection.addEventListener('mousemove', (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          gsap.to(chX, { y: y, duration: 0.15, ease: 'power2.out' });
+          gsap.to(chY, { x: x, duration: 0.15, ease: 'power2.out' });
+          gsap.to(coordTip, { x: x + 15, y: y + 15, duration: 0.15, ease: 'power2.out' });
+
+          coordTip.textContent = `x:${Math.round(x)} y:${Math.round(y)}`;
+        });
+      }
+
+      /* 10. Update local GMT time in contact page ──────────────── */
+      const contactTimeSpan = document.getElementById('contact-gmt-time');
+      if (contactTimeSpan) {
+        const updateContactTime = () => {
+          const now = new Date();
+          const pT = new Intl.DateTimeFormat('en-GB', {
+            timeZone: 'Europe/Lisbon', hour: '2-digit', minute: '2-digit', hour12: false
+          }).format(now);
+          contactTimeSpan.textContent = pT;
+        };
+        updateContactTime();
+        setInterval(updateContactTime, 30000);
+      }
 
     }); /* end onPageReady */
   </script>

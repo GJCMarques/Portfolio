@@ -264,23 +264,24 @@ export function initGlobalEffects() {
       pointer-events: none;
       z-index: 99998; /* Under the Loading Screen, waiting to be revealed as it shrinks! */
       will-change: transform;
+      mix-blend-mode: difference;
       transition: width 0.3s ease, height 0.3s ease,
                   background 0.3s ease, border-color 0.3s ease;
     }
     .cursor-dot {
       width: 8px; height: 8px;
-      background: var(--color-ink, #121212);
+      background: #ffffff;
       margin-top: -4px; margin-left: -4px;
     }
     .cursor-ring {
       width: 40px; height: 40px;
-      border: 1px solid rgba(18, 18, 18, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       margin-top: -20px; margin-left: -20px;
     }
     .cursor-ring.cursor-expand {
       width: 64px; height: 64px;
-      background: rgba(18, 18, 18, 0.06);
-      border-color: rgba(18, 18, 18, 0.5);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.6);
       margin-top: -32px; margin-left: -32px;
     }
     
