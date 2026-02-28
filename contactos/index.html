@@ -524,9 +524,9 @@
       <a href="/servicos/" class="nav-link" data-navpage="servicos">Serviços</a>
     </div>
 
-    <div class="hidden md:block relative z-20">
+    <div class="hidden md:flex relative z-20 items-center">
       <a href="/contactos/"
-        class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden inline-block"
+        class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden flex items-center justify-center leading-none"
         style="padding: clamp(0.6rem, 1vw, 0.85rem) clamp(1.5rem, 2.5vw, 2.25rem); font-size: clamp(0.8rem, 0.9vw, 1rem);">
         <span class="relative z-10 group-hover:text-ink transition-colors duration-300">Contactar</span>
         <span
@@ -562,8 +562,8 @@
 
     <!-- 1. HERO ──────────────────────────────────────────────────────── -->
     <section
-      class="hero-section relative min-h-screen flex flex-col justify-end overflow-hidden border-b border-ink/10 cursor-crosshair"
-      style="padding: clamp(7rem, 10vh, 10rem) clamp(1.5rem, 6vw, 7rem) clamp(3rem, 6vh, 5rem);">
+      class="hero-section relative h-[100dvh] min-h-[600px] w-full flex flex-col justify-end overflow-hidden border-b border-ink/10 cursor-crosshair box-border"
+      style="padding: clamp(5rem, 8vh, 8rem) clamp(1.5rem, 6vw, 7rem) clamp(2rem, 5vh, 4rem);">
 
       <!-- Diagonal Hatching Background instead of Grid -->
       <div class="absolute inset-0 pointer-events-none opacity-[0.05]"
@@ -572,11 +572,11 @@
 
       <!-- Elegant Vertical Image Placeholder - Hero Right -->
       <div
-        class="hero-image-frame hidden md:flex absolute right-[10%] lg:right-[12%] top-[55%] -translate-y-[45%] z-10 flex-col items-center">
-        <!-- Floating Wrapper in 'Polaroid/Print' style -->
+        class="hero-image-frame hidden md:flex absolute right-[8%] lg:right-[10%] 2xl:right-[12%] top-[54%] -translate-y-[50%] z-10 flex-col items-center">
+        <!-- Floating Wrapper in 'Polaroid/Print' style - Responsive Height Driven -->
         <div
-          class="relative w-[36vw] max-w-[500px] aspect-[4/5] p-3.5 bg-paper border border-ink/15 shadow-[12px_24px_50px_rgba(0,0,0,0.08)] transition-transform duration-700 hover:-translate-y-4 hover:scale-[1.02] rotate-[-2deg] hover:rotate-0"
-          style="backdrop-filter: blur(10px);">
+          class="relative p-4 bg-paper border border-ink/15 shadow-[12px_24px_50px_rgba(0,0,0,0.08)] transition-transform duration-700 hover:-translate-y-4 hover:scale-[1.02] rotate-[-2deg] hover:rotate-0"
+          style="backdrop-filter: blur(10px); height: min(70vh, 40vw * 1.25); max-height: 900px; min-height: 450px; aspect-ratio: 4/5;">
 
           <!-- Subtle subtle top tape effect for realism -->
           <div
