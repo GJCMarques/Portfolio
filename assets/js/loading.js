@@ -111,6 +111,9 @@ export function initLoader(onComplete) {
   if (exitX !== null) loader.style.setProperty('--origin-x', `${exitX}px`);
   if (exitY !== null) loader.style.setProperty('--origin-y', `${exitY}px`);
 
+  // Scroll Lock - Impede que o utilizador consiga dar scroll enquanto o Loader não desaparecer
+  document.body.style.overflow = 'hidden';
+
   // Trigger entry animation !
   setTimeout(() => {
     loader.classList.add('morph-in');
@@ -232,6 +235,7 @@ export function initLoader(onComplete) {
       running = false;
       cancelAnimationFrame(rafId);
       clearTimeout(tReveal);
+      document.body.style.overflow = ''; // Libertar o Scroll Lock da página!
       window.removeEventListener('resize', resize);
       loader.remove();
       style.remove();
@@ -242,6 +246,7 @@ export function initLoader(onComplete) {
     running = false;
     cancelAnimationFrame(rafId);
     clearTimeout(tExit);
+    document.body.style.overflow = ''; // Libertar caso seja forçado
     window.removeEventListener('resize', resize);
     loader.remove();
     style.remove();
