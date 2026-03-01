@@ -46,158 +46,139 @@ initLoader(() => {
     window.addEventListener("scroll", update, { passive: true });
   }
 
-  // --- Navbar Award-Winning Cinematic Hover (Minimal Diagonal Esquadria) ---
+  // --- Navbar Award-Winning Cinematic Hover (Individual Minimal Esquadrias) ---
   const navContainer = document.querySelector("#navbar .md\\:flex.absolute");
   if (navContainer) {
-    // Elegant, minimal architectural corners (Top-Left and Bottom-Right only)
-    const frame = document.createElement("div");
-    frame.className = "absolute left-0 top-0 pointer-events-none z-0 opacity-0";
-
-    frame.innerHTML = `
-      <!-- Top Left Esquadria -->
-      <div class="absolute left-[-8px] top-[-4px] w-[8px] h-[1px] bg-ink/40 transition-transform origin-left"></div>
-      <div class="absolute left-[-8px] top-[-4px] w-[1px] h-[8px] bg-ink/40 transition-transform origin-top"></div>
-      
-      <!-- Bottom Right Esquadria -->
-      <div class="absolute right-[-8px] bottom-[-2px] w-[8px] h-[1px] bg-ink/40 transition-transform origin-right"></div>
-      <div class="absolute right-[-8px] bottom-[-2px] w-[1px] h-[8px] bg-ink/40 transition-transform origin-bottom"></div>
-    `;
-    navContainer.appendChild(frame);
-
-    // Override the previous hover CSS lines securely
+    // Override the previous hover CSS lines securely for layout and pure CSS dims
     const styleOverride = document.createElement("style");
     styleOverride.innerHTML = `
+      #navbar .md\\:flex.absolute { z-index: 30 !important; }
       #navbar .md\\:flex.absolute .nav-link::before,
       #navbar .md\\:flex.absolute .nav-link::after { display: none !important; }
-      #navbar .md\\:flex.absolute .nav-link { position: relative; z-index: 10; padding: 2px 0; margin: 0; }
+      #navbar .md\\:flex.absolute .nav-link { 
+        position: relative; z-index: 10; 
+        padding: 6px 14px;
+        margin: 0;
+        transition: opacity 0.4s ease; 
+        display: inline-block; 
+      }
+      /* Pure CSS Dimming - flawless tracking */
+      #navbar .md\\:flex.absolute:hover .nav-link { opacity: 0.35; }
+      #navbar .md\\:flex.absolute .nav-link:hover,
+      #navbar .md\\:flex.absolute .nav-link.active-page { opacity: 1 !important; }
     `;
     document.head.appendChild(styleOverride);
 
     const navLinks = Array.from(navContainer.querySelectorAll(".nav-link"));
 
-    let activeLink = null;
-    let leaveTimer = null;
-
     // Determine current page link based on URL
     const currentPathSegment =
       location.pathname.split("/").filter(Boolean)[0] ?? "";
-    const pageActiveLink =
-      navLinks.find((link) => {
+
+    navLinks.forEach((link) => {
+      const isCurrentPage = (() => {
         const hrefSeg =
           link.getAttribute("href").split("/").filter(Boolean)[0] ?? "";
         return hrefSeg === currentPathSegment;
-      }) || null;
+      })();
 
-    gsap.set(frame, { x: 0, y: 0, width: 0, height: 0 });
+      // Localized frame bound tightly to each individual link
+      const frame = document.createElement("div");
+      frame.className =
+        "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 opacity-0 w-0 h-0";
+      frame.innerHTML = `
+        <!-- Top Left Esquadria -->
+        <div class="bp-mark absolute left-0 top-0 w-[8px] h-[1px] bg-ink opacity-40 origin-left"></div>
+        <div class="bp-mark absolute left-0 top-0 w-[1px] h-[8px] bg-ink opacity-40 origin-top"></div>
+        
+        <!-- Bottom Right Esquadria -->
+        <div class="bp-mark absolute right-0 bottom-0 w-[8px] h-[1px] bg-ink opacity-40 origin-right"></div>
+        <div class="bp-mark absolute right-0 bottom-0 w-[1px] h-[8px] bg-ink opacity-40 origin-bottom"></div>
 
-    // Instantly set boundaries to active page if found
-    if (pageActiveLink) {
-      const rect = pageActiveLink.getBoundingClientRect();
-      const containerRect = navContainer.getBoundingClientRect();
+        ${
+          isCurrentPage
+            ? `
+        <!-- Opposing Dots (Balance) ONLY for Active Page -->
+        <div class="bp-dot absolute right-[1px] top-[1px] w-[2.5px] h-[2.5px] bg-ink opacity-40 origin-center rounded-full"></div>
+        <div class="bp-dot absolute left-[1px] bottom-[1px] w-[2.5px] h-[2.5px] bg-ink opacity-40 origin-center rounded-full"></div>
+        `
+            : ""
+        }
+      `;
+      link.appendChild(frame);
 
-      gsap.set(frame, {
-        x: rect.left - containerRect.left,
-        y: rect.top - containerRect.top,
-        width: rect.width,
-        height: rect.height,
-        opacity: 1,
-      });
-      activeLink = pageActiveLink;
-    }
+      // Active state representation
+      if (isCurrentPage) {
+        link.classList.add("active-page");
+        gsap.set(frame, { opacity: 1, width: "100%", height: "100%" });
+        // Intro pulse
+        gsap.to(frame.querySelectorAll(".bp-mark, .bp-dot"), {
+          scale: 1.5,
+          duration: 0.4,
+          yoyo: true,
+          repeat: 1,
+          ease: "power2.out",
+        });
+      }
 
-    navLinks.forEach((link) => {
+      // Safe individual hover interactions
       link.addEventListener("mouseenter", () => {
-        clearTimeout(leaveTimer);
-        const rect = link.getBoundingClientRect();
-        const containerRect = navContainer.getBoundingClientRect();
+        // Expand the box from the center outwards with authority
+        gsap.to(frame, {
+          opacity: 1,
+          width: "100%",
+          height: "100%",
+          duration: 0.4,
+          ease: "expo.out",
+          overwrite: "auto",
+        });
 
-        const targetX = rect.left - containerRect.left;
-        const targetY = rect.top - containerRect.top;
-        const targetWidth = rect.width;
-        const targetHeight = rect.height;
-
-        if (activeLink === link) return;
-
-        if (activeLink) {
-          // Fluid transition to the new link
-          gsap.to(frame, {
-            x: targetX,
-            y: targetY,
-            width: targetWidth,
-            height: targetHeight,
-            duration: 0.65,
-            ease: "expo.out",
-            overwrite: "auto",
-          });
-        } else {
-          // First entry from nowhere: scale out from center block
-          gsap.set(frame, {
-            x: targetX + targetWidth / 2,
-            y: targetY + targetHeight / 2,
-            width: 0,
-            height: 0,
-          });
-
-          gsap.to(frame, {
-            x: targetX,
-            y: targetY,
-            width: targetWidth,
-            height: targetHeight,
-            opacity: 1,
-            duration: 0.65,
-            ease: "expo.out",
-            overwrite: "auto",
-          });
-        }
-
-        activeLink = link;
+        // Snappy "Elastic" Detail around the edges during travel
+        gsap.to(frame.querySelectorAll(".bp-mark, .bp-dot"), {
+          scale: 2,
+          duration: 0.25,
+          yoyo: true,
+          repeat: 1,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
       });
-    });
 
-    navContainer.addEventListener("mouseleave", () => {
-      leaveTimer = setTimeout(() => {
-        if (pageActiveLink) {
-          // Glide back to the Page Active Link seamlessly
-          const rect = pageActiveLink.getBoundingClientRect();
-          const containerRect = navContainer.getBoundingClientRect();
-          const targetX = rect.left - containerRect.left;
-          const targetY = rect.top - containerRect.top;
-
+      link.addEventListener("mouseleave", () => {
+        if (isCurrentPage) {
+          // Restore to active state gracefully
           gsap.to(frame, {
-            x: targetX,
-            y: targetY,
-            width: rect.width,
-            height: rect.height,
-            duration: 0.75,
+            opacity: 1,
+            width: "100%",
+            height: "100%",
+            duration: 0.4,
             ease: "expo.out",
             overwrite: "auto",
-            onComplete: () => {
-              activeLink = pageActiveLink;
-            },
+          });
+          gsap.to(frame.querySelectorAll(".bp-mark, .bp-dot"), {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.inOut",
+            overwrite: "auto",
           });
         } else {
-          // Disappear elegantly by collapsing frames inwards
-          if (!activeLink) return;
-          const rect = activeLink.getBoundingClientRect();
-          const containerRect = navContainer.getBoundingClientRect();
-          const startX = rect.left - containerRect.left;
-          const startY = rect.top - containerRect.top;
-
+          // Shrink back to center
           gsap.to(frame, {
-            x: startX + rect.width / 2,
-            y: startY + rect.height / 2,
-            width: 0,
-            height: 0,
             opacity: 0,
-            duration: 0.5,
-            ease: "expo.inOut",
+            width: "0%",
+            height: "0%",
+            duration: 0.35,
+            ease: "power2.inOut",
             overwrite: "auto",
-            onComplete: () => {
-              activeLink = null;
-            },
+          });
+          gsap.to(frame.querySelectorAll(".bp-mark, .bp-dot"), {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.inOut",
+            overwrite: "auto",
           });
         }
-      }, 50);
+      });
     });
   }
 
