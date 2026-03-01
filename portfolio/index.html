@@ -2072,141 +2072,216 @@
       import { ScrollTrigger } from "gsap/ScrollTrigger";
       gsap.registerPlugin(ScrollTrigger);
 
-      function initAnimations() {
-        // ── Hero entrance ──────────────────────────────────────
-        const heroTL = gsap.timeline({ defaults: { ease: "power3.out" } });
+      /* ── Project data for modal ───────────────────────────── */
+      const projectData = {
+        "arcadia": {
+          title: "Arcadia", cat: "Landing Page", num: "01 / 06",
+          img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85&fit=crop",
+          desc: "Website imersivo para restaurante fine-dining no Porto. Cada detalhe foi pensado para transmitir a sofisticação da marca: animações cinematográficas com GSAP, sistema de reservas integrado e uma experiência visual que transporta o visitante para dentro do restaurante.",
+          year: "2025", type: "Landing Page", client: "Arcadia Restaurant", duration: "6 semanas",
+          stack: ["React", "GSAP", "Tailwind CSS", "Framer Motion", "Vercel"], link: "#"
+        },
+        "studio-norte": {
+          title: "Studio Norte", cat: "Website Institucional", num: "02 / 06",
+          img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85&fit=crop",
+          desc: "Presença digital premium para atelier de arquitectura contemporânea no Porto. Portfólio de projectos com galeria interactiva, gestão de conteúdo headless e performance optimizada para Core Web Vitals.",
+          year: "2025", type: "Website Institucional", client: "Studio Norte Arquitectura", duration: "8 semanas",
+          stack: ["Next.js", "Sanity CMS", "GSAP", "TypeScript", "Tailwind CSS"], link: "#"
+        },
+        "forma-studio": {
+          title: "Forma Studio", cat: "Website + Plataforma", num: "03 / 06",
+          img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=85&fit=crop",
+          desc: "Website e plataforma de membros para estúdio de fitness premium. Sistema de agendamento integrado, área privada de membros com programa de treino personalizado e integração com wearables.",
+          year: "2025", type: "Website + Web App", client: "Forma Studio Lisboa", duration: "10 semanas",
+          stack: ["Next.js", "Supabase", "Tailwind CSS", "Framer Motion", "Stripe"], link: "#"
+        },
+        "bloom": {
+          title: "Bloom", cat: "E-Commerce", num: "04 / 06",
+          img: "https://images.unsplash.com/photo-1487530811015-780a88a7d0bc?w=1200&q=85&fit=crop",
+          desc: "Loja online de floricultura artesanal com foco total na experiência de compra. Catálogo visual imersivo, checkout em 2 passos, entregas programadas e subscriptions sazonais.",
+          year: "2024", type: "E-Commerce", client: "Bloom Flores Artesanais", duration: "7 semanas",
+          stack: ["Next.js", "Stripe", "Sanity", "Vercel", "Tailwind CSS"], link: "#"
+        },
+        "atlantico": {
+          title: "Atlântico", cat: "Web Application", num: "05 / 06",
+          img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=85&fit=crop",
+          desc: "Plataforma de gestão operacional para empresa do sector marítimo. Dashboard analítico em tempo real, relatórios exportáveis, gestão de frotas e comunicação entre equipas.",
+          year: "2024", type: "Web Application", client: "Atlântico Maritime", duration: "14 semanas",
+          stack: ["React", "Node.js", "PostgreSQL", "Chart.js", "Redis"], link: "#"
+        },
+        "brisa-solar": {
+          title: "Brisa Solar", cat: "Landing Page", num: "06 / 06",
+          img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=85&fit=crop",
+          desc: "Campanha digital de alto impacto para empresa líder em energia solar. Animações 3D com Three.js, simulador interactivo de poupança energética e funil de conversão optimizado.",
+          year: "2024", type: "Landing Page", client: "Brisa Solar Portugal", duration: "5 semanas",
+          stack: ["Vite", "GSAP", "Three.js", "Tailwind CSS", "HubSpot"], link: "#"
+        }
+      };
 
-        heroTL.to(
-          ["#hero-line-l", "#hero-line-r"],
-          { scaleX: 1, duration: 1.1 },
-          0,
-        );
-        heroTL.to(
-          ["#hero-w1", "#hero-w2"],
-          { y: "0%", duration: 1.3, stagger: 0.12 },
-          0.15,
-        );
+      /* ── Modal logic ──────────────────────────────────────── */
+      const modal = document.getElementById("proj-modal");
+      const modalOverlay = document.getElementById("modal-overlay");
+      const modalClose = document.getElementById("modal-close");
+
+      function openModal(key) {
+        const d = projectData[key];
+        if (!d) return;
+        document.getElementById("modal-img").src = d.img;
+        document.getElementById("modal-img").alt = d.title;
+        document.getElementById("modal-cat").textContent = d.cat;
+        document.getElementById("modal-num").textContent = d.num;
+        document.getElementById("modal-title").textContent = d.title;
+        document.getElementById("modal-desc").textContent = d.desc;
+        document.getElementById("modal-year").textContent = d.year;
+        document.getElementById("modal-type").textContent = d.type;
+        document.getElementById("modal-client").textContent = d.client;
+        document.getElementById("modal-duration").textContent = d.duration;
+        document.getElementById("modal-stack").innerHTML = d.stack
+          .map(s => `<span class="modal-stack-tag">${s}</span>`).join("");
+        document.getElementById("modal-cta-link").href = d.link;
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+        document.getElementById("modal-panel").scrollTop = 0;
+      }
+
+      function closeModal() {
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      modalClose.addEventListener("click", closeModal);
+      modalOverlay.addEventListener("click", closeModal);
+      document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+      /* ── Main init ────────────────────────────────────────── */
+      function initAnimations() {
+
+        /* ── Hero entrance ────────────────────────────────── */
+        const heroTL = gsap.timeline({ defaults: { ease: "power3.out" } });
+        heroTL.to(["#hero-line-l", "#hero-line-r"], { scaleX: 1, duration: 1.1 }, 0);
+        heroTL.to(["#hero-w1", "#hero-w2"], { y: "0%", duration: 1.3, stagger: 0.12 }, 0.15);
         heroTL.to("#hero-desc", { opacity: 1, duration: 0.9 }, 0.6);
-        heroTL.to(
-          ["#stat-1", "#stat-2", "#stat-3"],
-          { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 },
-          0.75,
-        );
+        heroTL.to(["#stat-1", "#stat-2", "#stat-3"], { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, 0.75);
         heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 0.7 }, 1.1);
 
-        // ── Filter bar ─────────────────────────────────────────
-        gsap.from("#pf-filters", {
-          scrollTrigger: { trigger: "#pf-filters", start: "top 90%" },
-          opacity: 0,
-          y: 20,
-          duration: 0.7,
-          ease: "power2.out",
+        /* ── Timeline section header ──────────────────────── */
+        ScrollTrigger.create({
+          trigger: "#tl-section",
+          start: "top 80%",
+          onEnter: () => {
+            gsap.to(["#tl-h2-1", "#tl-h2-2"], {
+              y: "0%", duration: 1.2, stagger: 0.1, ease: "power3.out"
+            });
+            gsap.from(".tl-filters", {
+              opacity: 0, y: 16, duration: 0.8, ease: "power2.out", delay: 0.35
+            });
+          }
         });
 
-        // ── Project rows reveal on scroll ──────────────────────
-        gsap.utils.toArray(".pf-project").forEach((proj, i) => {
-          gsap.from(proj, {
-            scrollTrigger: {
-              trigger: proj,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-            opacity: 0,
-            y: 40,
-            duration: 0.85,
-            ease: "power2.out",
+        /* ── Timeline track fill (scroll-driven) ─────────── */
+        const tlFill = document.getElementById("tl-track-fill");
+        if (tlFill) {
+          ScrollTrigger.create({
+            trigger: "#tl-body",
+            start: "top 55%",
+            end: "bottom 45%",
+            onUpdate: self => {
+              const pct = (100 - self.progress * 100).toFixed(2);
+              tlFill.style.clipPath = `inset(0 0 ${pct}% 0)`;
+            }
+          });
+        }
+
+        /* ── Year markers ─────────────────────────────────── */
+        gsap.utils.toArray(".tl-year-marker").forEach(el => {
+          ScrollTrigger.create({
+            trigger: el,
+            start: "top 85%",
+            onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" })
           });
         });
 
-        // ── CTA section ────────────────────────────────────────
-        const ctaTL = gsap.timeline({
-          scrollTrigger: { trigger: "#pf-cta", start: "top 78%" },
+        /* ── Card reveals + node activation ──────────────── */
+        gsap.utils.toArray(".tl-entry").forEach(entry => {
+          const card = entry.querySelector(".tl-card");
+          if (!card) return;
+          const isRight = !!entry.querySelector(".tl-right-col > .tl-card");
+          gsap.set(card, { opacity: 0, x: isRight ? 45 : -45, y: 20 });
+
+          ScrollTrigger.create({
+            trigger: entry,
+            start: "top 82%",
+            onEnter: () => {
+              gsap.to(card, { opacity: 1, x: 0, y: 0, duration: 1, ease: "power3.out" });
+              entry.classList.add("in-view");
+            }
+          });
         });
-        ctaTL.to(
-          ".cta-line",
-          { y: "0%", duration: 1.2, stagger: 0.12, ease: "power3.out" },
-          0,
-        );
-        ctaTL.to(
-          ".cta-fade",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            stagger: 0.12,
-            ease: "power2.out",
-          },
-          0.4,
-        );
 
-        // ── Filter logic ───────────────────────────────────────
-        const filterBtns = document.querySelectorAll(".pf-filter-btn");
-        const projects = document.querySelectorAll(".pf-project");
+        /* ── Card interactions ────────────────────────────── */
+        document.querySelectorAll(".tl-card").forEach(card => {
+          card.addEventListener("click", () => openModal(card.dataset.project));
+        });
+        document.querySelectorAll(".tl-open-btn").forEach(btn => {
+          btn.addEventListener("click", e => {
+            e.stopPropagation();
+            openModal(btn.closest(".tl-card").dataset.project);
+          });
+        });
 
-        filterBtns.forEach((btn) => {
+        /* ── Timeline filter ──────────────────────────────── */
+        document.querySelectorAll(".tl-filter-btn").forEach(btn => {
           btn.addEventListener("click", () => {
-            const cat = btn.dataset.filter;
-
-            // Update active button
-            filterBtns.forEach((b) => b.classList.remove("active"));
+            document.querySelectorAll(".tl-filter-btn").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
+            const filter = btn.dataset.filter;
 
-            // Animate projects in/out
-            projects.forEach((proj) => {
-              const match = cat === "all" || proj.dataset.cat === cat;
-              if (match) {
-                proj.style.display = "";
-                gsap.to(proj, {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.45,
-                  ease: "power2.out",
-                  delay: 0.05,
-                });
+            document.querySelectorAll(".tl-entry").forEach((entry, i) => {
+              const cats = entry.dataset.cat || "";
+              const show = filter === "all" || cats.split(" ").includes(filter);
+              if (show) {
+                entry.style.display = "";
+                gsap.to(entry, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", delay: i * 0.04 });
               } else {
-                gsap.to(proj, {
-                  opacity: 0,
-                  y: -12,
-                  duration: 0.3,
-                  ease: "power2.in",
-                  onComplete: () => {
-                    proj.style.display = "none";
-                  },
+                gsap.to(entry, {
+                  opacity: 0, y: -10, duration: 0.28, ease: "power2.in",
+                  onComplete: () => { entry.style.display = "none"; }
                 });
               }
+            });
+
+            document.querySelectorAll(".tl-year-marker").forEach(m => {
+              m.style.display = filter === "all" ? "" : "none";
             });
           });
         });
 
-        // ── Footer ───────────────────────────────────────────────
+        /* ── CTA section ──────────────────────────────────── */
+        const ctaTL = gsap.timeline({
+          scrollTrigger: { trigger: "#pf-cta", start: "top 78%" }
+        });
+        ctaTL.to(".cta-line", { y: "0%", duration: 1.2, stagger: 0.12, ease: "power3.out" }, 0);
+        ctaTL.to(".cta-fade", { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: "power2.out" }, 0.4);
+
+        /* ── Footer ───────────────────────────────────────── */
         gsap.from(".footer-dots", {
           scrollTrigger: { trigger: "footer", start: "top 85%" },
-          opacity: 0,
-          duration: 1.5,
-          ease: "power2.out",
+          opacity: 0, duration: 1.5, ease: "power2.out"
         });
-
         gsap.from(".footer-grid > div, .footer-bottom", {
           scrollTrigger: { trigger: "footer", start: "top 85%" },
-          y: 40,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
+          y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out"
         });
       }
 
-      // Wait for page.js initLoader to reveal body
+      /* ── Wait for page.js loader ──────────────────────────── */
       const obs = new MutationObserver(() => {
         if (document.body.style.visibility !== "") {
           obs.disconnect();
           requestAnimationFrame(initAnimations);
         }
       });
-      obs.observe(document.body, {
-        attributes: true,
-        attributeFilter: ["style"],
-      });
+      obs.observe(document.body, { attributes: true, attributeFilter: ["style"] });
     </script>
   </body>
 </html>
