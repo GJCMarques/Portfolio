@@ -1,6 +1,6 @@
 export function initLoader(onComplete) {
   const isHome = !!document.getElementById('canvas-container');
-  const SHOW_MS = 2800;
+  const SHOW_MS = 2500;
   const MORPH_MS = 1000;
 
   // ── Styles ───────────────────
