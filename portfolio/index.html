@@ -642,374 +642,367 @@
       }
 
       /* ══════════════════════════════════════════════════
-         TIMELINE — SCROLL ANIMATED PROJECT SHOWCASE
+         TIMELINE — SCROLL-JACKED SHOWCASE
       ══════════════════════════════════════════════════ */
 
+      /* Section: visible at 100vh, scroll distance added by GSAP pin */
       #tl-section {
-        background: #0d0d12;
+        background: var(--color-paper);
         position: relative;
+        height: 100vh;
         overflow: hidden;
-        padding: clamp(5rem, 10vh, 9rem) 0 clamp(6rem, 12vh, 11rem);
       }
 
-      #tl-header {
-        padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(3rem, 6vh, 5rem);
-        position: relative;
-        z-index: 10;
-      }
-
-      .tl-filters {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        margin-top: 2.5rem;
-      }
-      .tl-filter-btn {
-        font-family: var(--font-mono);
-        font-size: 0.58rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        border: 1px solid rgba(235, 233, 228, 0.1);
-        padding: 0.5rem 1.2rem;
-        border-radius: 100px;
-        color: rgba(235, 233, 228, 0.32);
-        cursor: pointer;
-        background: transparent;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .tl-filter-btn:hover {
-        border-color: rgba(235, 233, 228, 0.25);
-        color: rgba(235, 233, 228, 0.65);
-      }
-      .tl-filter-btn.active {
-        background: #c9a84c;
-        border-color: #c9a84c;
-        color: #0d0d12;
-      }
-
-      /* Timeline body + track */
-      #tl-body {
-        position: relative;
-        max-width: 1380px;
-        margin: 0 auto;
-        padding: 0 clamp(1.5rem, 5vw, 6rem);
-      }
-
-      .tl-track-wrap {
+      /* Vertical line tracks */
+      .tl-vline {
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
         width: 1px;
+        z-index: 20;
         pointer-events: none;
-        z-index: 1;
       }
-      .tl-track-bg {
+      #tl-vline-l { left: clamp(3rem, 5vw, 6rem); }
+      #tl-vline-r { right: clamp(3rem, 5vw, 6rem); }
+
+      .tl-vline-bg {
         position: absolute;
         inset: 0;
-        background: rgba(235, 233, 228, 0.06);
+        background: rgba(18, 18, 18, 0.1);
       }
-      .tl-track-fill {
+      .tl-vline-fill {
         position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to bottom,
-          transparent,
-          #c9a84c 8%,
-          #c9a84c 92%,
-          transparent
-        );
+        top: 0; left: 0; right: 0;
+        height: 100%;
+        background: var(--color-ink);
         clip-path: inset(0 0 100% 0);
+        will-change: clip-path;
+        opacity: 0;
+      }
+
+      /* Horizontal sweep connector */
+      #tl-hline {
+        position: absolute;
+        left: clamp(3rem, 5vw, 6rem);
+        right: clamp(3rem, 5vw, 6rem);
+        height: 1px;
+        background: var(--color-ink);
+        bottom: clamp(3.5rem, 6vh, 6rem);
+        z-index: 20;
+        pointer-events: none;
+        clip-path: inset(0 100% 0 0);
         will-change: clip-path;
       }
 
-      /* Year markers */
-      .tl-year-marker {
+      /* Progress display */
+      #tl-progress-display {
+        position: absolute;
+        bottom: clamp(1.8rem, 2.8vh, 3rem);
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         align-items: center;
-        justify-content: center;
-        position: relative;
-        z-index: 10;
-        padding: 3rem 0 1.5rem;
-        opacity: 0;
-        transform: translateY(12px);
+        gap: 1rem;
+        z-index: 25;
+        pointer-events: none;
+        white-space: nowrap;
       }
-      .tl-year-badge {
+      .tl-prog-num {
         font-family: var(--font-mono);
-        font-size: 0.58rem;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: #c9a84c;
-        background: #0d0d12;
-        padding: 0.45rem 1.5rem;
-        border: 1px solid rgba(201, 168, 76, 0.28);
-        border-radius: 100px;
+        font-size: 0.57rem;
+        letter-spacing: 0.2em;
+        color: rgba(18, 18, 18, 0.32);
       }
-
-      /* Entry grid */
-      .tl-entry {
-        display: grid;
-        grid-template-columns: 1fr 2.5rem 1fr;
-        align-items: start;
-        padding: clamp(1.5rem, 3vh, 2.5rem) 0;
+      .tl-prog-track {
+        width: clamp(70px, 9vw, 110px);
+        height: 1px;
+        background: rgba(18, 18, 18, 0.1);
         position: relative;
-        z-index: 2;
+      }
+      .tl-prog-fill {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%;
+        background: var(--color-ink);
+        width: 0%;
+        will-change: width;
+      }
+      .tl-prog-fill::after {
+        content: '';
+        position: absolute;
+        right: 0; top: 50%;
+        transform: translate(50%, -50%);
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--color-ink);
       }
 
-      .tl-node-col {
+      /* Panels layer */
+      #tl-panels { position: absolute; inset: 0; z-index: 5; }
+
+      /* Individual panel */
+      .tl-panel {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        opacity: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .tl-panel.tl-active { pointer-events: auto; }
+
+      /* line-left -> images col1 (dominant), text col2 (right, outside edge) */
+      .tl-panel[data-side="right"] {
+        grid-template-columns: 1.5fr 1fr;
+        padding-left: clamp(5.5rem, 9vw, 11rem);
+        padding-right: clamp(3rem, 5vw, 6.5rem);
+        padding-top: clamp(4rem, 7vh, 6.5rem);
+        padding-bottom: clamp(3.5rem, 6vh, 5.5rem);
+        column-gap: clamp(2.5rem, 3.5vw, 5rem);
+        grid-template-rows: 1fr;
+        align-items: center;
+      }
+      .tl-panel[data-side="right"] .tl-panel-images { grid-column: 1; grid-row: 1; }
+      .tl-panel[data-side="right"] .tl-panel-text   { grid-column: 2; grid-row: 1; align-self: center; }
+
+      /* line-right -> text col1 (left, outside edge), images col2 (dominant) */
+      .tl-panel[data-side="left"] {
+        grid-template-columns: 1fr 1.5fr;
+        padding-left: clamp(3rem, 5vw, 6.5rem);
+        padding-right: clamp(5.5rem, 9vw, 11rem);
+        padding-top: clamp(4rem, 7vh, 6.5rem);
+        padding-bottom: clamp(3.5rem, 6vh, 5.5rem);
+        column-gap: clamp(2.5rem, 3.5vw, 5rem);
+        grid-template-rows: 1fr;
+        align-items: center;
+      }
+      .tl-panel[data-side="left"] .tl-panel-text   { grid-column: 1; grid-row: 1; align-self: center; }
+      .tl-panel[data-side="left"] .tl-panel-images { grid-column: 2; grid-row: 1; }
+
+      /* Text column */
+      .tl-panel-text {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding-top: 2.5rem;
-      }
-      .tl-node {
-        width: 13px;
-        height: 13px;
-        border-radius: 50%;
-        background: #0d0d12;
-        border: 2px solid rgba(201, 168, 76, 0.3);
+        justify-content: center;
         position: relative;
         z-index: 2;
+        height: 100%;
+      }
+
+      /* Animated items */
+      .tl-pi { will-change: opacity, transform; }
+
+      .tl-panel-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.1rem;
+      }
+      .tl-panel-num {
+        font-family: var(--font-mono);
+        font-size: 0.54rem;
+        letter-spacing: 0.26em;
+        color: rgba(18, 18, 18, 0.28);
+      }
+      .tl-panel-num-sep {
+        width: 1.5rem;
+        height: 1px;
+        background: rgba(18, 18, 18, 0.15);
         flex-shrink: 0;
-        transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
       }
-      .tl-node::after {
-        content: "";
-        position: absolute;
-        inset: -7px;
-        border-radius: 50%;
-        border: 1px solid transparent;
-        transition: border-color 0.5s ease;
+      .tl-panel-cat {
+        font-family: var(--font-mono);
+        font-size: 0.54rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--color-ink);
+        border: 1px solid rgba(18, 18, 18, 0.18);
+        padding: 0.26rem 0.72rem;
+        border-radius: 100px;
       }
-      .tl-entry.in-view .tl-node {
-        background: #c9a84c;
-        border-color: #c9a84c;
-        box-shadow: 0 0 18px rgba(201, 168, 76, 0.45);
+      .tl-panel-title {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(2.8rem, 6vw, 6.5rem);
+        line-height: 0.88;
+        color: var(--color-ink);
+        letter-spacing: -0.02em;
+        margin-bottom: 1.25rem;
       }
-      .tl-entry.in-view .tl-node::after {
-        border-color: rgba(201, 168, 76, 0.2);
+      .tl-panel-divider {
+        width: clamp(2.5rem, 4vw, 4rem);
+        height: 1px;
+        background: rgba(18, 18, 18, 0.15);
+        margin-bottom: 1.2rem;
       }
-
-      .tl-left-col {
+      .tl-panel-desc {
+        font-size: clamp(0.78rem, 0.9vw, 0.875rem);
+        color: rgba(18, 18, 18, 0.48);
+        line-height: 1.78;
+        max-width: 36ch;
+        margin-bottom: 1.25rem;
+      }
+      .tl-panel-meta {
         display: flex;
-        justify-content: flex-end;
-        padding-right: clamp(1.5rem, 3vw, 3.5rem);
+        align-items: center;
+        gap: 0.55rem;
+        margin-bottom: 1.2rem;
       }
-      .tl-right-col {
+      .tl-panel-year {
+        font-family: var(--font-mono);
+        font-size: 0.57rem;
+        letter-spacing: 0.14em;
+        color: rgba(18, 18, 18, 0.3);
+      }
+      .tl-panel-meta-sep {
+        width: 1px;
+        height: 0.75rem;
+        background: rgba(18, 18, 18, 0.14);
+      }
+      .tl-panel-client {
+        font-family: var(--font-mono);
+        font-size: 0.57rem;
+        letter-spacing: 0.1em;
+        color: rgba(18, 18, 18, 0.36);
+      }
+      .tl-panel-stack {
         display: flex;
-        justify-content: flex-start;
-        padding-left: clamp(1.5rem, 3vw, 3.5rem);
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-bottom: 2rem;
       }
-
-      /* Card */
-      .tl-card {
-        width: 100%;
-        max-width: 520px;
-        background: rgba(235, 233, 228, 0.025);
-        border: 1px solid rgba(235, 233, 228, 0.06);
-        border-radius: 1.75rem;
-        overflow: hidden;
+      .tl-panel-tag {
+        font-family: var(--font-mono);
+        font-size: 0.52rem;
+        letter-spacing: 0.1em;
+        color: rgba(18, 18, 18, 0.32);
+        border: 1px solid rgba(18, 18, 18, 0.1);
+        padding: 0.22rem 0.6rem;
+        border-radius: 100px;
+      }
+      .tl-panel-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.57rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        background: var(--color-ink);
+        color: var(--color-paper);
+        padding: 0.85rem 1.8rem;
+        border-radius: 100px;
+        border: none;
         cursor: pointer;
-        position: relative;
-        opacity: 0;
-        will-change: transform, opacity;
-        transition: background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        align-self: flex-start;
+        text-decoration: none;
       }
-      .tl-card:hover {
-        background: rgba(235, 233, 228, 0.048);
-        border-color: rgba(201, 168, 76, 0.18);
-        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 168, 76, 0.06);
+      .tl-panel-cta:hover {
+        background: var(--color-carbon);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
       }
 
-      .tl-img-wrap {
-        position: relative;
-        overflow: hidden;
-        aspect-ratio: 16 / 9;
+      /* Ghost number watermark */
+      .tl-panel-ghost {
+        position: absolute;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 300;
+        font-size: clamp(20vw, 28vw, 36vw);
+        line-height: 0.85;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(18, 18, 18, 0.028);
+        user-select: none;
+        pointer-events: none;
+        z-index: 1;
+        bottom: -0.1em;
+        right: -0.02em;
+        white-space: nowrap;
       }
-      .tl-img-wrap img {
+      .tl-panel[data-side="left"] .tl-panel-ghost {
+        right: auto;
+        left: -0.02em;
+      }
+
+      /* Images column */
+      .tl-panel-images {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(0.65rem, 1.2vw, 1.1rem);
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        min-height: 0;
+      }
+      .tl-panel-img-main {
+        flex: 1;
+        min-height: 0;
+        border-radius: clamp(1rem, 1.5vw, 1.5rem);
+        overflow: hidden;
+        position: relative;
+      }
+      .tl-panel-img-main img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
-        transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
-      .tl-card:hover .tl-img-wrap img {
-        transform: scale(1.07);
+      .tl-panel-img-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(0.65rem, 1.2vw, 1.1rem);
+        height: clamp(90px, 14vh, 140px);
+        flex-shrink: 0;
       }
-      .tl-img-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to bottom, transparent 40%, rgba(13, 13, 18, 0.72) 100%);
-        opacity: 0;
-        transition: opacity 0.45s ease;
-        display: flex;
-        align-items: flex-end;
-        padding: 1.5rem;
+      .tl-panel-img-sm {
+        border-radius: clamp(0.75rem, 1.2vw, 1.1rem);
+        overflow: hidden;
       }
-      .tl-card:hover .tl-img-overlay {
-        opacity: 1;
-      }
-      .tl-img-view {
-        font-family: var(--font-mono);
-        font-size: 0.56rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: rgba(235, 233, 228, 0.9);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transform: translateY(8px);
-        transition: transform 0.35s ease;
-      }
-      .tl-card:hover .tl-img-view {
-        transform: translateY(0);
+      .tl-panel-img-sm img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
       }
 
-      .tl-ghost-num {
-        position: absolute;
-        top: -0.08em;
-        right: 0.75rem;
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-weight: 300;
-        font-size: clamp(5rem, 9vw, 11rem);
-        line-height: 1;
-        color: transparent;
-        -webkit-text-stroke: 1px rgba(235, 233, 228, 0.035);
-        pointer-events: none;
-        user-select: none;
-        z-index: 0;
-      }
-
-      .tl-card-body {
-        padding: clamp(1.4rem, 2.2vw, 2.1rem);
-        position: relative;
-        z-index: 1;
-      }
-      .tl-cat-tag {
-        display: inline-block;
-        font-family: var(--font-mono);
-        font-size: 0.55rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: rgba(201, 168, 76, 0.8);
-        border: 1px solid rgba(201, 168, 76, 0.2);
-        padding: 0.28rem 0.75rem;
-        border-radius: 100px;
-        margin-bottom: 0.9rem;
-      }
-      .tl-proj-title {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-weight: 400;
-        font-size: clamp(1.7rem, 3.2vw, 2.7rem);
-        line-height: 0.92;
-        color: var(--color-paper);
-        margin-bottom: 0.85rem;
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .tl-card:hover .tl-proj-title {
-        transform: translateX(5px);
-      }
-      .tl-proj-desc {
-        font-size: clamp(0.74rem, 0.88vw, 0.82rem);
-        color: rgba(235, 233, 228, 0.38);
-        line-height: 1.78;
-        max-width: 40ch;
-        margin-bottom: 1.2rem;
-      }
-      .tl-stack-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.32rem;
-        margin-bottom: 1.4rem;
-      }
-      .tl-stack-tag {
-        font-family: var(--font-mono);
-        font-size: 0.52rem;
-        letter-spacing: 0.1em;
-        color: rgba(235, 233, 228, 0.25);
-        border: 1px solid rgba(235, 233, 228, 0.07);
-        padding: 0.22rem 0.6rem;
-        border-radius: 100px;
-      }
-      .tl-card-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 1.2rem;
-        border-top: 1px solid rgba(235, 233, 228, 0.05);
-      }
-      .tl-year-text {
-        font-family: var(--font-mono);
-        font-size: 0.58rem;
-        letter-spacing: 0.14em;
-        color: rgba(235, 233, 228, 0.2);
-      }
-      .tl-open-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        font-family: var(--font-mono);
-        font-size: 0.55rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: rgba(201, 168, 76, 0.7);
-        background: transparent;
-        border: 1px solid rgba(201, 168, 76, 0.18);
-        padding: 0.48rem 1rem;
-        border-radius: 100px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .tl-open-btn:hover {
-        background: #c9a84c;
-        border-color: #c9a84c;
-        color: #0d0d12;
-      }
-
-      /* Mobile timeline */
+      /* Mobile: disable pin, stack vertically */
       @media (max-width: 768px) {
-        .tl-track-wrap { display: none; }
-        .tl-entry {
-          display: flex;
-          flex-direction: column;
-          padding: 0 0 2rem;
+        #tl-section {
+          height: auto;
+          overflow: visible;
+          padding-bottom: 2rem;
+        }
+        #tl-vline-l, #tl-vline-r, #tl-hline, #tl-progress-display {
+          display: none;
+        }
+        #tl-panels {
           position: relative;
-          border-left: 1px solid rgba(235, 233, 228, 0.07);
-          padding-left: 1.5rem;
-          margin-left: 0.5rem;
+          inset: auto;
         }
-        .tl-node-col { display: none; }
-        .tl-left-col,
-        .tl-right-col {
-          display: flex;
-          width: 100%;
-          padding: 0;
-          justify-content: flex-start;
+        .tl-panel {
+          position: relative;
+          opacity: 1 !important;
+          pointer-events: auto !important;
+          inset: auto;
+          grid-template-columns: 1fr !important;
+          padding: clamp(4.5rem, 8vh, 7rem) 1.5rem 3rem !important;
+          gap: 2rem !important;
         }
-        .tl-card { max-width: 100%; }
-        .tl-year-marker {
-          justify-content: flex-start;
-          padding-left: 2rem;
-        }
-        .tl-entry::before {
-          content: "";
-          position: absolute;
-          left: -5px;
-          top: 2.5rem;
-          width: 9px;
-          height: 9px;
-          border-radius: 50%;
-          background: #c9a84c;
-          border: 2px solid #0d0d12;
-        }
+        .tl-panel[data-side="right"] .tl-panel-text,
+        .tl-panel[data-side="left"] .tl-panel-text   { grid-column: 1 !important; grid-row: 2 !important; }
+        .tl-panel[data-side="right"] .tl-panel-images,
+        .tl-panel[data-side="left"] .tl-panel-images  { grid-column: 1 !important; grid-row: 1 !important; }
+        .tl-panel-title { font-size: clamp(2.5rem, 9vw, 3.5rem) !important; }
+        .tl-panel-images { height: 50vh; min-height: 300px; }
+        .tl-panel-img-row { height: 100px; }
+        .tl-panel-ghost { display: none; }
       }
 
       /* ══════════════════════════════════════════════════
-         MODAL
+         MODAL — LIGHT THEME
       ══════════════════════════════════════════════════ */
 
       #proj-modal {
@@ -1021,42 +1014,41 @@
         align-items: stretch;
         justify-content: flex-end;
       }
-      #proj-modal.open {
-        pointer-events: auto;
-      }
+      #proj-modal.open { pointer-events: auto; }
+
       #modal-overlay {
         position: absolute;
         inset: 0;
-        background: rgba(5, 5, 8, 0);
+        background: rgba(18, 18, 18, 0);
         backdrop-filter: blur(0px);
         -webkit-backdrop-filter: blur(0px);
         transition: background 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
           backdrop-filter 0.55s ease;
       }
       #proj-modal.open #modal-overlay {
-        background: rgba(5, 5, 8, 0.78);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
+        background: rgba(18, 18, 18, 0.32);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
       }
+
       #modal-panel {
         position: relative;
         z-index: 2;
-        background: #0f0f15;
+        background: var(--color-paper);
         width: min(660px, 100vw);
         height: 100dvh;
         overflow-y: auto;
         overflow-x: hidden;
         transform: translateX(101%);
         transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-        border-left: 1px solid rgba(235, 233, 228, 0.06);
+        border-left: 1px solid rgba(18, 18, 18, 0.08);
         display: flex;
         flex-direction: column;
         scrollbar-width: thin;
-        scrollbar-color: rgba(201, 168, 76, 0.2) transparent;
+        scrollbar-color: rgba(18, 18, 18, 0.12) transparent;
       }
-      #proj-modal.open #modal-panel {
-        transform: translateX(0);
-      }
+      #proj-modal.open #modal-panel { transform: translateX(0); }
+
       #modal-close {
         position: sticky;
         top: 1.25rem;
@@ -1065,21 +1057,21 @@
         width: 2.4rem;
         height: 2.4rem;
         border-radius: 50%;
-        border: 1px solid rgba(235, 233, 228, 0.1);
-        background: rgba(235, 233, 228, 0.04);
+        border: 1px solid rgba(18, 18, 18, 0.12);
+        background: rgba(18, 18, 18, 0.03);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: rgba(235, 233, 228, 0.55);
+        color: rgba(18, 18, 18, 0.45);
         z-index: 10;
         flex-shrink: 0;
         transition: all 0.3s ease;
       }
       #modal-close:hover {
-        background: rgba(235, 233, 228, 0.1);
-        color: var(--color-paper);
-        border-color: rgba(235, 233, 228, 0.22);
+        background: rgba(18, 18, 18, 0.07);
+        color: var(--color-ink);
+        border-color: rgba(18, 18, 18, 0.22);
       }
       .modal-hero-img {
         width: 100%;
@@ -1104,8 +1096,8 @@
         font-size: 0.54rem;
         letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: #c9a84c;
-        border: 1px solid rgba(201, 168, 76, 0.22);
+        color: var(--color-ink);
+        border: 1px solid rgba(18, 18, 18, 0.2);
         padding: 0.3rem 0.85rem;
         border-radius: 100px;
       }
@@ -1113,7 +1105,7 @@
         font-family: var(--font-mono);
         font-size: 0.54rem;
         letter-spacing: 0.15em;
-        color: rgba(235, 233, 228, 0.18);
+        color: rgba(18, 18, 18, 0.2);
       }
       .modal-proj-title {
         font-family: var(--font-serif);
@@ -1121,13 +1113,13 @@
         font-weight: 400;
         font-size: clamp(2.4rem, 5vw, 4.2rem);
         line-height: 0.9;
-        color: var(--color-paper);
+        color: var(--color-ink);
         margin-bottom: 1.4rem;
         letter-spacing: -0.01em;
       }
       .modal-proj-desc {
         font-size: clamp(0.8rem, 0.95vw, 0.875rem);
-        color: rgba(235, 233, 228, 0.48);
+        color: rgba(18, 18, 18, 0.5);
         line-height: 1.82;
         margin-bottom: 2.5rem;
         max-width: 50ch;
@@ -1138,43 +1130,34 @@
         gap: 1.25rem;
         margin-bottom: 2.25rem;
         padding: 1.6rem;
-        background: rgba(235, 233, 228, 0.025);
-        border: 1px solid rgba(235, 233, 228, 0.055);
+        background: rgba(18, 18, 18, 0.02);
+        border: 1px solid rgba(18, 18, 18, 0.07);
         border-radius: 1rem;
       }
-      .modal-meta-item {
-        display: flex;
-        flex-direction: column;
-        gap: 0.38rem;
-      }
+      .modal-meta-item { display: flex; flex-direction: column; gap: 0.38rem; }
       .modal-meta-label {
         font-family: var(--font-mono);
         font-size: 0.52rem;
         letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: rgba(235, 233, 228, 0.22);
+        color: rgba(18, 18, 18, 0.28);
       }
       .modal-meta-value {
         font-family: var(--font-sans);
         font-size: 0.83rem;
         font-weight: 500;
-        color: rgba(235, 233, 228, 0.68);
+        color: rgba(18, 18, 18, 0.68);
       }
-      .modal-stack-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.38rem;
-        margin-bottom: 2.75rem;
-      }
+      .modal-stack-row { display: flex; flex-wrap: wrap; gap: 0.38rem; margin-bottom: 2.75rem; }
       .modal-stack-tag {
         font-family: var(--font-mono);
         font-size: 0.55rem;
         letter-spacing: 0.1em;
-        color: rgba(235, 233, 228, 0.42);
-        border: 1px solid rgba(235, 233, 228, 0.08);
+        color: rgba(18, 18, 18, 0.38);
+        border: 1px solid rgba(18, 18, 18, 0.1);
         padding: 0.3rem 0.8rem;
         border-radius: 100px;
-        background: rgba(235, 233, 228, 0.025);
+        background: rgba(18, 18, 18, 0.02);
       }
       .modal-cta {
         display: inline-flex;
@@ -1184,8 +1167,8 @@
         font-size: 0.6rem;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        background: #c9a84c;
-        color: #0d0d12;
+        background: var(--color-ink);
+        color: var(--color-paper);
         padding: 0.95rem 2rem;
         border-radius: 100px;
         text-decoration: none;
@@ -1193,9 +1176,9 @@
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
       .modal-cta:hover {
-        background: #d4b660;
+        background: var(--color-carbon);
         transform: translateY(-2px);
-        box-shadow: 0 10px 28px rgba(201, 168, 76, 0.32);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
       }
       .modal-cta-secondary {
         display: inline-flex;
@@ -1205,16 +1188,16 @@
         font-size: 0.6rem;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        border: 1px solid rgba(235, 233, 228, 0.1);
-        color: rgba(235, 233, 228, 0.45);
+        border: 1px solid rgba(18, 18, 18, 0.14);
+        color: rgba(18, 18, 18, 0.45);
         padding: 0.95rem 2rem;
         border-radius: 100px;
         text-decoration: none;
         transition: all 0.3s ease;
       }
       .modal-cta-secondary:hover {
-        border-color: rgba(235, 233, 228, 0.25);
-        color: var(--color-paper);
+        border-color: rgba(18, 18, 18, 0.28);
+        color: var(--color-ink);
       }
     </style>
   </head>
@@ -1507,225 +1490,273 @@
         </div>
       </section>
 
-      <!-- ── 02. TIMELINE SECTION ─────────────────────────────── -->
+            <!-- ── 02. TIMELINE SECTION ─────────────────────────────── -->
 
       <section id="tl-section">
-        <!-- Subtle grid bg -->
-        <div class="bp-grid-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+        <!-- Blueprint grid (light) -->
+        <div class="bp-grid absolute inset-0 pointer-events-none" aria-hidden="true"></div>
 
-        <!-- Section header -->
-        <div id="tl-header">
-          <div class="flex items-center gap-5 mb-8">
-            <div class="crosshair-mark" style="color:rgba(235,233,228,0.2)"></div>
-            <span class="t-label-light">02 — PROJECTOS</span>
-          </div>
-          <h2>
-            <span class="block overflow-hidden">
-              <span id="tl-h2-1" class="block font-sans font-bold text-paper" style="font-size:clamp(2.8rem,6.5vw,7.5rem);line-height:0.92;letter-spacing:-0.03em;transform:translateY(110%);will-change:transform">Trabalho</span>
-            </span>
-            <span class="block overflow-hidden" style="padding-left:clamp(0.5rem,4%,4%)">
-              <span id="tl-h2-2" class="block font-serif italic text-paper" style="font-size:clamp(1.6rem,3.5vw,4.2rem);opacity:0.28;transform:translateY(110%);will-change:transform">em destaque.</span>
-            </span>
-          </h2>
-          <!-- Filters -->
-          <div class="tl-filters">
-            <button class="tl-filter-btn active" data-filter="all">Todos</button>
-            <button class="tl-filter-btn" data-filter="profissional">Profissional</button>
-            <button class="tl-filter-btn" data-filter="pessoal">Pessoal</button>
-            <button class="tl-filter-btn" data-filter="landing-page">Landing Pages</button>
-            <button class="tl-filter-btn" data-filter="webapp">Web Apps</button>
-          </div>
+        <!-- Left vertical line -->
+        <div class="tl-vline" id="tl-vline-l">
+          <div class="tl-vline-bg"></div>
+          <div class="tl-vline-fill" id="tl-vfill-l"></div>
         </div>
 
-        <!-- Timeline body -->
-        <div id="tl-body">
-          <!-- Track -->
-          <div class="tl-track-wrap">
-            <div class="tl-track-bg"></div>
-            <div id="tl-track-fill" class="tl-track-fill"></div>
-          </div>
+        <!-- Right vertical line -->
+        <div class="tl-vline" id="tl-vline-r">
+          <div class="tl-vline-bg"></div>
+          <div class="tl-vline-fill" id="tl-vfill-r"></div>
+        </div>
 
-          <!-- ── 2025 ── -->
-          <div class="tl-year-marker"><span class="tl-year-badge">2025</span></div>
+        <!-- Horizontal sweep connector -->
+        <div id="tl-hline"></div>
 
-          <!-- 01 · Arcadia (left) -->
-          <div class="tl-entry" data-cat="profissional landing-page">
-            <div class="tl-left-col">
-              <div class="tl-card" data-project="arcadia">
-                <span class="tl-ghost-num">01</span>
-                <div class="tl-img-wrap">
-                  <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85&fit=crop" alt="Arcadia" loading="lazy">
-                  <div class="tl-img-overlay">
-                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
-                  </div>
-                </div>
-                <div class="tl-card-body">
-                  <span class="tl-cat-tag">Landing Page</span>
-                  <h3 class="tl-proj-title">Arcadia</h3>
-                  <p class="tl-proj-desc">Website imersivo para restaurante fine-dining no Porto. Animações cinematográficas, reservas online e experiência sensorial única.</p>
-                  <div class="tl-stack-row">
-                    <span class="tl-stack-tag">React</span><span class="tl-stack-tag">GSAP</span><span class="tl-stack-tag">Tailwind CSS</span><span class="tl-stack-tag">Framer Motion</span>
-                  </div>
-                  <div class="tl-card-footer">
-                    <span class="tl-year-text">2025</span>
-                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
-                  </div>
-                </div>
+        <!-- Panels -->
+        <div id="tl-panels">
+
+          <!-- Panel 0: Arcadia — line left, content right -->
+          <div class="tl-panel" id="tl-panel-0" data-side="right">
+            <span class="tl-panel-ghost" aria-hidden="true">01</span>
+            <div class="tl-panel-text">
+              <div class="tl-pi tl-panel-eyebrow">
+                <span class="tl-panel-num">01 / 06</span>
+                <div class="tl-panel-num-sep"></div>
+                <span class="tl-panel-cat">Landing Page</span>
               </div>
+              <h3 class="tl-pi tl-panel-title">Arcadia</h3>
+              <div class="tl-pi tl-panel-divider"></div>
+              <p class="tl-pi tl-panel-desc">Website imersivo para restaurante fine-dining no Porto. Animações cinematográficas, reservas online e experiência sensorial única.</p>
+              <div class="tl-pi tl-panel-meta">
+                <span class="tl-panel-year">2025</span>
+                <div class="tl-panel-meta-sep"></div>
+                <span class="tl-panel-client">Arcadia Restaurant</span>
+              </div>
+              <div class="tl-pi tl-panel-stack">
+                <span class="tl-panel-tag">React</span>
+                <span class="tl-panel-tag">GSAP</span>
+                <span class="tl-panel-tag">Tailwind CSS</span>
+                <span class="tl-panel-tag">Framer Motion</span>
+              </div>
+              <button class="tl-pi tl-panel-cta" data-project="arcadia">
+                Ver Projecto
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </button>
             </div>
-            <div class="tl-node-col"><div class="tl-node"></div></div>
-            <div class="tl-right-col"></div>
-          </div>
-
-          <!-- 02 · Studio Norte (right) -->
-          <div class="tl-entry" data-cat="profissional website">
-            <div class="tl-left-col"></div>
-            <div class="tl-node-col"><div class="tl-node"></div></div>
-            <div class="tl-right-col">
-              <div class="tl-card" data-project="studio-norte">
-                <span class="tl-ghost-num">02</span>
-                <div class="tl-img-wrap">
-                  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=85&fit=crop" alt="Studio Norte" loading="lazy">
-                  <div class="tl-img-overlay">
-                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
-                  </div>
-                </div>
-                <div class="tl-card-body">
-                  <span class="tl-cat-tag">Website Institucional</span>
-                  <h3 class="tl-proj-title">Studio Norte</h3>
-                  <p class="tl-proj-desc">Presença digital para atelier de arquitectura contemporânea. Portfólio com galeria interactiva e gestão de conteúdo headless.</p>
-                  <div class="tl-stack-row">
-                    <span class="tl-stack-tag">Next.js</span><span class="tl-stack-tag">Sanity CMS</span><span class="tl-stack-tag">GSAP</span><span class="tl-stack-tag">TypeScript</span>
-                  </div>
-                  <div class="tl-card-footer">
-                    <span class="tl-year-text">2025</span>
-                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
-                  </div>
-                </div>
+            <div class="tl-panel-images">
+              <div class="tl-pi tl-panel-img-main">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85&fit=crop" alt="Arcadia" loading="lazy">
+              </div>
+              <div class="tl-panel-img-row">
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
               </div>
             </div>
           </div>
 
-          <!-- 03 · Forma Studio (left) -->
-          <div class="tl-entry" data-cat="profissional website">
-            <div class="tl-left-col">
-              <div class="tl-card" data-project="forma-studio">
-                <span class="tl-ghost-num">03</span>
-                <div class="tl-img-wrap">
-                  <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=85&fit=crop" alt="Forma Studio" loading="lazy">
-                  <div class="tl-img-overlay">
-                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
-                  </div>
-                </div>
-                <div class="tl-card-body">
-                  <span class="tl-cat-tag">Website + Plataforma</span>
-                  <h3 class="tl-proj-title">Forma Studio</h3>
-                  <p class="tl-proj-desc">Website para estúdio de fitness premium. Sistema de agendamento integrado, área de membros e programa de treino personalizável.</p>
-                  <div class="tl-stack-row">
-                    <span class="tl-stack-tag">Next.js</span><span class="tl-stack-tag">Supabase</span><span class="tl-stack-tag">Tailwind CSS</span><span class="tl-stack-tag">Framer Motion</span>
-                  </div>
-                  <div class="tl-card-footer">
-                    <span class="tl-year-text">2025</span>
-                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
-                  </div>
-                </div>
+          <!-- Panel 1: Studio Norte — line right, content left -->
+          <div class="tl-panel" id="tl-panel-1" data-side="left">
+            <span class="tl-panel-ghost" aria-hidden="true">02</span>
+            <div class="tl-panel-text">
+              <div class="tl-pi tl-panel-eyebrow">
+                <span class="tl-panel-num">02 / 06</span>
+                <div class="tl-panel-num-sep"></div>
+                <span class="tl-panel-cat">Website Institucional</span>
               </div>
+              <h3 class="tl-pi tl-panel-title">Studio Norte</h3>
+              <div class="tl-pi tl-panel-divider"></div>
+              <p class="tl-pi tl-panel-desc">Presença digital para atelier de arquitectura contemporânea. Portfólio com galeria interactiva e gestão de conteúdo headless.</p>
+              <div class="tl-pi tl-panel-meta">
+                <span class="tl-panel-year">2025</span>
+                <div class="tl-panel-meta-sep"></div>
+                <span class="tl-panel-client">Studio Norte Arq.</span>
+              </div>
+              <div class="tl-pi tl-panel-stack">
+                <span class="tl-panel-tag">Next.js</span>
+                <span class="tl-panel-tag">Sanity CMS</span>
+                <span class="tl-panel-tag">GSAP</span>
+                <span class="tl-panel-tag">TypeScript</span>
+              </div>
+              <button class="tl-pi tl-panel-cta" data-project="studio-norte">
+                Ver Projecto
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </button>
             </div>
-            <div class="tl-node-col"><div class="tl-node"></div></div>
-            <div class="tl-right-col"></div>
-          </div>
-
-          <!-- ── 2024 ── -->
-          <div class="tl-year-marker"><span class="tl-year-badge">2024</span></div>
-
-          <!-- 04 · Bloom (right) -->
-          <div class="tl-entry" data-cat="profissional ecommerce">
-            <div class="tl-left-col"></div>
-            <div class="tl-node-col"><div class="tl-node"></div></div>
-            <div class="tl-right-col">
-              <div class="tl-card" data-project="bloom">
-                <span class="tl-ghost-num">04</span>
-                <div class="tl-img-wrap">
-                  <img src="https://images.unsplash.com/photo-1487530811015-780a88a7d0bc?w=900&q=85&fit=crop" alt="Bloom" loading="lazy">
-                  <div class="tl-img-overlay">
-                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
-                  </div>
-                </div>
-                <div class="tl-card-body">
-                  <span class="tl-cat-tag">E-Commerce</span>
-                  <h3 class="tl-proj-title">Bloom</h3>
-                  <p class="tl-proj-desc">Loja online de floricultura artesanal. Catálogo visual, carrinho de compras e checkout optimizado para conversão máxima.</p>
-                  <div class="tl-stack-row">
-                    <span class="tl-stack-tag">Next.js</span><span class="tl-stack-tag">Stripe</span><span class="tl-stack-tag">Sanity</span><span class="tl-stack-tag">Vercel</span>
-                  </div>
-                  <div class="tl-card-footer">
-                    <span class="tl-year-text">2024</span>
-                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
-                  </div>
-                </div>
+            <div class="tl-panel-images">
+              <div class="tl-pi tl-panel-img-main">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=85&fit=crop" alt="Studio Norte" loading="lazy">
+              </div>
+              <div class="tl-panel-img-row">
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
               </div>
             </div>
           </div>
 
-          <!-- 05 · Atlântico (left) -->
-          <div class="tl-entry" data-cat="profissional webapp">
-            <div class="tl-left-col">
-              <div class="tl-card" data-project="atlantico">
-                <span class="tl-ghost-num">05</span>
-                <div class="tl-img-wrap">
-                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=85&fit=crop" alt="Atlântico" loading="lazy">
-                  <div class="tl-img-overlay">
-                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
-                  </div>
-                </div>
-                <div class="tl-card-body">
-                  <span class="tl-cat-tag">Web Application</span>
-                  <h3 class="tl-proj-title">Atlântico</h3>
-                  <p class="tl-proj-desc">Plataforma de gestão para empresa do sector marítimo. Dashboard analítico, relatórios exportáveis e gestão de frotas em tempo real.</p>
-                  <div class="tl-stack-row">
-                    <span class="tl-stack-tag">React</span><span class="tl-stack-tag">Node.js</span><span class="tl-stack-tag">PostgreSQL</span><span class="tl-stack-tag">Chart.js</span>
-                  </div>
-                  <div class="tl-card-footer">
-                    <span class="tl-year-text">2024</span>
-                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
-                  </div>
-                </div>
+          <!-- Panel 2: Forma Studio — line left, content right -->
+          <div class="tl-panel" id="tl-panel-2" data-side="right">
+            <span class="tl-panel-ghost" aria-hidden="true">03</span>
+            <div class="tl-panel-text">
+              <div class="tl-pi tl-panel-eyebrow">
+                <span class="tl-panel-num">03 / 06</span>
+                <div class="tl-panel-num-sep"></div>
+                <span class="tl-panel-cat">Website + Plataforma</span>
               </div>
+              <h3 class="tl-pi tl-panel-title">Forma Studio</h3>
+              <div class="tl-pi tl-panel-divider"></div>
+              <p class="tl-pi tl-panel-desc">Website para estúdio de fitness premium. Agendamento integrado, área de membros e programa de treino personalizável.</p>
+              <div class="tl-pi tl-panel-meta">
+                <span class="tl-panel-year">2025</span>
+                <div class="tl-panel-meta-sep"></div>
+                <span class="tl-panel-client">Forma Studio Lisboa</span>
+              </div>
+              <div class="tl-pi tl-panel-stack">
+                <span class="tl-panel-tag">Next.js</span>
+                <span class="tl-panel-tag">Supabase</span>
+                <span class="tl-panel-tag">Tailwind CSS</span>
+                <span class="tl-panel-tag">Framer Motion</span>
+              </div>
+              <button class="tl-pi tl-panel-cta" data-project="forma-studio">
+                Ver Projecto
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </button>
             </div>
-            <div class="tl-node-col"><div class="tl-node"></div></div>
-            <div class="tl-right-col"></div>
-          </div>
-
-          <!-- 06 · Brisa Solar (right) -->
-          <div class="tl-entry" data-cat="profissional landing-page">
-            <div class="tl-left-col"></div>
-            <div class="tl-node-col"><div class="tl-node"></div></div>
-            <div class="tl-right-col">
-              <div class="tl-card" data-project="brisa-solar">
-                <span class="tl-ghost-num">06</span>
-                <div class="tl-img-wrap">
-                  <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=85&fit=crop" alt="Brisa Solar" loading="lazy">
-                  <div class="tl-img-overlay">
-                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
-                  </div>
-                </div>
-                <div class="tl-card-body">
-                  <span class="tl-cat-tag">Landing Page</span>
-                  <h3 class="tl-proj-title">Brisa Solar</h3>
-                  <p class="tl-proj-desc">Campanha digital para empresa de energia solar. Animações 3D interactivas, simulador de poupança e formulário de orçamento optimizado.</p>
-                  <div class="tl-stack-row">
-                    <span class="tl-stack-tag">Vite</span><span class="tl-stack-tag">GSAP</span><span class="tl-stack-tag">Three.js</span><span class="tl-stack-tag">Tailwind CSS</span>
-                  </div>
-                  <div class="tl-card-footer">
-                    <span class="tl-year-text">2024</span>
-                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
-                  </div>
-                </div>
+            <div class="tl-panel-images">
+              <div class="tl-pi tl-panel-img-main">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=85&fit=crop" alt="Forma Studio" loading="lazy">
+              </div>
+              <div class="tl-panel-img-row">
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
               </div>
             </div>
           </div>
 
-        </div><!-- /#tl-body -->
+          <!-- Panel 3: Bloom — line right, content left -->
+          <div class="tl-panel" id="tl-panel-3" data-side="left">
+            <span class="tl-panel-ghost" aria-hidden="true">04</span>
+            <div class="tl-panel-text">
+              <div class="tl-pi tl-panel-eyebrow">
+                <span class="tl-panel-num">04 / 06</span>
+                <div class="tl-panel-num-sep"></div>
+                <span class="tl-panel-cat">E-Commerce</span>
+              </div>
+              <h3 class="tl-pi tl-panel-title">Bloom</h3>
+              <div class="tl-pi tl-panel-divider"></div>
+              <p class="tl-pi tl-panel-desc">Loja online de floricultura artesanal. Catálogo visual imersivo, checkout em 2 passos e entregas programadas.</p>
+              <div class="tl-pi tl-panel-meta">
+                <span class="tl-panel-year">2024</span>
+                <div class="tl-panel-meta-sep"></div>
+                <span class="tl-panel-client">Bloom Flores</span>
+              </div>
+              <div class="tl-pi tl-panel-stack">
+                <span class="tl-panel-tag">Next.js</span>
+                <span class="tl-panel-tag">Stripe</span>
+                <span class="tl-panel-tag">Sanity</span>
+                <span class="tl-panel-tag">Vercel</span>
+              </div>
+              <button class="tl-pi tl-panel-cta" data-project="bloom">
+                Ver Projecto
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </button>
+            </div>
+            <div class="tl-panel-images">
+              <div class="tl-pi tl-panel-img-main">
+                <img src="https://images.unsplash.com/photo-1487530811015-780a88a7d0bc?w=900&q=85&fit=crop" alt="Bloom" loading="lazy">
+              </div>
+              <div class="tl-panel-img-row">
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1490750967868-88df5691cc6e?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1559181567-c3190bbed0c9?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 4: Atlântico — line left, content right -->
+          <div class="tl-panel" id="tl-panel-4" data-side="right">
+            <span class="tl-panel-ghost" aria-hidden="true">05</span>
+            <div class="tl-panel-text">
+              <div class="tl-pi tl-panel-eyebrow">
+                <span class="tl-panel-num">05 / 06</span>
+                <div class="tl-panel-num-sep"></div>
+                <span class="tl-panel-cat">Web Application</span>
+              </div>
+              <h3 class="tl-pi tl-panel-title">Atlântico</h3>
+              <div class="tl-pi tl-panel-divider"></div>
+              <p class="tl-pi tl-panel-desc">Plataforma de gestão para empresa marítima. Dashboard analítico em tempo real, relatórios exportáveis e gestão de frotas.</p>
+              <div class="tl-pi tl-panel-meta">
+                <span class="tl-panel-year">2024</span>
+                <div class="tl-panel-meta-sep"></div>
+                <span class="tl-panel-client">Atlântico Maritime</span>
+              </div>
+              <div class="tl-pi tl-panel-stack">
+                <span class="tl-panel-tag">React</span>
+                <span class="tl-panel-tag">Node.js</span>
+                <span class="tl-panel-tag">PostgreSQL</span>
+                <span class="tl-panel-tag">Chart.js</span>
+              </div>
+              <button class="tl-pi tl-panel-cta" data-project="atlantico">
+                Ver Projecto
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </button>
+            </div>
+            <div class="tl-panel-images">
+              <div class="tl-pi tl-panel-img-main">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=85&fit=crop" alt="Atlântico" loading="lazy">
+              </div>
+              <div class="tl-panel-img-row">
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 5: Brisa Solar — line right, content left -->
+          <div class="tl-panel" id="tl-panel-5" data-side="left">
+            <span class="tl-panel-ghost" aria-hidden="true">06</span>
+            <div class="tl-panel-text">
+              <div class="tl-pi tl-panel-eyebrow">
+                <span class="tl-panel-num">06 / 06</span>
+                <div class="tl-panel-num-sep"></div>
+                <span class="tl-panel-cat">Landing Page</span>
+              </div>
+              <h3 class="tl-pi tl-panel-title">Brisa Solar</h3>
+              <div class="tl-pi tl-panel-divider"></div>
+              <p class="tl-pi tl-panel-desc">Campanha digital para empresa de energia solar. Animações 3D, simulador de poupança e funil de conversão optimizado.</p>
+              <div class="tl-pi tl-panel-meta">
+                <span class="tl-panel-year">2024</span>
+                <div class="tl-panel-meta-sep"></div>
+                <span class="tl-panel-client">Brisa Solar Portugal</span>
+              </div>
+              <div class="tl-pi tl-panel-stack">
+                <span class="tl-panel-tag">Vite</span>
+                <span class="tl-panel-tag">GSAP</span>
+                <span class="tl-panel-tag">Three.js</span>
+                <span class="tl-panel-tag">Tailwind CSS</span>
+              </div>
+              <button class="tl-pi tl-panel-cta" data-project="brisa-solar">
+                Ver Projecto
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </button>
+            </div>
+            <div class="tl-panel-images">
+              <div class="tl-pi tl-panel-img-main">
+                <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=85&fit=crop" alt="Brisa Solar" loading="lazy">
+              </div>
+              <div class="tl-panel-img-row">
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
+                <div class="tl-pi tl-panel-img-sm"><img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=500&q=80&fit=crop" alt="" loading="lazy"></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /#tl-panels -->
+
+        <!-- Progress indicator -->
+        <div id="tl-progress-display">
+          <span class="tl-prog-num" id="tl-prog-cur">01</span>
+          <div class="tl-prog-track"><div class="tl-prog-fill" id="tl-prog-fill"></div></div>
+          <span class="tl-prog-num">06</span>
+        </div>
+
       </section>
 
       <!-- ── PROJECT MODAL ─────────────────────────────────────── -->
@@ -2067,17 +2098,17 @@
     <!-- ── Scripts ────────────────────────────────────────────── -->
     <script type="module" src="../assets/js/page.js"></script>
 
-    <script type="module">
+        <script type="module">
       import { gsap } from "gsap";
       import { ScrollTrigger } from "gsap/ScrollTrigger";
       gsap.registerPlugin(ScrollTrigger);
 
-      /* ── Project data for modal ───────────────────────────── */
+      /* ── Project data ─────────────────────────────────────── */
       const projectData = {
         "arcadia": {
           title: "Arcadia", cat: "Landing Page", num: "01 / 06",
           img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85&fit=crop",
-          desc: "Website imersivo para restaurante fine-dining no Porto. Cada detalhe foi pensado para transmitir a sofisticação da marca: animações cinematográficas com GSAP, sistema de reservas integrado e uma experiência visual que transporta o visitante para dentro do restaurante.",
+          desc: "Website imersivo para restaurante fine-dining no Porto. Cada detalhe transmite a sofisticação da marca: animações cinematográficas com GSAP, sistema de reservas integrado e uma experiência visual que transporta o visitante para dentro do restaurante.",
           year: "2025", type: "Landing Page", client: "Arcadia Restaurant", duration: "6 semanas",
           stack: ["React", "GSAP", "Tailwind CSS", "Framer Motion", "Vercel"], link: "#"
         },
@@ -2091,21 +2122,21 @@
         "forma-studio": {
           title: "Forma Studio", cat: "Website + Plataforma", num: "03 / 06",
           img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=85&fit=crop",
-          desc: "Website e plataforma de membros para estúdio de fitness premium. Sistema de agendamento integrado, área privada de membros com programa de treino personalizado e integração com wearables.",
+          desc: "Website e plataforma de membros para estúdio de fitness premium. Sistema de agendamento integrado, área privada de membros com programa de treino personalizado.",
           year: "2025", type: "Website + Web App", client: "Forma Studio Lisboa", duration: "10 semanas",
           stack: ["Next.js", "Supabase", "Tailwind CSS", "Framer Motion", "Stripe"], link: "#"
         },
         "bloom": {
           title: "Bloom", cat: "E-Commerce", num: "04 / 06",
           img: "https://images.unsplash.com/photo-1487530811015-780a88a7d0bc?w=1200&q=85&fit=crop",
-          desc: "Loja online de floricultura artesanal com foco total na experiência de compra. Catálogo visual imersivo, checkout em 2 passos, entregas programadas e subscriptions sazonais.",
+          desc: "Loja online de floricultura artesanal com foco total na experiência de compra. Catálogo visual imersivo, checkout em 2 passos e subscriptions sazonais.",
           year: "2024", type: "E-Commerce", client: "Bloom Flores Artesanais", duration: "7 semanas",
           stack: ["Next.js", "Stripe", "Sanity", "Vercel", "Tailwind CSS"], link: "#"
         },
         "atlantico": {
           title: "Atlântico", cat: "Web Application", num: "05 / 06",
           img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=85&fit=crop",
-          desc: "Plataforma de gestão operacional para empresa do sector marítimo. Dashboard analítico em tempo real, relatórios exportáveis, gestão de frotas e comunicação entre equipas.",
+          desc: "Plataforma de gestão operacional para empresa do sector marítimo. Dashboard analítico em tempo real, relatórios exportáveis e gestão de frotas.",
           year: "2024", type: "Web Application", client: "Atlântico Maritime", duration: "14 semanas",
           stack: ["React", "Node.js", "PostgreSQL", "Chart.js", "Redis"], link: "#"
         },
@@ -2118,14 +2149,13 @@
         }
       };
 
-      /* ── Modal logic ──────────────────────────────────────── */
+      /* ── Modal ────────────────────────────────────────────── */
       const modal = document.getElementById("proj-modal");
       const modalOverlay = document.getElementById("modal-overlay");
       const modalClose = document.getElementById("modal-close");
 
       function openModal(key) {
-        const d = projectData[key];
-        if (!d) return;
+        const d = projectData[key]; if (!d) return;
         document.getElementById("modal-img").src = d.img;
         document.getElementById("modal-img").alt = d.title;
         document.getElementById("modal-cat").textContent = d.cat;
@@ -2143,15 +2173,18 @@
         document.body.style.overflow = "hidden";
         document.getElementById("modal-panel").scrollTop = 0;
       }
-
       function closeModal() {
         modal.classList.remove("open");
         document.body.style.overflow = "";
       }
-
       modalClose.addEventListener("click", closeModal);
       modalOverlay.addEventListener("click", closeModal);
       document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+      /* ── CTA button open modal ────────────────────────────── */
+      document.querySelectorAll(".tl-panel-cta[data-project]").forEach(btn => {
+        btn.addEventListener("click", () => openModal(btn.dataset.project));
+      });
 
       /* ── Main init ────────────────────────────────────────── */
       function initAnimations() {
@@ -2164,97 +2197,8 @@
         heroTL.to(["#stat-1", "#stat-2", "#stat-3"], { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, 0.75);
         heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 0.7 }, 1.1);
 
-        /* ── Timeline section header ──────────────────────── */
-        ScrollTrigger.create({
-          trigger: "#tl-section",
-          start: "top 80%",
-          onEnter: () => {
-            gsap.to(["#tl-h2-1", "#tl-h2-2"], {
-              y: "0%", duration: 1.2, stagger: 0.1, ease: "power3.out"
-            });
-            gsap.from(".tl-filters", {
-              opacity: 0, y: 16, duration: 0.8, ease: "power2.out", delay: 0.35
-            });
-          }
-        });
-
-        /* ── Timeline track fill (scroll-driven) ─────────── */
-        const tlFill = document.getElementById("tl-track-fill");
-        if (tlFill) {
-          ScrollTrigger.create({
-            trigger: "#tl-body",
-            start: "top 55%",
-            end: "bottom 45%",
-            onUpdate: self => {
-              const pct = (100 - self.progress * 100).toFixed(2);
-              tlFill.style.clipPath = `inset(0 0 ${pct}% 0)`;
-            }
-          });
-        }
-
-        /* ── Year markers ─────────────────────────────────── */
-        gsap.utils.toArray(".tl-year-marker").forEach(el => {
-          ScrollTrigger.create({
-            trigger: el,
-            start: "top 85%",
-            onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" })
-          });
-        });
-
-        /* ── Card reveals + node activation ──────────────── */
-        gsap.utils.toArray(".tl-entry").forEach(entry => {
-          const card = entry.querySelector(".tl-card");
-          if (!card) return;
-          const isRight = !!entry.querySelector(".tl-right-col > .tl-card");
-          gsap.set(card, { opacity: 0, x: isRight ? 45 : -45, y: 20 });
-
-          ScrollTrigger.create({
-            trigger: entry,
-            start: "top 82%",
-            onEnter: () => {
-              gsap.to(card, { opacity: 1, x: 0, y: 0, duration: 1, ease: "power3.out" });
-              entry.classList.add("in-view");
-            }
-          });
-        });
-
-        /* ── Card interactions ────────────────────────────── */
-        document.querySelectorAll(".tl-card").forEach(card => {
-          card.addEventListener("click", () => openModal(card.dataset.project));
-        });
-        document.querySelectorAll(".tl-open-btn").forEach(btn => {
-          btn.addEventListener("click", e => {
-            e.stopPropagation();
-            openModal(btn.closest(".tl-card").dataset.project);
-          });
-        });
-
-        /* ── Timeline filter ──────────────────────────────── */
-        document.querySelectorAll(".tl-filter-btn").forEach(btn => {
-          btn.addEventListener("click", () => {
-            document.querySelectorAll(".tl-filter-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            const filter = btn.dataset.filter;
-
-            document.querySelectorAll(".tl-entry").forEach((entry, i) => {
-              const cats = entry.dataset.cat || "";
-              const show = filter === "all" || cats.split(" ").includes(filter);
-              if (show) {
-                entry.style.display = "";
-                gsap.to(entry, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", delay: i * 0.04 });
-              } else {
-                gsap.to(entry, {
-                  opacity: 0, y: -10, duration: 0.28, ease: "power2.in",
-                  onComplete: () => { entry.style.display = "none"; }
-                });
-              }
-            });
-
-            document.querySelectorAll(".tl-year-marker").forEach(m => {
-              m.style.display = filter === "all" ? "" : "none";
-            });
-          });
-        });
+        /* ── Scroll-jacked Timeline ───────────────────────── */
+        initTimeline();
 
         /* ── CTA section ──────────────────────────────────── */
         const ctaTL = gsap.timeline({
@@ -2274,14 +2218,264 @@
         });
       }
 
-      /* ── Wait for page.js loader ──────────────────────────── */
+      /* ── Timeline scroll-jack ─────────────────────────────── */
+      function initTimeline() {
+        if (window.matchMedia("(max-width: 768px)").matches) return;
+
+        const panels = Array.from(document.querySelectorAll(".tl-panel"));
+        const N = panels.length;
+        if (N === 0) return;
+
+        const PROJ  = 1.0;
+        const TRANS = 0.38;
+        const totalDur = N * PROJ + (N - 1) * TRANS;
+
+        const vfillL   = document.getElementById("tl-vfill-l");
+        const vfillR   = document.getElementById("tl-vfill-r");
+        const hline    = document.getElementById("tl-hline");
+        const progFill = document.getElementById("tl-prog-fill");
+        const progCur  = document.getElementById("tl-prog-cur");
+
+        /* ── Set initial scene state BEFORE building the timeline.
+               Panel 0 is visible immediately — no scroll needed. */
+        gsap.set(panels, { opacity: 0 });
+        gsap.set(panels[0], { opacity: 1 });
+        gsap.set(panels[0].querySelectorAll(".tl-pi"), { opacity: 0, y: 28 });
+        gsap.set(vfillL, { opacity: 1, clipPath: "inset(0 0 100% 0)" });
+        gsap.set(hline,  { clipPath: "inset(0 100% 0 0)" });
+        panels[0].classList.add("tl-active");
+
+        const master = gsap.timeline({ paused: true });
+
+        panels.forEach((panel, i) => {
+          const isLeft = panel.dataset.side === "right";
+          const isLast = i === N - 1;
+          const t      = i * (PROJ + TRANS);
+          const tEnd   = t + PROJ;
+          const items  = panel.querySelectorAll(".tl-pi");
+          const fillEl = isLeft ? vfillL : vfillR;
+
+          if (i === 0) {
+            /* Panel 0 is already visible — just fill line + reveal items */
+            master.to(fillEl,   { clipPath: "inset(0 0 0% 0)", duration: PROJ, ease: "none" }, 0);
+            master.to(progFill, { width: (1 / N * 100) + "%",  duration: PROJ, ease: "none" }, 0);
+            master.to(items, { opacity: 1, y: 0, duration: PROJ * 0.36, stagger: 0.04, ease: "power2.out" }, 0.02);
+          } else {
+            /* Other panels: fade in at their window start */
+            master.set(panel, { opacity: 0 }, t - 0.01);
+            master.to(panel,  { opacity: 1, duration: 0.01 }, t);
+
+            master.set(fillEl, { opacity: 1, clipPath: "inset(0 0 100% 0)" }, t);
+            master.to(fillEl,  { clipPath: "inset(0 0 0% 0)", duration: PROJ, ease: "none" }, t);
+
+            master.to(progFill, { width: ((i + 1) / N * 100) + "%", duration: PROJ, ease: "none" }, t);
+
+            master.fromTo(items,
+              { opacity: 0, y: 28 },
+              { opacity: 1, y: 0, duration: PROJ * 0.36, stagger: 0.04, ease: "power2.out" },
+              t + 0.02
+            );
+          }
+
+          if (!isLast) {
+            /* Exit items */
+            master.to(items, {
+              opacity: 0, y: -18, duration: TRANS * 0.32, stagger: 0.03, ease: "power2.in"
+            }, tEnd);
+
+            /* Hide panel */
+            master.to(panel, { opacity: 0, duration: 0.01 }, tEnd + TRANS * 0.42);
+
+            /* Horizontal sweep */
+            if (isLeft) {
+              master.set(hline, { clipPath: "inset(0 100% 0 0)" }, tEnd);
+              master.to(hline,  { clipPath: "inset(0 0% 0 0)",    duration: TRANS * 0.52, ease: "power2.inOut" }, tEnd + 0.02);
+              master.to(hline,  { clipPath: "inset(0 0% 0 100%)", duration: TRANS * 0.36, ease: "power2.in"   }, tEnd + TRANS * 0.56);
+            } else {
+              master.set(hline, { clipPath: "inset(0 0 0 100%)" }, tEnd);
+              master.to(hline,  { clipPath: "inset(0 0 0 0%)",    duration: TRANS * 0.52, ease: "power2.inOut" }, tEnd + 0.02);
+              master.to(hline,  { clipPath: "inset(0 100% 0 0%)", duration: TRANS * 0.36, ease: "power2.in"  }, tEnd + TRANS * 0.56);
+            }
+
+            master.to(fillEl, { opacity: 0, duration: TRANS * 0.22, ease: "none" }, tEnd + TRANS * 0.74);
+          }
+        });
+
+        ScrollTrigger.create({
+          trigger: "#tl-section",
+          pin: true,
+          pinSpacing: true,
+          start: "top top",
+          end: () => "+=" + Math.round(totalDur * window.innerHeight * 1.05),
+          scrub: 0.3,          /* was 1 — that created 1s lag; 0.3 is tight & smooth */
+          animation: master,
+          onUpdate: self => {
+            const globalT = self.progress * totalDur;
+
+            /* Counter */
+            let cur = 0;
+            for (let i = 0; i < N; i++) {
+              if (globalT >= i * (PROJ + TRANS)) cur = i;
+            }
+            if (progCur) progCur.textContent = String(cur + 1).padStart(2, "0");
+
+            /* Active class — managed here for reliable bidirectional scrub */
+            panels.forEach((panel, i) => {
+              const t    = i * (PROJ + TRANS);
+              const tEnd = t + PROJ;
+              panel.classList.toggle("tl-active",
+                globalT >= t - 0.02 && globalT < tEnd + TRANS * 0.46);
+            });
+          }
+        });
+
+        /* Ensure correct layout after pin spacer is injected */
+        ScrollTrigger.refresh();
+      }
+
+      /* ── Wait for page.js loader (with fallback) ─────────── */
+      let _initDone = false;
+      function _doInit() {
+        if (_initDone) return;
+        _initDone = true;
+        requestAnimationFrame(initAnimations);
+      }
+      // Primary: watch for visibility set by loader
       const obs = new MutationObserver(() => {
-        if (document.body.style.visibility !== "") {
-          obs.disconnect();
-          requestAnimationFrame(initAnimations);
-        }
+        if (document.body.style.visibility !== "") { obs.disconnect(); _doInit(); }
       });
       obs.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+      // Fallback A: already visible (loader already ran)
+      if (document.body.style.visibility !== "") { obs.disconnect(); _doInit(); }
+      // Fallback B: fire after 4s regardless
+      setTimeout(() => { obs.disconnect(); _doInit(); }, 4000);
     </script>
+  
+    <!-- ── Guaranteed timeline layout CSS (overrides Tailwind CDN) ── -->
+    <style id="tl-guaranteed">
+      /* These rules are OUTSIDE Tailwind processing and have last-rule priority */
+      #tl-section {
+        background: #ebe9e4 !important;
+        position: relative !important;
+        height: 100vh !important;
+        overflow: hidden !important;
+      }
+      #tl-panels {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 5 !important;
+      }
+      .tl-panel {
+        position: absolute !important;
+        inset: 0 !important;
+        display: grid !important;
+        pointer-events: none !important;
+        overflow: hidden !important;
+        grid-template-rows: 1fr !important;
+        align-items: center !important;
+      }
+      .tl-panel.tl-active {
+        pointer-events: auto !important;
+      }
+      /* LINE-LEFT panels: images left (dominant), text right */
+      .tl-panel[data-side="right"] {
+        grid-template-columns: 1.5fr 1fr !important;
+        padding-top: clamp(4rem, 7vh, 6.5rem) !important;
+        padding-bottom: clamp(3.5rem, 6vh, 5.5rem) !important;
+        padding-left: clamp(5.5rem, 9vw, 11rem) !important;
+        padding-right: clamp(3rem, 5vw, 6.5rem) !important;
+        column-gap: clamp(2.5rem, 3.5vw, 5rem) !important;
+      }
+      .tl-panel[data-side="right"] .tl-panel-images {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+      }
+      .tl-panel[data-side="right"] .tl-panel-text {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        align-self: center !important;
+      }
+      /* LINE-RIGHT panels: text left, images right (dominant) */
+      .tl-panel[data-side="left"] {
+        grid-template-columns: 1fr 1.5fr !important;
+        padding-top: clamp(4rem, 7vh, 6.5rem) !important;
+        padding-bottom: clamp(3.5rem, 6vh, 5.5rem) !important;
+        padding-left: clamp(3rem, 5vw, 6.5rem) !important;
+        padding-right: clamp(5.5rem, 9vw, 11rem) !important;
+        column-gap: clamp(2.5rem, 3.5vw, 5rem) !important;
+      }
+      .tl-panel[data-side="left"] .tl-panel-text {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        align-self: center !important;
+      }
+      .tl-panel[data-side="left"] .tl-panel-images {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+      }
+      /* Panel text column */
+      .tl-panel-text {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        height: 100% !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      /* Panel images column */
+      .tl-panel-images {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: clamp(0.65rem, 1.2vw, 1.1rem) !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .tl-panel-img-main {
+        flex: 1 !important;
+        min-height: 0 !important;
+        border-radius: clamp(1rem, 1.5vw, 1.5rem) !important;
+        overflow: hidden !important;
+      }
+      .tl-panel-img-main img {
+        width: 100% !important; height: 100% !important;
+        object-fit: cover !important; display: block !important;
+      }
+      .tl-panel-img-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: clamp(0.65rem, 1.2vw, 1.1rem) !important;
+        height: clamp(90px, 14vh, 140px) !important;
+        flex-shrink: 0 !important;
+      }
+      .tl-panel-img-sm {
+        border-radius: clamp(0.75rem, 1.2vw, 1.1rem) !important;
+        overflow: hidden !important;
+      }
+      .tl-panel-img-sm img {
+        width: 100% !important; height: 100% !important;
+        object-fit: cover !important; display: block !important;
+      }
+      /* Mobile fallback */
+      @media (max-width: 768px) {
+        #tl-section { height: auto !important; overflow: visible !important; }
+        #tl-vline-l, #tl-vline-r, #tl-hline, #tl-progress-display { display: none !important; }
+        #tl-panels { position: relative !important; inset: auto !important; }
+        .tl-panel {
+          position: relative !important; opacity: 1 !important;
+          inset: auto !important;
+          grid-template-columns: 1fr !important;
+          padding: clamp(4rem,8vh,6rem) 1.5rem 2.5rem !important;
+          gap: 2rem !important;
+        }
+        .tl-panel[data-side="right"] .tl-panel-images,
+        .tl-panel[data-side="left"] .tl-panel-images { grid-column: 1 !important; grid-row: 1 !important; }
+        .tl-panel[data-side="right"] .tl-panel-text,
+        .tl-panel[data-side="left"] .tl-panel-text   { grid-column: 1 !important; grid-row: 2 !important; }
+        .tl-panel-images { height: 50vh !important; min-height: 280px !important; }
+      }
+    </style>
+
   </body>
 </html>
