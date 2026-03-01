@@ -263,7 +263,10 @@
         100% { background-position: 80px 0; }
       }
       #svc-cta.bp-grid {
-        animation: slideGridCTA 5s linear infinite;
+        animation: slideGridCTA 2s linear infinite;
+        background-image:
+          linear-gradient(rgba(18, 18, 18, 0.065) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(18, 18, 18, 0.065) 1px, transparent 1px);
       }
 
 
@@ -663,6 +666,20 @@
       }
       .faq-item[open] .faq-icon {
         transform: rotate(45deg);
+      }
+
+      
+      /* Custom FAQ Hover Animation */
+      .faq-hover-anim {
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s ease;
+      }
+      .faq-item:hover .faq-hover-anim {
+        transform: translateX(12px);
+        color: rgba(18, 18, 18, 0.6);
+      }
+      .faq-item:hover .faq-icon {
+        transform: scale(1.15) rotate(5deg);
+        color: var(--color-ink);
       }
 
       /* ── Interactive Icon Cloud ─────────────────────── */
@@ -1162,6 +1179,61 @@
       </div>
     </section>
 
+    <!-- ── 07. DIFERENCIAIS ──────────────────────────────────── -->
+    <section id="svc-diff" style="padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem)">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-0" style="border: 1px solid rgba(18, 18, 18, 0.07)">
+        <div class="diff-card reveal-up" style="border-right: 1px solid rgba(18, 18, 18, 0.07)">
+          <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
+          <span class="font-mono text-ink/12 block mb-6" style="
+                font-size: clamp(2.5rem, 5vw, 4rem);
+                letter-spacing: -0.04em;
+                line-height: 1;
+              ">01</span>
+          <h3 class="font-sans font-bold text-ink text-base mb-3">
+            Entrega Garantida
+          </h3>
+          <p class="font-mono text-silver leading-relaxed" style="font-size: 0.76rem">
+            Prazos reais, comunicados com clareza. Nenhum projecto fica parado
+            sem razão — e mantemos comunicação constante sobre o estado do
+            trabalho.
+          </p>
+        </div>
+
+        <div class="diff-card reveal-up" style="border-right: 1px solid rgba(18, 18, 18, 0.07)">
+          <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
+          <span class="font-mono text-ink/12 block mb-6" style="
+                font-size: clamp(2.5rem, 5vw, 4rem);
+                letter-spacing: -0.04em;
+                line-height: 1;
+              ">02</span>
+          <h3 class="font-sans font-bold text-ink text-base mb-3">
+            Código Proprietário
+          </h3>
+          <p class="font-mono text-silver leading-relaxed" style="font-size: 0.76rem">
+            Desenvolvemos com boas práticas e código limpo. O seu website não
+            fica refém de uma plataforma ou de um programador específico.
+          </p>
+        </div>
+
+        <div class="diff-card reveal-up">
+          <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
+          <span class="font-mono text-ink/12 block mb-6" style="
+                font-size: clamp(2.5rem, 5vw, 4rem);
+                letter-spacing: -0.04em;
+                line-height: 1;
+              ">03</span>
+          <h3 class="font-sans font-bold text-ink text-base mb-3">
+            Suporte Real
+          </h3>
+          <p class="font-mono text-silver leading-relaxed" style="font-size: 0.76rem">
+            Uma pessoa real, com resposta rápida. Sem tickets perdidos. Sem
+            intermediários. Directamente com quem criou o seu projecto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    
     <!-- ── 05. PRICING ───────────────────────────────────────── -->
     <section id="svc-pricing" style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem)">
       <div class="flex items-end justify-between mb-2">
@@ -1178,13 +1250,13 @@
       </div>
 
       <!-- Premium Horizontal Layout -->
-      <div class="flex flex-col gap-6 w-full max-w-6xl mx-auto mb-16">
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 w-full max-w-7xl mx-auto mb-16 items-center">
         <!-- Arranque -->
         <div
-          class="price-card bg-paper border border-ink/10 rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row gap-10 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group"
+          class="price-card bg-paper border border-ink/10 rounded-[2rem] p-8 md:p-10 flex flex-col gap-8 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group"
           id="pc-arranque" style="opacity: 0;">
           <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-ink/10 group-hover:bg-ink transition-colors"></div>
-          <div class="md:w-5/12 border-b md:border-b-0 md:border-r border-ink/10 pb-6 md:pb-0 md:pr-10">
+          <div class="w-full border-b border-ink/10 pb-6">
             <span class="t-label block mb-2 opacity-50">Essencial</span>
             <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-6">Arranque</h3>
             <div class="font-mono text-xs text-ink/60 mb-1">Custo Inicial</div>
@@ -1196,7 +1268,7 @@
             <a href="/contactos/"
               class="block text-center bg-transparent border border-ink text-ink font-mono text-xs uppercase px-6 py-3 hover:bg-ink hover:text-paper transition-colors rounded-full w-full">Instanciar</a>
           </div>
-          <div class="md:w-7/12 flex flex-col justify-center">
+          <div class="w-full flex flex-col justify-center mt-2">
             <ul class="space-y-4">
               <li class="flex items-start gap-3">
                 <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1236,7 +1308,7 @@
 
         <!-- Crescimento -->
         <div
-          class="price-card bg-ink border border-ink rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row gap-10 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group shadow-[0_30px_60px_rgba(18,18,18,0.3)]"
+          class="price-card bg-ink border border-ink rounded-[2rem] p-8 md:p-10 flex flex-col gap-8 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group shadow-[0_30px_60px_rgba(18,18,18,0.3)]"
           id="pc-crescimento" style="opacity: 0;">
           <div
             class="absolute inset-0 bg-gradient-to-br from-paper/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
@@ -1244,7 +1316,7 @@
           <div
             class="absolute top-0 right-10 bg-paper text-ink font-mono text-[0.6rem] uppercase px-4 py-1.5 tracking-widest rounded-b-xl shadow-lg">
             Popular</div>
-          <div class="md:w-5/12 border-b md:border-b-0 md:border-r border-paper/10 pb-6 md:pb-0 md:pr-10 relative z-10">
+          <div class="w-full border-b border-paper/10 pb-6 relative z-10">
             <span class="t-label-light block mb-2 text-paper/40">Profissional</span>
             <h3 class="font-sans font-bold text-2xl md:text-3xl text-paper mb-6">Crescimento</h3>
             <div class="font-mono text-xs text-paper/60 mb-1">Custo Inicial</div>
@@ -1256,7 +1328,7 @@
             <a href="/contactos/"
               class="block text-center bg-paper border border-paper text-ink font-mono text-xs uppercase px-6 py-3 hover:bg-transparent hover:text-paper transition-colors rounded-full w-full">Selecionar</a>
           </div>
-          <div class="md:w-7/12 flex flex-col justify-center relative z-10">
+          <div class="w-full flex flex-col justify-center mt-2 relative z-10">
             <ul class="space-y-4">
               <li class="flex items-start gap-3">
                 <svg class="w-4 h-4 text-paper flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
@@ -1296,10 +1368,10 @@
 
         <!-- Empresa -->
         <div
-          class="price-card bg-paper border border-ink/10 rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row gap-10 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group"
+          class="price-card bg-paper border border-ink/10 rounded-[2rem] p-8 md:p-10 flex flex-col gap-8 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group"
           id="pc-empresa" style="opacity: 0;">
           <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-ink/10 group-hover:bg-ink transition-colors"></div>
-          <div class="md:w-5/12 border-b md:border-b-0 md:border-r border-ink/10 pb-6 md:pb-0 md:pr-10">
+          <div class="w-full border-b border-ink/10 pb-6">
             <span class="t-label block mb-2 opacity-50">Custom</span>
             <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-6">Empresa</h3>
             <div class="font-mono text-xs text-ink/60 mb-1">Início</div>
@@ -1311,7 +1383,7 @@
             <a href="/contactos/"
               class="block text-center bg-transparent border border-ink text-ink font-mono text-xs uppercase px-6 py-3 hover:bg-ink hover:text-paper transition-colors rounded-full w-full">Contactar</a>
           </div>
-          <div class="md:w-7/12 flex flex-col justify-center">
+          <div class="w-full flex flex-col justify-center mt-2">
             <ul class="space-y-4">
               <li class="flex items-start gap-3">
                 <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1541,17 +1613,20 @@
             <h2 class="font-serif italic text-ink mb-6" style="font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.1">
               Perguntas Frequentes
             </h2>
-            <p class="font-sans text-ink/65 leading-relaxed" style="font-size: clamp(0.9rem, 1vw, 1rem)">
+            <p class="font-sans text-ink/65 leading-relaxed mb-10" style="font-size: clamp(0.9rem, 1vw, 1rem)">
               Esclareça todas as dúvidas logísticas, de propriedade intelectual e processo metodológico. Para questões
               adicionais, não hesite em contactar.
             </p>
+            <div class="w-full aspect-[4/5] rounded-[2rem] overflow-hidden grayscale border border-ink/10">
+               <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Monrion FAQ interior" class="w-full h-full object-cover">
+            </div>
           </div>
         </div>
 
         <!-- Right: Accordions -->
         <div class="lg:w-2/3 border-t border-ink/10">
           <details data-group="faq" class="faq-item group">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink">
+            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
               Quanto tempo demora a criar o website?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -1566,7 +1641,7 @@
           </details>
 
           <details data-group="faq" class="faq-item group">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink">
+            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
               Eu serei o dono do meu código ou fico dependente de vocês?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -1580,7 +1655,7 @@
           </details>
 
           <details data-group="faq" class="faq-item group">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink">
+            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
               Poderei actualizar o conteúdo (textos, imagens) do meu site de forma autónoma?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -1595,7 +1670,7 @@
           </details>
 
           <details data-group="faq" class="faq-item group">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink">
+            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
               Do que precisam para iniciar o meu projecto?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -1610,7 +1685,7 @@
           </details>
 
           <details class="faq-item group" data-group="faq">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink">
+            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
               Gostaria de ter efeitos e movimentos avançados (GSAP, 3D). É possível?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -1625,7 +1700,7 @@
           </details>
 
           <details class="faq-item group" data-group="faq">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink">
+            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
               Posso efectuar integrações ou melhorar o site mais tarde?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -1638,60 +1713,6 @@
               acordo com o crescimento real do seu negócio.
             </div>
           </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 07. DIFERENCIAIS ──────────────────────────────────── -->
-    <section id="svc-diff" style="padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem)">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-0" style="border: 1px solid rgba(18, 18, 18, 0.07)">
-        <div class="diff-card reveal-up" style="border-right: 1px solid rgba(18, 18, 18, 0.07)">
-          <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
-          <span class="font-mono text-ink/12 block mb-6" style="
-                font-size: clamp(2.5rem, 5vw, 4rem);
-                letter-spacing: -0.04em;
-                line-height: 1;
-              ">01</span>
-          <h3 class="font-sans font-bold text-ink text-base mb-3">
-            Entrega Garantida
-          </h3>
-          <p class="font-mono text-silver leading-relaxed" style="font-size: 0.76rem">
-            Prazos reais, comunicados com clareza. Nenhum projecto fica parado
-            sem razão — e mantemos comunicação constante sobre o estado do
-            trabalho.
-          </p>
-        </div>
-
-        <div class="diff-card reveal-up" style="border-right: 1px solid rgba(18, 18, 18, 0.07)">
-          <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
-          <span class="font-mono text-ink/12 block mb-6" style="
-                font-size: clamp(2.5rem, 5vw, 4rem);
-                letter-spacing: -0.04em;
-                line-height: 1;
-              ">02</span>
-          <h3 class="font-sans font-bold text-ink text-base mb-3">
-            Código Proprietário
-          </h3>
-          <p class="font-mono text-silver leading-relaxed" style="font-size: 0.76rem">
-            Desenvolvemos com boas práticas e código limpo. O seu website não
-            fica refém de uma plataforma ou de um programador específico.
-          </p>
-        </div>
-
-        <div class="diff-card reveal-up">
-          <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
-          <span class="font-mono text-ink/12 block mb-6" style="
-                font-size: clamp(2.5rem, 5vw, 4rem);
-                letter-spacing: -0.04em;
-                line-height: 1;
-              ">03</span>
-          <h3 class="font-sans font-bold text-ink text-base mb-3">
-            Suporte Real
-          </h3>
-          <p class="font-mono text-silver leading-relaxed" style="font-size: 0.76rem">
-            Uma pessoa real, com resposta rápida. Sem tickets perdidos. Sem
-            intermediários. Directamente com quem criou o seu projecto.
-          </p>
         </div>
       </div>
     </section>
