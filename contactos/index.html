@@ -1,1150 +1,1624 @@
 <!doctype html>
 <html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Monrion | Contactos</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+    <link rel="apple-touch-icon" href="../assets/favicon.ico" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
-  <title>Monrion | Contactos</title>
-  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
-  <link rel="apple-touch-icon" href="../assets/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              paper: "#EBE9E4",
+              ink: "#121212",
+              silver: "#8C8C8C",
+              carbon: "#333333",
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Cormorant Garamond"', "serif"],
+              mono: ['"IBM Plex Mono"', "monospace"],
+            },
+            borderRadius: {
+              "2xl": "2rem",
+              "3xl": "3rem",
+            },
+          },
+        },
+      };
+    </script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            paper: '#EBE9E4',
-            ink: '#121212',
-            silver: '#8C8C8C',
-            carbon: '#333333',
-          },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            serif: ['"Cormorant Garamond"', 'serif'],
-            mono: ['"IBM Plex Mono"', 'monospace'],
-          },
-          borderRadius: {
-            '2xl': '2rem',
-            '3xl': '3rem',
-          }
+    <script type="importmap">
+      {
+        "imports": {
+          "gsap": "https://esm.sh/gsap@3.12.5",
+          "gsap/ScrollTrigger": "https://esm.sh/gsap@3.12.5/ScrollTrigger",
+          "lucide": "https://esm.sh/lucide@0.344.0"
         }
       }
-    }
-  </script>
+    </script>
 
-  <script type="importmap">
-    {
-      "imports": {
-        "gsap": "https://esm.sh/gsap@3.12.5",
-        "gsap/ScrollTrigger": "https://esm.sh/gsap@3.12.5/ScrollTrigger",
-        "lucide": "https://esm.sh/lucide@0.344.0"
+    <style type="text/tailwindcss">
+      :root {
+        --bg-color: #ebe9e4;
+        --color-paper: #ebe9e4;
+        --color-ink: #121212;
+        --color-silver: #8c8c8c;
+        --color-carbon: #333333;
+        --font-sans: "Plus Jakarta Sans", sans-serif;
+        --font-serif: "Cormorant Garamond", serif;
+        --font-mono: "IBM Plex Mono", monospace;
       }
-    }
-  </script>
 
-  <style type="text/tailwindcss">
-    :root {
-      --bg-color: #EBE9E4;
-      --color-paper: #EBE9E4;
-      --color-ink: #121212;
-      --color-silver: #8C8C8C;
-      --color-carbon: #333333;
-      --font-sans: "Plus Jakarta Sans", sans-serif;
-      --font-serif: "Cormorant Garamond", serif;
-      --font-mono: "IBM Plex Mono", monospace;
-    }
+      body {
+        background-color: var(--bg-color);
+        color: var(--color-ink);
+        font-family: var(--font-sans);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        visibility: hidden;
+      }
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--color-ink);
-      font-family: var(--font-sans);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      visibility: hidden;
-    }
+      .noise-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.08;
+        filter: url(#noiseFilter);
+        mix-blend-mode: overlay;
+      }
 
-    .noise-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.08;
-      filter: url(#noiseFilter);
-      mix-blend-mode: overlay;
-    }
+      #navbar {
+        transition:
+          background-color 0.5s ease,
+          border-color 0.5s ease,
+          backdrop-filter 0.5s ease,
+          box-shadow 0.5s ease,
+          padding 0.5s ease;
+        border: 1px solid transparent;
+      }
 
-    #navbar {
-      transition: background-color 0.5s ease, border-color 0.5s ease,
-                  backdrop-filter 0.5s ease, box-shadow 0.5s ease,
-                  padding 0.5s ease;
-      border: 1px solid transparent;
-    }
+      #navbar.scrolled {
+        background-color: rgba(235, 233, 228, 0.85);
+        backdrop-filter: blur(16px);
+        border-color: rgba(18, 18, 18, 0.08);
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        padding-top: 0.55rem;
+        padding-bottom: 0.55rem;
+      }
 
-    #navbar.scrolled {
-      background-color: rgba(235, 233, 228, 0.85);
-      backdrop-filter: blur(16px);
-      border-color: rgba(18, 18, 18, 0.08);
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-      padding-top: 0.55rem;
-      padding-bottom: 0.55rem;
-    }
+      .nav-link {
+        font-family: var(--font-mono);
+        font-size: clamp(0.7rem, 0.85vw, 0.95rem);
+        font-weight: 500;
+        color: var(--color-ink);
+        position: relative;
+        padding: 0.2rem 0;
+        text-decoration: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
 
-    .nav-link {
-      font-family: var(--font-mono);
-      font-size: clamp(0.7rem, 0.85vw, 0.95rem);
-      font-weight: 500;
-      color: var(--color-ink);
-      position: relative;
-      padding: 0.2rem 0;
-      text-decoration: none !important;
-      border-bottom: none !important;
-      box-shadow: none !important;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
+      .nav-link:hover {
+        text-decoration: none !important;
+      }
 
-    .nav-link:hover { text-decoration: none !important; }
+      .nav-link::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--color-ink);
+        transform: scaleX(0) translateZ(0);
+        transform-origin: right;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: transform;
+      }
 
-    .nav-link::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 1px;
-      background-color: var(--color-ink);
-      transform: scaleX(0) translateZ(0);
-      transform-origin: right;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform;
-    }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--color-ink);
+        transform: scaleX(0) translateZ(0);
+        transform-origin: left;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: transform;
+      }
 
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 100%; height: 1px;
-      background-color: var(--color-ink);
-      transform: scaleX(0) translateZ(0);
-      transform-origin: left;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform;
-    }
+      .nav-link:hover::before,
+      .nav-link.active::before {
+        transform: scaleX(1) translateZ(0);
+        transform-origin: left;
+      }
 
-    .nav-link:hover::before,
-    .nav-link.active::before { transform: scaleX(1) translateZ(0); transform-origin: left; }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        transform: scaleX(1) translateZ(0);
+        transform-origin: right;
+      }
 
-    .nav-link:hover::after,
-    .nav-link.active::after  { transform: scaleX(1) translateZ(0); transform-origin: right; }
+      .logo-link {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
 
-    .logo-link {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
+      .logo-container {
+        width: clamp(2.5rem, 3.2vw, 4.2rem);
+        height: clamp(2.5rem, 3.2vw, 4.2rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .logo-container {
-      width: clamp(2.5rem, 3.2vw, 4.2rem);
-      height: clamp(2.5rem, 3.2vw, 4.2rem);
-      display: flex; align-items: center; justify-content: center;
-    }
+      .logo-text {
+        display: block;
+        font-size: clamp(15px, 1.4vw, 24px);
+        font-weight: 800;
+        text-transform: uppercase;
+        font-family: var(--font-sans);
+        user-select: none;
+        letter-spacing: 0.06em;
+        transition: letter-spacing 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
 
-    .logo-text {
-      display: block;
-      font-size: clamp(15px, 1.4vw, 24px);
-      font-weight: 800;
-      text-transform: uppercase;
-      font-family: var(--font-sans);
-      user-select: none;
-      letter-spacing: 0.06em;
-      transition: letter-spacing 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
+      .logo-link:hover .logo-text {
+        letter-spacing: 0.38em;
+      }
 
-    .logo-link:hover .logo-text { letter-spacing: 0.38em; }
+      .logo-container svg {
+        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        width: 100%;
+        height: 100%;
+      }
 
-    .logo-container svg {
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      width: 100%; height: 100%;
-    }
+      .logo-link:hover .logo-container svg {
+        transform: scale(1.1) rotate(-5deg);
+      }
 
-    .logo-link:hover .logo-container svg { transform: scale(1.1) rotate(-5deg); }
+      .btn-contact {
+        font-family: var(--font-sans);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border: 1px solid var(--color-ink);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        background-clip: padding-box;
+      }
 
-    .btn-contact {
-      font-family: var(--font-sans);
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      border: 1px solid var(--color-ink);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      background-clip: padding-box;
-    }
+      .btn-contact:hover {
+        background-color: transparent;
+        color: var(--color-ink);
+      }
+      .btn-contact span.absolute {
+        background-color: var(--color-paper);
+      }
+      .btn-contact:active {
+        transform: scale(0.96) translateY(1px);
+      }
 
-    .btn-contact:hover { background-color: transparent; color: var(--color-ink); }
-    .btn-contact span.absolute { background-color: var(--color-paper); }
-    .btn-contact:active { transform: scale(0.96) translateY(1px); }
+      .footer-link {
+        position: relative;
+        display: inline-block;
+        transition:
+          color 0.3s ease,
+          transform 0.3s ease;
+      }
 
-    .footer-link {
-      position: relative;
-      display: inline-block;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
+      .footer-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: rgba(235, 233, 228, 0.5);
+        transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
 
-    .footer-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 1px;
-      background-color: rgba(235, 233, 228, 0.5);
-      transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
+      .footer-link:hover {
+        color: rgba(235, 233, 228, 1) !important;
+        transform: translateX(4px);
+      }
+      .footer-link:hover::after {
+        width: 100%;
+      }
 
-    .footer-link:hover { color: rgba(235, 233, 228, 1) !important; transform: translateX(4px); }
-    .footer-link:hover::after { width: 100%; }
+      /* ── Marquee ─────────────────────────────────────────────── */
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .marquee-track {
+        animation: marquee 28s linear infinite;
+      }
 
-    /* ── Marquee ─────────────────────────────────────────────── */
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    .marquee-track { animation: marquee 28s linear infinite; }
+      /* ── Hero line clip (text reveal) ────────────────────────── */
+      .hero-line-wrap {
+        overflow: hidden;
+        line-height: 0.88;
+      }
+      .hero-line {
+        display: block;
+        transform: translateY(105%);
+        will-change: transform;
+      }
 
-    /* ── Hero line clip (text reveal) ────────────────────────── */
-    .hero-line-wrap {
-      overflow: hidden;
-      line-height: 0.88;
-    }
-    .hero-line {
-      display: block;
-      transform: translateY(105%);
-      will-change: transform;
-    }
+      /* ── Ghost decorative text ───────────────────────────────── */
+      .hero-ghost {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(12rem, 30vw, 35rem);
+        color: rgba(18, 18, 18, 0.03);
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+        line-height: 1;
+      }
 
-    /* ── Ghost decorative text ───────────────────────────────── */
-    .hero-ghost {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: clamp(12rem, 30vw, 35rem);
-      color: rgba(18, 18, 18, 0.03);
-      white-space: nowrap;
-      pointer-events: none;
-      user-select: none;
-      line-height: 1;
-    }
+      /* ── Scroll indicator ────────────────────────────────────── */
+      .scroll-line {
+        position: relative;
+        width: 1px;
+        height: 4rem;
+        background: rgba(18, 18, 18, 0.12);
+        overflow: hidden;
+      }
+      .scroll-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-ink);
+        transform: translateY(-100%);
+        will-change: transform;
+      }
 
-    /* ── Scroll indicator ────────────────────────────────────── */
-    .scroll-line {
-      position: relative;
-      width: 1px;
-      height: 4rem;
-      background: rgba(18, 18, 18, 0.12);
-      overflow: hidden;
-    }
-    .scroll-bar {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--color-ink);
-      transform: translateY(-100%);
-      will-change: transform;
-    }
+      /* ── Contact link hover underline ────────────────────────── */
+      .contact-link {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+      }
+      .contact-link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--color-ink);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .contact-link:hover::after {
+        transform: scaleX(1);
+      }
+      .contact-link .arrow {
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        display: inline-block;
+        opacity: 0.5;
+      }
+      .contact-link:hover .arrow {
+        transform: translateX(6px);
+        opacity: 1;
+      }
 
-    /* ── Contact link hover underline ────────────────────────── */
-    .contact-link {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-    }
-    .contact-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 100%; height: 1px;
-      background: var(--color-ink);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .contact-link:hover::after { transform: scaleX(1); }
-    .contact-link .arrow {
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      display: inline-block;
-      opacity: 0.5;
-    }
-    .contact-link:hover .arrow {
-      transform: translateX(6px);
-      opacity: 1;
-    }
+      .social-link {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem !important;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(18, 18, 18, 0.5);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .social-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--color-ink);
+        transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .social-link:hover {
+        color: var(--color-ink);
+      }
+      .social-link:hover::after {
+        width: 100%;
+      }
 
-    .social-link {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 1rem !important;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(18, 18, 18, 0.5);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    .social-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 1px;
-      background: var(--color-ink);
-      transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .social-link:hover { color: var(--color-ink); }
-    .social-link:hover::after { width: 100%; }
+      /* ── Floating label form & Blueprint Grid ────────────────── */
+      .blueprint-form {
+        border: 1px solid rgba(18, 18, 18, 0.15);
+        background: rgba(235, 233, 228, 0.4);
+        backdrop-filter: blur(10px);
+      }
+      .form-field {
+        position: relative;
+        padding: 1.5rem 1.5rem 0;
+        border-bottom: 1px solid rgba(18, 18, 18, 0.15);
+        transition: background 0.3s ease;
+      }
+      .form-field:hover {
+        background: rgba(18, 18, 18, 0.02);
+      }
+      .form-field label {
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(18, 18, 18, 0.4);
+        pointer-events: none;
+        transition:
+          transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          color 0.3s ease;
+        transform-origin: left top;
+      }
+      .form-field.focused label,
+      .form-field select.has-value ~ label,
+      .form-field input.has-value ~ label,
+      .form-field textarea.has-value ~ label {
+        transform: translateY(-0.9rem) scale(0.8);
+        color: var(--color-ink);
+      }
+      .form-field input,
+      .form-field select,
+      .form-field textarea {
+        background: transparent;
+        border: none;
+        color: var(--color-ink);
+        width: 100%;
+        padding: 0.75rem 0 0.5rem;
+        font-family: var(--font-sans);
+        font-size: clamp(0.9rem, 1.1vw, 1rem);
+        font-weight: 500;
+        outline: none;
+        caret-color: var(--color-ink);
+      }
+      .form-field select {
+        cursor: pointer;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%23121212" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>');
+        background-repeat: no-repeat;
+        background-position: right 0.5rem center;
+        background-size: 1rem;
+        padding-right: 2rem;
+      }
+      .form-field select option {
+        background: var(--color-paper);
+        color: var(--color-ink);
+      }
+      .form-field textarea {
+        resize: none;
+        min-height: 6rem;
+      }
+      .form-field input::placeholder,
+      .form-field textarea::placeholder {
+        color: transparent;
+      }
 
-    /* ── Floating label form & Blueprint Grid ────────────────── */
-    .blueprint-form {
-      border: 1px solid rgba(18,18,18,0.15);
-      background: rgba(235, 233, 228, 0.4);
-      backdrop-filter: blur(10px);
-    }
-    .form-field { 
-      position: relative; 
-      padding: 1.5rem 1.5rem 0; 
-      border-bottom: 1px solid rgba(18, 18, 18, 0.15);
-      transition: background 0.3s ease;
-    }
-    .form-field:hover {
-      background: rgba(18, 18, 18, 0.02);
-    }
-    .form-field label {
-      position: absolute;
-      top: 1.5rem;
-      left: 1.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(18, 18, 18, 0.4);
-      pointer-events: none;
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  color 0.3s ease;
-      transform-origin: left top;
-    }
-    .form-field.focused label,
-    .form-field select.has-value ~ label,
-    .form-field input.has-value ~ label,
-    .form-field textarea.has-value ~ label {
-      transform: translateY(-0.9rem) scale(0.8);
-      color: var(--color-ink);
-    }
-    .form-field input,
-    .form-field select,
-    .form-field textarea {
-      background: transparent;
-      border: none;
-      color: var(--color-ink);
-      width: 100%;
-      padding: 0.75rem 0 0.5rem;
-      font-family: var(--font-sans);
-      font-size: clamp(0.9rem, 1.1vw, 1rem);
-      font-weight: 500;
-      outline: none;
-      caret-color: var(--color-ink);
-    }
-    .form-field select {
-      cursor: pointer;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%23121212" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>');
-      background-repeat: no-repeat;
-      background-position: right 0.5rem center;
-      background-size: 1rem;
-      padding-right: 2rem;
-    }
-    .form-field select option {
-      background: var(--color-paper);
-      color: var(--color-ink);
-    }
-    .form-field textarea { resize: none; min-height: 6rem; }
-    .form-field input::placeholder,
-    .form-field textarea::placeholder { color: transparent; }
+      /* Right side border for the grid cols */
+      .grid-border-r {
+        border-right: 1px solid rgba(18, 18, 18, 0.15);
+      }
 
-    /* Right side border for the grid cols */
-    .grid-border-r {
-       border-right: 1px solid rgba(18,18,18,0.15);
-    }
+      /* ── Submit button ───────────────────────────────────────── */
+      .btn-submit {
+        font-family: var(--font-mono);
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        background: var(--color-ink);
+        color: var(--color-paper);
+        border: 1px solid var(--color-ink);
+        cursor: pointer;
+        transition:
+          transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          background 0.4s ease,
+          color 0.4s ease;
+        will-change: transform;
+      }
+      .btn-submit:hover {
+        transform: scale(1.02);
+        background: transparent;
+        color: var(--color-ink);
+      }
+      .btn-submit:active {
+        transform: scale(0.97);
+      }
+      .btn-submit:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
 
-    /* ── Submit button ───────────────────────────────────────── */
-    .btn-submit {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      background: var(--color-ink);
-      color: var(--color-paper);
-      border: 1px solid var(--color-ink);
-      cursor: pointer;
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  background 0.4s ease, color 0.4s ease;
-      will-change: transform;
-    }
-    .btn-submit:hover { 
-      transform: scale(1.02); 
-      background: transparent;
-      color: var(--color-ink);
-    }
-    .btn-submit:active { transform: scale(0.97); }
-    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+      /* ── Custom cursor ───────────────────────────────────────── */
+      .cursor-dot,
+      .cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        will-change: transform;
+        transition:
+          width 0.3s ease,
+          height 0.3s ease,
+          background 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--color-ink);
+        margin-top: -4px;
+        margin-left: -4px;
+      }
+      .cursor-ring {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(18, 18, 18, 0.25);
+        margin-top: -20px;
+        margin-left: -20px;
+      }
+      .cursor-ring.cursor-expand {
+        width: 64px;
+        height: 64px;
+        background: rgba(18, 18, 18, 0.06);
+        border-color: rgba(18, 18, 18, 0.5);
+        margin-top: -32px;
+        margin-left: -32px;
+      }
+      @media (pointer: coarse) {
+        .cursor-dot,
+        .cursor-ring {
+          display: none;
+        }
+      }
 
-    /* ── Custom cursor ───────────────────────────────────────── */
-    .cursor-dot, .cursor-ring {
-      position: fixed;
-      top: 0; left: 0;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      will-change: transform;
-      transition: width 0.3s ease, height 0.3s ease,
-                  background 0.3s ease, border-color 0.3s ease;
-    }
-    .cursor-dot {
-      width: 8px; height: 8px;
-      background: var(--color-ink);
-      margin-top: -4px; margin-left: -4px;
-    }
-    .cursor-ring {
-      width: 40px; height: 40px;
-      border: 1px solid rgba(18, 18, 18, 0.25);
-      margin-top: -20px; margin-left: -20px;
-    }
-    .cursor-ring.cursor-expand {
-      width: 64px; height: 64px;
-      background: rgba(18, 18, 18, 0.06);
-      border-color: rgba(18, 18, 18, 0.5);
-      margin-top: -32px; margin-left: -32px;
-    }
-    @media (pointer: coarse) {
-      .cursor-dot, .cursor-ring { display: none; }
-    }
+      /* ── Architect Accent line ───────────────────────────────── */
+      .accent-line {
+        display: inline-block;
+        width: 2.5rem;
+        height: 1px;
+        background: var(--color-ink);
+        vertical-align: middle;
+        margin-right: 0.8rem;
+      }
 
-    /* ── Architect Accent line ───────────────────────────────── */
-    .accent-line {
-      display: inline-block;
-      width: 2.5rem;
-      height: 1px;
-      background: var(--color-ink);
-      vertical-align: middle;
-      margin-right: 0.8rem;
-    }
+      /* ── Hero Rulers (Removed by request) ────────────────────── */
+      .drafting-crosshair {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      .drafting-ch-x {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: rgba(18, 18, 18, 0.15);
+        will-change: transform;
+        mix-blend-mode: multiply;
+      }
+      .drafting-ch-y {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 100%;
+        background: rgba(18, 18, 18, 0.15);
+        will-change: transform;
+        mix-blend-mode: multiply;
+      }
+      .coord-tooltip {
+        position: absolute;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--color-ink);
+        background: var(--color-paper);
+        padding: 0.2rem 0.4rem;
+        border: 1px solid rgba(18, 18, 18, 0.15);
+        transform: translate(10px, 10px);
+        will-change: transform;
+        opacity: 0.8;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
 
-    /* ── Hero Rulers (Removed by request) ────────────────────── */
-    .drafting-crosshair {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .drafting-ch-x {
-      position: absolute; top: 0; left: 0; width: 100%; height: 1px;
-      background: rgba(18,18,18,0.15);
-      will-change: transform;
-      mix-blend-mode: multiply;
-    }
-    .drafting-ch-y {
-      position: absolute; top: 0; left: 0; width: 1px; height: 100%;
-      background: rgba(18,18,18,0.15);
-      will-change: transform;
-      mix-blend-mode: multiply;
-    }
-    .coord-tooltip {
-      position: absolute;
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--color-ink);
-      background: var(--color-paper);
-      padding: 0.2rem 0.4rem;
-      border: 1px solid rgba(18,18,18,0.15);
-      transform: translate(10px, 10px);
-      will-change: transform;
-      opacity: 0.8;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-  </style>
-</head>
+  <body
+    class="bg-paper text-ink font-sans antialiased overflow-x-hidden selection:bg-silver selection:text-paper"
+  >
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+    <svg class="hidden">
+      <filter id="noiseFilter">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.6"
+          stitchTiles="stitch"
+        />
+      </filter>
+    </svg>
 
-<body class="bg-paper text-ink font-sans antialiased overflow-x-hidden selection:bg-silver selection:text-paper">
-
-  <!-- Noise Overlay -->
-  <div class="noise-overlay"></div>
-  <svg class="hidden">
-    <filter id="noiseFilter">
-      <feTurbulence type="fractalNoise" baseFrequency="0.6" stitchTiles="stitch" />
-    </filter>
-  </svg>
-
-  <!-- Navbar -->
-  <nav id="navbar" class="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] rounded-full flex items-center justify-between"
-    style="top: clamp(0.75rem, 2vh, 1.5rem); max-width: clamp(500px, 88vw, 76rem); padding: clamp(0.85rem, 1.5vw, 1.4rem) clamp(1.5rem, 3vw, 2.5rem);">
-
-    <a href="/" class="logo-link group relative z-20">
-      <div class="logo-container text-ink">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1"
-            class="opacity-100" />
-          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
-          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7"
-            class="opacity-100" />
-          <circle cx="20" cy="19" r="1.5" fill="currentColor" class="opacity-100" />
-        </svg>
-      </div>
-      <span
-        class="logo-text block font-extrabold uppercase text-ink font-sans select-none group-hover:text-carbon">MONRION</span>
-    </a>
-
-    <div class="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-      style="gap: clamp(1.5rem, 2.5vw, 2.5rem);">
-      <a href="/portfolio/" class="nav-link" data-navpage="portfolio">Portfólio</a>
-      <a href="/sobre/" class="nav-link" data-navpage="sobre">Sobre Nós</a>
-      <a href="/servicos/" class="nav-link" data-navpage="servicos">Serviços</a>
-    </div>
-
-    <div class="hidden md:flex relative z-20 items-center">
-      <a href="/contactos/"
-        class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden flex items-center justify-center leading-none"
-        style="padding: clamp(0.6rem, 1vw, 0.85rem) clamp(1.5rem, 2.5vw, 2.25rem); font-size: clamp(0.8rem, 0.9vw, 1rem);">
-        <span class="relative z-10 group-hover:text-ink transition-colors duration-300">Contactar</span>
+    <!-- Navbar -->
+    <nav
+      id="navbar"
+      class="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] rounded-full flex items-center justify-between"
+      style="
+        top: clamp(0.75rem, 2vh, 1.5rem);
+        max-width: clamp(500px, 88vw, 76rem);
+        padding: clamp(0.85rem, 1.5vw, 1.4rem) clamp(1.5rem, 3vw, 2.5rem);
+      "
+    >
+      <!-- Logo Link -->
+      <a href="/" class="logo-link group relative z-20">
+        <div class="logo-container text-ink">
+          <svg
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z"
+              stroke="currentColor"
+              stroke-width="1"
+              class="opacity-100"
+            />
+            <path
+              d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z"
+              fill="currentColor"
+              class="opacity-20"
+            />
+            <path
+              d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z"
+              stroke="currentColor"
+              stroke-width="0.7"
+              class="opacity-100"
+            />
+            <circle
+              cx="20"
+              cy="19"
+              r="1.5"
+              fill="currentColor"
+              class="opacity-100"
+            />
+          </svg>
+        </div>
         <span
-          class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+          class="logo-text block text-[22px] font-extrabold uppercase text-ink font-sans select-none group-hover:text-carbon"
+          >MONRION</span
+        >
       </a>
+
+      <!-- Centered Menu (Absolute) -->
+      <div
+        class="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+        style="gap: clamp(1.5rem, 2.5vw, 2.5rem)"
+      >
+        <a href="/portfolio/" class="nav-link">Portfólio</a>
+        <a href="/sobre/" class="nav-link">Sobre Nós</a>
+        <a href="/servicos/" class="nav-link">Serviços</a>
+      </div>
+
+      <div class="hidden md:flex relative z-20 items-center">
+        <a
+          href="/contactos/"
+          class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden flex items-center justify-center leading-none"
+          style="
+            padding: clamp(0.6rem, 1vw, 0.85rem) clamp(1.5rem, 2.5vw, 2.25rem);
+            font-size: clamp(0.8rem, 0.9vw, 1rem);
+          "
+        >
+          <span
+            class="relative z-10 group-hover:text-ink transition-colors duration-300"
+            >Contactar</span
+          >
+          <span
+            class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+          ></span>
+        </a>
+      </div>
+
+      <button
+        class="md:hidden text-ink cursor-pointer relative z-20"
+        id="menu-btn"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-40 bg-paper/95 backdrop-blur-xl transform translate-y-full transition-transform duration-500 flex flex-col items-center justify-center gap-8 md:hidden"
+    >
+      <button
+        id="close-menu-btn"
+        class="absolute top-8 right-8 text-ink cursor-pointer"
+      >
+        <i data-lucide="x"></i>
+      </button>
+      <a
+        href="/portfolio/"
+        class="text-2xl font-medium text-ink hover:text-carbon nav-link"
+        >Portfólio</a
+      >
+      <a
+        href="/sobre/"
+        class="text-2xl font-medium text-ink hover:text-carbon nav-link"
+        >Sobre Nós</a
+      >
+      <a
+        href="/servicos/"
+        class="text-2xl font-medium text-ink hover:text-carbon nav-link"
+        >Serviços</a
+      >
+      <a
+        href="/contactos/"
+        class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block flex items-center justify-center leading-none"
+        >Contactar</a
+      >
     </div>
 
-    <button class="md:hidden text-ink cursor-pointer relative z-20" id="menu-btn">
-      <i data-lucide="menu"></i>
-    </button>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div id="mobile-menu"
-    class="fixed inset-0 z-40 bg-paper/95 backdrop-blur-xl transform translate-y-full transition-transform duration-500 flex flex-col items-center justify-center gap-8 md:hidden">
-    <button id="close-menu-btn" class="absolute top-8 right-8 text-ink cursor-pointer">
-      <i data-lucide="x"></i>
-    </button>
-    <a href="/portfolio/" class="text-2xl font-medium text-ink hover:text-carbon nav-link"
-      data-navpage="portfolio">Portfólio</a>
-    <a href="/sobre/" class="text-2xl font-medium text-ink hover:text-carbon nav-link" data-navpage="sobre">Sobre
-      Nós</a>
-    <a href="/servicos/" class="text-2xl font-medium text-ink hover:text-carbon nav-link"
-      data-navpage="servicos">Serviços</a>
-    <a href="/contactos/"
-      class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block">Contactar</a>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════════════
        MAIN
   ════════════════════════════════════════════════════════════════════ -->
-  <main class="bg-paper relative z-10">
-
-    <!-- 1. HERO ──────────────────────────────────────────────────────── -->
-    <section
-      class="hero-section relative h-[100dvh] min-h-[600px] w-full flex flex-col justify-end overflow-hidden border-b border-ink/10 cursor-crosshair box-border"
-      style="padding: clamp(5rem, 8vh, 8rem) clamp(1.5rem, 6vw, 7rem) clamp(2rem, 5vh, 4rem);">
-
-      <!-- Diagonal Hatching Background instead of Grid -->
-      <div class="absolute inset-0 pointer-events-none opacity-[0.05]"
-        style="background-image: repeating-linear-gradient(45deg, transparent, transparent 15px, var(--color-ink) 15px, var(--color-ink) 16px);">
-      </div>
-
-      <!-- Elegant Vertical Image Placeholder - Hero Right -->
-      <div
-        class="hero-image-frame hidden md:flex absolute right-[8%] lg:right-[10%] 2xl:right-[12%] top-[54%] -translate-y-[50%] z-10 flex-col items-center">
-        <!-- Floating Wrapper in 'Polaroid/Print' style - Responsive Height Driven -->
+    <main class="bg-paper relative z-10">
+      <!-- 1. HERO ──────────────────────────────────────────────────────── -->
+      <section
+        class="hero-section relative h-[100dvh] min-h-[600px] w-full flex flex-col justify-end overflow-hidden border-b border-ink/10 cursor-crosshair box-border"
+        style="
+          padding: clamp(5rem, 8vh, 8rem) clamp(1.5rem, 6vw, 7rem)
+            clamp(2rem, 5vh, 4rem);
+        "
+      >
+        <!-- Diagonal Hatching Background instead of Grid -->
         <div
-          class="relative p-4 bg-paper border border-ink/15 shadow-[12px_24px_50px_rgba(0,0,0,0.08)] transition-transform duration-700 hover:-translate-y-4 hover:scale-[1.02] rotate-[-2deg] hover:rotate-0"
-          style="backdrop-filter: blur(10px); height: min(70vh, 40vw * 1.25); max-height: 900px; min-height: 450px; aspect-ratio: 4/5;">
+          class="absolute inset-0 pointer-events-none opacity-[0.05]"
+          style="
+            background-image: repeating-linear-gradient(
+              45deg,
+              transparent,
+              transparent 15px,
+              var(--color-ink) 15px,
+              var(--color-ink) 16px
+            );
+          "
+        ></div>
 
-          <!-- Subtle subtle top tape effect for realism -->
+        <!-- Elegant Vertical Image Placeholder - Hero Right -->
+        <div
+          class="hero-image-frame hidden md:flex absolute right-[8%] lg:right-[10%] 2xl:right-[12%] top-[54%] -translate-y-[50%] z-10 flex-col items-center"
+        >
+          <!-- Floating Wrapper in 'Polaroid/Print' style - Responsive Height Driven -->
           <div
-            class="absolute top-[-10px] left-1/2 -translate-x-1/2 w-20 h-6 bg-ink/5 mix-blend-multiply rotate-1 filter blur-[1px]">
-          </div>
+            class="relative p-4 bg-paper border border-ink/15 shadow-[12px_24px_50px_rgba(0,0,0,0.08)] transition-transform duration-700 hover:-translate-y-4 hover:scale-[1.02] rotate-[-2deg] hover:rotate-0"
+            style="
+              backdrop-filter: blur(10px);
+              height: min(70vh, 40vw * 1.25);
+              max-height: 900px;
+              min-height: 450px;
+              aspect-ratio: 4/5;
+            "
+          >
+            <!-- Subtle subtle top tape effect for realism -->
+            <div
+              class="absolute top-[-10px] left-1/2 -translate-x-1/2 w-20 h-6 bg-ink/5 mix-blend-multiply rotate-1 filter blur-[1px]"
+            ></div>
 
-          <!-- Image Container -->
-          <div class="relative w-full h-full overflow-hidden bg-ink/10 border border-ink/10">
-            <!-- Sleek Local image -->
-            <img src="../assets/Contactos.jpg" alt="Monrion Contactos"
-              class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply transition-all duration-700 hover:grayscale-[10%] hover:opacity-100 hover:scale-105" />
+            <!-- Image Container -->
+            <div
+              class="relative w-full h-full overflow-hidden bg-ink/10 border border-ink/10"
+            >
+              <!-- Sleek Local image -->
+              <img
+                src="../assets/Contactos.jpg"
+                alt="Monrion Contactos"
+                class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply transition-all duration-700 hover:grayscale-[10%] hover:opacity-100 hover:scale-105"
+              />
 
-            <!-- Corner crosshairs inside the image -->
-            <div class="absolute top-2 left-2 w-3 h-3 border-t border-l border-ink/60"></div>
-            <div class="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-ink/60"></div>
-          </div>
+              <!-- Corner crosshairs inside the image -->
+              <div
+                class="absolute top-2 left-2 w-3 h-3 border-t border-l border-ink/60"
+              ></div>
+              <div
+                class="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-ink/60"
+              ></div>
+            </div>
 
-          <!-- Small monospace caption under the image -->
-          <div
-            class="absolute bottom-[-2rem] left-0 w-full flex justify-between items-center px-1 font-mono text-[0.6rem] tracking-[0.2em] text-ink/40 uppercase">
-            <span>FIG. 01</span>
-            <span>HQ_CONNECTION</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Interactive Crosshair -->
-      <div class="drafting-crosshair">
-        <div class="drafting-ch-x"></div>
-        <div class="drafting-ch-y"></div>
-        <div class="coord-tooltip">x: 0, y: 0</div>
-      </div>
-
-      <!-- Ghost decorative text -->
-      <span class="hero-ghost" aria-hidden="true" style="opacity: 0.02;">Contacto</span>
-
-      <!-- Top-left label -->
-      <div class="absolute top-[clamp(7rem,10vh,10rem)] left-[clamp(3.5rem,6vw,7rem)] z-10">
-        <span class="hero-label font-mono uppercase tracking-[0.35em] text-ink/40"
-          style="font-size: 0.7rem; opacity: 0; transform: translateY(8px);">— Contactos</span>
-      </div>
-
-      <!-- Giant stacked heading -->
-      <div class="relative z-10 mb-10 md:mb-14" style="line-height: 0.88; pointer-events: none;">
-        <div class="hero-line-wrap">
-          <span class="hero-line font-serif italic text-ink" style="font-size: clamp(5rem, 13vw, 15rem);">Vamos</span>
-        </div>
-        <div class="hero-line-wrap" style="padding-left: 15%;">
-          <span class="hero-line font-serif italic text-ink" style="font-size: clamp(5rem, 13vw, 15rem);">Falar.</span>
-        </div>
-      </div>
-
-      <!-- Bottom row: description + scroll indicator -->
-      <div class="relative z-10 flex items-end justify-between gap-8 pointer-events-none">
-        <p class="hero-desc font-mono text-ink/50 max-w-xs leading-relaxed mix-blend-multiply"
-          style="font-size: clamp(0.65rem, 0.9vw, 0.8rem); letter-spacing: 0.06em; opacity: 0; transform: translateY(12px);">
-          Pronto para desenhar o seu próximo projecto?<br>
-          Fornecemos as coordenadas — respondemos em 24h.
-        </p>
-
-        <div class="hero-scroll-wrap flex flex-col items-center gap-3 mix-blend-multiply" style="opacity: 0;">
-          <span class="font-mono uppercase tracking-[0.25em] text-ink/30 rotate-90 origin-center"
-            style="font-size: 0.55rem; transform: rotate(90deg); margin-bottom: 0.5rem;">Scroll</span>
-          <div class="scroll-line">
-            <div class="scroll-bar"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. MARQUEE STRIP ─────────────────────────────────────────────── -->
-    <div class="border-t border-b border-ink/10 py-5 overflow-hidden">
-      <div class="marquee-track flex items-center gap-0" style="width: max-content;">
-        <!-- Set A -->
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          geral@monrion.com <span class="text-ink/20">●</span> +351 000 000 000 <span class="text-ink/20">●</span>
-          Porto, Portugal <span class="text-ink/20">●</span> Disponível <span class="text-ink/20">●</span> Resposta em
-          24h <span class="text-ink/20">●</span> @monrion <span class="text-ink/20">●</span>
-        </span>
-        <!-- Set B -->
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          geral@monrion.com <span class="text-ink/20">●</span> +351 000 000 000 <span class="text-ink/20">●</span>
-          Porto, Portugal <span class="text-ink/20">●</span> Disponível <span class="text-ink/20">●</span> Resposta em
-          24h <span class="text-ink/20">●</span> @monrion <span class="text-ink/20">●</span>
-        </span>
-        <!-- Set C -->
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          geral@monrion.com <span class="text-ink/20">●</span> +351 000 000 000 <span class="text-ink/20">●</span>
-          Porto, Portugal <span class="text-ink/20">●</span> Disponível <span class="text-ink/20">●</span> Resposta em
-          24h <span class="text-ink/20">●</span> @monrion <span class="text-ink/20">●</span>
-        </span>
-        <!-- Set D -->
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          geral@monrion.com <span class="text-ink/20">●</span> +351 000 000 000 <span class="text-ink/20">●</span>
-          Porto, Portugal <span class="text-ink/20">●</span> Disponível <span class="text-ink/20">●</span> Resposta em
-          24h <span class="text-ink/20">●</span> @monrion <span class="text-ink/20">●</span>
-        </span>
-      </div>
-    </div>
-
-    <!-- 3. SPLIT SECTION ─────────────────────────────────────────────── -->
-    <div class="grid grid-cols-1 lg:grid-cols-2">
-
-      <!-- LEFT: Contact Info ─────────────────────────────────────────── -->
-      <div class="contact-section bg-paper"
-        style="padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 8%, 7rem) clamp(4rem, 8vw, 7rem);">
-
-        <!-- Section label -->
-        <div class="contact-item mb-16">
-          <span class="font-mono text-xs uppercase tracking-[0.25em] text-ink/40">
-            <span class="accent-line"></span>01 — Fale Connosco
-          </span>
-        </div>
-
-        <!-- Email -->
-        <div class="contact-item mb-8">
-          <span class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/30 mb-3">
-            <i data-lucide="mail" class="w-3.5 h-3.5"></i> E-mail
-          </span>
-          <a href="mailto:geral@monrion.com" class="contact-link text-ink font-sans font-bold"
-            style="font-size: clamp(1.4rem, 2.8vw, 2.8rem);">
-            geral@monrion.com
-            <span class="arrow" style="font-size: 0.7em;">→</span>
-          </a>
-        </div>
-
-        <!-- Phone -->
-        <div class="contact-item mb-14">
-          <span class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/30 mb-3">
-            <i data-lucide="phone" class="w-3.5 h-3.5"></i> Telefone
-          </span>
-          <a href="tel:+351000000000" class="contact-link text-ink font-sans font-bold"
-            style="font-size: clamp(1.1rem, 2vw, 2rem);">
-            +351 000 000 000
-            <span class="arrow" style="font-size: 0.7em;">→</span>
-          </a>
-        </div>
-
-        <hr class="contact-item border-ink/10 mb-10" />
-
-        <!-- Availability -->
-        <div class="contact-item flex items-center gap-3 mb-10">
-          <div class="w-2 h-2 rounded-full bg-ink animate-pulse flex-shrink-0"></div>
-          <span class="font-mono text-xs uppercase tracking-[0.15em] text-ink/60">
-            Disponível — Resposta em 24h
-          </span>
-        </div>
-
-        <!-- Social links horizontal -->
-        <div class="contact-item mt-4">
-          <span class="block font-mono text-xs uppercase tracking-[0.2em] text-ink/25 mb-8 text-left">
-            Redes
-          </span>
-          <div class="flex flex-row items-center gap-10">
-            <a href="#" class="social-link w-fit flex items-center gap-4"><i data-lucide="instagram"
-                class="w-3.5 h-3.5"></i> Instagram</a>
-            <a href="#" class="social-link w-fit flex items-center gap-4"><i data-lucide="linkedin"
-                class="w-3.5 h-3.5"></i> LinkedIn</a>
-          </div>
-        </div>
-
-        <!-- Address & Fuso Horário -->
-        <div class="contact-item mt-14 pt-10 border-t border-ink/8 grid grid-cols-2 gap-8">
-          <div>
-            <span
-              class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/25 mb-2 text-left">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Sede
-            </span>
-            <span class="font-mono text-xs tracking-[0.1em] text-ink/40">Porto, Portugal</span>
-          </div>
-          <div>
-            <span
-              class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/25 mb-2 text-left">
-              <i data-lucide="clock" class="w-3.5 h-3.5"></i> Fuso
-            </span>
-            <div class="flex items-center gap-2">
-              <span class="font-mono text-xs tracking-[0.1em] text-ink/40" id="contact-gmt-time">--:--</span>
-              <span class="font-mono text-[0.65rem] tracking-wider text-ink/25">GMT+0</span>
+            <!-- Small monospace caption under the image -->
+            <div
+              class="absolute bottom-[-2rem] left-0 w-full flex justify-between items-center px-1 font-mono text-[0.6rem] tracking-[0.2em] text-ink/40 uppercase"
+            >
+              <span>FIG. 01</span>
+              <span>HQ_CONNECTION</span>
             </div>
           </div>
         </div>
 
-      </div>
-
-      <!-- RIGHT: Form ────────────────────────────────────────────────── -->
-      <div class="form-section relative overflow-hidden bg-paper" style="border-left: 1px solid rgba(18,18,18,0.1);">
-
-        <!-- Drafting dot grid background -->
-        <div class="absolute inset-0 pointer-events-none"
-          style="background-image: radial-gradient(circle, rgba(18,18,18,0.06) 1px, transparent 1px); background-size: 28px 28px; opacity: 1;">
+        <!-- Interactive Crosshair -->
+        <div class="drafting-crosshair">
+          <div class="drafting-ch-x"></div>
+          <div class="drafting-ch-y"></div>
+          <div class="coord-tooltip">x: 0, y: 0</div>
         </div>
 
-        <div class="relative z-10"
-          style="padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 8%, 6rem) clamp(4rem, 8vw, 7rem);">
+        <!-- Ghost decorative text -->
+        <span class="hero-ghost" aria-hidden="true" style="opacity: 0.02"
+          >Contacto</span
+        >
 
+        <!-- Top-left label -->
+        <div
+          class="absolute top-[clamp(7rem,10vh,10rem)] left-[clamp(3.5rem,6vw,7rem)] z-10"
+        >
+          <span
+            class="hero-label font-mono uppercase tracking-[0.35em] text-ink/40"
+            style="font-size: 0.7rem; opacity: 0; transform: translateY(8px)"
+            >— Contactos</span
+          >
+        </div>
+
+        <!-- Giant stacked heading -->
+        <div
+          class="relative z-10 mb-10 md:mb-14"
+          style="line-height: 0.88; pointer-events: none"
+        >
+          <div class="hero-line-wrap">
+            <span
+              class="hero-line font-serif italic text-ink"
+              style="font-size: clamp(5rem, 13vw, 15rem)"
+              >Vamos</span
+            >
+          </div>
+          <div class="hero-line-wrap" style="padding-left: 15%">
+            <span
+              class="hero-line font-serif italic text-ink"
+              style="font-size: clamp(5rem, 13vw, 15rem)"
+              >Falar.</span
+            >
+          </div>
+        </div>
+
+        <!-- Bottom row: description + scroll indicator -->
+        <div
+          class="relative z-10 flex items-end justify-between gap-8 pointer-events-none"
+        >
+          <p
+            class="hero-desc font-mono text-ink/50 max-w-xs leading-relaxed mix-blend-multiply"
+            style="
+              font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+              letter-spacing: 0.06em;
+              opacity: 0;
+              transform: translateY(12px);
+            "
+          >
+            Pronto para desenhar o seu próximo projecto?<br />
+            Fornecemos as coordenadas — respondemos em 24h.
+          </p>
+
+          <div
+            class="hero-scroll-wrap flex flex-col items-center gap-3 mix-blend-multiply"
+            style="opacity: 0"
+          >
+            <span
+              class="font-mono uppercase tracking-[0.25em] text-ink/30 rotate-90 origin-center"
+              style="
+                font-size: 0.55rem;
+                transform: rotate(90deg);
+                margin-bottom: 0.5rem;
+              "
+              >Scroll</span
+            >
+            <div class="scroll-line">
+              <div class="scroll-bar"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. MARQUEE STRIP ─────────────────────────────────────────────── -->
+      <div class="border-t border-b border-ink/10 py-5 overflow-hidden">
+        <div
+          class="marquee-track flex items-center gap-0"
+          style="width: max-content"
+        >
+          <!-- Set A -->
+          <span
+            class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap"
+          >
+            geral@monrion.com <span class="text-ink/20">●</span> +351 000 000
+            000 <span class="text-ink/20">●</span> Porto, Portugal
+            <span class="text-ink/20">●</span> Disponível
+            <span class="text-ink/20">●</span> Resposta em 24h
+            <span class="text-ink/20">●</span> @monrion
+            <span class="text-ink/20">●</span>
+          </span>
+          <!-- Set B -->
+          <span
+            class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap"
+          >
+            geral@monrion.com <span class="text-ink/20">●</span> +351 000 000
+            000 <span class="text-ink/20">●</span> Porto, Portugal
+            <span class="text-ink/20">●</span> Disponível
+            <span class="text-ink/20">●</span> Resposta em 24h
+            <span class="text-ink/20">●</span> @monrion
+            <span class="text-ink/20">●</span>
+          </span>
+          <!-- Set C -->
+          <span
+            class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap"
+          >
+            geral@monrion.com <span class="text-ink/20">●</span> +351 000 000
+            000 <span class="text-ink/20">●</span> Porto, Portugal
+            <span class="text-ink/20">●</span> Disponível
+            <span class="text-ink/20">●</span> Resposta em 24h
+            <span class="text-ink/20">●</span> @monrion
+            <span class="text-ink/20">●</span>
+          </span>
+          <!-- Set D -->
+          <span
+            class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap"
+          >
+            geral@monrion.com <span class="text-ink/20">●</span> +351 000 000
+            000 <span class="text-ink/20">●</span> Porto, Portugal
+            <span class="text-ink/20">●</span> Disponível
+            <span class="text-ink/20">●</span> Resposta em 24h
+            <span class="text-ink/20">●</span> @monrion
+            <span class="text-ink/20">●</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- 3. SPLIT SECTION ─────────────────────────────────────────────── -->
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <!-- LEFT: Contact Info ─────────────────────────────────────────── -->
+        <div
+          class="contact-section bg-paper"
+          style="
+            padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 8%, 7rem)
+              clamp(4rem, 8vw, 7rem);
+          "
+        >
           <!-- Section label -->
-          <div class="form-field-label mb-10">
-            <span class="font-mono text-xs uppercase tracking-[0.25em]" style="color: rgba(18,18,18,0.4);">
-              <span class="accent-line"></span>
-              02 — Especificações
+          <div class="contact-item mb-16">
+            <span
+              class="font-mono text-xs uppercase tracking-[0.25em] text-ink/40"
+            >
+              <span class="accent-line"></span>01 — Fale Connosco
             </span>
           </div>
 
-          <!-- Form heading -->
-          <div class="mb-14 overflow-hidden">
-            <h2 class="font-serif italic leading-[0.92]" style="font-size: clamp(2.5rem, 5vw, 4.5rem); color: #121212;">
-              Envie-nos<br>
-              <span style="color: rgba(18,18,18,0.3);">os detalhes</span>
-            </h2>
+          <!-- Email -->
+          <div class="contact-item mb-8">
+            <span
+              class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/30 mb-3"
+            >
+              <i data-lucide="mail" class="w-3.5 h-3.5"></i> E-mail
+            </span>
+            <a
+              href="mailto:geral@monrion.com"
+              class="contact-link text-ink font-sans font-bold"
+              style="font-size: clamp(1.4rem, 2.8vw, 2.8rem)"
+            >
+              geral@monrion.com
+              <span class="arrow" style="font-size: 0.7em">→</span>
+            </a>
           </div>
 
-          <!-- Form Grid Blueprint -->
-          <form id="contact-form" class="blueprint-form flex flex-col" novalidate>
+          <!-- Phone -->
+          <div class="contact-item mb-14">
+            <span
+              class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/30 mb-3"
+            >
+              <i data-lucide="phone" class="w-3.5 h-3.5"></i> Telefone
+            </span>
+            <a
+              href="tel:+351000000000"
+              class="contact-link text-ink font-sans font-bold"
+              style="font-size: clamp(1.1rem, 2vw, 2rem)"
+            >
+              +351 000 000 000
+              <span class="arrow" style="font-size: 0.7em">→</span>
+            </a>
+          </div>
 
-            <!-- Row: Nome + Apelido -->
-            <div class="grid grid-cols-1 sm:grid-cols-2">
-              <div class="form-field sm:grid-border-r">
-                <input type="text" id="field-nome" name="nome" autocomplete="given-name" />
-                <label for="field-nome">Nome</label>
+          <hr class="contact-item border-ink/10 mb-10" />
+
+          <!-- Availability -->
+          <div class="contact-item flex items-center gap-3 mb-10">
+            <div
+              class="w-2 h-2 rounded-full bg-ink animate-pulse flex-shrink-0"
+            ></div>
+            <span
+              class="font-mono text-xs uppercase tracking-[0.15em] text-ink/60"
+            >
+              Disponível — Resposta em 24h
+            </span>
+          </div>
+
+          <!-- Social links horizontal -->
+          <div class="contact-item mt-4">
+            <span
+              class="block font-mono text-xs uppercase tracking-[0.2em] text-ink/25 mb-8 text-left"
+            >
+              Redes
+            </span>
+            <div class="flex flex-row items-center gap-10">
+              <a href="#" class="social-link w-fit flex items-center gap-4"
+                ><i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+                Instagram</a
+              >
+              <a href="#" class="social-link w-fit flex items-center gap-4"
+                ><i data-lucide="linkedin" class="w-3.5 h-3.5"></i> LinkedIn</a
+              >
+            </div>
+          </div>
+
+          <!-- Address & Fuso Horário -->
+          <div
+            class="contact-item mt-14 pt-10 border-t border-ink/8 grid grid-cols-2 gap-8"
+          >
+            <div>
+              <span
+                class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/25 mb-2 text-left"
+              >
+                <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Sede
+              </span>
+              <span class="font-mono text-xs tracking-[0.1em] text-ink/40"
+                >Porto, Portugal</span
+              >
+            </div>
+            <div>
+              <span
+                class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-ink/25 mb-2 text-left"
+              >
+                <i data-lucide="clock" class="w-3.5 h-3.5"></i> Fuso
+              </span>
+              <div class="flex items-center gap-2">
+                <span
+                  class="font-mono text-xs tracking-[0.1em] text-ink/40"
+                  id="contact-gmt-time"
+                  >--:--</span
+                >
+                <span
+                  class="font-mono text-[0.65rem] tracking-wider text-ink/25"
+                  >GMT+0</span
+                >
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Form ────────────────────────────────────────────────── -->
+        <div
+          class="form-section relative overflow-hidden bg-paper"
+          style="border-left: 1px solid rgba(18, 18, 18, 0.1)"
+        >
+          <!-- Drafting dot grid background -->
+          <div
+            class="absolute inset-0 pointer-events-none"
+            style="
+              background-image: radial-gradient(
+                circle,
+                rgba(18, 18, 18, 0.06) 1px,
+                transparent 1px
+              );
+              background-size: 28px 28px;
+              opacity: 1;
+            "
+          ></div>
+
+          <div
+            class="relative z-10"
+            style="
+              padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 8%, 6rem)
+                clamp(4rem, 8vw, 7rem);
+            "
+          >
+            <!-- Section label -->
+            <div class="form-field-label mb-10">
+              <span
+                class="font-mono text-xs uppercase tracking-[0.25em]"
+                style="color: rgba(18, 18, 18, 0.4)"
+              >
+                <span class="accent-line"></span>
+                02 — Especificações
+              </span>
+            </div>
+
+            <!-- Form heading -->
+            <div class="mb-14 overflow-hidden">
+              <h2
+                class="font-serif italic leading-[0.92]"
+                style="font-size: clamp(2.5rem, 5vw, 4.5rem); color: #121212"
+              >
+                Envie-nos<br />
+                <span style="color: rgba(18, 18, 18, 0.3)">os detalhes</span>
+              </h2>
+            </div>
+
+            <!-- Form Grid Blueprint -->
+            <form
+              id="contact-form"
+              class="blueprint-form flex flex-col"
+              novalidate
+            >
+              <!-- Row: Nome + Apelido -->
+              <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="form-field sm:grid-border-r">
+                  <input
+                    type="text"
+                    id="field-nome"
+                    name="nome"
+                    autocomplete="given-name"
+                  />
+                  <label for="field-nome">Nome</label>
+                </div>
+                <div class="form-field">
+                  <input
+                    type="text"
+                    id="field-apelido"
+                    name="apelido"
+                    autocomplete="family-name"
+                  />
+                  <label for="field-apelido">Apelido</label>
+                </div>
+              </div>
+
+              <!-- Email -->
               <div class="form-field">
-                <input type="text" id="field-apelido" name="apelido" autocomplete="family-name" />
-                <label for="field-apelido">Apelido</label>
+                <input
+                  type="email"
+                  id="field-email"
+                  name="email"
+                  autocomplete="email"
+                />
+                <label for="field-email">E-mail</label>
               </div>
-            </div>
 
-            <!-- Email -->
-            <div class="form-field">
-              <input type="email" id="field-email" name="email" autocomplete="email" />
-              <label for="field-email">E-mail</label>
-            </div>
-
-            <!-- Assunto -->
-            <div class="grid grid-cols-1 sm:grid-cols-2">
-              <div class="form-field sm:grid-border-r">
-                <input type="text" id="field-assunto" name="assunto" />
-                <label for="field-assunto">Assunto</label>
+              <!-- Assunto -->
+              <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="form-field sm:grid-border-r">
+                  <input type="text" id="field-assunto" name="assunto" />
+                  <label for="field-assunto">Assunto</label>
+                </div>
+                <!-- Orçamento (Combo Box) -->
+                <div class="form-field">
+                  <select id="field-orcamento" name="orcamento" required>
+                    <option value="" disabled selected></option>
+                    <option value="Abaixo de 1.000€">Abaixo de 1.000€</option>
+                    <option value="1.000€ - 3.000€">1.000€ - 3.000€</option>
+                    <option value="3.000€ - 5.000€">3.000€ - 5.000€</option>
+                    <option value="Acima de 5.000€">Acima de 5.000€</option>
+                  </select>
+                  <label for="field-orcamento">Orçamento Estimado</label>
+                </div>
               </div>
-              <!-- Orçamento (Combo Box) -->
-              <div class="form-field">
-                <select id="field-orcamento" name="orcamento" required>
-                  <option value="" disabled selected></option>
-                  <option value="Abaixo de 1.000€">Abaixo de 1.000€</option>
-                  <option value="1.000€ - 3.000€">1.000€ - 3.000€</option>
-                  <option value="3.000€ - 5.000€">3.000€ - 5.000€</option>
-                  <option value="Acima de 5.000€">Acima de 5.000€</option>
-                </select>
-                <label for="field-orcamento">Orçamento Estimado</label>
+
+              <!-- Mensagem -->
+              <div class="form-field" style="border-bottom: none">
+                <textarea
+                  id="field-mensagem"
+                  name="mensagem"
+                  rows="4"
+                ></textarea>
+                <label for="field-mensagem">Mensagem</label>
               </div>
-            </div>
 
-            <!-- Mensagem -->
-            <div class="form-field" style="border-bottom: none;">
-              <textarea id="field-mensagem" name="mensagem" rows="4"></textarea>
-              <label for="field-mensagem">Mensagem</label>
-            </div>
-
-            <!-- Submit -->
-            <div class="submit-wrap p-4 border-t border-ink/15" style="background: rgba(18,18,18,0.02);">
-              <button type="submit" class="btn-submit btn-magnetic w-full py-5 text-sm rounded-full" data-cursor-expand>
-                Validar e Enviar
-              </button>
-            </div>
-
-          </form>
-
+              <!-- Submit -->
+              <div
+                class="submit-wrap p-4 border-t border-ink/15"
+                style="background: rgba(18, 18, 18, 0.02)"
+              >
+                <button
+                  type="submit"
+                  class="btn-submit btn-magnetic w-full py-5 text-sm rounded-full"
+                  data-cursor-expand
+                >
+                  Validar e Enviar
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
 
-  </main>
+    <!-- Footer -->
+    <footer
+      class="bg-ink rounded-t-[4rem] pt-24 pb-8 relative z-30 text-paper overflow-hidden"
+      style="
+        padding-left: clamp(1.5rem, 5vw, 6rem);
+        padding-right: clamp(1.5rem, 5vw, 6rem);
+      "
+    >
+      <div
+        class="footer-dots absolute inset-0 pointer-events-none opacity-[0.24]"
+        style="
+          background-image: radial-gradient(
+            circle,
+            rgba(235, 233, 228, 0.5) 1px,
+            transparent 1px
+          );
+          background-size: 24px 24px;
+        "
+      ></div>
 
-  <!-- Footer -->
-  <footer class="bg-ink rounded-t-[4rem] pt-24 pb-8 relative z-30 text-paper overflow-hidden"
-    style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
-
-    <div class="footer-dots absolute inset-0 pointer-events-none opacity-[0.24]"
-      style="background-image: radial-gradient(circle, rgba(235,233,228,0.5) 1px, transparent 1px); background-size: 24px 24px;">
-    </div>
-
-    <div class="footer-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
-
-      <div class="lg:col-span-1">
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-12 flex items-center justify-content text-paper">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-              <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
-              <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
-              <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7" />
-              <circle cx="20" cy="19" r="1.5" fill="currentColor" />
-            </svg>
+      <div
+        class="footer-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10"
+      >
+        <div class="lg:col-span-1">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 flex items-center justify-content text-paper">
+              <svg
+                viewBox="0 0 40 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-full h-full"
+              >
+                <path
+                  d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z"
+                  stroke="currentColor"
+                  stroke-width="1"
+                />
+                <path
+                  d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z"
+                  fill="currentColor"
+                  class="opacity-20"
+                />
+                <path
+                  d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z"
+                  stroke="currentColor"
+                  stroke-width="0.7"
+                />
+                <circle cx="20" cy="19" r="1.5" fill="currentColor" />
+              </svg>
+            </div>
+            <span
+              class="font-sans font-extrabold text-paper select-none"
+              style="
+                font-size: clamp(20px, 1.8vw, 28px);
+                letter-spacing: 0.15em;
+              "
+              >M O N R I O N</span
+            >
           </div>
-          <span class="font-sans font-extrabold text-paper select-none"
-            style="font-size: clamp(20px, 1.8vw, 28px); letter-spacing: 0.15em;">M O N R I O N</span>
+          <p class="text-paper/50 text-sm leading-relaxed max-w-xs">
+            Design orgânico para um futuro digital sustentável. Sediados no
+            Porto, a cultivar para o mundo.
+          </p>
         </div>
-        <p class="text-paper/50 text-sm leading-relaxed max-w-xs">
-          Design orgânico para um futuro digital sustentável. Sediados no Porto, a cultivar para o mundo.
+
+        <div>
+          <h4
+            class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6"
+          >
+            Páginas
+          </h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="/" class="text-paper/70 text-sm footer-link">Início</a>
+            </li>
+            <li>
+              <a href="/portfolio/" class="text-paper/70 text-sm footer-link"
+                >Portfólio</a
+              >
+            </li>
+            <li>
+              <a href="/sobre/" class="text-paper/70 text-sm footer-link"
+                >Sobre Nós</a
+              >
+            </li>
+            <li>
+              <a href="/servicos/" class="text-paper/70 text-sm footer-link"
+                >Serviços</a
+              >
+            </li>
+            <li>
+              <a href="/contactos/" class="text-paper/70 text-sm footer-link"
+                >Contactos</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4
+            class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6"
+          >
+            Contacto
+          </h4>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-2">
+              <i data-lucide="mail" class="w-3.5 h-3.5 text-paper/40"></i>
+              <a
+                href="mailto:geral@monrion.com"
+                class="text-paper/70 text-sm footer-link"
+                >geral@monrion.com</a
+              >
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-paper/40"></i>
+              <a
+                href="tel:+351000000000"
+                class="text-paper/70 text-sm footer-link"
+                >+351 000 000 000</a
+              >
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="instagram" class="w-3.5 h-3.5 text-paper/40"></i>
+              <a href="#" class="text-paper/70 text-sm footer-link">@monrion</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="linkedin" class="w-3.5 h-3.5 text-paper/40"></i>
+              <a href="#" class="text-paper/70 text-sm footer-link">Monrion</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4
+            class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6"
+          >
+            Localização
+          </h4>
+          <div class="space-y-4">
+            <div class="flex items-start gap-2">
+              <i
+                data-lucide="map-pin"
+                class="w-3.5 h-3.5 text-paper/40 mt-0.5"
+              ></i>
+              <p class="text-paper/70 text-sm leading-relaxed">
+                Porto, Portugal
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="clock" class="w-3.5 h-3.5 text-paper/40"></i>
+              <span class="font-mono text-sm text-paper/70" id="footer-gmt-time"
+                >--:--</span
+              >
+              <span class="font-mono text-xs text-paper/40">GMT+0</span>
+            </div>
+            <div class="flex items-center gap-2 mt-2">
+              <div
+                class="w-1.5 h-1.5 rounded-full bg-paper animate-pulse"
+              ></div>
+              <span
+                class="font-mono text-xs text-paper/40 uppercase tracking-wider"
+                >Disponível</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="footer-bottom border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <p class="text-paper/30 font-mono text-xs tracking-wide">
+          © 2026 Monrion. Todos os direitos reservados.
         </p>
-      </div>
-
-      <div>
-        <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Páginas</h4>
-        <ul class="space-y-3">
-          <li><a href="/" class="text-paper/70 text-sm footer-link">Início</a></li>
-          <li><a href="/portfolio/" class="text-paper/70 text-sm footer-link">Portfólio</a></li>
-          <li><a href="/sobre/" class="text-paper/70 text-sm footer-link">Sobre Nós</a></li>
-          <li><a href="/servicos/" class="text-paper/70 text-sm footer-link">Serviços</a></li>
-          <li><a href="/contactos/" class="text-paper/70 text-sm footer-link">Contactos</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Contacto</h4>
-        <ul class="space-y-3">
-          <li class="flex items-center gap-2">
-            <i data-lucide="mail" class="w-3.5 h-3.5 text-paper/40"></i>
-            <a href="mailto:geral@monrion.com" class="text-paper/70 text-sm footer-link">geral@monrion.com</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <i data-lucide="phone" class="w-3.5 h-3.5 text-paper/40"></i>
-            <a href="tel:+351000000000" class="text-paper/70 text-sm footer-link">+351 000 000 000</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <i data-lucide="instagram" class="w-3.5 h-3.5 text-paper/40"></i>
-            <a href="#" class="text-paper/70 text-sm footer-link">@monrion</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <i data-lucide="linkedin" class="w-3.5 h-3.5 text-paper/40"></i>
-            <a href="#" class="text-paper/70 text-sm footer-link">Monrion</a>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Localização</h4>
-        <div class="space-y-4">
-          <div class="flex items-start gap-2">
-            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-paper/40 mt-0.5"></i>
-            <p class="text-paper/70 text-sm leading-relaxed">Porto, Portugal</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <i data-lucide="clock" class="w-3.5 h-3.5 text-paper/40"></i>
-            <span class="font-mono text-sm text-paper/70" id="footer-gmt-time">--:--</span>
-            <span class="font-mono text-xs text-paper/40">GMT+0</span>
-          </div>
-          <div class="flex items-center gap-2 mt-2">
-            <div class="w-1.5 h-1.5 rounded-full bg-paper animate-pulse"></div>
-            <span class="font-mono text-xs text-paper/40 uppercase tracking-wider">Disponível</span>
-          </div>
+        <div class="flex items-center gap-6">
+          <a
+            href="#"
+            class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide"
+            >Termos e Condições</a
+          >
+          <a
+            href="#"
+            class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide"
+            >Política de Privacidade</a
+          >
         </div>
       </div>
+    </footer>
 
-    </div>
+    <script type="module" src="../assets/js/page.js"></script>
 
-    <div
-      class="footer-bottom border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-paper/30 font-mono text-xs tracking-wide">© 2026 Monrion. Todos os direitos reservados.</p>
-      <div class="flex items-center gap-6">
-        <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Termos e
-          Condições</a>
-        <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Política
-          de Privacidade</a>
-      </div>
-    </div>
+    <!-- ── Contact page animations ──────────────────────────────────────── -->
+    <script type="module">
+      import gsap from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  </footer>
+      gsap.registerPlugin(ScrollTrigger);
 
-  <script type="module" src="../assets/js/page.js"></script>
-
-  <!-- ── Contact page animations ──────────────────────────────────────── -->
-  <script type="module">
-    import gsap from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    /* ── Wait for page.js loader to set body visible ────────────── */
-    function onPageReady(cb) {
-      if (document.body.style.visibility === 'visible') { cb(); return; }
-      const mo = new MutationObserver((_, obs) => {
-        if (document.body.style.visibility === 'visible') {
-          obs.disconnect();
+      /* ── Wait for page.js loader to set body visible ────────────── */
+      function onPageReady(cb) {
+        if (document.body.style.visibility === "visible") {
           cb();
+          return;
         }
-      });
-      mo.observe(document.body, { attributes: true, attributeFilter: ['style'] });
-    }
-
-    onPageReady(() => {
-
-      /* 1. Hero entrance timeline ─────────────────────────────── */
-      gsap.set('.hero-line', { y: '120%' });
-      gsap.set('.hero-label, .hero-desc, .hero-scroll-wrap', { opacity: 0, y: 20 });
-      gsap.set('.hero-image-frame', { scale: 0.95, opacity: 0, y: 40 });
-
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-      tl.to('.hero-line', { y: '0%', duration: 2.2, stagger: 0.15 }, 0.4)
-        .to('.hero-image-frame', { scale: 1, opacity: 1, y: 0, duration: 3.0 }, 0.6)
-        .to('.hero-label', { opacity: 1, y: 0, duration: 1.6 }, 1.0)
-        .to('.hero-desc', { opacity: 1, y: 0, duration: 1.6 }, 1.3)
-        .to('.hero-scroll-wrap', { opacity: 1, y: 0, duration: 1.6 }, 1.6);
-
-      /* 2. Scroll-line loop ────────────────────────────────────── */
-      gsap.fromTo(
-        '.scroll-bar',
-        { y: '-100%' },
-        { y: '100%', duration: 1.5, ease: 'power2.inOut', repeat: -1 }
-      );
-
-      /* 3. ScrollTrigger — contact info items ─────────────────── */
-      gsap.from('.contact-item', {
-        scrollTrigger: {
-          trigger: '.contact-section',
-          start: 'top 80%',
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: 'expo.out',
-      });
-
-      /* 4. ScrollTrigger — form container & fields ────────────────────────── */
-      gsap.from('.form-section', {
-        scrollTrigger: { trigger: '.form-section', start: 'top 85%' },
-        y: 80,
-        opacity: 0,
-        duration: 1.4,
-        ease: 'power3.out'
-      });
-
-      gsap.from('.form-field', {
-        scrollTrigger: { trigger: '.form-section', start: 'top 80%' },
-        y: 45,
-        x: -15,
-        opacity: 0,
-        duration: 1.1,
-        stagger: 0.1,
-        ease: 'expo.out',
-      });
-
-      /* Also animate the form heading, label and submit button row */
-      gsap.from('.form-field-label, .form-section h2, .submit-wrap', {
-        scrollTrigger: {
-          trigger: '.form-section',
-          start: 'top 85%',
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1.3,
-        stagger: 0.15,
-        ease: 'expo.out',
-      });
-
-      /* 5. ScrollTrigger — Marquee strip and Footer ──────────────── */
-      gsap.from('.marquee-track', {
-        scrollTrigger: { trigger: '.marquee-track', start: 'top 95%' },
-        opacity: 0, duration: 1.2, ease: 'power2.out'
-      });
-
-      gsap.from('.footer-dots', {
-        scrollTrigger: { trigger: 'footer', start: 'top 85%' },
-        opacity: 0, duration: 1.5, ease: 'power2.out'
-      });
-
-      gsap.from('.footer-grid > div, .footer-bottom', {
-        scrollTrigger: { trigger: 'footer', start: 'top 85%' },
-        y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out'
-      });
-
-      /* 6. Magnetic submit button ──────────────────────────────── */
-      const magBtn = document.querySelector('.btn-magnetic');
-      if (magBtn) {
-        magBtn.addEventListener('mousemove', e => {
-          const r = magBtn.getBoundingClientRect();
-          const x = e.clientX - r.left - r.width / 2;
-          const y = e.clientY - r.top - r.height / 2;
-          gsap.to(magBtn, { x: x * 0.3, y: y * 0.3, duration: 0.4, ease: 'power2.out' });
+        const mo = new MutationObserver((_, obs) => {
+          if (document.body.style.visibility === "visible") {
+            obs.disconnect();
+            cb();
+          }
         });
-        magBtn.addEventListener('mouseleave', () => {
-          gsap.to(magBtn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+        mo.observe(document.body, {
+          attributes: true,
+          attributeFilter: ["style"],
         });
       }
 
-      /* 7. Floating labels ─────────────────────────────────────── */
-      document.querySelectorAll('.form-field input, .form-field select, .form-field textarea').forEach(el => {
-        /* Initialise has-value on page load (e.g. browser autofill) */
-        el.classList.toggle('has-value', el.value.length > 0);
-
-        el.addEventListener('input', () => { el.classList.toggle('has-value', el.value.length > 0); });
-        el.addEventListener('change', () => { el.classList.toggle('has-value', el.value.length > 0); });
-
-        el.addEventListener('focus', () => {
-          el.closest('.form-field').classList.add('focused');
+      onPageReady(() => {
+        /* 1. Hero entrance timeline ─────────────────────────────── */
+        gsap.set(".hero-line", { y: "120%" });
+        gsap.set(".hero-label, .hero-desc, .hero-scroll-wrap", {
+          opacity: 0,
+          y: 20,
         });
-        el.addEventListener('blur', () => {
-          el.closest('.form-field').classList.remove('focused');
+        gsap.set(".hero-image-frame", { scale: 0.95, opacity: 0, y: 40 });
+
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.to(".hero-line", { y: "0%", duration: 2.2, stagger: 0.15 }, 0.4)
+          .to(
+            ".hero-image-frame",
+            { scale: 1, opacity: 1, y: 0, duration: 3.0 },
+            0.6,
+          )
+          .to(".hero-label", { opacity: 1, y: 0, duration: 1.6 }, 1.0)
+          .to(".hero-desc", { opacity: 1, y: 0, duration: 1.6 }, 1.3)
+          .to(".hero-scroll-wrap", { opacity: 1, y: 0, duration: 1.6 }, 1.6);
+
+        /* 2. Scroll-line loop ────────────────────────────────────── */
+        gsap.fromTo(
+          ".scroll-bar",
+          { y: "-100%" },
+          { y: "100%", duration: 1.5, ease: "power2.inOut", repeat: -1 },
+        );
+
+        /* 3. ScrollTrigger — contact info items ─────────────────── */
+        gsap.from(".contact-item", {
+          scrollTrigger: {
+            trigger: ".contact-section",
+            start: "top 80%",
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: "expo.out",
         });
-      });
 
-      /* 8. Form submit handler ─────────────────────────────────── */
-      document.querySelector('#contact-form')?.addEventListener('submit', e => {
-        e.preventDefault();
-        const btn = e.target.querySelector('.btn-submit');
-        btn.textContent = 'A Enviar...';
-        btn.disabled = true;
-
-        setTimeout(() => {
-          btn.textContent = 'VALIDADO ✓';
-          btn.style.background = 'var(--color-ink)';
-          btn.style.color = 'var(--color-paper)';
-
-          /* Reset after 4 s */
-          setTimeout(() => {
-            btn.textContent = 'Validar e Enviar';
-            btn.style.background = '';
-            btn.style.color = '';
-            btn.disabled = false;
-          }, 4000);
-        }, 1800);
-      });
-
-      /* 9. Interactive Drafting Crosshair ──────────────────────── */
-      const heroSection = document.querySelector('.hero-section');
-      const crosshair = document.querySelector('.drafting-crosshair');
-      const chX = document.querySelector('.drafting-ch-x');
-      const chY = document.querySelector('.drafting-ch-y');
-      const coordTip = document.querySelector('.coord-tooltip');
-
-      if (heroSection && crosshair) {
-        heroSection.addEventListener('mouseenter', () => { crosshair.style.opacity = '1'; });
-        heroSection.addEventListener('mouseleave', () => { crosshair.style.opacity = '0'; });
-        heroSection.addEventListener('mousemove', (e) => {
-          const rect = heroSection.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-
-          gsap.to(chX, { y: y, duration: 0.15, ease: 'power2.out' });
-          gsap.to(chY, { x: x, duration: 0.15, ease: 'power2.out' });
-          gsap.to(coordTip, { x: x + 15, y: y + 15, duration: 0.15, ease: 'power2.out' });
-
-          coordTip.textContent = `x:${Math.round(x)} y:${Math.round(y)}`;
+        /* 4. ScrollTrigger — form container & fields ────────────────────────── */
+        gsap.from(".form-section", {
+          scrollTrigger: { trigger: ".form-section", start: "top 85%" },
+          y: 80,
+          opacity: 0,
+          duration: 1.4,
+          ease: "power3.out",
         });
-      }
 
-      /* 10. Update local GMT time in contact page ──────────────── */
-      const contactTimeSpan = document.getElementById('contact-gmt-time');
-      if (contactTimeSpan) {
-        const updateContactTime = () => {
-          const now = new Date();
-          const pT = new Intl.DateTimeFormat('en-GB', {
-            timeZone: 'Europe/Lisbon', hour: '2-digit', minute: '2-digit', hour12: false
-          }).format(now);
-          contactTimeSpan.textContent = pT;
-        };
-        updateContactTime();
-        setInterval(updateContactTime, 30000);
-      }
+        gsap.from(".form-field", {
+          scrollTrigger: { trigger: ".form-section", start: "top 80%" },
+          y: 45,
+          x: -15,
+          opacity: 0,
+          duration: 1.1,
+          stagger: 0.1,
+          ease: "expo.out",
+        });
 
-    }); /* end onPageReady */
-  </script>
+        /* Also animate the form heading, label and submit button row */
+        gsap.from(".form-field-label, .form-section h2, .submit-wrap", {
+          scrollTrigger: {
+            trigger: ".form-section",
+            start: "top 85%",
+          },
+          y: 50,
+          opacity: 0,
+          duration: 1.3,
+          stagger: 0.15,
+          ease: "expo.out",
+        });
 
-  <!-- Custom Hero Terrain Script -->
-  <script src="../assets/js/contact-terrain.js"></script>
-</body>
+        /* 5. ScrollTrigger — Marquee strip and Footer ──────────────── */
+        gsap.from(".marquee-track", {
+          scrollTrigger: { trigger: ".marquee-track", start: "top 95%" },
+          opacity: 0,
+          duration: 1.2,
+          ease: "power2.out",
+        });
 
+        gsap.from(".footer-dots", {
+          scrollTrigger: { trigger: "footer", start: "top 85%" },
+          opacity: 0,
+          duration: 1.5,
+          ease: "power2.out",
+        });
+
+        gsap.from(".footer-grid > div, .footer-bottom", {
+          scrollTrigger: { trigger: "footer", start: "top 85%" },
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.1,
+          ease: "power3.out",
+        });
+
+        /* 6. Magnetic submit button ──────────────────────────────── */
+        const magBtn = document.querySelector(".btn-magnetic");
+        if (magBtn) {
+          magBtn.addEventListener("mousemove", (e) => {
+            const r = magBtn.getBoundingClientRect();
+            const x = e.clientX - r.left - r.width / 2;
+            const y = e.clientY - r.top - r.height / 2;
+            gsap.to(magBtn, {
+              x: x * 0.3,
+              y: y * 0.3,
+              duration: 0.4,
+              ease: "power2.out",
+            });
+          });
+          magBtn.addEventListener("mouseleave", () => {
+            gsap.to(magBtn, {
+              x: 0,
+              y: 0,
+              duration: 0.6,
+              ease: "elastic.out(1, 0.5)",
+            });
+          });
+        }
+
+        /* 7. Floating labels ─────────────────────────────────────── */
+        document
+          .querySelectorAll(
+            ".form-field input, .form-field select, .form-field textarea",
+          )
+          .forEach((el) => {
+            /* Initialise has-value on page load (e.g. browser autofill) */
+            el.classList.toggle("has-value", el.value.length > 0);
+
+            el.addEventListener("input", () => {
+              el.classList.toggle("has-value", el.value.length > 0);
+            });
+            el.addEventListener("change", () => {
+              el.classList.toggle("has-value", el.value.length > 0);
+            });
+
+            el.addEventListener("focus", () => {
+              el.closest(".form-field").classList.add("focused");
+            });
+            el.addEventListener("blur", () => {
+              el.closest(".form-field").classList.remove("focused");
+            });
+          });
+
+        /* 8. Form submit handler ─────────────────────────────────── */
+        document
+          .querySelector("#contact-form")
+          ?.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector(".btn-submit");
+            btn.textContent = "A Enviar...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+              btn.textContent = "VALIDADO ✓";
+              btn.style.background = "var(--color-ink)";
+              btn.style.color = "var(--color-paper)";
+
+              /* Reset after 4 s */
+              setTimeout(() => {
+                btn.textContent = "Validar e Enviar";
+                btn.style.background = "";
+                btn.style.color = "";
+                btn.disabled = false;
+              }, 4000);
+            }, 1800);
+          });
+
+        /* 9. Interactive Drafting Crosshair ──────────────────────── */
+        const heroSection = document.querySelector(".hero-section");
+        const crosshair = document.querySelector(".drafting-crosshair");
+        const chX = document.querySelector(".drafting-ch-x");
+        const chY = document.querySelector(".drafting-ch-y");
+        const coordTip = document.querySelector(".coord-tooltip");
+
+        if (heroSection && crosshair) {
+          heroSection.addEventListener("mouseenter", () => {
+            crosshair.style.opacity = "1";
+          });
+          heroSection.addEventListener("mouseleave", () => {
+            crosshair.style.opacity = "0";
+          });
+          heroSection.addEventListener("mousemove", (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            gsap.to(chX, { y: y, duration: 0.15, ease: "power2.out" });
+            gsap.to(chY, { x: x, duration: 0.15, ease: "power2.out" });
+            gsap.to(coordTip, {
+              x: x + 15,
+              y: y + 15,
+              duration: 0.15,
+              ease: "power2.out",
+            });
+
+            coordTip.textContent = `x:${Math.round(x)} y:${Math.round(y)}`;
+          });
+        }
+
+        /* 10. Update local GMT time in contact page ──────────────── */
+        const contactTimeSpan = document.getElementById("contact-gmt-time");
+        if (contactTimeSpan) {
+          const updateContactTime = () => {
+            const now = new Date();
+            const pT = new Intl.DateTimeFormat("en-GB", {
+              timeZone: "Europe/Lisbon",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            }).format(now);
+            contactTimeSpan.textContent = pT;
+          };
+          updateContactTime();
+          setInterval(updateContactTime, 30000);
+        }
+      }); /* end onPageReady */
+    </script>
+
+    <!-- Custom Hero Terrain Script -->
+    <script src="../assets/js/contact-terrain.js"></script>
+  </body>
 </html>
