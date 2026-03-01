@@ -640,6 +640,582 @@
         border-color: rgba(235, 233, 228, 0.4);
         color: var(--color-paper);
       }
+
+      /* ══════════════════════════════════════════════════
+         TIMELINE — SCROLL ANIMATED PROJECT SHOWCASE
+      ══════════════════════════════════════════════════ */
+
+      #tl-section {
+        background: #0d0d12;
+        position: relative;
+        overflow: hidden;
+        padding: clamp(5rem, 10vh, 9rem) 0 clamp(6rem, 12vh, 11rem);
+      }
+
+      #tl-header {
+        padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(3rem, 6vh, 5rem);
+        position: relative;
+        z-index: 10;
+      }
+
+      .tl-filters {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 2.5rem;
+      }
+      .tl-filter-btn {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        border: 1px solid rgba(235, 233, 228, 0.1);
+        padding: 0.5rem 1.2rem;
+        border-radius: 100px;
+        color: rgba(235, 233, 228, 0.32);
+        cursor: pointer;
+        background: transparent;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .tl-filter-btn:hover {
+        border-color: rgba(235, 233, 228, 0.25);
+        color: rgba(235, 233, 228, 0.65);
+      }
+      .tl-filter-btn.active {
+        background: #c9a84c;
+        border-color: #c9a84c;
+        color: #0d0d12;
+      }
+
+      /* Timeline body + track */
+      #tl-body {
+        position: relative;
+        max-width: 1380px;
+        margin: 0 auto;
+        padding: 0 clamp(1.5rem, 5vw, 6rem);
+      }
+
+      .tl-track-wrap {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .tl-track-bg {
+        position: absolute;
+        inset: 0;
+        background: rgba(235, 233, 228, 0.06);
+      }
+      .tl-track-fill {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          #c9a84c 8%,
+          #c9a84c 92%,
+          transparent
+        );
+        clip-path: inset(0 0 100% 0);
+        will-change: clip-path;
+      }
+
+      /* Year markers */
+      .tl-year-marker {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 10;
+        padding: 3rem 0 1.5rem;
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      .tl-year-badge {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: #c9a84c;
+        background: #0d0d12;
+        padding: 0.45rem 1.5rem;
+        border: 1px solid rgba(201, 168, 76, 0.28);
+        border-radius: 100px;
+      }
+
+      /* Entry grid */
+      .tl-entry {
+        display: grid;
+        grid-template-columns: 1fr 2.5rem 1fr;
+        align-items: start;
+        padding: clamp(1.5rem, 3vh, 2.5rem) 0;
+        position: relative;
+        z-index: 2;
+      }
+
+      .tl-node-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 2.5rem;
+      }
+      .tl-node {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: #0d0d12;
+        border: 2px solid rgba(201, 168, 76, 0.3);
+        position: relative;
+        z-index: 2;
+        flex-shrink: 0;
+        transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      }
+      .tl-node::after {
+        content: "";
+        position: absolute;
+        inset: -7px;
+        border-radius: 50%;
+        border: 1px solid transparent;
+        transition: border-color 0.5s ease;
+      }
+      .tl-entry.in-view .tl-node {
+        background: #c9a84c;
+        border-color: #c9a84c;
+        box-shadow: 0 0 18px rgba(201, 168, 76, 0.45);
+      }
+      .tl-entry.in-view .tl-node::after {
+        border-color: rgba(201, 168, 76, 0.2);
+      }
+
+      .tl-left-col {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: clamp(1.5rem, 3vw, 3.5rem);
+      }
+      .tl-right-col {
+        display: flex;
+        justify-content: flex-start;
+        padding-left: clamp(1.5rem, 3vw, 3.5rem);
+      }
+
+      /* Card */
+      .tl-card {
+        width: 100%;
+        max-width: 520px;
+        background: rgba(235, 233, 228, 0.025);
+        border: 1px solid rgba(235, 233, 228, 0.06);
+        border-radius: 1.75rem;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        opacity: 0;
+        will-change: transform, opacity;
+        transition: background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;
+      }
+      .tl-card:hover {
+        background: rgba(235, 233, 228, 0.048);
+        border-color: rgba(201, 168, 76, 0.18);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 168, 76, 0.06);
+      }
+
+      .tl-img-wrap {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+      }
+      .tl-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .tl-card:hover .tl-img-wrap img {
+        transform: scale(1.07);
+      }
+      .tl-img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 40%, rgba(13, 13, 18, 0.72) 100%);
+        opacity: 0;
+        transition: opacity 0.45s ease;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+      }
+      .tl-card:hover .tl-img-overlay {
+        opacity: 1;
+      }
+      .tl-img-view {
+        font-family: var(--font-mono);
+        font-size: 0.56rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(235, 233, 228, 0.9);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transform: translateY(8px);
+        transition: transform 0.35s ease;
+      }
+      .tl-card:hover .tl-img-view {
+        transform: translateY(0);
+      }
+
+      .tl-ghost-num {
+        position: absolute;
+        top: -0.08em;
+        right: 0.75rem;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 300;
+        font-size: clamp(5rem, 9vw, 11rem);
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(235, 233, 228, 0.035);
+        pointer-events: none;
+        user-select: none;
+        z-index: 0;
+      }
+
+      .tl-card-body {
+        padding: clamp(1.4rem, 2.2vw, 2.1rem);
+        position: relative;
+        z-index: 1;
+      }
+      .tl-cat-tag {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(201, 168, 76, 0.8);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        padding: 0.28rem 0.75rem;
+        border-radius: 100px;
+        margin-bottom: 0.9rem;
+      }
+      .tl-proj-title {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(1.7rem, 3.2vw, 2.7rem);
+        line-height: 0.92;
+        color: var(--color-paper);
+        margin-bottom: 0.85rem;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .tl-card:hover .tl-proj-title {
+        transform: translateX(5px);
+      }
+      .tl-proj-desc {
+        font-size: clamp(0.74rem, 0.88vw, 0.82rem);
+        color: rgba(235, 233, 228, 0.38);
+        line-height: 1.78;
+        max-width: 40ch;
+        margin-bottom: 1.2rem;
+      }
+      .tl-stack-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.32rem;
+        margin-bottom: 1.4rem;
+      }
+      .tl-stack-tag {
+        font-family: var(--font-mono);
+        font-size: 0.52rem;
+        letter-spacing: 0.1em;
+        color: rgba(235, 233, 228, 0.25);
+        border: 1px solid rgba(235, 233, 228, 0.07);
+        padding: 0.22rem 0.6rem;
+        border-radius: 100px;
+      }
+      .tl-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 1.2rem;
+        border-top: 1px solid rgba(235, 233, 228, 0.05);
+      }
+      .tl-year-text {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.14em;
+        color: rgba(235, 233, 228, 0.2);
+      }
+      .tl-open-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(201, 168, 76, 0.7);
+        background: transparent;
+        border: 1px solid rgba(201, 168, 76, 0.18);
+        padding: 0.48rem 1rem;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .tl-open-btn:hover {
+        background: #c9a84c;
+        border-color: #c9a84c;
+        color: #0d0d12;
+      }
+
+      /* Mobile timeline */
+      @media (max-width: 768px) {
+        .tl-track-wrap { display: none; }
+        .tl-entry {
+          display: flex;
+          flex-direction: column;
+          padding: 0 0 2rem;
+          position: relative;
+          border-left: 1px solid rgba(235, 233, 228, 0.07);
+          padding-left: 1.5rem;
+          margin-left: 0.5rem;
+        }
+        .tl-node-col { display: none; }
+        .tl-left-col,
+        .tl-right-col {
+          display: flex;
+          width: 100%;
+          padding: 0;
+          justify-content: flex-start;
+        }
+        .tl-card { max-width: 100%; }
+        .tl-year-marker {
+          justify-content: flex-start;
+          padding-left: 2rem;
+        }
+        .tl-entry::before {
+          content: "";
+          position: absolute;
+          left: -5px;
+          top: 2.5rem;
+          width: 9px;
+          height: 9px;
+          border-radius: 50%;
+          background: #c9a84c;
+          border: 2px solid #0d0d12;
+        }
+      }
+
+      /* ══════════════════════════════════════════════════
+         MODAL
+      ══════════════════════════════════════════════════ */
+
+      #proj-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        pointer-events: none;
+        display: flex;
+        align-items: stretch;
+        justify-content: flex-end;
+      }
+      #proj-modal.open {
+        pointer-events: auto;
+      }
+      #modal-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(5, 5, 8, 0);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        transition: background 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          backdrop-filter 0.55s ease;
+      }
+      #proj-modal.open #modal-overlay {
+        background: rgba(5, 5, 8, 0.78);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+      #modal-panel {
+        position: relative;
+        z-index: 2;
+        background: #0f0f15;
+        width: min(660px, 100vw);
+        height: 100dvh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        transform: translateX(101%);
+        transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+        border-left: 1px solid rgba(235, 233, 228, 0.06);
+        display: flex;
+        flex-direction: column;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(201, 168, 76, 0.2) transparent;
+      }
+      #proj-modal.open #modal-panel {
+        transform: translateX(0);
+      }
+      #modal-close {
+        position: sticky;
+        top: 1.25rem;
+        margin-left: auto;
+        margin-right: 1.25rem;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 50%;
+        border: 1px solid rgba(235, 233, 228, 0.1);
+        background: rgba(235, 233, 228, 0.04);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(235, 233, 228, 0.55);
+        z-index: 10;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+      #modal-close:hover {
+        background: rgba(235, 233, 228, 0.1);
+        color: var(--color-paper);
+        border-color: rgba(235, 233, 228, 0.22);
+      }
+      .modal-hero-img {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        display: block;
+        flex-shrink: 0;
+        margin-top: -2.4rem;
+      }
+      .modal-content {
+        padding: 2.5rem clamp(1.75rem, 4vw, 3rem) 3.5rem;
+        flex: 1;
+      }
+      .modal-cat-row {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+      }
+      .modal-cat-badge {
+        font-family: var(--font-mono);
+        font-size: 0.54rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #c9a84c;
+        border: 1px solid rgba(201, 168, 76, 0.22);
+        padding: 0.3rem 0.85rem;
+        border-radius: 100px;
+      }
+      .modal-proj-num {
+        font-family: var(--font-mono);
+        font-size: 0.54rem;
+        letter-spacing: 0.15em;
+        color: rgba(235, 233, 228, 0.18);
+      }
+      .modal-proj-title {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(2.4rem, 5vw, 4.2rem);
+        line-height: 0.9;
+        color: var(--color-paper);
+        margin-bottom: 1.4rem;
+        letter-spacing: -0.01em;
+      }
+      .modal-proj-desc {
+        font-size: clamp(0.8rem, 0.95vw, 0.875rem);
+        color: rgba(235, 233, 228, 0.48);
+        line-height: 1.82;
+        margin-bottom: 2.5rem;
+        max-width: 50ch;
+      }
+      .modal-meta-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin-bottom: 2.25rem;
+        padding: 1.6rem;
+        background: rgba(235, 233, 228, 0.025);
+        border: 1px solid rgba(235, 233, 228, 0.055);
+        border-radius: 1rem;
+      }
+      .modal-meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.38rem;
+      }
+      .modal-meta-label {
+        font-family: var(--font-mono);
+        font-size: 0.52rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(235, 233, 228, 0.22);
+      }
+      .modal-meta-value {
+        font-family: var(--font-sans);
+        font-size: 0.83rem;
+        font-weight: 500;
+        color: rgba(235, 233, 228, 0.68);
+      }
+      .modal-stack-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.38rem;
+        margin-bottom: 2.75rem;
+      }
+      .modal-stack-tag {
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        letter-spacing: 0.1em;
+        color: rgba(235, 233, 228, 0.42);
+        border: 1px solid rgba(235, 233, 228, 0.08);
+        padding: 0.3rem 0.8rem;
+        border-radius: 100px;
+        background: rgba(235, 233, 228, 0.025);
+      }
+      .modal-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        background: #c9a84c;
+        color: #0d0d12;
+        padding: 0.95rem 2rem;
+        border-radius: 100px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .modal-cta:hover {
+        background: #d4b660;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(201, 168, 76, 0.32);
+      }
+      .modal-cta-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        border: 1px solid rgba(235, 233, 228, 0.1);
+        color: rgba(235, 233, 228, 0.45);
+        padding: 0.95rem 2rem;
+        border-radius: 100px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      .modal-cta-secondary:hover {
+        border-color: rgba(235, 233, 228, 0.25);
+        color: var(--color-paper);
+      }
     </style>
   </head>
 
@@ -931,400 +1507,272 @@
         </div>
       </section>
 
-      <!-- ── 02. FILTER BAR ────────────────────────────────────── -->
-      <div class="pf-filter-bar" id="pf-filters">
-        <button class="pf-filter-btn active" data-filter="all">Todos</button>
-        <button class="pf-filter-btn" data-filter="landing-page">
-          Landing Pages
-        </button>
-        <button class="pf-filter-btn" data-filter="website">Websites</button>
-        <button class="pf-filter-btn" data-filter="ecommerce">
-          E-Commerce
-        </button>
-        <button class="pf-filter-btn" data-filter="webapp">Web Apps</button>
+      <!-- ── 02. TIMELINE SECTION ─────────────────────────────── -->
+
+      <section id="tl-section">
+        <!-- Subtle grid bg -->
+        <div class="bp-grid-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+        <!-- Section header -->
+        <div id="tl-header">
+          <div class="flex items-center gap-5 mb-8">
+            <div class="crosshair-mark" style="color:rgba(235,233,228,0.2)"></div>
+            <span class="t-label-light">02 — PROJECTOS</span>
+          </div>
+          <h2>
+            <span class="block overflow-hidden">
+              <span id="tl-h2-1" class="block font-sans font-bold text-paper" style="font-size:clamp(2.8rem,6.5vw,7.5rem);line-height:0.92;letter-spacing:-0.03em;transform:translateY(110%);will-change:transform">Trabalho</span>
+            </span>
+            <span class="block overflow-hidden" style="padding-left:clamp(0.5rem,4%,4%)">
+              <span id="tl-h2-2" class="block font-serif italic text-paper" style="font-size:clamp(1.6rem,3.5vw,4.2rem);opacity:0.28;transform:translateY(110%);will-change:transform">em destaque.</span>
+            </span>
+          </h2>
+          <!-- Filters -->
+          <div class="tl-filters">
+            <button class="tl-filter-btn active" data-filter="all">Todos</button>
+            <button class="tl-filter-btn" data-filter="profissional">Profissional</button>
+            <button class="tl-filter-btn" data-filter="pessoal">Pessoal</button>
+            <button class="tl-filter-btn" data-filter="landing-page">Landing Pages</button>
+            <button class="tl-filter-btn" data-filter="webapp">Web Apps</button>
+          </div>
+        </div>
+
+        <!-- Timeline body -->
+        <div id="tl-body">
+          <!-- Track -->
+          <div class="tl-track-wrap">
+            <div class="tl-track-bg"></div>
+            <div id="tl-track-fill" class="tl-track-fill"></div>
+          </div>
+
+          <!-- ── 2025 ── -->
+          <div class="tl-year-marker"><span class="tl-year-badge">2025</span></div>
+
+          <!-- 01 · Arcadia (left) -->
+          <div class="tl-entry" data-cat="profissional landing-page">
+            <div class="tl-left-col">
+              <div class="tl-card" data-project="arcadia">
+                <span class="tl-ghost-num">01</span>
+                <div class="tl-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85&fit=crop" alt="Arcadia" loading="lazy">
+                  <div class="tl-img-overlay">
+                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                  </div>
+                </div>
+                <div class="tl-card-body">
+                  <span class="tl-cat-tag">Landing Page</span>
+                  <h3 class="tl-proj-title">Arcadia</h3>
+                  <p class="tl-proj-desc">Website imersivo para restaurante fine-dining no Porto. Animações cinematográficas, reservas online e experiência sensorial única.</p>
+                  <div class="tl-stack-row">
+                    <span class="tl-stack-tag">React</span><span class="tl-stack-tag">GSAP</span><span class="tl-stack-tag">Tailwind CSS</span><span class="tl-stack-tag">Framer Motion</span>
+                  </div>
+                  <div class="tl-card-footer">
+                    <span class="tl-year-text">2025</span>
+                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tl-node-col"><div class="tl-node"></div></div>
+            <div class="tl-right-col"></div>
+          </div>
+
+          <!-- 02 · Studio Norte (right) -->
+          <div class="tl-entry" data-cat="profissional website">
+            <div class="tl-left-col"></div>
+            <div class="tl-node-col"><div class="tl-node"></div></div>
+            <div class="tl-right-col">
+              <div class="tl-card" data-project="studio-norte">
+                <span class="tl-ghost-num">02</span>
+                <div class="tl-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=85&fit=crop" alt="Studio Norte" loading="lazy">
+                  <div class="tl-img-overlay">
+                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                  </div>
+                </div>
+                <div class="tl-card-body">
+                  <span class="tl-cat-tag">Website Institucional</span>
+                  <h3 class="tl-proj-title">Studio Norte</h3>
+                  <p class="tl-proj-desc">Presença digital para atelier de arquitectura contemporânea. Portfólio com galeria interactiva e gestão de conteúdo headless.</p>
+                  <div class="tl-stack-row">
+                    <span class="tl-stack-tag">Next.js</span><span class="tl-stack-tag">Sanity CMS</span><span class="tl-stack-tag">GSAP</span><span class="tl-stack-tag">TypeScript</span>
+                  </div>
+                  <div class="tl-card-footer">
+                    <span class="tl-year-text">2025</span>
+                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 03 · Forma Studio (left) -->
+          <div class="tl-entry" data-cat="profissional website">
+            <div class="tl-left-col">
+              <div class="tl-card" data-project="forma-studio">
+                <span class="tl-ghost-num">03</span>
+                <div class="tl-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=85&fit=crop" alt="Forma Studio" loading="lazy">
+                  <div class="tl-img-overlay">
+                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                  </div>
+                </div>
+                <div class="tl-card-body">
+                  <span class="tl-cat-tag">Website + Plataforma</span>
+                  <h3 class="tl-proj-title">Forma Studio</h3>
+                  <p class="tl-proj-desc">Website para estúdio de fitness premium. Sistema de agendamento integrado, área de membros e programa de treino personalizável.</p>
+                  <div class="tl-stack-row">
+                    <span class="tl-stack-tag">Next.js</span><span class="tl-stack-tag">Supabase</span><span class="tl-stack-tag">Tailwind CSS</span><span class="tl-stack-tag">Framer Motion</span>
+                  </div>
+                  <div class="tl-card-footer">
+                    <span class="tl-year-text">2025</span>
+                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tl-node-col"><div class="tl-node"></div></div>
+            <div class="tl-right-col"></div>
+          </div>
+
+          <!-- ── 2024 ── -->
+          <div class="tl-year-marker"><span class="tl-year-badge">2024</span></div>
+
+          <!-- 04 · Bloom (right) -->
+          <div class="tl-entry" data-cat="profissional ecommerce">
+            <div class="tl-left-col"></div>
+            <div class="tl-node-col"><div class="tl-node"></div></div>
+            <div class="tl-right-col">
+              <div class="tl-card" data-project="bloom">
+                <span class="tl-ghost-num">04</span>
+                <div class="tl-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1487530811015-780a88a7d0bc?w=900&q=85&fit=crop" alt="Bloom" loading="lazy">
+                  <div class="tl-img-overlay">
+                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                  </div>
+                </div>
+                <div class="tl-card-body">
+                  <span class="tl-cat-tag">E-Commerce</span>
+                  <h3 class="tl-proj-title">Bloom</h3>
+                  <p class="tl-proj-desc">Loja online de floricultura artesanal. Catálogo visual, carrinho de compras e checkout optimizado para conversão máxima.</p>
+                  <div class="tl-stack-row">
+                    <span class="tl-stack-tag">Next.js</span><span class="tl-stack-tag">Stripe</span><span class="tl-stack-tag">Sanity</span><span class="tl-stack-tag">Vercel</span>
+                  </div>
+                  <div class="tl-card-footer">
+                    <span class="tl-year-text">2024</span>
+                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 05 · Atlântico (left) -->
+          <div class="tl-entry" data-cat="profissional webapp">
+            <div class="tl-left-col">
+              <div class="tl-card" data-project="atlantico">
+                <span class="tl-ghost-num">05</span>
+                <div class="tl-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=85&fit=crop" alt="Atlântico" loading="lazy">
+                  <div class="tl-img-overlay">
+                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                  </div>
+                </div>
+                <div class="tl-card-body">
+                  <span class="tl-cat-tag">Web Application</span>
+                  <h3 class="tl-proj-title">Atlântico</h3>
+                  <p class="tl-proj-desc">Plataforma de gestão para empresa do sector marítimo. Dashboard analítico, relatórios exportáveis e gestão de frotas em tempo real.</p>
+                  <div class="tl-stack-row">
+                    <span class="tl-stack-tag">React</span><span class="tl-stack-tag">Node.js</span><span class="tl-stack-tag">PostgreSQL</span><span class="tl-stack-tag">Chart.js</span>
+                  </div>
+                  <div class="tl-card-footer">
+                    <span class="tl-year-text">2024</span>
+                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tl-node-col"><div class="tl-node"></div></div>
+            <div class="tl-right-col"></div>
+          </div>
+
+          <!-- 06 · Brisa Solar (right) -->
+          <div class="tl-entry" data-cat="profissional landing-page">
+            <div class="tl-left-col"></div>
+            <div class="tl-node-col"><div class="tl-node"></div></div>
+            <div class="tl-right-col">
+              <div class="tl-card" data-project="brisa-solar">
+                <span class="tl-ghost-num">06</span>
+                <div class="tl-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=85&fit=crop" alt="Brisa Solar" loading="lazy">
+                  <div class="tl-img-overlay">
+                    <span class="tl-img-view">Ver projecto <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                  </div>
+                </div>
+                <div class="tl-card-body">
+                  <span class="tl-cat-tag">Landing Page</span>
+                  <h3 class="tl-proj-title">Brisa Solar</h3>
+                  <p class="tl-proj-desc">Campanha digital para empresa de energia solar. Animações 3D interactivas, simulador de poupança e formulário de orçamento optimizado.</p>
+                  <div class="tl-stack-row">
+                    <span class="tl-stack-tag">Vite</span><span class="tl-stack-tag">GSAP</span><span class="tl-stack-tag">Three.js</span><span class="tl-stack-tag">Tailwind CSS</span>
+                  </div>
+                  <div class="tl-card-footer">
+                    <span class="tl-year-text">2024</span>
+                    <button class="tl-open-btn">Ver Detalhes <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /#tl-body -->
+      </section>
+
+      <!-- ── PROJECT MODAL ─────────────────────────────────────── -->
+      <div id="proj-modal" role="dialog" aria-modal="true" aria-label="Detalhes do projecto">
+        <div id="modal-overlay"></div>
+        <div id="modal-panel">
+          <button id="modal-close" aria-label="Fechar modal">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+          <img id="modal-img" class="modal-hero-img" src="" alt="">
+          <div class="modal-content">
+            <div class="modal-cat-row">
+              <span id="modal-cat" class="modal-cat-badge"></span>
+              <span id="modal-num" class="modal-proj-num"></span>
+            </div>
+            <h2 id="modal-title" class="modal-proj-title"></h2>
+            <p id="modal-desc" class="modal-proj-desc"></p>
+            <div class="modal-meta-grid">
+              <div class="modal-meta-item">
+                <span class="modal-meta-label">Ano</span>
+                <span id="modal-year" class="modal-meta-value"></span>
+              </div>
+              <div class="modal-meta-item">
+                <span class="modal-meta-label">Tipo</span>
+                <span id="modal-type" class="modal-meta-value"></span>
+              </div>
+              <div class="modal-meta-item">
+                <span class="modal-meta-label">Cliente</span>
+                <span id="modal-client" class="modal-meta-value"></span>
+              </div>
+              <div class="modal-meta-item">
+                <span class="modal-meta-label">Duração</span>
+                <span id="modal-duration" class="modal-meta-value"></span>
+              </div>
+            </div>
+            <div id="modal-stack" class="modal-stack-row"></div>
+            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:0.75rem">
+              <a id="modal-cta-link" href="#" class="modal-cta">
+                <span>Ver ao Vivo</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <a href="/contactos/" class="modal-cta-secondary">Projecto Similar</a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- ── 03. PROJECTS ──────────────────────────────────────── -->
-      <div id="pf-list">
-        <!-- 01 · Arcadia ─────────────────────────────────────── -->
-        <article class="pf-project" data-cat="landing-page">
-          <div class="pf-inner">
-            <!-- Image -->
-            <div class="pf-img-col">
-              <img
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85&fit=crop"
-                alt="Arcadia — Restaurante fine-dining"
-                loading="lazy"
-              />
-              <div class="pf-img-overlay">
-                <a href="#" class="pf-view-link">
-                  <span>Ver Projecto</span>
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <!-- Info -->
-            <div class="pf-info-col">
-              <span class="pf-ghost-num" aria-hidden="true">01</span>
-              <span class="pf-cat">Landing Page</span>
-              <h2 class="pf-name">Arcadia</h2>
-              <p class="pf-desc">
-                Website de apresentação para restaurante fine-dining no Porto.
-                Animações imersivas, reservas online e experiência sensorial
-                digital.
-              </p>
-              <div class="pf-stack">
-                <span class="pf-stack-tag">React</span>
-                <span class="pf-stack-tag">GSAP</span>
-                <span class="pf-stack-tag">Tailwind CSS</span>
-                <span class="pf-stack-tag">Framer Motion</span>
-              </div>
-              <div class="pf-bottom">
-                <span class="pf-year">2025</span>
-                <a
-                  href="#"
-                  class="pf-arrow-btn"
-                  aria-label="Ver Projecto Arcadia"
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 02 · Studio Norte ────────────────────────────────── -->
-        <article class="pf-project" data-cat="website">
-          <div class="pf-inner">
-            <div class="pf-img-col">
-              <img
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85&fit=crop"
-                alt="Studio Norte — Atelier de arquitectura"
-                loading="lazy"
-              />
-              <div class="pf-img-overlay">
-                <a href="#" class="pf-view-link">
-                  <span>Ver Projecto</span>
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="pf-info-col">
-              <span class="pf-ghost-num" aria-hidden="true">02</span>
-              <span class="pf-cat">Website Institucional</span>
-              <h2 class="pf-name">Studio Norte</h2>
-              <p class="pf-desc">
-                Presença digital para atelier de arquitectura contemporânea.
-                Portfólio de projectos com galeria interactiva e gestão de
-                conteúdo.
-              </p>
-              <div class="pf-stack">
-                <span class="pf-stack-tag">Next.js</span>
-                <span class="pf-stack-tag">Sanity CMS</span>
-                <span class="pf-stack-tag">GSAP</span>
-                <span class="pf-stack-tag">TypeScript</span>
-              </div>
-              <div class="pf-bottom">
-                <span class="pf-year">2025</span>
-                <a
-                  href="#"
-                  class="pf-arrow-btn"
-                  aria-label="Ver Projecto Studio Norte"
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 03 · Bloom ───────────────────────────────────────── -->
-        <article class="pf-project" data-cat="ecommerce">
-          <div class="pf-inner">
-            <div class="pf-img-col">
-              <img
-                src="https://images.unsplash.com/photo-1487530811015-780a88a7d0bc?w=1200&q=85&fit=crop"
-                alt="Bloom — Loja online de floricultura"
-                loading="lazy"
-              />
-              <div class="pf-img-overlay">
-                <a href="#" class="pf-view-link">
-                  <span>Ver Projecto</span>
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="pf-info-col">
-              <span class="pf-ghost-num" aria-hidden="true">03</span>
-              <span class="pf-cat">E-Commerce</span>
-              <h2 class="pf-name">Bloom</h2>
-              <p class="pf-desc">
-                Loja online de floricultura artesanal. Catálogo visual, carrinho
-                de compras e checkout optimizado para conversão, com entrega
-                programada.
-              </p>
-              <div class="pf-stack">
-                <span class="pf-stack-tag">Next.js</span>
-                <span class="pf-stack-tag">Stripe</span>
-                <span class="pf-stack-tag">Sanity</span>
-                <span class="pf-stack-tag">Vercel</span>
-              </div>
-              <div class="pf-bottom">
-                <span class="pf-year">2024</span>
-                <a
-                  href="#"
-                  class="pf-arrow-btn"
-                  aria-label="Ver Projecto Bloom"
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 04 · Atlântico ───────────────────────────────────── -->
-        <article class="pf-project" data-cat="webapp">
-          <div class="pf-inner">
-            <div class="pf-img-col">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=85&fit=crop"
-                alt="Atlântico — Plataforma de gestão"
-                loading="lazy"
-              />
-              <div class="pf-img-overlay">
-                <a href="#" class="pf-view-link">
-                  <span>Ver Projecto</span>
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="pf-info-col">
-              <span class="pf-ghost-num" aria-hidden="true">04</span>
-              <span class="pf-cat">Web Application</span>
-              <h2 class="pf-name">Atlântico</h2>
-              <p class="pf-desc">
-                Plataforma de gestão para empresa do sector marítimo. Dashboard
-                analítico, relatórios exportáveis, gestão de frotas e equipas.
-              </p>
-              <div class="pf-stack">
-                <span class="pf-stack-tag">React</span>
-                <span class="pf-stack-tag">Node.js</span>
-                <span class="pf-stack-tag">PostgreSQL</span>
-                <span class="pf-stack-tag">Chart.js</span>
-              </div>
-              <div class="pf-bottom">
-                <span class="pf-year">2024</span>
-                <a
-                  href="#"
-                  class="pf-arrow-btn"
-                  aria-label="Ver Projecto Atlântico"
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 05 · Brisa Solar ─────────────────────────────────── -->
-        <article class="pf-project" data-cat="landing-page">
-          <div class="pf-inner">
-            <div class="pf-img-col">
-              <img
-                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=85&fit=crop"
-                alt="Brisa Solar — Campanha digital"
-                loading="lazy"
-              />
-              <div class="pf-img-overlay">
-                <a href="#" class="pf-view-link">
-                  <span>Ver Projecto</span>
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="pf-info-col">
-              <span class="pf-ghost-num" aria-hidden="true">05</span>
-              <span class="pf-cat">Landing Page</span>
-              <h2 class="pf-name">Brisa Solar</h2>
-              <p class="pf-desc">
-                Campanha digital para empresa de energia solar. Animações 3D
-                interactivas, simulador de poupança e formulário de orçamento
-                optimizado.
-              </p>
-              <div class="pf-stack">
-                <span class="pf-stack-tag">Vite</span>
-                <span class="pf-stack-tag">GSAP</span>
-                <span class="pf-stack-tag">Three.js</span>
-                <span class="pf-stack-tag">Tailwind CSS</span>
-              </div>
-              <div class="pf-bottom">
-                <span class="pf-year">2024</span>
-                <a
-                  href="#"
-                  class="pf-arrow-btn"
-                  aria-label="Ver Projecto Brisa Solar"
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 06 · Forma ───────────────────────────────────────── -->
-        <article class="pf-project" data-cat="website">
-          <div class="pf-inner">
-            <div class="pf-img-col">
-              <img
-                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=85&fit=crop"
-                alt="Forma Studio — Estúdio de fitness premium"
-                loading="lazy"
-              />
-              <div class="pf-img-overlay">
-                <a href="#" class="pf-view-link">
-                  <span>Ver Projecto</span>
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="pf-info-col">
-              <span class="pf-ghost-num" aria-hidden="true">06</span>
-              <span class="pf-cat">Website Institucional</span>
-              <h2 class="pf-name">Forma Studio</h2>
-              <p class="pf-desc">
-                Website para estúdio de fitness premium. Sistema de agendamento
-                integrado, área de membros e programa de treino personalizável.
-              </p>
-              <div class="pf-stack">
-                <span class="pf-stack-tag">Next.js</span>
-                <span class="pf-stack-tag">Supabase</span>
-                <span class="pf-stack-tag">Tailwind CSS</span>
-                <span class="pf-stack-tag">Framer Motion</span>
-              </div>
-              <div class="pf-bottom">
-                <span class="pf-year">2025</span>
-                <a
-                  href="#"
-                  class="pf-arrow-btn"
-                  aria-label="Ver Projecto Forma Studio"
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-      <!-- /#pf-list -->
 
       <!-- ── 04. CTA ───────────────────────────────────────────── -->
       <section
