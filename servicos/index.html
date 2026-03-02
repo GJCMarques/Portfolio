@@ -1187,8 +1187,11 @@
 
       <!-- Section Header: Editorial Style -->
       <div class="px-[clamp(1.5rem,5vw,6rem)] mb-[clamp(6rem,12vh,12rem)] relative z-10">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12 relative">
-          <div class="relative z-10">
+        <div
+          class="flex flex-col lg:flex-row lg:items-stretch justify-between gap-12 relative min-h-[clamp(16rem,30vw,38rem)]">
+
+          <!-- Left: title -->
+          <div class="relative z-10 flex flex-col justify-end">
             <span class="font-mono text-[0.65rem] tracking-[0.4em] uppercase text-silver mb-8 block reveal-fade">Atelier
               Monrion — Collection 01</span>
             <h2 class="font-serif italic text-ink leading-[0.8] m-0 reveal-up"
@@ -1197,31 +1200,84 @@
             </h2>
           </div>
 
-          <!-- Background Decorative Detail (Right Side) -->
-          <div
-            class="absolute -right-12 top-0 bottom-0 w-32 hidden lg:flex flex-col justify-between items-end pointer-events-none opacity-20">
-            <div class="text-right">
+          <!-- Right: Scattered decorative area — absolutely positioned fragments -->
+          <div class="hidden lg:block absolute inset-y-0 pointer-events-none" style="left: 45%; right: 0;">
+
+            <!-- SVG Geometric background shapes -->
+            <svg class="absolute inset-0 w-full h-full opacity-[0.06]" viewBox="0 0 600 400" fill="none"
+              preserveAspectRatio="xMidYMid meet">
+              <!-- Large thin circle -->
+              <circle cx="320" cy="200" r="160" stroke="#121212" stroke-width="0.6" />
+              <!-- Smaller concentric circle -->
+              <circle cx="320" cy="200" r="90" stroke="#121212" stroke-width="0.4" stroke-dasharray="3 6" />
+              <!-- Diamond rotated square -->
+              <rect x="260" y="140" width="120" height="120" stroke="#121212" stroke-width="0.5"
+                transform="rotate(45 320 200)" />
+              <!-- Horizontal rule -->
+              <line x1="60" y1="200" x2="200" y2="200" stroke="#121212" stroke-width="0.5" />
+              <!-- Tiny crosshair top-right -->
+              <line x1="500" y1="60" x2="540" y2="60" stroke="#121212" stroke-width="0.6" />
+              <line x1="520" y1="40" x2="520" y2="80" stroke="#121212" stroke-width="0.6" />
+              <!-- Angled line bottom-left -->
+              <line x1="80" y1="320" x2="180" y2="360" stroke="#121212" stroke-width="0.4" />
+              <!-- Arc bottom-right -->
+              <path d="M 480 280 Q 560 320 540 380" stroke="#121212" stroke-width="0.5" fill="none" />
+              <!-- Dot cluster -->
+              <circle cx="150" cy="80" r="1.5" fill="#121212" />
+              <circle cx="162" cy="80" r="1.5" fill="#121212" />
+              <circle cx="174" cy="80" r="1.5" fill="#121212" />
+            </svg>
+
+            <!-- Technical Spec label — top left of right area -->
+            <div class="absolute top-0 left-[5%] opacity-20">
               <span class="font-mono text-[0.5rem] tracking-[0.8em] uppercase block mb-1">Technical Spec</span>
-              <div class="h-[1px] w-24 bg-ink mb-4"></div>
-              <span class="font-mono text-[0.45rem] block opacity-60 overflow-hidden text-nowrap">Scale: 1:1 Precise
-                Architecture</span>
+              <div class="h-[1px] w-16 bg-ink"></div>
+              <span class="font-mono text-[0.42rem] block opacity-60 mt-1">Scale: 1:1 Precise Architecture</span>
             </div>
 
-            <div
-              class="relative w-24 h-24 border border-ink/[0.1] rounded-full flex items-center justify-center animate-spin-slow">
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="w-full h-[0.5px] bg-ink/[0.2]"></div>
-                <div class="w-full h-[0.5px] bg-ink/[0.2] rotate-90"></div>
+            <!-- Spinning circle — center of right area -->
+            <div class="absolute top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2 opacity-15">
+              <div
+                class="relative w-20 h-20 border border-ink/[0.3] rounded-full flex items-center justify-center animate-spin-slow">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-full h-[0.5px] bg-ink/[0.3]"></div>
+                  <div class="w-full h-[0.5px] bg-ink/[0.3] rotate-90"></div>
+                </div>
+                <span class="font-mono text-[7px] tracking-widest bg-paper px-1.5 z-10">ATELIER</span>
               </div>
-              <span class="font-mono text-[8px] tracking-widest bg-paper px-2 z-10">ATELIER</span>
             </div>
 
-            <div class="text-right rotate-90 origin-right translate-y-12 translate-x-4">
-              <span class="font-serif italic text-xl">L'excellence Digitale</span>
+            <!-- Measurement arm — mid right -->
+            <div class="absolute top-[30%] right-[20%] opacity-15">
+              <div class="flex flex-col items-end gap-1">
+                <span class="font-mono text-[0.42rem] tracking-widest uppercase">MON / 2026</span>
+                <div class="h-[1px] w-12 bg-ink"></div>
+                <div class="flex items-center gap-1">
+                  <div class="w-[1px] h-4 bg-ink"></div>
+                  <span class="font-mono text-[0.38rem] opacity-60">±0.001</span>
+                </div>
+              </div>
             </div>
+
+            <!-- L'excellence Digitale — bottom center of right area, away from text block -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-15 whitespace-nowrap">
+              <span class="font-serif italic" style="font-size: clamp(0.9rem, 1.3vw, 1.25rem)">L'excellence
+                Digitale</span>
+            </div>
+
+            <!-- Small crosshair bottom left of right area -->
+            <div class="absolute bottom-[15%] left-[8%] opacity-15">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="0" x2="10" y2="20" stroke="#121212" stroke-width="0.7" />
+                <line x1="0" y1="10" x2="20" y2="10" stroke="#121212" stroke-width="0.7" />
+                <circle cx="10" cy="10" r="2.5" stroke="#121212" stroke-width="0.6" />
+              </svg>
+            </div>
+
           </div>
 
-          <div class="lg:w-[320px] pb-4 reveal-fade z-10">
+          <!-- Text block bottom right -->
+          <div class="lg:w-[260px] pb-4 reveal-fade z-10 self-end flex-shrink-0">
             <div class="h-[1px] w-12 bg-ink mb-6"></div>
             <p class="font-sans text-ink/70 text-sm leading-relaxed uppercase tracking-wider">
               A alta-costura aplicada ao <br /> código e à estética digital. <br />
@@ -1230,6 +1286,7 @@
           </div>
         </div>
       </div>
+
 
       <!-- LUXURY EDITORIAL BLOCKS -->
       <div class="space-y-[clamp(10rem,20vh,25rem)] px-[clamp(1.5rem,5vw,6rem)] relative z-10">
