@@ -660,7 +660,7 @@
       /* Arrow */
       .price-acc-btn .feat-arrow {
         flex-shrink: 0;
-        opacity: 0.65;
+        opacity: 0.85; /* Increased visibility */
         margin-left: auto;
         margin-top: 0.125rem;
         transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.25s ease;
@@ -670,7 +670,7 @@
         opacity: 1;
       }
       .price-acc-btn:hover .feat-arrow {
-        opacity: 0.9;
+        opacity: 1;
       }
       
       /* Pricing Accordion */
@@ -1211,11 +1211,10 @@
     </section>
 
 
-    <!-- ── 07. DIFERENCIAIS ──────────────────────────────────── -->
-
-
-
     <section id="svc-diff" style="padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem)">
+      <div class="flex items-end justify-between mb-8">
+        <span class="t-label">03 — DIFERENCIAIS</span>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-0" style="border: 1px solid rgba(18, 18, 18, 0.07)">
         <div class="diff-card reveal-up" style="border-right: 1px solid rgba(18, 18, 18, 0.07)">
           <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
@@ -1269,7 +1268,7 @@
     </section>
 
 
-    <!-- ── 05. PRICING ───────────────────────────────────────── -->
+    <!-- ── 04. PRICING ───────────────────────────────────────── -->
     <section id="svc-pricing" style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem)">
       <div class="flex items-end justify-between mb-2">
         <span class="t-label">04 — INVESTIMENTO</span>
@@ -1289,7 +1288,7 @@
         <!-- Arranque -->
         <div
           class="price-card bg-paper border border-ink/15 p-8 md:p-10 flex flex-col hover:-translate-y-2 transition-all duration-500 relative group rounded-none"
-          id="pc-arranque" style="opacity: 0;">
+          id="pc-arranque">
 
           <!-- Architectural Lines -->
           <div
@@ -1406,7 +1405,7 @@
         <!-- Crescimento (Middle, featured) -->
         <div
           class="price-card !bg-ink border border-ink p-8 md:p-10 flex flex-col hover:-translate-y-4 transition-all duration-500 relative group rounded-none shadow-[0_30px_60px_rgba(18,18,18,0.4)] xl:-mt-8 xl:mb-2 z-20"
-          id="pc-crescimento" style="opacity: 0;">
+          id="pc-crescimento">
 
           <div
             class="absolute inset-0 bg-gradient-to-br from-paper/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
@@ -1534,7 +1533,7 @@
         <!-- Empresa -->
         <div
           class="price-card bg-paper border border-ink/15 p-8 md:p-10 flex flex-col hover:-translate-y-2 transition-all duration-500 relative group rounded-none"
-          id="pc-empresa" style="opacity: 0;">
+          id="pc-empresa">
 
           <!-- Architectural Lines -->
           <div
@@ -2059,7 +2058,7 @@
       <div class="absolute flex items-center gap-2.5 pointer-events-none"
         style="top: clamp(3rem, 6vh, 5rem); left: clamp(1.5rem, 5vw, 6rem)">
         <div class="crosshair-mark" style="color: rgba(18, 18, 18, 0.3)"></div>
-        <span class="t-label">08 — PRÓXIMO PASSO</span>
+        <span class="t-label">07 — PRÓXIMO PASSO</span>
       </div>
 
       <div class="relative z-10 text-center">
