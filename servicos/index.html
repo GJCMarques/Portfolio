@@ -1769,17 +1769,27 @@
 
     <!-- ── 04. PRICING ───────────────────────────────────────── -->
 
-    <section id="svc-pricing" style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem)">
-      <div class="flex items-end justify-between mb-2">
+    <section id="svc-pricing" class="relative overflow-hidden"
+      style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem)">
+
+      <!-- Ghost background text -->
+      <span
+        class="absolute -right-4 bottom-0 font-serif italic text-ink/[0.025] leading-none pointer-events-none select-none hidden lg:block"
+        style="font-size: clamp(8rem, 16vw, 20rem); writing-mode: vertical-rl">Investimento</span>
+
+      <!-- Section label -->
+      <div class="flex items-center gap-6 mb-16">
         <span class="t-label">04 — INVESTIMENTO</span>
+        <div class="flex-1 h-[1px] bg-ink/[0.06]"></div>
+        <span class="font-mono text-[0.5rem] tracking-[0.6em] uppercase text-ink/30 hidden lg:block">Sem
+          Surpresas</span>
       </div>
-      <div class="flex items-end justify-between mb-14 gap-8">
+      <div class="mb-14">
         <h2 class="font-serif italic text-ink" style="font-size: clamp(2rem, 4.5vw, 4.5rem); line-height: 1.1">
           Preços transparentes
         </h2>
-        <p class="hidden md:block font-mono text-silver text-right leading-relaxed"
-          style="font-size: 0.72rem; max-width: 30ch">
-          Sem surpresas.<br />Sem letras pequenas.
+        <p class="font-sans text-ink/50 leading-relaxed mt-4" style="font-size: 0.82rem; max-width: 40ch">
+          Sem surpresas. Sem letras pequenas.
         </p>
       </div>
 
@@ -1805,14 +1815,21 @@
           </div>
 
           <div class="w-full relative z-10 flex-grow-0">
-            <span class="font-mono text-[0.6rem] uppercase tracking-widest text-ink/40 block mb-3">Essencial</span>
-            <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-8">Arranque</h3>
-            <div class="font-mono text-[0.65rem] text-ink/60 mb-2 uppercase tracking-wider">Custo Inicial</div>
-            <div class="font-sans font-light text-ink text-5xl mb-4 tracking-tight">€800</div>
-            <div
-              class="font-mono text-[0.65rem] text-ink/70 py-2 border-y border-ink/10 block mb-6 uppercase tracking-widest text-center">
-              &sim; 3 a 4 Semanas
+            <!-- Ghost number -->
+            <span class="absolute -right-2 -top-2 font-serif italic text-ink/[0.05] leading-none select-none"
+              style="font-size: clamp(4rem,7vw,7rem)">01</span>
+            <span class="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-ink/40 block mb-4">Essencial</span>
+            <div class="flex items-center gap-3 mb-1">
+              <span class="w-5 h-[1px] bg-ink/30"></span>
+              <span class="font-mono text-[0.52rem] tracking-[0.3em] uppercase text-ink/30">Custo Inicial</span>
             </div>
+            <h3 class="font-serif italic text-ink mb-2" style="font-size: clamp(2rem, 3vw, 3rem); line-height: 1">
+              Arranque</h3>
+            <div class="font-sans font-light text-ink mb-4 tracking-tight"
+              style="font-size: clamp(2.5rem, 4vw, 3.5rem)">€800</div>
+            <div
+              class="font-mono text-[0.6rem] text-ink/50 py-2 border-y border-ink/[0.08] block mb-6 uppercase tracking-widest text-center">
+              &#8764; 3 a 4 Semanas</div>
           </div>
           <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-10">
             <div class="space-y-4 mb-8">
@@ -1948,14 +1965,21 @@
           </div>
 
           <div class="w-full relative z-20 flex-grow-0">
-            <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/40 block mb-3">Profissional</span>
-            <h3 class="font-sans font-bold text-2xl md:text-3xl text-paper mb-8">Crescimento</h3>
-            <div class="font-mono text-[0.65rem] text-paper/60 mb-2 uppercase tracking-wider">Custo Inicial</div>
-            <div class="font-sans font-light text-paper text-5xl mb-4 tracking-tight">€1.800</div>
-            <div
-              class="font-mono text-[0.65rem] text-paper/80 py-2 border-y border-paper/10 block mb-6 uppercase tracking-widest text-center mix-blend-screen">
-              &sim; 6 a 8 Semanas
+            <span class="absolute -right-2 -top-2 font-serif italic text-paper/[0.08] leading-none select-none"
+              style="font-size: clamp(4rem,7vw,7rem)">02</span>
+            <span
+              class="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-paper/50 block mb-4">Profissional</span>
+            <div class="flex items-center gap-3 mb-1">
+              <span class="w-5 h-[1px] bg-paper/40"></span>
+              <span class="font-mono text-[0.52rem] tracking-[0.3em] uppercase text-paper/40">Custo Inicial</span>
             </div>
+            <h3 class="font-serif italic text-paper mb-2" style="font-size: clamp(2rem, 3vw, 3rem); line-height: 1">
+              Crescimento</h3>
+            <div class="font-sans font-light text-paper mb-4 tracking-tight"
+              style="font-size: clamp(2.5rem, 4vw, 3.5rem)">€1.800</div>
+            <div
+              class="font-mono text-[0.6rem] text-paper/50 py-2 border-y border-paper/[0.15] block mb-6 uppercase tracking-widest text-center mix-blend-screen">
+              &#8764; 6 a 8 Semanas</div>
           </div>
           <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-20">
             <div class="space-y-4 mb-8">
@@ -2089,14 +2113,21 @@
           </div>
 
           <div class="w-full relative z-10 flex-grow-0">
-            <span class="font-mono text-[0.6rem] uppercase tracking-widest text-ink/40 block mb-3">Custom</span>
-            <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-8">Empresa</h3>
-            <div class="font-mono text-[0.65rem] text-ink/60 mb-2 uppercase tracking-wider">Início</div>
-            <div class="font-sans font-light text-ink text-4xl mb-4 tracking-tight">Orçamento</div>
-            <div
-              class="font-mono text-[0.65rem] text-ink/70 py-2 border-y border-ink/10 block mb-6 uppercase tracking-widest text-center">
-              &sim; Tempo Dinâmico
+            <!-- Ghost number -->
+            <span class="absolute -right-2 -top-2 font-serif italic text-ink/[0.05] leading-none select-none"
+              style="font-size: clamp(4rem,7vw,7rem)">03</span>
+            <span class="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-ink/40 block mb-4">Custom</span>
+            <div class="flex items-center gap-3 mb-1">
+              <span class="w-5 h-[1px] bg-ink/30"></span>
+              <span class="font-mono text-[0.52rem] tracking-[0.3em] uppercase text-ink/30">Por Proposta</span>
             </div>
+            <h3 class="font-serif italic text-ink mb-2" style="font-size: clamp(2rem, 3vw, 3rem); line-height: 1">
+              Empresa</h3>
+            <div class="font-sans font-light text-ink mb-4 tracking-tight" style="font-size: clamp(2rem, 3vw, 3rem)">
+              Orçamento</div>
+            <div
+              class="font-mono text-[0.6rem] text-ink/50 py-2 border-y border-ink/[0.08] block mb-6 uppercase tracking-widest text-center">
+              &#8764; Tempo Din&#226;mico</div>
           </div>
           <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-10">
             <div class="space-y-4 mb-8">
@@ -2266,7 +2297,10 @@
 
         <!-- Left: Context & Tech List Accordions -->
         <div class="w-full lg:w-5/12">
-          <span class="t-label block mb-3">05 — TECNOLOGIAS</span>
+          <div class="flex items-center gap-6 mb-8">
+            <span class="t-label block">05 — TECNOLOGIAS</span>
+            <div class="flex-1 h-[1px] bg-ink/[0.06]"></div>
+          </div>
           <h2 class="font-serif italic text-ink mb-6" style="font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.1">
             Ferramentas certas
           </h2>
@@ -2279,7 +2313,7 @@
             <!-- NextJS / React -->
             <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
               <summary
-                class="flex items-center justify-between py-5 font-sans font-bold text-lg cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
                 <div class="flex items-center gap-4">
                   <span class="font-mono text-xs opacity-50 block w-6">01</span>
                   <span>React & Next.js</span>
@@ -2300,7 +2334,7 @@
             <!-- GSAP -->
             <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
               <summary
-                class="flex items-center justify-between py-5 font-sans font-bold text-lg cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
                 <div class="flex items-center gap-4">
                   <span class="font-mono text-xs opacity-50 block w-6">02</span>
                   <span>GSAP Animations</span>
@@ -2321,7 +2355,7 @@
             <!-- Tailwind & CSS -->
             <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
               <summary
-                class="flex items-center justify-between py-5 font-sans font-bold text-lg cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
                 <div class="flex items-center gap-4">
                   <span class="font-mono text-xs opacity-50 block w-6">03</span>
                   <span>Tailwind & CSS</span>
@@ -2342,7 +2376,7 @@
             <!-- Vercel & Cloud -->
             <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
               <summary
-                class="flex items-center justify-between py-5 font-sans font-bold text-lg cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
                 <div class="flex items-center gap-4">
                   <span class="font-mono text-xs opacity-50 block w-6">04</span>
                   <span>Vercel / AWS</span>
@@ -2363,7 +2397,7 @@
             <!-- Stripe / APIs -->
             <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
               <summary
-                class="flex items-center justify-between py-5 font-sans font-bold text-lg cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
                 <div class="flex items-center gap-4">
                   <span class="font-mono text-xs opacity-50 block w-6">05</span>
                   <span>Integrações (Stripe, APIs)</span>
@@ -2384,7 +2418,7 @@
             <!-- Analytics & SEO -->
             <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
               <summary
-                class="flex items-center justify-between py-5 font-sans font-bold text-lg cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
                 <div class="flex items-center gap-4">
                   <span class="font-mono text-xs opacity-50 block w-6">06</span>
                   <span>Analytics Avançado & SEO</span>
@@ -2519,7 +2553,10 @@
         <!-- Left: Title and Desc -->
         <div class="lg:w-1/3">
           <div class="sticky top-32">
-            <span class="t-label block mb-3">06 — DÚVIDAS</span>
+            <div class="flex items-center gap-6 mb-6">
+              <span class="t-label block">06 — DÚVIDAS</span>
+              <div class="flex-1 h-[1px] bg-ink/[0.06]"></div>
+            </div>
             <h2 class="font-serif italic text-ink mb-6" style="font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.1">
               Perguntas Frequentes
             </h2>
@@ -2589,7 +2626,7 @@
         <!-- Right: Accordions -->
         <div class="lg:w-2/3 border-t border-ink/10">
           <details data-group="faq" class="faq-item group">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
               Quanto tempo demora a criar o website?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -2604,7 +2641,7 @@
           </details>
 
           <details data-group="faq" class="faq-item group">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
               Eu serei o dono do meu código ou fico dependente de vocês?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -2618,7 +2655,7 @@
           </details>
 
           <details data-group="faq" class="faq-item group">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
               Poderei actualizar o conteúdo (textos, imagens) do meu site de forma autónoma?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -2633,7 +2670,7 @@
           </details>
 
           <details data-group="faq" class="faq-item group">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
               Do que precisam para iniciar o meu projecto?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -2648,7 +2685,7 @@
           </details>
 
           <details class="faq-item group" data-group="faq">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
               Gostaria de ter efeitos e movimentos avançados (GSAP, 3D). É possível?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -2663,7 +2700,7 @@
           </details>
 
           <details class="faq-item group" data-group="faq">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
               Posso efectuar integrações ou melhorar o site mais tarde?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
@@ -2678,7 +2715,7 @@
           </details>
 
           <details class="faq-item group" data-group="faq">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
               Qual é a diferença funcional frente a templates de mercado (WordPress, Elementor, construtores de arrastar
               e largar)?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2695,7 +2732,7 @@
           </details>
 
           <details class="faq-item group" data-group="faq">
-            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
               Como garantem que a arquitetura suporta tráfego elevado?
               <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.5">
