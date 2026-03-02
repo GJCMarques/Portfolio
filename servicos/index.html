@@ -989,29 +989,33 @@
   ═══════════════════════════════════════════════════ -->
   <main class="relative z-10 overflow-hidden">
     <!-- ── 01. HERO ─────────────────────────────────────────── -->
-    <section id="svc-hero" class="relative min-h-screen flex flex-col justify-end bg-paper bp-grid overflow-hidden"
+    <section id="svc-hero" class="relative min-h-screen flex flex-col justify-end bg-paper overflow-hidden"
       style="
           padding: clamp(7rem, 12vh, 10rem) clamp(1.5rem, 5vw, 6rem)
             clamp(3.5rem, 6vh, 5.5rem);
         ">
+      <!-- Animated canvas background -->
+      <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
       <!-- Ghost text -->
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
         <span class="hero-ghost" style="font-size: clamp(20vw, 28vw, 38vw)">Serviços</span>
       </div>
 
       <!-- Top-left technical ref -->
-      <div class="absolute flex items-center gap-2.5 pointer-events-none" style="
+      <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none" style="
             top: clamp(5.5rem, 9.5vh, 8.5rem);
             left: clamp(1.5rem, 5vw, 6rem);
+            opacity: 0;
           ">
         <div class="crosshair-mark text-ink"></div>
         <span class="t-label">REF: MON-SRV-001 / 2026</span>
       </div>
 
       <!-- Top-right coordinates -->
-      <div class="absolute flex items-center gap-2.5 pointer-events-none justify-end" style="
+      <div id="hero-ref-tr" class="absolute flex items-center gap-2.5 pointer-events-none justify-end" style="
             top: clamp(5.5rem, 9.5vh, 8.5rem);
             right: clamp(1.5rem, 5vw, 6rem);
+            opacity: 0;
           ">
         <span class="t-label">41.15° N · 8.61° W · Porto</span>
         <div class="crosshair-mark text-ink"></div>
@@ -1327,7 +1331,7 @@
             class="absolute right-0 bottom-0 w-3 h-3 border-b border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
           </div>
 
-          <div class="w-full border-b border-ink/10 relative z-10 flex-grow-0">
+          <div class="w-full relative z-10 flex-grow-0">
             <span class="font-mono text-[0.6rem] uppercase tracking-widest text-ink/40 block mb-3">Essencial</span>
             <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-8">Arranque</h3>
             <div class="font-mono text-[0.65rem] text-ink/60 mb-2 uppercase tracking-wider">Custo Inicial</div>
@@ -1415,6 +1419,23 @@
                   serviços detalhados, FAQ e contacto.
                 </div>
               </details>
+              <details class="group/acc" data-acc-group="acc-arranque">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Alojamento, domínio e certificado SSL incluídos</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Tratamos da configuração técnica completa: alojamento, registos DNS e certificado HTTPS — o seu site entra online no primeiro dia, sem qualquer custo oculto adicional.
+                </div>
+              </details>
             </div>
             <a href="/contactos/"
               class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono border border-ink/20 px-6 py-4 text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:border-ink hover:text-paper rounded-none mt-auto">
@@ -1451,7 +1472,7 @@
             class="absolute right-0 bottom-0 w-3 h-3 border-b border-r border-paper/40 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1 z-10">
           </div>
 
-          <div class="w-full border-b border-paper/10 relative z-20 flex-grow-0">
+          <div class="w-full relative z-20 flex-grow-0">
             <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/40 block mb-3">Profissional</span>
             <h3 class="font-sans font-bold text-2xl md:text-3xl text-paper mb-8">Crescimento</h3>
             <div class="font-mono text-[0.65rem] text-paper/60 mb-2 uppercase tracking-wider">Custo Inicial</div>
@@ -1543,6 +1564,26 @@
                   página única.
                 </div>
               </details>
+              <details class="group/acc" data-acc-group="acc-crescimento">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-paper mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-paper group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-paper/80 leading-relaxed transition-colors group-hover/acc:text-paper">Suporte
+                    técnico pós-lançamento de 30 dias</span>
+                  <svg class="feat-arrow w-3 h-3 text-paper/50 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-paper/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Período de garantia após entrega em que corrigimos quaisquer anomalias identificadas e realizamos
+                  ajustes de pormenor sem custo adicional.
+                </div>
+              </details>
             </div>
             <a href="/contactos/"
               class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono bg-paper text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] px-6 py-4 rounded-none mt-auto">
@@ -1572,7 +1613,7 @@
             class="absolute right-0 bottom-0 w-3 h-3 border-b border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
           </div>
 
-          <div class="w-full border-b border-ink/10 relative z-10 flex-grow-0">
+          <div class="w-full relative z-10 flex-grow-0">
             <span class="font-mono text-[0.6rem] uppercase tracking-widest text-ink/40 block mb-3">Custom</span>
             <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-8">Empresa</h3>
             <div class="font-mono text-[0.65rem] text-ink/60 mb-2 uppercase tracking-wider">Início</div>
@@ -1638,8 +1679,7 @@
                 </summary>
                 <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
                   Infraestrutura montada para absorver tráfego exótico, replicando os assets na orla global para
-                  garantir
-                  zero falhas em picos Black Friday.
+                  garantir zero falhas em picos Black Friday.
                 </div>
               </details>
               <details class="group/acc" data-acc-group="acc-empresa">
@@ -1659,6 +1699,25 @@
                 <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
                   Qualquer rutura provocada por sistemas integrados da terceiros é mitigada instantaneamente no próprio
                   dia através de acesso direto aos programadores core.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-empresa">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Auditoria
+                    de performance e segurança trimestral</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Relatórios detalhados de velocidade, SEO técnico e vulnerabilidades — a plataforma mantém-se sempre
+                  no pico da performance e protegida contra ameaças emergentes.
                 </div>
               </details>
             </div>
@@ -1690,8 +1749,8 @@
     </section>
 
     <!-- ── 05. TECNOLOGIAS ───────────────────────────────────── -->
-    <section id="svc-tech" class="bg-paper text-ink relative"
-      style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem)">
+    <section id="svc-tech" class="text-ink relative"
+      style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem); background-color: #e4e2dc; background-image: repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(18,18,18,0.06) 16px, rgba(18,18,18,0.06) 17px);">
       <div class="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-20 max-w-7xl mx-auto">
 
         <!-- Left: Context & Tech List Accordions -->
@@ -1860,7 +1919,7 @@
     </section>
 
     <!-- ── 06. PERGUNTAS FREQUENTES ──────────────────────────── -->
-    <section id="svc-faq" style="padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem)">
+    <section id="svc-faq" style="padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem); background-color: #e4e2dc; background-image: repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(18,18,18,0.06) 16px, rgba(18,18,18,0.06) 17px);">
       <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-24">
 
         <!-- Left: Title and Desc -->
@@ -2362,20 +2421,105 @@
           });
         }
 
+        // ── Hero Canvas — Website Architecture Network ─────────
+        const heroCanvas = document.getElementById('hero-canvas');
+        if (heroCanvas && !heroCanvas._hInit) {
+          heroCanvas._hInit = true;
+          const hCtx = heroCanvas.getContext('2d');
+          let hW = 0, hH = 0, hDpr = 1;
+          function resizeHeroC() {
+            hDpr = window.devicePixelRatio || 1;
+            hW = heroCanvas.parentElement.offsetWidth;
+            hH = heroCanvas.parentElement.offsetHeight;
+            heroCanvas.width  = Math.round(hW * hDpr);
+            heroCanvas.height = Math.round(hH * hDpr);
+            hCtx.resetTransform();
+            hCtx.scale(hDpr, hDpr);
+          }
+          resizeHeroC();
+          window.addEventListener('resize', resizeHeroC, { passive: true });
+
+          // Sitemap nodes — each represents a page/component in the architecture
+          const rawNodes = [
+            [0.10,0.12],[0.30,0.08],[0.52,0.06],[0.74,0.10],[0.92,0.18],
+            [0.05,0.38],[0.24,0.32],[0.44,0.28],[0.63,0.35],[0.82,0.30],[0.97,0.42],
+            [0.12,0.60],[0.34,0.55],[0.54,0.62],[0.74,0.57],[0.94,0.65],
+            [0.07,0.82],[0.28,0.78],[0.50,0.85],[0.70,0.80],[0.90,0.88],
+          ];
+          const nodes = rawNodes.map((p, i) => ({
+            ox: p[0], oy: p[1],
+            sX: 0.014 + (i % 4) * 0.006,
+            sY: 0.010 + (i % 5) * 0.005,
+            sp: 0.0010 + (i % 8) * 0.0003,
+            ph: i * 0.47,
+          }));
+          const MAX_D = 0.26;
+
+          let hT = 0;
+          (function drawHeroC() {
+            requestAnimationFrame(drawHeroC);
+            if (!hW || !hH) return;
+            hCtx.clearRect(0, 0, hW, hH);
+            hT++;
+
+            const pos = nodes.map(n => {
+              const a = hT * n.sp + n.ph;
+              return {
+                x: hW * n.ox + Math.cos(a) * hW * n.sX,
+                y: hH * n.oy + Math.sin(a * 0.73) * hH * n.sY
+              };
+            });
+
+            // Connection lines — fade with distance
+            hCtx.lineWidth = 0.7;
+            for (let i = 0; i < pos.length; i++) {
+              for (let j = i + 1; j < pos.length; j++) {
+                const dx = (pos[i].x - pos[j].x) / hW;
+                const dy = (pos[i].y - pos[j].y) / hH;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAX_D) {
+                  hCtx.beginPath();
+                  hCtx.moveTo(pos[i].x, pos[i].y);
+                  hCtx.lineTo(pos[j].x, pos[j].y);
+                  hCtx.strokeStyle = `rgba(18,18,18,${(1 - dist / MAX_D) * 0.11})`;
+                  hCtx.stroke();
+                }
+              }
+            }
+
+            // Node rings + core dots
+            pos.forEach(p => {
+              hCtx.beginPath();
+              hCtx.arc(p.x, p.y, 5.5, 0, Math.PI * 2);
+              hCtx.strokeStyle = 'rgba(18,18,18,0.10)';
+              hCtx.lineWidth = 0.6;
+              hCtx.stroke();
+              hCtx.beginPath();
+              hCtx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+              hCtx.fillStyle = 'rgba(18,18,18,0.20)';
+              hCtx.fill();
+            });
+          })();
+        }
+
         // ── Hero entrance ──────────────────────────────────────
-        // Lines: CSS sets transform: scaleX(0), so .to(scaleX:1) works
         const heroTL = gsap.timeline({ defaults: { ease: "power4.out" } });
+        // Horizontal rules draw out
         heroTL.to(["#hero-line-l", "#hero-line-r"], { scaleX: 1, duration: 1.5, stagger: 0 }, 0);
-        // Words: inline style transform: translateY(110%), animate to 0%
+        // Headline words rise up
         heroTL.to(["#hero-w1", "#hero-w2"], { y: "0%", duration: 1.6, stagger: 0.15 }, 0.2);
-        // Description: inline opacity: 0, animate to 1
-        heroTL.to("#hero-desc", { opacity: 1, duration: 1.2 }, 0.8);
-        // Stats: explicit fromTo to set initial state
+        // Description fades in
+        heroTL.to("#hero-desc", { opacity: 1, duration: 1.2 }, 0.75);
+        // Stats stagger up
         heroTL.fromTo(["#stat-1", "#stat-2", "#stat-3"],
           { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.15 }, 0.9);
-        heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.5);
+        // Technical ref labels materialise
+        heroTL.to(["#hero-ref-tl", "#hero-ref-tr"],
+          { opacity: 1, y: 0, duration: 1.0, stagger: 0.12, ease: "power3.out" }, 1.05);
+        // Scroll cue last
+        heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.55);
 
-        // Ghost text drifts in
+        // Ghost text drifts in on load
         gsap.from(".hero-ghost", { opacity: 0, y: 60, scale: 0.92, duration: 2.5, ease: "power3.out" });
 
         // ── Section headings scroll entrance ───────────────────
