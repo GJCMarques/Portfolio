@@ -1136,177 +1136,253 @@
 
 
     <!-- ── 03. DIGITAL ATELIER: O QUE CRIAMOS ─────────────────── -->
-    <section id="svc-list" class="relative overflow-hidden" style="padding: clamp(3rem, 6vh, 6rem) 0;">
-      <!-- Section Header -->
-      <div class="px-[clamp(1.5rem,5vw,6rem)] mb-[clamp(2.5rem,5vh,4rem)]">
-        <div class="flex items-center gap-4 mb-4">
-          <span class="t-label">02 — COLECÇÃO</span>
-          <div class="h-[1px] flex-1 bg-ink/10"></div>
-          <span class="t-label">EST. 2026</span>
+    <section id="svc-list" class="relative overflow-hidden bg-paper" style="padding: clamp(6rem, 12vh, 12rem) 0;">
+      <!-- Floating Background Elements: Living Instrument Feel -->
+      <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <!-- Vertical Measuring Guides (Animated) -->
+        <div class="absolute left-[5%] top-0 bottom-0 w-[1px] bg-ink/[0.04] hidden lg:block"></div>
+        <div class="absolute right-[5%] top-0 bottom-0 w-[1px] bg-ink/[0.04] hidden lg:block"></div>
+
+        <!-- Drifting Large Labels -->
+        <div
+          class="absolute top-[10%] -left-12 font-serif italic text-ink/[0.03] text-[20vw] leading-none select-none rotate-90 transform-gpu"
+          id="bg-drift-1">Monrion</div>
+        <div
+          class="absolute bottom-[10%] -right-12 font-serif italic text-ink/[0.03] text-[20vw] leading-none select-none -rotate-90 transform-gpu"
+          id="bg-drift-2">Atelier</div>
+
+        <!-- Floating Points and Crosses -->
+        <div class="absolute top-1/4 left-1/4 text-ink/[0.1] reveal-fade" id="bg-cross-1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+            <path d="M12 4V20M4 12H20" />
+          </svg>
         </div>
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <h2 class="font-serif italic text-ink leading-[0.82] m-0" style="font-size: clamp(3rem, 7vw, 10rem)">
-            Atelier <br /> <span class="pl-[10%]">Monrion.</span>
-          </h2>
-          <p class="font-mono text-silver text-sm max-w-[280px] leading-relaxed opacity-70 lg:mb-1">
-            Sistemas digitais concebidos <br /> como peças de alta-costura. <br />
-            Precisão. Estética. Poder.
-          </p>
+        <div class="absolute top-3/4 right-1/4 text-ink/[0.1] reveal-fade" id="bg-cross-2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+            <path d="M12 4V20M4 12H20" />
+          </svg>
         </div>
       </div>
 
-      <!-- Luxury Collection Blocks -->
-      <div class="space-y-[clamp(4rem,10vh,12rem)] px-[clamp(1.5rem,5vw,6rem)]">
+      <!-- Background Vertical Guide Line -->
+      <div
+        class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-ink/[0.03] -translate-x-1/2 hidden lg:block pointer-events-none">
+      </div>
 
-        <!-- BLOCK 01: ARQUITETURA DIGITAL -->
-        <div class="atelier-block group flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
-          <div class="w-full lg:w-[60%] aspect-video relative">
-            <!-- Decorative Frames & Tech Labels -->
-            <div class="img-decorative-line h-[1px] w-[110%] -left-[5%] -top-4 tech-line opacity-40"></div>
-            <div class="img-decorative-line w-[1px] h-[110%] -left-6 -top-[5%] tech-line opacity-30"></div>
-            <div class="absolute -left-10 top-0 font-mono text-[8px] opacity-20 vertical-text tech-text">
-              GRID_REF: ARCH_DIGITAL.v1</div>
+      <!-- Section Header: Editorial Style -->
+      <div class="px-[clamp(1.5rem,5vw,6rem)] mb-[clamp(6rem,12vh,12rem)] relative z-10">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+          <div class="relative">
+            <span class="font-mono text-[0.65rem] tracking-[0.4em] uppercase text-silver mb-8 block reveal-fade">Atelier
+              Monrion — Collection 01</span>
+            <h2 class="font-serif italic text-ink leading-[0.8] m-0 reveal-up"
+              style="font-size: clamp(4rem, 12vw, 15rem)">
+              L'Art de <br /> <span class="pl-[15%]">Créer.</span>
+            </h2>
+          </div>
+          <div class="lg:w-[320px] pb-4 reveal-fade">
+            <div class="h-[1px] w-12 bg-ink mb-6"></div>
+            <p class="font-sans text-ink/70 text-sm leading-relaxed uppercase tracking-wider">
+              A alta-costura aplicada ao <br /> código e à estética digital. <br />
+              Um atelier de precisão absoluta.
+            </p>
+          </div>
+        </div>
+      </div>
 
-            <div class="w-full h-full overflow-hidden bg-ink relative">
-              <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2070&auto=format&fit=crop"
-                alt="Arquitetura Digital"
-                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100 atelier-img" />
+      <!-- LUXURY EDITORIAL BLOCKS -->
+      <div class="space-y-[clamp(10rem,20vh,25rem)] px-[clamp(1.5rem,5vw,6rem)] relative z-10">
+
+        <!-- BLOCK 01: ARQUITETURA DIGITAL (Asymmetrical Right-Heavy) -->
+        <div class="atelier-block group flex flex-col lg:flex-row items-start justify-end gap-16 lg:gap-32 relative">
+          <!-- Background Large Number -->
+          <span
+            class="absolute -left-4 top-0 font-serif italic text-ink/[0.02] text-[25vw] leading-none pointer-events-none hidden lg:block">01</span>
+
+          <div class="w-full lg:w-[380px] atelier-info pt-12 order-2 lg:order-1">
+            <div class="flex items-center gap-3 mb-6">
+              <span class="w-8 h-[1px] bg-silver/30"></span>
+              <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40">Section d'Or</span>
+            </div>
+            <h3 class="font-serif italic text-ink text-6xl mb-8 leading-tight">Arquitetura <br /> Digital</h3>
+            <p class="font-sans text-ink/60 text-[0.95rem] mb-12 leading-relaxed">
+              Ecossistemas concebidos com a precisão de um projeto brutalista e a leveza de um editorial de luxo. A sua
+              marca elevada ao estado de arte.
+            </p>
+            <div class="atelier-list space-y-2">
               <div
-                class="absolute inset-0 bg-ink/10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
+                class="atelier-item py-2 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] opacity-30 transform transition-transform group-hover/item:translate-x-1">I</span>
+                <span class="font-sans text-[0.9rem] uppercase tracking-widest text-ink/80">Websites Custom-Built
+                  (Elite)</span>
               </div>
-              <!-- Technical Grid Overlay -->
-              <div class="absolute inset-0 opacity-10 pointer-events-none"
-                style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;">
+              <div
+                class="atelier-item py-2 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] opacity-30 transform transition-transform group-hover/item:translate-x-1">II</span>
+                <span class="font-sans text-[0.9rem] uppercase tracking-widest text-ink/80">Web Apps & SaaS
+                  High-Architecture</span>
+              </div>
+              <div
+                class="atelier-item py-2 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] opacity-30 transform transition-transform group-hover/item:translate-x-1">III</span>
+                <span class="font-sans text-[0.9rem] uppercase tracking-widest text-ink/80">Plataformas E-Commerce de
+                  Prestígio</span>
+              </div>
+              <div
+                class="atelier-item py-2 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] opacity-30 transform transition-transform group-hover/item:translate-x-1">IV</span>
+                <span class="font-sans text-[0.9rem] uppercase tracking-widest text-ink/80">Experiências Imersivas
+                  WebGL</span>
+              </div>
+              <div
+                class="atelier-item py-2 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] opacity-30 transform transition-transform group-hover/item:translate-x-1">V</span>
+                <span class="font-sans text-[0.9rem] uppercase tracking-widest text-ink/80">Software sob Medida &
+                  Algoritmos</span>
+              </div>
+              <div
+                class="atelier-item py-2 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] opacity-30 transform transition-transform group-hover/item:translate-x-1">VI</span>
+                <span class="font-sans text-[0.9rem] uppercase tracking-widest text-ink/80">Identidade & Ecossistemas
+                  Digitais</span>
               </div>
             </div>
           </div>
-          <div class="w-full lg:w-[35%] atelier-info">
-            <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40 mb-4 block">Colecção
-              d'Élite</span>
-            <h3 class="font-serif italic text-ink text-5xl mb-6">Arquitetura Digital</h3>
-            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed">
-              Concebemos ecossistemas web que equilibram estética minimalista com performance absoluta. Não apenas
-              sites, mas extensões digitais da sua visão de marca.
-            </p>
-            <div class="atelier-list space-y-4 font-mono text-[0.75rem] text-ink/70">
-              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
-                <span class="opacity-30">0.1</span>
-                <span>Websites Custom-Built (The Essence)</span>
+
+          <div class="w-full lg:w-[60%] relative order-1 lg:order-2">
+            <!-- Tailoring Measurements Marks -->
+            <div
+              class="absolute -left-8 top-12 bottom-12 w-[1px] bg-ink/10 flex flex-col justify-between items-center py-2 opacity-40">
+              <span class="font-mono text-[6px] rotate-90">0cm</span>
+              <div class="w-1 h-[1px] bg-ink"></div>
+              <div class="w-1 h-[1px] bg-ink"></div>
+              <span class="font-mono text-[6px] rotate-90">45cm</span>
+              <div class="w-1 h-[1px] bg-ink"></div>
+              <div class="w-1 h-[1px] bg-ink"></div>
+              <span class="font-mono text-[6px] rotate-90">90cm</span>
+            </div>
+
+            <div class="aspect-[4/5] lg:aspect-[3/4] overflow-hidden bg-white/20 relative shadow-2xl">
+              <img src="https://images.unsplash.com/photo-1517030321217-65759955798f?q=80&w=2070&auto=format&fit=crop"
+                alt="Digital Architecture"
+                class="w-full h-full object-cover transition-all duration-[2.5s] ease-out group-hover:scale-105 atelier-img" />
+              <div
+                class="absolute inset-0 bg-ink/5 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity">
               </div>
-              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
-                <span class="opacity-30">0.2</span>
-                <span>Web Applications & Sistemas SaaS</span>
-              </div>
-              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
-                <span class="opacity-30">0.3</span>
-                <span>Plataformas E-Commerce de Luxo</span>
-              </div>
-              <div class="atelier-item flex items-center gap-4 py-3">
-                <span class="opacity-30">0.4</span>
-                <span>Otimização & Identidade Digital</span>
-              </div>
+            </div>
+            <!-- Technical Coordinate Labels -->
+            <div
+              class="absolute -bottom-10 right-0 font-mono text-[0.55rem] tracking-widest text-silver uppercase flex gap-8">
+              <span>Ref: MOD-01_ARC</span>
+              <span>Pos: 38.7223° N / 9.1393° W</span>
             </div>
           </div>
         </div>
 
-        <!-- BLOCK 02: ENGENHARIA DE PRECISÃO -->
-        <div
-          class="atelier-block group flex flex-col lg:flex-row-reverse items-center justify-between gap-12 lg:gap-20">
-          <div class="w-full lg:w-[60%] aspect-video relative">
-            <!-- Blueprint Corner marks -->
-            <div class="absolute -top-6 -right-6 w-24 h-[1px] bg-ink/20 tech-line"></div>
-            <div class="absolute -top-6 -right-6 w-[1px] h-24 bg-ink/20 tech-line"></div>
-            <div class="absolute -bottom-6 -left-6 w-24 h-[1px] bg-ink/20 tech-line"></div>
-            <div class="absolute -bottom-6 -left-6 w-[1px] h-24 bg-ink/20 tech-line"></div>
-            <div class="absolute -right-8 top-10 font-mono text-[8px] opacity-20 rotate-90 tech-text">
-              ENGINEering_DATA_INIT</div>
+        <!-- BLOCK 02: ENGENHARIA DE PRECISÃO (Overlapping Left-Heavy) -->
+        <div class="atelier-block group flex flex-col lg:flex-row items-center gap-16 lg:gap-0 relative">
+          <!-- Background Large Number -->
+          <span
+            class="absolute -right-4 top-0 font-serif italic text-ink/[0.02] text-[25vw] leading-none pointer-events-none hidden lg:block text-right">02</span>
 
-            <div class="w-full h-full overflow-hidden bg-ink relative">
-              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop"
-                alt="Engenharia de Alta-Tecnologia"
-                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100 atelier-img" />
-              <div
-                class="absolute inset-0 bg-ink/10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
+          <div class="w-full lg:w-[55%] relative z-10">
+            <!-- Luxury Blueprint Frame -->
+            <div
+              class="absolute -top-6 -left-6 -right-6 -bottom-6 border border-ink/[0.03] pointer-events-none h-line opacity-100 scale-x-100">
+            </div>
+
+            <div class="aspect-video lg:aspect-[16/10] overflow-hidden bg-ink relative shadow-2xl">
+              <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=2070&auto=format&fit=crop"
+                alt="Precision Technology"
+                class="w-full h-full object-cover grayscale opacity-80 transition-all duration-[2.5s] ease-out group-hover:grayscale-0 group-hover:scale-105 atelier-img" />
+            </div>
+            <!-- Dynamic Gauge Detail -->
+            <div
+              class="absolute -top-12 right-12 w-32 font-mono text-[6px] tracking-tighter opacity-30 hidden lg:block">
+              <div class="flex justify-between border-b border-ink/40 pb-1 mb-1">
+                <span>0.00</span>
+                <span>P R C S N</span>
+                <span>1.00</span>
               </div>
-              <!-- Blueprint Corner marks internal -->
-              <div class="absolute top-8 left-8 w-12 h-12 border-t border-l border-white/30"></div>
-              <div class="absolute bottom-8 right-8 w-12 h-12 border-b border-r border-white/30"></div>
+              <div class="h-1 bg-ink/10 relative">
+                <div class="absolute inset-y-0 left-0 w-[85%] bg-silver/60"></div>
+              </div>
             </div>
           </div>
-          <div class="w-full lg:w-[35%] atelier-info lg:text-right">
-            <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40 mb-4 block">Lógica &
-              Engenharia</span>
-            <h3 class="font-serif italic text-ink text-5xl mb-6">Engenharia de Precisão</h3>
-            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed max-w-md lg:ml-auto">
-              Onde a lógica pura se encontra com a inovação. Desenvolvemos software e aplicações robustas, focadas em
-              escalabilidade e na experiência técnica superior.
+
+          <div class="w-full lg:w-[450px] lg:-ml-24 relative z-20 bg-paper p-12 shadow-sm border border-ink/[0.05]">
+            <span class="font-mono text-[0.6rem] tracking-[0.4em] uppercase opacity-40 mb-6 block">Structure &
+              Logic</span>
+            <h3 class="font-serif italic text-ink text-5xl mb-8">Engenharia <br /> de Precisão</h3>
+            <p class="font-sans text-ink/70 text-sm mb-10 leading-relaxed">
+              Desenvolvemos sistemas onde cada linha de código é uma costura invisível. Escalabilidade robusta para
+              marcas que não aceitam compromissos técnicos.
             </p>
-            <div class="atelier-list space-y-4 font-mono text-[0.75rem] text-ink/70">
-              <div class="atelier-item flex items-center lg:flex-row-reverse gap-4 py-3 border-b border-ink/5">
-                <span class="opacity-30">0.1</span>
-                <span>Mobile Apps (iOS & Android)</span>
-              </div>
-              <div class="atelier-item flex items-center lg:flex-row-reverse gap-4 py-3 border-b border-ink/5">
-                <span class="opacity-30">0.2</span>
-                <span>Software sob Medida & Algoritmos</span>
-              </div>
-              <div class="atelier-item flex items-center lg:flex-row-reverse gap-4 py-3 border-b border-ink/5">
-                <span class="opacity-30">0.3</span>
-                <span>Consultoria Técnica em Engenharia de Software</span>
-              </div>
-              <div class="atelier-item flex items-center lg:flex-row-reverse gap-4 py-3">
-                <span class="opacity-30">0.4</span>
-                <span>Programação Full Stack & Backend</span>
-              </div>
+            <div class="flex flex-wrap gap-3">
+              <span
+                class="px-4 py-1.5 border border-ink/10 font-mono text-[0.55rem] uppercase tracking-widest text-ink hover:bg-ink hover:text-paper transition-colors duration-300">Software
+                Architecture</span>
+              <span
+                class="px-4 py-1.5 border border-ink/10 font-mono text-[0.55rem] uppercase tracking-widest text-ink hover:bg-ink hover:text-paper transition-colors duration-300">SaaS
+                Systems</span>
+              <span
+                class="px-4 py-1.5 border border-ink/10 font-mono text-[0.55rem] uppercase tracking-widest text-ink hover:bg-ink hover:text-paper transition-colors duration-300">iOS
+                & Android</span>
             </div>
           </div>
         </div>
 
-        <!-- BLOCK 03: ESTÚDIO VISUAL -->
-        <div class="atelier-block group flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
-          <div class="w-full lg:w-[60%] aspect-video relative">
-            <!-- Decorative Crosshair & Frame -->
-            <div class="absolute -inset-8 border border-ink/5 tech-frame"></div>
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-[1px] h-4 bg-ink/20 tech-line"></div>
-            <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[1px] h-4 bg-ink/20 tech-line"></div>
-            <div class="absolute top-1/2 -translate-y-1/2 -left-8 h-[1px] w-4 bg-ink/20 tech-line"></div>
-            <div class="absolute top-1/2 -translate-y-1/2 -right-8 h-[1px] w-4 bg-ink/20 tech-line"></div>
+        <!-- BLOCK 03: ESTÚDIO VISUAL (Symmetrical Editorial) -->
+        <div class="atelier-block group flex flex-col items-center text-center relative max-w-5xl mx-auto">
+          <span
+            class="font-serif italic text-ink/[0.02] text-[20vw] absolute -top-[10vw] left-1/2 -translate-x-1/2 pointer-events-none hidden lg:block">03</span>
 
-            <div class="w-full h-full overflow-hidden bg-ink relative">
-              <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop"
-                alt="Estúdio de Media Professional"
-                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100 atelier-img" />
-              <div
-                class="absolute inset-0 bg-ink/10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
-              </div>
-              <!-- Dynamic Crosshair moved internally to be very subtle -->
-              <div class="absolute top-4 right-4 w-4 h-4 border-t border-r border-white/20"></div>
+          <div class="w-full mb-16 relative">
+            <div class="aspect-[21/9] overflow-hidden bg-ink relative">
+              <!-- Viewfinder Overlay -->
+              <div class="absolute inset-0 z-10 border border-paper/10 m-4 pointer-events-none"></div>
+              <div class="absolute top-1/2 left-8 w-8 h-[1px] bg-paper/30 z-10"></div>
+              <div class="absolute top-1/2 right-8 w-8 h-[1px] bg-paper/30 z-10"></div>
+              <div class="absolute top-8 left-1/2 w-[1px] h-8 bg-paper/30 z-10"></div>
+              <div class="absolute bottom-8 left-1/2 w-[1px] h-8 bg-paper/30 z-10"></div>
+
+              <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop"
+                alt="Visual Studio"
+                class="w-full h-full object-cover grayscale opacity-85 transition-all duration-[2.5s] ease-out group-hover:grayscale-0 group-hover:scale-110 atelier-img" />
             </div>
           </div>
-          <div class="w-full lg:w-[35%] atelier-info">
-            <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40 mb-4 block">Recurso Visual
-              Complementar</span>
-            <h3 class="font-serif italic text-ink text-5xl mb-6">Estúdio Visual</h3>
-            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed">
-              A imagem como linguagem de poder. Complementamos a presença digital com fotografia e vídeo que elevam o
-              padrão de percepção do mercado.
+
+          <div class="w-full max-w-2xl px-6 atelier-info reveal-up">
+            <span class="font-mono text-[0.6rem] tracking-[0.4em] uppercase opacity-40 mb-4 block">Visual
+              Composition</span>
+            <h3 class="font-serif italic text-ink text-6xl mb-8">Estúdio Visual</h3>
+            <p class="font-sans text-ink/70 text-[1.1rem] mb-12 leading-relaxed">
+              Onde o olhar capturado se transforma em narrativa de poder. Criamos o universo estético que permite à sua
+              marca falar sem dizer uma única palavra.
             </p>
-            <div class="atelier-list space-y-4 font-mono text-[0.75rem] text-ink/70">
-              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
-                <span class="opacity-30">0.1</span>
-                <span>Fotografia Profissional & Pós-Produção</span>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+              <div class="text-center">
+                <span class="font-serif text-3xl italic block mb-2">01</span>
+                <span class="font-mono text-[0.55rem] uppercase tracking-widest opacity-60">Photography</span>
               </div>
-              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
-                <span class="opacity-30">0.2</span>
-                <span>Videografia & Edição Cinematográfica</span>
+              <div class="text-center">
+                <span class="font-serif text-3xl italic block mb-2">02</span>
+                <span class="font-mono text-3xl italic block mb-2">02</span>
+                <span class="font-mono text-[0.55rem] uppercase tracking-widest opacity-60">Cinema</span>
               </div>
-              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
-                <span class="opacity-30">0.3</span>
-                <span>Gestão Estratégica de Redes Sociais</span>
+              <div class="text-center">
+                <span class="font-serif text-3xl italic block mb-2">03</span>
+                <span class="font-mono text-[0.55rem] uppercase tracking-widest opacity-60">Strategy</span>
               </div>
-              <div class="atelier-item flex items-center gap-4 py-3">
-                <span class="opacity-30">0.4</span>
-                <span>Suporte em Criatividade & Design de Marca</span>
+              <div class="text-center">
+                <span class="font-serif text-3xl italic block mb-2">04</span>
+                <span class="font-mono text-[0.55rem] uppercase tracking-widest opacity-60">Identity</span>
               </div>
             </div>
           </div>
@@ -1803,7 +1879,7 @@
               </details>
             </div>
             <a href="/contactos/"
-              class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono border border-ink/20 px-6 py-4 text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:border-ink hover:text-paper rounded-none mt-auto">
+              class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono border border-ink/20 px-6 py-4 text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:border-ink hover:bg-ink hover:text-paper rounded-none mt-auto">
               <span
                 class="absolute inset-0 w-full h-full bg-ink translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
               <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Contactar</span>
@@ -2562,34 +2638,17 @@
 
         // ── §3 svc-list background ───────────────────────────────
         const listSect = document.getElementById("svc-list");
-        if (listSect && !document.querySelector('#svc-list .svc-list-bg')) {
+        if (listSect) { // Removed the check for .svc-list-bg as elements are now in HTML
           listSect.style.position = "relative";
           listSect.style.overflow = "hidden";
-          const listBg = document.createElement("div");
-          listBg.className = "svc-list-bg";
-          listBg.style.cssText = "position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;";
-          listBg.innerHTML = `
-            <div id="svc-list-grid" style="position:absolute;inset:0;background-image:linear-gradient(to right,rgba(18,18,18,0.025) 1px,transparent 1px),linear-gradient(to bottom,rgba(18,18,18,0.025) 1px,transparent 1px);background-size:80px 80px;opacity:0;transition:opacity 1.6s ease;"></div>
-            <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 48px,rgba(18,18,18,0.012) 48px,rgba(18,18,18,0.012) 49px);"></div>
-            <div id="svc-list-ghost" style="position:absolute;font-family:'IBM Plex Mono',monospace;font-size:clamp(16rem,28vw,34rem);font-weight:400;letter-spacing:-0.08em;line-height:0.75;color:rgba(18,18,18,0.016);pointer-events:none;user-select:none;right:-1rem;bottom:-3rem;will-change:transform;">02</div>
-            <div id="svc-list-mv" style="position:absolute;width:1px;background:rgba(18,18,18,0.08);clip-path:inset(0 0 100% 0);right:clamp(1.5rem,3vw,4rem);top:15%;height:70%;"></div>
-            <div id="svc-list-tick-t" style="position:absolute;background:rgba(18,18,18,0.08);right:calc(clamp(1.5rem,3vw,4rem) - 5px);top:15%;width:11px;height:1px;opacity:0;"></div>
-            <div id="svc-list-tick-b" style="position:absolute;background:rgba(18,18,18,0.08);right:calc(clamp(1.5rem,3vw,4rem) - 5px);top:85%;width:11px;height:1px;opacity:0;"></div>
-          `;
-          listSect.prepend(listBg);
+          // Removed the creation of listBg and its innerHTML as elements are now in HTML
 
+          // Animations for the new background elements in HTML
           ScrollTrigger.create({
             trigger: "#svc-list", start: "top 80%", once: true,
             onEnter() { document.getElementById("svc-list-grid").style.opacity = "1"; }
           });
-          gsap.to("#svc-list-mv", {
-            scrollTrigger: { trigger: "#svc-list", start: "top 68%" },
-            clipPath: "inset(0 0 0% 0)", duration: 1.6, ease: "power3.out"
-          });
-          gsap.to("#svc-list-tick-t, #svc-list-tick-b", {
-            scrollTrigger: { trigger: "#svc-list", start: "top 65%" },
-            opacity: 1, duration: 0.5, stagger: 0.2, ease: "power2.out"
-          });
+          // Removed svc-list-mv, svc-list-tick-t, svc-list-tick-b animations as they are not in the new HTML
           gsap.to("#svc-list-ghost", {
             scrollTrigger: { trigger: "#svc-list", start: "top bottom", end: "bottom top", scrub: 1.2 },
             y: -70, ease: "none"
@@ -2714,14 +2773,45 @@
         ["#svc-list", "#svc-diff", "#svc-pricing", "#svc-tech", "#svc-faq"].forEach(id => {
           const sect = document.querySelector(id);
           if (!sect) return;
-          const targets = [sect.querySelector(".t-label"), sect.querySelector("h2")].filter(Boolean);
-          if (targets.length) {
-            gsap.from(targets, {
-              scrollTrigger: { trigger: sect, start: "top 84%", once: true },
-              opacity: 0, y: 28, duration: 1.4, stagger: 0.15, ease: "power4.out"
-            });
+          const label = sect.querySelector(".t-label");
+          const h2 = sect.querySelector("h2");
+
+          if (label || h2) {
+            gsap.fromTo([label, h2].filter(Boolean),
+              { opacity: 0, y: 30 },
+              {
+                scrollTrigger: { trigger: sect, start: "top 85%", once: true },
+                opacity: 1, y: 0, duration: 1.5, stagger: 0.18, ease: "power4.out"
+              }
+            );
           }
         });
+
+        // ── Global reveal system (fix for invisible parts) ─────
+        gsap.utils.toArray(".reveal-up").forEach(el => {
+          gsap.fromTo(el,
+            { opacity: 0, y: 36 },
+            {
+              scrollTrigger: { trigger: el, start: "top 90%", once: true },
+              opacity: 1, y: 0, duration: 1.4, ease: "power3.out"
+            }
+          );
+        });
+
+        gsap.utils.toArray(".reveal-fade").forEach(el => {
+          gsap.fromTo(el,
+            { opacity: 0 },
+            {
+              scrollTrigger: { trigger: el, start: "top 90%", once: true },
+              opacity: 1, duration: 1.2, ease: "power3.out"
+            }
+          );
+        });
+
+        // ── Background drift animations ────────────────────────
+        gsap.to("#bg-drift-1", { x: 50, duration: 25, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to("#bg-drift-2", { x: -50, duration: 20, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(["#bg-cross-1", "#bg-cross-2"], { rotation: 90, duration: 15, repeat: -1, ease: "none" });
 
         // ── Tech background floating ──────────────────────────
         ScrollTrigger.create({
@@ -2781,10 +2871,21 @@
               scrollTrigger: {
                 trigger: block,
                 start: "top bottom",
-                scrub: 1 // Reduced scrub lag
+                scrub: 1.2
               },
-              y: 25,
-              scale: 1.05
+              y: 40,
+              scale: 1.12
+            });
+
+            // Subtle Loop Animation
+            gsap.to(img, {
+              y: "+=15",
+              x: "+=5",
+              rotation: 1,
+              duration: 5 + Math.random() * 3,
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut"
             });
           }
 
@@ -2793,34 +2894,36 @@
             const blockTL = gsap.timeline({
               scrollTrigger: {
                 trigger: block,
-                start: "top 88%", // Trigger slightly earlier for smoothness
-                once: true // Only fire once to save CPU
+                start: "top 85%",
+                once: true
               }
             });
 
             // Fast technical details reveal
-            if (techLines.length) blockTL.to(techLines, { opacity: 0.4, duration: 0.8, stagger: 0.05 }, 0);
-            if (techTexts.length) blockTL.to(techTexts, { opacity: 0.3, duration: 0.6 }, 0.2);
-            if (techFrame) blockTL.to(techFrame, { opacity: 1, duration: 1 }, 0.1);
+            if (techLines.length) blockTL.fromTo(techLines, { opacity: 0 }, { opacity: 0.4, duration: 1, stagger: 0.08 }, 0);
+            if (techTexts.length) blockTL.fromTo(techTexts, { opacity: 0 }, { opacity: 0.3, duration: 0.8 }, 0.3);
+            if (techFrame) blockTL.fromTo(techFrame, { opacity: 0 }, { opacity: 1, duration: 1.2 }, 0.1);
 
             // Sequential text reveal
             const label = info.querySelector("span");
             const title = info.querySelector("h3");
             const desc = info.querySelector("p");
 
-            if (label) blockTL.from(label, { opacity: 0, x: -15, duration: 0.5 }, 0.3);
-            if (title) blockTL.from(title, { opacity: 0, y: 15, duration: 0.6 }, "-=0.3");
-            if (desc) blockTL.from(desc, { opacity: 0, y: 10, duration: 0.6 }, "-=0.4");
+            if (label) blockTL.fromTo(label, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.7 }, 0.4);
+            if (title) blockTL.fromTo(title, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
+            if (desc) blockTL.fromTo(desc, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5");
 
             if (items.length) {
-              blockTL.from(items, {
-                opacity: 0,
-                x: (i) => block.classList.contains('lg:flex-row-reverse') ? 15 : -15,
-                duration: 0.6,
-                stagger: 0.05,
-                ease: "power2.out",
-                clearProps: "all"
-              }, "-=0.3");
+              blockTL.fromTo(items,
+                { opacity: 0, x: (i) => block.classList.contains('lg:flex-row-reverse') ? 20 : -20 },
+                {
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.8,
+                  stagger: 0.08,
+                  ease: "power3.out",
+                  clearProps: "all"
+                }, "-=0.4");
             }
           }
         });
