@@ -989,12 +989,17 @@
   ═══════════════════════════════════════════════════ -->
   <main class="relative z-10 overflow-hidden">
     <!-- ── 01. HERO ─────────────────────────────────────────── -->
-    <section id="svc-hero" class="relative min-h-screen flex flex-col justify-end bg-paper overflow-hidden"
+    <section id="svc-hero" class="relative min-h-screen flex flex-col justify-end overflow-hidden"
       style="
           padding: clamp(7rem, 12vh, 10rem) clamp(1.5rem, 5vw, 6rem)
             clamp(3.5rem, 6vh, 5.5rem);
+          background-color: #EBE9E4;
+          background-image:
+            radial-gradient(ellipse 75% 55% at 72% 8%,  rgba(201,168,76,0.10) 0%, transparent 65%),
+            radial-gradient(ellipse 50% 60% at 8%  88%, rgba(18,18,18,0.06)   0%, transparent 60%),
+            radial-gradient(ellipse 60% 45% at 90% 75%, rgba(201,168,76,0.06) 0%, transparent 55%);
         ">
-      <!-- Animated canvas background -->
+      <!-- Geometric shapes loop -->
       <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
       <!-- Ghost text -->
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
@@ -2421,12 +2426,13 @@
           });
         }
 
-        // ── Hero Canvas — Website Architecture Network ─────────
+        // ── Hero Canvas — Geometric Shapes Loop ─────────
         const heroCanvas = document.getElementById('hero-canvas');
         if (heroCanvas && !heroCanvas._hInit) {
           heroCanvas._hInit = true;
           const hCtx = heroCanvas.getContext('2d');
           let hW = 0, hH = 0, hDpr = 1;
+
           function resizeHeroC() {
             hDpr = window.devicePixelRatio || 1;
             hW = heroCanvas.parentElement.offsetWidth;
@@ -2439,21 +2445,18 @@
           resizeHeroC();
           window.addEventListener('resize', resizeHeroC, { passive: true });
 
-          // Sitemap nodes — each represents a page/component in the architecture
-          const rawNodes = [
-            [0.10,0.12],[0.30,0.08],[0.52,0.06],[0.74,0.10],[0.92,0.18],
-            [0.05,0.38],[0.24,0.32],[0.44,0.28],[0.63,0.35],[0.82,0.30],[0.97,0.42],
-            [0.12,0.60],[0.34,0.55],[0.54,0.62],[0.74,0.57],[0.94,0.65],
-            [0.07,0.82],[0.28,0.78],[0.50,0.85],[0.70,0.80],[0.90,0.88],
+          // cx/cy = center (0–1), rw/rh = size (fraction of canvas), op = opacity,
+          // rs = rotation speed (rad/frame), rp = initial angle,
+          // dax/day = drift amplitude, ds = drift speed, dp = drift phase
+          const shapes = [
+            { cx:0.80, cy:0.35, rw:0.13, rh:0.42, op:0.11, rs:-0.0012, rp:0.3,  dax:0.030, day:0.018, ds:0.0018, dp:0.0 },
+            { cx:0.18, cy:0.75, rw:0.28, rh:0.09, op:0.10, rs: 0.0010, rp:1.1,  dax:0.022, day:0.015, ds:0.0015, dp:1.8 },
+            { cx:0.14, cy:0.25, rw:0.14, rh:0.14, op:0.12, rs:-0.0016, rp:2.4,  dax:0.016, day:0.020, ds:0.0022, dp:3.5 },
+            { cx:0.50, cy:0.55, rw:0.05, rh:0.50, op:0.08, rs: 0.0007, rp:0.9,  dax:0.012, day:0.010, ds:0.0012, dp:2.2 },
+            { cx:0.72, cy:0.72, rw:0.12, rh:0.12, op:0.09, rs: 0.0014, rp:3.8,  dax:0.018, day:0.016, ds:0.0019, dp:4.0 },
+            { cx:0.45, cy:0.12, rw:0.32, rh:0.07, op:0.09, rs:-0.0008, rp:1.6,  dax:0.014, day:0.011, ds:0.0014, dp:1.0 },
+            { cx:0.92, cy:0.58, rw:0.08, rh:0.08, op:0.10, rs:-0.0018, rp:4.5,  dax:0.011, day:0.014, ds:0.0024, dp:5.2 },
           ];
-          const nodes = rawNodes.map((p, i) => ({
-            ox: p[0], oy: p[1],
-            sX: 0.014 + (i % 4) * 0.006,
-            sY: 0.010 + (i % 5) * 0.005,
-            sp: 0.0010 + (i % 8) * 0.0003,
-            ph: i * 0.47,
-          }));
-          const MAX_D = 0.26;
 
           let hT = 0;
           (function drawHeroC() {
@@ -2462,42 +2465,21 @@
             hCtx.clearRect(0, 0, hW, hH);
             hT++;
 
-            const pos = nodes.map(n => {
-              const a = hT * n.sp + n.ph;
-              return {
-                x: hW * n.ox + Math.cos(a) * hW * n.sX,
-                y: hH * n.oy + Math.sin(a * 0.73) * hH * n.sY
-              };
-            });
+            shapes.forEach(s => {
+              const rot   = hT * s.rs + s.rp;
+              const drift = hT * s.ds + s.dp;
+              const px = s.cx * hW + Math.cos(drift)        * s.dax * hW;
+              const py = s.cy * hH + Math.sin(drift * 0.73) * s.day * hH;
+              const hw = s.rw * hW * 0.5;
+              const hh = s.rh * hH * 0.5;
 
-            // Connection lines — fade with distance
-            hCtx.lineWidth = 0.7;
-            for (let i = 0; i < pos.length; i++) {
-              for (let j = i + 1; j < pos.length; j++) {
-                const dx = (pos[i].x - pos[j].x) / hW;
-                const dy = (pos[i].y - pos[j].y) / hH;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < MAX_D) {
-                  hCtx.beginPath();
-                  hCtx.moveTo(pos[i].x, pos[i].y);
-                  hCtx.lineTo(pos[j].x, pos[j].y);
-                  hCtx.strokeStyle = `rgba(18,18,18,${(1 - dist / MAX_D) * 0.11})`;
-                  hCtx.stroke();
-                }
-              }
-            }
-
-            // Node rings + core dots
-            pos.forEach(p => {
-              hCtx.beginPath();
-              hCtx.arc(p.x, p.y, 5.5, 0, Math.PI * 2);
-              hCtx.strokeStyle = 'rgba(18,18,18,0.10)';
-              hCtx.lineWidth = 0.6;
-              hCtx.stroke();
-              hCtx.beginPath();
-              hCtx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
-              hCtx.fillStyle = 'rgba(18,18,18,0.20)';
-              hCtx.fill();
+              hCtx.save();
+              hCtx.translate(px, py);
+              hCtx.rotate(rot);
+              hCtx.strokeStyle = `rgba(18,18,18,${s.op})`;
+              hCtx.lineWidth = 1.2;
+              hCtx.strokeRect(-hw, -hh, hw * 2, hh * 2);
+              hCtx.restore();
             });
           })();
         }
