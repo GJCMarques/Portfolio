@@ -1666,64 +1666,109 @@
     </section>
 
 
-    <section id="svc-diff" style="padding: clamp(4rem, 7vh, 7rem) clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem)">
-      <div class="flex items-end justify-between mb-8">
+    <section id="svc-diff" class="relative overflow-hidden"
+      style="padding: clamp(4rem, 7vh, 7rem) clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem)">
+
+      <!-- Ghost background text -->
+      <span
+        class="absolute -right-8 top-1/2 -translate-y-1/2 font-serif italic text-ink/[0.025] leading-none pointer-events-none select-none hidden lg:block"
+        style="font-size: clamp(8rem, 18vw, 22rem); writing-mode: vertical-rl">Diferença</span>
+
+      <!-- Section label -->
+      <div class="flex items-center gap-6 mb-16 relative z-10">
         <span class="t-label">03 — DIFERENCIAIS</span>
+        <div class="flex-1 h-[1px] bg-ink/[0.06]"></div>
+        <span class="font-mono text-[0.5rem] tracking-[0.6em] uppercase text-ink/30">Monrion Standard</span>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-0" style="border: 1px solid rgba(18, 18, 18, 0.07)">
-        <div class="diff-card reveal-up" style="border-right: 1px solid rgba(18, 18, 18, 0.07)">
-          <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
-          <span class="font-mono text-ink/12 block mb-6" style="
-                font-size: clamp(2.5rem, 5vw, 4rem);
-                letter-spacing: -0.04em;
-                line-height: 1;
-              ">01</span>
-          <h3 class="font-sans font-bold text-ink text-base mb-3">
-            Entrega Garantida
-          </h3>
-          <p class="font-mono text-silver leading-relaxed" style="font-size: 0.76rem">
-            Prazos reais, comunicados com clareza. Nenhum projecto fica parado
-            sem razão — e mantemos comunicação constante sobre o estado do
-            trabalho.
-          </p>
+
+      <!-- Editorial List -->
+      <div class="relative z-10">
+
+        <!-- Diff Item 01 -->
+        <div
+          class="diff-card group relative grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-24 py-14 border-t border-ink/[0.07] reveal-up">
+          <!-- Left: number + label + title -->
+          <div class="flex items-start gap-6">
+            <span class="font-serif italic text-ink/[0.08] leading-none select-none flex-shrink-0 mt-1"
+              style="font-size: clamp(3rem, 5vw, 5.5rem)">01</span>
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="w-5 h-[1px] bg-ink/30"></span>
+                <span class="font-mono text-[0.52rem] tracking-[0.4em] uppercase text-ink/40">Delivery</span>
+              </div>
+              <h3 class="font-serif italic text-ink leading-tight" style="font-size: clamp(1.6rem, 2.2vw, 2.4rem)">
+                Entrega<br>Garantida</h3>
+            </div>
+          </div>
+          <!-- Right: body -->
+          <div class="flex flex-col justify-center gap-6">
+            <p class="font-sans text-ink/60 leading-relaxed"
+              style="font-size: clamp(0.88rem, 1vw, 1rem); max-width: 56ch">
+              Prazos reais, comunicados com clareza. Nenhum projecto fica parado sem razão — e mantemos comunicação
+              constante sobre o estado do trabalho.
+            </p>
+            <span class="font-sans text-[0.7rem] uppercase tracking-[0.22em] text-ink/50 font-medium">Prazos
+              Verificados</span>
+          </div>
         </div>
 
-        <div class="diff-card reveal-up" style="border-right: 1px solid rgba(18, 18, 18, 0.07)">
-          <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
-          <span class="font-mono text-ink/12 block mb-6" style="
-                font-size: clamp(2.5rem, 5vw, 4rem);
-                letter-spacing: -0.04em;
-                line-height: 1;
-              ">02</span>
-          <h3 class="font-sans font-bold text-ink text-base mb-3">
-            Código Proprietário
-          </h3>
-          <p class="font-mono text-silver leading-relaxed" style="font-size: 0.76rem">
-            Desenvolvemos com boas práticas e código limpo. O seu website não
-            fica refém de uma plataforma ou de um programador específico.
-          </p>
+        <!-- Diff Item 02 -->
+        <div
+          class="diff-card group relative grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-24 py-14 border-t border-ink/[0.07] reveal-up">
+          <div class="flex items-start gap-6">
+            <span class="font-serif italic text-ink/[0.08] leading-none select-none flex-shrink-0 mt-1"
+              style="font-size: clamp(3rem, 5vw, 5.5rem)">02</span>
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="w-5 h-[1px] bg-ink/30"></span>
+                <span class="font-mono text-[0.52rem] tracking-[0.4em] uppercase text-ink/40">Propriedade</span>
+              </div>
+              <h3 class="font-serif italic text-ink leading-tight" style="font-size: clamp(1.6rem, 2.2vw, 2.4rem)">
+                Código<br>Proprietário</h3>
+            </div>
+          </div>
+          <div class="flex flex-col justify-center gap-6">
+            <p class="font-sans text-ink/60 leading-relaxed"
+              style="font-size: clamp(0.88rem, 1vw, 1rem); max-width: 56ch">
+              Desenvolvemos com boas práticas e código limpo. O seu website não fica refém de uma plataforma ou de um
+              programador específico.
+            </p>
+            <span class="font-sans text-[0.7rem] uppercase tracking-[0.22em] text-ink/50 font-medium">Código
+              Limpo</span>
+          </div>
         </div>
 
-        <div class="diff-card reveal-up">
-          <div class="card-corner tl" style="border-color: rgba(18, 18, 18, 0.12)"></div>
-          <span class="font-mono text-ink/12 block mb-6" style="
-                font-size: clamp(2.5rem, 5vw, 4rem);
-                letter-spacing: -0.04em;
-                line-height: 1;
-              ">03</span>
-          <h3 class="font-sans font-bold text-ink text-base mb-3">
-            Suporte Real
-          </h3>
-          <p class="font-mono text-silver leading-relaxed" style="font-size: 0.76rem">
-            Uma pessoa real, com resposta rápida. Sem tickets perdidos. Sem
-            intermediários. Directamente com quem criou o seu projecto.
-          </p>
+        <!-- Diff Item 03 -->
+        <div
+          class="diff-card group relative grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-24 py-14 border-t border-b border-ink/[0.07] reveal-up">
+          <div class="flex items-start gap-6">
+            <span class="font-serif italic text-ink/[0.08] leading-none select-none flex-shrink-0 mt-1"
+              style="font-size: clamp(3rem, 5vw, 5.5rem)">03</span>
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="w-5 h-[1px] bg-ink/30"></span>
+                <span class="font-mono text-[0.52rem] tracking-[0.4em] uppercase text-ink/40">Suporte</span>
+              </div>
+              <h3 class="font-serif italic text-ink leading-tight" style="font-size: clamp(1.6rem, 2.2vw, 2.4rem)">
+                Suporte<br>Real</h3>
+            </div>
+          </div>
+          <div class="flex flex-col justify-center gap-6">
+            <p class="font-sans text-ink/60 leading-relaxed"
+              style="font-size: clamp(0.88rem, 1vw, 1rem); max-width: 56ch">
+              Uma pessoa real, com resposta rápida. Sem tickets perdidos. Sem intermediários. Directamente com quem
+              criou o seu projecto.
+            </p>
+            <span class="font-sans text-[0.7rem] uppercase tracking-[0.22em] text-ink/50 font-medium">Resposta &lt;
+              24h</span>
+          </div>
         </div>
+
       </div>
     </section>
 
-
     <!-- ── 04. PRICING ───────────────────────────────────────── -->
+
     <section id="svc-pricing" style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem)">
       <div class="flex items-end justify-between mb-2">
         <span class="t-label">04 — INVESTIMENTO</span>
