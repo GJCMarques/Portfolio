@@ -665,3 +665,161 @@ gsap.from('.footer-grid > div, .footer-bottom', {
   y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out'
 });
 
+
+// ── §3 CSS Awards — Enhanced Visual Backgrounds ───────────────────────────
+
+// Portfolio — dimension lines & crosshairs fade in on section enter
+gsap.from('.portfolio-dim-line, .portfolio-crosshair', {
+  scrollTrigger: { trigger: '#portfolio', start: 'top 80%' },
+  opacity: 0, duration: 1.8, stagger: 0.18, ease: 'power2.out',
+});
+
+// Portfolio — concentric arcs parallax (depth illusion)
+gsap.to('.portfolio-arc', {
+  scrollTrigger: {
+    trigger: '#portfolio',
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: 1.6,
+  },
+  y: -110, ease: 'none',
+});
+
+// Portfolio — ghost number parallax
+gsap.to('#pf-ghost', {
+  scrollTrigger: {
+    trigger: '#portfolio',
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: 1.2,
+  },
+  y: -70, ease: 'none',
+});
+
+// ── Sobre ────────────────────────────────────────────────────────────────
+
+// Sobre — background image parallax
+gsap.to('#sobre > div:first-child', {
+  scrollTrigger: {
+    trigger: '#sobre',
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: 1,
+  },
+  y: -60, ease: 'none',
+});
+
+// Sobre — vertical lines clip-path reveal (scrubbed for drama)
+gsap.to('.sobre-vline', {
+  scrollTrigger: {
+    trigger: '#sobre',
+    start: 'top 72%',
+    end: 'top 20%',
+    scrub: 0.8,
+  },
+  clipPath: 'inset(0 0 0% 0)',
+  stagger: 0.14,
+  ease: 'none',
+});
+
+// Sobre — horizontal accent line sweeps in
+gsap.to('.sobre-h-accent', {
+  scrollTrigger: { trigger: '#sobre', start: 'top 55%' },
+  clipPath: 'inset(0 0% 0 0)',
+  duration: 1.6, ease: 'power4.out',
+});
+
+// Sobre — scanline sweep animation (repeating every 5s)
+(function initScanline() {
+  const scanline = document.getElementById('sobre-scanline');
+  if (!scanline) return;
+  const sobreEl = document.getElementById('sobre');
+  if (!sobreEl) return;
+  const h = sobreEl.offsetHeight;
+
+  const runSweep = () => {
+    gsap.fromTo(scanline,
+      { top: '0%', opacity: 0 },
+      {
+        top: '100%', opacity: 1,
+        duration: 3.5,
+        ease: 'none',
+        onComplete: () => gsap.delayedCall(2, runSweep),
+      }
+    );
+  };
+
+  // Only start when #sobre is in view
+  ScrollTrigger.create({
+    trigger: '#sobre',
+    start: 'top 60%',
+    once: true,
+    onEnter: runSweep,
+  });
+})();
+
+// ── Servicos ─────────────────────────────────────────────────────────────
+
+// Grid background fades in
+gsap.to('#serv-grid-bg', {
+  scrollTrigger: { trigger: '#servicos', start: 'top 78%' },
+  opacity: 1, duration: 1.8, ease: 'power2.out',
+});
+
+// Set initial rotation via GSAP (avoids inline transform conflict)
+gsap.set('#serv-geo-a', { rotation: 12 });
+gsap.set('#serv-geo-b', { rotation: 12 });
+
+// Geometric annotation squares appear
+gsap.fromTo('#serv-geo-a',
+  { opacity: 0, scale: 0.82 },
+  { scrollTrigger: { trigger: '#servicos', start: 'top 72%' }, opacity: 1, scale: 1, duration: 1.4, ease: 'power3.out' }
+);
+gsap.fromTo('#serv-geo-b',
+  { opacity: 0, scale: 0.72 },
+  { scrollTrigger: { trigger: '#servicos', start: 'top 72%' }, opacity: 1, scale: 1, duration: 1.6, delay: 0.2, ease: 'power3.out' }
+);
+
+// Float animation — starts once after section enters, runs forever
+ScrollTrigger.create({
+  trigger: '#servicos', start: 'top 72%', once: true,
+  onEnter() {
+    gsap.to('#serv-geo-a', { y: -18, duration: 5.5, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1.2 });
+    gsap.to('#serv-geo-b', { y: -11, duration: 4.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1.8 });
+  },
+});
+
+// Measurement vertical line grows
+gsap.to('#serv-mv', {
+  scrollTrigger: { trigger: '#servicos', start: 'top 68%' },
+  clipPath: 'inset(0 0 0% 0)', duration: 1.7, ease: 'power3.out',
+});
+
+// Tick marks appear
+gsap.from('#serv-tick-t, #serv-tick-b', {
+  scrollTrigger: { trigger: '#servicos', start: 'top 65%' },
+  opacity: 0, duration: 0.6, stagger: 0.2, ease: 'power2.out',
+});
+
+// Horizontal rule sweeps in
+gsap.to('#serv-mh-t', {
+  scrollTrigger: { trigger: '#servicos', start: 'top 74%' },
+  clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power4.out',
+});
+
+// Blueprint labels fade in
+gsap.to('#serv-bp-label, #serv-sec-num', {
+  scrollTrigger: { trigger: '#servicos', start: 'top 62%' },
+  opacity: 1, duration: 1, stagger: 0.25, ease: 'power2.out',
+});
+
+// Ghost number parallax
+gsap.to('#serv-ghost', {
+  scrollTrigger: {
+    trigger: '#servicos',
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: 1.2,
+  },
+  y: -90, ease: 'none',
+});

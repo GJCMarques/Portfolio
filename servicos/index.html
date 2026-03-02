@@ -2278,6 +2278,72 @@
           });
         }
 
+        // ── §3 svc-list background ───────────────────────────────
+        const listSect = document.getElementById("svc-list");
+        if (listSect && !document.querySelector('#svc-list .svc-list-bg')) {
+          listSect.style.position = "relative";
+          listSect.style.overflow = "hidden";
+          const listBg = document.createElement("div");
+          listBg.className = "svc-list-bg";
+          listBg.style.cssText = "position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;";
+          listBg.innerHTML = `
+            <div id="svc-list-grid" style="position:absolute;inset:0;background-image:linear-gradient(to right,rgba(18,18,18,0.025) 1px,transparent 1px),linear-gradient(to bottom,rgba(18,18,18,0.025) 1px,transparent 1px);background-size:80px 80px;opacity:0;transition:opacity 1.6s ease;"></div>
+            <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 48px,rgba(18,18,18,0.012) 48px,rgba(18,18,18,0.012) 49px);"></div>
+            <div id="svc-list-ghost" style="position:absolute;font-family:'IBM Plex Mono',monospace;font-size:clamp(16rem,28vw,34rem);font-weight:400;letter-spacing:-0.08em;line-height:0.75;color:rgba(18,18,18,0.016);pointer-events:none;user-select:none;right:-1rem;bottom:-3rem;will-change:transform;">02</div>
+            <div id="svc-list-mv" style="position:absolute;width:1px;background:rgba(18,18,18,0.08);clip-path:inset(0 0 100% 0);right:clamp(1.5rem,3vw,4rem);top:15%;height:70%;"></div>
+            <div id="svc-list-mh" style="position:absolute;height:1px;background:rgba(18,18,18,0.08);clip-path:inset(0 100% 0 0);left:0;right:0;top:4.5rem;"></div>
+            <div id="svc-list-tick-t" style="position:absolute;background:rgba(18,18,18,0.08);right:calc(clamp(1.5rem,3vw,4rem) - 5px);top:15%;width:11px;height:1px;opacity:0;"></div>
+            <div id="svc-list-tick-b" style="position:absolute;background:rgba(18,18,18,0.08);right:calc(clamp(1.5rem,3vw,4rem) - 5px);top:85%;width:11px;height:1px;opacity:0;"></div>
+          `;
+          listSect.prepend(listBg);
+
+          ScrollTrigger.create({
+            trigger: "#svc-list", start: "top 80%", once: true,
+            onEnter() { document.getElementById("svc-list-grid").style.opacity = "1"; }
+          });
+          gsap.to("#svc-list-mv", {
+            scrollTrigger: { trigger: "#svc-list", start: "top 68%" },
+            clipPath: "inset(0 0 0% 0)", duration: 1.6, ease: "power3.out"
+          });
+          gsap.to("#svc-list-mh", {
+            scrollTrigger: { trigger: "#svc-list", start: "top 74%" },
+            clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "power4.out"
+          });
+          gsap.to("#svc-list-tick-t, #svc-list-tick-b", {
+            scrollTrigger: { trigger: "#svc-list", start: "top 65%" },
+            opacity: 1, duration: 0.5, stagger: 0.2, ease: "power2.out"
+          });
+          gsap.to("#svc-list-ghost", {
+            scrollTrigger: { trigger: "#svc-list", start: "top bottom", end: "bottom top", scrub: 1.2 },
+            y: -70, ease: "none"
+          });
+        }
+
+        // ── §3 svc-diff background ───────────────────────────────
+        const diffSect = document.getElementById("svc-diff");
+        if (diffSect && !document.querySelector('#svc-diff .svc-diff-bg')) {
+          diffSect.style.position = "relative";
+          diffSect.style.overflow = "hidden";
+          const diffBg = document.createElement("div");
+          diffBg.className = "svc-diff-bg";
+          diffBg.style.cssText = "position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;";
+          diffBg.innerHTML = `
+            <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 48px,rgba(18,18,18,0.013) 48px,rgba(18,18,18,0.013) 49px);"></div>
+            <div id="svc-diff-ghost" style="position:absolute;font-family:'IBM Plex Mono',monospace;font-size:clamp(18rem,30vw,38rem);font-weight:400;letter-spacing:-0.08em;line-height:0.75;color:rgba(18,18,18,0.015);pointer-events:none;user-select:none;left:-2rem;top:-4rem;will-change:transform;">03</div>
+            <div id="svc-diff-mh" style="position:absolute;height:1px;background:rgba(18,18,18,0.07);clip-path:inset(0 100% 0 0);left:0;right:0;top:4rem;"></div>
+          `;
+          diffSect.prepend(diffBg);
+
+          gsap.to("#svc-diff-ghost", {
+            scrollTrigger: { trigger: "#svc-diff", start: "top bottom", end: "bottom top", scrub: 1 },
+            y: -65, ease: "none"
+          });
+          gsap.to("#svc-diff-mh", {
+            scrollTrigger: { trigger: "#svc-diff", start: "top 78%" },
+            clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "power4.out"
+          });
+        }
+
         // ── Hero entrance ──────────────────────────────────────
         const heroTL = gsap.timeline({ defaults: { ease: "power4.out" } });
 

@@ -455,6 +455,128 @@
           width: 100%;
         }
       }
+
+      /* ══════════════════════════════════════════════════
+         §3  VISUAL BACKGROUND LAYERS — CSS Awards
+      ══════════════════════════════════════════════════ */
+
+      /* Portfolio arcs — will-change for GSAP parallax */
+      .portfolio-arc,
+      .portfolio-dim-line,
+      .portfolio-crosshair { will-change: transform, opacity; }
+
+      /* ── SOBRE — animated vertical rule lines ── */
+      .sobre-vlines {
+        position: absolute; inset: 0;
+        pointer-events: none; overflow: hidden;
+      }
+      .sobre-vline {
+        position: absolute; top: 0; bottom: 0; width: 1px;
+        background: rgba(235, 233, 228, 0.055);
+        clip-path: inset(0 0 100% 0);
+        will-change: clip-path;
+      }
+      .sobre-h-accent {
+        position: absolute; left: 0; right: 0; height: 1px;
+        background: rgba(235, 233, 228, 0.055);
+        clip-path: inset(0 100% 0 0);
+        will-change: clip-path;
+      }
+      /* Scanline sweep */
+      .sobre-scanline {
+        position: absolute; left: 0; right: 0; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(235,233,228,0.18), transparent);
+        pointer-events: none;
+        will-change: top;
+      }
+
+      /* ── SERVICOS — full decorative background system ── */
+      .serv-bg-wrap {
+        position: absolute; inset: 0;
+        pointer-events: none; overflow: hidden;
+        z-index: 0;
+      }
+      .serv-grid-bg {
+        position: absolute; inset: 0;
+        background-image:
+          linear-gradient(to right,  rgba(18,18,18,0.026) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(18,18,18,0.026) 1px, transparent 1px);
+        background-size: 80px 80px;
+        opacity: 0;
+        will-change: opacity;
+      }
+      .serv-hatch-bg {
+        position: absolute; inset: 0;
+        background-image: repeating-linear-gradient(
+          -45deg,
+          transparent, transparent 48px,
+          rgba(18,18,18,0.013) 48px, rgba(18,18,18,0.013) 49px
+        );
+      }
+      .serv-geo {
+        position: absolute;
+        border: 1px solid rgba(18,18,18,0.065);
+        pointer-events: none;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+      .serv-ghost-num {
+        position: absolute;
+        font-family: var(--font-mono);
+        font-size: clamp(18rem, 30vw, 38rem);
+        font-weight: 400;
+        letter-spacing: -0.08em;
+        line-height: 0.75;
+        color: rgba(18, 18, 18, 0.018);
+        pointer-events: none;
+        user-select: none;
+        will-change: transform;
+      }
+      .serv-measure-v {
+        position: absolute; width: 1px;
+        background: rgba(18,18,18,0.08);
+        clip-path: inset(0 0 100% 0);
+        will-change: clip-path;
+      }
+      .serv-measure-h {
+        position: absolute; height: 1px;
+        background: rgba(18,18,18,0.08);
+        clip-path: inset(0 100% 0 0);
+        will-change: clip-path;
+      }
+      .serv-tick { position: absolute; background: rgba(18,18,18,0.08); }
+      .serv-bp-label {
+        position: absolute;
+        font-family: var(--font-mono);
+        font-size: 0.52rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(18,18,18,0.22);
+        pointer-events: none;
+        user-select: none;
+        opacity: 0;
+        will-change: opacity;
+      }
+      /* Ensure content sits above bg layer */
+      #servicos > .max-w-6xl { position: relative; z-index: 1; }
+
+      /* ── PORTFOLIO — section ghost number ── */
+      .pf-ghost-label {
+        position: absolute;
+        font-family: var(--font-mono);
+        font-size: clamp(16rem, 28vw, 34rem);
+        font-weight: 400;
+        letter-spacing: -0.08em;
+        line-height: 0.75;
+        color: rgba(18, 18, 18, 0.016);
+        pointer-events: none;
+        user-select: none;
+        will-change: transform;
+      }
+
+      @media (max-width: 768px) {
+        .serv-bg-wrap, .sobre-vlines { display: none; }
+      }
     </style>
   </head>
 
@@ -914,6 +1036,14 @@
             "
           ></div>
         </div>
+
+        <!-- Ghost label "02" watermark -->
+        <div
+          class="pf-ghost-label"
+          id="pf-ghost"
+          style="left: -3rem; bottom: -2rem"
+          aria-hidden="true"
+        >02</div>
 
         <!-- Marcador de cruzamento B -->
         <div
@@ -1863,6 +1993,16 @@
         />
       </div>
 
+      <!-- Animated vertical rule lines -->
+      <div class="sobre-vlines" aria-hidden="true">
+        <div class="sobre-vline" style="left: 7%"></div>
+        <div class="sobre-vline" style="left: 19%"></div>
+        <div class="sobre-vline" style="right: 13%"></div>
+        <div class="sobre-vline" style="right: 3.5%"></div>
+        <div class="sobre-h-accent" style="top: 60%"></div>
+        <div class="sobre-scanline" id="sobre-scanline" style="top: 0"></div>
+      </div>
+
       <div class="relative z-10 max-w-6xl mx-auto">
         <!-- Mono label -->
         <p
@@ -1909,6 +2049,49 @@
       id="servicos"
       class="py-32 px-6 md:px-12 lg:px-24 bg-paper relative overflow-hidden"
     >
+      <!-- §3 Decorative background layer -->
+      <div class="serv-bg-wrap" aria-hidden="true">
+        <div class="serv-grid-bg" id="serv-grid-bg"></div>
+        <div class="serv-hatch-bg"></div>
+        <!-- Ghost watermark number -->
+        <div class="serv-ghost-num" id="serv-ghost" style="right: -1rem; bottom: -3rem">S</div>
+        <!-- Outer rotating square annotation (rotation set via GSAP) -->
+        <div class="serv-geo" id="serv-geo-a" style="
+          top: 2.5rem; right: 2.5rem;
+          width: clamp(13rem, 21vw, 23rem);
+          height: clamp(13rem, 21vw, 23rem);
+        "></div>
+        <!-- Inner nested square -->
+        <div class="serv-geo" id="serv-geo-b" style="
+          top: 6rem; right: 6rem;
+          width: clamp(6rem, 10vw, 11rem);
+          height: clamp(6rem, 10vw, 11rem);
+        "></div>
+        <!-- Measurement vertical line — right edge -->
+        <div class="serv-measure-v" id="serv-mv" style="
+          right: clamp(1.5rem, 3vw, 4rem); top: 16%; height: 68%;
+        "></div>
+        <!-- Ticks at extremes of vertical measure -->
+        <div class="serv-tick" id="serv-tick-t" style="
+          right: calc(clamp(1.5rem, 3vw, 4rem) - 5px); top: 16%; width: 11px; height: 1px;
+        "></div>
+        <div class="serv-tick" id="serv-tick-b" style="
+          right: calc(clamp(1.5rem, 3vw, 4rem) - 5px); top: 84%; width: 11px; height: 1px;
+        "></div>
+        <!-- Blueprint label alongside vertical measure -->
+        <div class="serv-bp-label" id="serv-bp-label" style="
+          right: calc(clamp(1.5rem, 3vw, 4rem) + 1.1rem);
+          top: 50%;
+          transform: translateY(-50%) rotate(-90deg);
+          transform-origin: center;
+          white-space: nowrap;
+        ">03 · Serviços</div>
+        <!-- Horizontal accent rule — top of section -->
+        <div class="serv-measure-h" id="serv-mh-t" style="left: 0; right: 0; top: 4.5rem;"></div>
+        <!-- Section number label — top left -->
+        <div class="serv-bp-label" id="serv-sec-num" style="top: 3.5rem; left: clamp(1.5rem, 5vw, 6rem);">§ 03</div>
+      </div>
+
       <div class="max-w-6xl mx-auto">
         <!-- Header -->
         <div
