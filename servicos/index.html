@@ -70,6 +70,14 @@
         visibility: hidden;
       }
 
+      /* ── Optimization Utilities ───────────────────── */
+      .gpu-accel {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+        will-change: transform, opacity;
+      }
+      
       .noise-overlay {
         position: fixed;
         top: 0;
@@ -78,7 +86,7 @@
         height: 100%;
         pointer-events: none;
         z-index: 9999;
-        opacity: 0.08;
+        opacity: 0.05; /* Reduced for better paint performance */
         filter: url(#noiseFilter);
         mix-blend-mode: overlay;
       }
@@ -931,10 +939,12 @@
         color: var(--color-ink);
         transform: scale(1.1);
       }
-      .img-decorative-line {
-        position: absolute;
-        background: rgba(18, 18, 18, 0.15);
-        pointer-events: none;
+      .atelier-block .atelier-img {
+        will-change: transform, filter;
+        transform: translateZ(0); /* Hardware Acceleration */
+      }
+      .tech-line, .tech-text, .tech-frame {
+        will-change: opacity, transform;
       }
     </style>
 </head>
@@ -1126,19 +1136,19 @@
 
 
     <!-- ── 03. DIGITAL ATELIER: O QUE CRIAMOS ─────────────────── -->
-    <section id="svc-list" class="relative overflow-hidden" style="padding: clamp(6rem, 10vh, 12rem) 0;">
+    <section id="svc-list" class="relative overflow-hidden" style="padding: clamp(3rem, 6vh, 6rem) 0;">
       <!-- Section Header -->
-      <div class="px-[clamp(1.5rem,5vw,6rem)] mb-[clamp(4rem,8vh,8rem)]">
+      <div class="px-[clamp(1.5rem,5vw,6rem)] mb-[clamp(2.5rem,5vh,4rem)]">
         <div class="flex items-center gap-4 mb-4">
           <span class="t-label">02 — COLECÇÃO</span>
           <div class="h-[1px] flex-1 bg-ink/10"></div>
           <span class="t-label">EST. 2026</span>
         </div>
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-          <h2 class="font-serif italic text-ink leading-[0.9]" style="font-size: clamp(3.5rem, 8vw, 12rem)">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <h2 class="font-serif italic text-ink leading-[0.82] m-0" style="font-size: clamp(3rem, 7vw, 10rem)">
             Atelier <br /> <span class="pl-[10%]">Monrion.</span>
           </h2>
-          <p class="font-mono text-silver text-sm max-w-xs leading-relaxed opacity-70">
+          <p class="font-mono text-silver text-sm max-w-[280px] leading-relaxed opacity-70 lg:mb-1">
             Sistemas digitais concebidos <br /> como peças de alta-costura. <br />
             Precisão. Estética. Poder.
           </p>
@@ -1146,35 +1156,35 @@
       </div>
 
       <!-- Luxury Collection Blocks -->
-      <div class="space-y-[clamp(8rem,15vh,18rem)] px-[clamp(1.5rem,5vw,6rem)]">
+      <div class="space-y-[clamp(4rem,10vh,12rem)] px-[clamp(1.5rem,5vw,6rem)]">
 
         <!-- BLOCK 01: ARQUITETURA DIGITAL -->
-        <div class="atelier-block group flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
-          <div class="w-full lg:w-3/5 aspect-[16/10] relative">
-            <!-- Decorative Frames -->
-            <div class="img-decorative-line h-[1px] w-[110%] -left-[5%] -top-4 tech-line opacity-0"></div>
-            <div class="img-decorative-line w-[1px] h-[110%] -left-6 -top-[5%] tech-line opacity-0"></div>
-            <div class="absolute -left-10 top-0 font-mono text-[8px] opacity-20 vertical-text tech-text opacity-0">
-              GRID_REF: SCALE_01.ARC</div>
+        <div class="atelier-block group flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+          <div class="w-full lg:w-[60%] aspect-video relative">
+            <!-- Decorative Frames & Tech Labels -->
+            <div class="img-decorative-line h-[1px] w-[110%] -left-[5%] -top-4 tech-line opacity-40"></div>
+            <div class="img-decorative-line w-[1px] h-[110%] -left-6 -top-[5%] tech-line opacity-30"></div>
+            <div class="absolute -left-10 top-0 font-mono text-[8px] opacity-20 vertical-text tech-text">
+              GRID_REF: ARCH_DIGITAL.v1</div>
 
             <div class="w-full h-full overflow-hidden bg-ink relative">
-              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+              <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2070&auto=format&fit=crop"
                 alt="Arquitetura Digital"
                 class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100 atelier-img" />
               <div
-                class="absolute inset-0 bg-ink/20 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
+                class="absolute inset-0 bg-ink/10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
               </div>
               <!-- Technical Grid Overlay -->
-              <div class="absolute inset-0 opacity-20 pointer-events-none"
-                style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 40px 40px;">
+              <div class="absolute inset-0 opacity-10 pointer-events-none"
+                style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;">
               </div>
             </div>
           </div>
-          <div class="w-full lg:w-2/5 atelier-info">
+          <div class="w-full lg:w-[35%] atelier-info">
             <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40 mb-4 block">Colecção
               d'Élite</span>
             <h3 class="font-serif italic text-ink text-5xl mb-6">Arquitetura Digital</h3>
-            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed max-w-md">
+            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed">
               Concebemos ecossistemas web que equilibram estética minimalista com performance absoluta. Não apenas
               sites, mas extensões digitais da sua visão de marca.
             </p>
@@ -1200,14 +1210,15 @@
         </div>
 
         <!-- BLOCK 02: ENGENHARIA DE PRECISÃO -->
-        <div class="atelier-block group flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-24">
-          <div class="w-full lg:w-3/5 aspect-[16/10] relative">
+        <div
+          class="atelier-block group flex flex-col lg:flex-row-reverse items-center justify-between gap-12 lg:gap-20">
+          <div class="w-full lg:w-[60%] aspect-video relative">
             <!-- Blueprint Corner marks -->
-            <div class="absolute -top-6 -right-6 w-24 h-[1px] bg-ink/20 tech-line opacity-0"></div>
-            <div class="absolute -top-6 -right-6 w-[1px] h-24 bg-ink/20 tech-line opacity-0"></div>
-            <div class="absolute -bottom-6 -left-6 w-24 h-[1px] bg-ink/20 tech-line opacity-0"></div>
-            <div class="absolute -bottom-6 -left-6 w-[1px] h-24 bg-ink/20 tech-line opacity-0"></div>
-            <div class="absolute -right-8 top-10 font-mono text-[8px] opacity-20 rotate-90 tech-text opacity-0">
+            <div class="absolute -top-6 -right-6 w-24 h-[1px] bg-ink/20 tech-line"></div>
+            <div class="absolute -top-6 -right-6 w-[1px] h-24 bg-ink/20 tech-line"></div>
+            <div class="absolute -bottom-6 -left-6 w-24 h-[1px] bg-ink/20 tech-line"></div>
+            <div class="absolute -bottom-6 -left-6 w-[1px] h-24 bg-ink/20 tech-line"></div>
+            <div class="absolute -right-8 top-10 font-mono text-[8px] opacity-20 rotate-90 tech-text">
               ENGINEering_DATA_INIT</div>
 
             <div class="w-full h-full overflow-hidden bg-ink relative">
@@ -1215,14 +1226,14 @@
                 alt="Engenharia de Alta-Tecnologia"
                 class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100 atelier-img" />
               <div
-                class="absolute inset-0 bg-ink/20 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
+                class="absolute inset-0 bg-ink/10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
               </div>
               <!-- Blueprint Corner marks internal -->
               <div class="absolute top-8 left-8 w-12 h-12 border-t border-l border-white/30"></div>
               <div class="absolute bottom-8 right-8 w-12 h-12 border-b border-r border-white/30"></div>
             </div>
           </div>
-          <div class="w-full lg:w-2/5 atelier-info lg:text-right">
+          <div class="w-full lg:w-[35%] atelier-info lg:text-right">
             <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40 mb-4 block">Lógica &
               Engenharia</span>
             <h3 class="font-serif italic text-ink text-5xl mb-6">Engenharia de Precisão</h3>
@@ -1252,36 +1263,31 @@
         </div>
 
         <!-- BLOCK 03: ESTÚDIO VISUAL -->
-        <div class="atelier-block group flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
-          <div class="w-full lg:w-3/5 aspect-[16/10] relative">
+        <div class="atelier-block group flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+          <div class="w-full lg:w-[60%] aspect-video relative">
             <!-- Decorative Crosshair & Frame -->
-            <div class="absolute -inset-8 border border-ink/5 tech-frame opacity-0"></div>
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-[1px] h-4 bg-ink/20 tech-line opacity-0"></div>
-            <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[1px] h-4 bg-ink/20 tech-line opacity-0"></div>
-            <div class="absolute top-1/2 -translate-y-1/2 -left-8 h-[1px] w-4 bg-ink/20 tech-line opacity-0"></div>
-            <div class="absolute top-1/2 -translate-y-1/2 -right-8 h-[1px] w-4 bg-ink/20 tech-line opacity-0"></div>
+            <div class="absolute -inset-8 border border-ink/5 tech-frame"></div>
+            <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-[1px] h-4 bg-ink/20 tech-line"></div>
+            <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[1px] h-4 bg-ink/20 tech-line"></div>
+            <div class="absolute top-1/2 -translate-y-1/2 -left-8 h-[1px] w-4 bg-ink/20 tech-line"></div>
+            <div class="absolute top-1/2 -translate-y-1/2 -right-8 h-[1px] w-4 bg-ink/20 tech-line"></div>
 
             <div class="w-full h-full overflow-hidden bg-ink relative">
               <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop"
                 alt="Estúdio de Media Professional"
                 class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100 atelier-img" />
               <div
-                class="absolute inset-0 bg-ink/20 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
+                class="absolute inset-0 bg-ink/10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
               </div>
-              <!-- Dynamic Crosshair -->
-              <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 text-white/40"
-                viewBox="0 0 100 100">
-                <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-width="0.5" />
-                <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-width="0.5" />
-                <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" stroke-width="0.5" />
-              </svg>
+              <!-- Dynamic Crosshair moved internally to be very subtle -->
+              <div class="absolute top-4 right-4 w-4 h-4 border-t border-r border-white/20"></div>
             </div>
           </div>
-          <div class="w-full lg:w-2/5 atelier-info">
+          <div class="w-full lg:w-[35%] atelier-info">
             <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40 mb-4 block">Recurso Visual
               Complementar</span>
             <h3 class="font-serif italic text-ink text-5xl mb-6">Estúdio Visual</h3>
-            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed max-w-md">
+            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed">
               A imagem como linguagem de poder. Complementamos a presença digital com fotografia e vídeo que elevam o
               padrão de percepção do mercado.
             </p>
@@ -1307,7 +1313,6 @@
         </div>
 
       </div>
-
 
     </section>
 
@@ -2770,57 +2775,59 @@
           const techTexts = block.querySelectorAll(".tech-text");
           const techFrame = block.querySelector(".tech-frame");
 
-          // Entry animation for image wrapper
+          // Image parallax & Scale (scrub) - Optimized scrub
           if (img) {
-            gsap.from(img.parentElement, {
-              scrollTrigger: { trigger: block, start: "top 90%", once: true },
-              opacity: 0, scale: 0.98, y: 20, duration: 1.2, ease: "power2.out"
-            });
-
-            // Image parallax & Scale (scrub)
             gsap.from(img, {
               scrollTrigger: {
                 trigger: block,
                 start: "top bottom",
-                scrub: 1.2
+                scrub: 1 // Reduced scrub lag
               },
-              y: 30,
-              scale: 1.1
+              y: 25,
+              scale: 1.05
             });
           }
 
-          // Reveal Block Details (One unified timeline for reliability)
+          // Reveal Block Details
           if (info) {
             const blockTL = gsap.timeline({
-              scrollTrigger: { trigger: block, start: "top 85%", once: true }
+              scrollTrigger: {
+                trigger: block,
+                start: "top 88%", // Trigger slightly earlier for smoothness
+                once: true // Only fire once to save CPU
+              }
             });
 
-            // Technical details
-            if (techLines.length) blockTL.to(techLines, { opacity: 0.4, scaleX: 1, scaleY: 1, duration: 1.0, stagger: 0.08 }, 0);
-            if (techTexts.length) blockTL.to(techTexts, { opacity: 0.3, y: 0, duration: 0.8 }, 0.3);
-            if (techFrame) blockTL.to(techFrame, { opacity: 1, scale: 1, duration: 1.2 }, 0.2);
+            // Fast technical details reveal
+            if (techLines.length) blockTL.to(techLines, { opacity: 0.4, duration: 0.8, stagger: 0.05 }, 0);
+            if (techTexts.length) blockTL.to(techTexts, { opacity: 0.3, duration: 0.6 }, 0.2);
+            if (techFrame) blockTL.to(techFrame, { opacity: 1, duration: 1 }, 0.1);
 
             // Sequential text reveal
             const label = info.querySelector("span");
             const title = info.querySelector("h3");
             const desc = info.querySelector("p");
 
-            if (label) blockTL.from(label, { opacity: 0, x: -20, duration: 0.6 }, 0.4);
-            if (title) blockTL.from(title, { opacity: 0, y: 25, duration: 0.8 }, "-=0.4");
-            if (desc) blockTL.from(desc, { opacity: 0, y: 15, duration: 0.8 }, "-=0.6");
+            if (label) blockTL.from(label, { opacity: 0, x: -15, duration: 0.5 }, 0.3);
+            if (title) blockTL.from(title, { opacity: 0, y: 15, duration: 0.6 }, "-=0.3");
+            if (desc) blockTL.from(desc, { opacity: 0, y: 10, duration: 0.6 }, "-=0.4");
 
             if (items.length) {
               blockTL.from(items, {
                 opacity: 0,
-                x: (i) => block.classList.contains('lg:flex-row-reverse') ? 25 : -25,
-                duration: 0.8,
-                stagger: 0.08,
+                x: (i) => block.classList.contains('lg:flex-row-reverse') ? 15 : -15,
+                duration: 0.6,
+                stagger: 0.05,
                 ease: "power2.out",
-                clearProps: "all" // Ensures opacity:1 after animation
-              }, "-=0.4");
+                clearProps: "all"
+              }, "-=0.3");
             }
           }
         });
+
+        // Optimization: Reduce ScrollTrigger check frequency
+        ScrollTrigger.config({ limitCallbacks: true });
+        window.addEventListener('resize', () => ScrollTrigger.refresh());
 
         // ── Pricing cards ──────────────────────────────────────
         ["#pc-arranque", "#pc-crescimento", "#pc-empresa"].forEach((sel, i) => {
