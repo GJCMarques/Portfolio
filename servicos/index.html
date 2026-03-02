@@ -1067,15 +1067,12 @@
 
 
     <!-- ── 03. SERVICES LIST ─────────────────────────────────── -->
-    <section id="svc-list" style="
-          padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem)
-            clamp(3rem, 6vh, 6rem);
-        ">
+    <section id="svc-list" style="padding: clamp(4rem, 7vh, 7rem) clamp(1.5rem, 5vw, 6rem) clamp(2.5rem, 5vh, 5rem);">
       <div class="flex items-end justify-between mb-2">
         <span class="t-label">02 — TIPOLOGIAS</span>
         <span class="t-label">05 SERVIÇOS</span>
       </div>
-      <div class="flex items-end justify-between mb-16 gap-8">
+      <div class="flex items-end justify-between mb-10 gap-8">
         <h2 class="font-serif italic text-ink" style="font-size: clamp(2rem, 4.5vw, 4.5rem); line-height: 1.1">
           O que criamos
         </h2>
@@ -1085,153 +1082,139 @@
         </p>
       </div>
 
-      <!-- 01 Landing Page -->
-      <div class="svc-row reveal-up" id="svc-01">
-        <div class="svc-row-bar"></div>
-        <div class="flex items-start justify-between gap-6">
-          <div class="flex items-start gap-5 md:gap-8 flex-1 min-w-0">
-            <span class="svc-num">01</span>
-            <div class="min-w-0">
-              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2">
-                <h3 class="svc-name">Landing Page</h3>
-                <span class="svc-tag">Essencial</span>
-              </div>
-              <p class="svc-desc">
-                A porta de entrada perfeita. Páginas de alto impacto, focadas
-                em conversão, para apresentar uma marca, produto ou campanha
-                de forma memorável.
-              </p>
-            </div>
+      <!-- Row 1: 3 cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 border border-ink/12">
+
+        <a href="/contactos/" id="svc-01"
+          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 sm:border-r border-ink/12 transition-colors duration-300 hover:bg-ink">
+          <div class="flex items-start justify-between">
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">01</span>
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Essencial</span>
           </div>
-          <div class="flex flex-col items-end gap-3 flex-shrink-0">
-            <div class="svc-arrow">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </div>
-            <span class="svc-price">desde €800</span>
+          <div>
+            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
+              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">Landing Page</h3>
+            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">desde
+              €800</span>
           </div>
-        </div>
+          <svg
+            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg>
+        </a>
+
+        <a href="/contactos/" id="svc-02"
+          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 sm:border-r border-ink/12 transition-colors duration-300 hover:bg-ink">
+          <div class="flex items-start justify-between">
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">02</span>
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Profissional</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
+              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">Website Institucional</h3>
+            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">desde
+              €1.800</span>
+          </div>
+          <svg
+            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg>
+        </a>
+
+        <a href="/contactos/" id="svc-03"
+          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 border-ink/12 transition-colors duration-300 hover:bg-ink">
+          <div class="flex items-start justify-between">
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">03</span>
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Avançado</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
+              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">E-Commerce</h3>
+            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">desde
+              €3.200</span>
+          </div>
+          <svg
+            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg>
+        </a>
       </div>
 
-      <!-- 02 Website Institucional -->
-      <div class="svc-row reveal-up" id="svc-02">
-        <div class="svc-row-bar"></div>
-        <div class="flex items-start justify-between gap-6">
-          <div class="flex items-start gap-5 md:gap-8 flex-1 min-w-0">
-            <span class="svc-num">02</span>
-            <div class="min-w-0">
-              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2">
-                <h3 class="svc-name">Website Institucional</h3>
-                <span class="svc-tag">Profissional</span>
-              </div>
-              <p class="svc-desc">
-                Presença digital completa e coerente. Múltiplas páginas,
-                identidade visual sólida, SEO integrado e painel de gestão de
-                conteúdo para autonomia total.
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col items-end gap-3 flex-shrink-0">
-            <div class="svc-arrow">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </div>
-            <span class="svc-price">desde €1.800</span>
-          </div>
-        </div>
-      </div>
+      <!-- Row 2: 2 cards + CTA card -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 border border-t-0 border-ink/12">
 
-      <!-- 03 E-Commerce -->
-      <div class="svc-row reveal-up" id="svc-03">
-        <div class="svc-row-bar"></div>
-        <div class="flex items-start justify-between gap-6">
-          <div class="flex items-start gap-5 md:gap-8 flex-1 min-w-0">
-            <span class="svc-num">03</span>
-            <div class="min-w-0">
-              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2">
-                <h3 class="svc-name">E-Commerce</h3>
-                <span class="svc-tag">Avançado</span>
-              </div>
-              <p class="svc-desc">
-                Lojas online completas com pagamentos seguros, gestão de
-                produtos e uma experiência de compra optimizada que transforma
-                visitantes em clientes.
-              </p>
-            </div>
+        <a href="/contactos/" id="svc-04"
+          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 sm:border-r border-ink/12 transition-colors duration-300 hover:bg-ink">
+          <div class="flex items-start justify-between">
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">04</span>
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Premium</span>
           </div>
-          <div class="flex flex-col items-end gap-3 flex-shrink-0">
-            <div class="svc-arrow">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </div>
-            <span class="svc-price">desde €3.200</span>
+          <div>
+            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
+              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">Web Application</h3>
+            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">sob
+              consulta</span>
           </div>
-        </div>
-      </div>
+          <svg
+            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg>
+        </a>
 
-      <!-- 04 Web Application -->
-      <div class="svc-row reveal-up" id="svc-04">
-        <div class="svc-row-bar"></div>
-        <div class="flex items-start justify-between gap-6">
-          <div class="flex items-start gap-5 md:gap-8 flex-1 min-w-0">
-            <span class="svc-num">04</span>
-            <div class="min-w-0">
-              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2">
-                <h3 class="svc-name">Web Application</h3>
-                <span class="svc-tag">Premium</span>
-              </div>
-              <p class="svc-desc">
-                Plataformas e aplicações web complexas — autenticação, bases
-                de dados, integrações API e fluxos de utilizador à medida das
-                necessidades do negócio.
-              </p>
-            </div>
+        <a href="/contactos/" id="svc-05"
+          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 sm:border-r border-ink/12 transition-colors duration-300 hover:bg-ink">
+          <div class="flex items-start justify-between">
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">05</span>
+            <span
+              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Contínuo</span>
           </div>
-          <div class="flex flex-col items-end gap-3 flex-shrink-0">
-            <div class="svc-arrow">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </div>
-            <span class="svc-price">sob consulta</span>
+          <div>
+            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
+              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">Manutenção</h3>
+            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">desde
+              €80/mês</span>
           </div>
-        </div>
-      </div>
+          <svg
+            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg>
+        </a>
 
-      <!-- 05 Manutenção -->
-      <div class="svc-row reveal-up" id="svc-05">
-        <div class="svc-row-bar"></div>
-        <div class="flex items-start justify-between gap-6">
-          <div class="flex items-start gap-5 md:gap-8 flex-1 min-w-0">
-            <span class="svc-num">05</span>
-            <div class="min-w-0">
-              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2">
-                <h3 class="svc-name">Manutenção</h3>
-                <span class="svc-tag">Contínuo</span>
-              </div>
-              <p class="svc-desc">
-                O seu website sempre actualizado, seguro e em funcionamento.
-                Actualizações, backups automáticos, monitorização e suporte
-                técnico dedicado.
-              </p>
-            </div>
+        <!-- CTA card -->
+        <a href="/contactos/"
+          class="group relative bg-ink flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden">
+          <span class="font-mono text-[0.6rem] text-paper/40 tracking-widest uppercase">Fale connosco</span>
+          <div>
+            <p class="font-serif italic text-paper leading-tight mb-3" style="font-size: clamp(1rem, 1.5vw, 1.2rem)">Tem
+              um projecto em mente?</p>
+            <span
+              class="font-mono text-[0.65rem] text-paper/60 uppercase tracking-widest border-b border-paper/25 pb-0.5 group-hover:border-paper/60 group-hover:text-paper/90 transition-colors duration-300">Iniciar
+              conversa →</span>
           </div>
-          <div class="flex flex-col items-end gap-3 flex-shrink-0">
-            <div class="svc-arrow">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </div>
-            <span class="svc-price">desde €80/mês</span>
-          </div>
-        </div>
+        </a>
+
       </div>
     </section>
 
+
     <!-- ── 07. DIFERENCIAIS ──────────────────────────────────── -->
+
+
+
     <section id="svc-diff" style="padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem)">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-0" style="border: 1px solid rgba(18, 18, 18, 0.07)">
         <div class="diff-card reveal-up" style="border-right: 1px solid rgba(18, 18, 18, 0.07)">
