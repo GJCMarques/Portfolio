@@ -911,7 +911,7 @@
       }
       /* ── Atelier Section ────────────────────────────── */
       .atelier-item {
-        cursor: pointer;
+        cursor: default;
         transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
       .atelier-block.lg\:flex-row-reverse .atelier-item:hover {
@@ -1157,10 +1157,10 @@
             <div class="absolute -left-10 top-0 font-mono text-[8px] opacity-20 vertical-text tech-text opacity-0">
               GRID_REF: SCALE_01.ARC</div>
 
-            <div class="w-full h-full overflow-hidden rounded-[2rem] bg-ink relative">
+            <div class="w-full h-full overflow-hidden bg-ink relative">
               <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
                 alt="Arquitetura Digital"
-                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100" />
+                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100 atelier-img" />
               <div
                 class="absolute inset-0 bg-ink/20 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
               </div>
@@ -1210,10 +1210,10 @@
             <div class="absolute -right-8 top-10 font-mono text-[8px] opacity-20 rotate-90 tech-text opacity-0">
               ENGINEering_DATA_INIT</div>
 
-            <div class="w-full h-full overflow-hidden rounded-[2rem] bg-ink relative">
+            <div class="w-full h-full overflow-hidden bg-ink relative">
               <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop"
                 alt="Engenharia de Alta-Tecnologia"
-                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100" />
+                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100 atelier-img" />
               <div
                 class="absolute inset-0 bg-ink/20 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
               </div>
@@ -1261,10 +1261,10 @@
             <div class="absolute top-1/2 -translate-y-1/2 -left-8 h-[1px] w-4 bg-ink/20 tech-line opacity-0"></div>
             <div class="absolute top-1/2 -translate-y-1/2 -right-8 h-[1px] w-4 bg-ink/20 tech-line opacity-0"></div>
 
-            <div class="w-full h-full overflow-hidden rounded-[2rem] bg-ink relative">
+            <div class="w-full h-full overflow-hidden bg-ink relative">
               <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop"
                 alt="Estúdio de Media Professional"
-                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100" />
+                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100 atelier-img" />
               <div
                 class="absolute inset-0 bg-ink/20 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
               </div>
@@ -2763,45 +2763,63 @@
 
         // ── Service list atelier blocks reveal ─────────────────
         gsap.utils.toArray(".atelier-block").forEach((block) => {
-          const img = block.querySelector("img");
+          const img = block.querySelector(".atelier-img");
           const info = block.querySelector(".atelier-info");
           const items = block.querySelectorAll(".atelier-item");
           const techLines = block.querySelectorAll(".tech-line");
           const techTexts = block.querySelectorAll(".tech-text");
           const techFrame = block.querySelector(".tech-frame");
 
-          // Image parallax & Scale
-          gsap.from(img, {
-            scrollTrigger: {
-              trigger: block,
-              start: "top bottom",
-              scrub: 1.5
-            },
-            y: 40,
-            scale: 1.15
-          });
+          // Entry animation for image wrapper
+          if (img) {
+            gsap.from(img.parentElement, {
+              scrollTrigger: { trigger: block, start: "top 90%", once: true },
+              opacity: 0, scale: 0.98, y: 20, duration: 1.2, ease: "power2.out"
+            });
 
-          // Reveal Block Details
-          const blockTL = gsap.timeline({
-            scrollTrigger: { trigger: block, start: "top 65%" }
-          });
+            // Image parallax & Scale (scrub)
+            gsap.from(img, {
+              scrollTrigger: {
+                trigger: block,
+                start: "top bottom",
+                scrub: 1.2
+              },
+              y: 30,
+              scale: 1.1
+            });
+          }
 
-          // Animate technical details
-          if (techLines.length) blockTL.to(techLines, { opacity: 0.4, scaleX: 1, scaleY: 1, duration: 1.2, stagger: 0.1, ease: "power2.out" }, 0);
-          if (techTexts.length) blockTL.to(techTexts, { opacity: 0.3, y: 0, duration: 1 }, 0.4);
-          if (techFrame) blockTL.to(techFrame, { opacity: 1, scale: 1, duration: 1.5, ease: "expo.out" }, 0.2);
+          // Reveal Block Details (One unified timeline for reliability)
+          if (info) {
+            const blockTL = gsap.timeline({
+              scrollTrigger: { trigger: block, start: "top 85%", once: true }
+            });
 
-          // Info reveal
-          blockTL.from(info.querySelector("span"), { opacity: 0, x: -25, duration: 0.8 }, 0.5)
-            .from(info.querySelector("h3"), { opacity: 0, y: 35, duration: 1.2, ease: "power4.out" }, "-=0.6")
-            .from(info.querySelector("p"), { opacity: 0, y: 25, duration: 1 }, "-=0.8")
-            .from(items, {
-              opacity: 0,
-              x: (i) => block.classList.contains('lg:flex-row-reverse') ? 35 : -35,
-              duration: 1.2,
-              stagger: 0.15,
-              ease: "power3.out"
-            }, "-=0.8");
+            // Technical details
+            if (techLines.length) blockTL.to(techLines, { opacity: 0.4, scaleX: 1, scaleY: 1, duration: 1.0, stagger: 0.08 }, 0);
+            if (techTexts.length) blockTL.to(techTexts, { opacity: 0.3, y: 0, duration: 0.8 }, 0.3);
+            if (techFrame) blockTL.to(techFrame, { opacity: 1, scale: 1, duration: 1.2 }, 0.2);
+
+            // Sequential text reveal
+            const label = info.querySelector("span");
+            const title = info.querySelector("h3");
+            const desc = info.querySelector("p");
+
+            if (label) blockTL.from(label, { opacity: 0, x: -20, duration: 0.6 }, 0.4);
+            if (title) blockTL.from(title, { opacity: 0, y: 25, duration: 0.8 }, "-=0.4");
+            if (desc) blockTL.from(desc, { opacity: 0, y: 15, duration: 0.8 }, "-=0.6");
+
+            if (items.length) {
+              blockTL.from(items, {
+                opacity: 0,
+                x: (i) => block.classList.contains('lg:flex-row-reverse') ? 25 : -25,
+                duration: 0.8,
+                stagger: 0.08,
+                ease: "power2.out",
+                clearProps: "all" // Ensures opacity:1 after animation
+              }, "-=0.4");
+            }
+          }
         });
 
         // ── Pricing cards ──────────────────────────────────────
