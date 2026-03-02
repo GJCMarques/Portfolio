@@ -989,8 +989,7 @@
   ═══════════════════════════════════════════════════ -->
   <main class="relative z-10 overflow-hidden" style="background-color:#EBE9E4;">
     <!-- ── 01. HERO ─────────────────────────────────────────── -->
-    <section id="svc-hero" class="relative min-h-screen flex flex-col justify-end overflow-hidden"
-      style="
+    <section id="svc-hero" class="relative min-h-screen flex flex-col justify-end overflow-hidden" style="
           padding: clamp(7rem, 12vh, 10rem) clamp(1.5rem, 5vw, 6rem)
             clamp(3.5rem, 6vh, 5.5rem);
           background-color: #EBE9E4;
@@ -1000,7 +999,8 @@
             radial-gradient(ellipse 60% 45% at 90% 75%, rgba(201,168,76,0.06) 0%, transparent 55%);
         ">
       <!-- Geometric shapes loop -->
-      <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+      <canvas id="hero-canvas" aria-hidden="true"
+        style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
       <!-- Ghost text -->
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
         <span class="hero-ghost" style="font-size: clamp(20vw, 28vw, 38vw)">Serviços</span>
@@ -1008,7 +1008,7 @@
 
       <!-- Top-left technical ref -->
       <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none" style="
-            top: clamp(5.5rem, 9.5vh, 8.5rem);
+            top: clamp(7.5rem, 11vh, 10.5rem);
             left: clamp(1.5rem, 5vw, 6rem);
             opacity: 0;
           ">
@@ -1018,7 +1018,7 @@
 
       <!-- Top-right coordinates -->
       <div id="hero-ref-tr" class="absolute flex items-center gap-2.5 pointer-events-none justify-end" style="
-            top: clamp(5.5rem, 9.5vh, 8.5rem);
+            top: clamp(7.5rem, 11vh, 10.5rem);
             right: clamp(1.5rem, 5vw, 6rem);
             opacity: 0;
           ">
@@ -1431,14 +1431,16 @@
                     class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
                   </div>
                   <span
-                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Alojamento, domínio e certificado SSL incluídos</span>
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Alojamento,
+                    domínio e certificado SSL incluídos</span>
                   <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2">
                     <path d="m6 9 6 6 6-6" />
                   </svg>
                 </summary>
                 <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
-                  Tratamos da configuração técnica completa: alojamento, registos DNS e certificado HTTPS — o seu site entra online no primeiro dia, sem qualquer custo oculto adicional.
+                  Tratamos da configuração técnica completa: alojamento, registos DNS e certificado HTTPS — o seu site
+                  entra online no primeiro dia, sem qualquer custo oculto adicional.
                 </div>
               </details>
             </div>
@@ -1924,7 +1926,8 @@
     </section>
 
     <!-- ── 06. PERGUNTAS FREQUENTES ──────────────────────────── -->
-    <section id="svc-faq" style="position:relative; padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem); background-color: #e4e2dc; background-image: linear-gradient(to top, #EBE9E4 0%, transparent 9rem);">
+    <section id="svc-faq"
+      style="position:relative; padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem); background-color: #e4e2dc; background-image: linear-gradient(to top, #EBE9E4 0%, transparent 9rem);">
 
       <!-- ── Decorative geometric shapes ─────────────────────── -->
       <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
@@ -1932,58 +1935,51 @@
         <!-- Circle — bleeds off left edge, mid-height -->
         <svg width="190" height="190" fill="none"
           style="position:absolute;top:48%;left:0;transform:translate(-55%,-50%)">
-          <circle cx="95" cy="95" r="88" stroke="#121212" stroke-width="1.0" opacity="0.09"/>
+          <circle cx="95" cy="95" r="88" stroke="#121212" stroke-width="1.0" opacity="0.09" />
         </svg>
 
         <!-- Equilateral triangle — bleeds off right edge, upper area -->
         <svg width="130" height="114" fill="none"
           style="position:absolute;top:30%;right:0;transform:translate(30%,-50%)">
-          <polygon points="65,6 124,110 6,110"
-            stroke="#121212" stroke-width="0.9" opacity="0.09"/>
+          <polygon points="65,6 124,110 6,110" stroke="#121212" stroke-width="0.9" opacity="0.09" />
         </svg>
 
         <!-- Hexagon — left side, lower area -->
         <svg width="108" height="124" fill="none"
           style="position:absolute;top:65%;left:6%;transform:translate(-50%,-50%)">
-          <polygon points="54,4 104,30 104,94 54,120 4,94 4,30"
-            stroke="#121212" stroke-width="0.9" opacity="0.10"/>
+          <polygon points="54,4 104,30 104,94 54,120 4,94 4,30" stroke="#121212" stroke-width="0.9" opacity="0.10" />
         </svg>
 
         <!-- Rectangle rotated ~12° — bleeds off right edge, lower area -->
         <svg width="160" height="100" fill="none"
           style="position:absolute;top:70%;right:0;transform:translate(28%,-50%)">
-          <rect x="6" y="6" width="148" height="88"
-            stroke="#121212" stroke-width="0.9" opacity="0.09"
-            transform="rotate(12,80,50)"/>
+          <rect x="6" y="6" width="148" height="88" stroke="#121212" stroke-width="0.9" opacity="0.09"
+            transform="rotate(12,80,50)" />
         </svg>
 
         <!-- Square rotated 20° — upper center-right, fully visible -->
         <svg width="100" height="100" fill="none"
           style="position:absolute;top:26%;left:66%;transform:translate(-50%,-50%)">
-          <rect x="8" y="8" width="84" height="84"
-            stroke="#121212" stroke-width="0.9" opacity="0.09"
-            transform="rotate(20,50,50)"/>
+          <rect x="8" y="8" width="84" height="84" stroke="#121212" stroke-width="0.9" opacity="0.09"
+            transform="rotate(20,50,50)" />
         </svg>
 
         <!-- Pentagon — upper-left interior -->
         <svg width="96" height="92" fill="none"
           style="position:absolute;top:27%;left:20%;transform:translate(-50%,-50%)">
-          <polygon points="48,4 92,34 74,86 22,86 4,34"
-            stroke="#121212" stroke-width="0.9" opacity="0.09"/>
+          <polygon points="48,4 92,34 74,86 22,86 4,34" stroke="#121212" stroke-width="0.9" opacity="0.09" />
         </svg>
 
         <!-- Ellipse rotated ~30° — center of section -->
         <svg width="120" height="60" fill="none"
           style="position:absolute;top:50%;left:46%;transform:translate(-50%,-50%) rotate(30deg)">
-          <ellipse cx="60" cy="30" rx="56" ry="24"
-            stroke="#121212" stroke-width="0.9" opacity="0.08"/>
+          <ellipse cx="60" cy="30" rx="56" ry="24" stroke="#121212" stroke-width="0.9" opacity="0.08" />
         </svg>
 
         <!-- Parallelogram — lower center -->
         <svg width="130" height="70" fill="none"
           style="position:absolute;top:76%;left:53%;transform:translate(-50%,-50%)">
-          <polygon points="22,4 126,4 108,66 4,66"
-            stroke="#121212" stroke-width="0.9" opacity="0.09"/>
+          <polygon points="22,4 126,4 108,66 4,66" stroke="#121212" stroke-width="0.9" opacity="0.09" />
         </svg>
 
       </div>
@@ -2501,7 +2497,7 @@
             hDpr = window.devicePixelRatio || 1;
             hW = heroCanvas.parentElement.offsetWidth;
             hH = heroCanvas.parentElement.offsetHeight;
-            heroCanvas.width  = Math.round(hW * hDpr);
+            heroCanvas.width = Math.round(hW * hDpr);
             heroCanvas.height = Math.round(hH * hDpr);
             hCtx.resetTransform();
             hCtx.scale(hDpr, hDpr);
@@ -2513,13 +2509,13 @@
           // rs = rotation speed (rad/frame), rp = initial angle,
           // dax/day = drift amplitude, ds = drift speed, dp = drift phase
           const shapes = [
-            { cx:0.80, cy:0.35, rw:0.13, rh:0.42, op:0.11, rs:-0.0012, rp:0.3,  dax:0.030, day:0.018, ds:0.0018, dp:0.0 },
-            { cx:0.18, cy:0.75, rw:0.28, rh:0.09, op:0.10, rs: 0.0010, rp:1.1,  dax:0.022, day:0.015, ds:0.0015, dp:1.8 },
-            { cx:0.14, cy:0.25, rw:0.14, rh:0.14, op:0.12, rs:-0.0016, rp:2.4,  dax:0.016, day:0.020, ds:0.0022, dp:3.5 },
-            { cx:0.50, cy:0.55, rw:0.05, rh:0.50, op:0.08, rs: 0.0007, rp:0.9,  dax:0.012, day:0.010, ds:0.0012, dp:2.2 },
-            { cx:0.72, cy:0.72, rw:0.12, rh:0.12, op:0.09, rs: 0.0014, rp:3.8,  dax:0.018, day:0.016, ds:0.0019, dp:4.0 },
-            { cx:0.45, cy:0.12, rw:0.32, rh:0.07, op:0.09, rs:-0.0008, rp:1.6,  dax:0.014, day:0.011, ds:0.0014, dp:1.0 },
-            { cx:0.92, cy:0.58, rw:0.08, rh:0.08, op:0.10, rs:-0.0018, rp:4.5,  dax:0.011, day:0.014, ds:0.0024, dp:5.2 },
+            { cx: 0.80, cy: 0.35, rw: 0.13, rh: 0.42, op: 0.11, rs: -0.0012, rp: 0.3, dax: 0.030, day: 0.018, ds: 0.0018, dp: 0.0 },
+            { cx: 0.18, cy: 0.75, rw: 0.28, rh: 0.09, op: 0.10, rs: 0.0010, rp: 1.1, dax: 0.022, day: 0.015, ds: 0.0015, dp: 1.8 },
+            { cx: 0.14, cy: 0.25, rw: 0.14, rh: 0.14, op: 0.12, rs: -0.0016, rp: 2.4, dax: 0.016, day: 0.020, ds: 0.0022, dp: 3.5 },
+            { cx: 0.50, cy: 0.55, rw: 0.05, rh: 0.50, op: 0.08, rs: 0.0007, rp: 0.9, dax: 0.012, day: 0.010, ds: 0.0012, dp: 2.2 },
+            { cx: 0.72, cy: 0.72, rw: 0.12, rh: 0.12, op: 0.09, rs: 0.0014, rp: 3.8, dax: 0.018, day: 0.016, ds: 0.0019, dp: 4.0 },
+            { cx: 0.45, cy: 0.12, rw: 0.32, rh: 0.07, op: 0.09, rs: -0.0008, rp: 1.6, dax: 0.014, day: 0.011, ds: 0.0014, dp: 1.0 },
+            { cx: 0.92, cy: 0.58, rw: 0.08, rh: 0.08, op: 0.10, rs: -0.0018, rp: 4.5, dax: 0.011, day: 0.014, ds: 0.0024, dp: 5.2 },
           ];
 
           let hT = 0;
@@ -2530,9 +2526,9 @@
             hT++;
 
             shapes.forEach(s => {
-              const rot   = hT * s.rs + s.rp;
+              const rot = hT * s.rs + s.rp;
               const drift = hT * s.ds + s.dp;
-              const px = s.cx * hW + Math.cos(drift)        * s.dax * hW;
+              const px = s.cx * hW + Math.cos(drift) * s.dax * hW;
               const py = s.cy * hH + Math.sin(drift * 0.73) * s.day * hH;
               const hw = s.rw * hW * 0.5;
               const hh = s.rh * hH * 0.5;
@@ -2585,7 +2581,7 @@
         const faqSticky = document.querySelector("#svc-faq .sticky");
         if (faqSticky) {
           const faqDesc = faqSticky.querySelector("p");
-          const faqImg  = faqDesc && faqDesc.nextElementSibling;
+          const faqImg = faqDesc && faqDesc.nextElementSibling;
           if (faqDesc) {
             gsap.from(faqDesc, {
               scrollTrigger: { trigger: "#svc-faq", start: "top 80%", once: true },
@@ -2621,8 +2617,10 @@
         // reveal-fade: fromTo required (CSS sets opacity:0, from→0 would be 0→0)
         gsap.fromTo("#svc-pricing .reveal-fade",
           { opacity: 0 },
-          { scrollTrigger: { trigger: "#svc-pricing", start: "top 75%", once: true },
-            opacity: 1, duration: 1.2, ease: "power3.out" }
+          {
+            scrollTrigger: { trigger: "#svc-pricing", start: "top 75%", once: true },
+            opacity: 1, duration: 1.2, ease: "power3.out"
+          }
         );
 
         // ── Differentiators ────────────────────────────────────
