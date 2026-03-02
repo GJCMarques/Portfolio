@@ -909,6 +909,33 @@
         opacity: 0;
         will-change: opacity;
       }
+      /* ── Atelier Section ────────────────────────────── */
+      .atelier-item {
+        cursor: pointer;
+        transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .atelier-block.lg\:flex-row-reverse .atelier-item:hover {
+        transform: translateX(-15px);
+      }
+      .atelier-block:not(.lg\:flex-row-reverse) .atelier-item:hover {
+        transform: translateX(15px);
+      }
+      .atelier-item:hover {
+        color: var(--color-ink);
+        border-bottom-color: rgba(18, 18, 18, 0.25);
+      }
+      .atelier-item span:first-child {
+        transition: color 0.4s ease, transform 0.4s ease;
+      }
+      .atelier-item:hover span:first-child {
+        color: var(--color-ink);
+        transform: scale(1.1);
+      }
+      .img-decorative-line {
+        position: absolute;
+        background: rgba(18, 18, 18, 0.15);
+        pointer-events: none;
+      }
     </style>
 </head>
 
@@ -1098,148 +1125,190 @@
     </section>
 
 
-    <!-- ── 03. SERVICES LIST ─────────────────────────────────── -->
-    <section id="svc-list" style="padding: clamp(4rem, 7vh, 7rem) clamp(1.5rem, 5vw, 6rem) clamp(2.5rem, 5vh, 5rem);">
-      <div class="flex items-end justify-between mb-2">
-        <span class="t-label">02 — TIPOLOGIAS</span>
-        <span class="t-label">05 SERVIÇOS</span>
-      </div>
-      <div class="flex items-end justify-between mb-10 gap-8">
-        <h2 class="font-serif italic text-ink" style="font-size: clamp(2rem, 4.5vw, 4.5rem); line-height: 1.1">
-          O que criamos
-        </h2>
-        <p class="hidden md:block font-mono text-silver text-right leading-relaxed"
-          style="font-size: 0.72rem; max-width: 26ch">
-          Cada projecto é único.<br />Cada solução, feita à medida.
-        </p>
-      </div>
-
-      <!-- Row 1: 3 cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 border border-ink/12">
-
-        <a href="/contactos/" id="svc-01"
-          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 sm:border-r border-ink/12 transition-colors duration-300 hover:bg-ink">
-          <div class="flex items-start justify-between">
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">01</span>
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Essencial</span>
-          </div>
-          <div>
-            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
-              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">Landing Page</h3>
-            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">desde
-              €800</span>
-          </div>
-          <svg
-            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </a>
-
-        <a href="/contactos/" id="svc-02"
-          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 sm:border-r border-ink/12 transition-colors duration-300 hover:bg-ink">
-          <div class="flex items-start justify-between">
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">02</span>
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Profissional</span>
-          </div>
-          <div>
-            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
-              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">Website Institucional</h3>
-            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">desde
-              €1.800</span>
-          </div>
-          <svg
-            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </a>
-
-        <a href="/contactos/" id="svc-03"
-          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 border-ink/12 transition-colors duration-300 hover:bg-ink">
-          <div class="flex items-start justify-between">
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">03</span>
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Avançado</span>
-          </div>
-          <div>
-            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
-              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">E-Commerce</h3>
-            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">desde
-              €3.200</span>
-          </div>
-          <svg
-            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </a>
+    <!-- ── 03. DIGITAL ATELIER: O QUE CRIAMOS ─────────────────── -->
+    <section id="svc-list" class="relative overflow-hidden" style="padding: clamp(6rem, 10vh, 12rem) 0;">
+      <!-- Section Header -->
+      <div class="px-[clamp(1.5rem,5vw,6rem)] mb-[clamp(4rem,8vh,8rem)]">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="t-label">02 — COLECÇÃO</span>
+          <div class="h-[1px] flex-1 bg-ink/10"></div>
+          <span class="t-label">EST. 2026</span>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+          <h2 class="font-serif italic text-ink leading-[0.9]" style="font-size: clamp(3.5rem, 8vw, 12rem)">
+            Atelier <br /> <span class="pl-[10%]">Monrion.</span>
+          </h2>
+          <p class="font-mono text-silver text-sm max-w-xs leading-relaxed opacity-70">
+            Sistemas digitais concebidos <br /> como peças de alta-costura. <br />
+            Precisão. Estética. Poder.
+          </p>
+        </div>
       </div>
 
-      <!-- Row 2: 2 cards + CTA card -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 border border-t-0 border-ink/12">
+      <!-- Luxury Collection Blocks -->
+      <div class="space-y-[clamp(8rem,15vh,18rem)] px-[clamp(1.5rem,5vw,6rem)]">
 
-        <a href="/contactos/" id="svc-04"
-          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 sm:border-r border-ink/12 transition-colors duration-300 hover:bg-ink">
-          <div class="flex items-start justify-between">
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">04</span>
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Premium</span>
-          </div>
-          <div>
-            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
-              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">Web Application</h3>
-            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">sob
-              consulta</span>
-          </div>
-          <svg
-            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </a>
+        <!-- BLOCK 01: ARQUITETURA DIGITAL -->
+        <div class="atelier-block group flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+          <div class="w-full lg:w-3/5 aspect-[16/10] relative">
+            <!-- Decorative Frames -->
+            <div class="img-decorative-line h-[1px] w-[110%] -left-[5%] -top-4 tech-line opacity-0"></div>
+            <div class="img-decorative-line w-[1px] h-[110%] -left-6 -top-[5%] tech-line opacity-0"></div>
+            <div class="absolute -left-10 top-0 font-mono text-[8px] opacity-20 vertical-text tech-text opacity-0">
+              GRID_REF: SCALE_01.ARC</div>
 
-        <a href="/contactos/" id="svc-05"
-          class="group relative bg-paper flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden border-b sm:border-b-0 sm:border-r border-ink/12 transition-colors duration-300 hover:bg-ink">
-          <div class="flex items-start justify-between">
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/40 transition-colors duration-300 tracking-widest">05</span>
-            <span
-              class="font-mono text-[0.6rem] text-ink/40 group-hover:text-paper/30 transition-colors duration-300 uppercase tracking-widest border border-ink/20 group-hover:border-paper/20 px-2 py-0.5">Contínuo</span>
+            <div class="w-full h-full overflow-hidden rounded-[2rem] bg-ink relative">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+                alt="Arquitetura Digital"
+                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100" />
+              <div
+                class="absolute inset-0 bg-ink/20 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
+              </div>
+              <!-- Technical Grid Overlay -->
+              <div class="absolute inset-0 opacity-20 pointer-events-none"
+                style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 40px 40px;">
+              </div>
+            </div>
           </div>
-          <div>
-            <h3 class="font-sans font-bold text-ink group-hover:text-paper transition-colors duration-300 mb-1"
-              style="font-size: clamp(1rem, 1.8vw, 1.3rem)">Manutenção</h3>
-            <span class="font-mono text-ink/50 group-hover:text-paper/50 transition-colors duration-300 text-xs">desde
-              €80/mês</span>
+          <div class="w-full lg:w-2/5 atelier-info">
+            <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40 mb-4 block">Colecção
+              d'Élite</span>
+            <h3 class="font-serif italic text-ink text-5xl mb-6">Arquitetura Digital</h3>
+            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed max-w-md">
+              Concebemos ecossistemas web que equilibram estética minimalista com performance absoluta. Não apenas
+              sites, mas extensões digitais da sua visão de marca.
+            </p>
+            <div class="atelier-list space-y-4 font-mono text-[0.75rem] text-ink/70">
+              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
+                <span class="opacity-30">0.1</span>
+                <span>Websites Custom-Built (The Essence)</span>
+              </div>
+              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
+                <span class="opacity-30">0.2</span>
+                <span>Web Applications & Sistemas SaaS</span>
+              </div>
+              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
+                <span class="opacity-30">0.3</span>
+                <span>Plataformas E-Commerce de Luxo</span>
+              </div>
+              <div class="atelier-item flex items-center gap-4 py-3">
+                <span class="opacity-30">0.4</span>
+                <span>Otimização & Identidade Digital</span>
+              </div>
+            </div>
           </div>
-          <svg
-            class="absolute bottom-4 right-4 w-4 h-4 text-ink/25 group-hover:text-paper/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </a>
+        </div>
 
-        <!-- CTA card -->
-        <a href="/contactos/"
-          class="group relative bg-ink flex flex-col justify-between p-6 md:p-8 min-h-[220px] overflow-hidden">
-          <span class="font-mono text-[0.6rem] text-paper/40 tracking-widest uppercase">Fale connosco</span>
-          <div>
-            <p class="font-serif italic text-paper leading-tight mb-3" style="font-size: clamp(1rem, 1.5vw, 1.2rem)">Tem
-              um projecto em mente?</p>
-            <span
-              class="font-mono text-[0.65rem] text-paper/60 uppercase tracking-widest border-b border-paper/25 pb-0.5 group-hover:border-paper/60 group-hover:text-paper/90 transition-colors duration-300">Iniciar
-              conversa →</span>
+        <!-- BLOCK 02: ENGENHARIA DE PRECISÃO -->
+        <div class="atelier-block group flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-24">
+          <div class="w-full lg:w-3/5 aspect-[16/10] relative">
+            <!-- Blueprint Corner marks -->
+            <div class="absolute -top-6 -right-6 w-24 h-[1px] bg-ink/20 tech-line opacity-0"></div>
+            <div class="absolute -top-6 -right-6 w-[1px] h-24 bg-ink/20 tech-line opacity-0"></div>
+            <div class="absolute -bottom-6 -left-6 w-24 h-[1px] bg-ink/20 tech-line opacity-0"></div>
+            <div class="absolute -bottom-6 -left-6 w-[1px] h-24 bg-ink/20 tech-line opacity-0"></div>
+            <div class="absolute -right-8 top-10 font-mono text-[8px] opacity-20 rotate-90 tech-text opacity-0">
+              ENGINEering_DATA_INIT</div>
+
+            <div class="w-full h-full overflow-hidden rounded-[2rem] bg-ink relative">
+              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop"
+                alt="Engenharia de Alta-Tecnologia"
+                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100" />
+              <div
+                class="absolute inset-0 bg-ink/20 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
+              </div>
+              <!-- Blueprint Corner marks internal -->
+              <div class="absolute top-8 left-8 w-12 h-12 border-t border-l border-white/30"></div>
+              <div class="absolute bottom-8 right-8 w-12 h-12 border-b border-r border-white/30"></div>
+            </div>
           </div>
-        </a>
+          <div class="w-full lg:w-2/5 atelier-info lg:text-right">
+            <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40 mb-4 block">Lógica &
+              Engenharia</span>
+            <h3 class="font-serif italic text-ink text-5xl mb-6">Engenharia de Precisão</h3>
+            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed max-w-md lg:ml-auto">
+              Onde a lógica pura se encontra com a inovação. Desenvolvemos software e aplicações robustas, focadas em
+              escalabilidade e na experiência técnica superior.
+            </p>
+            <div class="atelier-list space-y-4 font-mono text-[0.75rem] text-ink/70">
+              <div class="atelier-item flex items-center lg:flex-row-reverse gap-4 py-3 border-b border-ink/5">
+                <span class="opacity-30">0.1</span>
+                <span>Mobile Apps (iOS & Android)</span>
+              </div>
+              <div class="atelier-item flex items-center lg:flex-row-reverse gap-4 py-3 border-b border-ink/5">
+                <span class="opacity-30">0.2</span>
+                <span>Software sob Medida & Algoritmos</span>
+              </div>
+              <div class="atelier-item flex items-center lg:flex-row-reverse gap-4 py-3 border-b border-ink/5">
+                <span class="opacity-30">0.3</span>
+                <span>Consultoria Técnica em Engenharia de Software</span>
+              </div>
+              <div class="atelier-item flex items-center lg:flex-row-reverse gap-4 py-3">
+                <span class="opacity-30">0.4</span>
+                <span>Programação Full Stack & Backend</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCK 03: ESTÚDIO VISUAL -->
+        <div class="atelier-block group flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+          <div class="w-full lg:w-3/5 aspect-[16/10] relative">
+            <!-- Decorative Crosshair & Frame -->
+            <div class="absolute -inset-8 border border-ink/5 tech-frame opacity-0"></div>
+            <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-[1px] h-4 bg-ink/20 tech-line opacity-0"></div>
+            <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[1px] h-4 bg-ink/20 tech-line opacity-0"></div>
+            <div class="absolute top-1/2 -translate-y-1/2 -left-8 h-[1px] w-4 bg-ink/20 tech-line opacity-0"></div>
+            <div class="absolute top-1/2 -translate-y-1/2 -right-8 h-[1px] w-4 bg-ink/20 tech-line opacity-0"></div>
+
+            <div class="w-full h-full overflow-hidden rounded-[2rem] bg-ink relative">
+              <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop"
+                alt="Estúdio de Media Professional"
+                class="w-full h-full object-cover transition-all duration-[2s] grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-80 group-hover:opacity-100" />
+              <div
+                class="absolute inset-0 bg-ink/20 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0">
+              </div>
+              <!-- Dynamic Crosshair -->
+              <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 text-white/40"
+                viewBox="0 0 100 100">
+                <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-width="0.5" />
+                <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-width="0.5" />
+                <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" stroke-width="0.5" />
+              </svg>
+            </div>
+          </div>
+          <div class="w-full lg:w-2/5 atelier-info">
+            <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40 mb-4 block">Recurso Visual
+              Complementar</span>
+            <h3 class="font-serif italic text-ink text-5xl mb-6">Estúdio Visual</h3>
+            <p class="font-sans text-ink/60 text-sm mb-8 leading-relaxed max-w-md">
+              A imagem como linguagem de poder. Complementamos a presença digital com fotografia e vídeo que elevam o
+              padrão de percepção do mercado.
+            </p>
+            <div class="atelier-list space-y-4 font-mono text-[0.75rem] text-ink/70">
+              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
+                <span class="opacity-30">0.1</span>
+                <span>Fotografia Profissional & Pós-Produção</span>
+              </div>
+              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
+                <span class="opacity-30">0.2</span>
+                <span>Videografia & Edição Cinematográfica</span>
+              </div>
+              <div class="atelier-item flex items-center gap-4 py-3 border-b border-ink/5">
+                <span class="opacity-30">0.3</span>
+                <span>Gestão Estratégica de Redes Sociais</span>
+              </div>
+              <div class="atelier-item flex items-center gap-4 py-3">
+                <span class="opacity-30">0.4</span>
+                <span>Suporte em Criatividade & Design de Marca</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
+
+
     </section>
 
 
@@ -2130,7 +2199,7 @@
             </summary>
             <div class="font-sans text-ink/65 leading-relaxed pt-6">
               O tempo médio de desenvolvimento varia conforme a complexidade do projecto. Uma Landing Page pode levar
-              entre 3 a 4 semanas. Um website mais complexo demora cerca de 6 a 8 semanas. Estabelecemos prazos claros
+              entre 3 a 4 semanas. Un website mais complexo demora cerca de 6 a 8 semanas. Estabelecemos prazos claros
               após aprovação do conceito visual.
             </div>
           </details>
@@ -2692,14 +2761,48 @@
           }
         }
 
-        // ── Service list cards (svc-01…svc-05) ─────────────────
-        const svcCards = Array.from(document.querySelectorAll("#svc-list a[id^='svc-0']"));
-        if (svcCards.length) {
-          gsap.from(svcCards, {
-            scrollTrigger: { trigger: "#svc-list", start: "top 80%", once: true },
-            opacity: 0, y: 36, duration: 1.2, stagger: 0.1, ease: "power4.out"
+        // ── Service list atelier blocks reveal ─────────────────
+        gsap.utils.toArray(".atelier-block").forEach((block) => {
+          const img = block.querySelector("img");
+          const info = block.querySelector(".atelier-info");
+          const items = block.querySelectorAll(".atelier-item");
+          const techLines = block.querySelectorAll(".tech-line");
+          const techTexts = block.querySelectorAll(".tech-text");
+          const techFrame = block.querySelector(".tech-frame");
+
+          // Image parallax & Scale
+          gsap.from(img, {
+            scrollTrigger: {
+              trigger: block,
+              start: "top bottom",
+              scrub: 1.5
+            },
+            y: 40,
+            scale: 1.15
           });
-        }
+
+          // Reveal Block Details
+          const blockTL = gsap.timeline({
+            scrollTrigger: { trigger: block, start: "top 65%" }
+          });
+
+          // Animate technical details
+          if (techLines.length) blockTL.to(techLines, { opacity: 0.4, scaleX: 1, scaleY: 1, duration: 1.2, stagger: 0.1, ease: "power2.out" }, 0);
+          if (techTexts.length) blockTL.to(techTexts, { opacity: 0.3, y: 0, duration: 1 }, 0.4);
+          if (techFrame) blockTL.to(techFrame, { opacity: 1, scale: 1, duration: 1.5, ease: "expo.out" }, 0.2);
+
+          // Info reveal
+          blockTL.from(info.querySelector("span"), { opacity: 0, x: -25, duration: 0.8 }, 0.5)
+            .from(info.querySelector("h3"), { opacity: 0, y: 35, duration: 1.2, ease: "power4.out" }, "-=0.6")
+            .from(info.querySelector("p"), { opacity: 0, y: 25, duration: 1 }, "-=0.8")
+            .from(items, {
+              opacity: 0,
+              x: (i) => block.classList.contains('lg:flex-row-reverse') ? 35 : -35,
+              duration: 1.2,
+              stagger: 0.15,
+              ease: "power3.out"
+            }, "-=0.8");
+        });
 
         // ── Pricing cards ──────────────────────────────────────
         ["#pc-arranque", "#pc-crescimento", "#pc-empresa"].forEach((sel, i) => {
