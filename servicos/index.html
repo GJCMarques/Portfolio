@@ -1484,6 +1484,20 @@
                 </div>
               </div>
 
+              <!-- TOP-RIGHT corner bracket -->
+              <div class="absolute top-4 right-4 pointer-events-none">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="opacity-60">
+                  <path d="M0 2 L34 2 L34 36" stroke="#EBE9E4" stroke-width="1.2" fill="none" />
+                </svg>
+              </div>
+
+              <!-- BOTTOM-RIGHT corner bracket -->
+              <div class="absolute bottom-4 right-4 pointer-events-none">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="opacity-60">
+                  <path d="M0 34 L34 34 L34 0" stroke="#EBE9E4" stroke-width="1.2" fill="none" />
+                </svg>
+              </div>
+
             </div>
             <!-- Dynamic Gauge Detail -->
             <div
@@ -1565,11 +1579,14 @@
           </div>
         </div>
 
-        <!-- BLOCK 03: ESTÚDIO VISUAL (Symmetrical Editorial) -->
-        <div class="atelier-block group flex flex-col items-center text-center relative max-w-5xl mx-auto">
-          <span
-            class="font-serif italic text-ink/[0.02] text-[20vw] absolute -top-[10vw] -left-12 pointer-events-none hidden lg:block">03</span>
+        <!-- BLOCK 03: ESTÚDIO VISUAL -->
+        <div class="atelier-block group relative">
 
+          <!-- Ghost background watermark -->
+          <span
+            class="font-serif italic text-ink/[0.02] text-[20vw] absolute -top-[10vw] right-0 pointer-events-none hidden lg:block">Atelier</span>
+
+          <!-- Full-width image -->
           <div class="w-full mb-16 relative">
             <div class="aspect-[21/9] overflow-hidden bg-ink relative">
               <!-- Viewfinder Overlay -->
@@ -1585,55 +1602,66 @@
             </div>
           </div>
 
-          <div class="w-full max-w-2xl px-6 atelier-info reveal-up">
-            <span class="font-mono text-[0.6rem] tracking-[0.4em] uppercase opacity-40 mb-4 block">Visual
-              Composition</span>
-            <h3 class="font-serif italic text-ink text-6xl mb-8">Estúdio Visual</h3>
-            <p class="font-sans text-ink/70 text-[1.1rem] mb-12 leading-relaxed">
-              Onde o olhar capturado se transforma em narrativa de poder. Criamos o universo estético que permite à sua
-              marca falar sem dizer uma única palavra.
-            </p>
-            <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 pt-8 border-t border-ink/[0.05]">
-              <div class="flex flex-col items-center">
-                <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">01. Photo</span>
-                <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Produto &
-                  Moda</span>
-              </div>
-              <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
-              <div class="flex flex-col items-center">
-                <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">02. Cinema</span>
-                <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Filmes
-                  Comerciais</span>
-              </div>
-              <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
-              <div class="flex flex-col items-center">
-                <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">03. Strategy</span>
-                <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Direção
-                  Criativa</span>
-              </div>
-              <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
-              <div class="flex flex-col items-center">
-                <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">04. Edit</span>
-                <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Color
-                  Grading</span>
-              </div>
-              <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
-              <div class="flex flex-col items-center">
-                <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">05. Brand</span>
-                <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Arquitetura
-                  Marca</span>
-              </div>
-              <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
-              <div class="flex flex-col items-center">
-                <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">06. Print</span>
-                <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Editorial
-                  Design</span>
+          <!-- Below image: 03 number LEFT + content div RIGHT -->
+          <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+
+            <!-- 03 number — same style as 02 in Engenharia div -->
+            <div class="hidden lg:flex flex-shrink-0 items-start pt-2">
+              <span class="font-serif italic text-ink/[0.06] leading-none pointer-events-none select-none"
+                style="font-size: clamp(6rem, 10vw, 12rem)">03</span>
+            </div>
+
+            <!-- Content div -->
+            <div class="flex-1 w-full max-w-2xl mx-auto px-6 atelier-info reveal-up text-center">
+              <span class="font-mono text-[0.6rem] tracking-[0.4em] uppercase opacity-40 mb-4 block">Visual
+                Composition</span>
+              <h3 class="font-serif italic text-ink text-6xl mb-8">Estúdio Visual</h3>
+              <p class="font-sans text-ink/70 text-[1.1rem] mb-12 leading-relaxed">
+                Onde o olhar capturado se transforma em narrativa de poder. Criamos o universo estético que permite à
+                sua
+                marca falar sem dizer uma única palavra.
+              </p>
+              <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 pt-8 border-t border-ink/[0.05]">
+                <div class="flex flex-col items-center">
+                  <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">01. Photo</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Produto &
+                    Moda</span>
+                </div>
+                <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
+                <div class="flex flex-col items-center">
+                  <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">02. Cinema</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Filmes
+                    Comerciais</span>
+                </div>
+                <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
+                <div class="flex flex-col items-center">
+                  <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">03. Strategy</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Direção
+                    Criativa</span>
+                </div>
+                <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
+                <div class="flex flex-col items-center">
+                  <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">04. Edit</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Color
+                    Grading</span>
+                </div>
+                <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
+                <div class="flex flex-col items-center">
+                  <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">05. Brand</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Arquitetura
+                    Marca</span>
+                </div>
+                <div class="w-[1px] h-8 bg-ink/[0.05] hidden lg:block"></div>
+                <div class="flex flex-col items-center">
+                  <span class="font-mono text-[0.55rem] opacity-30 uppercase tracking-widest mb-1">06. Print</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-wider text-ink/80 font-bold">Editorial
+                    Design</span>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-      </div>
+          </div><!-- end flex row -->
+        </div><!-- end block 03 -->
 
     </section>
 
