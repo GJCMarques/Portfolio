@@ -1397,7 +1397,7 @@
               class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono border border-ink/20 px-6 py-4 text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:border-ink hover:text-paper rounded-none mt-auto">
               <span
                 class="absolute inset-0 w-full h-full bg-ink translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
-              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Instanciar</span>
+              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Contactar</span>
             </a>
           </div>
         </div>
@@ -1525,7 +1525,7 @@
               class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono bg-paper text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] px-6 py-4 rounded-none mt-auto">
               <span
                 class="absolute inset-0 w-full h-full bg-[#e0ded9] translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
-              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Selecionar</span>
+              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Contactar</span>
             </a>
           </div>
         </div>
@@ -2345,176 +2345,118 @@
         }
 
         // ── Hero entrance ──────────────────────────────────────
+        // Lines: CSS sets transform: scaleX(0), so .to(scaleX:1) works
         const heroTL = gsap.timeline({ defaults: { ease: "power4.out" } });
+        heroTL.to(["#hero-line-l", "#hero-line-r"], { scaleX: 1, duration: 1.5, stagger: 0 }, 0);
+        // Words: inline style transform: translateY(110%), animate to 0%
+        heroTL.to(["#hero-w1", "#hero-w2"], { y: "0%", duration: 1.6, stagger: 0.15 }, 0.2);
+        // Description: inline opacity: 0, animate to 1
+        heroTL.to("#hero-desc", { opacity: 1, duration: 1.2 }, 0.8);
+        // Stats: explicit fromTo to set initial state
+        heroTL.fromTo(["#stat-1", "#stat-2", "#stat-3"],
+          { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.15 }, 0.9);
+        heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.5);
 
-        gsap.from(".hero-ghost", {
-          opacity: 0,
-          y: 50,
-          scale: 0.95,
-          duration: 2,
-          ease: "power3.out"
+        // Ghost text drifts in
+        gsap.from(".hero-ghost", { opacity: 0, y: 60, scale: 0.92, duration: 2.5, ease: "power3.out" });
+
+        // ── Section headings scroll entrance ───────────────────
+        ["#svc-list", "#svc-diff", "#svc-pricing", "#svc-tech", "#svc-faq"].forEach(id => {
+          const sect = document.querySelector(id);
+          if (!sect) return;
+          const targets = [sect.querySelector(".t-label"), sect.querySelector("h2")].filter(Boolean);
+          if (targets.length) {
+            gsap.from(targets, {
+              scrollTrigger: { trigger: sect, start: "top 84%", once: true },
+              opacity: 0, y: 22, duration: 0.9, stagger: 0.1, ease: "power3.out"
+            });
+          }
         });
 
-        // Horizontal lines draw in
-        heroTL.to(
-          ["#hero-line-l", "#hero-line-r"],
-          {
-            scaleX: 1,
-            duration: 1.5,
-            stagger: 0,
-          },
-          0,
-        );
-
-        // Headline words reveal (clip up)
-        heroTL.to(
-          ["#hero-w1", "#hero-w2"],
-          {
-            y: "0%",
-            duration: 1.6,
-            stagger: 0.15,
-          },
-          0.2,
-        );
-
-        // Description + stats + scroll cue
-        heroTL.to(
-          "#hero-desc",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-          },
-          0.8,
-        );
-        heroTL.fromTo(
-          ["#stat-1", "#stat-2", "#stat-3"],
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            stagger: 0.15,
-          },
-          0.9,
-        );
-        heroTL.to(
-          "#hero-scroll-cue",
-          {
-            opacity: 1,
-            duration: 1,
-          },
-          1.5,
-        );
-
-        // ── Service rows ───────────────────────────────────────
-        const rows = gsap.utils.toArray(".svc-row");
-        rows.forEach((row, i) => {
-          gsap.to(row, {
-            scrollTrigger: {
-              trigger: row,
-              start: "top 88%",
-              toggleActions: "play none none none",
-            },
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            delay: i * 0.05,
-            ease: "power2.out",
+        // ── Service list cards (svc-01…svc-05) ─────────────────
+        const svcCards = Array.from(document.querySelectorAll("#svc-list a[id^='svc-0']"));
+        if (svcCards.length) {
+          gsap.from(svcCards, {
+            scrollTrigger: { trigger: "#svc-list", start: "top 80%", once: true },
+            opacity: 0, y: 30, duration: 0.75, stagger: 0.08, ease: "power3.out"
           });
-        });
+        }
 
         // ── Pricing cards ──────────────────────────────────────
-        const cards = ["#pc-arranque", "#pc-crescimento", "#pc-empresa"];
-        cards.forEach((sel, i) => {
+        // gsap.from() sets initial state itself — no CSS hidden state needed
+        ["#pc-arranque", "#pc-crescimento", "#pc-empresa"].forEach((sel, i) => {
           const el = document.querySelector(sel);
           if (!el) return;
-          gsap.to(el, {
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: "power2.out",
+          gsap.from(el, {
+            scrollTrigger: { trigger: "#svc-pricing", start: "top 80%", once: true },
+            opacity: 0, y: 50, duration: 1, delay: i * 0.15, ease: "power3.out"
           });
         });
-
-        // Pricing note
-        gsap.to("#svc-pricing .reveal-fade", {
-          scrollTrigger: {
-            trigger: "#svc-pricing .reveal-fade",
-            start: "top 90%",
-            toggleActions: "play none none none",
-          },
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-        });
+        // reveal-fade CSS sets opacity:0 — must use fromTo, not from (0→0 does nothing)
+        gsap.fromTo("#svc-pricing .reveal-fade",
+          { opacity: 0 },
+          { scrollTrigger: { trigger: "#svc-pricing", start: "top 75%", once: true },
+            opacity: 1, duration: 0.9, ease: "power2.out" }
+        );
 
         // ── Differentiators ────────────────────────────────────
+        // fromTo to override CSS .reveal-up class reliably
         gsap.utils.toArray("#svc-diff .diff-card").forEach((card, i) => {
-          gsap.to(card, {
-            scrollTrigger: {
-              trigger: "#svc-diff",
-              start: "top 82%",
-              toggleActions: "play none none none",
-            },
-            opacity: 1,
-            y: 0,
-            duration: 0.75,
-            delay: i * 0.12,
-            ease: "power2.out",
+          gsap.fromTo(card,
+            { opacity: 0, y: 36 },
+            {
+              scrollTrigger: { trigger: "#svc-diff", start: "top 82%", once: true },
+              opacity: 1, y: 0, duration: 0.75, delay: i * 0.12, ease: "power2.out"
+            }
+          );
+        });
+
+        // ── Process steps ──────────────────────────────────────
+        gsap.utils.toArray(".process-step").forEach((step, i) => {
+          gsap.from(step, {
+            scrollTrigger: { trigger: "#svc-process", start: "top 80%", once: true },
+            opacity: 0, y: 24, duration: 0.7, delay: i * 0.1, ease: "power3.out"
           });
         });
 
+        // ── Tech section: slide left panel in from left, right from right ──
+        const techInner = document.querySelector("#svc-tech > div");
+        if (techInner && techInner.children.length >= 2) {
+          gsap.from(techInner.children[0], {
+            scrollTrigger: { trigger: "#svc-tech", start: "top 78%", once: true },
+            opacity: 0, x: -32, duration: 1, ease: "power3.out"
+          });
+          gsap.from(techInner.children[1], {
+            scrollTrigger: { trigger: "#svc-tech", start: "top 78%", once: true },
+            opacity: 0, x: 32, duration: 1, delay: 0.1, ease: "power3.out"
+          });
+        }
+
         // ── CTA section ────────────────────────────────────────
+        // .cta-word has inline transform: translateY(130%), animate to 0%
         const ctaTL = gsap.timeline({
-          scrollTrigger: {
-            trigger: "#svc-cta",
-            start: "top 78%",
-            toggleActions: "play none none none",
-          },
+          scrollTrigger: { trigger: "#svc-cta", start: "top 78%" }
         });
-        ctaTL.to(
-          ".cta-word",
-          {
-            y: "0%",
-            duration: 1.2,
-            stagger: 0.12,
-            ease: "power3.out",
-          },
-          0,
-        );
-        ctaTL.to(
-          "#svc-cta .reveal-fade",
-          {
-            opacity: 1,
-            duration: 0.9,
-            stagger: 0.1,
-            ease: "power2.out",
-          },
-          0.4,
+        ctaTL.to(".cta-word", { y: "0%", duration: 1.2, stagger: 0.12, ease: "power3.out" }, 0);
+        // reveal-fade CSS is opacity:0 — fromTo required (from 0→1, not 0→0)
+        ctaTL.fromTo("#svc-cta .reveal-fade",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.9, stagger: 0.1, ease: "power2.out" },
+          0.4
         );
 
         // ── Footer ───────────────────────────────────────────────
         gsap.from(".footer-dots", {
           scrollTrigger: { trigger: "footer", start: "top 85%" },
-          opacity: 0,
-          duration: 1.5,
-          ease: "power2.out",
+          opacity: 0, duration: 1.5, ease: "power2.out",
         });
-
         gsap.from(".footer-grid > div, .footer-bottom", {
           scrollTrigger: { trigger: "footer", start: "top 85%" },
-          y: 40,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
+          y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out",
         });
+
+        // Recalculate all scroll trigger positions after layout stabilises
+        ScrollTrigger.refresh();
       } catch (err) {
         console.error("Animations init error:", err);
       }
