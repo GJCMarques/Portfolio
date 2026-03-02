@@ -2783,9 +2783,10 @@
               return;
             }
 
-            // Performance: skip draw if the hero is not visible
+            // Performance: completely pause if the hero is not visible
             const rect = heroCanvas.getBoundingClientRect();
-            if (rect.bottom < 0 || rect.top > window.innerHeight) {
+            if (rect.bottom < 0) return; // Stop the loop completely if scrolled past
+            if (rect.top > window.innerHeight) {
               heroCanvas._raf = requestAnimationFrame(drawHeroC);
               return;
             }
@@ -2810,6 +2811,15 @@
             });
             heroCanvas._raf = requestAnimationFrame(drawHeroC);
           })();
+
+          // Restart Raf when entering hero (if it was stopped)
+          ScrollTrigger.create({
+            trigger: heroCanvas,
+            start: "top bottom",
+            onEnter: () => {
+              if (!heroCanvas._raf) drawHeroC();
+            }
+          });
         }
 
         // ── Hero entrance ──────────────────────────────────────
@@ -2850,25 +2860,38 @@
           }
         });
 
-        // ── Global reveal system (Cinematic Power) ──────────────
-        gsap.utils.toArray(".reveal-up").forEach(el => {
-          gsap.fromTo(el,
-            { opacity: 0, y: 50 },
-            {
-              scrollTrigger: { trigger: el, start: "top 88%", once: true },
-              opacity: 1, y: 0, duration: 1.6, ease: "power4.out"
-            }
-          );
+        // ── Batched Global Reveal system (Better Performance) ───
+        ScrollTrigger.batch(".reveal-up", {
+          onEnter: batch => gsap.to(batch, {
+            opacity: 1, y: 0,
+            duration: 1.4,
+            stagger: 0.15,
+            ease: "power4.out",
+            overwrite: true
+          }),
+          start: "top 88%",
+          once: true
         });
 
-        gsap.utils.toArray(".reveal-fade").forEach(el => {
-          gsap.fromTo(el,
-            { opacity: 0 },
-            {
-              scrollTrigger: { trigger: el, start: "top 88%", once: true },
-              opacity: 1, duration: 1.4, ease: "power2.out"
-            }
-          );
+        ScrollTrigger.batch(".reveal-fade", {
+          onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.1,
+            ease: "power2.out",
+            overwrite: true
+          }),
+          start: "top 88%",
+          once: true
+        });
+
+        // Ensure elements starts at initial state
+        gsap.set(".reveal-up", { opacity: 0, y: 50 });
+        gsap.set(".reveal-fade", { opacity: 0 });
+
+        // Refresh on full load to avoid 'stuck' triggers due to lazy-loaded images
+        window.addEventListener('load', () => {
+          ScrollTrigger.refresh();
         });
 
         // ── Background drift animations ────────────────────────
@@ -2982,8 +3005,12 @@
           }
         });
 
-        // Optimization: Reduce ScrollTrigger check frequency
+        // Optimization: Global ScrollTrigger defaults
         ScrollTrigger.config({ limitCallbacks: true });
+        ScrollTrigger.defaults({
+          fastScrollEnd: true,
+          preventOverlaps: true
+        });
         window.addEventListener('resize', () => ScrollTrigger.refresh());
 
         // ── Pricing cards ──────────────────────────────────────
