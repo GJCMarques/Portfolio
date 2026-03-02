@@ -1199,6 +1199,49 @@
         border-color: rgba(18, 18, 18, 0.28);
         color: var(--color-ink);
       }
+
+      /* ARCHIVE — rows visible by default; IO adds polish */
+      #all-projects-list > div {
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      #all-projects-list > div.will-animate {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      #all-projects-list > div.will-animate.in-view {
+        opacity: 1;
+        transform: none;
+      }
+
+      #pf-all .archive-title {
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      #pf-all .archive-title.will-animate {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      #pf-all .archive-title.will-animate.in-view {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* CTA — visible by default; transitions added for class reveal */
+      .cta-line {
+        display: block;
+        transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* Footer — always visible */
+      .footer-dots,
+      .footer-grid > div,
+      .footer-bottom {
+        opacity: 1;
+        transform: none;
+      }
     </style>
 </head>
 
@@ -1338,34 +1381,19 @@
           </p>
           <div class="flex items-start gap-10 md:gap-14">
             <div id="stat-1" style="opacity: 0; transform: translateY(20px)">
-              <div class="font-mono font-light text-ink" style="
-                    font-size: clamp(2.25rem, 4.5vw, 4rem);
-                    letter-spacing: -0.03em;
-                    line-height: 1;
-                  ">
-                6
-              </div>
+              <div class="font-mono font-light text-ink"
+                style="font-size: clamp(2.25rem, 4.5vw, 4rem); letter-spacing: -0.03em; line-height: 1;">11</div>
               <div class="t-label mt-1.5">Projectos</div>
             </div>
             <div id="stat-2" style="opacity: 0; transform: translateY(20px)">
-              <div class="font-mono font-light text-ink" style="
-                    font-size: clamp(2.25rem, 4.5vw, 4rem);
-                    letter-spacing: -0.03em;
-                    line-height: 1;
-                  ">
-                4
-              </div>
+              <div class="font-mono font-light text-ink"
+                style="font-size: clamp(2.25rem, 4.5vw, 4rem); letter-spacing: -0.03em; line-height: 1;">5</div>
               <div class="t-label mt-1.5">Categorias</div>
             </div>
             <div id="stat-3" style="opacity: 0; transform: translateY(20px)">
-              <div class="font-mono font-light text-ink" style="
-                    font-size: clamp(2.25rem, 4.5vw, 4rem);
-                    letter-spacing: -0.03em;
-                    line-height: 1;
-                  ">
-                3
-              </div>
-              <div class="t-label mt-1.5">Anos</div>
+              <div class="font-mono font-light text-ink"
+                style="font-size: clamp(2.25rem, 4.5vw, 4rem); letter-spacing: -0.03em; line-height: 1;">3</div>
+              <div class="t-label mt-1.5">Clientes Reais</div>
             </div>
           </div>
         </div>
@@ -1402,78 +1430,35 @@
       <!-- Panels -->
       <div id="tl-panels">
 
-        <!-- Panel 0: Arcadia — line left, content right -->
-        <div class="tl-panel" id="tl-panel-0" data-side="right">
+        <!-- Panel 0: Cristal Capital Terminal — line left, content right -->
+        <!-- Panel 0: Cristal Capital Terminal — Flagship -->
+        <div class="tl-panel" id="tl-panel-0" data-side="right" data-project="cristal-terminal">
           <span class="tl-panel-ghost" aria-hidden="true">01</span>
           <div class="tl-panel-text">
             <div class="tl-pi tl-panel-eyebrow">
-              <span class="tl-panel-num">01 / 06</span>
+              <span class="tl-panel-num">01 / 03</span>
               <div class="tl-panel-num-sep"></div>
-              <span class="tl-panel-cat">Landing Page</span>
+              <span class="tl-panel-cat">Terminal Financeiro</span>
             </div>
-            <h3 class="tl-pi tl-panel-title">Arcadia</h3>
+            <h3 class="tl-pi tl-panel-title">Cristal Terminal</h3>
             <div class="tl-pi tl-panel-divider"></div>
-            <p class="tl-pi tl-panel-desc">Website imersivo para restaurante fine-dining no Porto. Animações
-              cinematográficas, reservas online e experiência sensorial única.</p>
+            <p class="tl-pi tl-panel-desc">Terminal financeiro profissional inspirado no Bloomberg. Arquitectura
+              tri-camada: TypeScript + Python + C++/WASM. Modelos quant avançados, IA local com Ollama e chat
+              institucional em tempo real.</p>
             <div class="tl-pi tl-panel-meta">
               <span class="tl-panel-year">2025</span>
               <div class="tl-panel-meta-sep"></div>
-              <span class="tl-panel-client">Arcadia Restaurant</span>
+              <span class="tl-panel-client">Projecto Pessoal · Em desenvolvimento</span>
             </div>
             <div class="tl-pi tl-panel-stack">
-              <span class="tl-panel-tag">React</span>
-              <span class="tl-panel-tag">GSAP</span>
-              <span class="tl-panel-tag">Tailwind CSS</span>
-              <span class="tl-panel-tag">Framer Motion</span>
-            </div>
-            <button class="tl-pi tl-panel-cta" data-project="arcadia">
-              Ver Projecto
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </button>
-          </div>
-          <div class="tl-panel-images">
-            <div class="tl-pi tl-panel-img-main">
-              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85&fit=crop" alt="Arcadia"
-                loading="lazy">
-            </div>
-            <div class="tl-panel-img-row">
-              <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=80&fit=crop" alt=""
-                  loading="lazy"></div>
-              <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=500&q=80&fit=crop" alt=""
-                  loading="lazy"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel 1: Studio Norte — line right, content left -->
-        <div class="tl-panel" id="tl-panel-1" data-side="left">
-          <span class="tl-panel-ghost" aria-hidden="true">02</span>
-          <div class="tl-panel-text">
-            <div class="tl-pi tl-panel-eyebrow">
-              <span class="tl-panel-num">02 / 06</span>
-              <div class="tl-panel-num-sep"></div>
-              <span class="tl-panel-cat">Website Institucional</span>
-            </div>
-            <h3 class="tl-pi tl-panel-title">Studio Norte</h3>
-            <div class="tl-pi tl-panel-divider"></div>
-            <p class="tl-pi tl-panel-desc">Presença digital para atelier de arquitectura contemporânea. Portfólio com
-              galeria interactiva e gestão de conteúdo headless.</p>
-            <div class="tl-pi tl-panel-meta">
-              <span class="tl-panel-year">2025</span>
-              <div class="tl-panel-meta-sep"></div>
-              <span class="tl-panel-client">Studio Norte Arq.</span>
-            </div>
-            <div class="tl-pi tl-panel-stack">
-              <span class="tl-panel-tag">Next.js</span>
-              <span class="tl-panel-tag">Sanity CMS</span>
-              <span class="tl-panel-tag">GSAP</span>
+              <span class="tl-panel-tag">Next.js 15</span>
+              <span class="tl-panel-tag">React 19</span>
               <span class="tl-panel-tag">TypeScript</span>
+              <span class="tl-panel-tag">C++/WASM</span>
+              <span class="tl-panel-tag">Python</span>
+              <span class="tl-panel-tag">Ollama AI</span>
             </div>
-            <button class="tl-pi tl-panel-cta" data-project="studio-norte">
+            <button class="tl-pi tl-panel-cta" data-project="cristal-terminal">
               Ver Projecto
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
@@ -1482,186 +1467,46 @@
           </div>
           <div class="tl-panel-images">
             <div class="tl-pi tl-panel-img-main">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=85&fit=crop"
-                alt="Studio Norte" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=900&q=85&fit=crop"
+                alt="Cristal Terminal" loading="lazy">
             </div>
             <div class="tl-panel-img-row">
               <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&q=80&fit=crop" alt=""
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80&fit=crop" alt=""
                   loading="lazy"></div>
-              <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=500&q=80&fit=crop" alt=""
-                  loading="lazy"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel 2: Forma Studio — line left, content right -->
-        <div class="tl-panel" id="tl-panel-2" data-side="right">
-          <span class="tl-panel-ghost" aria-hidden="true">03</span>
-          <div class="tl-panel-text">
-            <div class="tl-pi tl-panel-eyebrow">
-              <span class="tl-panel-num">03 / 06</span>
-              <div class="tl-panel-num-sep"></div>
-              <span class="tl-panel-cat">Website + Plataforma</span>
-            </div>
-            <h3 class="tl-pi tl-panel-title">Forma Studio</h3>
-            <div class="tl-pi tl-panel-divider"></div>
-            <p class="tl-pi tl-panel-desc">Website para estúdio de fitness premium. Agendamento integrado, área de
-              membros e programa de treino personalizável.</p>
-            <div class="tl-pi tl-panel-meta">
-              <span class="tl-panel-year">2025</span>
-              <div class="tl-panel-meta-sep"></div>
-              <span class="tl-panel-client">Forma Studio Lisboa</span>
-            </div>
-            <div class="tl-pi tl-panel-stack">
-              <span class="tl-panel-tag">Next.js</span>
-              <span class="tl-panel-tag">Supabase</span>
-              <span class="tl-panel-tag">Tailwind CSS</span>
-              <span class="tl-panel-tag">Framer Motion</span>
-            </div>
-            <button class="tl-pi tl-panel-cta" data-project="forma-studio">
-              Ver Projecto
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </button>
-          </div>
-          <div class="tl-panel-images">
-            <div class="tl-pi tl-panel-img-main">
-              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=85&fit=crop"
-                alt="Forma Studio" loading="lazy">
-            </div>
-            <div class="tl-panel-img-row">
-              <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=500&q=80&fit=crop" alt=""
-                  loading="lazy"></div>
-              <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=500&q=80&fit=crop" alt=""
-                  loading="lazy"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel 3: Bloom — line right, content left -->
-        <div class="tl-panel" id="tl-panel-3" data-side="left">
-          <span class="tl-panel-ghost" aria-hidden="true">04</span>
-          <div class="tl-panel-text">
-            <div class="tl-pi tl-panel-eyebrow">
-              <span class="tl-panel-num">04 / 06</span>
-              <div class="tl-panel-num-sep"></div>
-              <span class="tl-panel-cat">E-Commerce</span>
-            </div>
-            <h3 class="tl-pi tl-panel-title">Bloom</h3>
-            <div class="tl-pi tl-panel-divider"></div>
-            <p class="tl-pi tl-panel-desc">Loja online de floricultura artesanal. Catálogo visual imersivo, checkout em
-              2 passos e entregas programadas.</p>
-            <div class="tl-pi tl-panel-meta">
-              <span class="tl-panel-year">2024</span>
-              <div class="tl-panel-meta-sep"></div>
-              <span class="tl-panel-client">Bloom Flores</span>
-            </div>
-            <div class="tl-pi tl-panel-stack">
-              <span class="tl-panel-tag">Next.js</span>
-              <span class="tl-panel-tag">Stripe</span>
-              <span class="tl-panel-tag">Sanity</span>
-              <span class="tl-panel-tag">Vercel</span>
-            </div>
-            <button class="tl-pi tl-panel-cta" data-project="bloom">
-              Ver Projecto
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </button>
-          </div>
-          <div class="tl-panel-images">
-            <div class="tl-pi tl-panel-img-main">
-              <img src="https://images.unsplash.com/photo-1487530811015-780a88a7d0bc?w=900&q=85&fit=crop" alt="Bloom"
-                loading="lazy">
-            </div>
-            <div class="tl-panel-img-row">
-              <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1490750967868-88df5691cc6e?w=500&q=80&fit=crop" alt=""
-                  loading="lazy"></div>
-              <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1559181567-c3190bbed0c9?w=500&q=80&fit=crop" alt=""
-                  loading="lazy"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel 4: Atlântico — line left, content right -->
-        <div class="tl-panel" id="tl-panel-4" data-side="right">
-          <span class="tl-panel-ghost" aria-hidden="true">05</span>
-          <div class="tl-panel-text">
-            <div class="tl-pi tl-panel-eyebrow">
-              <span class="tl-panel-num">05 / 06</span>
-              <div class="tl-panel-num-sep"></div>
-              <span class="tl-panel-cat">Web Application</span>
-            </div>
-            <h3 class="tl-pi tl-panel-title">Atlântico</h3>
-            <div class="tl-pi tl-panel-divider"></div>
-            <p class="tl-pi tl-panel-desc">Plataforma de gestão para empresa marítima. Dashboard analítico em tempo
-              real, relatórios exportáveis e gestão de frotas.</p>
-            <div class="tl-pi tl-panel-meta">
-              <span class="tl-panel-year">2024</span>
-              <div class="tl-panel-meta-sep"></div>
-              <span class="tl-panel-client">Atlântico Maritime</span>
-            </div>
-            <div class="tl-pi tl-panel-stack">
-              <span class="tl-panel-tag">React</span>
-              <span class="tl-panel-tag">Node.js</span>
-              <span class="tl-panel-tag">PostgreSQL</span>
-              <span class="tl-panel-tag">Chart.js</span>
-            </div>
-            <button class="tl-pi tl-panel-cta" data-project="atlantico">
-              Ver Projecto
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </button>
-          </div>
-          <div class="tl-panel-images">
-            <div class="tl-pi tl-panel-img-main">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=85&fit=crop" alt="Atlântico"
-                loading="lazy">
-            </div>
-            <div class="tl-panel-img-row">
               <div class="tl-pi tl-panel-img-sm"><img
                   src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=500&q=80&fit=crop" alt=""
                   loading="lazy"></div>
-              <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=500&q=80&fit=crop" alt=""
-                  loading="lazy"></div>
             </div>
           </div>
         </div>
 
-        <!-- Panel 5: Brisa Solar — line right, content left -->
-        <div class="tl-panel" id="tl-panel-5" data-side="left">
-          <span class="tl-panel-ghost" aria-hidden="true">06</span>
+        <!-- Panel 1: Alojamento GI — E-Commerce real client -->
+        <div class="tl-panel" id="tl-panel-1" data-side="left" data-project="casa-gi">
+          <span class="tl-panel-ghost" aria-hidden="true">02</span>
           <div class="tl-panel-text">
             <div class="tl-pi tl-panel-eyebrow">
-              <span class="tl-panel-num">06 / 06</span>
+              <span class="tl-panel-num">02 / 03</span>
               <div class="tl-panel-num-sep"></div>
-              <span class="tl-panel-cat">Landing Page</span>
+              <span class="tl-panel-cat">E-Commerce · Cliente Real</span>
             </div>
-            <h3 class="tl-pi tl-panel-title">Brisa Solar</h3>
+            <h3 class="tl-pi tl-panel-title">Casa do Gi</h3>
             <div class="tl-pi tl-panel-divider"></div>
-            <p class="tl-pi tl-panel-desc">Campanha digital para empresa de energia solar. Animações 3D, simulador de
-              poupança e funil de conversão optimizado.</p>
+            <p class="tl-pi tl-panel-desc">Plataforma de reservas e e-commerce para alojamento local em Mogadouro.
+              Pagamentos IfthenPay, faturas com HMAC-SHA256, painel de administração completo. Em produção activa.</p>
             <div class="tl-pi tl-panel-meta">
               <span class="tl-panel-year">2024</span>
               <div class="tl-panel-meta-sep"></div>
-              <span class="tl-panel-client">Brisa Solar Portugal</span>
+              <span class="tl-panel-client">Alojamento GI · Mogadouro</span>
             </div>
             <div class="tl-pi tl-panel-stack">
-              <span class="tl-panel-tag">Vite</span>
-              <span class="tl-panel-tag">GSAP</span>
-              <span class="tl-panel-tag">Three.js</span>
+              <span class="tl-panel-tag">PHP 8</span>
+              <span class="tl-panel-tag">MySQL</span>
               <span class="tl-panel-tag">Tailwind CSS</span>
+              <span class="tl-panel-tag">IfthenPay</span>
+              <span class="tl-panel-tag">PHPMailer</span>
             </div>
-            <button class="tl-pi tl-panel-cta" data-project="brisa-solar">
+            <button class="tl-pi tl-panel-cta" data-project="casa-gi">
               Ver Projecto
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
@@ -1670,15 +1515,64 @@
           </div>
           <div class="tl-panel-images">
             <div class="tl-pi tl-panel-img-main">
-              <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=85&fit=crop"
-                alt="Brisa Solar" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=85&fit=crop"
+                alt="Casa do Gi" loading="lazy">
             </div>
             <div class="tl-panel-img-row">
               <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=500&q=80&fit=crop" alt=""
+                  src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&q=80&fit=crop" alt=""
                   loading="lazy"></div>
               <div class="tl-pi tl-panel-img-sm"><img
-                  src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=500&q=80&fit=crop" alt=""
+                  src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=500&q=80&fit=crop" alt=""
+                  loading="lazy"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: ExpoLive — 2 year platform -->
+        <div class="tl-panel" id="tl-panel-2" data-side="right" data-project="expolive">
+          <span class="tl-panel-ghost" aria-hidden="true">03</span>
+          <div class="tl-panel-text">
+            <div class="tl-pi tl-panel-eyebrow">
+              <span class="tl-panel-num">03 / 03</span>
+              <div class="tl-panel-num-sep"></div>
+              <span class="tl-panel-cat">Plataforma · 2 Anos</span>
+            </div>
+            <h3 class="tl-pi tl-panel-title">ExpoLive</h3>
+            <div class="tl-pi tl-panel-divider"></div>
+            <p class="tl-pi tl-panel-desc">Plataforma completa de gestão de eventos desenvolvida ao longo de 2 anos. 30+
+              páginas de administração, chatbot com IA, blog, galeria, agenda, stands, podcasts e API endpoints
+              próprios.</p>
+            <div class="tl-pi tl-panel-meta">
+              <span class="tl-panel-year">2023 — 2025</span>
+              <div class="tl-panel-meta-sep"></div>
+              <span class="tl-panel-client">Projecto Académico de Alto Impacto</span>
+            </div>
+            <div class="tl-pi tl-panel-stack">
+              <span class="tl-panel-tag">PHP</span>
+              <span class="tl-panel-tag">MySQL</span>
+              <span class="tl-panel-tag">JavaScript</span>
+              <span class="tl-panel-tag">PHPMailer</span>
+              <span class="tl-panel-tag">REST API</span>
+            </div>
+            <button class="tl-pi tl-panel-cta" data-project="expolive">
+              Ver Projecto
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </button>
+          </div>
+          <div class="tl-panel-images">
+            <div class="tl-pi tl-panel-img-main">
+              <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=85&fit=crop" alt="ExpoLive"
+                loading="lazy">
+            </div>
+            <div class="tl-panel-img-row">
+              <div class="tl-pi tl-panel-img-sm"><img
+                  src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500&q=80&fit=crop" alt=""
+                  loading="lazy"></div>
+              <div class="tl-pi tl-panel-img-sm"><img
+                  src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=500&q=80&fit=crop" alt=""
                   loading="lazy"></div>
             </div>
           </div>
@@ -1692,7 +1586,7 @@
         <div class="tl-prog-track">
           <div class="tl-prog-fill" id="tl-prog-fill"></div>
         </div>
-        <span class="tl-prog-num">06</span>
+        <span class="tl-prog-num">03</span>
       </div>
 
     </section>
@@ -1747,24 +1641,260 @@
     </div>
 
 
+    <!-- ── 03. TODOS OS PROJECTOS ──────────────────────────── -->
+    <section id="pf-all" style="padding: clamp(5rem,9vh,9rem) clamp(1.5rem,5vw,6rem); background-color: #EBE9E4;">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="flex items-center gap-6 mb-16">
+          <span class="t-label">03 — ARQUIVO</span>
+          <div class="flex-1 h-[1px] bg-ink/[0.06]"></div>
+          <span class="font-mono text-[0.5rem] tracking-[0.5em] uppercase text-ink/25 hidden lg:block">11
+            Projectos</span>
+        </div>
+        <div class="mb-14">
+          <h2 class="font-serif italic text-ink archive-title"
+            style="font-size: clamp(2rem,4.5vw,4.5rem); line-height:1.1">Arquivo
+            completo</h2>
+        </div>
+
+        <!-- Project rows -->
+        <div class="border-t border-ink/[0.07]" id="all-projects-list">
+
+          <!-- 01 Cristal Terminal -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default"
+            data-project="cristal-terminal">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">01</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">Cristal Capital Terminal</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Terminal Financeiro ·
+                  Next.js 15 · TypeScript · C++/WASM · Python · IA Local</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Pessoal</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2025</span>
+            </div>
+          </div>
+
+          <!-- 02 Casa do Gi -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default"
+            data-project="casa-gi">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">02</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">Alojamento GI — Casa do Gi</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">E-Commerce · PHP 8 · MySQL
+                  · IfthenPay · PHPMailer · Em Produção</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Cliente
+                Real</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2024</span>
+            </div>
+          </div>
+
+          <!-- 03 ExpoLive -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default"
+            data-project="expolive">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">03</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">ExpoLive</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Plataforma Eventos · PHP ·
+                  MySQL · REST API · Chatbot IA · 2 Anos</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Académico</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2023–25</span>
+            </div>
+          </div>
+
+          <!-- 04 Cristal Capital -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">04</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">Cristal Capital</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Plataforma Financeira ·
+                  Laravel 12 · Inertia.js · Docker · PAP Excelência</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Académico</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2025</span>
+            </div>
+          </div>
+
+          <!-- 05 Eletro 2000 -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">05</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">Eletro 2000</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Retalho com IA · Laravel
+                  12 · React 19 · Google Gemini API · Simulação</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Académico</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2025</span>
+            </div>
+          </div>
+
+          <!-- 06 Volunta -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">06</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">Volunta</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Plataforma Cívica · Câmara
+                  V.N. Gaia · Laravel · Em Desenvolvimento</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Institucional</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2025</span>
+            </div>
+          </div>
+
+          <!-- 07 Estudas Comigo -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">07</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">Estudas Comigo</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Centro de Estudos · HTML ·
+                  Tailwind CSS · GitHub Pages · Em Produção</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Cliente
+                Real</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2024</span>
+            </div>
+          </div>
+
+          <!-- 08 GT Móvel -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">08</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">GT Móvel</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Website Comercial · HTML ·
+                  CSS · JavaScript · SEO · Gaia · Em Produção</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Cliente
+                Real</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2024</span>
+            </div>
+          </div>
+
+          <!-- 09 Hugo Brito -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">09</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">Hugo Brito — Luxury Fashion</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Moda Luxo · Vanilla JS ·
+                  GSAP · ScrollTrigger · Glassmorphism</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Académico</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2024</span>
+            </div>
+          </div>
+
+          <!-- 10 Tec N' Cool -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">10</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">Tec N' Cool</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Plataforma ISCAP/CEI ·
+                  250+ Itens · Vanilla JS · JSON · Em Produção</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Institucional</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2024</span>
+            </div>
+          </div>
+
+          <!-- 11 Wise Wallet -->
+          <div
+            class="pf-all-row group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 border-b border-ink/[0.07] cursor-default">
+            <div class="flex items-center gap-6">
+              <span class="font-mono text-[0.55rem] tracking-[0.3em] text-ink/25 w-5 flex-shrink-0">11</span>
+              <div>
+                <h3 class="font-serif italic text-ink group-hover:translate-x-2 transition-transform duration-300"
+                  style="font-size:clamp(1.5rem,2.5vw,2rem); line-height:1">Wise Wallet</h3>
+                <p class="font-mono text-[0.58rem] text-ink/40 mt-1 tracking-wider uppercase">Gestão Financeira · PHP ·
+                  Chart.js · DomPDF · Ollama IA · OAuth</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <span
+                class="font-mono text-[0.55rem] tracking-[0.2em] text-ink/30 border border-ink/10 px-3 py-1 rounded-full">Académico</span>
+              <span class="font-mono text-[0.55rem] text-ink/25">2024</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- ── 04. CTA ───────────────────────────────────────────── -->
-    <section id="pf-cta" class="relative bg-ink text-paper bp-grid-dark overflow-hidden" style="
+    <section id="pf-cta" class="relative bg-ink text-paper overflow-hidden" style="
           padding: clamp(7rem, 13vh, 13rem) clamp(1.5rem, 5vw, 6rem);
           border-radius: 4rem 4rem 0 0;
+          min-height: 600px;
         ">
-      <!-- Ghost text -->
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
-        aria-hidden="true">
-        <span class="font-serif italic text-paper" style="
-              font-size: clamp(18vw, 26vw, 36vw);
-              opacity: 0.028;
-              white-space: nowrap;
-              line-height: 0.85;
-            ">Projecto</span>
-      </div>
+
+      <!-- Dome Gallery Background -->
+      <div id="dome-bg" class="absolute inset-0 z-0 pointer-events-auto" style="opacity:0.22"></div>
+
+      <!-- Radial vignette over dome -->
+      <div class="absolute inset-0 z-[1] pointer-events-none"
+        style="background: radial-gradient(ellipse at center, transparent 30%, #121212 85%)"></div>
 
       <!-- Technical label -->
-      <div class="absolute flex items-center gap-2.5 pointer-events-none"
+      <div class="absolute flex items-center gap-2.5 pointer-events-none z-10"
         style="top: clamp(3rem, 6vh, 5rem); left: clamp(1.5rem, 5vw, 6rem)">
         <div class="crosshair-mark" style="color: rgba(235, 233, 228, 0.3)"></div>
         <span class="t-label-light">04 — PRÓXIMO PASSO</span>
@@ -1777,25 +1907,22 @@
               letter-spacing: -0.02em;
             ">
           <span class="block overflow-hidden">
-            <span class="cta-line block" style="transform: translateY(110%); will-change: transform">O próximo</span>
+            <span class="cta-line block">O próximo</span>
           </span>
           <span class="block overflow-hidden">
-            <span class="cta-line block" style="transform: translateY(110%); will-change: transform">é o seu.</span>
+            <span class="cta-line block">é o seu.</span>
           </span>
         </h2>
 
         <p class="font-mono text-paper/35 mb-12 mx-auto leading-relaxed cta-fade" style="
               font-size: clamp(0.68rem, 0.9vw, 0.82rem);
               max-width: 38ch;
-              opacity: 0;
-              transform: translateY(16px);
             ">
           Cada projecto começa com uma conversa.<br />
           Conte-nos o que tem em mente.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 cta-fade"
-          style="opacity: 0; transform: translateY(16px)">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 cta-fade">
           <a href="/contactos/" class="btn-cta-paper">
             <span>Iniciar projecto</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1941,47 +2068,26 @@
 
     /* ── Project data ─────────────────────────────────────── */
     const projectData = {
-      "arcadia": {
-        title: "Arcadia", cat: "Landing Page", num: "01 / 06",
-        img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85&fit=crop",
-        desc: "Website imersivo para restaurante fine-dining no Porto. Cada detalhe transmite a sofisticação da marca: animações cinematográficas com GSAP, sistema de reservas integrado e uma experiência visual que transporta o visitante para dentro do restaurante.",
-        year: "2025", type: "Landing Page", client: "Arcadia Restaurant", duration: "6 semanas",
-        stack: ["React", "GSAP", "Tailwind CSS", "Framer Motion", "Vercel"], link: "#"
+      "cristal-terminal": {
+        title: "Cristal Capital Terminal", cat: "Terminal Financeiro", num: "01 / 03",
+        img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+        desc: "Terminal financeiro profissional inspirado no Bloomberg Terminal. Arquitectura tri-camada: TypeScript no browser, Python server-side (numpy/scipy/pandas) e C++ compilado para WebAssembly. Modelos quant: Black-Scholes, Monte Carlo GBM, Markowitz, GARCH, Heston, SABR. IA local com Ollama/Llama 3. Chat institucional SSE em tempo real.",
+        year: "2025", type: "Web Application", client: "Projecto Pessoal", duration: "Em desenvolvimento activo",
+        stack: ["Next.js 15", "React 19", "TypeScript", "C++/WASM", "Python 3.12", "Ollama AI", "Zustand 5", "SQLite"], link: "#"
       },
-      "studio-norte": {
-        title: "Studio Norte", cat: "Website Institucional", num: "02 / 06",
-        img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85&fit=crop",
-        desc: "Presença digital premium para atelier de arquitectura contemporânea no Porto. Portfólio de projectos com galeria interactiva, gestão de conteúdo headless e performance optimizada para Core Web Vitals.",
-        year: "2025", type: "Website Institucional", client: "Studio Norte Arquitectura", duration: "8 semanas",
-        stack: ["Next.js", "Sanity CMS", "GSAP", "TypeScript", "Tailwind CSS"], link: "#"
+      "casa-gi": {
+        title: "Alojamento GI — Casa do Gi", cat: "E-Commerce · Cliente Real", num: "02 / 03",
+        img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=85&fit=crop",
+        desc: "Plataforma completa de reservas e e-commerce para alojamento local em Mogadouro. Sistema de reservas com gestão de disponibilidade, carrinho de compras, pagamentos IfthenPay (MB + Cartão), geração automática de faturas com UUID, HMAC-SHA256 e código de barras. Painel de administração completo. Em produção activa.",
+        year: "2024", type: "E-Commerce", client: "Alojamento GI, Mogadouro", duration: "10 semanas",
+        stack: ["PHP 8", "MySQL", "Tailwind CSS", "IfthenPay", "PHPMailer", "HMAC-SHA256"], link: "#"
       },
-      "forma-studio": {
-        title: "Forma Studio", cat: "Website + Plataforma", num: "03 / 06",
-        img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=85&fit=crop",
-        desc: "Website e plataforma de membros para estúdio de fitness premium. Sistema de agendamento integrado, área privada de membros com programa de treino personalizado.",
-        year: "2025", type: "Website + Web App", client: "Forma Studio Lisboa", duration: "10 semanas",
-        stack: ["Next.js", "Supabase", "Tailwind CSS", "Framer Motion", "Stripe"], link: "#"
-      },
-      "bloom": {
-        title: "Bloom", cat: "E-Commerce", num: "04 / 06",
-        img: "https://images.unsplash.com/photo-1487530811015-780a88a7d0bc?w=1200&q=85&fit=crop",
-        desc: "Loja online de floricultura artesanal com foco total na experiência de compra. Catálogo visual imersivo, checkout em 2 passos e subscriptions sazonais.",
-        year: "2024", type: "E-Commerce", client: "Bloom Flores Artesanais", duration: "7 semanas",
-        stack: ["Next.js", "Stripe", "Sanity", "Vercel", "Tailwind CSS"], link: "#"
-      },
-      "atlantico": {
-        title: "Atlântico", cat: "Web Application", num: "05 / 06",
-        img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=85&fit=crop",
-        desc: "Plataforma de gestão operacional para empresa do sector marítimo. Dashboard analítico em tempo real, relatórios exportáveis e gestão de frotas.",
-        year: "2024", type: "Web Application", client: "Atlântico Maritime", duration: "14 semanas",
-        stack: ["React", "Node.js", "PostgreSQL", "Chart.js", "Redis"], link: "#"
-      },
-      "brisa-solar": {
-        title: "Brisa Solar", cat: "Landing Page", num: "06 / 06",
-        img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=85&fit=crop",
-        desc: "Campanha digital de alto impacto para empresa líder em energia solar. Animações 3D com Three.js, simulador interactivo de poupança energética e funil de conversão optimizado.",
-        year: "2024", type: "Landing Page", client: "Brisa Solar Portugal", duration: "5 semanas",
-        stack: ["Vite", "GSAP", "Three.js", "Tailwind CSS", "HubSpot"], link: "#"
+      "expolive": {
+        title: "ExpoLive", cat: "Plataforma de Eventos", num: "03 / 03",
+        img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=85&fit=crop",
+        desc: "Plataforma completa de gestão de eventos desenvolvida ao longo de 2 anos. Website público com notícias, blog, galeria, vídeos, podcasts e agenda. Painel de administração com 30+ páginas, chatbot com IA, gestão de stands, templates de email e API endpoints próprios.",
+        year: "2023–2025", type: "Plataforma Web", client: "Projecto Académico", duration: "2 Anos",
+        stack: ["PHP", "MySQL", "JavaScript", "PHPMailer", "PDO", "REST API"], link: "#"
       }
     };
 
@@ -2036,23 +2142,10 @@
       /* ── Scroll-jacked Timeline ───────────────────────── */
       initTimeline();
 
-      /* ── CTA section ──────────────────────────────────── */
-      const ctaTL = gsap.timeline({
-        scrollTrigger: { trigger: "#pf-cta", start: "top 78%" }
-      });
-      ctaTL.to(".cta-line", { y: "0%", duration: 1.2, stagger: 0.12, ease: "power3.out" }, 0);
-      ctaTL.to(".cta-fade", { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: "power2.out" }, 0.4);
-
-      /* ── Footer ───────────────────────────────────────── */
-      gsap.from(".footer-dots", {
-        scrollTrigger: { trigger: "footer", start: "top 85%" },
-        opacity: 0, duration: 1.5, ease: "power2.out"
-      });
-      gsap.from(".footer-grid > div, .footer-bottom", {
-        scrollTrigger: { trigger: "footer", start: "top 85%" },
-        y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out"
-      });
+      /* ── Dome sphere init ─────────────────────────────────── */
+      setTimeout(() => { initDome(); }, 200);
     }
+
 
     /* ── Timeline scroll-jack ─────────────────────────────── */
     function initTimeline() {
@@ -2072,12 +2165,15 @@
       const progFill = document.getElementById("tl-prog-fill");
       const progCur = document.getElementById("tl-prog-cur");
 
-      /* ── Set initial scene state BEFORE building the timeline.
-             Panel 0 is visible immediately — no scroll needed. */
+      /* ── Set initial scene state ──────────────────────── */
+      // All panels hidden except panel 0
+      gsap.set(panels.slice(1), { opacity: 0 });
       gsap.set(panels, { opacity: 0 });
       gsap.set(panels[0], { opacity: 1 });
-      gsap.set(panels[0].querySelectorAll(".tl-pi"), { opacity: 0, y: 28 });
+      // Panel 0 items: VISIBLE by default — no entrance animation needed
+      // The master exit tween will hide them when scrolling to next panel
       gsap.set(vfillL, { opacity: 1, clipPath: "inset(0 0 100% 0)" });
+      gsap.set(vfillR, { opacity: 0 });
       gsap.set(hline, { clipPath: "inset(0 100% 0 0)" });
       panels[0].classList.add("tl-active");
 
@@ -2092,24 +2188,22 @@
         const fillEl = isLeft ? vfillL : vfillR;
 
         if (i === 0) {
-          /* Panel 0 is already visible — just fill line + reveal items */
+          /* Panel 0: just animate line fill + progress bar in scrub */
           master.to(fillEl, { clipPath: "inset(0 0 0% 0)", duration: PROJ, ease: "none" }, 0);
           master.to(progFill, { width: (1 / N * 100) + "%", duration: PROJ, ease: "none" }, 0);
-          master.to(items, { opacity: 1, y: 0, duration: PROJ * 0.36, stagger: 0.04, ease: "power2.out" }, 0.02);
         } else {
-          /* Other panels: fade in at their window start */
+          /* Other panels: hide until their window, then reveal */
           master.set(panel, { opacity: 0 }, t - 0.01);
           master.to(panel, { opacity: 1, duration: 0.01 }, t);
 
           master.set(fillEl, { opacity: 1, clipPath: "inset(0 0 100% 0)" }, t);
           master.to(fillEl, { clipPath: "inset(0 0 0% 0)", duration: PROJ, ease: "none" }, t);
-
           master.to(progFill, { width: ((i + 1) / N * 100) + "%", duration: PROJ, ease: "none" }, t);
 
           master.fromTo(items,
             { opacity: 0, y: 28 },
-            { opacity: 1, y: 0, duration: PROJ * 0.36, stagger: 0.04, ease: "power2.out" },
-            t + 0.02
+            { opacity: 1, y: 0, duration: PROJ * 0.4, stagger: 0.05, ease: "power2.out" },
+            t + 0.04
           );
         }
 
@@ -2143,7 +2237,7 @@
         pinSpacing: true,
         start: "top top",
         end: () => "+=" + Math.round(totalDur * window.innerHeight * 1.05),
-        scrub: 0.3,          /* was 1 — that created 1s lag; 0.3 is tight & smooth */
+        scrub: 0.08,         /* ultra tight — no lag between scroll and animation */
         animation: master,
         onUpdate: self => {
           const globalT = self.progress * totalDur;
@@ -2168,6 +2262,154 @@
       /* Ensure correct layout after pin spacer is injected */
       ScrollTrigger.refresh();
     }
+
+    /* ──═════════════════════════════════════════════════
+       DOME SPHERE — CTA Background (function, called after load)
+    ──═════════════════════════════════════════════════ */
+    function initDome() {
+      const container = document.getElementById('dome-bg');
+      if (!container) return;
+
+      const canvas = document.createElement('canvas');
+      canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+      container.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+
+      // Placeholder images — light, premium, architectural tones
+      const IMGS = [
+        'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=400&q=80&fit=crop', // luxury interior white
+        'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=80&fit=crop', // minimal room cream
+        'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&q=80&fit=crop', // beige minimal
+        'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80&fit=crop', // light sofa room
+        'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=400&q=80&fit=crop', // clean architecture
+        'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=400&q=80&fit=crop', // arch detail white
+        'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=400&q=80&fit=crop', // marble texture
+        'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=400&q=80&fit=crop', // light gray room
+        'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=400&q=80&fit=crop', // soft cream interior
+        'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&q=80&fit=crop', // modern white arch
+        'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80&fit=crop', // airy office
+      ];
+
+      // Generate sphere points using Fibonacci lattice
+      const N_POINTS = IMGS.length;
+      const PHI = Math.PI * (Math.sqrt(5) - 1);
+
+      const points = IMGS.map((src, i) => {
+        const y = 1 - (i / (N_POINTS - 1)) * 2;
+        const r = Math.sqrt(1 - y * y);
+        const theta = PHI * i;
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = src;
+        return { x: Math.cos(theta) * r, y, z: Math.sin(theta) * r, img, loaded: false };
+      });
+      points.forEach(p => { p.img.onload = () => { p.loaded = true; }; });
+
+      const RADIUS = 0.52; // tighter so images fit well
+      let rotY = 0.3, rotX = 0.18;
+      let targetRX = 0.18, targetRY = 0.3;
+      let w, h, cx, cy, R;
+
+      function resize() {
+        const rect = container.getBoundingClientRect();
+        w = canvas.width = rect.width;
+        h = canvas.height = rect.height;
+        cx = w / 2; cy = h / 2;
+        R = Math.min(w, h) * RADIUS;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      document.addEventListener('mousemove', e => {
+        const mx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const my = (e.clientY / window.innerHeight - 0.5) * 2;
+        targetRX = 0.18 - my * 0.22;
+        targetRY += mx * 0.0018;
+      });
+
+      function project(p) {
+        // Rotate Y
+        const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+        let x1 = p.x * cosY - p.z * sinY;
+        let z1 = p.x * sinY + p.z * cosY;
+        // Rotate X
+        const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+        let y1 = p.y * cosX - z1 * sinX;
+        let z2 = p.y * sinX + z1 * cosX;
+        // Perspective
+        const fov = 2.2;
+        const scale = fov / (fov + z2);
+        return { sx: cx + x1 * R * scale, sy: cy + y1 * R * scale, z: z2, scale };
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        // Smooth rotation
+        rotY += (targetRY - rotY) * 0.03 + 0.0015;
+        rotX += (targetRX - rotX) * 0.04;
+
+        const projected = points.map((p, i) => ({ ...project(p), img: p.img, loaded: p.loaded, i }));
+        projected.sort((a, b) => a.z - b.z);
+
+        const tw = Math.min(200, w * 0.24);
+        const th = tw * 0.66;
+
+        projected.forEach(p => {
+          if (!p.loaded) return;
+          // front = fully visible, back = very faint
+          const alpha = Math.max(0, (p.z + 1) / 2) * 0.9 + 0.04;
+          const s = p.scale;
+          const dw = tw * s, dh = th * s;
+          ctx.save();
+          ctx.globalAlpha = alpha;
+          // Rounded rect clip
+          const rad = dw * 0.08;
+          ctx.beginPath();
+          ctx.roundRect(p.sx - dw / 2, p.sy - dh / 2, dw, dh, rad);
+          ctx.clip();
+          // Slight brightness for back items
+          ctx.filter = p.z < -0.2 ? 'brightness(1.1)' : 'none';
+          ctx.drawImage(p.img, p.sx - dw / 2, p.sy - dh / 2, dw, dh);
+          // Thin border
+          ctx.filter = 'none';
+          ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.restore();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    /* ── Archive rows: IntersectionObserver (CSS class system) ────── */
+    (function initArchiveObserver() {
+      const title = document.querySelector('#pf-all .archive-title');
+      const rows = Array.from(document.querySelectorAll('#all-projects-list > div'));
+      const all = title ? [title, ...rows] : rows;
+      if (!all.length) return;
+
+      // Mark elements for animation ONLY after we confirm IO is set up
+      // This ensures elements are visible if JS fails
+      requestAnimationFrame(() => {
+        all.forEach(el => el.classList.add('will-animate'));
+
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const idx = all.indexOf(el);
+              el.style.transitionDelay = Math.min(idx * 0.05, 0.4) + 's';
+              el.classList.add('in-view');
+              io.unobserve(el);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+        all.forEach(el => io.observe(el));
+      });
+    })();
 
     /* ── Wait for page.js loader (with fallback) ─────────── */
     let _initDone = false;
@@ -2214,6 +2456,16 @@
       overflow: hidden !important;
       grid-template-rows: 1fr !important;
       align-items: center !important;
+    }
+
+    /* Panel 0: visible before GSAP runs */
+    #tl-panel-0 {
+      opacity: 1 !important;
+    }
+
+    #tl-panel-0 .tl-pi {
+      opacity: 1 !important;
+      transform: none !important;
     }
 
     .tl-panel.tl-active {
