@@ -274,9 +274,6 @@ const initShader = () => {
   animate();
 };
 
-try { initShader(); } catch (e) { console.warn('[Shader] WebGL unavailable:', e.message); }
-initGlobe();
-
 // --- GSAP Animations ---
 
 // Anti-FOUC: Pre-set all animated elements to their "from" states
@@ -289,6 +286,12 @@ gsap.set("#globe-canvas", { opacity: 0, scale: 0.85 });
 
 // Entrance Animations — deferred until the loading screen exits
 initLoader(() => {
+  // Heavy initializations moved here to prevent blocking the loader loop
+  requestAnimationFrame(() => {
+    try { initShader(); } catch (e) { console.warn('[Shader] WebGL unavailable:', e.message); }
+    initGlobe();
+  });
+
   const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
   // Body reveal — loader has already faded or is morphing out, so this is instantaneous

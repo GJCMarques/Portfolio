@@ -2520,10 +2520,20 @@
 
           let hT = 0;
           (function drawHeroC() {
-            requestAnimationFrame(drawHeroC);
-            if (!hW || !hH) return;
-            hCtx.clearRect(0, 0, hW, hH);
             hT++;
+            if (!hW || !hH) {
+              heroCanvas._raf = requestAnimationFrame(drawHeroC);
+              return;
+            }
+
+            // Performance: skip draw if the hero is not visible
+            const rect = heroCanvas.getBoundingClientRect();
+            if (rect.bottom < 0 || rect.top > window.innerHeight) {
+              heroCanvas._raf = requestAnimationFrame(drawHeroC);
+              return;
+            }
+
+            hCtx.clearRect(0, 0, hW, hH);
 
             shapes.forEach(s => {
               const rot = hT * s.rs + s.rp;
@@ -2541,6 +2551,7 @@
               hCtx.strokeRect(-hw, -hh, hw * 2, hh * 2);
               hCtx.restore();
             });
+            heroCanvas._raf = requestAnimationFrame(drawHeroC);
           })();
         }
 
@@ -2889,9 +2900,6 @@
 
             let depth = (t.z + radius) / (2 * radius);
             t.el.style.opacity = Math.max(0.2, depth * 0.8 + 0.2);
-
-            let curBlur = Math.max(0, (1 - depth) * 3);
-            t.el.style.filter = `blur(${curBlur}px)`;
           });
 
           requestAnimationFrame(render);
@@ -2906,10 +2914,13 @@
     const obs = new MutationObserver(() => {
       if (document.body.style.visibility !== "") {
         obs.disconnect();
+        // Performance Staggering: don't boot everything on a single frame
         requestAnimationFrame(() => {
-          initAccordions();
-          initIconCloud();
           initAnimations();
+          setTimeout(() => {
+            initAccordions();
+            initIconCloud();
+          }, 150);
         });
       }
     });

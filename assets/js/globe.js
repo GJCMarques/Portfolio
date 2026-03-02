@@ -129,7 +129,7 @@ export function initGlobe() {
 
     function processFeatures(features) {
         const dots = [];
-        const spacing = 1.8; // degrees between dots (fewer = faster)
+        const spacing = 2.4; // degrees between dots (higher = faster)
 
         for (const feature of features) {
             const geom = feature.geometry;

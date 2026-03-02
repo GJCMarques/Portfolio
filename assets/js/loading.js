@@ -134,13 +134,13 @@ export function initLoader(onComplete) {
   window.addEventListener('resize', resize, { passive: true });
 
   const points = [];
-  const lines = 18;
-  const segments = 60;
+  const lines = 14;
+  const segments = 45;
 
   let rafId = null, running = true, time = 0;
 
   function draw() {
-    if (!running) return;
+    if (!running || loader.classList.contains('morph-out')) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
