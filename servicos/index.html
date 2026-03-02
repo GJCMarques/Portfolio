@@ -1187,8 +1187,8 @@
 
       <!-- Section Header: Editorial Style -->
       <div class="px-[clamp(1.5rem,5vw,6rem)] mb-[clamp(6rem,12vh,12rem)] relative z-10">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
-          <div class="relative">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12 relative">
+          <div class="relative z-10">
             <span class="font-mono text-[0.65rem] tracking-[0.4em] uppercase text-silver mb-8 block reveal-fade">Atelier
               Monrion — Collection 01</span>
             <h2 class="font-serif italic text-ink leading-[0.8] m-0 reveal-up"
@@ -1196,7 +1196,32 @@
               L'Art de <br /> <span class="pl-[15%]">Créer.</span>
             </h2>
           </div>
-          <div class="lg:w-[320px] pb-4 reveal-fade">
+
+          <!-- Background Decorative Detail (Right Side) -->
+          <div
+            class="absolute -right-12 top-0 bottom-0 w-32 hidden lg:flex flex-col justify-between items-end pointer-events-none opacity-20">
+            <div class="text-right">
+              <span class="font-mono text-[0.5rem] tracking-[0.8em] uppercase block mb-1">Technical Spec</span>
+              <div class="h-[1px] w-24 bg-ink mb-4"></div>
+              <span class="font-mono text-[0.45rem] block opacity-60 overflow-hidden text-nowrap">Scale: 1:1 Precise
+                Architecture</span>
+            </div>
+
+            <div
+              class="relative w-24 h-24 border border-ink/[0.1] rounded-full flex items-center justify-center animate-spin-slow">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-full h-[0.5px] bg-ink/[0.2]"></div>
+                <div class="w-full h-[0.5px] bg-ink/[0.2] rotate-90"></div>
+              </div>
+              <span class="font-mono text-[8px] tracking-widest bg-paper px-2 z-10">ATELIER</span>
+            </div>
+
+            <div class="text-right rotate-90 origin-right translate-y-12 translate-x-4">
+              <span class="font-serif italic text-xl">L'excellence Digitale</span>
+            </div>
+          </div>
+
+          <div class="lg:w-[320px] pb-4 reveal-fade z-10">
             <div class="h-[1px] w-12 bg-ink mb-6"></div>
             <p class="font-sans text-ink/70 text-sm leading-relaxed uppercase tracking-wider">
               A alta-costura aplicada ao <br /> código e à estética digital. <br />
