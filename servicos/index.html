@@ -987,7 +987,7 @@
   <!-- ══════════════════════════════════════════════════
        SERVIÇOS — CONTEÚDO PRINCIPAL
   ═══════════════════════════════════════════════════ -->
-  <main class="relative z-10 overflow-hidden">
+  <main class="relative z-10 overflow-hidden" style="background-color:#EBE9E4;">
     <!-- ── 01. HERO ─────────────────────────────────────────── -->
     <section id="svc-hero" class="relative min-h-screen flex flex-col justify-end overflow-hidden"
       style="
@@ -1755,7 +1755,7 @@
 
     <!-- ── 05. TECNOLOGIAS ───────────────────────────────────── -->
     <section id="svc-tech" class="text-ink relative"
-      style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem); background-color: #e4e2dc; background-image: repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(18,18,18,0.06) 16px, rgba(18,18,18,0.06) 17px);">
+      style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem); background-color: #EBE9E4; background-image: linear-gradient(to bottom, #EBE9E4 0%, transparent 9rem), linear-gradient(to bottom, transparent calc(100% - 10rem), #e4e2dc 100%);">
       <div class="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-20 max-w-7xl mx-auto">
 
         <!-- Left: Context & Tech List Accordions -->
@@ -1924,7 +1924,50 @@
     </section>
 
     <!-- ── 06. PERGUNTAS FREQUENTES ──────────────────────────── -->
-    <section id="svc-faq" style="padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem); background-color: #e4e2dc; background-image: repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(18,18,18,0.06) 16px, rgba(18,18,18,0.06) 17px);">
+    <section id="svc-faq" style="position:relative; padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem); background-color: #e4e2dc; background-image: linear-gradient(to top, #EBE9E4 0%, transparent 9rem);">
+
+      <!-- ── Decorative geometric shapes ─────────────────────── -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+
+        <!-- Circle — bleeds off left edge, mid-height -->
+        <svg width="190" height="190" fill="none"
+          style="position:absolute;top:48%;left:0;transform:translate(-55%,-50%)">
+          <circle cx="95" cy="95" r="88" stroke="#121212" stroke-width="1.0" opacity="0.09"/>
+        </svg>
+
+        <!-- Equilateral triangle — bleeds off right edge, upper area -->
+        <svg width="130" height="114" fill="none"
+          style="position:absolute;top:30%;right:0;transform:translate(30%,-50%)">
+          <polygon points="65,6 124,110 6,110"
+            stroke="#121212" stroke-width="0.9" opacity="0.09"/>
+        </svg>
+
+        <!-- Hexagon — left side, lower area -->
+        <svg width="108" height="124" fill="none"
+          style="position:absolute;top:65%;left:6%;transform:translate(-50%,-50%)">
+          <polygon points="54,4 104,30 104,94 54,120 4,94 4,30"
+            stroke="#121212" stroke-width="0.9" opacity="0.10"/>
+        </svg>
+
+        <!-- Rectangle rotated ~12° — bleeds off right edge, lower area -->
+        <svg width="160" height="100" fill="none"
+          style="position:absolute;top:70%;right:0;transform:translate(28%,-50%)">
+          <rect x="6" y="6" width="148" height="88"
+            stroke="#121212" stroke-width="0.9" opacity="0.09"
+            transform="rotate(12,80,50)"/>
+        </svg>
+
+        <!-- Square rotated 20° — upper center-right, fully visible -->
+        <svg width="100" height="100" fill="none"
+          style="position:absolute;top:26%;left:66%;transform:translate(-50%,-50%)">
+          <rect x="8" y="8" width="84" height="84"
+            stroke="#121212" stroke-width="0.9" opacity="0.09"
+            transform="rotate(20,50,50)"/>
+        </svg>
+
+      </div>
+      <!-- ──────────────────────────────────────────────────────── -->
+
       <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-24">
 
         <!-- Left: Title and Desc -->
