@@ -620,6 +620,31 @@
       details.acc-group summary::-webkit-details-marker {
         display: none;
       }
+
+      /* ── Pricing card feature accordions ─────────────── */
+      details.group\/acc > summary {
+        list-style: none;
+      }
+      details.group\/acc > summary::-webkit-details-marker {
+        display: none;
+      }
+      details.group\/acc > summary::marker {
+        display: none;
+      }
+      /* Arrow indicator shown at right of each feature row */
+      details.group\/acc > summary .feat-arrow {
+        margin-left: auto;
+        flex-shrink: 0;
+        opacity: 0.35;
+        transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+      }
+      details.group\/acc[open] > summary .feat-arrow {
+        transform: rotate(90deg);
+        opacity: 0.8;
+      }
+      details.group\/acc > summary:hover .feat-arrow {
+        opacity: 0.7;
+      }
       
       /* Pricing Accordion */
       .price-feat-acc {
@@ -1233,7 +1258,7 @@
       </div>
     </section>
 
-    
+
     <!-- ── 05. PRICING ───────────────────────────────────────── -->
     <section id="svc-pricing" style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem)">
       <div class="flex items-end justify-between mb-2">
@@ -1250,174 +1275,325 @@
       </div>
 
       <!-- Premium Horizontal Layout -->
-      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 w-full max-w-7xl mx-auto mb-16 items-center">
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 w-full max-w-7xl mx-auto mb-16 items-stretch">
         <!-- Arranque -->
         <div
-          class="price-card bg-paper border border-ink/10 rounded-[2rem] p-8 md:p-10 flex flex-col gap-8 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group"
+          class="price-card bg-paper border border-ink/15 p-8 md:p-10 flex flex-col hover:-translate-y-2 transition-all duration-500 relative group rounded-none"
           id="pc-arranque" style="opacity: 0;">
-          <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-ink/10 group-hover:bg-ink transition-colors"></div>
-          <div class="w-full border-b border-ink/10 pb-6">
-            <span class="t-label block mb-2 opacity-50">Essencial</span>
-            <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-6">Arranque</h3>
-            <div class="font-mono text-xs text-ink/60 mb-1">Custo Inicial</div>
-            <div class="font-sans font-light text-ink text-4xl lg:text-5xl mb-3 tracking-tight">€800</div>
+
+          <!-- Architectural Lines -->
+          <div
+            class="absolute left-0 top-0 w-3 h-3 border-t border-l border-ink/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
+          </div>
+          <div
+            class="absolute right-0 top-0 w-3 h-3 border-t border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
+          </div>
+          <div
+            class="absolute left-0 bottom-0 w-3 h-3 border-b border-l border-ink/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:translate-y-1">
+          </div>
+          <div
+            class="absolute right-0 bottom-0 w-3 h-3 border-b border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
+          </div>
+
+          <div class="w-full border-b border-ink/10 pb-8 relative z-10 flex-grow-0">
+            <span class="font-mono text-[0.6rem] uppercase tracking-widest text-ink/40 block mb-3">Essencial</span>
+            <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-8">Arranque</h3>
+            <div class="font-mono text-[0.65rem] text-ink/60 mb-2 uppercase tracking-wider">Custo Inicial</div>
+            <div class="font-sans font-light text-ink text-5xl mb-4 tracking-tight">€800</div>
             <div
-              class="font-mono text-[0.68rem] text-ink/50 py-1.5 px-3 border border-ink/10 rounded-full inline-block mb-8">
+              class="font-mono text-[0.65rem] text-ink/70 py-2 border-y border-ink/10 block mb-6 uppercase tracking-widest text-center">
               &sim; 3 a 4 Semanas
             </div>
-            <a href="/contactos/"
-              class="block text-center bg-transparent border border-ink text-ink font-mono text-xs uppercase px-6 py-3 hover:bg-ink hover:text-paper transition-colors rounded-full w-full">Instanciar</a>
           </div>
-          <div class="w-full flex flex-col justify-center mt-2">
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-ink/80 leading-relaxed">Design personalizado e
-                  único (Sem Templates)</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-ink/80 leading-relaxed">Landing Page otimizada para
-                  SEO e Performance</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-ink/80 leading-relaxed">Efeitos GSAP suaves e
-                  interações modernas</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-ink/80 leading-relaxed">Até 5 secções (Hero,
-                  Serviços, Sobre, etc)</span>
-              </li>
-            </ul>
+          <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-10">
+            <div class="space-y-4 mb-8">
+              <details class="group/acc border-b border-ink/8 pb-3">
+                <summary
+                  class="flex items-center gap-3 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden py-1">
+                  <svg class="feat-arrow w-3 h-3 text-ink/50 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Design
+                    personalizado e único (Sem Templates)</span>
+                </summary>
+                <div class="pl-6 pt-2 pb-3 font-sans text-[0.78rem] text-ink/55 leading-relaxed">
+                  Desenhamos a interface no Figma exclusivamente para a sua marca. Nada de temas comprados instalados em
+                  duplicado noutras empresas.
+                </div>
+              </details>
+              <details class="group/acc border-b border-ink/8 pb-3">
+                <summary
+                  class="flex items-center gap-3 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden py-1">
+                  <svg class="feat-arrow w-3 h-3 text-ink/50 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Landing
+                    Page otimizada para SEO e Performance</span>
+                </summary>
+                <div class="pl-6 pt-2 pb-3 font-sans text-[0.78rem] text-ink/55 leading-relaxed">
+                  O código é compilado microscopicamente e os assets otimizados para garantir pontuações PageSpeed
+                  extremas e melhor ranking orgânico.
+                </div>
+              </details>
+              <details class="group/acc border-b border-ink/8 pb-3">
+                <summary
+                  class="flex items-center gap-3 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden py-1">
+                  <svg class="feat-arrow w-3 h-3 text-ink/50 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Efeitos
+                    GSAP suaves e interações modernas</span>
+                </summary>
+                <div class="pl-6 pt-2 pb-3 font-sans text-[0.78rem] text-ink/55 leading-relaxed">
+                  Implementamos animações elegantes baseadas no scroll do utilizador e micro-interações, criando um
+                  aspeto premium e incrivelmente satisfatório.
+                </div>
+              </details>
+              <details class="group/acc pb-2">
+                <summary
+                  class="flex items-center gap-3 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden py-1">
+                  <svg class="feat-arrow w-3 h-3 text-ink/50 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Até
+                    5 secções funcionais e estratégicas</span>
+                </summary>
+                <div class="pl-6 pt-2 pb-3 font-sans text-[0.78rem] text-ink/55 leading-relaxed">
+                  Estrutura onepage completa pensada para conversão: Cabeçalho com forte apelo, sobre a empresa,
+                  serviços detalhados, FAQ e contacto.
+                </div>
+              </details>
+            </div>
+            <a href="/contactos/"
+              class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono border border-ink/20 px-6 py-4 text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:border-ink hover:text-paper rounded-none mt-auto">
+              <span
+                class="absolute inset-0 w-full h-full bg-ink translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Instanciar</span>
+            </a>
           </div>
         </div>
 
-        <!-- Crescimento -->
+        <!-- Crescimento (Middle, featured) -->
         <div
-          class="price-card bg-ink border border-ink rounded-[2rem] p-8 md:p-10 flex flex-col gap-8 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group shadow-[0_30px_60px_rgba(18,18,18,0.3)]"
+          class="price-card !bg-ink border border-ink p-8 md:p-10 flex flex-col hover:-translate-y-4 transition-all duration-500 relative group rounded-none shadow-[0_30px_60px_rgba(18,18,18,0.4)] xl:-mt-8 xl:mb-2 z-20"
           id="pc-crescimento" style="opacity: 0;">
+
           <div
-            class="absolute inset-0 bg-gradient-to-br from-paper/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+            class="absolute inset-0 bg-gradient-to-br from-paper/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+          </div>
+
+          <div
+            class="absolute top-0 right-0 bg-paper text-ink font-mono text-[0.6rem] uppercase px-5 py-2 tracking-[0.2em] border-l border-b border-paper z-20">
+            Popular
+          </div>
+
+          <!-- Architectural border for middle card -->
+          <div
+            class="absolute inset-2 border border-paper/10 pointer-events-none z-10 transition-colors duration-500 group-hover:border-paper/20">
+          </div>
+
+          <div
+            class="absolute left-0 top-0 w-3 h-3 border-t border-l border-paper/40 transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 z-10">
           </div>
           <div
-            class="absolute top-0 right-10 bg-paper text-ink font-mono text-[0.6rem] uppercase px-4 py-1.5 tracking-widest rounded-b-xl shadow-lg">
-            Popular</div>
-          <div class="w-full border-b border-paper/10 pb-6 relative z-10">
-            <span class="t-label-light block mb-2 text-paper/40">Profissional</span>
-            <h3 class="font-sans font-bold text-2xl md:text-3xl text-paper mb-6">Crescimento</h3>
-            <div class="font-mono text-xs text-paper/60 mb-1">Custo Inicial</div>
-            <div class="font-sans font-light text-paper text-4xl lg:text-5xl mb-3 tracking-tight">€1.800</div>
+            class="absolute right-0 bottom-0 w-3 h-3 border-b border-r border-paper/40 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1 z-10">
+          </div>
+
+          <div class="w-full border-b border-paper/10 pb-8 relative z-20 flex-grow-0">
+            <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/40 block mb-3">Profissional</span>
+            <h3 class="font-sans font-bold text-2xl md:text-3xl text-paper mb-8">Crescimento</h3>
+            <div class="font-mono text-[0.65rem] text-paper/60 mb-2 uppercase tracking-wider">Custo Inicial</div>
+            <div class="font-sans font-light text-paper text-5xl mb-4 tracking-tight">€1.800</div>
             <div
-              class="font-mono text-[0.68rem] text-paper/60 py-1.5 px-3 border border-paper/20 rounded-full inline-block mb-8">
+              class="font-mono text-[0.65rem] text-paper/80 py-2 border-y border-paper/10 block mb-6 uppercase tracking-widest text-center mix-blend-screen">
               &sim; 6 a 8 Semanas
             </div>
-            <a href="/contactos/"
-              class="block text-center bg-paper border border-paper text-ink font-mono text-xs uppercase px-6 py-3 hover:bg-transparent hover:text-paper transition-colors rounded-full w-full">Selecionar</a>
           </div>
-          <div class="w-full flex flex-col justify-center mt-2 relative z-10">
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-paper flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-paper/80 leading-relaxed">Website Multi-Página ou
-                  Single-Page Complexa</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-paper flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-paper/80 leading-relaxed">CMS Integrado Custom
-                  (Artigos, Portfólio, Produtos editáveis sem código)</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-paper flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-paper/80 leading-relaxed">Integração complexa de
-                  GSAP (Scroll, Transições premium)</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-paper flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-paper/80 leading-relaxed">Analytics e SEO Avançado
-                  Integrado nativamente</span>
-              </li>
-            </ul>
+          <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-20">
+            <div class="space-y-4 mb-8">
+              <details class="group/acc border-b border-paper/10 pb-3">
+                <summary
+                  class="flex items-center gap-3 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden py-1">
+                  <svg class="feat-arrow w-3 h-3 text-paper/60 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                  <span
+                    class="font-mono text-xs text-paper/80 leading-relaxed transition-colors group-hover/acc:text-paper">Website
+                    Multi-Página ou Single-Page Complexa</span>
+                </summary>
+                <div class="pl-6 pt-2 pb-3 font-sans text-[0.78rem] text-paper/55 leading-relaxed">
+                  Navegabilidade expandida com infinitas ramificações. Pode incluir páginas dedicadas por produto ou
+                  serviço para captação de tráfego ultra-específico.
+                </div>
+              </details>
+              <details class="group/acc border-b border-paper/10 pb-3">
+                <summary
+                  class="flex items-center gap-3 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden py-1">
+                  <svg class="feat-arrow w-3 h-3 text-paper/60 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                  <span
+                    class="font-mono text-xs text-paper/80 leading-relaxed transition-colors group-hover/acc:text-paper">CMS
+                    Integrado Custom (Sem código para editar)</span>
+                </summary>
+                <div class="pl-6 pt-2 pb-3 font-sans text-[0.78rem] text-paper/55 leading-relaxed">
+                  Painel de administração exclusivo onde a sua equipa poderá atualizar facilmente textos e novas fotos.
+                </div>
+              </details>
+              <details class="group/acc border-b border-paper/10 pb-3">
+                <summary
+                  class="flex items-center gap-3 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden py-1">
+                  <svg class="feat-arrow w-3 h-3 text-paper/60 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                  <span
+                    class="font-mono text-xs text-paper/80 leading-relaxed transition-colors group-hover/acc:text-paper">Integração
+                    complexa de GSAP (Scroll, WebGL)</span>
+                </summary>
+                <div class="pl-6 pt-2 pb-3 font-sans text-[0.78rem] text-paper/55 leading-relaxed">
+                  Vanguardismo. Ligações imersivas interativas com possibilidade de integrar modelos complexos ou
+                  elementos webgl que reagem ao rato.
+                </div>
+              </details>
+              <details class="group/acc pb-2">
+                <summary
+                  class="flex items-center gap-3 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden py-1">
+                  <svg class="feat-arrow w-3 h-3 text-paper/60 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                  <span
+                    class="font-mono text-xs text-paper/80 leading-relaxed transition-colors group-hover/acc:text-paper">Analytics
+                    e SEO Avançado Integrado nativamente</span>
+                </summary>
+                <div class="pl-6 pt-2 pb-3 font-sans text-[0.78rem] text-paper/55 leading-relaxed">
+                  Métricas de funil incorporadas num ecossistema fechado que otimiza automaticamente as meta-tags por
+                  cada página única.
+                </div>
+              </details>
+            </div>
+            <a href="/contactos/"
+              class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono bg-paper text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] px-6 py-4 rounded-none mt-auto">
+              <span
+                class="absolute inset-0 w-full h-full bg-[#e0ded9] translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Selecionar</span>
+            </a>
           </div>
         </div>
 
         <!-- Empresa -->
         <div
-          class="price-card bg-paper border border-ink/10 rounded-[2rem] p-8 md:p-10 flex flex-col gap-8 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group"
+          class="price-card bg-paper border border-ink/15 p-8 md:p-10 flex flex-col hover:-translate-y-2 transition-all duration-500 relative group rounded-none"
           id="pc-empresa" style="opacity: 0;">
-          <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-ink/10 group-hover:bg-ink transition-colors"></div>
-          <div class="w-full border-b border-ink/10 pb-6">
-            <span class="t-label block mb-2 opacity-50">Custom</span>
-            <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-6">Empresa</h3>
-            <div class="font-mono text-xs text-ink/60 mb-1">Início</div>
-            <div class="font-sans font-light text-ink text-4xl lg:text-5xl mb-3 tracking-tight">Orçamento</div>
+
+          <!-- Architectural Lines -->
+          <div
+            class="absolute left-0 top-0 w-3 h-3 border-t border-l border-ink/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
+          </div>
+          <div
+            class="absolute right-0 top-0 w-3 h-3 border-t border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
+          </div>
+          <div
+            class="absolute left-0 bottom-0 w-3 h-3 border-b border-l border-ink/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:translate-y-1">
+          </div>
+          <div
+            class="absolute right-0 bottom-0 w-3 h-3 border-b border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
+          </div>
+
+          <div class="w-full border-b border-ink/10 pb-8 relative z-10 flex-grow-0">
+            <span class="font-mono text-[0.6rem] uppercase tracking-widest text-ink/40 block mb-3">Custom</span>
+            <h3 class="font-sans font-bold text-2xl md:text-3xl text-ink mb-8">Empresa</h3>
+            <div class="font-mono text-[0.65rem] text-ink/60 mb-2 uppercase tracking-wider">Início</div>
+            <div class="font-sans font-light text-ink text-4xl mb-4 tracking-tight">Orçamento</div>
             <div
-              class="font-mono text-[0.68rem] text-ink/50 py-1.5 px-3 border border-ink/10 rounded-full inline-block mb-8">
+              class="font-mono text-[0.65rem] text-ink/70 py-2 border-y border-ink/10 block mb-6 uppercase tracking-widest text-center">
               &sim; Tempo Dinâmico
             </div>
-            <a href="/contactos/"
-              class="block text-center bg-transparent border border-ink text-ink font-mono text-xs uppercase px-6 py-3 hover:bg-ink hover:text-paper transition-colors rounded-full w-full">Contactar</a>
           </div>
-          <div class="w-full flex flex-col justify-center mt-2">
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-ink/80 leading-relaxed">E-Commerce à medida ou App
-                  Base de dados Complexa</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-ink/80 leading-relaxed">Integrações de API
-                  exclusivas com CRM/ERPs globais</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-ink/80 leading-relaxed">Escalabilidade extrema via
-                  arquiteturas Cloud (AWS, Vercel Edge)</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-4 h-4 text-ink flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-mono text-xs md:text-[0.8rem] text-ink/80 leading-relaxed">Prioridade máxima e SLA de
-                  intervenção em menos de 2h</span>
-              </li>
-            </ul>
+          <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-10">
+            <div class="space-y-4 mb-8">
+              <details class="group/acc">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">E-Commerce
+                    à medida ou Web App Base de Dados</span>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Plataformas de venda com fluxos de checkout rigorosamente desenhados via APIs independentes (Stripe) e
+                  gestão de dados relacionais estruturada.
+                </div>
+              </details>
+              <details class="group/acc">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Integrações
+                    de API exclusivas com CRM/ERPs globais</span>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Sincronização bidirecional automatizada entre o stock do armazém e APIs de faturação (Moloni, PHC) via
+                  sistemas lógicos altamente seguros.
+                </div>
+              </details>
+              <details class="group/acc">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Escalabilidade
+                    via arquiteturas Cloud (AWS, Edge)</span>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Infraestrutura montada para absorver tráfego exótico, replicando os assets na orla global para
+                  garantir zero falhas em picos Black Friday.
+                </div>
+              </details>
+              <details class="group/acc">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Prioridade
+                    máxima e SLA de intervenção em 2h</span>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Qualquer rutura provocada por sistemas integrados da terceiros é mitigada instantaneamente no próprio
+                  dia através de acesso direto aos programadores core.
+                </div>
+              </details>
+            </div>
+            <a href="/contactos/"
+              class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono border border-ink/20 px-6 py-4 text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:border-ink hover:text-paper rounded-none mt-auto">
+              <span
+                class="absolute inset-0 w-full h-full bg-ink translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Contactar</span>
+            </a>
           </div>
         </div>
       </div>
@@ -1617,8 +1793,37 @@
               Esclareça todas as dúvidas logísticas, de propriedade intelectual e processo metodológico. Para questões
               adicionais, não hesite em contactar.
             </p>
-            <div class="w-full aspect-[4/5] rounded-[2rem] overflow-hidden grayscale border border-ink/10">
-               <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Monrion FAQ interior" class="w-full h-full object-cover">
+            <div
+              class="group relative w-full aspect-[4/5] overflow-hidden bg-ink/5 border border-ink/10 cursor-crosshair">
+              <!-- Overlay effect for architectural feel -->
+              <div
+                class="absolute inset-0 bg-paper/10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-700 z-10 pointer-events-none">
+              </div>
+
+              <!-- Blueprint corner marks -->
+              <div
+                class="absolute top-5 left-5 w-5 h-5 border-t border-l border-paper/60 z-20 mix-blend-difference transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:-translate-x-1.5 group-hover:-translate-y-1.5 opacity-40 group-hover:opacity-100">
+              </div>
+              <div
+                class="absolute top-5 right-5 w-5 h-5 border-t border-r border-paper/60 z-20 mix-blend-difference transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:translate-x-1.5 group-hover:-translate-y-1.5 opacity-40 group-hover:opacity-100">
+              </div>
+              <div
+                class="absolute bottom-5 left-5 w-5 h-5 border-b border-l border-paper/60 z-20 mix-blend-difference transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:-translate-x-1.5 group-hover:translate-y-1.5 opacity-40 group-hover:opacity-100">
+              </div>
+              <div
+                class="absolute bottom-5 right-5 w-5 h-5 border-b border-r border-paper/60 z-20 mix-blend-difference transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:translate-x-1.5 group-hover:translate-y-1.5 opacity-40 group-hover:opacity-100">
+              </div>
+
+              <!-- Interactive prompt inside image -->
+              <div
+                class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 mix-blend-difference">
+                <div class="w-1.5 h-1.5 rounded-full bg-paper animate-pulse"></div>
+                <span class="font-mono text-[0.6rem] tracking-[0.25em] text-paper uppercase">Explorar</span>
+              </div>
+
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
+                alt="Monrion FAQ interior"
+                class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]">
             </div>
           </div>
         </div>
@@ -1713,6 +1918,39 @@
               acordo com o crescimento real do seu negócio.
             </div>
           </details>
+
+          <details class="faq-item group" data-group="faq">
+            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+              Qual é a diferença funcional frente a templates de mercado (WordPress, Elementor, construtores de arrastar
+              e largar)?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              Todos os nossos projetos são desenhados de forma customizada e "headless" com arquitetura de performance
+              imaculada. Ao contrário de templates pesados com plugins (que abrandam massivamente o site, reduzem a taxa
+              de conversão e geram vulnerabilidades de segurança), o nosso código é puro e otimizado ao milésimo de
+              segundo.
+            </div>
+          </details>
+
+          <details class="faq-item group" data-group="faq">
+            <summary class="font-sans font-bold text-lg md:text-xl text-ink faq-hover-anim">
+              Como garantem que a arquitetura suporta tráfego elevado?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              Assumimos uma postura de infraestrutura "Edge". Na nossa camada de engenharia moderna, minimizamos os
+              pedidos bloqueantes ao servidor. Com isto as distribuições do site fluem através de servidores regionais
+              globais; os ficheiros chegam diretos ao consumidor com tempos de resposta mínimos tornando o seu website
+              quase virtualmente inquebrável a picos de acessos.
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -1742,16 +1980,16 @@
       </div>
 
       <div class="relative z-10 text-center">
-        <h2 id="cta-headline" class="font-serif italic text-ink mb-6 overflow-hidden" style="
+        <h2 id="cta-headline" class="font-serif italic text-ink mb-6" style="
               font-size: clamp(3.5rem, 9.5vw, 12rem);
               line-height: 0.88;
               letter-spacing: -0.02em;
             ">
-          <span class="block overflow-hidden">
-            <span class="block cta-word" style="transform: translateY(110%); will-change: transform">Vamos criar</span>
+          <span class="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
+            <span class="block cta-word" style="transform: translateY(130%); will-change: transform">Vamos criar</span>
           </span>
-          <span class="block overflow-hidden">
-            <span class="block cta-word" style="transform: translateY(110%); will-change: transform">algo
+          <span class="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
+            <span class="block cta-word" style="transform: translateY(130%); will-change: transform">algo
               notável.</span>
           </span>
         </h2>
@@ -1762,28 +2000,30 @@
           se somos a escolha certa para o seu projecto.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal-fade">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-5 reveal-fade mt-2">
           <a href="/contactos/"
-            class="inline-flex items-center gap-3 font-mono bg-ink text-paper px-8 py-4 hover:bg-carbon transition-colors duration-300"
+            class="group relative inline-flex items-center justify-center gap-3 font-mono bg-ink text-paper px-9 py-[1.125rem] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-[0_12px_24px_-6px_rgba(18,18,18,0.25)] hover:bg-[#1a1a1a]"
             style="
-                font-size: 0.62rem;
-                letter-spacing: 0.16em;
+                font-size: 0.65rem;
+                letter-spacing: 0.18em;
                 text-transform: uppercase;
               ">
-            <span>Iniciar projecto</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <span class="relative z-10 block transition-transform duration-500 group-hover:scale-[1.02]">Iniciar
+              projecto</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              class="relative z-10 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:translate-x-1">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
           <a href="mailto:geral@monrion.com"
-            class="inline-flex items-center gap-3 font-mono border text-ink/60 px-8 py-4 hover:border-ink/40 hover:text-ink transition-all duration-300"
+            class="group relative inline-flex items-center justify-center gap-3 font-mono border border-ink/20 px-9 py-[1.125rem] text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:border-ink hover:bg-ink hover:text-paper hover:shadow-[0_12px_24px_-8px_rgba(18,18,18,0.2)]"
             style="
-                font-size: 0.62rem;
-                letter-spacing: 0.16em;
+                font-size: 0.65rem;
+                letter-spacing: 0.18em;
                 text-transform: uppercase;
-                border-color: rgba(18, 18, 18, 0.18);
               ">
-            <span>geral@monrion.com</span>
+            <span
+              class="relative z-10 block transition-transform duration-500 group-hover:scale-[1.02]">geral@monrion.com</span>
           </a>
         </div>
       </div>
