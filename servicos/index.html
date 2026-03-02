@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt">
 
 <head>
@@ -621,29 +621,56 @@
         display: none;
       }
 
-      /* ── Pricing card feature accordions ─────────────── */
-      details.group\/acc > summary {
-        list-style: none;
+      /* ── Pricing card feature accordions (div/button based) ── */
+      .price-acc-item {
+        display: block;
       }
-      details.group\/acc > summary::-webkit-details-marker {
-        display: none;
+      .price-acc-btn {
+        display: flex;
+        width: 100%;
+        align-items: flex-start;
+        gap: 1rem;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        text-align: left;
+        color: inherit;
+        font: inherit;
+        outline: none;
       }
-      details.group\/acc > summary::marker {
-        display: none;
+      /* Collapsible body: grid collapses to 0 height */
+      .price-acc-body {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        transition:
+          grid-template-rows 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          opacity 0.26s ease;
       }
-      /* Arrow indicator shown at right of each feature row */
-      details.group\/acc > summary .feat-arrow {
-        margin-left: auto;
+      .price-acc-body > div {
+        overflow: hidden;
+        min-height: 0;
+      }
+      /* Open state */
+      .price-acc-item.is-open .price-acc-body {
+        grid-template-rows: 1fr;
+        opacity: 1;
+      }
+      /* Arrow */
+      .price-acc-btn .feat-arrow {
         flex-shrink: 0;
         opacity: 0.35;
-        transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+        margin-left: auto;
+        margin-top: 0.125rem;
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.25s ease;
       }
-      details.group\/acc[open] > summary .feat-arrow {
-        transform: rotate(90deg);
-        opacity: 0.8;
+      .price-acc-item.is-open .price-acc-btn .feat-arrow {
+        transform: rotate(180deg);
+        opacity: 0.75;
       }
-      details.group\/acc > summary:hover .feat-arrow {
-        opacity: 0.7;
+      .price-acc-btn:hover .feat-arrow {
+        opacity: 0.6;
       }
       
       /* Pricing Accordion */
@@ -1307,7 +1334,7 @@
           </div>
           <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-10">
             <div class="space-y-4 mb-8">
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-arranque">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1326,7 +1353,7 @@
                   duplicado noutras empresas.
                 </div>
               </details>
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-arranque">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1345,7 +1372,7 @@
                   extremas e melhor ranking orgânico.
                 </div>
               </details>
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-arranque">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1364,7 +1391,7 @@
                   aspeto premium e incrivelmente satisfatório.
                 </div>
               </details>
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-arranque">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1431,7 +1458,7 @@
           </div>
           <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-20">
             <div class="space-y-4 mb-8">
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-crescimento">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1451,7 +1478,7 @@
                   serviço para captação de tráfego ultra-específico.
                 </div>
               </details>
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-crescimento">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1470,7 +1497,7 @@
                   Painel de administração exclusivo onde a sua equipa poderá atualizar facilmente textos e novas fotos.
                 </div>
               </details>
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-crescimento">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1490,7 +1517,7 @@
                   elementos webgl que reagem ao rato.
                 </div>
               </details>
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-crescimento">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1552,7 +1579,7 @@
           </div>
           <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-10">
             <div class="space-y-4 mb-8">
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-empresa">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1571,7 +1598,7 @@
                   gestão de dados relacionais estruturada.
                 </div>
               </details>
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-empresa">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1590,7 +1617,7 @@
                   sistemas lógicos altamente seguros.
                 </div>
               </details>
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-empresa">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -1610,7 +1637,7 @@
                   zero falhas em picos Black Friday.
                 </div>
               </details>
-              <details class="group/acc">
+              <details class="group/acc" data-acc-group="acc-empresa">
                 <summary
                   class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
                   <div
@@ -2671,6 +2698,64 @@
       attributes: true,
       attributeFilter: ["style"],
     });
+  </script>
+
+  <!-- Pricing accordion: convert <details> → <div>/<button> for smooth animation -->
+  <script>
+    (function () {
+      document.querySelectorAll('details[data-acc-group]').forEach(function (details) {
+        var group = details.dataset.accGroup;
+        var summary = details.querySelector('summary');
+        var content = summary && summary.nextElementSibling;
+        if (!summary || !content) return;
+
+        // ── Build replacement elements ─────────────────────────────────────
+
+        // Wrapper div (replaces <details>)
+        var item = document.createElement('div');
+        item.className = 'price-acc-item';
+        item.dataset.accGroup = group;
+
+        // Button (replaces <summary>)
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'price-acc-btn';
+        btn.setAttribute('aria-expanded', 'false');
+        // Move all children from <summary> into the button
+        while (summary.firstChild) btn.appendChild(summary.firstChild);
+
+        // Collapsible body (outer = grid container, inner = overflow clip)
+        var body = document.createElement('div');
+        body.className = 'price-acc-body';
+        var inner = document.createElement('div');
+        inner.appendChild(content); // content div moves here (keeps its classes/text)
+        body.appendChild(inner);
+
+        item.appendChild(btn);
+        item.appendChild(body);
+
+        // Replace the original <details> in the DOM
+        details.parentNode.replaceChild(item, details);
+
+        // ── Click handler ─────────────────────────────────────────────────
+        btn.addEventListener('click', function () {
+          var isOpen = item.classList.contains('is-open');
+
+          if (!isOpen) {
+            // Close siblings in the same group first
+            document.querySelectorAll('.price-acc-item[data-acc-group="' + group + '"].is-open')
+              .forEach(function (sib) {
+                sib.classList.remove('is-open');
+                sib.querySelector('.price-acc-btn').setAttribute('aria-expanded', 'false');
+              });
+          }
+
+          // Toggle this item
+          item.classList.toggle('is-open', !isOpen);
+          btn.setAttribute('aria-expanded', String(!isOpen));
+        });
+      });
+    })();
   </script>
 </body>
 
