@@ -3296,6 +3296,25 @@
 
         // Recalculate all scroll trigger positions after layout stabilises
         ScrollTrigger.refresh();
+
+        // ── Fix: refresh mid-page bug ───────────────────────────
+        // When the user refreshes mid-scroll, elements already in the viewport
+        // never get their "enter" animation fired. We detect this and immediately
+        // complete those animations so nothing stays invisible.
+        requestAnimationFrame(() => {
+          const viewportH = window.innerHeight;
+          ScrollTrigger.getAll().forEach(st => {
+            if (!st.trigger) return;
+            const rect = st.trigger.getBoundingClientRect();
+            // If the trigger element is already fully or partially in view,
+            // jump the associated tween/timeline to its end state immediately.
+            if (rect.top < viewportH && rect.bottom > 0) {
+              if (st.animation) {
+                st.animation.progress(1, false);
+              }
+            }
+          });
+        });
       } catch (err) {
         console.error("Animations init error:", err);
       }
