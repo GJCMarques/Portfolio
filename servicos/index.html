@@ -2291,7 +2291,6 @@
             <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 48px,rgba(18,18,18,0.012) 48px,rgba(18,18,18,0.012) 49px);"></div>
             <div id="svc-list-ghost" style="position:absolute;font-family:'IBM Plex Mono',monospace;font-size:clamp(16rem,28vw,34rem);font-weight:400;letter-spacing:-0.08em;line-height:0.75;color:rgba(18,18,18,0.016);pointer-events:none;user-select:none;right:-1rem;bottom:-3rem;will-change:transform;">02</div>
             <div id="svc-list-mv" style="position:absolute;width:1px;background:rgba(18,18,18,0.08);clip-path:inset(0 0 100% 0);right:clamp(1.5rem,3vw,4rem);top:15%;height:70%;"></div>
-            <div id="svc-list-mh" style="position:absolute;height:1px;background:rgba(18,18,18,0.08);clip-path:inset(0 100% 0 0);left:0;right:0;top:4.5rem;"></div>
             <div id="svc-list-tick-t" style="position:absolute;background:rgba(18,18,18,0.08);right:calc(clamp(1.5rem,3vw,4rem) - 5px);top:15%;width:11px;height:1px;opacity:0;"></div>
             <div id="svc-list-tick-b" style="position:absolute;background:rgba(18,18,18,0.08);right:calc(clamp(1.5rem,3vw,4rem) - 5px);top:85%;width:11px;height:1px;opacity:0;"></div>
           `;
@@ -2304,10 +2303,6 @@
           gsap.to("#svc-list-mv", {
             scrollTrigger: { trigger: "#svc-list", start: "top 68%" },
             clipPath: "inset(0 0 0% 0)", duration: 1.6, ease: "power3.out"
-          });
-          gsap.to("#svc-list-mh", {
-            scrollTrigger: { trigger: "#svc-list", start: "top 74%" },
-            clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "power4.out"
           });
           gsap.to("#svc-list-tick-t, #svc-list-tick-b", {
             scrollTrigger: { trigger: "#svc-list", start: "top 65%" },
@@ -2372,6 +2367,25 @@
             });
           }
         });
+
+        // ── FAQ: description + image (not covered by heading loop) ──
+        const faqSticky = document.querySelector("#svc-faq .sticky");
+        if (faqSticky) {
+          const faqDesc = faqSticky.querySelector("p");
+          const faqImg  = faqDesc && faqDesc.nextElementSibling; // the aspect-[4/5] wrapper
+          if (faqDesc) {
+            gsap.from(faqDesc, {
+              scrollTrigger: { trigger: "#svc-faq", start: "top 80%", once: true },
+              opacity: 0, y: 18, duration: 0.85, delay: 0.15, ease: "power3.out"
+            });
+          }
+          if (faqImg) {
+            gsap.from(faqImg, {
+              scrollTrigger: { trigger: "#svc-faq", start: "top 80%", once: true },
+              opacity: 0, y: 28, duration: 1.1, delay: 0.3, ease: "power3.out"
+            });
+          }
+        }
 
         // ── Service list cards (svc-01…svc-05) ─────────────────
         const svcCards = Array.from(document.querySelectorAll("#svc-list a[id^='svc-0']"));
