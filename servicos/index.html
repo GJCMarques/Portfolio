@@ -941,7 +941,12 @@
       }
       .atelier-block .atelier-img {
         will-change: transform, filter;
-        transform: translateZ(0); /* Hardware Acceleration */
+        transform: translateZ(0);
+        transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1.2s ease;
+      }
+      .atelier-block .atelier-img:hover {
+        transform: scale(1.08) translateZ(0);
+        filter: grayscale(0%) !important;
       }
       .tech-line, .tech-text, .tech-frame {
         will-change: opacity, transform;
@@ -1162,6 +1167,17 @@
             <path d="M12 4V20M4 12H20" />
           </svg>
         </div>
+
+        <!-- Animated Scanning Lines (Laser Scan Effect) -->
+        <div class="absolute left-0 w-full h-[1px] bg-ink/[0.05] pointer-events-none" id="bg-laser-h1" style="top: 20%">
+        </div>
+        <div class="absolute left-0 w-full h-[1px] bg-ink/[0.05] pointer-events-none" id="bg-laser-h2" style="top: 80%">
+        </div>
+        <div class="absolute top-0 h-full w-[1px] bg-ink/[0.05] pointer-events-none" id="bg-laser-v1" style="left: 30%">
+        </div>
+        <div class="absolute top-0 h-full w-[1px] bg-ink/[0.05] pointer-events-none" id="bg-laser-v2" style="left: 70%">
+        </div>
+      </div>
       </div>
 
       <!-- Background Vertical Guide Line -->
@@ -1266,13 +1282,10 @@
               <span class="font-mono text-[6px] rotate-90">90cm</span>
             </div>
 
-            <div class="aspect-[4/5] lg:aspect-[3/4] overflow-hidden bg-ink/5 relative shadow-2xl reveal-fade">
+            <div
+              class="aspect-[4/5] lg:aspect-[3/4] overflow-hidden bg-ink/5 relative shadow-2xl reveal-fade border border-ink/5">
               <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070&auto=format&fit=crop"
-                alt="Architecture"
-                class="w-full h-full object-cover transition-all duration-[2.5s] ease-out group-hover:scale-105 atelier-img" />
-              <div
-                class="absolute inset-0 bg-ink/5 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity">
-              </div>
+                alt="Architecture" class="w-full h-full object-cover grayscale atelier-img" />
             </div>
             <!-- Technical Coordinate Labels -->
             <div
@@ -1285,11 +1298,11 @@
 
         <!-- BLOCK 02: ENGENHARIA DE PRECISÃO (Overlapping Left-Heavy) -->
         <div class="atelier-block group flex flex-col lg:flex-row items-center gap-16 lg:gap-0 relative">
-          <!-- Background Large Number -->
-          <span
-            class="absolute -right-4 top-0 font-serif italic text-ink/[0.02] text-[25vw] leading-none pointer-events-none hidden lg:block text-right">02</span>
+          <div class="w-full lg:w-[45%] relative z-10">
+            <!-- Large Background Number positioned over image area -->
+            <span
+              class="absolute -left-12 -top-24 font-serif italic text-ink/[0.04] text-[30vw] leading-none pointer-events-none hidden lg:block z-0">02</span>
 
-          <div class="w-full lg:w-[55%] relative z-10">
             <!-- Luxury Blueprint Frame -->
             <div
               class="absolute -top-6 -left-6 -right-6 -bottom-6 border border-ink/[0.03] pointer-events-none h-line opacity-100 scale-x-100">
@@ -1298,7 +1311,7 @@
             <div class="aspect-video lg:aspect-[16/10] overflow-hidden bg-ink relative shadow-2xl">
               <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=2070&auto=format&fit=crop"
                 alt="Precision Technology"
-                class="w-full h-full object-cover grayscale opacity-80 transition-all duration-[2.5s] ease-out group-hover:grayscale-0 group-hover:scale-105 atelier-img" />
+                class="w-full h-full object-cover grayscale opacity-80 transition-all duration-[2.5s] ease-out atelier-img" />
             </div>
             <!-- Dynamic Gauge Detail -->
             <div
@@ -1314,24 +1327,63 @@
             </div>
           </div>
 
-          <div class="w-full lg:w-[450px] lg:-ml-24 relative z-20 bg-paper p-12 shadow-sm border border-ink/[0.05]">
+          <div class="w-full lg:w-[60%] lg:-ml-12 relative z-20 bg-paper p-12 shadow-sm border border-ink/[0.05]">
             <span class="font-mono text-[0.6rem] tracking-[0.4em] uppercase opacity-40 mb-6 block">Structure &
               Logic</span>
             <h3 class="font-serif italic text-ink text-5xl mb-8">Engenharia <br /> de Precisão</h3>
-            <p class="font-sans text-ink/70 text-sm mb-10 leading-relaxed">
+            <p class="font-sans text-ink/70 text-sm mb-10 leading-relaxed max-w-md">
               Desenvolvemos sistemas onde cada linha de código é uma costura invisível. Escalabilidade robusta para
               marcas que não aceitam compromissos técnicos.
             </p>
-            <div class="flex flex-wrap gap-3">
-              <span
-                class="px-4 py-1.5 border border-ink/10 font-mono text-[0.55rem] uppercase tracking-widest text-ink hover:bg-ink hover:text-paper transition-colors duration-300">Software
-                Architecture</span>
-              <span
-                class="px-4 py-1.5 border border-ink/10 font-mono text-[0.55rem] uppercase tracking-widest text-ink hover:bg-ink hover:text-paper transition-colors duration-300">SaaS
-                Systems</span>
-              <span
-                class="px-4 py-1.5 border border-ink/10 font-mono text-[0.55rem] uppercase tracking-widest text-ink hover:bg-ink hover:text-paper transition-colors duration-300">iOS
-                & Android</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-8">
+              <div
+                class="atelier-item py-3 border-b border-ink/[0.08] flex justify-between items-center group/item hover:bg-ink/[0.02] transition-all duration-500 px-4 reveal-up">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-[0.55rem] opacity-30">01</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-widest text-ink font-bold">Arquitetura
+                    Software</span>
+                </div>
+              </div>
+              <div
+                class="atelier-item py-3 border-b border-ink/[0.08] flex justify-between items-center group/item hover:bg-ink/[0.02] transition-all duration-500 px-4 reveal-up">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-[0.55rem] opacity-30">02</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-widest text-ink font-bold">Engenharia
+                    SaaS</span>
+                </div>
+              </div>
+              <div
+                class="atelier-item py-3 border-b border-ink/[0.08] flex justify-between items-center group/item hover:bg-ink/[0.02] transition-all duration-500 px-4 reveal-up">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-[0.55rem] opacity-30">03</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-widest text-ink font-bold">Native Mobile
+                    Apps</span>
+                </div>
+              </div>
+              <div
+                class="atelier-item py-3 border-b border-ink/[0.08] flex justify-between items-center group/item hover:bg-ink/[0.02] transition-all duration-500 px-4 reveal-up">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-[0.55rem] opacity-30">04</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-widest text-ink font-bold">Scalability
+                    Cloud</span>
+                </div>
+              </div>
+              <div
+                class="atelier-item py-3 border-b border-ink/[0.08] flex justify-between items-center group/item hover:bg-ink/[0.02] transition-all duration-500 px-4 reveal-up">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-[0.55rem] opacity-30">05</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-widest text-ink font-bold">Cybersecurity
+                    API</span>
+                </div>
+              </div>
+              <div
+                class="atelier-item py-3 border-b border-ink/[0.08] flex justify-between items-center group/item hover:bg-ink/[0.02] transition-all duration-500 px-4 reveal-up">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-[0.55rem] opacity-30">06</span>
+                  <span class="font-sans text-[0.8rem] uppercase tracking-widest text-ink font-bold">Performance
+                    UX</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1352,7 +1404,7 @@
 
               <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop"
                 alt="Visual Studio"
-                class="w-full h-full object-cover grayscale opacity-85 transition-all duration-[2.5s] ease-out group-hover:grayscale-0 group-hover:scale-110 atelier-img" />
+                class="w-full h-full object-cover grayscale opacity-85 transition-all duration-[2.5s] ease-out atelier-img" />
             </div>
           </div>
 
@@ -1364,22 +1416,36 @@
               Onde o olhar capturado se transforma em narrativa de poder. Criamos o universo estético que permite à sua
               marca falar sem dizer uma única palavra.
             </p>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              <div class="text-center">
-                <span class="font-serif text-3xl italic block mb-2">01</span>
-                <span class="font-mono text-[0.55rem] uppercase tracking-widest opacity-60">Photography</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+              <div class="atelier-item py-3 border-b border-ink/[0.08]">
+                <span class="font-mono text-[0.65rem] opacity-30 block mb-2">Service I</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Fotografia de Produto &
+                  Moda</span>
               </div>
-              <div class="text-center">
-                <span class="font-serif text-3xl italic block mb-2">02</span>
-                <span class="font-mono text-[0.55rem] uppercase tracking-widest opacity-60">Cinema</span>
+              <div class="atelier-item py-3 border-b border-ink/[0.08]">
+                <span class="font-mono text-[0.65rem] opacity-30 block mb-2">Service II</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Filmes Comerciais de
+                  Alta-Gama</span>
               </div>
-              <div class="text-center">
-                <span class="font-serif text-3xl italic block mb-2">03</span>
-                <span class="font-mono text-[0.55rem] uppercase tracking-widest opacity-60">Strategy</span>
+              <div class="atelier-item py-3 border-b border-ink/[0.08]">
+                <span class="font-mono text-[0.65rem] opacity-30 block mb-2">Service III</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Direção Criativa &
+                  Estratégia</span>
               </div>
-              <div class="text-center">
-                <span class="font-serif text-3xl italic block mb-2">04</span>
-                <span class="font-mono text-[0.55rem] uppercase tracking-widest opacity-60">Identity</span>
+              <div class="atelier-item py-3 border-b border-ink/[0.08]">
+                <span class="font-mono text-[0.65rem] opacity-30 block mb-2">Service IV</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Edição & Color Grading
+                  Profissional</span>
+              </div>
+              <div class="atelier-item py-3 border-b border-ink/[0.08]">
+                <span class="font-mono text-[0.65rem] opacity-30 block mb-2">Service V</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Arquitetura de Marca
+                  (Branding)</span>
+              </div>
+              <div class="atelier-item py-3 border-b border-ink/[0.08]">
+                <span class="font-mono text-[0.65rem] opacity-30 block mb-2">Service VI</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Design para Print &
+                  Editorial</span>
               </div>
             </div>
           </div>
@@ -2784,13 +2850,13 @@
           }
         });
 
-        // ── Global reveal system (fix for invisible parts) ─────
+        // ── Global reveal system (Cinematic Power) ──────────────
         gsap.utils.toArray(".reveal-up").forEach(el => {
           gsap.fromTo(el,
-            { opacity: 0, y: 36 },
+            { opacity: 0, y: 50 },
             {
-              scrollTrigger: { trigger: el, start: "top 90%", once: true },
-              opacity: 1, y: 0, duration: 1.4, ease: "power3.out"
+              scrollTrigger: { trigger: el, start: "top 88%", once: true },
+              opacity: 1, y: 0, duration: 1.6, ease: "power4.out"
             }
           );
         });
@@ -2799,8 +2865,8 @@
           gsap.fromTo(el,
             { opacity: 0 },
             {
-              scrollTrigger: { trigger: el, start: "top 90%", once: true },
-              opacity: 1, duration: 1.2, ease: "power3.out"
+              scrollTrigger: { trigger: el, start: "top 88%", once: true },
+              opacity: 1, duration: 1.4, ease: "power2.out"
             }
           );
         });
@@ -2809,6 +2875,8 @@
         gsap.to("#bg-drift-1", { x: 50, duration: 25, repeat: -1, yoyo: true, ease: "sine.inOut" });
         gsap.to("#bg-drift-2", { x: -50, duration: 20, repeat: -1, yoyo: true, ease: "sine.inOut" });
         gsap.to(["#bg-cross-1", "#bg-cross-2"], { rotation: 90, duration: 15, repeat: -1, ease: "none" });
+
+        // Removed laser scanning lines - now static geometric background
 
         // ── Tech background floating ──────────────────────────
         ScrollTrigger.create({
@@ -2864,25 +2932,14 @@
 
           // Image parallax & Scale (scrub) - Optimized scrub
           if (img) {
+            // Scrub only parallax (Scroll physics)
             gsap.from(img, {
               scrollTrigger: {
                 trigger: block,
                 start: "top bottom",
-                scrub: 1.2
+                scrub: 1.5
               },
-              y: 40,
-              scale: 1.12
-            });
-
-            // Subtle Loop Animation
-            gsap.to(img, {
-              y: "+=15",
-              x: "+=5",
-              rotation: 1,
-              duration: 5 + Math.random() * 3,
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut"
+              y: 50
             });
           }
 
