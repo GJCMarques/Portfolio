@@ -1602,17 +1602,17 @@
             </div>
           </div>
 
-          <!-- Below image: 03 number LEFT + content div RIGHT -->
-          <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+          <!-- Below image: 03 number LEFT (absolute, out of flow) + content centered -->
+          <div class="relative">
 
-            <!-- 03 number — same style as 02 in Engenharia div -->
-            <div class="hidden lg:flex flex-shrink-0 items-start pt-2">
+            <!-- 03 number — absolute so it doesn't shift the content center -->
+            <div class="absolute left-0 top-0 hidden lg:block">
               <span class="font-serif italic text-ink/[0.06] leading-none pointer-events-none select-none"
                 style="font-size: clamp(6rem, 10vw, 12rem)">03</span>
             </div>
 
-            <!-- Content div -->
-            <div class="flex-1 w-full max-w-2xl mx-auto px-6 atelier-info reveal-up text-center">
+            <!-- Content div — truly centered via mx-auto, unaffected by the 03 -->
+            <div class="w-full max-w-2xl mx-auto px-6 atelier-info reveal-up text-center">
               <span class="font-mono text-[0.6rem] tracking-[0.4em] uppercase opacity-40 mb-4 block">Visual
                 Composition</span>
               <h3 class="font-serif italic text-ink text-6xl mb-8">Estúdio Visual</h3>
@@ -1660,7 +1660,7 @@
               </div>
             </div>
 
-          </div><!-- end flex row -->
+          </div><!-- end relative wrapper -->
         </div><!-- end block 03 -->
 
     </section>
