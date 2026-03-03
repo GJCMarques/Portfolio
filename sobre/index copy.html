@@ -92,7 +92,6 @@
     .card-corner.tr { top:0; right:0; border-top:1px solid currentColor; border-right:1px solid currentColor; }
     .card-corner.bl { bottom:0; left:0; border-bottom:1px solid currentColor; border-left:1px solid currentColor; }
     .card-corner.br { bottom:0; right:0; border-bottom:1px solid currentColor; border-right:1px solid currentColor; }
-    .card-corner-light { color:rgba(235,233,228,0.15); }
 
     /* ── Value pills ────────────── */
     .vp { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; border:1px solid rgba(235,233,228,0.12); padding:0.4rem 1rem; border-radius:100px; color:rgba(235,233,228,0.5); transition:all 0.4s ease; }
@@ -103,47 +102,23 @@
     .sk-tag { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; border:1px solid rgba(18,18,18,0.12); border-radius:100px; padding:0.3rem 0.7rem; color:rgba(18,18,18,0.45); transition:all 0.35s ease; }
     .sk-tag:hover { border-color:rgba(18,18,18,0.35); color:rgba(18,18,18,0.7); }
 
-    /* ── GSAP Reveal System (matching Serviços) ── */
-    .reveal-up { opacity:0; transform:translateY(36px); will-change:transform,opacity; }
-    .reveal-fade { opacity:0; will-change:opacity; }
+    /* ── Reveal ────────────────── */
+    .will-reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .will-reveal.revealed { opacity:1; transform:none; }
 
-    /* ── Marquee ──────────────── */
-    @keyframes sbn-marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
-    .mq-track { display:flex; width:max-content; animation:sbn-marquee 32s linear infinite; }
-
-    /* ── Value row (service-row style) ── */
-    .val-row { position:relative; border-bottom:1px solid rgba(18,18,18,0.07); padding:clamp(2rem,3.5vw,3.5rem) 0; overflow:hidden; cursor:default; transition:background 0.4s ease; }
-    .val-row:hover { background:rgba(18,18,18,0.015); }
-    .val-row-bar { position:absolute; bottom:-1px; left:0; height:1px; width:0; background:var(--color-ink); transition:width 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .val-row:hover .val-row-bar { width:100%; }
-    .val-row .val-name { transition:transform 0.42s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .val-row:hover .val-name { transform:translateX(10px); }
-    .val-row .val-num { transition:all 0.4s ease; }
-    .val-row:hover .val-num { color:rgba(18,18,18,0.25); transform:scale(1.08); }
-
-    /* ── Founder card hover ────── */
-    .founder-card { position:relative; transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.45s ease; }
-    .founder-card:hover { transform:translateY(-6px); box-shadow:0 28px 70px -18px rgba(18,18,18,0.08); }
-
-    /* ── Dark section values ────── */
-    .val-row-dark { position:relative; border-bottom:1px solid rgba(235,233,228,0.06); padding:clamp(2rem,3.5vw,3.5rem) 0; overflow:hidden; cursor:default; transition:background 0.4s ease; }
-    .val-row-dark:hover { background:rgba(235,233,228,0.03); }
-    .val-row-dark .val-row-bar { background:var(--color-paper); }
+    /* ── Stagger columns ────────── */
+    .stack-col { border-top:1px dashed rgba(18,18,18,0.15); padding-top:2rem; }
 
     /* ── Tech logo cards ────────── */
     .tech-logo-card {
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.6rem;
-      padding:1.25rem 0.75rem; border:1px solid rgba(18,18,18,0.06);
+      padding:1.25rem 0.75rem; border:1px solid rgba(18,18,18,0.06); border-radius:1rem;
       transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
     }
     .tech-logo-card:hover { border-color:rgba(18,18,18,0.18); transform:translateY(-4px); box-shadow:0 8px 24px -8px rgba(18,18,18,0.08); }
     .tech-logo-card img { width:32px; height:32px; object-fit:contain; filter:grayscale(100%) opacity(0.55); transition:filter 0.5s ease; }
     .tech-logo-card:hover img { filter:grayscale(0%) opacity(1); }
     .tech-logo-card span { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.1em; color:rgba(18,18,18,0.4); text-transform:uppercase; text-align:center; }
-
-    /* ── L-bracket marks ────────── */
-    .l-bracket { position:absolute; pointer-events:none; }
-    .l-bracket svg { opacity:0.5; }
   </style>
 </head>
 
@@ -220,7 +195,7 @@
 
   <main>
     <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 01. HERO — Geometric canvas + technical metadata          -->
+    <!-- 01. HERO — Animated particles on paper background        -->
     <!-- ══════════════════════════════════════════════════════════ -->
     <section id="sbn-hero" class="relative w-full overflow-hidden bp-grid" style="
           min-height:100svh;
@@ -230,7 +205,7 @@
             radial-gradient(ellipse 55% 55% at 10% 85%, rgba(18,18,18,0.035) 0%, transparent 55%),
             radial-gradient(ellipse 50% 40% at 85% 70%, rgba(18,18,18,0.025) 0%, transparent 50%);
         ">
-      <!-- Animated geometric canvas -->
+      <!-- Animated particle canvas -->
       <canvas id="hero-canvas" aria-hidden="true"
         style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
 
@@ -240,54 +215,32 @@
         <span class="hero-ghost" style="font-size: clamp(20vw, 28vw, 38vw)">Sobre</span>
       </div>
 
-      <!-- Top-left technical ref -->
-      <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none" style="
-            top: clamp(7.5rem, 11vh, 10.5rem);
-            left: clamp(1.5rem, 5vw, 6rem);
-            opacity: 0;
-          ">
-        <div class="crosshair-mark text-ink"></div>
-        <span class="t-label">REF: MON-ABT-001 / 2026</span>
-      </div>
-
-      <!-- Top-right coordinates -->
-      <div id="hero-ref-tr" class="absolute flex items-center gap-2.5 pointer-events-none justify-end" style="
-            top: clamp(7.5rem, 11vh, 10.5rem);
-            right: clamp(1.5rem, 5vw, 6rem);
-            opacity: 0;
-          ">
-        <span class="t-label">41.15° N · 8.61° W · Porto</span>
-        <div class="crosshair-mark text-ink"></div>
-      </div>
-
       <!-- Content — bottom aligned -->
       <div class="relative z-10 flex flex-col justify-end h-full"
         style="min-height:100svh; padding: clamp(7rem,12vh,10rem) clamp(1.5rem,5vw,6rem) clamp(3.5rem,6vh,5.5rem);">
 
-        <!-- Tech label + line -->
-        <div class="flex items-center gap-5 mb-10" id="hero-label" style="opacity:0">
-          <div class="h-line flex-1" id="hero-line-l"></div>
-          <span class="t-label whitespace-nowrap">01 — SOBRE NÓS</span>
-          <div class="h-line flex-1" id="hero-line-r"></div>
+        <!-- Tech label -->
+        <div class="flex items-center gap-2.5 mb-10" id="hero-label" style="opacity:0">
+          <div class="crosshair-mark text-ink"></div>
+          <span class="t-label">01 — SOBRE NÓS</span>
+          <div class="h-line flex-1 ml-4" id="hero-hline"></div>
         </div>
 
         <!-- Headline -->
-        <h1 class="font-serif italic leading-[0.88] text-ink mb-10 overflow-hidden"
-          style="font-size: clamp(3.5rem, 8.5vw, 14rem)">
-          <span class="block overflow-hidden">
-            <span class="block" id="hw-1" style="transform: translateY(110%); will-change: transform">A história</span>
-          </span>
-          <span class="block overflow-hidden" style="padding-left: clamp(0px, 13%, 18%)">
-            <span class="block" id="hw-2" style="transform: translateY(110%); will-change: transform">por trás.</span>
-          </span>
+        <h1>
+          <div class="clip-wrap"><span class="hero-word font-serif italic text-ink block" id="hw-1"
+              style="font-size:clamp(4rem,11vw,14rem); line-height:0.88; letter-spacing:-0.02em; transform:translateY(110%)">A
+              história</span></div>
+          <div class="clip-wrap"><span class="hero-word font-serif italic text-ink block" id="hw-2"
+              style="font-size:clamp(4rem,11vw,14rem); line-height:0.88; letter-spacing:-0.02em; margin-left:12%; transform:translateY(110%)">por
+              trás.</span></div>
         </h1>
 
         <!-- Bottom row: desc + stats -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-16">
-          <p id="hero-desc" class="font-mono text-silver leading-[1.8] max-w-xs"
-            style="font-size: clamp(0.68rem, 0.82vw, 0.8rem); opacity:0;">
-            Um estúdio de design e desenvolvimento digital,<br>construído com foco total em qualidade.<br>Cada pixel com
-            propósito.
+        <div class="flex flex-col md:flex-row md:items-end justify-between mt-10 gap-6">
+          <p id="hero-desc" class="font-mono text-silver max-w-xs"
+            style="font-size:0.75rem; line-height:1.75; opacity:0;">
+            Um estúdio de design e desenvolvimento digital,<br>construído com foco total em qualidade.
           </p>
           <div class="flex items-start gap-10 md:gap-14">
             <div id="stat-1" style="opacity:0; transform:translateY(20px)">
@@ -309,74 +262,34 @@
         </div>
 
         <!-- Scroll cue -->
-        <div class="flex items-center gap-3 mt-14" id="hero-scroll-cue" style="opacity:0">
+        <div class="flex flex-col items-center gap-2 mt-10 w-fit" id="hero-cue" style="opacity:0" aria-hidden="true">
           <div class="scroll-cue-line"></div>
-          <span class="t-label">Scroll</span>
+          <span class="t-label" style="opacity:0.4">Scroll</span>
         </div>
       </div>
     </section>
 
-    <!-- MARQUEE STRIP ──────────────────────────────────────── -->
-    <div class="border-t border-b border-ink/10 py-5 overflow-hidden">
-      <div class="mq-track flex items-center gap-0">
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          Est. 2023 <span class="text-ink/20">●</span> Porto, Portugal
-          <span class="text-ink/20">●</span> Design & Código
-          <span class="text-ink/20">●</span> Qualidade Total
-          <span class="text-ink/20">●</span> 2 Fundadores
-          <span class="text-ink/20">●</span> @monrion
-          <span class="text-ink/20">●</span>
-        </span>
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          Est. 2023 <span class="text-ink/20">●</span> Porto, Portugal
-          <span class="text-ink/20">●</span> Design & Código
-          <span class="text-ink/20">●</span> Qualidade Total
-          <span class="text-ink/20">●</span> 2 Fundadores
-          <span class="text-ink/20">●</span> @monrion
-          <span class="text-ink/20">●</span>
-        </span>
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          Est. 2023 <span class="text-ink/20">●</span> Porto, Portugal
-          <span class="text-ink/20">●</span> Design & Código
-          <span class="text-ink/20">●</span> Qualidade Total
-          <span class="text-ink/20">●</span> 2 Fundadores
-          <span class="text-ink/20">●</span> @monrion
-          <span class="text-ink/20">●</span>
-        </span>
-      </div>
-    </div>
-
     <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 02. MANIFESTO — Asymmetric editorial + architectural       -->
+    <!-- 02. MANIFESTO — Asymmetric editorial                     -->
     <!-- ══════════════════════════════════════════════════════════ -->
     <section id="sbn-spread" class="relative bg-paper overflow-hidden"
       style="padding:clamp(6rem,12vh,12rem) clamp(1.5rem,5vw,6rem);">
-      <!-- Background ghost number -->
-      <span
-        class="absolute -left-8 -top-4 font-serif italic text-ink/[0.02] leading-none pointer-events-none select-none hidden lg:block"
-        id="sbn-ghost-02" style="font-size:clamp(18rem,30vw,38rem);">02</span>
-      <!-- Vertical guide -->
-      <div class="absolute left-[5%] top-0 bottom-0 w-[1px] bg-ink/[0.04] hidden lg:block pointer-events-none"></div>
-
-      <div class="flex items-center gap-5 mb-20 reveal-fade">
+      <div class="flex items-center gap-5 mb-20 will-reveal">
         <div class="crosshair-mark text-ink"></div>
         <span class="t-label">02 — MANIFESTO</span>
         <div style="flex:1; height:1px; background:rgba(18,18,18,0.08);"></div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start">
-        <div class="lg:col-span-7 reveal-up">
+        <div class="lg:col-span-7 will-reveal">
           <blockquote>
-            <p class="font-serif italic text-ink" id="manifesto-quote"
+            <p class="font-serif italic text-ink"
               style="font-size:clamp(2.8rem,5.5vw,6.5rem); line-height:0.95; letter-spacing:-0.025em;">
               "Qualidade não é<br>um extra — é o<br>ponto de partida."
             </p>
           </blockquote>
-          <div class="h-line" id="manifesto-hline" style="margin:clamp(2rem,4vh,3.5rem) 0;"></div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-up">
+          <div style="height:1px; background:rgba(18,18,18,0.1); margin:clamp(2rem,4vh,3.5rem) 0;"></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <p class="font-sans text-ink/50" style="font-size:0.84rem; line-height:1.85; max-width:42ch;">
               A Monrion foi criada em 2023, no Porto, com uma missão clara: construir experiências digitais que se
               distinguem pela qualidade, pela atenção ao detalhe e pela honestidade no processo.
@@ -386,37 +299,23 @@
               de cuidado que cada projecto merece.
             </p>
           </div>
-          <div class="flex items-center gap-4 mt-8 reveal-fade">
+          <div class="flex items-center gap-4 mt-8">
             <div style="flex:1; height:0; border-top:1px dashed rgba(18,18,18,0.15);"></div>
             <span class="t-label whitespace-nowrap">Est. 2023 · Porto, Portugal</span>
           </div>
         </div>
-        <div class="lg:col-span-5 reveal-up">
-          <div class="ed-photo relative" style="height:clamp(450px,65vh,750px);">
+        <div class="lg:col-span-5 will-reveal" style="transition-delay:0.15s">
+          <div class="ed-photo" style="height:clamp(450px,65vh,750px);">
             <div class="card-corner tl"></div>
             <div class="card-corner tr"></div>
             <div class="card-corner bl"></div>
             <div class="card-corner br"></div>
-            <!-- L-bracket overlays -->
-            <div class="l-bracket absolute top-3 left-3 z-10"><svg width="32" height="32" viewBox="0 0 32 32"
-                fill="none">
-                <path d="M32 2 L2 2 L2 32" stroke="#121212" stroke-width="1" />
-              </svg></div>
-            <div class="l-bracket absolute bottom-3 right-3 z-10"><svg width="32" height="32" viewBox="0 0 32 32"
-                fill="none">
-                <path d="M0 30 L30 30 L30 0" stroke="#121212" stroke-width="1" />
-              </svg></div>
             <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=85&fit=crop"
               alt="Código e desenvolvimento" loading="lazy">
-            <!-- System label overlay -->
-            <div class="absolute bottom-4 left-4 z-10 pointer-events-none">
-              <span class="font-mono text-ink/30 text-[0.42rem] tracking-[0.3em] uppercase block">SYS. MON-ABT
-                v1.2</span>
-            </div>
           </div>
           <div class="flex items-center justify-between mt-4">
-            <span class="t-label">REF: CRAFT-001</span>
-            <span class="t-label">fig. 01 · Desenvolvimento</span>
+            <span class="t-label">Desenvolvimento</span>
+            <span class="t-label">fig. 01</span>
           </div>
         </div>
       </div>
@@ -428,18 +327,16 @@
     <section class="relative overflow-hidden"
       style="padding:0 clamp(1.5rem,5vw,6rem); margin-bottom:clamp(2rem,4vh,4rem);">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-3 lg:gap-5">
-        <div class="md:col-span-7 ed-photo reveal-up" style="aspect-ratio:3/2;">
+        <div class="md:col-span-7 ed-photo will-reveal" style="aspect-ratio:3/2;">
           <div class="card-corner tl"></div>
           <div class="card-corner tr"></div>
           <div class="card-corner bl"></div>
           <div class="card-corner br"></div>
-          <!-- Viewfinder overlay -->
-          <div class="absolute inset-0 z-10 border border-ink/5 m-3 pointer-events-none"></div>
           <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=85&fit=crop"
             alt="Ecrã com código" loading="lazy">
         </div>
         <div class="md:col-span-5 grid grid-rows-2 gap-3 lg:gap-5">
-          <div class="ed-photo reveal-up" style="aspect-ratio:16/9;">
+          <div class="ed-photo will-reveal" style="transition-delay:0.1s; aspect-ratio:16/9;">
             <div class="card-corner tl"></div>
             <div class="card-corner tr"></div>
             <div class="card-corner bl"></div>
@@ -447,7 +344,7 @@
             <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=85&fit=crop"
               alt="Workspace com portátil" loading="lazy">
           </div>
-          <div class="ed-photo reveal-up" style="aspect-ratio:16/9;">
+          <div class="ed-photo will-reveal" style="transition-delay:0.2s; aspect-ratio:16/9;">
             <div class="card-corner tl"></div>
             <div class="card-corner tr"></div>
             <div class="card-corner bl"></div>
@@ -461,97 +358,68 @@
         <div class="md:col-span-7 flex items-center justify-between"><span class="t-label">fig. 02 — Craft</span><span
             class="t-label" style="opacity:0.35">1920 × 1080</span></div>
         <div class="md:col-span-5 flex items-center justify-between"><span class="t-label">fig. 03–04</span><span
-            class="t-label" style="opacity:0.35">Stack · Infrastructure</span></div>
+            class="t-label" style="opacity:0.35">Stack</span></div>
       </div>
     </section>
 
     <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 04. VALORES — DARK SECTION with service-row interactivity -->
+    <!-- 04. VALORES — Ruled horizontal rows                      -->
     <!-- ══════════════════════════════════════════════════════════ -->
-    <section id="sbn-values" class="relative bg-ink overflow-hidden bp-grid-dark"
-      style="padding:clamp(6rem,11vh,11rem) clamp(1.5rem,5vw,6rem);">
-      <!-- Background ghost number -->
-      <span
-        class="absolute -right-8 -top-4 font-serif italic text-paper/[0.02] leading-none pointer-events-none select-none hidden lg:block"
-        id="sbn-ghost-03" style="font-size:clamp(18rem,30vw,38rem);">03</span>
-      <!-- Scanning laser line -->
-      <div class="absolute left-0 w-full h-[1px] bg-paper/[0.05] pointer-events-none" id="sbn-laser-h" style="top:50%">
+    <section id="sbn-values" class="relative bg-paper overflow-hidden"
+      style="padding:clamp(6rem,11vh,11rem) clamp(1.5rem,5vw,6rem); border-top:1px solid rgba(18,18,18,0.08);">
+      <div class="flex items-center gap-5 mb-6 will-reveal">
+        <div class="crosshair-mark text-ink"></div>
+        <span class="t-label">03 — VALORES</span>
+        <div style="flex:1; height:1px; background:rgba(18,18,18,0.08);"></div>
       </div>
-
-      <div class="flex items-center gap-5 mb-6 reveal-fade">
-        <div class="crosshair-mark text-paper"></div>
-        <span class="t-label-light">03 — VALORES</span>
-        <div style="flex:1; height:1px; background:rgba(235,233,228,0.06);"></div>
-      </div>
-      <h2 class="font-serif italic text-paper mb-16 reveal-up"
+      <h2 class="font-serif italic text-ink mb-16 will-reveal"
         style="font-size:clamp(2.5rem,6vw,8rem); line-height:0.9; max-width:18ch;">O que nos<br>guia.</h2>
 
-      <div>
-        <div class="val-row-dark" style="border-top:1px solid rgba(235,233,228,0.06);">
-          <div class="val-row-bar"></div>
-          <div class="flex items-start gap-6 md:gap-10">
-            <span class="font-mono text-paper/10 font-light shrink-0 val-num"
-              style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">01</span>
-            <div class="pt-1">
-              <h3 class="font-sans font-bold text-paper mb-2 val-name" style="font-size:clamp(1rem,1.3vw,1.25rem);">
-                Precisão</h3>
-              <p class="font-mono text-paper/35" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">Cada
-                detalhe
-                tem propósito. Nada é acidental — do espaçamento à paleta de cores, cada decisão é deliberada.</p>
-            </div>
+      <div class="will-reveal">
+        <div class="flex items-start gap-6 md:gap-10 py-8" style="border-top:1px solid rgba(18,18,18,0.1);">
+          <span class="font-mono text-ink/12 font-light shrink-0"
+            style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">01</span>
+          <div class="pt-1">
+            <h3 class="font-sans font-bold text-ink mb-2" style="font-size:clamp(1rem,1.3vw,1.25rem);">Precisão</h3>
+            <p class="font-mono text-ink/40" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">Cada detalhe
+              tem propósito. Nada é acidental — do espaçamento à paleta de cores, cada decisão é deliberada.</p>
           </div>
         </div>
-        <div class="val-row-dark">
-          <div class="val-row-bar"></div>
-          <div class="flex items-start gap-6 md:gap-10">
-            <span class="font-mono text-paper/10 font-light shrink-0 val-num"
-              style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">02</span>
-            <div class="pt-1">
-              <h3 class="font-sans font-bold text-paper mb-2 val-name" style="font-size:clamp(1rem,1.3vw,1.25rem);">
-                Transparência</h3>
-              <p class="font-mono text-paper/35" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">
-                Comunicação
-                clara, sem jargão. Sabe sempre o que está a acontecer com o seu projecto em cada fase.</p>
-            </div>
+        <div class="flex items-start gap-6 md:gap-10 py-8" style="border-top:1px solid rgba(18,18,18,0.1);">
+          <span class="font-mono text-ink/12 font-light shrink-0"
+            style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">02</span>
+          <div class="pt-1">
+            <h3 class="font-sans font-bold text-ink mb-2" style="font-size:clamp(1rem,1.3vw,1.25rem);">Transparência
+            </h3>
+            <p class="font-mono text-ink/40" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">Comunicação
+              clara, sem jargão. Sabe sempre o que está a acontecer com o seu projecto em cada fase.</p>
           </div>
         </div>
-        <div class="val-row-dark">
-          <div class="val-row-bar"></div>
-          <div class="flex items-start gap-6 md:gap-10">
-            <span class="font-mono text-paper/10 font-light shrink-0 val-num"
-              style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">03</span>
-            <div class="pt-1">
-              <h3 class="font-sans font-bold text-paper mb-2 val-name" style="font-size:clamp(1rem,1.3vw,1.25rem);">
-                Qualidade</h3>
-              <p class="font-mono text-paper/35" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">Não
-                existem
-                atalhos. Código limpo, design cuidado, resultado duradouro que se mantém no tempo.</p>
-            </div>
+        <div class="flex items-start gap-6 md:gap-10 py-8" style="border-top:1px solid rgba(18,18,18,0.1);">
+          <span class="font-mono text-ink/12 font-light shrink-0"
+            style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">03</span>
+          <div class="pt-1">
+            <h3 class="font-sans font-bold text-ink mb-2" style="font-size:clamp(1rem,1.3vw,1.25rem);">Qualidade</h3>
+            <p class="font-mono text-ink/40" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">Não existem
+              atalhos. Código limpo, design cuidado, resultado duradouro que se mantém no tempo.</p>
           </div>
         </div>
-        <div class="val-row-dark">
-          <div class="val-row-bar"></div>
-          <div class="flex items-start gap-6 md:gap-10">
-            <span class="font-mono text-paper/10 font-light shrink-0 val-num"
-              style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">04</span>
-            <div class="pt-1">
-              <h3 class="font-sans font-bold text-paper mb-2 val-name" style="font-size:clamp(1rem,1.3vw,1.25rem);">
-                Parceria</h3>
-              <p class="font-mono text-paper/35" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">
-                Trabalhamos
-                lado a lado com cada cliente. Não somos fornecedores — somos parceiros no resultado final.</p>
-            </div>
+        <div class="flex items-start gap-6 md:gap-10 py-8"
+          style="border-top:1px solid rgba(18,18,18,0.1); border-bottom:1px solid rgba(18,18,18,0.1);">
+          <span class="font-mono text-ink/12 font-light shrink-0"
+            style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">04</span>
+          <div class="pt-1">
+            <h3 class="font-sans font-bold text-ink mb-2" style="font-size:clamp(1rem,1.3vw,1.25rem);">Parceria</h3>
+            <p class="font-mono text-ink/40" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">Trabalhamos
+              lado a lado com cada cliente. Não somos fornecedores — somos parceiros no resultado final.</p>
           </div>
         </div>
       </div>
 
-      <div class="flex flex-wrap gap-2 mt-10 reveal-fade">
-        <span class="vp"><span class="vp-dot"></span>Acessibilidade</span>
-        <span class="vp"><span class="vp-dot"></span>Performance</span>
-        <span class="vp"><span class="vp-dot"></span>Responsividade</span>
-        <span class="vp"><span class="vp-dot"></span>SEO</span>
-        <span class="vp"><span class="vp-dot"></span>Código limpo</span>
-        <span class="vp"><span class="vp-dot"></span>Mobile-first</span>
+      <div class="flex flex-wrap gap-2 mt-10 will-reveal" style="transition-delay:0.1s;">
+        <span class="sk-tag">Acessibilidade</span><span class="sk-tag">Performance</span><span
+          class="sk-tag">Responsividade</span>
+        <span class="sk-tag">SEO</span><span class="sk-tag">Código limpo</span><span class="sk-tag">Mobile-first</span>
       </div>
     </section>
 
