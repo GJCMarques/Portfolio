@@ -14,7 +14,6 @@
   <title>Monrion | Sobre Nós</title>
   <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
-
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -38,117 +37,108 @@
     :root {
       --bg-color:#ebe9e4; --color-paper:#ebe9e4; --color-ink:#121212;
       --color-silver:#8c8c8c; --color-carbon:#333333;
-      --font-sans:"Plus Jakarta Sans",sans-serif; --font-serif:"Cormorant Garamond",serif; --font-mono:"IBM Plex Mono",monospace;
+      --font-sans:"Plus Jakarta Sans",sans-serif;
+      --font-serif:"Cormorant Garamond",serif;
+      --font-mono:"IBM Plex Mono",monospace;
     }
-    body { background:var(--bg-color); color:var(--color-ink); font-family:var(--font-sans); overflow-x:hidden; -webkit-font-smoothing:antialiased; visibility:hidden; }
+    body { background-color:var(--bg-color); color:var(--color-ink); font-family:var(--font-sans); overflow-x:hidden; -webkit-font-smoothing:antialiased; visibility:hidden; }
+
     .noise-overlay { position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:0.05; filter:url(#noiseFilter); mix-blend-mode:overlay; }
 
-    /* ── Navbar ──────────────────── */
-    #navbar { transition: background-color 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.5s ease, padding 0.5s ease; border:1px solid transparent; }
+    /* ── Navbar ── */
+    #navbar { transition:background-color .5s ease,border-color .5s ease,backdrop-filter .5s ease,box-shadow .5s ease,padding .5s ease; border:1px solid transparent; }
     #navbar.scrolled { background-color:rgba(235,233,228,0.85); backdrop-filter:blur(16px); border-color:rgba(18,18,18,0.08); box-shadow:0 4px 20px -2px rgba(0,0,0,0.05); padding-top:0.55rem; padding-bottom:0.55rem; }
-    .nav-link { font-family:var(--font-mono); font-size:clamp(0.7rem,0.85vw,0.95rem); font-weight:500; color:var(--color-ink); position:relative; padding:0.2rem 0; text-decoration:none !important; letter-spacing:0.05em; text-transform:uppercase; }
-    .nav-link::before { content:""; position:absolute; top:0; left:0; width:100%; height:1px; background:var(--color-ink); transform:scaleX(0); transform-origin:right; transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .nav-link::after  { content:""; position:absolute; bottom:0; left:0; width:100%; height:1px; background:var(--color-ink); transform:scaleX(0); transform-origin:left; transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .nav-link:hover::before, .nav-link.active::before { transform:scaleX(1); transform-origin:left; }
-    .nav-link:hover::after, .nav-link.active::after   { transform:scaleX(1); transform-origin:right; }
+    .nav-link { font-family:var(--font-mono); font-size:clamp(0.7rem,0.85vw,0.95rem); font-weight:500; color:var(--color-ink); position:relative; padding:0.2rem 0; text-decoration:none!important; border-bottom:none!important; box-shadow:none!important; letter-spacing:0.05em; text-transform:uppercase; }
+    .nav-link:hover { text-decoration:none!important; }
+    .nav-link::before { content:""; position:absolute; top:0; left:0; width:100%; height:1px; background-color:var(--color-ink); transform:scaleX(0) translateZ(0); transform-origin:right; transition:transform .4s cubic-bezier(.25,.46,.45,.94); }
+    .nav-link::after { content:""; position:absolute; bottom:0; left:0; width:100%; height:1px; background-color:var(--color-ink); transform:scaleX(0) translateZ(0); transform-origin:left; transition:transform .4s cubic-bezier(.25,.46,.45,.94); }
+    .nav-link:hover::before,.nav-link.active::before { transform:scaleX(1) translateZ(0); transform-origin:left; }
+    .nav-link:hover::after,.nav-link.active::after { transform:scaleX(1) translateZ(0); transform-origin:right; }
     .logo-link { display:flex; align-items:center; gap:1.5rem; }
     .logo-container { width:clamp(2.5rem,3.2vw,4.2rem); height:clamp(2.5rem,3.2vw,4.2rem); display:flex; align-items:center; justify-content:center; }
-    .logo-text { display:block; font-size:clamp(15px,1.4vw,24px); font-weight:800; text-transform:uppercase; font-family:var(--font-sans); user-select:none; letter-spacing:0.06em; transition:letter-spacing 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .logo-text { display:block; font-size:clamp(15px,1.4vw,24px); font-weight:800; text-transform:uppercase; font-family:var(--font-sans); user-select:none; letter-spacing:0.06em; transition:letter-spacing .55s cubic-bezier(.25,.46,.45,.94); }
     .logo-link:hover .logo-text { letter-spacing:0.38em; }
-    .logo-container svg { transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1); width:100%; height:100%; }
+    .logo-container svg { transition:transform .5s cubic-bezier(.34,1.56,.64,1); width:100%; height:100%; }
     .logo-link:hover .logo-container svg { transform:scale(1.1) rotate(-5deg); }
-    .btn-contact { font-family:var(--font-sans); font-weight:700; letter-spacing:0.05em; text-transform:uppercase; border:1px solid var(--color-ink); transition:all 0.3s ease; cursor:pointer; }
+    .btn-contact { font-family:var(--font-sans); font-weight:700; letter-spacing:0.05em; text-transform:uppercase; border:1px solid var(--color-ink); transition:all .3s ease; cursor:pointer; }
     .btn-contact:hover { background-color:transparent; color:var(--color-ink); }
     .btn-contact span.absolute { background-color:var(--color-paper); }
+    .btn-contact:active { transform:scale(0.96) translateY(1px); }
 
-    /* ── Footer ──────────────────── */
-    .footer-link { position:relative; display:inline-block; transition:color 0.3s ease, transform 0.3s ease; }
-    .footer-link::after { content:""; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:rgba(235,233,228,0.5); transition:width 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+    /* ── Footer ── */
+    .footer-link { position:relative; display:inline-block; transition:color .3s ease,transform .3s ease; }
+    .footer-link::after { content:""; position:absolute; bottom:-2px; left:0; width:0; height:1px; background-color:rgba(235,233,228,0.5); transition:width .4s cubic-bezier(.25,.46,.45,.94); }
     .footer-link:hover { color:rgba(235,233,228,1)!important; transform:translateX(4px); }
     .footer-link:hover::after { width:100%; }
 
-    /* ── Design tokens ──────────── */
-    .bp-grid { background-image: linear-gradient(rgba(18,18,18,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(18,18,18,0.028) 1px, transparent 1px); background-size:80px 80px; }
-    .bp-grid-dark { background-image: linear-gradient(rgba(235,233,228,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(235,233,228,0.025) 1px, transparent 1px); background-size:80px 80px; }
+    /* ══ SOBRE NÓS — PAGE SPECIFIC ══ */
+    .bp-grid { background-image:linear-gradient(rgba(18,18,18,0.028) 1px,transparent 1px),linear-gradient(90deg,rgba(18,18,18,0.028) 1px,transparent 1px); background-size:80px 80px; }
+    .bp-grid-dark { background-image:linear-gradient(rgba(235,233,228,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(235,233,228,0.025) 1px,transparent 1px); background-size:80px 80px; }
+
     .t-label { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(18,18,18,0.32); }
     .t-label-light { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(235,233,228,0.3); }
+
     .crosshair-mark { position:relative; width:13px; height:13px; flex-shrink:0; }
-    .crosshair-mark::before { content:""; position:absolute; width:1px; height:100%; left:50%; background:currentColor; opacity:0.22; }
-    .crosshair-mark::after  { content:""; position:absolute; height:1px; width:100%; top:50%; background:currentColor; opacity:0.22; }
+    .crosshair-mark::before,.crosshair-mark::after { content:""; position:absolute; background:currentColor; opacity:0.22; }
+    .crosshair-mark::before { width:1px; height:100%; left:50%; }
+    .crosshair-mark::after { height:1px; width:100%; top:50%; }
+
+    .hero-ghost { font-family:var(--font-serif); font-style:italic; font-weight:300; line-height:0.85; letter-spacing:-0.02em; color:transparent; -webkit-text-stroke:1px rgba(18,18,18,0.045); user-select:none; pointer-events:none; white-space:nowrap; }
     .h-line { height:1px; background:rgba(18,18,18,0.12); transform-origin:left center; transform:scaleX(0); }
-    .hero-ghost { font-family:var(--font-serif); font-style:italic; font-weight:300; line-height:0.85; color:transparent; -webkit-text-stroke:1px rgba(18,18,18,0.045); user-select:none; pointer-events:none; white-space:nowrap; }
-    @keyframes scroll-cue { 0%,100%{transform:translateY(0);opacity:0.3;} 50%{transform:translateY(10px);opacity:0.08;} }
+
+    @keyframes scroll-cue { 0%,100% { transform:translateY(0); opacity:0.3; } 50% { transform:translateY(10px); opacity:0.08; } }
     .scroll-cue-line { width:1px; height:48px; background:var(--color-ink); opacity:0.3; animation:scroll-cue 2.2s ease-in-out infinite; }
-    .clip-wrap { overflow:hidden; display:block; }
 
-    /* ── Editorial photo ────────── */
-    .ed-photo { overflow:hidden; position:relative; }
-    .ed-photo img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(30%); transition:filter 1s ease, transform 1.2s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .ed-photo:hover img { filter:grayscale(0%); transform:scale(1.04); }
+    /* Marquee */
+    .mq-overflow { overflow:hidden; }
+    .mq-track { display:flex; width:max-content; animation:sbn-marquee 38s linear infinite; }
+    @keyframes sbn-marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
 
-    /* ── Blueprint corner marks ──── */
-    .card-corner { position:absolute; width:18px; height:18px; z-index:2; color:rgba(18,18,18,0.18); }
-    .card-corner.tl { top:0; left:0; border-top:1px solid currentColor; border-left:1px solid currentColor; }
-    .card-corner.tr { top:0; right:0; border-top:1px solid currentColor; border-right:1px solid currentColor; }
-    .card-corner.bl { bottom:0; left:0; border-bottom:1px solid currentColor; border-left:1px solid currentColor; }
-    .card-corner.br { bottom:0; right:0; border-bottom:1px solid currentColor; border-right:1px solid currentColor; }
-    .card-corner-light { color:rgba(235,233,228,0.15); }
+    /* Editorial photo containers */
+    .ed-photo { position:relative; overflow:hidden; border-radius:0; }
+    .ed-photo img { width:100%; height:100%; object-fit:cover; transition:transform 1.2s cubic-bezier(.25,.46,.45,.94); }
+    .ed-photo:hover img { transform:scale(1.04); }
+    .card-corner { position:absolute; width:20px; height:20px; border-color:rgba(18,18,18,0.15); pointer-events:none; z-index:5; }
+    .card-corner.tl { top:8px; left:8px; border-top:1px solid; border-left:1px solid; }
+    .card-corner.tr { top:8px; right:8px; border-top:1px solid; border-right:1px solid; }
+    .card-corner.bl { bottom:8px; left:8px; border-bottom:1px solid; border-left:1px solid; }
+    .card-corner.br { bottom:8px; right:8px; border-bottom:1px solid; border-right:1px solid; }
 
-    /* ── Value pills ────────────── */
-    .vp { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; border:1px solid rgba(235,233,228,0.12); padding:0.4rem 1rem; border-radius:100px; color:rgba(235,233,228,0.5); transition:all 0.4s ease; }
-    .vp:hover { border-color:rgba(235,233,228,0.35); color:rgba(235,233,228,0.85); }
-    .vp-dot { width:5px; height:5px; border-radius:50%; background:rgba(235,233,228,0.2); flex-shrink:0; }
+    /* Skill tags */
+    .sk-tag { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.12em; text-transform:uppercase; border:1px solid rgba(18,18,18,0.12); padding:0.25rem 0.6rem; border-radius:100px; color:rgba(18,18,18,0.4); display:inline-block; transition:all .3s ease; }
+    .sk-tag:hover { border-color:rgba(18,18,18,0.3); color:rgba(18,18,18,0.7); }
 
-    /* ── Skill tag ────────────── */
-    .sk-tag { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; border:1px solid rgba(18,18,18,0.12); border-radius:100px; padding:0.3rem 0.7rem; color:rgba(18,18,18,0.45); transition:all 0.35s ease; }
-    .sk-tag:hover { border-color:rgba(18,18,18,0.35); color:rgba(18,18,18,0.7); }
+    /* Value pills (dark section) */
+    .vp { font-family:var(--font-mono); font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; border:1px solid rgba(235,233,228,0.1); padding:0.22rem 0.55rem; border-radius:100px; color:rgba(235,233,228,0.35); display:inline-flex; align-items:center; gap:0.4rem; }
+    .vp::before { content:""; width:4px; height:4px; border-radius:50%; background:rgba(235,233,228,0.2); }
 
-    /* ── GSAP Reveal System (matching Serviços) ── */
-    .reveal-up { opacity:0; transform:translateY(36px); will-change:transform,opacity; }
-    .reveal-fade { opacity:0; will-change:opacity; }
+    /* Value rows (dark) */
+    .val-row-dark { position:relative; border-bottom:1px solid rgba(235,233,228,0.06); padding:clamp(2rem,3.5vw,3.5rem) 0; overflow:hidden; cursor:default; transition:background .4s ease; }
+    .val-row-dark:hover { background:rgba(235,233,228,0.03); }
+    .val-row-bar { position:absolute; bottom:-1px; left:0; height:1px; width:0; background:var(--color-paper); transition:width .55s cubic-bezier(.25,.46,.45,.94); }
+    .val-row-dark:hover .val-row-bar { width:100%; }
+    .val-num { font-family:var(--font-serif); font-style:italic; line-height:1; }
+    .val-name { font-family:var(--font-sans); font-weight:700; transition:transform .42s cubic-bezier(.25,.46,.45,.94); }
+    .val-row-dark:hover .val-name { transform:translateX(8px); }
 
-    /* ── Marquee ──────────────── */
-    @keyframes sbn-marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
-    .mq-track { display:flex; width:max-content; animation:sbn-marquee 32s linear infinite; }
-
-    /* ── Value row (service-row style) ── */
-    .val-row { position:relative; border-bottom:1px solid rgba(18,18,18,0.07); padding:clamp(2rem,3.5vw,3.5rem) 0; overflow:hidden; cursor:default; transition:background 0.4s ease; }
-    .val-row:hover { background:rgba(18,18,18,0.015); }
-    .val-row-bar { position:absolute; bottom:-1px; left:0; height:1px; width:0; background:var(--color-ink); transition:width 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .val-row:hover .val-row-bar { width:100%; }
-    .val-row .val-name { transition:transform 0.42s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .val-row:hover .val-name { transform:translateX(10px); }
-    .val-row .val-num { transition:all 0.4s ease; }
-    .val-row:hover .val-num { color:rgba(18,18,18,0.25); transform:scale(1.08); }
-
-    /* ── Founder card hover ────── */
-    .founder-card { position:relative; transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.45s ease; }
+    /* Founder cards */
+    .founder-card { transition:transform .5s cubic-bezier(.25,.46,.45,.94),box-shadow .5s ease; border-radius:0; }
     .founder-card:hover { transform:translateY(-6px); box-shadow:0 28px 70px -18px rgba(18,18,18,0.08); }
 
-    /* ── Dark section values ────── */
-    .val-row-dark { position:relative; border-bottom:1px solid rgba(235,233,228,0.06); padding:clamp(2rem,3.5vw,3.5rem) 0; overflow:hidden; cursor:default; transition:background 0.4s ease; }
-    .val-row-dark:hover { background:rgba(235,233,228,0.03); }
-    .val-row-dark .val-row-bar { background:var(--color-paper); }
-
-    /* ── Tech logo cards ────────── */
-    .tech-logo-card {
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.6rem;
-      padding:1.25rem 0.75rem; border:1px solid rgba(18,18,18,0.06);
-      transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
+    /* Tech cards */
+    .tech-logo-card { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.6rem; padding:1.25rem 0.75rem; border:1px solid rgba(18,18,18,0.06); transition:all .4s cubic-bezier(.25,.46,.45,.94); }
     .tech-logo-card:hover { border-color:rgba(18,18,18,0.18); transform:translateY(-4px); box-shadow:0 8px 24px -8px rgba(18,18,18,0.08); }
-    .tech-logo-card img { width:32px; height:32px; object-fit:contain; filter:grayscale(100%) opacity(0.55); transition:filter 0.5s ease; }
+    .tech-logo-card img { width:32px; height:32px; object-fit:contain; filter:grayscale(100%) opacity(0.55); transition:filter .5s ease; }
     .tech-logo-card:hover img { filter:grayscale(0%) opacity(1); }
     .tech-logo-card span { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.1em; color:rgba(18,18,18,0.4); text-transform:uppercase; text-align:center; }
 
-    /* ── L-bracket marks ────────── */
     .l-bracket { position:absolute; pointer-events:none; }
     .l-bracket svg { opacity:0.5; }
   </style>
 </head>
 
+
 <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden selection:bg-ink/10">
-  <!-- Noise Overlay -->
   <div class="noise-overlay"></div>
   <svg class="hidden" aria-hidden="true">
     <filter id="noiseFilter">
@@ -218,360 +208,238 @@
       class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block flex items-center justify-center leading-none">Contactar</a>
   </div>
 
+
   <main>
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 01. HERO — Geometric canvas + technical metadata          -->
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <section id="sbn-hero" class="relative w-full overflow-hidden bp-grid" style="
-          min-height:100svh;
-          background-color:#EBE9E4;
-          background-image:
-            radial-gradient(ellipse 65% 50% at 70% 12%, rgba(18,18,18,0.04) 0%, transparent 60%),
-            radial-gradient(ellipse 55% 55% at 10% 85%, rgba(18,18,18,0.035) 0%, transparent 55%),
-            radial-gradient(ellipse 50% 40% at 85% 70%, rgba(18,18,18,0.025) 0%, transparent 50%);
-        ">
-      <!-- Animated geometric canvas -->
-      <canvas id="hero-canvas" aria-hidden="true"
-        style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+    <!-- ══ 01. HERO ══ -->
+    <section id="sbn-hero" class="relative min-h-[100dvh] flex flex-col justify-end overflow-hidden bp-grid"
+      style="padding:0 clamp(1.5rem,5vw,6rem) clamp(3rem,5vh,5rem);">
+      <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"
+        style="opacity:0.7;"></canvas>
+      <span class="hero-ghost absolute right-[-5%] top-[8%] hidden lg:block"
+        style="font-size:clamp(14rem,22vw,28rem);">Sobre</span>
 
-      <!-- Ghost serif text -->
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
-        aria-hidden="true">
-        <span class="hero-ghost" style="font-size: clamp(20vw, 28vw, 38vw)">Sobre</span>
+      <div class="absolute top-[clamp(5rem,10vh,8rem)] left-[clamp(1.5rem,5vw,6rem)] opacity-0" id="hero-ref-tl"
+        style="transform:translateY(8px);">
+        <span class="t-label flex items-center gap-2"><span class="crosshair-mark text-ink"
+            style="width:9px;height:9px;"></span> REF: MON-ABT-001 / 2026</span>
+      </div>
+      <div class="absolute top-[clamp(5rem,10vh,8rem)] right-[clamp(1.5rem,5vw,6rem)] opacity-0" id="hero-ref-tr"
+        style="transform:translateY(8px);">
+        <span class="t-label flex items-center gap-2">41.15&deg; N &middot; 8.61&deg; W &middot; PORTO <span
+            class="crosshair-mark text-ink" style="width:9px;height:9px;"></span></span>
       </div>
 
-      <!-- Top-left technical ref -->
-      <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none" style="
-            top: clamp(7.5rem, 11vh, 10.5rem);
-            left: clamp(1.5rem, 5vw, 6rem);
-            opacity: 0;
-          ">
-        <div class="crosshair-mark text-ink"></div>
-        <span class="t-label">REF: MON-ABT-001 / 2026</span>
-      </div>
-
-      <!-- Top-right coordinates -->
-      <div id="hero-ref-tr" class="absolute flex items-center gap-2.5 pointer-events-none justify-end" style="
-            top: clamp(7.5rem, 11vh, 10.5rem);
-            right: clamp(1.5rem, 5vw, 6rem);
-            opacity: 0;
-          ">
-        <span class="t-label">41.15° N · 8.61° W · Porto</span>
-        <div class="crosshair-mark text-ink"></div>
-      </div>
-
-      <!-- Content — bottom aligned -->
-      <div class="relative z-10 flex flex-col justify-end h-full"
-        style="min-height:100svh; padding: clamp(7rem,12vh,10rem) clamp(1.5rem,5vw,6rem) clamp(3.5rem,6vh,5.5rem);">
-
-        <!-- Tech label + line -->
-        <div class="flex items-center gap-5 mb-10" id="hero-label" style="opacity:0">
-          <div class="h-line flex-1" id="hero-line-l"></div>
-          <span class="t-label whitespace-nowrap">01 — SOBRE NÓS</span>
-          <div class="h-line flex-1" id="hero-line-r"></div>
+      <div class="relative z-10">
+        <div class="flex items-center gap-6 mb-8">
+          <div class="h-line w-full" id="hero-line-l"></div>
+          <span class="t-label whitespace-nowrap opacity-0" id="hero-label">01 &mdash; SOBRE N&Oacute;S</span>
+          <div class="h-line w-full" id="hero-line-r" style="transform-origin:right center;"></div>
+        </div>
+        <div class="overflow-hidden mb-2">
+          <h1 id="hw-1" class="font-serif italic text-ink"
+            style="font-size:clamp(3.5rem,9vw,9.5rem);line-height:0.9;transform:translateY(110%);">A hist&oacute;ria
+          </h1>
+        </div>
+        <div class="overflow-hidden mb-10">
+          <h1 id="hw-2" class="font-serif italic text-ink"
+            style="font-size:clamp(3.5rem,9vw,9.5rem);line-height:0.9;padding-left:clamp(2rem,8vw,10rem);transform:translateY(110%);">
+            por tr&aacute;s.</h1>
         </div>
 
-        <!-- Headline -->
-        <h1 class="font-serif italic leading-[0.88] text-ink mb-10 overflow-hidden"
-          style="font-size: clamp(3.5rem, 8.5vw, 14rem)">
-          <span class="block overflow-hidden">
-            <span class="block" id="hw-1" style="transform: translateY(110%); will-change: transform">A história</span>
-          </span>
-          <span class="block overflow-hidden" style="padding-left: clamp(0px, 13%, 18%)">
-            <span class="block" id="hw-2" style="transform: translateY(110%); will-change: transform">por trás.</span>
-          </span>
-        </h1>
-
-        <!-- Bottom row: desc + stats -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-16">
-          <p id="hero-desc" class="font-mono text-silver leading-[1.8] max-w-xs"
-            style="font-size: clamp(0.68rem, 0.82vw, 0.8rem); opacity:0;">
-            Um estúdio de design e desenvolvimento digital,<br>construído com foco total em qualidade.<br>Cada pixel com
-            propósito.
-          </p>
-          <div class="flex items-start gap-10 md:gap-14">
-            <div id="stat-1" style="opacity:0; transform:translateY(20px)">
-              <div class="font-mono font-light text-ink"
-                style="font-size:clamp(1.8rem,3.2vw,4rem); letter-spacing:-0.03em; line-height:1;">2023</div>
-              <div class="t-label mt-1.5">Fundação</div>
-            </div>
-            <div id="stat-2" style="opacity:0; transform:translateY(20px)">
-              <div class="font-mono font-light text-ink"
-                style="font-size:clamp(1.8rem,3.2vw,4rem); letter-spacing:-0.03em; line-height:1;">Porto</div>
-              <div class="t-label mt-1.5">Localização</div>
-            </div>
-            <div id="stat-3" style="opacity:0; transform:translateY(20px)">
-              <div class="font-mono font-light text-ink"
-                style="font-size:clamp(1.8rem,3.2vw,4rem); letter-spacing:-0.03em; line-height:1;">100%</div>
-              <div class="t-label mt-1.5">Foco Total</div>
-            </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+          <p id="hero-desc" class="font-sans text-ink/50 opacity-0"
+            style="font-size:clamp(0.78rem,0.9vw,0.88rem);line-height:1.85;max-width:42ch;">Um est&uacute;dio de design
+            e desenvolvimento digital,<br>constru&iacute;do com foco total em qualidade.<br>Cada pixel com
+            prop&oacute;sito.</p>
+          <div class="flex items-end justify-end gap-12 lg:gap-16">
+            <div id="stat-1" class="text-right"><span class="block font-mono text-ink"
+                style="font-size:clamp(2rem,4vw,3.5rem);line-height:1;">2023</span><span
+                class="t-label mt-1 block">FUNDA&Ccedil;&Atilde;O</span></div>
+            <div id="stat-2" class="text-right"><span class="block font-mono text-ink"
+                style="font-size:clamp(2rem,4vw,3.5rem);line-height:1;">Porto</span><span
+                class="t-label mt-1 block">LOCALIZA&Ccedil;&Atilde;O</span></div>
+            <div id="stat-3" class="text-right"><span class="block font-mono text-ink"
+                style="font-size:clamp(2rem,4vw,3.5rem);line-height:1;">100%</span><span class="t-label mt-1 block">FOCO
+                TOTAL</span></div>
           </div>
         </div>
-
-        <!-- Scroll cue -->
-        <div class="flex items-center gap-3 mt-14" id="hero-scroll-cue" style="opacity:0">
-          <div class="scroll-cue-line"></div>
-          <span class="t-label">Scroll</span>
-        </div>
+      </div>
+      <div class="flex flex-col items-center mt-12 opacity-0" id="hero-scroll-cue">
+        <div class="scroll-cue-line"></div><span class="t-label mt-3 block">SCROLL</span>
       </div>
     </section>
 
-    <!-- MARQUEE STRIP ──────────────────────────────────────── -->
-    <div class="border-t border-b border-ink/10 py-5 overflow-hidden">
-      <div class="mq-track flex items-center gap-0">
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          Est. 2023 <span class="text-ink/20">●</span> Porto, Portugal
-          <span class="text-ink/20">●</span> Design & Código
-          <span class="text-ink/20">●</span> Qualidade Total
-          <span class="text-ink/20">●</span> 2 Fundadores
-          <span class="text-ink/20">●</span> @monrion
-          <span class="text-ink/20">●</span>
-        </span>
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          Est. 2023 <span class="text-ink/20">●</span> Porto, Portugal
-          <span class="text-ink/20">●</span> Design & Código
-          <span class="text-ink/20">●</span> Qualidade Total
-          <span class="text-ink/20">●</span> 2 Fundadores
-          <span class="text-ink/20">●</span> @monrion
-          <span class="text-ink/20">●</span>
-        </span>
-        <span
-          class="flex items-center gap-6 px-3 font-mono text-xs tracking-[0.25em] uppercase text-ink/50 whitespace-nowrap">
-          Est. 2023 <span class="text-ink/20">●</span> Porto, Portugal
-          <span class="text-ink/20">●</span> Design & Código
-          <span class="text-ink/20">●</span> Qualidade Total
-          <span class="text-ink/20">●</span> 2 Fundadores
-          <span class="text-ink/20">●</span> @monrion
-          <span class="text-ink/20">●</span>
-        </span>
+    <!-- MARQUEE STRIP -->
+    <div class="mq-overflow border-y border-ink/[0.06] bg-ink py-3" style="margin-top:-1px;">
+      <div class="mq-track">
+        <span class="font-mono text-paper/40 whitespace-nowrap" style="font-size:0.6rem;letter-spacing:0.2em;">@MONRION
+          &bull; EST. 2023 &bull; PORTO, PORTUGAL &bull; DESIGN &amp; C&Oacute;DIGO &bull; QUALIDADE TOTAL &bull; 2
+          FUNDADORES &bull; @MONRION &bull; EST. 2023 &bull; PORTO, PORTUGAL &bull; DESIGN &amp; C&Oacute;DIGO &bull;
+          QUALIDADE TOTAL &bull; 2 FUNDADORES &bull; @MONRION &bull; EST. 2023 &bull; PORTO, PORTUGAL &bull; DESIGN
+          &amp; C&Oacute;DIGO &bull; QUALIDADE TOTAL &bull; 2 FUNDADORES &bull; @MONRION &bull; EST. 2023 &bull; PORTO,
+          PORTUGAL &bull; DESIGN &amp; C&Oacute;DIGO &bull; QUALIDADE TOTAL &bull; 2 FUNDADORES &bull; </span>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 02. MANIFESTO — Asymmetric editorial + architectural       -->
-    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- ══ 02. MANIFESTO ══ -->
     <section id="sbn-spread" class="relative bg-paper overflow-hidden"
       style="padding:clamp(6rem,12vh,12rem) clamp(1.5rem,5vw,6rem);">
-      <!-- Background ghost number -->
       <span
         class="absolute -left-8 -top-4 font-serif italic text-ink/[0.02] leading-none pointer-events-none select-none hidden lg:block"
         id="sbn-ghost-02" style="font-size:clamp(18rem,30vw,38rem);">02</span>
-      <!-- Vertical guide -->
-      <div class="absolute left-[5%] top-0 bottom-0 w-[1px] bg-ink/[0.04] hidden lg:block pointer-events-none"></div>
+      <div class="absolute left-[8%] top-0 bottom-0 w-[1px] bg-ink/[0.04] hidden lg:block pointer-events-none"></div>
 
-      <div class="flex items-center gap-5 mb-20 reveal-fade">
-        <div class="crosshair-mark text-ink"></div>
-        <span class="t-label">02 — MANIFESTO</span>
-        <div style="flex:1; height:1px; background:rgba(18,18,18,0.08);"></div>
+      <div class="flex items-center gap-5 mb-6 reveal-fade">
+        <div class="crosshair-mark text-ink"></div><span class="t-label">02 &mdash; MANIFESTO</span>
+        <div style="flex:1;height:1px;background:rgba(18,18,18,0.08);" id="manifesto-hline" class="h-line"></div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start">
-        <div class="lg:col-span-7 reveal-up">
-          <blockquote>
-            <p class="font-serif italic text-ink" id="manifesto-quote"
-              style="font-size:clamp(2.8rem,5.5vw,6.5rem); line-height:0.95; letter-spacing:-0.025em;">
-              "Qualidade não é<br>um extra — é o<br>ponto de partida."
-            </p>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6">
+        <div class="lg:col-span-7">
+          <blockquote class="mb-12">
+            <p id="manifesto-quote" class="font-serif italic text-ink"
+              style="font-size:clamp(2rem,4.5vw,4.5rem);line-height:1.05;max-width:18ch;">&ldquo;Qualidade n&atilde;o
+              &eacute; um extra &mdash; &eacute; o ponto de partida.&rdquo;</p>
           </blockquote>
-          <div class="h-line" id="manifesto-hline" style="margin:clamp(2rem,4vh,3.5rem) 0;"></div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-up">
-            <p class="font-sans text-ink/50" style="font-size:0.84rem; line-height:1.85; max-width:42ch;">
-              A Monrion foi criada em 2023, no Porto, com uma missão clara: construir experiências digitais que se
-              distinguem pela qualidade, pela atenção ao detalhe e pela honestidade no processo.
-            </p>
-            <p class="font-sans text-ink/50" style="font-size:0.84rem; line-height:1.85; max-width:42ch;">
-              Não somos uma agência de 50 pessoas. Somos um estúdio focado — porque é a única forma de garantir o nível
-              de cuidado que cada projecto merece.
-            </p>
-          </div>
-          <div class="flex items-center gap-4 mt-8 reveal-fade">
-            <div style="flex:1; height:0; border-top:1px dashed rgba(18,18,18,0.15);"></div>
-            <span class="t-label whitespace-nowrap">Est. 2023 · Porto, Portugal</span>
-          </div>
+          <div style="height:1px;background:rgba(18,18,18,0.08);margin-bottom:2rem;" class="reveal-fade"></div>
+          <p class="font-sans text-ink/50 mb-6 reveal-up" style="font-size:0.84rem;line-height:1.85;max-width:52ch;">A
+            Monrion foi criada em 2023, no Porto, com uma miss&atilde;o clara: construir experi&ecirc;ncias digitais que
+            se distinguem pela aten&ccedil;&atilde;o ao detalhe e pela honestidade no processo.</p>
+          <p class="font-sans text-ink/50 reveal-up" style="font-size:0.84rem;line-height:1.85;max-width:52ch;">
+            N&atilde;o seguimos tend&ecirc;ncias &mdash; criamos sistemas visuais que duram. Cada projecto que
+            entregamos reflecte um compromisso absoluto com a qualidade que cada projecto merece.</p>
+          <span class="t-label mt-8 block reveal-fade">EST. 2023 &middot; PORTO, PORTUGAL</span>
         </div>
         <div class="lg:col-span-5 reveal-up">
-          <div class="ed-photo relative" style="height:clamp(450px,65vh,750px);">
+          <div class="ed-photo relative" style="height:clamp(380px,55vh,580px);">
             <div class="card-corner tl"></div>
             <div class="card-corner tr"></div>
             <div class="card-corner bl"></div>
             <div class="card-corner br"></div>
-            <!-- L-bracket overlays -->
-            <div class="l-bracket absolute top-3 left-3 z-10"><svg width="32" height="32" viewBox="0 0 32 32"
+            <div class="l-bracket absolute top-3 left-3 z-10"><svg width="28" height="28" viewBox="0 0 28 28"
                 fill="none">
-                <path d="M32 2 L2 2 L2 32" stroke="#121212" stroke-width="1" />
+                <path d="M28 2 L2 2 L2 28" stroke="#121212" stroke-width="0.8" />
               </svg></div>
-            <div class="l-bracket absolute bottom-3 right-3 z-10"><svg width="32" height="32" viewBox="0 0 32 32"
+            <div class="l-bracket absolute bottom-3 right-3 z-10"><svg width="28" height="28" viewBox="0 0 28 28"
                 fill="none">
-                <path d="M0 30 L30 30 L30 0" stroke="#121212" stroke-width="1" />
+                <path d="M0 26 L26 26 L26 0" stroke="#121212" stroke-width="0.8" />
               </svg></div>
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=85&fit=crop"
-              alt="Código e desenvolvimento" loading="lazy">
-            <!-- System label overlay -->
-            <div class="absolute bottom-4 left-4 z-10 pointer-events-none">
-              <span class="font-mono text-ink/30 text-[0.42rem] tracking-[0.3em] uppercase block">SYS. MON-ABT
-                v1.2</span>
-            </div>
+            <div class="absolute bottom-4 left-4 z-10 bg-paper/80 backdrop-blur-sm px-3 py-1.5 rounded-sm"><span
+                class="t-label">SYS. MON-ABT v1.2</span></div>
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=85&fit=crop"
+              alt="Desenvolvimento" loading="lazy" style="object-position:center 30%;">
           </div>
-          <div class="flex items-center justify-between mt-4">
-            <span class="t-label">REF: CRAFT-001</span>
-            <span class="t-label">fig. 01 · Desenvolvimento</span>
-          </div>
+          <span class="t-label mt-4 block text-right">REF: CRAFT-001 &nbsp;&nbsp;&nbsp;&nbsp; fig. 01 &middot;
+            Desenvolvimento</span>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 03. PHOTO EDITORIAL — Tech-themed strip                  -->
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <section class="relative overflow-hidden"
-      style="padding:0 clamp(1.5rem,5vw,6rem); margin-bottom:clamp(2rem,4vh,4rem);">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-3 lg:gap-5">
-        <div class="md:col-span-7 ed-photo reveal-up" style="aspect-ratio:3/2;">
-          <div class="card-corner tl"></div>
-          <div class="card-corner tr"></div>
-          <div class="card-corner bl"></div>
-          <div class="card-corner br"></div>
-          <!-- Viewfinder overlay -->
-          <div class="absolute inset-0 z-10 border border-ink/5 m-3 pointer-events-none"></div>
-          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=85&fit=crop"
-            alt="Ecrã com código" loading="lazy">
-        </div>
-        <div class="md:col-span-5 grid grid-rows-2 gap-3 lg:gap-5">
-          <div class="ed-photo reveal-up" style="aspect-ratio:16/9;">
+    <!-- ══ 03. PHOTO EDITORIAL ══ -->
+    <section class="relative bg-paper overflow-hidden" style="padding:0 clamp(1.5rem,5vw,6rem) clamp(6rem,10vh,10rem);">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 reveal-up">
+          <div class="ed-photo relative" style="height:clamp(350px,50vh,520px);">
             <div class="card-corner tl"></div>
             <div class="card-corner tr"></div>
             <div class="card-corner bl"></div>
             <div class="card-corner br"></div>
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=85&fit=crop"
-              alt="Workspace com portátil" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=85&fit=crop" alt="Workspace"
+              loading="lazy">
           </div>
-          <div class="ed-photo reveal-up" style="aspect-ratio:16/9;">
+          <span class="t-label mt-4 block">fig. 02 &middot; Ambiente de trabalho</span>
+        </div>
+        <div class="lg:col-span-5 reveal-up" style="transition-delay:0.15s;">
+          <div class="ed-photo relative" style="height:clamp(350px,50vh,520px);">
             <div class="card-corner tl"></div>
             <div class="card-corner tr"></div>
             <div class="card-corner bl"></div>
             <div class="card-corner br"></div>
-            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500&q=85&fit=crop"
-              alt="Infraestrutura" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=85&fit=crop" alt="C&oacute;digo"
+              loading="lazy">
           </div>
+          <span class="t-label mt-4 block text-right">fig. 03 &middot; Precis&atilde;o t&eacute;cnica</span>
         </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-3 lg:gap-5 mt-3">
-        <div class="md:col-span-7 flex items-center justify-between"><span class="t-label">fig. 02 — Craft</span><span
-            class="t-label" style="opacity:0.35">1920 × 1080</span></div>
-        <div class="md:col-span-5 flex items-center justify-between"><span class="t-label">fig. 03–04</span><span
-            class="t-label" style="opacity:0.35">Stack · Infrastructure</span></div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 04. VALORES — DARK SECTION with service-row interactivity -->
-    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- ══ 04. VALORES (DARK SECTION) ══ -->
     <section id="sbn-values" class="relative bg-ink overflow-hidden bp-grid-dark"
-      style="padding:clamp(6rem,11vh,11rem) clamp(1.5rem,5vw,6rem);">
-      <!-- Background ghost number -->
+      style="padding:clamp(6rem,12vh,12rem) clamp(1.5rem,5vw,6rem);">
       <span
         class="absolute -right-8 -top-4 font-serif italic text-paper/[0.02] leading-none pointer-events-none select-none hidden lg:block"
         id="sbn-ghost-03" style="font-size:clamp(18rem,30vw,38rem);">03</span>
-      <!-- Scanning laser line -->
-      <div class="absolute left-0 w-full h-[1px] bg-paper/[0.05] pointer-events-none" id="sbn-laser-h" style="top:50%">
-      </div>
 
       <div class="flex items-center gap-5 mb-6 reveal-fade">
-        <div class="crosshair-mark text-paper"></div>
-        <span class="t-label-light">03 — VALORES</span>
-        <div style="flex:1; height:1px; background:rgba(235,233,228,0.06);"></div>
+        <div class="crosshair-mark text-paper"></div><span class="t-label-light">03 &mdash; VALORES</span>
+        <div style="flex:1;height:1px;background:rgba(235,233,228,0.06);"></div>
       </div>
-      <h2 class="font-serif italic text-paper mb-16 reveal-up"
-        style="font-size:clamp(2.5rem,6vw,8rem); line-height:0.9; max-width:18ch;">O que nos<br>guia.</h2>
+      <p class="font-serif italic text-paper reveal-up"
+        style="font-size:clamp(1.8rem,3.5vw,3.5rem);line-height:1.05;max-width:16ch;margin-bottom:3rem;">O que nos guia.
+      </p>
 
-      <div>
-        <div class="val-row-dark" style="border-top:1px solid rgba(235,233,228,0.06);">
-          <div class="val-row-bar"></div>
-          <div class="flex items-start gap-6 md:gap-10">
-            <span class="font-mono text-paper/10 font-light shrink-0 val-num"
-              style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">01</span>
-            <div class="pt-1">
-              <h3 class="font-sans font-bold text-paper mb-2 val-name" style="font-size:clamp(1rem,1.3vw,1.25rem);">
-                Precisão</h3>
-              <p class="font-mono text-paper/35" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">Cada
-                detalhe
-                tem propósito. Nada é acidental — do espaçamento à paleta de cores, cada decisão é deliberada.</p>
-            </div>
-          </div>
-        </div>
-        <div class="val-row-dark">
-          <div class="val-row-bar"></div>
-          <div class="flex items-start gap-6 md:gap-10">
-            <span class="font-mono text-paper/10 font-light shrink-0 val-num"
-              style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">02</span>
-            <div class="pt-1">
-              <h3 class="font-sans font-bold text-paper mb-2 val-name" style="font-size:clamp(1rem,1.3vw,1.25rem);">
-                Transparência</h3>
-              <p class="font-mono text-paper/35" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">
-                Comunicação
-                clara, sem jargão. Sabe sempre o que está a acontecer com o seu projecto em cada fase.</p>
-            </div>
-          </div>
-        </div>
-        <div class="val-row-dark">
-          <div class="val-row-bar"></div>
-          <div class="flex items-start gap-6 md:gap-10">
-            <span class="font-mono text-paper/10 font-light shrink-0 val-num"
-              style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">03</span>
-            <div class="pt-1">
-              <h3 class="font-sans font-bold text-paper mb-2 val-name" style="font-size:clamp(1rem,1.3vw,1.25rem);">
-                Qualidade</h3>
-              <p class="font-mono text-paper/35" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">Não
-                existem
-                atalhos. Código limpo, design cuidado, resultado duradouro que se mantém no tempo.</p>
-            </div>
-          </div>
-        </div>
-        <div class="val-row-dark">
-          <div class="val-row-bar"></div>
-          <div class="flex items-start gap-6 md:gap-10">
-            <span class="font-mono text-paper/10 font-light shrink-0 val-num"
-              style="font-size:clamp(2.5rem,4vw,4.5rem); line-height:1; letter-spacing:-0.04em;">04</span>
-            <div class="pt-1">
-              <h3 class="font-sans font-bold text-paper mb-2 val-name" style="font-size:clamp(1rem,1.3vw,1.25rem);">
-                Parceria</h3>
-              <p class="font-mono text-paper/35" style="font-size:0.72rem; line-height:1.75; max-width:48ch;">
-                Trabalhamos
-                lado a lado com cada cliente. Não somos fornecedores — somos parceiros no resultado final.</p>
-            </div>
+      <div class="val-row-dark reveal-up" style="border-top:1px solid rgba(235,233,228,0.06);">
+        <div class="val-row-bar"></div>
+        <div class="flex items-start gap-6 lg:gap-10">
+          <span class="val-num text-paper/[0.12]" style="font-size:clamp(2.5rem,5vw,4.5rem);">01</span>
+          <div>
+            <span class="val-name text-paper block" style="font-size:clamp(1.2rem,2.5vw,2rem);">Precis&atilde;o</span>
+            <p class="font-mono text-paper/30 mt-2" style="font-size:0.7rem;line-height:1.7;max-width:40ch;">Cada
+              detalhe tem prop&oacute;sito. Nada &eacute; acidental &mdash; do espa&ccedil;amento &agrave; paleta de
+              cores, cada decis&atilde;o &eacute; deliberada.</p>
           </div>
         </div>
       </div>
-
-      <div class="flex flex-wrap gap-2 mt-10 reveal-fade">
-        <span class="vp"><span class="vp-dot"></span>Acessibilidade</span>
-        <span class="vp"><span class="vp-dot"></span>Performance</span>
-        <span class="vp"><span class="vp-dot"></span>Responsividade</span>
-        <span class="vp"><span class="vp-dot"></span>SEO</span>
-        <span class="vp"><span class="vp-dot"></span>Código limpo</span>
-        <span class="vp"><span class="vp-dot"></span>Mobile-first</span>
+      <div class="val-row-dark reveal-up">
+        <div class="val-row-bar"></div>
+        <div class="flex items-start gap-6 lg:gap-10">
+          <span class="val-num text-paper/[0.12]" style="font-size:clamp(2.5rem,5vw,4.5rem);">02</span>
+          <div>
+            <span class="val-name text-paper block"
+              style="font-size:clamp(1.2rem,2.5vw,2rem);">Transpar&ecirc;ncia</span>
+            <p class="font-mono text-paper/30 mt-2" style="font-size:0.7rem;line-height:1.7;max-width:40ch;">
+              Comunica&ccedil;&atilde;o clara, sem jarg&atilde;o. Sabe sempre o que est&aacute; a acontecer com o seu
+              projecto em cada fase.</p>
+          </div>
+        </div>
+      </div>
+      <div class="val-row-dark reveal-up">
+        <div class="val-row-bar"></div>
+        <div class="flex items-start gap-6 lg:gap-10">
+          <span class="val-num text-paper/[0.12]" style="font-size:clamp(2.5rem,5vw,4.5rem);">03</span>
+          <div>
+            <span class="val-name text-paper block" style="font-size:clamp(1.2rem,2.5vw,2rem);">Qualidade</span>
+            <p class="font-mono text-paper/30 mt-2" style="font-size:0.7rem;line-height:1.7;max-width:40ch;">N&atilde;o
+              existem atalhos. C&oacute;digo limpo, design cuidado, resultado duradouro que se mant&eacute;m no tempo.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="val-row-dark reveal-up">
+        <div class="val-row-bar"></div>
+        <div class="flex items-start gap-6 lg:gap-10">
+          <span class="val-num text-paper/[0.12]" style="font-size:clamp(2.5rem,5vw,4.5rem);">04</span>
+          <div>
+            <span class="val-name text-paper block" style="font-size:clamp(1.2rem,2.5vw,2rem);">Parceria</span>
+            <p class="font-mono text-paper/30 mt-2" style="font-size:0.7rem;line-height:1.7;max-width:40ch;">N&atilde;o
+              somos fornecedores &mdash; somos parceiros. O sucesso do projecto &eacute; o nosso sucesso.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 05. EQUIPA — Magazine spread                             -->
-    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- ══ 05. EQUIPA ══ -->
     <section id="sbn-founder" class="relative bg-paper overflow-hidden"
-      style="padding:clamp(6rem,12vh,12rem) clamp(1.5rem,5vw,6rem); border-top:1px solid rgba(18,18,18,0.08);">
-      <!-- Ghost number -->
+      style="padding:clamp(6rem,12vh,12rem) clamp(1.5rem,5vw,6rem);border-top:1px solid rgba(18,18,18,0.08);">
       <span
         class="absolute -left-8 -top-4 font-serif italic text-ink/[0.02] leading-none pointer-events-none select-none hidden lg:block"
         id="sbn-ghost-04" style="font-size:clamp(18rem,30vw,38rem);">04</span>
-      <!-- Vertical guide -->
-      <div class="absolute right-[5%] top-0 bottom-0 w-[1px] bg-ink/[0.04] hidden lg:block pointer-events-none"></div>
 
       <div class="flex items-center justify-between mb-20 reveal-fade">
         <div class="flex items-center gap-5">
-          <div class="crosshair-mark text-ink"></div><span class="t-label">04 — EQUIPA</span>
+          <div class="crosshair-mark text-ink"></div><span class="t-label">04 &mdash; EQUIPA</span>
         </div>
-        <span class="t-label">PORTO, PT · 41.15° N</span>
+        <span class="t-label">PORTO, PT &middot; 41.15&deg; N</span>
       </div>
 
       <!-- Guilherme -->
@@ -593,16 +461,17 @@
             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=85&fit=crop&crop=face"
               alt="Guilherme" loading="lazy" style="object-position:center 20%;">
           </div>
-          <span class="t-label mt-4 block">fig. 05 — Retrato · GJC</span>
+          <span class="t-label mt-4 block">fig. 05 &mdash; Retrato &middot; GJC</span>
         </div>
         <div class="lg:col-span-7 flex flex-col justify-center">
-          <h3 class="font-serif italic text-ink" style="font-size:clamp(3rem,6vw,7rem); line-height:0.9;">Guilherme</h3>
-          <p class="font-mono text-silver uppercase mt-3 mb-8" style="font-size:0.6rem; letter-spacing:0.15em;">
-            Co-fundador · Design &amp; Frontend</p>
-          <div style="height:1px; background:rgba(18,18,18,0.08); margin-bottom:1.5rem;"></div>
-          <p class="font-sans text-ink/50 mb-8" style="font-size:0.84rem; line-height:1.85; max-width:48ch;">Combino
-            design estratégico com desenvolvimento técnico para criar websites que são simultaneamente belos e
-            funcionais. Cada pixel é intencional, cada interacção é pensada.</p>
+          <h3 class="font-serif italic text-ink" style="font-size:clamp(3rem,6vw,7rem);line-height:0.9;">Guilherme</h3>
+          <p class="font-mono text-silver uppercase mt-3 mb-8" style="font-size:0.6rem;letter-spacing:0.15em;">
+            Co-fundador &middot; Design &amp; Frontend</p>
+          <div style="height:1px;background:rgba(18,18,18,0.08);margin-bottom:1.5rem;"></div>
+          <p class="font-sans text-ink/50 mb-8" style="font-size:0.84rem;line-height:1.85;max-width:48ch;">Combino
+            design estrat&eacute;gico com desenvolvimento t&eacute;cnico para criar websites que s&atilde;o
+            simultaneamente belos e funcionais. Cada pixel &eacute; intencional, cada interac&ccedil;&atilde;o &eacute;
+            pensada.</p>
           <div class="flex flex-wrap gap-2 mb-8">
             <span class="sk-tag">React</span><span class="sk-tag">Next.js</span><span class="sk-tag">GSAP</span><span
               class="sk-tag">Three.js</span><span class="sk-tag">Figma</span><span class="sk-tag">Tailwind</span>
@@ -610,26 +479,26 @@
           <div class="flex items-center gap-3">
             <a href="#"
               class="inline-flex items-center gap-2 border rounded-full font-mono text-ink/45 hover:text-ink hover:border-ink/30 transition-all duration-300"
-              style="font-size:0.55rem; letter-spacing:0.1em; padding:0.3rem 0.7rem; border-color:rgba(18,18,18,0.1);"><i
+              style="font-size:0.55rem;letter-spacing:0.1em;padding:0.3rem 0.7rem;border-color:rgba(18,18,18,0.1);"><i
                 data-lucide="instagram" class="w-3 h-3" aria-hidden="true"></i> Instagram</a>
             <a href="#"
               class="inline-flex items-center gap-2 border rounded-full font-mono text-ink/45 hover:text-ink hover:border-ink/30 transition-all duration-300"
-              style="font-size:0.55rem; letter-spacing:0.1em; padding:0.3rem 0.7rem; border-color:rgba(18,18,18,0.1);"><i
+              style="font-size:0.55rem;letter-spacing:0.1em;padding:0.3rem 0.7rem;border-color:rgba(18,18,18,0.1);"><i
                 data-lucide="linkedin" class="w-3 h-3" aria-hidden="true"></i> LinkedIn</a>
           </div>
         </div>
       </div>
 
-      <!-- Eduardo — reversed -->
+      <!-- Eduardo -->
       <div class="founder-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start reveal-up">
         <div class="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1">
-          <h3 class="font-serif italic text-ink" style="font-size:clamp(3rem,6vw,7rem); line-height:0.9;">Eduardo</h3>
-          <p class="font-mono text-silver uppercase mt-3 mb-8" style="font-size:0.6rem; letter-spacing:0.15em;">
-            Co-fundador · Estratégia &amp; Backend</p>
-          <div style="height:1px; background:rgba(18,18,18,0.08); margin-bottom:1.5rem;"></div>
-          <p class="font-sans text-ink/50 mb-8" style="font-size:0.84rem; line-height:1.85; max-width:48ch;">Foco em
-            arquitectura de sistemas, performance e lógica de negócio. Construo a infraestrutura que sustenta cada
-            projecto — robusta, escalável e pensada ao milímetro.</p>
+          <h3 class="font-serif italic text-ink" style="font-size:clamp(3rem,6vw,7rem);line-height:0.9;">Eduardo</h3>
+          <p class="font-mono text-silver uppercase mt-3 mb-8" style="font-size:0.6rem;letter-spacing:0.15em;">
+            Co-fundador &middot; Estrat&eacute;gia &amp; Backend</p>
+          <div style="height:1px;background:rgba(18,18,18,0.08);margin-bottom:1.5rem;"></div>
+          <p class="font-sans text-ink/50 mb-8" style="font-size:0.84rem;line-height:1.85;max-width:48ch;">Foco em
+            arquitectura de sistemas, performance e l&oacute;gica de neg&oacute;cio. Construo a infraestrutura que
+            sustenta cada projecto &mdash; robusta, escal&aacute;vel e pensada ao mil&iacute;metro.</p>
           <div class="flex flex-wrap gap-2 mb-8">
             <span class="sk-tag">Node.js</span><span class="sk-tag">PostgreSQL</span><span
               class="sk-tag">Python</span><span class="sk-tag">APIs REST</span><span class="sk-tag">Supabase</span><span
@@ -638,11 +507,11 @@
           <div class="flex items-center gap-3">
             <a href="#"
               class="inline-flex items-center gap-2 border rounded-full font-mono text-ink/45 hover:text-ink hover:border-ink/30 transition-all duration-300"
-              style="font-size:0.55rem; letter-spacing:0.1em; padding:0.3rem 0.7rem; border-color:rgba(18,18,18,0.1);"><i
+              style="font-size:0.55rem;letter-spacing:0.1em;padding:0.3rem 0.7rem;border-color:rgba(18,18,18,0.1);"><i
                 data-lucide="instagram" class="w-3 h-3" aria-hidden="true"></i> Instagram</a>
             <a href="#"
               class="inline-flex items-center gap-2 border rounded-full font-mono text-ink/45 hover:text-ink hover:border-ink/30 transition-all duration-300"
-              style="font-size:0.55rem; letter-spacing:0.1em; padding:0.3rem 0.7rem; border-color:rgba(18,18,18,0.1);"><i
+              style="font-size:0.55rem;letter-spacing:0.1em;padding:0.3rem 0.7rem;border-color:rgba(18,18,18,0.1);"><i
                 data-lucide="linkedin" class="w-3 h-3" aria-hidden="true"></i> LinkedIn</a>
           </div>
         </div>
@@ -663,178 +532,151 @@
             <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=85&fit=crop&crop=face"
               alt="Eduardo" loading="lazy" style="object-position:center 15%;">
           </div>
-          <span class="t-label mt-4 block text-right">fig. 06 — Retrato · EDS</span>
+          <span class="t-label mt-4 block text-right">fig. 06 &mdash; Retrato &middot; EDS</span>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 06. ARSENAL — Technology editorial grid                   -->
-    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- ══ 06. ARSENAL TÉCNICO ══ -->
     <section id="sbn-stack" class="relative bg-paper overflow-hidden"
-      style="padding:clamp(6rem,12vh,12rem) clamp(1.5rem,5vw,6rem); border-top:1px solid rgba(18,18,18,0.08);">
-      <!-- Ghost number -->
+      style="padding:clamp(6rem,12vh,12rem) clamp(1.5rem,5vw,6rem);border-top:1px solid rgba(18,18,18,0.08);">
       <span
         class="absolute -right-8 -top-4 font-serif italic text-ink/[0.02] leading-none pointer-events-none select-none hidden lg:block"
         id="sbn-ghost-05" style="font-size:clamp(18rem,30vw,38rem);">05</span>
 
       <div class="flex items-center gap-5 mb-6 reveal-fade">
-        <div class="crosshair-mark text-ink"></div>
-        <span class="t-label">05 — ARSENAL TÉCNICO</span>
-        <div style="flex:1; height:1px; background:rgba(18,18,18,0.08);"></div>
+        <div class="crosshair-mark text-ink"></div><span class="t-label">05 &mdash; ARSENAL T&Eacute;CNICO</span>
+        <div style="flex:1;height:1px;background:rgba(18,18,18,0.08);"></div>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-14">
         <p class="font-serif italic text-ink reveal-up"
-          style="font-size:clamp(1.8rem,3.5vw,3.5rem); line-height:1.05; max-width:16ch;">As ferramentas que dominamos.
+          style="font-size:clamp(1.8rem,3.5vw,3.5rem);line-height:1.05;max-width:16ch;">As ferramentas que dominamos.
         </p>
-        <p class="font-sans text-ink/45 reveal-up self-end" style="font-size:0.82rem; line-height:1.8; max-width:44ch;">
-          Escolhemos cada tecnologia com critério. Nada de
-          modas — só ferramentas que provaram o seu valor em projectos reais.</p>
+        <p class="font-sans text-ink/45 reveal-up self-end" style="font-size:0.82rem;line-height:1.8;max-width:44ch;">
+          Escolhemos cada tecnologia com crit&eacute;rio. Nada de modas &mdash; s&oacute; ferramentas que provaram o seu
+          valor em projectos reais.</p>
       </div>
 
       <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-0"
         style="border-top:1px solid rgba(18,18,18,0.08);">
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.00s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="Figma"
             loading="lazy"><span>Figma</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.03s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5"
+          style="transition-delay:0.03s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML"
             loading="lazy"><span>HTML</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.06s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3"
+          style="transition-delay:0.06s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS"
             loading="lazy"><span>CSS</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.09s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.09s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
             alt="JavaScript" loading="lazy"><span>JavaScript</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.12s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.12s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React"
             loading="lazy"><span>React</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.15s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.15s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" alt="Next.js"
             loading="lazy"><span>Next.js</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.18s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.18s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
             alt="Tailwind" loading="lazy"><span>Tailwind</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.21s; border-bottom:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.21s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg"
             alt="Three.js" loading="lazy"><span>Three.js</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.24s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.24s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js"
             loading="lazy"><span>Node.js</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.27s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.27s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python"
             loading="lazy"><span>Python</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.30s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.30s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
             alt="PostgreSQL" loading="lazy"><span>PostgreSQL</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.33s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.33s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg"
             alt="Supabase" loading="lazy"><span>Supabase</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.36s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.36s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git"
             loading="lazy"><span>Git</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.39s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.39s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker"
             loading="lazy"><span>Docker</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.42s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          style="transition-delay:0.42s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" alt="Vercel"
             loading="lazy"><span>Vercel</span>
         </div>
         <div class="tech-logo-card reveal-up"
-          style="transition-delay:0.45s; border-bottom:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg"
+          style="transition-delay:0.45s;border-bottom:1px solid rgba(18,18,18,0.06);border-right:1px solid rgba(18,18,18,0.06);border-radius:0;padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-original.svg"
             alt="WordPress" loading="lazy"><span>WordPress</span>
         </div>
       </div>
     </section>
 
-
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <!-- 07. CTA ─ Light with blueprint lines                     -->
-    <!-- ══════════════════════════════════════════════════════════ -->
-    <section id="sbn-cta" class="relative bg-paper bp-grid overflow-hidden" style="
-          border-top:1px solid rgba(18,18,18,0.08);
-          padding:clamp(7rem,13vh,13rem) clamp(1.5rem,5vw,6rem) clamp(6rem,10vh,10rem);
-        ">
-      <!-- Ghost text -->
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
-        aria-hidden="true">
-        <span class="hero-ghost" style="font-size:clamp(18vw,26vw,36vw)">Início</span>
-      </div>
-
-      <!-- Section label with line -->
-      <div class="flex items-center gap-5 relative z-10 mb-14 reveal-up">
-        <div class="crosshair-mark text-ink"></div>
-        <span class="t-label">06 — PRÓXIMO PASSO</span>
-        <div style="flex:1; height:1px; background:rgba(18,18,18,0.08);"></div>
-      </div>
-
-      <div class="relative z-10 mb-14 reveal-up" style="transition-delay:0.1s">
-        <h2>
-          <div class="clip-wrap"><span class="cta-line font-serif italic text-ink block"
-              style="font-size:clamp(3.5rem,9vw,11rem); line-height:0.88; transform:translateY(110%);">Vamos
-              trabalhar</span></div>
-          <div class="clip-wrap"><span class="cta-line font-serif italic text-ink block"
-              style="font-size:clamp(3.5rem,9vw,11rem); line-height:0.88; margin-left:clamp(1rem,8vw,8rem); transform:translateY(110%);">juntos.</span>
-          </div>
-        </h2>
-      </div>
-
-      <!-- Dashed rule -->
-      <div class="relative z-10 reveal-up"
-        style="transition-delay:0.15s; height:0; border-top:1px dashed rgba(18,18,18,0.15); margin-bottom:clamp(2rem,4vh,3.5rem);">
-      </div>
-
-      <div class="relative z-10 flex items-center gap-4 flex-wrap reveal-up" style="transition-delay:0.2s">
-        <a href="/contactos/"
-          class="btn-contact group relative rounded-full bg-ink text-paper font-sans font-bold uppercase overflow-hidden inline-flex items-center transition-transform hover:scale-[1.03]"
-          style="padding:clamp(0.85rem,1.2vw,1.2rem) clamp(2rem,3vw,3rem); font-size:clamp(0.78rem,0.9vw,0.95rem); letter-spacing:0.05em;">
-          <span
-            class="relative z-10 group-hover:text-ink transition-colors duration-300 flex items-center gap-3">Iniciar
-            projecto
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <!-- ══ 07. CTA ══ -->
+    <section id="sbn-cta" class="relative bg-paper overflow-hidden bp-grid"
+      style="padding:clamp(8rem,16vh,16rem) clamp(1.5rem,5vw,6rem);border-top:1px solid rgba(18,18,18,0.08);">
+      <span class="hero-ghost absolute left-[-3%] top-[10%] hidden lg:block"
+        style="font-size:clamp(12rem,20vw,24rem);">Iniciar</span>
+      <div class="relative z-10 text-center max-w-3xl mx-auto">
+        <div class="overflow-hidden mb-3">
+          <p class="font-serif italic text-ink cta-line"
+            style="font-size:clamp(2.5rem,5.5vw,5.5rem);line-height:1;transform:translateY(110%);">Pronto para</p>
+        </div>
+        <div class="overflow-hidden mb-12">
+          <p class="font-serif italic text-ink cta-line"
+            style="font-size:clamp(2.5rem,5.5vw,5.5rem);line-height:1;transform:translateY(110%);">come&ccedil;ar?</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-5 reveal-up">
+          <a href="/contactos/"
+            class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden inline-flex items-center justify-center leading-none"
+            style="padding:clamp(0.85rem,1.2vw,1.2rem) clamp(2rem,3vw,3rem);font-size:clamp(0.78rem,0.9vw,0.95rem);letter-spacing:0.05em;">
+            <span
+              class="relative z-10 group-hover:text-ink transition-colors duration-300 flex items-center gap-3">Iniciar
+              projecto <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg></span>
+            <span
+              class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+          </a>
+          <a href="/servicos/"
+            class="inline-flex items-center gap-2 rounded-full border font-mono tracking-wide transition-all duration-300 hover:bg-ink/5"
+            style="border-color:rgba(18,18,18,0.15);color:rgba(18,18,18,0.55);padding:clamp(0.85rem,1.2vw,1.2rem) clamp(1.5rem,2.5vw,2.5rem);font-size:clamp(0.7rem,0.85vw,0.875rem);">Ver
+            Servi&ccedil;os <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5" style="opacity:0.4">
               <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg></span>
-          <span
-            class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
-        </a>
-        <a href="/servicos/"
-          class="inline-flex items-center gap-2 rounded-full border font-mono tracking-wide transition-all duration-300 hover:bg-ink/5"
-          style="border-color:rgba(18,18,18,0.15); color:rgba(18,18,18,0.55); padding:clamp(0.85rem,1.2vw,1.2rem) clamp(1.5rem,2.5vw,2.5rem); font-size:clamp(0.7rem,0.85vw,0.875rem);">
-          Ver Serviços <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="1.5" style="opacity:0.4">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
+            </svg></a>
+        </div>
       </div>
     </section>
   </main>
@@ -936,164 +778,72 @@
     function initAnimations() {
       createIcons({ icons });
 
-      // ── Hero entrance (matching Serviços timings) ──────────────
+      // Hero entrance
       const heroTL = gsap.timeline({ defaults: { ease: "power4.out" } });
       heroTL.to(["#hero-line-l", "#hero-line-r"], { scaleX: 1, duration: 1.5, stagger: 0 }, 0);
       heroTL.to("#hero-label", { opacity: 1, duration: 1.0 }, 0.1);
       heroTL.to(["#hw-1", "#hw-2"], { y: "0%", duration: 1.6, stagger: 0.15 }, 0.2);
       heroTL.to("#hero-desc", { opacity: 1, duration: 1.2 }, 0.75);
-      heroTL.fromTo(["#stat-1", "#stat-2", "#stat-3"],
-        { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.15 }, 0.9);
-      heroTL.to(["#hero-ref-tl", "#hero-ref-tr"],
-        { opacity: 1, y: 0, duration: 1.0, stagger: 0.12, ease: "power3.out" }, 1.05);
+      heroTL.fromTo(["#stat-1", "#stat-2", "#stat-3"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.15 }, 0.9);
+      heroTL.to(["#hero-ref-tl", "#hero-ref-tr"], { opacity: 1, y: 0, duration: 1.0, stagger: 0.12, ease: "power3.out" }, 1.05);
       heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.55);
       gsap.from(".hero-ghost", { opacity: 0, y: 60, scale: 0.92, duration: 2.5, ease: "power3.out" });
 
-      // ── Batched Global Reveal system (matching Serviços) ───────
+      // Batched reveal system
       gsap.set(".reveal-up", { opacity: 0, y: 50 });
       gsap.set(".reveal-fade", { opacity: 0 });
-
       ScrollTrigger.batch(".reveal-up", {
-        onEnter: batch => gsap.to(batch, {
-          opacity: 1, y: 0, duration: 1.4, stagger: 0.15, ease: "power4.out", overwrite: true
-        }),
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1.4, stagger: 0.15, ease: "power4.out", overwrite: true }),
         start: "top 88%", once: true
       });
       ScrollTrigger.batch(".reveal-fade", {
-        onEnter: batch => gsap.to(batch, {
-          opacity: 1, duration: 1.2, stagger: 0.1, ease: "power2.out", overwrite: true
-        }),
+        onEnter: batch => gsap.to(batch, { opacity: 1, duration: 1.2, stagger: 0.1, ease: "power2.out", overwrite: true }),
         start: "top 88%", once: true
       });
 
-      // ── Manifesto blockquote dramatic entrance ───────────
-      const manifQuote = document.getElementById("manifesto-quote");
-      if (manifQuote) {
-        gsap.fromTo(manifQuote,
-          { opacity: 0, y: 60, scale: 0.95 },
-          {
-            scrollTrigger: { trigger: "#sbn-spread", start: "top 70%", once: true },
-            opacity: 1, y: 0, scale: 1, duration: 2, ease: "power4.out"
-          }
-        );
-      }
-      // Manifesto h-line draw
-      gsap.to("#manifesto-hline", {
-        scrollTrigger: { trigger: "#sbn-spread", start: "top 65%", once: true },
-        scaleX: 1, duration: 1.8, ease: "power4.out"
-      });
+      // Manifesto quote
+      const mq = document.getElementById("manifesto-quote");
+      if (mq) gsap.fromTo(mq, { opacity: 0, y: 60, scale: 0.95 }, { scrollTrigger: { trigger: "#sbn-spread", start: "top 70%", once: true }, opacity: 1, y: 0, scale: 1, duration: 2, ease: "power4.out" });
+      gsap.to("#manifesto-hline", { scrollTrigger: { trigger: "#sbn-spread", start: "top 65%", once: true }, scaleX: 1, duration: 1.8, ease: "power4.out" });
 
-      // ── Ghost number parallax ─────────────────────────────
+      // Ghost parallax
       ["#sbn-ghost-02", "#sbn-ghost-03", "#sbn-ghost-04", "#sbn-ghost-05"].forEach(id => {
         const el = document.querySelector(id);
-        if (el) {
-          gsap.to(el, {
-            scrollTrigger: { trigger: el.closest("section"), start: "top bottom", end: "bottom top", scrub: 1 },
-            y: -80, ease: "none"
-          });
-        }
+        if (el) gsap.to(el, { scrollTrigger: { trigger: el.closest("section"), start: "top bottom", end: "bottom top", scrub: 1 }, y: -80, ease: "none" });
       });
 
-      // ── Photo parallax on scroll ────────────────────────
+      // Photo parallax
       document.querySelectorAll(".ed-photo img").forEach(img => {
-        gsap.fromTo(img, { yPercent: -8 }, {
-          scrollTrigger: { trigger: img.closest(".ed-photo"), start: "top bottom", end: "bottom top", scrub: 1 },
-          yPercent: 8, ease: "none"
-        });
+        gsap.fromTo(img, { yPercent: -8 }, { scrollTrigger: { trigger: img.closest(".ed-photo"), start: "top bottom", end: "bottom top", scrub: 1 }, yPercent: 8, ease: "none" });
       });
 
-      // ── Card corners fade in ────────────────────────────
-      gsap.utils.toArray(".card-corner").forEach(corner => {
-        gsap.fromTo(corner, { opacity: 0 }, {
-          scrollTrigger: { trigger: corner.parentElement, start: "top 80%", once: true },
-          opacity: 1, duration: 1.5, delay: 0.6, ease: "power2.out"
-        });
-      });
+      // Corner + bracket reveals
+      gsap.utils.toArray(".card-corner").forEach(c => gsap.fromTo(c, { opacity: 0 }, { scrollTrigger: { trigger: c.parentElement, start: "top 80%", once: true }, opacity: 1, duration: 1.5, delay: 0.6, ease: "power2.out" }));
+      gsap.utils.toArray(".l-bracket").forEach(b => gsap.fromTo(b, { opacity: 0, scale: 0.8 }, { scrollTrigger: { trigger: b.parentElement, start: "top 80%", once: true }, opacity: 1, scale: 1, duration: 1.2, delay: 0.8, ease: "back.out(1.5)" }));
 
-      // ── L-brackets fade in ────────────────────────────
-      gsap.utils.toArray(".l-bracket").forEach(bracket => {
-        gsap.fromTo(bracket, { opacity: 0, scale: 0.8 }, {
-          scrollTrigger: { trigger: bracket.parentElement, start: "top 80%", once: true },
-          opacity: 1, scale: 1, duration: 1.2, delay: 0.8, ease: "back.out(1.5)"
-        });
-      });
+      // Value rows
+      const vr = document.querySelectorAll("#sbn-values .val-row-dark");
+      if (vr.length) gsap.fromTo(vr, { opacity: 0, x: -40, clipPath: "inset(0 100% 0 0)" }, { scrollTrigger: { trigger: "#sbn-values", start: "top 65%", once: true }, opacity: 1, x: 0, clipPath: "inset(0 0% 0 0)", duration: 1.4, stagger: 0.18, ease: "power4.out" });
+      document.querySelectorAll("#sbn-values .val-num").forEach(n => gsap.fromTo(n, { opacity: 0, scale: 0.5 }, { scrollTrigger: { trigger: n, start: "top 85%", once: true }, opacity: 1, scale: 1, duration: 1, ease: "back.out(2)" }));
 
-      // ── Value rows clipPath reveal (DARK section) ───────
-      const valueRows = document.querySelectorAll("#sbn-values .val-row-dark");
-      if (valueRows.length) {
-        gsap.fromTo(valueRows,
-          { opacity: 0, x: -40, clipPath: "inset(0 100% 0 0)" },
-          {
-            scrollTrigger: { trigger: "#sbn-values", start: "top 65%", once: true },
-            opacity: 1, x: 0, clipPath: "inset(0 0% 0 0)",
-            duration: 1.4, stagger: 0.18, ease: "power4.out"
-          }
-        );
-      }
-      // Value numbers scale pop
-      document.querySelectorAll("#sbn-values .val-num").forEach(num => {
-        gsap.fromTo(num, { opacity: 0, scale: 0.5 }, {
-          scrollTrigger: { trigger: num, start: "top 85%", once: true },
-          opacity: 1, scale: 1, duration: 1, ease: "back.out(2)"
-        });
-      });
+      // Founder names
+      document.querySelectorAll("#sbn-founder h3").forEach((h3, i) => gsap.fromTo(h3, { opacity: 0, y: 80, clipPath: "inset(100% 0 0 0)" }, { scrollTrigger: { trigger: h3, start: "top 85%", once: true }, opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: 1.8, delay: i * 0.1, ease: "power4.out" }));
 
-      // ── Founder names dramatic clipPath entrance ───────────
-      document.querySelectorAll("#sbn-founder h3").forEach((h3, i) => {
-        gsap.fromTo(h3,
-          { opacity: 0, y: 80, clipPath: "inset(100% 0 0 0)" },
-          {
-            scrollTrigger: { trigger: h3, start: "top 85%", once: true },
-            opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)",
-            duration: 1.8, delay: i * 0.1, ease: "power4.out"
-          }
-        );
-      });
+      // Tech batch
+      ScrollTrigger.batch(".tech-logo-card", { onEnter: batch => gsap.fromTo(batch, { opacity: 0, y: 25, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.04, ease: "power3.out", overwrite: true }), start: "top 90%", once: true });
 
-      // ── Tech stack batch reveal ─────────────────────────
-      ScrollTrigger.batch(".tech-logo-card", {
-        onEnter: batch => gsap.fromTo(batch,
-          { opacity: 0, y: 25, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.04, ease: "power3.out", overwrite: true }
-        ),
-        start: "top 90%", once: true
-      });
+      // CTA
+      gsap.to(".cta-line", { scrollTrigger: { trigger: "#sbn-cta", start: "top 78%" }, y: "0%", duration: 1.6, stagger: 0.15, ease: "power4.out" });
+      const ctaG = document.querySelector("#sbn-cta .hero-ghost");
+      if (ctaG) gsap.to(ctaG, { scrollTrigger: { trigger: "#sbn-cta", start: "top bottom", end: "bottom top", scrub: 1 }, y: -80, ease: "none" });
 
-      // ── CTA lines rise ─────────────────────────────────
-      gsap.to(".cta-line", {
-        scrollTrigger: { trigger: "#sbn-cta", start: "top 78%" },
-        y: "0%", duration: 1.6, stagger: 0.15, ease: "power4.out"
-      });
+      // Pills
+      ScrollTrigger.batch(".sk-tag, .vp", { onEnter: batch => gsap.fromTo(batch, { opacity: 0, scale: 0.85, y: 10 }, { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.03, ease: "back.out(1.5)", overwrite: true }), start: "top 92%", once: true });
 
-      // ── CTA ghost text parallax ─────────────────────────
-      const ctaGhost = document.querySelector("#sbn-cta .hero-ghost");
-      if (ctaGhost) {
-        gsap.to(ctaGhost, {
-          scrollTrigger: { trigger: "#sbn-cta", start: "top bottom", end: "bottom top", scrub: 1 },
-          y: -80, ease: "none"
-        });
-      }
+      // Footer
+      gsap.from(".footer-dots", { scrollTrigger: { trigger: "footer", start: "top 85%" }, opacity: 0, duration: 1.5, ease: "power2.out" });
+      gsap.from(".footer-grid > *, .footer-bottom", { scrollTrigger: { trigger: "footer", start: "top 85%" }, y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" });
 
-      // ── sk-tag / vp pills stagger ────────────────────────
-      ScrollTrigger.batch(".sk-tag, .vp", {
-        onEnter: batch => gsap.fromTo(batch,
-          { opacity: 0, scale: 0.85, y: 10 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.03, ease: "back.out(1.5)", overwrite: true }
-        ),
-        start: "top 92%", once: true
-      });
-
-      // ── Footer reveal ─────────────
-      gsap.from(".footer-dots", {
-        scrollTrigger: { trigger: "footer", start: "top 85%" },
-        opacity: 0, duration: 1.5, ease: "power2.out"
-      });
-      gsap.from(".footer-grid > *, .footer-bottom", {
-        scrollTrigger: { trigger: "footer", start: "top 85%" },
-        y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out"
-      });
-
-      // ── Performance config ─────────────
       ScrollTrigger.config({ limitCallbacks: true });
       window.addEventListener("load", () => ScrollTrigger.refresh());
     }
@@ -1103,117 +853,41 @@
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       let w = 0, h = 0, dpr = 1;
-
       function resize() {
         dpr = window.devicePixelRatio || 1;
-        w = canvas.parentElement.offsetWidth;
-        h = canvas.parentElement.offsetHeight;
-        canvas.width = Math.round(w * dpr);
-        canvas.height = Math.round(h * dpr);
-        ctx.resetTransform();
-        ctx.scale(dpr, dpr);
+        w = canvas.parentElement.offsetWidth; h = canvas.parentElement.offsetHeight;
+        canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+        ctx.resetTransform(); ctx.scale(dpr, dpr);
       }
       resize();
       window.addEventListener('resize', resize, { passive: true });
 
-      // ── Topographic Contour Lines (unique to Sobre Nós) ──────
-      // Flowing organic curves like a terrain elevation map.
-      // No dots (footer uses those), no rectangles (Serviços uses those).
-      const CELL = 18;            // marching-squares cell size
-      const LEVELS = 7;           // number of contour lines
-      const LINE_OP = 0.07;       // line opacity
-      const SPEED = 0.003;        // time drift speed
-
-      // Simple smooth noise function (layered sines)
+      const CELL = 18, LEVELS = 7, LINE_OP = 0.07, SPEED = 0.003;
       function noise(x, y, t) {
-        return (
-          Math.sin(x * 0.008 + t * 0.7) * Math.cos(y * 0.006 - t * 0.5) * 0.35 +
-          Math.sin(x * 0.014 - y * 0.01 + t * 0.3) * 0.25 +
-          Math.sin((x + y) * 0.005 + t * 1.1) * 0.20 +
-          Math.cos(x * 0.003 - t * 0.2) * Math.sin(y * 0.009 + t * 0.6) * 0.20
-        ) * 0.5 + 0.5; // normalize to 0–1
+        return (Math.sin(x * 0.008 + t * 0.7) * Math.cos(y * 0.006 - t * 0.5) * 0.35 + Math.sin(x * 0.014 - y * 0.01 + t * 0.3) * 0.25 + Math.sin((x + y) * 0.005 + t * 1.1) * 0.20 + Math.cos(x * 0.003 - t * 0.2) * Math.sin(y * 0.009 + t * 0.6) * 0.20) * 0.5 + 0.5;
       }
-
       let t = 0;
       function draw() {
         t += SPEED;
         if (!w || !h) { requestAnimationFrame(draw); return; }
         const rect = canvas.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > window.innerHeight) {
-          requestAnimationFrame(draw); return;
-        }
-
+        if (rect.bottom < 0 || rect.top > window.innerHeight) { requestAnimationFrame(draw); return; }
         ctx.clearRect(0, 0, w, h);
-        const cols = Math.ceil(w / CELL);
-        const rows = Math.ceil(h / CELL);
-
-        // Sample noise field
+        const cols = Math.ceil(w / CELL), rows = Math.ceil(h / CELL);
         const field = [];
-        for (let r = 0; r <= rows; r++) {
-          field[r] = [];
-          for (let c = 0; c <= cols; c++) {
-            field[r][c] = noise(c * CELL, r * CELL, t);
-          }
-        }
-
-        // Draw contour lines using marching squares (simplified)
-        ctx.strokeStyle = `rgba(18,18,18,${LINE_OP})`;
-        ctx.lineWidth = 0.8;
-
+        for (let r = 0; r <= rows; r++) { field[r] = []; for (let c = 0; c <= cols; c++) field[r][c] = noise(c * CELL, r * CELL, t); }
+        ctx.strokeStyle = `rgba(18,18,18,${LINE_OP})`; ctx.lineWidth = 0.8;
         for (let lv = 1; lv < LEVELS; lv++) {
-          const threshold = lv / LEVELS;
-          ctx.beginPath();
-
-          for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-              const x = c * CELL;
-              const y = r * CELL;
-              const tl = field[r][c];
-              const tr = field[r][c + 1];
-              const br = field[r + 1][c + 1];
-              const bl = field[r + 1][c];
-
-              // Classify corners (above/below threshold)
-              const code = (tl >= threshold ? 8 : 0) |
-                (tr >= threshold ? 4 : 0) |
-                (br >= threshold ? 2 : 0) |
-                (bl >= threshold ? 1 : 0);
-
-              if (code === 0 || code === 15) continue;
-
-              // Interpolation helpers
-              const lerp = (a, b) => (threshold - a) / (b - a);
-
-              // Edge midpoints
-              const topX = x + lerp(tl, tr) * CELL;
-              const rightY = y + lerp(tr, br) * CELL;
-              const bottomX = x + lerp(bl, br) * CELL;
-              const leftY = y + lerp(tl, bl) * CELL;
-
-              // Draw line segments for each case
-              const segments = [];
-              switch (code) {
-                case 1: case 14: segments.push(bottomX, y + CELL, x, leftY); break;
-                case 2: case 13: segments.push(x + CELL, rightY, bottomX, y + CELL); break;
-                case 3: case 12: segments.push(x + CELL, rightY, x, leftY); break;
-                case 4: case 11: segments.push(topX, y, x + CELL, rightY); break;
-                case 5:
-                  segments.push(topX, y, x, leftY);
-                  segments.push(x + CELL, rightY, bottomX, y + CELL);
-                  break;
-                case 6: case 9: segments.push(topX, y, bottomX, y + CELL); break;
-                case 7: case 8: segments.push(topX, y, x, leftY); break;
-                case 10:
-                  segments.push(topX, y, x + CELL, rightY);
-                  segments.push(x, leftY, bottomX, y + CELL);
-                  break;
-              }
-
-              for (let s = 0; s < segments.length; s += 4) {
-                ctx.moveTo(segments[s], segments[s + 1]);
-                ctx.lineTo(segments[s + 2], segments[s + 3]);
-              }
-            }
+          const th = lv / LEVELS; ctx.beginPath();
+          for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+            const x = c * CELL, y = r * CELL, tl = field[r][c], tr = field[r][c + 1], br = field[r + 1][c + 1], bl = field[r + 1][c];
+            const code = (tl >= th ? 8 : 0) | (tr >= th ? 4 : 0) | (br >= th ? 2 : 0) | (bl >= th ? 1 : 0);
+            if (code === 0 || code === 15) continue;
+            const lerp = (a, b) => (th - a) / (b - a);
+            const topX = x + lerp(tl, tr) * CELL, rightY = y + lerp(tr, br) * CELL, bottomX = x + lerp(bl, br) * CELL, leftY = y + lerp(tl, bl) * CELL;
+            const s = [];
+            switch (code) { case 1: case 14: s.push(bottomX, y + CELL, x, leftY); break; case 2: case 13: s.push(x + CELL, rightY, bottomX, y + CELL); break; case 3: case 12: s.push(x + CELL, rightY, x, leftY); break; case 4: case 11: s.push(topX, y, x + CELL, rightY); break; case 5: s.push(topX, y, x, leftY); s.push(x + CELL, rightY, bottomX, y + CELL); break; case 6: case 9: s.push(topX, y, bottomX, y + CELL); break; case 7: case 8: s.push(topX, y, x, leftY); break; case 10: s.push(topX, y, x + CELL, rightY); s.push(x, leftY, bottomX, y + CELL); break; }
+            for (let i = 0; i < s.length; i += 4) { ctx.moveTo(s[i], s[i + 1]); ctx.lineTo(s[i + 2], s[i + 3]); }
           }
           ctx.stroke();
         }
@@ -1222,14 +896,10 @@
       draw();
     }
 
-    // Wait for page.js to set visibility
     const obs = new MutationObserver(() => {
       if (document.body.style.visibility !== "") {
         obs.disconnect();
-        requestAnimationFrame(() => {
-          initAnimations();
-          initHeroCanvas();
-        });
+        requestAnimationFrame(() => { initAnimations(); initHeroCanvas(); });
       }
     });
     obs.observe(document.body, { attributes: true, attributeFilter: ["style"] });
