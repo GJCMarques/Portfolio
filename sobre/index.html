@@ -560,7 +560,14 @@
     <!-- ══════════════════════════════════════════════════════════ -->
     <section id="sbn-founder" class="relative bg-paper overflow-hidden"
       style="padding:clamp(6rem,12vh,12rem) clamp(1.5rem,5vw,6rem); border-top:1px solid rgba(18,18,18,0.08);">
-      <div class="flex items-center justify-between mb-20">
+      <!-- Ghost number -->
+      <span
+        class="absolute -left-8 -top-4 font-serif italic text-ink/[0.02] leading-none pointer-events-none select-none hidden lg:block"
+        id="sbn-ghost-04" style="font-size:clamp(18rem,30vw,38rem);">04</span>
+      <!-- Vertical guide -->
+      <div class="absolute right-[5%] top-0 bottom-0 w-[1px] bg-ink/[0.04] hidden lg:block pointer-events-none"></div>
+
+      <div class="flex items-center justify-between mb-20 reveal-fade">
         <div class="flex items-center gap-5">
           <div class="crosshair-mark text-ink"></div><span class="t-label">04 — EQUIPA</span>
         </div>
@@ -568,19 +575,27 @@
       </div>
 
       <!-- Guilherme -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start mb-24 will-reveal">
+      <div class="founder-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start mb-24 reveal-up">
         <div class="lg:col-span-5">
-          <div class="ed-photo" style="height:clamp(420px,55vh,620px);">
+          <div class="ed-photo relative" style="height:clamp(420px,55vh,620px);">
             <div class="card-corner tl"></div>
             <div class="card-corner tr"></div>
             <div class="card-corner bl"></div>
             <div class="card-corner br"></div>
+            <div class="l-bracket absolute top-3 left-3 z-10"><svg width="28" height="28" viewBox="0 0 28 28"
+                fill="none">
+                <path d="M28 2 L2 2 L2 28" stroke="#121212" stroke-width="0.8" />
+              </svg></div>
+            <div class="l-bracket absolute bottom-3 right-3 z-10"><svg width="28" height="28" viewBox="0 0 28 28"
+                fill="none">
+                <path d="M0 26 L26 26 L26 0" stroke="#121212" stroke-width="0.8" />
+              </svg></div>
             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=85&fit=crop&crop=face"
               alt="Guilherme" loading="lazy" style="object-position:center 20%;">
           </div>
-          <span class="t-label mt-4 block">fig. 05 — Retrato</span>
+          <span class="t-label mt-4 block">fig. 05 — Retrato · GJC</span>
         </div>
-        <div class="lg:col-span-7 flex flex-col justify-center will-reveal" style="transition-delay:0.12s;">
+        <div class="lg:col-span-7 flex flex-col justify-center">
           <h3 class="font-serif italic text-ink" style="font-size:clamp(3rem,6vw,7rem); line-height:0.9;">Guilherme</h3>
           <p class="font-mono text-silver uppercase mt-3 mb-8" style="font-size:0.6rem; letter-spacing:0.15em;">
             Co-fundador · Design &amp; Frontend</p>
@@ -606,9 +621,8 @@
       </div>
 
       <!-- Eduardo — reversed -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start will-reveal">
-        <div class="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1 will-reveal"
-          style="transition-delay:0.12s;">
+      <div class="founder-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start reveal-up">
+        <div class="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1">
           <h3 class="font-serif italic text-ink" style="font-size:clamp(3rem,6vw,7rem); line-height:0.9;">Eduardo</h3>
           <p class="font-mono text-silver uppercase mt-3 mb-8" style="font-size:0.6rem; letter-spacing:0.15em;">
             Co-fundador · Estratégia &amp; Backend</p>
@@ -633,15 +647,23 @@
           </div>
         </div>
         <div class="lg:col-span-5 order-1 lg:order-2">
-          <div class="ed-photo" style="height:clamp(420px,55vh,620px);">
+          <div class="ed-photo relative" style="height:clamp(420px,55vh,620px);">
             <div class="card-corner tl"></div>
             <div class="card-corner tr"></div>
             <div class="card-corner bl"></div>
             <div class="card-corner br"></div>
+            <div class="l-bracket absolute top-3 left-3 z-10"><svg width="28" height="28" viewBox="0 0 28 28"
+                fill="none">
+                <path d="M28 2 L2 2 L2 28" stroke="#121212" stroke-width="0.8" />
+              </svg></div>
+            <div class="l-bracket absolute bottom-3 right-3 z-10"><svg width="28" height="28" viewBox="0 0 28 28"
+                fill="none">
+                <path d="M0 26 L26 26 L26 0" stroke="#121212" stroke-width="0.8" />
+              </svg></div>
             <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=85&fit=crop&crop=face"
               alt="Eduardo" loading="lazy" style="object-position:center 15%;">
           </div>
-          <span class="t-label mt-4 block text-right">fig. 06 — Retrato</span>
+          <span class="t-label mt-4 block text-right">fig. 06 — Retrato · EDS</span>
         </div>
       </div>
     </section>
@@ -651,98 +673,103 @@
     <!-- ══════════════════════════════════════════════════════════ -->
     <section id="sbn-stack" class="relative bg-paper overflow-hidden"
       style="padding:clamp(6rem,12vh,12rem) clamp(1.5rem,5vw,6rem); border-top:1px solid rgba(18,18,18,0.08);">
-      <div class="flex items-center gap-5 mb-6 will-reveal">
+      <!-- Ghost number -->
+      <span
+        class="absolute -right-8 -top-4 font-serif italic text-ink/[0.02] leading-none pointer-events-none select-none hidden lg:block"
+        id="sbn-ghost-05" style="font-size:clamp(18rem,30vw,38rem);">05</span>
+
+      <div class="flex items-center gap-5 mb-6 reveal-fade">
         <div class="crosshair-mark text-ink"></div>
         <span class="t-label">05 — ARSENAL TÉCNICO</span>
         <div style="flex:1; height:1px; background:rgba(18,18,18,0.08);"></div>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-14">
-        <p class="font-serif italic text-ink will-reveal"
+        <p class="font-serif italic text-ink reveal-up"
           style="font-size:clamp(1.8rem,3.5vw,3.5rem); line-height:1.05; max-width:16ch;">As ferramentas que dominamos.
         </p>
-        <p class="font-sans text-ink/45 will-reveal self-end"
-          style="font-size:0.82rem; line-height:1.8; max-width:44ch;">Escolhemos cada tecnologia com critério. Nada de
+        <p class="font-sans text-ink/45 reveal-up self-end" style="font-size:0.82rem; line-height:1.8; max-width:44ch;">
+          Escolhemos cada tecnologia com critério. Nada de
           modas — só ferramentas que provaram o seu valor em projectos reais.</p>
       </div>
 
       <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-0"
         style="border-top:1px solid rgba(18,18,18,0.08);">
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="Figma"
             loading="lazy"><span>Figma</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.03s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5"
             loading="lazy"><span>HTML</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.06s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3"
             loading="lazy"><span>CSS</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.09s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
             alt="JavaScript" loading="lazy"><span>JavaScript</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.12s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React"
             loading="lazy"><span>React</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.15s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" alt="Next.js"
             loading="lazy"><span>Next.js</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.18s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
             alt="Tailwind" loading="lazy"><span>Tailwind</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.21s; border-bottom:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg"
             alt="Three.js" loading="lazy"><span>Three.js</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.24s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js"
             loading="lazy"><span>Node.js</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.27s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python"
             loading="lazy"><span>Python</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.30s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
             alt="PostgreSQL" loading="lazy"><span>PostgreSQL</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.33s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg"
             alt="Supabase" loading="lazy"><span>Supabase</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.36s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git"
             loading="lazy"><span>Git</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.39s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker"
             loading="lazy"><span>Docker</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.42s; border-bottom:1px solid rgba(18,18,18,0.06); border-right:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" alt="Vercel"
             loading="lazy"><span>Vercel</span>
         </div>
-        <div class="tech-logo-card will-reveal"
+        <div class="tech-logo-card reveal-up"
           style="transition-delay:0.45s; border-bottom:1px solid rgba(18,18,18,0.06); border-radius:0; padding:clamp(1rem,2vw,1.5rem) 0.5rem;">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg"
             alt="WordPress" loading="lazy"><span>WordPress</span>
@@ -765,13 +792,13 @@
       </div>
 
       <!-- Section label with line -->
-      <div class="flex items-center gap-5 relative z-10 mb-14 will-reveal">
+      <div class="flex items-center gap-5 relative z-10 mb-14 reveal-up">
         <div class="crosshair-mark text-ink"></div>
         <span class="t-label">06 — PRÓXIMO PASSO</span>
         <div style="flex:1; height:1px; background:rgba(18,18,18,0.08);"></div>
       </div>
 
-      <div class="relative z-10 mb-14 will-reveal" style="transition-delay:0.1s">
+      <div class="relative z-10 mb-14 reveal-up" style="transition-delay:0.1s">
         <h2>
           <div class="clip-wrap"><span class="cta-line font-serif italic text-ink block"
               style="font-size:clamp(3.5rem,9vw,11rem); line-height:0.88; transform:translateY(110%);">Vamos
@@ -783,11 +810,11 @@
       </div>
 
       <!-- Dashed rule -->
-      <div class="relative z-10 will-reveal"
+      <div class="relative z-10 reveal-up"
         style="transition-delay:0.15s; height:0; border-top:1px dashed rgba(18,18,18,0.15); margin-bottom:clamp(2rem,4vh,3.5rem);">
       </div>
 
-      <div class="relative z-10 flex items-center gap-4 flex-wrap will-reveal" style="transition-delay:0.2s">
+      <div class="relative z-10 flex items-center gap-4 flex-wrap reveal-up" style="transition-delay:0.2s">
         <a href="/contactos/"
           class="btn-contact group relative rounded-full bg-ink text-paper font-sans font-bold uppercase overflow-hidden inline-flex items-center transition-transform hover:scale-[1.03]"
           style="padding:clamp(0.85rem,1.2vw,1.2rem) clamp(2rem,3vw,3rem); font-size:clamp(0.78rem,0.9vw,0.95rem); letter-spacing:0.05em;">
@@ -899,7 +926,6 @@
     </div>
   </footer>
 
-  <!-- ── Scripts ──────────────────── -->
   <script type="module" src="../assets/js/page.js"></script>
   <script type="module">
     import { gsap } from "gsap";
@@ -912,59 +938,36 @@
 
       // ── Hero entrance (matching Serviços timings) ──────────────
       const heroTL = gsap.timeline({ defaults: { ease: "power4.out" } });
-      // Horizontal rule draws out
-      heroTL.to("#hero-hline", { scaleX: 1, duration: 1.5 }, 0);
-      // Label fades in
+      heroTL.to(["#hero-line-l", "#hero-line-r"], { scaleX: 1, duration: 1.5, stagger: 0 }, 0);
       heroTL.to("#hero-label", { opacity: 1, duration: 1.0 }, 0.1);
-      // Headline words rise up
       heroTL.to(["#hw-1", "#hw-2"], { y: "0%", duration: 1.6, stagger: 0.15 }, 0.2);
-      // Description fades in
       heroTL.to("#hero-desc", { opacity: 1, duration: 1.2 }, 0.75);
-      // Stats stagger up
       heroTL.fromTo(["#stat-1", "#stat-2", "#stat-3"],
         { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.15 }, 0.9);
-      // Scroll cue last
-      heroTL.to("#hero-cue", { opacity: 1, duration: 1 }, 1.55);
-      // Ghost text drifts in
+      heroTL.to(["#hero-ref-tl", "#hero-ref-tr"],
+        { opacity: 1, y: 0, duration: 1.0, stagger: 0.12, ease: "power3.out" }, 1.05);
+      heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.55);
       gsap.from(".hero-ghost", { opacity: 0, y: 60, scale: 0.92, duration: 2.5, ease: "power3.out" });
 
-      // ── CTA lines rise ─────────────────
-      gsap.to(".cta-line", {
-        scrollTrigger: { trigger: "#sbn-cta", start: "top 78%" },
-        y: "0%", duration: 1.6, stagger: 0.15, ease: "power4.out"
+      // ── Batched Global Reveal system (matching Serviços) ───────
+      gsap.set(".reveal-up", { opacity: 0, y: 50 });
+      gsap.set(".reveal-fade", { opacity: 0 });
+
+      ScrollTrigger.batch(".reveal-up", {
+        onEnter: batch => gsap.to(batch, {
+          opacity: 1, y: 0, duration: 1.4, stagger: 0.15, ease: "power4.out", overwrite: true
+        }),
+        start: "top 88%", once: true
       });
-
-      // ── Section headings scroll entrance ───────────────────
-      ["#sbn-spread", "#sbn-values", "#sbn-founder", "#sbn-stack", "#sbn-cta"].forEach(id => {
-        const sect = document.querySelector(id);
-        if (!sect) return;
-        const labels = sect.querySelectorAll(".t-label, .crosshair-mark");
-        const h2 = sect.querySelector("h2");
-        const hLine = sect.querySelector("[style*='height:1px']");
-
-        if (labels.length || h2) {
-          gsap.fromTo([...labels, h2].filter(Boolean),
-            { opacity: 0, y: 30 },
-            {
-              scrollTrigger: { trigger: sect, start: "top 85%", once: true },
-              opacity: 1, y: 0, duration: 1.5, stagger: 0.12, ease: "power4.out"
-            }
-          );
-        }
-        // Animate horizontal rules scaleX
-        if (hLine) {
-          gsap.fromTo(hLine,
-            { scaleX: 0, transformOrigin: "left center" },
-            {
-              scrollTrigger: { trigger: sect, start: "top 82%", once: true },
-              scaleX: 1, duration: 1.8, ease: "power4.out"
-            }
-          );
-        }
+      ScrollTrigger.batch(".reveal-fade", {
+        onEnter: batch => gsap.to(batch, {
+          opacity: 1, duration: 1.2, stagger: 0.1, ease: "power2.out", overwrite: true
+        }),
+        start: "top 88%", once: true
       });
 
       // ── Manifesto blockquote dramatic entrance ───────────
-      const manifQuote = document.querySelector("#sbn-spread blockquote p");
+      const manifQuote = document.getElementById("manifesto-quote");
       if (manifQuote) {
         gsap.fromTo(manifQuote,
           { opacity: 0, y: 60, scale: 0.95 },
@@ -974,37 +977,49 @@
           }
         );
       }
+      // Manifesto h-line draw
+      gsap.to("#manifesto-hline", {
+        scrollTrigger: { trigger: "#sbn-spread", start: "top 65%", once: true },
+        scaleX: 1, duration: 1.8, ease: "power4.out"
+      });
+
+      // ── Ghost number parallax ─────────────────────────────
+      ["#sbn-ghost-02", "#sbn-ghost-03", "#sbn-ghost-04", "#sbn-ghost-05"].forEach(id => {
+        const el = document.querySelector(id);
+        if (el) {
+          gsap.to(el, {
+            scrollTrigger: { trigger: el.closest("section"), start: "top bottom", end: "bottom top", scrub: 1 },
+            y: -80, ease: "none"
+          });
+        }
+      });
 
       // ── Photo parallax on scroll ────────────────────────
       document.querySelectorAll(".ed-photo img").forEach(img => {
-        gsap.fromTo(img,
-          { yPercent: -8 },
-          {
-            scrollTrigger: {
-              trigger: img.closest(".ed-photo"),
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1
-            },
-            yPercent: 8,
-            ease: "none"
-          }
-        );
+        gsap.fromTo(img, { yPercent: -8 }, {
+          scrollTrigger: { trigger: img.closest(".ed-photo"), start: "top bottom", end: "bottom top", scrub: 1 },
+          yPercent: 8, ease: "none"
+        });
       });
 
       // ── Card corners fade in ────────────────────────────
       gsap.utils.toArray(".card-corner").forEach(corner => {
-        gsap.fromTo(corner,
-          { opacity: 0 },
-          {
-            scrollTrigger: { trigger: corner.parentElement, start: "top 80%", once: true },
-            opacity: 1, duration: 1.5, delay: 0.6, ease: "power2.out"
-          }
-        );
+        gsap.fromTo(corner, { opacity: 0 }, {
+          scrollTrigger: { trigger: corner.parentElement, start: "top 80%", once: true },
+          opacity: 1, duration: 1.5, delay: 0.6, ease: "power2.out"
+        });
       });
 
-      // ── Value rows slide in from left with stagger ──────
-      const valueRows = document.querySelectorAll("#sbn-values .flex.items-start");
+      // ── L-brackets fade in ────────────────────────────
+      gsap.utils.toArray(".l-bracket").forEach(bracket => {
+        gsap.fromTo(bracket, { opacity: 0, scale: 0.8 }, {
+          scrollTrigger: { trigger: bracket.parentElement, start: "top 80%", once: true },
+          opacity: 1, scale: 1, duration: 1.2, delay: 0.8, ease: "back.out(1.5)"
+        });
+      });
+
+      // ── Value rows clipPath reveal (DARK section) ───────
+      const valueRows = document.querySelectorAll("#sbn-values .val-row-dark");
       if (valueRows.length) {
         gsap.fromTo(valueRows,
           { opacity: 0, x: -40, clipPath: "inset(0 100% 0 0)" },
@@ -1015,20 +1030,15 @@
           }
         );
       }
-
-      // ── Value numbers count-up ──────────────────────────
-      document.querySelectorAll("#sbn-values .font-mono.text-ink\\/12").forEach(num => {
-        const target = num.textContent.trim();
-        gsap.fromTo(num,
-          { opacity: 0, scale: 0.5 },
-          {
-            scrollTrigger: { trigger: num, start: "top 85%", once: true },
-            opacity: 1, scale: 1, duration: 1, ease: "back.out(2)"
-          }
-        );
+      // Value numbers scale pop
+      document.querySelectorAll("#sbn-values .val-num").forEach(num => {
+        gsap.fromTo(num, { opacity: 0, scale: 0.5 }, {
+          scrollTrigger: { trigger: num, start: "top 85%", once: true },
+          opacity: 1, scale: 1, duration: 1, ease: "back.out(2)"
+        });
       });
 
-      // ── Founder names dramatic scale entrance ───────────
+      // ── Founder names dramatic clipPath entrance ───────────
       document.querySelectorAll("#sbn-founder h3").forEach((h3, i) => {
         gsap.fromTo(h3,
           { opacity: 0, y: 80, clipPath: "inset(100% 0 0 0)" },
@@ -1044,14 +1054,15 @@
       ScrollTrigger.batch(".tech-logo-card", {
         onEnter: batch => gsap.fromTo(batch,
           { opacity: 0, y: 25, scale: 0.9 },
-          {
-            opacity: 1, y: 0, scale: 1,
-            duration: 0.8, stagger: 0.04, ease: "power3.out",
-            overwrite: true
-          }
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.04, ease: "power3.out", overwrite: true }
         ),
-        start: "top 90%",
-        once: true
+        start: "top 90%", once: true
+      });
+
+      // ── CTA lines rise ─────────────────────────────────
+      gsap.to(".cta-line", {
+        scrollTrigger: { trigger: "#sbn-cta", start: "top 78%" },
+        y: "0%", duration: 1.6, stagger: 0.15, ease: "power4.out"
       });
 
       // ── CTA ghost text parallax ─────────────────────────
@@ -1063,25 +1074,13 @@
         });
       }
 
-      // ── sk-tag pills stagger ────────────────────────────
-      ScrollTrigger.batch(".sk-tag", {
+      // ── sk-tag / vp pills stagger ────────────────────────
+      ScrollTrigger.batch(".sk-tag, .vp", {
         onEnter: batch => gsap.fromTo(batch,
           { opacity: 0, scale: 0.85, y: 10 },
           { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.03, ease: "back.out(1.5)", overwrite: true }
         ),
-        start: "top 92%",
-        once: true
-      });
-
-      // ── IntersectionObserver: will-reveal ──
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add("revealed"); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
-      requestAnimationFrame(() => {
-        document.querySelectorAll(".will-reveal").forEach(el => io.observe(el));
+        start: "top 92%", once: true
       });
 
       // ── Footer reveal ─────────────
@@ -1094,7 +1093,8 @@
         y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out"
       });
 
-      // ── Refresh on load ─────────────
+      // ── Performance config ─────────────
+      ScrollTrigger.config({ limitCallbacks: true });
       window.addEventListener("load", () => ScrollTrigger.refresh());
     }
 
@@ -1102,68 +1102,57 @@
       const canvas = document.getElementById('hero-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      let w, h, particles = [];
-      const COUNT = 60;
-      const MAX_DIST = 120;
+      let w = 0, h = 0, dpr = 1;
 
       function resize() {
-        const r = window.devicePixelRatio || 1;
-        w = canvas.offsetWidth;
-        h = canvas.offsetHeight;
-        canvas.width = w * r;
-        canvas.height = h * r;
-        ctx.setTransform(r, 0, 0, r, 0, 0);
+        dpr = window.devicePixelRatio || 1;
+        w = canvas.parentElement.offsetWidth;
+        h = canvas.parentElement.offsetHeight;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        ctx.resetTransform();
+        ctx.scale(dpr, dpr);
       }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
 
-      function seed() {
-        particles = [];
-        for (let i = 0; i < COUNT; i++) {
-          particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.7,
-            vy: (Math.random() - 0.5) * 0.7,
-            r: Math.random() * 2 + 0.5,
-          });
-        }
-      }
+      // Geometric shapes (matching Serviços canvas)
+      const shapes = [
+        { cx: 0.80, cy: 0.35, rw: 0.13, rh: 0.42, op: 0.09, rs: -0.0012, rp: 0.3, dax: 0.030, day: 0.018, ds: 0.0018, dp: 0.0 },
+        { cx: 0.18, cy: 0.75, rw: 0.28, rh: 0.09, op: 0.08, rs: 0.0010, rp: 1.1, dax: 0.022, day: 0.015, ds: 0.0015, dp: 1.8 },
+        { cx: 0.14, cy: 0.25, rw: 0.14, rh: 0.14, op: 0.10, rs: -0.0016, rp: 2.4, dax: 0.016, day: 0.020, ds: 0.0022, dp: 3.5 },
+        { cx: 0.50, cy: 0.55, rw: 0.05, rh: 0.50, op: 0.06, rs: 0.0007, rp: 0.9, dax: 0.012, day: 0.010, ds: 0.0012, dp: 2.2 },
+        { cx: 0.72, cy: 0.72, rw: 0.12, rh: 0.12, op: 0.08, rs: 0.0014, rp: 3.8, dax: 0.018, day: 0.016, ds: 0.0019, dp: 4.0 },
+        { cx: 0.45, cy: 0.12, rw: 0.32, rh: 0.07, op: 0.07, rs: -0.0008, rp: 1.6, dax: 0.014, day: 0.011, ds: 0.0014, dp: 1.0 },
+      ];
 
+      let t = 0;
       function draw() {
+        t++;
+        if (!w || !h) { requestAnimationFrame(draw); return; }
+        const rect = canvas.getBoundingClientRect();
+        if (rect.bottom < 0) return;
+        if (rect.top > window.innerHeight) { requestAnimationFrame(draw); return; }
+
         ctx.clearRect(0, 0, w, h);
-        // Lines
-        for (let i = 0; i < COUNT; i++) {
-          for (let j = i + 1; j < COUNT; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < MAX_DIST) {
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = `rgba(18,18,18,${0.06 * (1 - dist / MAX_DIST)})`;
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
-          }
-        }
-        // Dots
-        for (const p of particles) {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(18,18,18,0.08)';
-          ctx.fill();
-        }
+        shapes.forEach(s => {
+          const rot = t * s.rs + s.rp;
+          const drift = t * s.ds + s.dp;
+          const px = s.cx * w + Math.cos(drift) * s.dax * w;
+          const py = s.cy * h + Math.sin(drift * 0.73) * s.day * h;
+          const hw = s.rw * w * 0.5;
+          const hh = s.rh * h * 0.5;
+          ctx.save();
+          ctx.translate(px, py);
+          ctx.rotate(rot);
+          ctx.strokeStyle = `rgba(18,18,18,${s.op})`;
+          ctx.lineWidth = 1.2;
+          ctx.strokeRect(-hw, -hh, hw * 2, hh * 2);
+          ctx.restore();
+        });
         requestAnimationFrame(draw);
       }
-
-      resize();
-      seed();
       draw();
-      window.addEventListener('resize', () => { resize(); seed(); });
     }
 
     // Wait for page.js to set visibility

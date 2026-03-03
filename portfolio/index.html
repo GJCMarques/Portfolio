@@ -119,13 +119,13 @@
 
     /* ── Timeline ────────────────────────── */
     .tl-container { position:relative; max-width:76rem; margin:0 auto; }
-    .tl-line { position:absolute; left:28px; top:0; bottom:0; width:2px; background:rgba(18,18,18,0.08); }
+    .tl-line { position:absolute; left:clamp(5.5rem,8vw,8rem); top:0; bottom:0; width:2px; background:rgba(18,18,18,0.08); }
     .tl-line-fill { position:absolute; top:0; left:0; width:100%; height:0%; background:var(--color-ink); }
-    .tl-dot { width:14px; height:14px; border-radius:50%; background:var(--color-paper); border:2px solid var(--color-ink); position:absolute; left:22px; top:0; z-index:5; transform:scale(0); }
-    .tl-year-badge { position:absolute; left:0; top:0; font-family:var(--font-serif); font-style:italic; font-size:clamp(0.85rem,1vw,1rem); color:rgba(18,18,18,0.25); writing-mode:vertical-rl; text-orientation:mixed; letter-spacing:0.05em; }
-    .tl-entry { position:relative; padding:clamp(4rem,8vh,8rem) 0; padding-left:clamp(4rem,6vw,6rem); }
+    .tl-dot { width:14px; height:14px; border-radius:50%; background:var(--color-paper); border:2px solid var(--color-ink); position:absolute; left:clamp(calc(5.5rem - 6px),calc(8vw - 6px),calc(8rem - 6px)); top:0.35rem; z-index:5; transform:scale(0); }
+    .tl-year { position:absolute; left:0; top:0; width:clamp(4.5rem,7vw,7rem); text-align:right; padding-right:1.25rem; font-family:var(--font-serif); font-style:italic; font-size:clamp(0.9rem,1.1vw,1.15rem); color:rgba(18,18,18,0.55); font-weight:600; line-height:1.4; letter-spacing:0.02em; }
+    .tl-entry { position:relative; padding:clamp(4rem,8vh,8rem) 0; padding-left:clamp(7.5rem,10vw,11rem); }
     .tl-entry:first-child { padding-top:0; }
-    .tl-ghost-num { position:absolute; left:clamp(3rem,5vw,5rem); top:50%; transform:translateY(-50%); font-family:var(--font-serif); font-style:italic; font-weight:300; font-size:clamp(12rem,22vw,28rem); line-height:0.75; color:transparent; -webkit-text-stroke:1px rgba(18,18,18,0.025); pointer-events:none; user-select:none; z-index:0; }
+    .tl-ghost-num { position:absolute; left:clamp(6.5rem,9vw,10rem); top:50%; transform:translateY(-50%); font-family:var(--font-serif); font-style:italic; font-weight:300; font-size:clamp(12rem,22vw,28rem); line-height:0.75; color:transparent; -webkit-text-stroke:1px rgba(18,18,18,0.025); pointer-events:none; user-select:none; z-index:0; }
     .tl-tag { font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.15em; text-transform:uppercase; border:1px solid rgba(18,18,18,0.14); padding:0.28rem 0.65rem; border-radius:100px; color:rgba(18,18,18,0.45); display:inline-block; }
     .tl-divider { height:1px; background:rgba(18,18,18,0.08); margin:1.25rem 0; }
     .tl-meta { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.1em; color:rgba(18,18,18,0.35); }
@@ -134,22 +134,57 @@
 
     @media (max-width: 768px) {
       .tl-line { left:14px; }
-      .tl-dot { left:8px; }
+      .tl-dot { left:8px; width:12px; height:12px; }
+      .tl-year { display:none; }
       .tl-entry { padding-left:clamp(2.5rem,8vw,4rem); }
       .tl-ghost-num { display:none; }
     }
 
     /* ── Archive ──────────────────────────── */
-    .arc-row { position:relative; border-bottom:1px solid rgba(18,18,18,0.07); padding:clamp(1.25rem,2.5vw,2rem) 0; display:flex; align-items:center; gap:clamp(0.75rem,2vw,2.5rem); cursor:default; }
+    .arc-row { position:relative; border-bottom:1px solid rgba(18,18,18,0.07); cursor:pointer; }
+    .arc-header { display:flex; align-items:center; gap:clamp(0.75rem,2vw,2.5rem); padding:clamp(1.4rem,2.5vw,2.2rem) 0; position:relative; }
     .arc-bar { position:absolute; bottom:-1px; left:0; height:1px; width:0; background:var(--color-ink); transition:width 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
     .arc-row:hover .arc-bar { width:100%; }
     .arc-num { font-family:var(--font-mono); font-size:clamp(0.55rem,0.7vw,0.68rem); letter-spacing:0.14em; color:rgba(18,18,18,0.22); flex-shrink:0; min-width:1.75rem; }
     .arc-title { font-family:var(--font-sans); font-weight:700; font-size:clamp(1rem,2.5vw,1.5rem); line-height:1.1; color:var(--color-ink); flex:1; min-width:0; transition:transform 0.42s cubic-bezier(0.25,0.46,0.45,0.94); }
     .arc-row:hover .arc-title { transform:translateX(10px); }
-    .arc-type { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.15em; text-transform:uppercase; border:1px solid rgba(18,18,18,0.13); padding:0.25rem 0.6rem; border-radius:100px; color:rgba(18,18,18,0.4); flex-shrink:0; white-space:nowrap; }
-    .arc-stack { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.08em; color:rgba(18,18,18,0.3); flex-shrink:0; white-space:nowrap; display:none; }
+    .arc-type { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.15em; text-transform:uppercase; border:1px solid rgba(18,18,18,0.22); padding:0.25rem 0.6rem; border-radius:100px; color:rgba(18,18,18,0.6); flex-shrink:0; white-space:nowrap; }
+    .arc-stack { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.08em; color:rgba(18,18,18,0.5); flex-shrink:0; white-space:nowrap; display:none; }
     @media (min-width: 768px) { .arc-stack { display:block; } }
-    .arc-year { font-family:var(--font-mono); font-size:0.55rem; color:rgba(18,18,18,0.25); flex-shrink:0; }
+    .arc-year { font-family:var(--font-mono); font-size:0.6rem; color:rgba(18,18,18,0.5); flex-shrink:0; font-weight:500; }
+    .arc-chevron { flex-shrink:0; width:18px; height:18px; color:rgba(18,18,18,0.3); transition:color 0.3s ease; }
+    .arc-row:hover .arc-chevron { color:rgba(18,18,18,0.6); }
+    .arc-row.is-open .arc-chevron { color:var(--color-ink); }
+
+    /* Accordion body — grid row collapse */
+    .arc-body { display:grid; grid-template-rows:0fr; transition:grid-template-rows 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .arc-row.is-open .arc-body { grid-template-rows:1fr; }
+    .arc-body-inner { overflow:hidden; }
+    .arc-detail { padding:0 0 clamp(1.5rem,3vw,2.5rem) 0; opacity:0; transform:translateY(-8px); transition:opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s; }
+    .arc-row.is-open .arc-detail { opacity:1; transform:translateY(0); }
+    .arc-desc { font-family:var(--font-sans); font-size:clamp(0.85rem,1.1vw,1rem); line-height:1.65; color:rgba(18,18,18,0.65); max-width:42rem; margin-bottom:1.25rem; }
+
+    /* Carousel */
+    .arc-carousel { display:flex; gap:0.75rem; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:0.5rem; margin-bottom:1.25rem; scrollbar-width:thin; scrollbar-color:rgba(18,18,18,0.12) transparent; }
+    .arc-carousel::-webkit-scrollbar { height:4px; }
+    .arc-carousel::-webkit-scrollbar-track { background:transparent; }
+    .arc-carousel::-webkit-scrollbar-thumb { background:rgba(18,18,18,0.12); border-radius:4px; }
+    .arc-slide { scroll-snap-align:start; flex-shrink:0; width:clamp(200px,28vw,320px); aspect-ratio:16/10; background:rgba(18,18,18,0.04); border:1px solid rgba(18,18,18,0.06); border-radius:0.75rem; display:flex; align-items:center; justify-content:center; }
+    .arc-slide span { font-family:var(--font-mono); font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(18,18,18,0.18); }
+
+    /* Tags */
+    .arc-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.25rem; }
+    .arc-tag { font-family:var(--font-mono); font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; border:1px solid rgba(18,18,18,0.12); padding:0.22rem 0.55rem; border-radius:100px; color:rgba(18,18,18,0.45); }
+
+    /* Action buttons */
+    .arc-actions { display:flex; gap:0.6rem; flex-wrap:wrap; }
+    .arc-btn { font-family:var(--font-mono); font-size:0.6rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; padding:0.5rem 1.2rem; border-radius:100px; border:1px solid var(--color-ink); color:var(--color-ink); background:transparent; text-decoration:none; transition:all 0.3s ease; display:inline-flex; align-items:center; gap:0.4rem; cursor:pointer; }
+    .arc-btn:hover { background:var(--color-ink); color:var(--color-paper); }
+    .arc-btn--muted { border-color:rgba(18,18,18,0.18); color:rgba(18,18,18,0.45); }
+    .arc-btn--muted:hover { background:rgba(18,18,18,0.06); color:var(--color-ink); border-color:rgba(18,18,18,0.3); }
+
+    /* Open state bg tint */
+    .arc-row.is-open { background:rgba(18,18,18,0.015); border-radius:0.5rem; margin:0 -1rem; padding:0 1rem; }
 
     /* ── CTA Dome ─────────────────────────── */
     .dome-stage { perspective:900px; perspective-origin:50% 50%; }
@@ -316,6 +351,7 @@
 
         <!-- ─── Entry 1: Cristal Terminal ─── -->
         <div class="tl-entry" data-tl-entry>
+          <div class="tl-year">2025</div>
           <div class="tl-dot" data-tl-dot></div>
           <div class="tl-ghost-num" aria-hidden="true">01</div>
           <div class="relative z-10">
@@ -349,6 +385,7 @@
 
         <!-- ─── Entry 2: Casa do Gi ─── -->
         <div class="tl-entry" data-tl-entry>
+          <div class="tl-year">2025</div>
           <div class="tl-dot" data-tl-dot></div>
           <div class="tl-ghost-num" aria-hidden="true">02</div>
           <div class="relative z-10">
@@ -377,6 +414,7 @@
 
         <!-- ─── Entry 3: ExpoLive ─── -->
         <div class="tl-entry" data-tl-entry>
+          <div class="tl-year">2023–25</div>
           <div class="tl-dot" data-tl-dot></div>
           <div class="tl-ghost-num" aria-hidden="true">03</div>
           <div class="relative z-10">
@@ -420,94 +458,375 @@
 
       <!-- Archive list -->
       <div class="arc-list" style="border-top:1px solid rgba(18,18,18,0.07);">
-        <div class="arc-row reveal-up">
-          <span class="arc-num">01</span>
-          <span class="arc-title">Cristal Terminal</span>
-          <span class="arc-type">Pessoal</span>
-          <span class="arc-stack">Next.js · React · TypeScript</span>
-          <span class="arc-year">2025</span>
-          <div class="arc-bar"></div>
+
+        <!-- 01 — Cristal Terminal -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">01</span>
+            <span class="arc-title">Cristal Terminal</span>
+            <span class="arc-type">Pessoal</span>
+            <span class="arc-stack">Next.js · React · TypeScript</span>
+            <span class="arc-year">2025</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">Terminal financeiro Bloomberg-inspired com dados em tempo real. Plataforma completa de análise financeira com motor de cálculo em C++/WASM e assistente IA via Ollama. Em desenvolvimento activo.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">Next.js 15</span>
+                  <span class="arc-tag">React 19</span>
+                  <span class="arc-tag">TypeScript</span>
+                  <span class="arc-tag">C++ / WASM</span>
+                  <span class="arc-tag">Python</span>
+                  <span class="arc-tag">Ollama AI</span>
+                </div>
+                <div class="arc-actions">
+                  <span class="arc-btn arc-btn--muted">Em Desenvolvimento</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">02</span>
-          <span class="arc-title">Casa do Gi</span>
-          <span class="arc-type">Comercial</span>
-          <span class="arc-stack">PHP · MySQL · IfthenPay</span>
-          <span class="arc-year">2025</span>
-          <div class="arc-bar"></div>
+
+        <!-- 02 — Casa do Gi -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">02</span>
+            <span class="arc-title">Casa do Gi</span>
+            <span class="arc-type">Comercial</span>
+            <span class="arc-stack">PHP · MySQL · IfthenPay</span>
+            <span class="arc-year">2025</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">E-commerce para alojamento local com sistema de reservas e pagamentos integrados via IfthenPay. Design focado em conversão e experiência de reserva simplificada.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">PHP</span>
+                  <span class="arc-tag">MySQL</span>
+                  <span class="arc-tag">IfthenPay</span>
+                  <span class="arc-tag">Tailwind CSS</span>
+                </div>
+                <div class="arc-actions">
+                  <a href="#" class="arc-btn">Ver Website ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">03</span>
-          <span class="arc-title">Eletro 2000 v2</span>
-          <span class="arc-type">Académico</span>
-          <span class="arc-stack">Laravel · React · Gemini AI</span>
-          <span class="arc-year">2025</span>
-          <div class="arc-bar"></div>
+
+        <!-- 03 — Eletro 2000 v2 -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">03</span>
+            <span class="arc-title">Eletro 2000 v2</span>
+            <span class="arc-type">Académico</span>
+            <span class="arc-stack">Laravel · React · Gemini AI</span>
+            <span class="arc-year">2025</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">Plataforma de gestão de reparações electrónicas com diagnóstico assistido por IA. Sistema completo de tracking de reparações, inventário e facturação.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">Laravel</span>
+                  <span class="arc-tag">React</span>
+                  <span class="arc-tag">Gemini AI</span>
+                </div>
+                <div class="arc-actions">
+                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">04</span>
-          <span class="arc-title">Cristal Capital</span>
-          <span class="arc-type">Académico</span>
-          <span class="arc-stack">Laravel · Inertia · Docker</span>
-          <span class="arc-year">2025</span>
-          <div class="arc-bar"></div>
+
+        <!-- 04 — Cristal Capital -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">04</span>
+            <span class="arc-title">Cristal Capital</span>
+            <span class="arc-type">Académico</span>
+            <span class="arc-stack">Laravel · Inertia · Docker</span>
+            <span class="arc-year">2025</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">PAP — plataforma de investimentos simulados com portfólios virtuais, cotações em tempo real e análise de performance. Projecto de Aptidão Profissional.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">Laravel</span>
+                  <span class="arc-tag">Inertia.js</span>
+                  <span class="arc-tag">Docker</span>
+                </div>
+                <div class="arc-actions">
+                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">05</span>
-          <span class="arc-title">Volunta</span>
-          <span class="arc-type">Institucional</span>
-          <span class="arc-stack">PHP · Laravel · MySQL</span>
-          <span class="arc-year">2025</span>
-          <div class="arc-bar"></div>
+
+        <!-- 05 — Volunta -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">05</span>
+            <span class="arc-title">Volunta</span>
+            <span class="arc-type">Institucional</span>
+            <span class="arc-stack">PHP · Laravel · MySQL</span>
+            <span class="arc-year">2025</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">Plataforma de voluntariado institucional para gestão de voluntários, eventos e horas de serviço. Painel administrativo com relatórios e certificados automáticos.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">PHP</span>
+                  <span class="arc-tag">Laravel</span>
+                  <span class="arc-tag">MySQL</span>
+                </div>
+                <div class="arc-actions">
+                  <span class="arc-btn arc-btn--muted">Projecto Institucional</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">06</span>
-          <span class="arc-title">Estudas Comigo</span>
-          <span class="arc-type">Comercial</span>
-          <span class="arc-stack">HTML · Tailwind · JS</span>
-          <span class="arc-year">2024</span>
-          <div class="arc-bar"></div>
+
+        <!-- 06 — Estudas Comigo -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">06</span>
+            <span class="arc-title">Estudas Comigo</span>
+            <span class="arc-type">Comercial</span>
+            <span class="arc-stack">HTML · Tailwind · JS</span>
+            <span class="arc-year">2024</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">Plataforma de explicações online que liga estudantes a explicadores qualificados. Sistema de pesquisa, agendamento e perfis de explicadores.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">HTML</span>
+                  <span class="arc-tag">Tailwind CSS</span>
+                  <span class="arc-tag">JavaScript</span>
+                </div>
+                <div class="arc-actions">
+                  <a href="#" class="arc-btn">Ver Website ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">07</span>
-          <span class="arc-title">GT Móvel</span>
-          <span class="arc-type">Comercial</span>
-          <span class="arc-stack">HTML · CSS · JS</span>
-          <span class="arc-year">2024</span>
-          <div class="arc-bar"></div>
+
+        <!-- 07 — GT Móvel -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">07</span>
+            <span class="arc-title">GT Móvel</span>
+            <span class="arc-type">Comercial</span>
+            <span class="arc-stack">HTML · CSS · JS</span>
+            <span class="arc-year">2024</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">Website comercial para empresa de reparação de telemóveis. Design focado em confiança, rapidez de contacto e apresentação de serviços.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">HTML</span>
+                  <span class="arc-tag">CSS</span>
+                  <span class="arc-tag">JavaScript</span>
+                </div>
+                <div class="arc-actions">
+                  <a href="#" class="arc-btn">Ver Website ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">08</span>
-          <span class="arc-title">Hugo Brito</span>
-          <span class="arc-type">Académico</span>
-          <span class="arc-stack">HTML · GSAP · Tailwind</span>
-          <span class="arc-year">2024</span>
-          <div class="arc-bar"></div>
+
+        <!-- 08 — Hugo Brito -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">08</span>
+            <span class="arc-title">Hugo Brito</span>
+            <span class="arc-type">Académico</span>
+            <span class="arc-stack">HTML · GSAP · Tailwind</span>
+            <span class="arc-year">2024</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">Portfólio pessoal para fotógrafo com galeria imersiva, transições cinematográficas e animações GSAP. Foco na apresentação visual do trabalho fotográfico.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">HTML</span>
+                  <span class="arc-tag">GSAP</span>
+                  <span class="arc-tag">Tailwind CSS</span>
+                </div>
+                <div class="arc-actions">
+                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">09</span>
-          <span class="arc-title">Tec N' Cool</span>
-          <span class="arc-type">Institucional</span>
-          <span class="arc-stack">HTML · CSS · JS</span>
-          <span class="arc-year">2024</span>
-          <div class="arc-bar"></div>
+
+        <!-- 09 — Tec N' Cool -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">09</span>
+            <span class="arc-title">Tec N' Cool</span>
+            <span class="arc-type">Institucional</span>
+            <span class="arc-stack">HTML · CSS · JS</span>
+            <span class="arc-year">2024</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">Website institucional para escola profissional. Apresentação de cursos, notícias, calendário escolar e informações para alunos e encarregados de educação.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">HTML</span>
+                  <span class="arc-tag">CSS</span>
+                  <span class="arc-tag">JavaScript</span>
+                </div>
+                <div class="arc-actions">
+                  <span class="arc-btn arc-btn--muted">Projecto Institucional</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">10</span>
-          <span class="arc-title">ExpoLive</span>
-          <span class="arc-type">Académico</span>
-          <span class="arc-stack">PHP · MySQL · IA</span>
-          <span class="arc-year">2023–25</span>
-          <div class="arc-bar"></div>
+
+        <!-- 10 — ExpoLive -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">10</span>
+            <span class="arc-title">ExpoLive</span>
+            <span class="arc-type">Académico</span>
+            <span class="arc-stack">PHP · MySQL · IA</span>
+            <span class="arc-year">2023–25</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">Plataforma de exposições com streaming ao vivo e curadoria assistida por IA. Sistema de gestão de eventos, galerias virtuais e transmissão em directo.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">PHP</span>
+                  <span class="arc-tag">MySQL</span>
+                  <span class="arc-tag">IA</span>
+                  <span class="arc-tag">Streaming</span>
+                </div>
+                <div class="arc-actions">
+                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arc-row reveal-up">
-          <span class="arc-num">11</span>
-          <span class="arc-title">Wise Wallet</span>
-          <span class="arc-type">Académico</span>
-          <span class="arc-stack">PHP · Chart.js · Ollama</span>
-          <span class="arc-year">2024</span>
-          <div class="arc-bar"></div>
+
+        <!-- 11 — Wise Wallet -->
+        <div class="arc-row reveal-up" data-arc>
+          <div class="arc-header">
+            <span class="arc-num">11</span>
+            <span class="arc-title">Wise Wallet</span>
+            <span class="arc-type">Académico</span>
+            <span class="arc-stack">PHP · Chart.js · Ollama</span>
+            <span class="arc-year">2024</span>
+            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="arc-bar"></div>
+          </div>
+          <div class="arc-body">
+            <div class="arc-body-inner">
+              <div class="arc-detail">
+                <p class="arc-desc">Gestor financeiro pessoal com análise de despesas assistida por IA. Dashboards interactivos, categorização automática e previsões financeiras via Ollama.</p>
+                <div class="arc-carousel">
+                  <div class="arc-slide"><span>Screenshot 1</span></div>
+                  <div class="arc-slide"><span>Screenshot 2</span></div>
+                  <div class="arc-slide"><span>Screenshot 3</span></div>
+                </div>
+                <div class="arc-tags">
+                  <span class="arc-tag">PHP</span>
+                  <span class="arc-tag">Chart.js</span>
+                  <span class="arc-tag">Ollama</span>
+                </div>
+                <div class="arc-actions">
+                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
