@@ -172,114 +172,13 @@ if (navContainer) {
   });
 }
 
-// --- Three.js Shader Animation ---
-const initShader = () => {
-  const container = document.getElementById('canvas-container');
-  if (!container) return;
 
-  const vertexShader = `
-    void main() {
-      gl_Position = vec4( position, 1.0 );
-    }
-  `;
-
-  const fragmentShader = `
-    #define TWO_PI 6.2831853072
-    #define PI 3.14159265359
-
-    precision highp float;
-    uniform vec2 resolution;
-    uniform float time;
-
-    void main(void) {
-      vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
-      float t = time*0.05;
-      float lineWidth = 0.002;
-
-      // Technicolor / Vibrant Palette for contrast against B&W UI
-      // Cyan, Magenta, Yellow, Red
-      vec3 color1 = vec3(0.0, 1.0, 1.0); // Cyan
-      vec3 color2 = vec3(1.0, 0.0, 1.0); // Magenta
-      vec3 color3 = vec3(1.0, 1.0, 0.0); // Yellow
-      
-      vec3 color = vec3(0.92, 0.91, 0.89); // Paper background base
-
-      for(int j = 0; j < 3; j++){
-        for(int i=0; i < 5; i++){
-          float d = abs(fract(t - 0.01*float(j)+float(i)*0.01)*5.0 - length(uv) + mod(uv.x+uv.y, 0.2));
-          float intensity = lineWidth*float(i*i) / d;
-          
-          if (mod(float(j), 3.0) == 0.0) {
-             color -= (1.0 - color1) * intensity * 0.8; 
-          } else if (mod(float(j), 3.0) == 1.0) {
-             color -= (1.0 - color2) * intensity * 0.8;
-          } else {
-             color -= (1.0 - color3) * intensity * 0.8;
-          }
-        }
-      }
-      
-      gl_FragColor = vec4(color, 1.0);
-    }
-  `;
-
-  const camera = new THREE.Camera();
-  camera.position.z = 1;
-
-  const scene = new THREE.Scene();
-  const geometry = new THREE.PlaneGeometry(2, 2);
-
-  const uniforms = {
-    time: { type: "f", value: 1.0 },
-    resolution: { type: "v2", value: new THREE.Vector2() },
-  };
-
-  const material = new THREE.ShaderMaterial({
-    uniforms: uniforms,
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader,
-  });
-
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  container.appendChild(renderer.domElement);
-
-  const onWindowResize = () => {
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-    renderer.setSize(width, height);
-    uniforms.resolution.value.x = renderer.domElement.width;
-    uniforms.resolution.value.y = renderer.domElement.height;
-  };
-
-  onWindowResize();
-  window.addEventListener("resize", onWindowResize, false);
-
-  let shaderVisible = true;
-  const heroEl = document.getElementById('hero');
-  if (heroEl && 'IntersectionObserver' in window) {
-    new IntersectionObserver(([e]) => { shaderVisible = e.isIntersecting; }, { threshold: 0 }).observe(heroEl);
-  }
-
-  const animate = () => {
-    requestAnimationFrame(animate);
-    if (!shaderVisible) return;
-    uniforms.time.value += 0.04;
-    renderer.render(scene, camera);
-  };
-
-  animate();
-};
 
 // --- GSAP Animations ---
 
 // Anti-FOUC: Pre-set all animated elements to their "from" states
 // so nothing flashes when the body becomes visible.
 gsap.set("#navbar", { y: -40, opacity: 0, filter: "blur(10px)" });
-gsap.set("#canvas-container", { opacity: 0 });
 gsap.set(".bg-gradient-to-t", { opacity: 0 });
 gsap.set(".hero-text-part", { y: 40, opacity: 0, filter: "blur(6px)" });
 gsap.set("#globe-canvas", { opacity: 0, scale: 0.85 });
@@ -288,7 +187,6 @@ gsap.set("#globe-canvas", { opacity: 0, scale: 0.85 });
 initLoader(() => {
   // Heavy initializations moved here to prevent blocking the loader loop
   requestAnimationFrame(() => {
-    try { initShader(); } catch (e) { console.warn('[Shader] WebGL unavailable:', e.message); }
     initGlobe();
   });
 
@@ -297,12 +195,7 @@ initLoader(() => {
   // Body reveal — loader has already faded or is morphing out, so this is instantaneous
   tl.set("body", { autoAlpha: 1 });
 
-  // Hero canvas FAST reveal (during morph out)
-  tl.fromTo("#canvas-container",
-    { opacity: 0 },
-    { opacity: 1, duration: 2.0, ease: "power2.out" },
-    0
-  );
+
 
   // Globe canvas FAST reveal (during morph out)
   tl.fromTo("#globe-canvas",
@@ -340,35 +233,9 @@ initLoader(() => {
   );
 });
 
-// --- Hero ↔ Portfolio snap magnet ---
-// If scroll stops mid-spacer, snaps to either hero (0) or portfolio (1).
-ScrollTrigger.create({
-  trigger: ".hero-spacer",
-  start: "top top",
-  end: "bottom top",
-  snap: {
-    snapTo: [0, 1],
-    ease: "power2.inOut",
-    duration: { min: 0.35, max: 0.65 },
-    delay: 0.05,
-  },
-});
 
-// --- Hero: Curtain Reveal Effect ---
-// Hero is position:fixed (z-0). Portfolio (z-20, bg-paper) slides over it naturally.
-// A 100dvh spacer div before portfolio creates the scroll space.
-// Hero content fades out gently as portfolio covers it.
-gsap.timeline({
-  scrollTrigger: {
-    trigger: ".hero-spacer",
-    start: "top top",
-    end: "bottom top",
-    scrub: 1,
-  }
-})
-  .to(".hero-text-part", { opacity: 0, ease: "none" }, 0)
-  .to("#globe-canvas", { opacity: 0, scale: 0.96, ease: "none" }, 0)
-  .to("#canvas-container, .bg-gradient-to-t", { opacity: 0.3, ease: "none" }, 0);
+
+
 
 
 // ── Portfolio — Scroll Animations ────────────────────────────────────────────
