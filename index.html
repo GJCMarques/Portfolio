@@ -859,6 +859,27 @@
     <!-- Background layers -->
     <div class="absolute inset-0 bg-gradient-to-t from-paper via-paper/60 to-transparent z-10"></div>
 
+    <!-- Floating Wireframe Components -->
+    <div class="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
+      <div class="wf-el wf-rect--strong" style="left:72%;top:15%;width:180px;height:140px;transform:rotate(-8deg);">
+        <span class="wf-el wf-dot" style="left:8px;top:8px;"></span>
+        <span class="wf-el wf-bar" style="left:8px;top:22px;width:54px;"></span>
+        <span class="wf-el wf-bar" style="left:8px;top:34px;width:43px;"></span>
+      </div>
+      <div class="wf-el wf-rect" style="left:10%;top:20%;width:120px;height:90px;transform:rotate(5deg);">
+        <span class="wf-el wf-bar" style="left:8px;top:22px;width:57px;"></span>
+      </div>
+      <div class="wf-el wf-rect" style="left:55%;top:65%;width:160px;height:110px;transform:rotate(-4deg);">
+        <span class="wf-el wf-bar" style="left:8px;top:22px;width:43px;"></span>
+      </div>
+      <div class="wf-el wf-rect" style="left:85%;top:50%;width:80px;height:120px;transform:rotate(3deg);"></div>
+      <div class="wf-el wf-circle" style="left:25%;top:35%;width:30px;height:30px;"></div>
+      <div class="wf-el wf-circle" style="left:80%;top:20%;width:20px;height:20px;"></div>
+      <div class="wf-el wf-circle" style="left:15%;top:75%;width:25px;height:25px;"></div>
+      <span class="wf-el wf-line" style="left:30%;top:45%;width:120px;transform:rotate(12deg);"></span>
+      <span class="wf-el wf-line" style="left:65%;top:25%;width:100px;transform:rotate(-15deg);"></span>
+    </div>
+
     <!-- Globe — responsive sizing & position -->
     <div
       class="absolute top-1/2 -translate-y-1/2 z-30 opacity-15 md:opacity-100 pointer-events-none md:pointer-events-auto"
@@ -970,8 +991,7 @@
             </div>
             <span class="sc-status">Em Desenvolvimento</span>
           </div>
-          <span class="sc-initial">C</span>
-          <span class="sc-whisper">QUANT ENGINE // WASM</span>
+
         </div>
         <!-- Panel 02 -->
         <div class="sc-panel" data-panel="1">
@@ -995,8 +1015,7 @@
             </div>
             <span class="sc-status">Em Produção</span>
           </div>
-          <span class="sc-initial">G</span>
-          <span class="sc-whisper">HMAC-SHA256 // IFTHEN</span>
+
         </div>
         <!-- Panel 03 -->
         <div class="sc-panel" data-panel="2">
@@ -1020,8 +1039,7 @@
             </div>
             <span class="sc-status">Concluído</span>
           </div>
-          <span class="sc-initial">X</span>
-          <span class="sc-whisper">30+ PAGES // 2 YEARS</span>
+
         </div>
       </div>
       <div class="sc-progress">
@@ -1560,7 +1578,7 @@
                 padding: clamp(2rem, 3.5vw, 4rem);
                 background: #ebe9e4;
               ">
-            <span class="proj-bg-num" aria-hidden="true">03</span>
+
             <span class="proj-item font-mono" style="
                   font-size: 0.58rem;
                   letter-spacing: 0.32em;
@@ -1636,7 +1654,7 @@
                 padding: clamp(2rem, 3.5vw, 4rem);
                 background: #ebe9e4;
               ">
-            <span class="proj-bg-num" aria-hidden="true">04</span>
+
             <span class="proj-item font-mono" style="
                   font-size: 0.58rem;
                   letter-spacing: 0.32em;
@@ -1863,8 +1881,7 @@
     <div class="serv-bg-wrap" aria-hidden="true">
       <div class="serv-grid-bg" id="serv-grid-bg"></div>
       <div class="serv-hatch-bg"></div>
-      <!-- Ghost watermark number -->
-      <div class="serv-ghost-num" id="serv-ghost" style="right: -1rem; bottom: -3rem">S</div>
+
       <!-- Outer rotating square annotation (rotation set via GSAP) -->
       <div class="serv-geo" id="serv-geo-a" style="
           top: 2.5rem; right: 2.5rem;

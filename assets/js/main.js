@@ -441,6 +441,30 @@ gsap.from(".cta-anim", {
   ease: "power3.out"
 });
 
+// --- Floating Wireframes ---
+const initFloatingWireframes = () => {
+  // Floating animation for wireframe components in Hero
+  document.querySelectorAll(".wf-el:not(.wf-dot):not(.wf-bar)").forEach(el => {
+    gsap.to(el, {
+      x: `random(-20, 20)`,
+      y: `random(-20, 20)`,
+      rotation: `random(-10, 10)`,
+      duration: `random(7, 12)`,
+      repeat: -1, yoyo: true, ease: "sine.inOut"
+    });
+  });
+  // Individual drift for lines
+  document.querySelectorAll(".wf-line").forEach(el => {
+    gsap.to(el, {
+      rotation: "+=4",
+      duration: `random(8, 15)`,
+      repeat: -1, yoyo: true, ease: "sine.inOut"
+    });
+  });
+};
+
+initFloatingWireframes();
+
 // --- Pinned Showcase (Featured Projects) ---
 const initPinnedShowcase = () => {
   const scSection = document.getElementById("pf-showcase");
@@ -498,13 +522,7 @@ const initPinnedShowcase = () => {
       );
     }
 
-    if (nextI) {
-      masterTL.fromTo(nextI,
-        { scale: 0.85, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" },
-        i + 0.45
-      );
-    }
+
   }
 
   // Update dots and view button link

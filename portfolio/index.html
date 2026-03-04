@@ -667,6 +667,8 @@
         object-fit: cover;
         transition: transform 1.2s cubic-bezier(.25, .46, .45, .94), filter 0.8s ease;
         filter: grayscale(100%) brightness(0.72) saturate(0.85);
+        backface-visibility: hidden;
+        transform: translateZ(0);
     }
 
     .eg-card:hover .eg-img {
@@ -928,6 +930,9 @@
         transition: transform .3s cubic-bezier(.25, .46, .45, .94), box-shadow .3s;
         z-index: 50;
         text-decoration: none;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
     }
 
     .cta-btn:hover {
@@ -971,6 +976,8 @@
         position: absolute;
         transform-style: preserve-3d;
         backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        pointer-events: none;
     }
 
     .dome-tile img {
@@ -979,6 +986,16 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        transition: filter 0.8s cubic-bezier(.25, .46, .45, .94);
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    .dome-stage.is-dragging .dome-tile img {
+        filter: grayscale(0%) brightness(1);
     }
 
     /* ══ PROJECT PAGE ══ */
@@ -1257,17 +1274,9 @@
         <span class="wf-el wf-dot" style="left:36%;top:25%;"></span>
         <span class="wf-el wf-dot" style="left:64%;top:53%;"></span>
         <span class="wf-el wf-text" style="left:42%;top:89%;">header</span>
-        <span class="wf-el wf-text" style="left:79%;top:36%;">nav</span>
-        <span class="wf-el wf-text" style="left:49%;top:15%;">hero</span>
-        <span class="wf-el wf-text" style="left:37%;top:12%;">grid</span>
-        <span class="wf-el wf-text" style="left:48%;top:59%;">card</span>
-        <span class="wf-el wf-text" style="left:42%;top:16%;">footer</span>
-        <span class="wf-el wf-text" style="left:35%;top:80%;">sidebar</span>
-        <span class="wf-el wf-text" style="left:48%;top:35%;">modal</span>
+
       </div>
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
-        <span class="hero-ghost" style="font-size:clamp(20vw,28vw,38vw)">Portfolio</span>
-      </div>
+
       <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none"
         style="top:clamp(7.5rem,11vh,10.5rem);left:clamp(1.5rem,5vw,6rem);opacity:0;">
         <div class="crosshair-mark text-ink"></div><span class="t-label">REF: MON-PF-001 / 2026</span>
@@ -1462,9 +1471,7 @@
               <div class="eg-color-overlay"
                 style="background:linear-gradient(155deg,#0e0e14,#1a1a28);opacity:0.4;mix-blend-mode:multiply;"></div>
               <div class="eg-grid-pattern"></div>
-              <span class="eg-initial">H</span>
-              <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2024</span></div>
-              <span class="eg-whisper">LUXURY // GSAP</span>
+
               <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg></div>
@@ -1568,9 +1575,7 @@
               <div class="eg-color-overlay"
                 style="background:linear-gradient(135deg,#0a0e17,#1a1f3a);opacity:0.4;mix-blend-mode:multiply;"></div>
 
-              <span class="eg-initial">C</span>
-              <div class="eg-badge-row"><span class="eg-badge">Pessoal</span><span class="eg-year">2025</span></div>
-              <span class="eg-whisper">QUANT ENGINE // WASM</span>
+
               <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg></div>
@@ -1671,7 +1676,8 @@
         <div class="cta-chevron-line" style="top:94.28571428571428%;"></div>
         <div class="cta-chevron-line" style="top:97.14285714285714%;"></div>
       </div>
-      <div class="dome-stage absolute inset-0 flex items-center justify-center" id="dome-stage" aria-hidden="true">
+      <div class="dome-stage absolute inset-0 flex items-center justify-center" id="dome-stage" aria-hidden="true"
+        style="z-index: 5; cursor: grab;">
         <div class="dome-sphere" id="dome-sphere" style="width:1px;height:1px;"></div>
       </div>
       <div class="absolute inset-0 z-20 pointer-events-none"
@@ -1680,7 +1686,8 @@
         style="background:linear-gradient(to bottom,var(--color-paper),transparent);"></div>
       <div class="absolute bottom-0 left-0 right-0 h-40 z-20 pointer-events-none"
         style="background:linear-gradient(to top,var(--color-paper),transparent);"></div>
-      <div class="relative z-40 text-center flex flex-col items-center" style="padding:0 clamp(1.5rem,5vw,4rem);">
+      <div class="relative text-center flex flex-col items-center"
+        style="padding:0 clamp(1.5rem,5vw,4rem); isolation: isolate; z-index: 100;">
         <h2 class="font-serif italic reveal-up"
           style="font-size:clamp(2.8rem,7vw,7rem);line-height:0.88;letter-spacing:-0.03em;margin-bottom:1.5rem;">O
           pr&oacute;ximo<br>&eacute; o seu.</h2>
@@ -1798,7 +1805,7 @@
         heroTL.to("#hero-desc", { opacity: 1, duration: 1.2 }, 0.75);
         heroTL.to(["#hero-ref-tl", "#hero-ref-tr"], { opacity: 1, y: 0, duration: 1, stagger: 0.12, ease: "power3.out" }, 1.05);
         heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.55);
-        gsap.from(".hero-ghost", { opacity: 0, y: 60, scale: 0.92, duration: 2.5, ease: "power3.out" });
+
 
         // Wireframe blueprint entrance
         gsap.from(".wf-rect, .wf-rect--strong", { opacity: 0, scale: 0.85, duration: 2, stagger: 0.08, ease: "power3.out", delay: 0.4 });
@@ -1806,7 +1813,23 @@
         gsap.from(".wf-line", { scaleX: 0, opacity: 0, duration: 1.5, stagger: 0.05, ease: "power3.out", delay: 0.5 });
         gsap.from(".wf-dot", { opacity: 0, scale: 0, duration: 1.2, stagger: 0.03, ease: "back.out(2)", delay: 0.8 });
         gsap.from(".wf-bar", { scaleX: 0, opacity: 0, duration: 1.8, stagger: 0.06, ease: "power3.out", delay: 0.7, transformOrigin: "left" });
-        gsap.from(".wf-text", { opacity: 0, x: -10, duration: 1.4, stagger: 0.08, ease: "power3.out", delay: 0.9 });
+        // wf-text labels removed per user request
+
+        // Floating animation for wireframe components
+        document.querySelectorAll(".wf-rect, .wf-rect--strong, .wf-circle").forEach(el => {
+          gsap.to(el, {
+            x: `random(-15, 15)`,
+            y: `random(-15, 15)`,
+            rotation: `random(-8, 8)`,
+            duration: `random(6, 12)`,
+            repeat: -1, yoyo: true, ease: "sine.inOut"
+          });
+        });
+        gsap.to(".wf-line", {
+          rotation: "+=3",
+          duration: `random(8, 14)`,
+          repeat: -1, yoyo: true, ease: "sine.inOut"
+        });
 
         // Pinned showcase removed per user request
 
@@ -1885,19 +1908,19 @@
       const sphere = document.getElementById("dome-sphere");
       if (!stage || !sphere) return;
       const N = 20, PHI = Math.PI * (Math.sqrt(5) - 1);
-      const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
-      const tW = Math.max(80, radius * 0.42), tH = tW * 0.65;
+      const radius = Math.min(window.innerWidth, window.innerHeight) * 0.55;
+      const tW = Math.max(90, radius * 0.38), tH = tW * 0.65;
       const imgs = [
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=300&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=300&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=300&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1547658719-da2b51169166?w=300&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=70&fit=crop",
+        "https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&q=70&fit=crop",
       ];
       const tiles = [];
       for (let i = 0; i < N; i++) {
@@ -1908,22 +1931,64 @@
         tile.style.cssText = `width:${tW}px;height:${tH}px;left:${-tW / 2}px;top:${-tH / 2}px;`;
         const im = document.createElement("img");
         im.src = imgs[i % imgs.length]; im.alt = ""; im.loading = "lazy";
+        im.draggable = false;
         tile.appendChild(im); sphere.appendChild(tile);
         tiles.push({ el: tile, x: x * radius, y: y * radius, z: z * radius });
       }
-      let rotY = 0, rotX = 0, tRY = 0, tRX = 0, auto = true;
-      stage.addEventListener("mousemove", e => { const r = stage.getBoundingClientRect(); tRY = ((e.clientX - r.left) / r.width - .5) * .8; tRX = -((e.clientY - r.top) / r.height - .5) * .4; auto = false; });
-      stage.addEventListener("mouseleave", () => { auto = true; });
+      let rotY = 0, rotX = 0, tRY = 0, tRX = 0, auto = true, dragging = false, lastX, lastY;
+
+      const handleStart = (clientX, clientY) => {
+        dragging = true; lastX = clientX; lastY = clientY; auto = false;
+        stage.style.cursor = "grabbing";
+        stage.classList.add("is-dragging");
+      };
+
+      const ctaSection = document.getElementById("pf-cta");
+      ctaSection.addEventListener("mousedown", (e) => {
+        if (e.target.closest(".cta-btn")) return;
+        handleStart(e.clientX, e.clientY);
+      });
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - lastX, dy = e.clientY - lastY;
+        tRY += dx * 0.006; tRX -= dy * 0.004;
+        lastX = e.clientX; lastY = e.clientY;
+      });
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false; auto = true;
+        stage.style.cursor = "grab";
+        stage.classList.remove("is-dragging");
+        setTimeout(() => { if (!dragging) tRX = 0; }, 1200);
+      });
+
+      // Touch
+      ctaSection.addEventListener("touchstart", (e) => {
+        if (e.touches.length !== 1 || e.target.closest(".cta-btn")) return;
+        handleStart(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+      window.addEventListener("touchmove", (e) => {
+        if (!dragging || e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - lastX, dy = e.touches[0].clientY - lastY;
+        tRY += dx * 0.006; tRX -= dy * 0.004;
+        lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
+      }, { passive: true });
+      window.addEventListener("touchend", () => {
+        if (!dragging) return;
+        dragging = false; auto = true;
+        stage.classList.remove("is-dragging");
+      });
+
       let raf;
       function render() {
-        if (auto) { tRY += .002; tRX *= .98; }
-        rotY += (tRY - rotY) * .04; rotX += (tRX - rotX) * .04;
+        if (auto) { tRY += 0.0018; tRX *= 0.98; }
+        rotY += (tRY - rotY) * 0.065; rotX += (tRX - rotX) * 0.065;
         tiles.forEach(t => {
           const cY = Math.cos(rotY), sY = Math.sin(rotY), cX = Math.cos(rotX), sX = Math.sin(rotX);
           let x1 = t.x * cY + t.z * sY, z1 = t.z * cY - t.x * sY, y1 = t.y * cX - z1 * sX, z2 = z1 * cX + t.y * sX;
-          const sc = 900 / (900 + z2), op = Math.max(.15, (z2 + radius) / (2 * radius));
+          const sc = 900 / (900 + z2), op = Math.max(0.12, (z2 + radius) / (2 * radius));
           t.el.style.transform = `translate3d(${x1}px,${y1}px,${z2}px) scale(${sc})`;
-          t.el.style.opacity = op; t.el.style.zIndex = Math.round(z2 + radius);
+          t.el.style.opacity = op;
         });
         raf = requestAnimationFrame(render);
       }
