@@ -4,8 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Portfólio Monrion — projectos de design digital, branding e desenvolvimento web feitos em Porto, Portugal." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -21,67 +19,84 @@
     tailwind.config = {
       theme: {
         extend: {
-          colors: { paper: "#EBE9E4", ink: "#121212", silver: "#8C8C8C", carbon: "#333333" },
+          colors: {
+            paper: "#EBE9E4",
+            ink: "#121212",
+            silver: "#8C8C8C",
+            carbon: "#333333",
+          },
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', "sans-serif"],
             serif: ['"Cormorant Garamond"', "serif"],
             mono: ['"IBM Plex Mono"', "monospace"],
           },
-          borderRadius: { "2xl": "2rem", "3xl": "3rem" },
+          borderRadius: {
+            "2xl": "2rem",
+            "3xl": "3rem",
+          },
         },
       },
     };
   </script>
-  <script
-    type="importmap">{"imports":{"gsap":"https://esm.sh/gsap@3.12.5","gsap/ScrollTrigger":"https://esm.sh/gsap@3.12.5/ScrollTrigger","lucide":"https://esm.sh/lucide@0.344.0"}}</script>
 
+  <script type="importmap">
+      {
+        "imports": {
+          "gsap": "https://esm.sh/gsap@3.12.5",
+          "gsap/ScrollTrigger": "https://esm.sh/gsap@3.12.5/ScrollTrigger",
+          "lucide": "https://esm.sh/lucide@0.344.0"
+        }
+      }
+    </script>
 
   <style type="text/tailwindcss">
     :root {
         --bg-color: #ebe9e4;
         --color-paper: #ebe9e4;
         --color-ink: #121212;
-        --color-silver: #8c8c8c;
+        --color-carbon: #333333;
         --font-sans: "Plus Jakarta Sans", sans-serif;
         --font-serif: "Cormorant Garamond", serif;
         --font-mono: "IBM Plex Mono", monospace;
-    }
+      }
 
-    body {
-        background: var(--bg-color);
+      body {
+        background-color: var(--bg-color);
         color: var(--color-ink);
         font-family: var(--font-sans);
         overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
         visibility: hidden;
-    }
+      }
 
-    .noise-overlay {
+      .noise-overlay {
         position: fixed;
-        inset: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         pointer-events: none;
         z-index: 9999;
         opacity: 0.05;
         filter: url(#noiseFilter);
         mix-blend-mode: overlay;
-    }
+      }
 
-    /* Navbar */
-    #navbar {
-        transition: background-color .5s, border-color .5s, backdrop-filter .5s, box-shadow .5s, padding .5s;
+      #navbar {
+        transition: background-color 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.5s ease, padding 0.5s ease;
         border: 1px solid transparent;
-    }
+      }
 
-    #navbar.scrolled {
-        background: rgba(235, 233, 228, 0.85);
+      #navbar.scrolled {
+        background-color: rgba(235, 233, 228, 0.85);
         backdrop-filter: blur(16px);
         border-color: rgba(18, 18, 18, 0.08);
         box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
         padding-top: 0.55rem;
         padding-bottom: 0.55rem;
-    }
+      }
 
-    .nav-link {
+      .nav-link {
         font-family: var(--font-mono);
         font-size: clamp(0.7rem, 0.85vw, 0.95rem);
         font-weight: 500;
@@ -91,996 +106,114 @@
         text-decoration: none !important;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-    }
+      }
 
-    .nav-link::before {
+      .nav-link::before, .nav-link::after {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 1px;
-        background: var(--color-ink);
-        transform: scaleX(0);
-        transform-origin: right;
-        transition: transform .4s cubic-bezier(.25, .46, .45, .94);
-    }
-
-    .nav-link::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: var(--color-ink);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform .4s cubic-bezier(.25, .46, .45, .94);
-    }
-
-    .nav-link:hover::before,
-    .nav-link.active::before {
-        transform: scaleX(1);
-        transform-origin: left;
-    }
-
-    .nav-link:hover::after,
-    .nav-link.active::after {
-        transform: scaleX(1);
-        transform-origin: right;
-    }
-
-    .logo-link {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .logo-container {
-        width: clamp(2.5rem, 3.2vw, 4.2rem);
-        height: clamp(2.5rem, 3.2vw, 4.2rem);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .logo-text {
-        display: block;
-        font-size: clamp(15px, 1.4vw, 24px);
-        font-weight: 800;
-        text-transform: uppercase;
-        font-family: var(--font-sans);
-        user-select: none;
-        letter-spacing: 0.06em;
-        transition: letter-spacing .55s cubic-bezier(.25, .46, .45, .94);
-    }
-
-    .logo-link:hover .logo-text {
-        letter-spacing: 0.38em;
-    }
-
-    .logo-container svg {
-        transition: transform .5s cubic-bezier(.34, 1.56, .64, 1);
-        width: 100%;
-        height: 100%;
-    }
-
-    .logo-link:hover .logo-container svg {
-        transform: scale(1.1) rotate(-5deg);
-    }
-
-    .btn-contact {
-        font-family: var(--font-sans);
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        border: 1px solid var(--color-ink);
-        transition: all .3s;
-        cursor: pointer;
-    }
-
-    .btn-contact:hover {
-        background: transparent;
-        color: var(--color-ink);
-    }
-
-    /* Footer */
-    .footer-link {
-        position: relative;
-        display: inline-block;
-        transition: color .3s, transform .3s;
-    }
-
-    .footer-link::after {
-        content: "";
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: rgba(235, 233, 228, 0.5);
-        transition: width .4s cubic-bezier(.25, .46, .45, .94);
-    }
-
-    .footer-link:hover {
-        color: rgba(235, 233, 228, 1) !important;
-        transform: translateX(4px);
-    }
-
-    .footer-link:hover::after {
-        width: 100%;
-    }
-
-    /* ══ COMMON ══ */
-    .bp-grid {
-        background-image: linear-gradient(rgba(18, 18, 18, 0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 18, 18, 0.028) 1px, transparent 1px);
-        background-size: 80px 80px;
-    }
-
-    .t-label {
-        font-family: var(--font-mono);
-        font-size: 0.6rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: rgba(18, 18, 18, 0.32);
-    }
-
-    .crosshair-mark {
-        position: relative;
-        width: 13px;
-        height: 13px;
-        flex-shrink: 0;
-    }
-
-    .crosshair-mark::before,
-    .crosshair-mark::after {
-        content: "";
-        position: absolute;
-        background: currentColor;
-        opacity: 0.22;
-    }
-
-    .crosshair-mark::before {
-        width: 1px;
-        height: 100%;
-        left: 50%;
-    }
-
-    .crosshair-mark::after {
-        height: 1px;
-        width: 100%;
-        top: 50%;
-    }
-
-    .hero-ghost {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-weight: 300;
-        line-height: 0.85;
-        letter-spacing: -0.02em;
-        color: transparent;
-        -webkit-text-stroke: 1px rgba(18, 18, 18, 0.045);
-        user-select: none;
-        pointer-events: none;
-        white-space: nowrap;
-    }
-
-    .h-line {
-        height: 1px;
-        background: rgba(18, 18, 18, 0.12);
-        transform-origin: left;
-        transform: scaleX(0);
-    }
-
-    @keyframes scroll-cue {
-
-        0%,
-        100% {
-            transform: translateY(0);
-            opacity: .3
-        }
-
-        50% {
-            transform: translateY(10px);
-            opacity: .08
-        }
-    }
-
-    .scroll-cue-line {
-        width: 1px;
-        height: 48px;
-        background: var(--color-ink);
-        opacity: .3;
-        animation: scroll-cue 2.2s ease-in-out infinite;
-    }
-
-    .hero-word {
-        display: inline-block;
-        transform: translateY(105%);
-    }
-
-    .clip-wrap {
-        overflow: hidden;
-        display: block;
-    }
-
-    .reveal-up {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-
-    /* ══ HERO WIREFRAME BLUEPRINT (unique to portfolio) ══ */
-    .wf-el {
-        position: absolute;
-        pointer-events: none;
-        user-select: none;
-    }
-
-    .wf-rect {
-        border: 1.5px solid rgba(18, 18, 18, 0.06);
-        border-radius: 6px;
-    }
-
-    .wf-rect--strong {
-        border-color: rgba(18, 18, 18, 0.09);
-        border-radius: 10px;
-    }
-
-    .wf-circle {
-        border: 1.5px solid rgba(18, 18, 18, 0.05);
-        border-radius: 50%;
-    }
-
-    .wf-line {
-        height: 1.5px;
-        background: rgba(18, 18, 18, 0.04);
-        transform-origin: left;
-    }
-
-    .wf-dot {
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: rgba(18, 18, 18, 0.06);
-    }
-
-    .wf-bar {
-        height: 3px;
-        border-radius: 2px;
-        background: rgba(18, 18, 18, 0.04);
-    }
-
-    .wf-text {
-        font-family: var(--font-mono);
-        font-size: 0.5rem;
-        letter-spacing: 0.15em;
-        color: rgba(18, 18, 18, 0.05);
-        text-transform: uppercase;
-        white-space: nowrap;
-    }
-
-    /* ══ PINNED SHOWCASE ══ */
-    .sc-sticky {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    .sc-panels {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
-
-    .sc-panel {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-    }
-
-    .sc-panel:first-child {
-        opacity: 1;
-    }
-
-    .sc-img-wrap {
-        position: absolute;
-        inset: 0;
-        overflow: hidden;
-    }
-
-    .sc-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: scale(1.1);
+        background-color: var(--color-ink);
+        transform: scaleX(0) translateZ(0);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         will-change: transform;
-        filter: brightness(0.65) saturate(0.85);
-    }
+      }
+      .nav-link::before { top: 0; left: 0; transform-origin: right; }
+      .nav-link::after { bottom: 0; left: 0; transform-origin: left; }
 
-    .sc-img-overlay {
-        position: absolute;
-        inset: 0;
-        mix-blend-mode: multiply;
-    }
+      .nav-link:hover::before, .nav-link.active::before { transform: scaleX(1); transform-origin: left; }
+      .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); transform-origin: right; }
 
-    .sc-img-gradient {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.7) 100%);
-    }
+      .logo-link { display: flex; align-items: center; gap: 1.5rem; }
+      .logo-container { width: clamp(2.5rem, 3.2vw, 4.2rem); height: clamp(2.5rem, 3.2vw, 4.2rem); display: flex; align-items: center; justify-content: center; }
+      .logo-text { font-size: clamp(15px, 1.4vw, 24px); font-weight: 800; text-transform: uppercase; font-family: var(--font-sans); user-select: none; letter-spacing: 0.06em; transition: letter-spacing 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .logo-link:hover .logo-text { letter-spacing: 0.38em; }
+      .logo-container svg { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); width: 100%; height: 100%; }
+      .logo-link:hover .logo-container svg { transform: scale(1.1) rotate(-5deg); }
 
-    .sc-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        z-index: 5;
-        padding: clamp(2rem, 5vw, 5rem);
-        max-width: 55rem;
-    }
+      .btn-contact { font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid var(--color-ink); transition: all 0.3s ease; }
+      .btn-contact:hover { background-color: transparent; color: var(--color-ink); }
+      .btn-contact span.absolute { background-color: var(--color-paper); }
 
-    .sc-num {
-        font-family: var(--font-mono);
-        font-size: clamp(0.55rem, 0.7vw, .65rem);
-        letter-spacing: 0.2em;
-        color: rgba(255, 255, 255, 0.35);
+      .footer-link { position: relative; display: inline-block; transition: color 0.3s ease, transform 0.3s ease; }
+      .footer-link::after { content: ""; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background-color: rgba(235, 233, 228, 0.5); transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .footer-link:hover { color: rgba(235, 233, 228, 1) !important; transform: translateX(4px); }
+      .footer-link:hover::after { width: 100%; }
+
+      /* Hero Specific */
+      .hero-ghost { font-family: var(--font-serif); font-style: italic; font-weight: 300; line-height: 0.85; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 1px rgba(18, 18, 18, 0.045); user-select: none; pointer-events: none; white-space: nowrap; }
+      .t-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(18, 18, 18, 0.4); }
+
+      /* Gallery Specific */
+      .bp-grid {
+        background-image:
+          linear-gradient(rgba(18, 18, 18, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(18, 18, 18, 0.04) 1px, transparent 1px);
+        background-size: 80px 80px;
+      }
+      
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
         display: block;
-        margin-bottom: 1rem;
-    }
-
-    .sc-title {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-weight: 400;
-        font-size: clamp(3rem, 8vw, 7.5rem);
-        line-height: 0.88;
-        color: white;
-        margin-bottom: 0.5rem;
-    }
-
-    .sc-sub {
-        font-family: var(--font-mono);
-        font-size: clamp(0.55rem, 0.75vw, .7rem);
-        letter-spacing: 0.12em;
-        color: rgba(255, 255, 255, 0.4);
-        margin-bottom: 1.5rem;
-        text-transform: uppercase;
-    }
-
-    .sc-desc {
-        font-size: clamp(0.8rem, 1vw, .92rem);
-        line-height: 1.7;
-        color: rgba(255, 255, 255, 0.55);
-        max-width: 42ch;
-        margin-bottom: 1.25rem;
-    }
-
-    .sc-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.35rem;
-        margin-bottom: 1rem;
-    }
-
-    .sc-tag {
-        font-family: var(--font-mono);
-        font-size: 0.45rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        padding: 0.2rem 0.5rem;
-        color: rgba(255, 255, 255, 0.45);
-    }
-
-    .sc-status {
-        font-family: var(--font-mono);
-        font-size: 0.5rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.3);
-    }
-
-    .sc-initial {
-        position: absolute;
-        right: 5%;
-        top: 50%;
-        transform: translateY(-50%);
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: clamp(14rem, 25vw, 22rem);
-        color: rgba(255, 255, 255, 0.03);
-        pointer-events: none;
-        z-index: 2;
-    }
-
-    .sc-whisper {
-        position: absolute;
-        bottom: clamp(1.5rem, 3vw, 2.5rem);
-        right: clamp(1.5rem, 3vw, 2.5rem);
-        font-family: var(--font-mono);
-        font-size: 0.42rem;
-        letter-spacing: 0.18em;
-        color: rgba(255, 255, 255, 0.1);
-        z-index: 3;
-        text-transform: uppercase;
-    }
-
-    .sc-progress {
-        position: absolute;
-        right: clamp(1.5rem, 3vw, 2.5rem);
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .sc-dot {
-        width: 2.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-    }
-
-    .sc-dot-fill {
-        width: 2px;
-        height: 2rem;
-        background: rgba(255, 255, 255, 0.15);
-        position: relative;
-        overflow: hidden;
-        flex-shrink: 0;
-        transition: background .3s;
-    }
-
-    .sc-dot-fill::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: white;
-        transform: scaleY(0);
-        transform-origin: top;
-        transition: transform .5s cubic-bezier(.25, .46, .45, .94);
-    }
-
-    .sc-dot.active .sc-dot-fill::after {
-        transform: scaleY(1);
-    }
-
-    .sc-dot-label {
-        font-family: var(--font-mono);
-        font-size: 0.42rem;
-        letter-spacing: 0.12em;
-        color: rgba(255, 255, 255, 0.2);
-        transition: color .3s;
-    }
-
-    .sc-dot.active .sc-dot-label {
-        color: rgba(255, 255, 255, 0.6);
-    }
-
-    .sc-section-label {
-        position: absolute;
-        top: clamp(1.5rem, 3vh, 2.5rem);
-        left: clamp(1.5rem, 3vw, 2.5rem);
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-    }
-
-    .sc-view-btn {
-        position: absolute;
-        bottom: clamp(2rem, 5vw, 4rem);
-        right: clamp(6rem, 12vw, 12rem);
-        z-index: 10;
-    }
-
-    .sc-view-btn a {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        font-family: var(--font-mono);
-        font-size: 0.6rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        padding: 0.75rem 1.8rem;
-        transition: all .35s cubic-bezier(.25, .46, .45, .94);
-        text-decoration: none;
-        backdrop-filter: blur(8px);
-        background: rgba(255, 255, 255, 0.04);
-    }
-
-    .sc-view-btn a:hover {
-        color: white;
-        border-color: rgba(255, 255, 255, 0.6);
-        background: rgba(255, 255, 255, 0.1);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.3);
-    }
-
-    /* ══ EDITORIAL STAGGERED GRID ══ */
-    .eg-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 8rem;
-    }
-
-    .eg-row {
-        display: grid;
-        gap: 4rem;
-        width: 100%;
-    }
-
-    .eg-row--full {
-        grid-template-columns: 1fr;
-    }
-
-    .eg-row--asym-1 {
-        grid-template-columns: 0.62fr 0.38fr;
-    }
-
-    .eg-row--asym-2 {
-        grid-template-columns: 0.38fr 0.62fr;
-    }
-
-    .eg-row--trio {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    @media(max-width:1024px) {
-        .eg-row {
-            grid-template-columns: 1fr !important;
-            gap: 4rem;
-        }
-        .eg-grid { gap: 4rem; }
-    }
-
-    .eg-card {
-        cursor: pointer;
-        overflow: hidden;
-        position: relative;
-        text-decoration: none;
-        display: block;
-    }
-
-    .eg-img-wrap {
-        position: relative;
-        height: clamp(320px, 45vh, 560px);
-        overflow: hidden;
-    }
-
-    .eg-full .eg-img-wrap {
-        height: clamp(420px, 58vh, 680px);
-    }
-
-    .eg-img {
+        transform: translateZ(0); /* Hardware accel */
+        background-color: var(--color-ink);
+      }
+      
+      .gallery-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 1.2s cubic-bezier(.25, .46, .45, .94), filter 0.8s ease;
-        filter: grayscale(100%) brightness(0.72) saturate(0.85);
-        backface-visibility: hidden;
-        transform: translateZ(0);
-    }
+        transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1.2s ease, opacity 0.8s ease;
+        filter: grayscale(100%) contrast(1.1);
+        opacity: 0.85;
+      }
+      
+      .gallery-item:hover .gallery-img {
+        transform: scale(1.05);
+        filter: grayscale(0%) contrast(1);
+        opacity: 0.4;
+      }
 
-    .eg-card:hover .eg-img {
-        transform: scale(1.06);
-        filter: grayscale(0%) brightness(0.6) saturate(1);
-    }
-
-    .eg-overlay {
+      .gallery-content {
         position: absolute;
         inset: 0;
-        z-index: 2;
-        pointer-events: none;
-    }
-
-    .eg-color-overlay {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        pointer-events: none;
-    }
-
-
-
-
-
-    .eg-badge-row {
-        position: absolute;
-        top: 14px;
-        left: 16px;
-        z-index: 5;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-    }
-
-    .eg-badge {
-        font-family: var(--font-mono);
-        font-size: 0.48rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        background: rgba(255, 255, 255, 0.08);
-        color: rgba(255, 255, 255, 0.55);
-        padding: 0.2rem 0.5rem;
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .eg-year {
-        font-family: var(--font-mono);
-        font-size: 0.48rem;
-        color: rgba(255, 255, 255, 0.3);
-        letter-spacing: 0.12em;
-    }
-
-    .eg-whisper {
-        position: absolute;
-        bottom: 14px;
-        right: 16px;
-        font-family: var(--font-mono);
-        font-size: 0.42rem;
-        letter-spacing: 0.18em;
-        color: rgba(255, 255, 255, 0.1);
-        z-index: 5;
-        text-transform: uppercase;
-    }
-
-    .eg-hover-content {
-        position: absolute;
-        inset: 0;
-        z-index: 6;
+        padding: clamp(1.5rem, 3vw, 3rem);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        padding: clamp(1.2rem, 2.5vw, 2rem);
+        align-items: flex-start;
         opacity: 0;
-        transform: translateY(12px);
-        transition: opacity .5s cubic-bezier(.25, .46, .45, .94), transform .5s cubic-bezier(.25, .46, .45, .94);
-    }
+        transform: translateY(15px);
+        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        background: linear-gradient(to top, rgba(18,18,18,0.95) 0%, rgba(18,18,18,0) 60%);
+      }
 
-    .eg-card:hover .eg-hover-content {
+      .gallery-item:hover .gallery-content {
         opacity: 1;
         transform: translateY(0);
-    }
+      }
 
-    .eg-hover-title {
-        font-family: var(--font-serif);
-        font-style: italic;
-        color: white;
-        font-size: clamp(1.8rem, 3.5vw, 3rem);
-        line-height: .92;
-        margin: .25rem 0;
-    }
+      /* Hover text animations */
+      .g-title { transform: translateY(10px); opacity: 0; transition: all 0.5s 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .g-tags { transform: translateY(10px); opacity: 0; transition: all 0.5s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .gallery-item:hover .g-title, .gallery-item:hover .g-tags { transform: translateY(0); opacity: 1; }
 
-    .eg-hover-sub {
-        font-family: var(--font-mono);
-        font-size: 0.55rem;
-        letter-spacing: .1em;
-        color: rgba(255, 255, 255, .45);
-        margin-bottom: .5rem;
-    }
-
-    .eg-hover-desc {
-        font-size: .78rem;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, .55);
-        max-width: 42ch;
-        margin-bottom: .75rem;
-    }
-
-    .eg-hover-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: .3rem;
-    }
-
-    .eg-tag {
-        font-family: var(--font-mono);
-        font-size: .42rem;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-        border: 1px solid rgba(255, 255, 255, .15);
-        padding: .18rem .45rem;
-        color: rgba(255, 255, 255, .45);
-    }
-
-    .eg-view-arrow {
-        position: absolute;
-        top: 14px;
-        right: 16px;
-        z-index: 7;
-        width: 28px;
-        height: 28px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transform: translate(-4px, -4px);
-        transition: all .4s cubic-bezier(.25, .46, .45, .94);
-    }
-
-    .eg-card:hover .eg-view-arrow {
-        opacity: 1;
-        transform: translate(0, 0);
-    }
-
-    .eg-view-arrow svg {
-        width: 12px;
-        height: 12px;
-        stroke: rgba(255, 255, 255, 0.55);
-    }
-
-    @media(max-width:768px) {
-        .eg-hover-content {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .eg-hover-desc,
-        .eg-hover-tags {
-            display: none;
-        }
-
-        .eg-view-arrow {
-            opacity: 1;
-            transform: translate(0, 0);
-        }
-    }
-
-    /* Filter */
-    .gal-filter {
-        font-family: var(--font-mono);
-        font-size: 0.58rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        padding: 0.4rem 1rem;
-        border: 1px solid rgba(18, 18, 18, 0.12);
-        color: rgba(18, 18, 18, 0.4);
-        background: transparent;
-        cursor: pointer;
-        transition: all .3s;
-    }
-
-    .gal-filter:hover {
-        border-color: rgba(18, 18, 18, 0.3);
-        color: var(--color-ink);
-    }
-
-    .gal-filter.active {
-        background: var(--color-ink);
-        color: var(--color-paper);
-        border-color: var(--color-ink);
-    }
-
-    /* ══ CTA ══ */
-    .cta-chevron {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: clamp(200px, 28vw, 400px);
-        pointer-events: none;
-        z-index: 5;
-        overflow: hidden;
-    }
-
-    .cta-chevron--left {
-        left: 0;
-    }
-
-    .cta-chevron--right {
-        right: 0;
-    }
-
-    .cta-chevron-line {
-        position: absolute;
-        width: 100%;
-        height: 1.5px;
-        background: rgba(18, 18, 18, 0.18);
-        transform-origin: center;
-    }
-
-    .cta-chevron--left .cta-chevron-line {
-        transform: rotate(-20deg);
-    }
-
-    .cta-chevron--right .cta-chevron-line {
-        transform: rotate(20deg);
-    }
-
-    .cta-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-family: var(--font-sans);
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: clamp(0.72rem, 0.85vw, 0.82rem);
-        padding: clamp(0.85rem, 1.2vw, 1.1rem) clamp(2rem, 3vw, 2.8rem);
-        position: relative;
-        overflow: hidden;
-        transition: transform .3s cubic-bezier(.25, .46, .45, .94), box-shadow .3s;
-        z-index: 50;
-        text-decoration: none;
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        transform: translateZ(0);
-    }
-
-    .cta-btn:hover {
-        transform: scale(1.03);
-    }
-
-    .cta-btn--primary {
-        background: var(--color-ink);
-        color: var(--color-paper);
-        border: 1px solid var(--color-ink);
-    }
-
-    .cta-btn--primary:hover {
-        box-shadow: 0 12px 40px -8px rgba(18, 18, 18, 0.3);
-    }
-
-    .cta-btn--outline {
-        background: var(--color-paper);
-        color: var(--color-ink);
-        border: 1px solid rgba(18, 18, 18, 0.2);
-    }
-
-    .cta-btn--outline:hover {
-        border-color: rgba(18, 18, 18, 0.6);
-        box-shadow: 0 8px 30px -6px rgba(18, 18, 18, 0.15);
-    }
-
-    /* Dome */
-    .dome-stage {
-        perspective: 900px;
-        perspective-origin: 50% 50%;
-    }
-
-    .dome-sphere {
-        transform-style: preserve-3d;
-        will-change: transform;
-        position: relative;
-    }
-
-    .dome-tile {
-        position: absolute;
-        transform-style: preserve-3d;
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        pointer-events: none;
-    }
-
-    .dome-tile img {
-        filter: grayscale(100%) brightness(0.95);
-        border-radius: 8px;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        backface-visibility: hidden;
-        transform: translateZ(0);
-        transition: filter 0.8s cubic-bezier(.25, .46, .45, .94);
-        pointer-events: none;
-        user-select: none;
-        -webkit-user-drag: none;
-    }
-
-    .dome-stage.is-dragging .dome-tile img {
-        filter: grayscale(0%) brightness(1);
-    }
-
-    /* ══ PROJECT PAGE ══ */
-    .proj-hero-img {
-        width: 100%;
-        height: clamp(400px, 55vh, 650px);
-        object-fit: cover;
-        filter: brightness(0.7) saturate(0.85);
-    }
-
-    .proj-detail-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(6px, 0.6vw, 10px);
-    }
-
-    @media(max-width:768px) {
-        .proj-detail-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .proj-detail-img {
-        width: 100%;
-        height: clamp(280px, 40vh, 450px);
-        object-fit: cover;
-        filter: brightness(0.75);
-        transition: filter .5s;
-    }
-
-    .proj-detail-img:hover {
-        filter: brightness(0.9);
-    }
-
-    .breadcrumb-link {
-        font-family: var(--font-mono);
-        font-size: 0.55rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(18, 18, 18, 0.4);
-        transition: color .3s;
-        text-decoration: none;
-    }
-
-    .breadcrumb-link:hover {
-        color: var(--color-ink);
-    }
-
-    .breadcrumb-sep {
-        font-family: var(--font-mono);
-        font-size: 0.55rem;
-        color: rgba(18, 18, 18, 0.2);
-        margin: 0 0.5rem;
-    }
-
-    .tech-icon {
-        width: 20px;
-        height: 20px;
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 4px;
-        opacity: 0.7;
-    }
-
-    .proj-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: var(--font-mono);
-        font-size: 0.6rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--color-ink);
-        border: 1px solid rgba(18, 18, 18, 0.15);
-        padding: 0.6rem 1.2rem;
-        transition: all .3s;
-        text-decoration: none;
-    }
-
-    .proj-link:hover {
-        border-color: var(--color-ink);
-        background: var(--color-ink);
-        color: var(--color-paper);
-    }
-
-    .proj-link svg {
-        width: 14px;
-        height: 14px;
-    }
-  </style>
+    </style>
 </head>
 
-<body class="bg-paper text-ink">
+<body class="bg-paper text-ink font-sans antialiased overflow-x-hidden selection:bg-ink/10">
+  <!-- Noise Overlay -->
+  <div class="noise-overlay"></div>
   <svg class="hidden">
     <filter id="noiseFilter">
       <feTurbulence type="fractalNoise" baseFrequency="0.6" stitchTiles="stitch" />
     </filter>
   </svg>
-  <div class="noise-overlay" aria-hidden="true"></div>
 
+  <!-- Navbar -->
   <nav id="navbar" class="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] rounded-full flex items-center justify-between"
-    style="top:clamp(0.75rem,2vh,1.5rem); max-width:clamp(500px,88vw,76rem); padding:clamp(0.85rem,1.5vw,1.4rem) clamp(1.5rem,3vw,2.5rem);">
+    style="top: clamp(0.75rem, 2vh, 1.5rem); max-width: clamp(500px, 88vw, 76rem); padding: clamp(0.85rem, 1.5vw, 1.4rem) clamp(1.5rem, 3vw, 2.5rem);">
     <a href="/" class="logo-link group relative z-20">
       <div class="logo-container text-ink">
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1089,27 +222,30 @@
           <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
           <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7"
             class="opacity-100" />
-          <circle cx="20" cy="19" r="1.5" fill="currentColor" class="opacity-100" />
+          <circle cx="20" cy="19" r="1.5" fill="currentColor" />
         </svg>
       </div>
       <span
         class="logo-text block text-[22px] font-extrabold uppercase text-ink font-sans select-none group-hover:text-carbon">MONRION</span>
     </a>
+
     <div class="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-      style="gap:clamp(1.5rem,2.5vw,2.5rem)">
+      style="gap: clamp(1.5rem, 2.5vw, 2.5rem)">
       <a href="/portfolio/" class="nav-link active">Portfólio</a>
       <a href="/sobre/" class="nav-link">Sobre Nós</a>
       <a href="/servicos/" class="nav-link">Serviços</a>
     </div>
+
     <div class="hidden md:flex relative z-20 items-center">
       <a href="/contactos/"
         class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden flex items-center justify-center leading-none"
-        style="padding:clamp(0.6rem,1vw,0.85rem) clamp(1.5rem,2.5vw,2.25rem); font-size:clamp(0.8rem,0.9vw,1rem);">
+        style="padding: clamp(0.6rem, 1vw, 0.85rem) clamp(1.5rem, 2.5vw, 2.25rem); font-size: clamp(0.8rem, 0.9vw, 1rem);">
         <span class="relative z-10 group-hover:text-ink transition-colors duration-300">Contactar</span>
         <span
           class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
       </a>
     </div>
+
     <button class="md:hidden text-ink cursor-pointer relative z-20" id="menu-btn">
       <i data-lucide="menu"></i>
     </button>
@@ -1128,448 +264,180 @@
       class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block flex items-center justify-center leading-none">Contactar</a>
   </div>
 
+  <main class="relative z-10 overflow-hidden bg-paper">
+    <!-- 1. HERO ─────────────────────────────────────────── -->
+    <section id="portfolio-hero"
+      class="relative min-h-[85vh] flex flex-col justify-end overflow-hidden border-b border-ink/10"
+      style="padding: clamp(7rem, 12vh, 10rem) clamp(1.5rem, 5vw, 6rem) clamp(3.5rem, 6vh, 5.5rem);">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <main class="relative z-10" style="background-color:#EBE9E4;">
-    <section id="pf-hero" class="relative min-h-screen flex flex-col justify-end overflow-hidden"
-      style="padding:clamp(7rem,12vh,10rem) clamp(1.5rem,5vw,6rem) clamp(3.5rem,6vh,5.5rem);">
-      <div class="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
-        <div class="wf-el wf-rect--strong" style="left:72%;top:8%;width:220px;height:160px;transform:rotate(-8deg);">
-          <span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:54px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:43px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:46px;width:75px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:58px;width:71px;"></span>
-        </div>
-        <div class="wf-el wf-rect" style="left:5%;top:12%;width:140px;height:100px;transform:rotate(5deg);"><span
-            class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:57px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:53px;"></span></div>
-        <div class="wf-el wf-rect" style="left:85%;top:55%;width:80px;height:140px;transform:rotate(3deg);"><span
-            class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:57px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:42px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:46px;width:58px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:58px;width:53px;"></span></div>
-        <div class="wf-el wf-rect--strong" style="left:55%;top:70%;width:200px;height:130px;transform:rotate(-4deg);">
-          <span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:43px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:51px;"></span>
-        </div>
-        <div class="wf-el wf-rect" style="left:15%;top:65%;width:120px;height:80px;transform:rotate(7deg);"><span
-            class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:54px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:72px;"></span></div>
-        <div class="wf-el wf-rect" style="left:40%;top:15%;width:100px;height:70px;transform:rotate(-12deg);"><span
-            class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:41px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:75px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:46px;width:52px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:58px;width:74px;"></span></div>
-        <div class="wf-el wf-rect" style="left:90%;top:28%;width:60px;height:90px;transform:rotate(0deg);"><span
-            class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:40px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:40px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:46px;width:40px;"></span></div>
-        <div class="wf-el wf-rect" style="left:30%;top:85%;width:160px;height:50px;transform:rotate(2deg);"><span
-            class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:60px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:94px;"></span></div>
-        <div class="wf-el wf-rect" style="left:65%;top:40%;width:90px;height:60px;transform:rotate(-6deg);"><span
-            class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:48px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:44px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:46px;width:46px;"></span></div>
-        <div class="wf-el wf-rect--strong" style="left:8%;top:42%;width:70px;height:120px;transform:rotate(10deg);">
-          <span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot"
-            style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span
-            class="wf-el wf-bar" style="left:8px;top:22px;width:41px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:34px;width:41px;"></span><span class="wf-el wf-bar"
-            style="left:8px;top:46px;width:46px;"></span>
-        </div>
-        <div class="wf-el wf-circle" style="left:25%;top:30%;width:35px;height:35px;"></div>
-        <div class="wf-el wf-circle" style="left:78%;top:75%;width:25px;height:25px;"></div>
-        <div class="wf-el wf-circle" style="left:50%;top:50%;width:20px;height:20px;"></div>
-        <div class="wf-el wf-circle" style="left:92%;top:12%;width:30px;height:30px;"></div>
-        <div class="wf-el wf-circle" style="left:12%;top:82%;width:22px;height:22px;"></div>
-        <div class="wf-el wf-circle" style="left:60%;top:22%;width:15px;height:15px;"></div>
-        <div class="wf-el wf-circle" style="left:45%;top:92%;width:18px;height:18px;"></div>
-        <span class="wf-el wf-line" style="left:18%;top:35%;width:140px;transform:rotate(15deg);"></span>
-        <span class="wf-el wf-line" style="left:70%;top:25%;width:100px;transform:rotate(-20deg);"></span>
-        <span class="wf-el wf-line" style="left:55%;top:80%;width:180px;transform:rotate(5deg);"></span>
-        <span class="wf-el wf-line" style="left:35%;top:45%;width:90px;transform:rotate(30deg);"></span>
-        <span class="wf-el wf-line" style="left:80%;top:65%;width:120px;transform:rotate(-10deg);"></span>
-        <span class="wf-el wf-line" style="left:10%;top:55%;width:200px;transform:rotate(-5deg);"></span>
-        <span class="wf-el wf-line" style="left:45%;top:10%;width:160px;transform:rotate(8deg);"></span>
-        <span class="wf-el wf-line" style="left:65%;top:90%;width:100px;transform:rotate(-15deg);"></span>
-        <span class="wf-el wf-dot" style="left:17%;top:50%;"></span>
-        <span class="wf-el wf-dot" style="left:49%;top:82%;"></span>
-        <span class="wf-el wf-dot" style="left:38%;top:10%;"></span>
-        <span class="wf-el wf-dot" style="left:63%;top:73%;"></span>
-        <span class="wf-el wf-dot" style="left:20%;top:53%;"></span>
-        <span class="wf-el wf-dot" style="left:15%;top:75%;"></span>
-        <span class="wf-el wf-dot" style="left:42%;top:85%;"></span>
-        <span class="wf-el wf-dot" style="left:84%;top:51%;"></span>
-        <span class="wf-el wf-dot" style="left:78%;top:29%;"></span>
-        <span class="wf-el wf-dot" style="left:95%;top:13%;"></span>
-        <span class="wf-el wf-dot" style="left:10%;top:89%;"></span>
-        <span class="wf-el wf-dot" style="left:34%;top:42%;"></span>
-        <span class="wf-el wf-dot" style="left:15%;top:34%;"></span>
-        <span class="wf-el wf-dot" style="left:17%;top:53%;"></span>
-        <span class="wf-el wf-dot" style="left:40%;top:63%;"></span>
-        <span class="wf-el wf-dot" style="left:86%;top:51%;"></span>
-        <span class="wf-el wf-dot" style="left:25%;top:52%;"></span>
-        <span class="wf-el wf-dot" style="left:50%;top:31%;"></span>
-        <span class="wf-el wf-dot" style="left:90%;top:39%;"></span>
-        <span class="wf-el wf-dot" style="left:94%;top:92%;"></span>
-        <span class="wf-el wf-dot" style="left:87%;top:14%;"></span>
-        <span class="wf-el wf-dot" style="left:82%;top:86%;"></span>
-        <span class="wf-el wf-dot" style="left:26%;top:73%;"></span>
-        <span class="wf-el wf-dot" style="left:36%;top:25%;"></span>
-        <span class="wf-el wf-dot" style="left:64%;top:53%;"></span>
-        <span class="wf-el wf-text" style="left:42%;top:89%;">header</span>
-
+      <!-- Ghost text -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true"
+        style="margin-top: -5%;">
+        <span class="hero-ghost" style="font-size: clamp(15vw, 22vw, 30vw)">Portfólio</span>
       </div>
 
-      <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none"
-        style="top:clamp(7.5rem,11vh,10.5rem);left:clamp(1.5rem,5vw,6rem);opacity:0;">
-        <div class="crosshair-mark text-ink"></div><span class="t-label">REF: MON-PF-001 / 2026</span>
-      </div>
-      <div id="hero-ref-tr" class="absolute flex items-center gap-2.5 pointer-events-none justify-end"
-        style="top:clamp(7.5rem,11vh,10.5rem);right:clamp(1.5rem,5vw,6rem);opacity:0;"><span class="t-label">41.15&deg;
-          N &middot; 8.61&deg; W &middot; Porto</span>
-        <div class="crosshair-mark text-ink"></div>
-      </div>
-      <div class="relative z-10">
-        <div class="flex items-center gap-2.5 mb-16"><span class="t-label" id="hero-label" style="opacity:0;">01 &mdash;
-            Portf&oacute;lio</span>
-          <div class="h-line flex-1 ml-4" id="hero-line-l"></div>
+      <!-- Hero main content -->
+      <div class="relative z-10 max-w-7xl w-full mx-auto">
+        <!-- Dividing rule + label -->
+        <div class="flex items-center justify-center gap-5 mb-10 opacity-0" id="hero-rule"
+          style="transform: translateY(20px);">
+          <div class="h-[1px] bg-ink/20 flex-1 w-12 max-w-[4rem]"></div>
+          <span class="t-label whitespace-nowrap text-center">ARQUIVO ATELIER</span>
+          <div class="h-[1px] bg-ink/20 flex-1 hidden md:block max-w-[4rem]"></div>
         </div>
-        <h1
-          style="font-family:var(--font-serif);font-style:italic;font-size:clamp(3.5rem,10vw,14rem);line-height:0.88;letter-spacing:-0.03em;margin-bottom:2.5rem;">
-          <span class="clip-wrap"><span class="hero-word" id="hero-w1">Do conceito</span></span>
-          <span class="clip-wrap" style="margin-left:clamp(1rem,6vw,8rem)"><span class="hero-word" id="hero-w2">ao
-              pixel.</span></span>
+
+        <!-- Headline -->
+        <h1 class="font-serif italic leading-[0.85] text-ink mb-12 overflow-hidden text-center"
+          style="font-size: clamp(3.5rem, 8.5vw, 12rem)">
+          <span class="block overflow-hidden"><span class="block hero-title-word"
+              style="transform: translateY(110%); will-change: transform">Visão</span></span>
+          <span class="block overflow-hidden"><span class="block hero-title-word"
+              style="transform: translateY(110%); will-change: transform">Materializada.</span></span>
         </h1>
-        <div class="h-line" id="hero-line-r" style="max-width:320px;margin-bottom:2rem;"></div>
-        <p id="hero-desc" class="font-mono text-ink/40 leading-relaxed"
-          style="font-size:clamp(0.68rem,0.9vw,0.82rem);max-width:46ch;opacity:0;">Cada projecto &eacute; uma conversa
-          entre forma e fun&ccedil;&atilde;o.<br>Aqui est&aacute; o resultado dessas conversas.</p>
-      </div>
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10"
-        id="hero-scroll-cue" style="opacity:0"><span class="t-label">Scroll</span>
-        <div class="scroll-cue-line"></div>
       </div>
     </section>
 
+    <!-- 2. EDITORIAL GALLERY ─────────────────────────────────────────── -->
+    <section class="relative bg-paper bp-grid pb-32" style="padding-top: clamp(2rem, 5vh, 5rem);">
+      <!-- Central grid layout -->
+      <div class="max-w-[1400px] mx-auto px-4 md:px-8">
 
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
 
-    <section id="pf-grid" class="relative" style="padding:clamp(5rem,10vh,10rem) clamp(1.5rem,5vw,6rem);">
-      <div class="flex items-center gap-2.5 mb-4 reveal-up">
-        <div class="crosshair-mark text-ink"></div><span class="t-label">03 &mdash; Arquivo Completo</span>
-        <div class="h-line flex-1 ml-4" id="grid-hline"></div>
-      </div>
-      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10">
-        <h2 class="font-serif italic reveal-up"
-          style="font-size:clamp(2.2rem,5vw,4.5rem);line-height:0.92;letter-spacing:-0.02em;">Todos os<br>Projectos</h2>
-        <div class="flex flex-wrap gap-2 mt-4 lg:mt-0 reveal-up">
-          <button class="gal-filter active" data-filter="Todos">Todos</button>
-          <button class="gal-filter" data-filter="Comercial">Comercial</button>
-          <button class="gal-filter" data-filter="Acad&eacute;mico">Acad&eacute;mico</button>
-          <button class="gal-filter" data-filter="Pessoal">Pessoal</button>
-          <button class="gal-filter" data-filter="Institucional">Institucional</button>
-        </div>
-      </div>
-      <div class="eg-grid">
-        <!-- Sequence 01: Hero Center Archive -->
-        <div class="eg-row eg-row--full">
-          <a href="/portfolio/eletro2000/" class="eg-card reveal-up">
-            <div class="eg-img-wrap" style="height: 78vh;">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=95&fit=crop"
-                alt="Eletro 2000" class="eg-img">
-              <div class="sc-anno" style="top: 8%; right: 8%; align-items: flex-end;">
-                <span style="color: #c9a84c;">ARCHIVE ID // 01</span>
-                <div class="sc-anno-line" style="background: #c9a84c;"></div>
-              </div>
-              <div class="eg-hover-content">
-                <h3 class="eg-hover-title" style="font-size: clamp(4rem, 9vw, 12rem); transform: translateX(-40px);">
-                  Eletro 2000</h3>
-                <p class="eg-hover-sub">Autonomous Retail Intelligence</p>
-                <div class="eg-hover-tags">
-                  <span class="eg-tag">Laravel 12</span>
-                  <span class="eg-tag">Google Gemini AI</span>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
+          <!-- Column 1 -->
+          <div class="flex flex-col gap-4 md:gap-8 md:mt-16">
 
-        <!-- Sequence 02: Asymmetric Split -->
-        <div class="eg-row eg-row--asym-1">
-          <a href="/portfolio/cristal-capital/" class="eg-card reveal-up" style="transform: translateY(12%);">
-            <div class="eg-img-wrap" style="height: 62vh;">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=90&fit=crop"
-                alt="Cristal Capital" class="eg-img">
-              <div class="eg-hover-content">
-                <h3 class="eg-hover-title">Cristal Capital</h3>
-                <p class="eg-hover-sub">Financial Architecture</p>
-              </div>
-            </div>
-          </a>
-          <a href="/portfolio/volunta/" class="eg-card reveal-up" style="transform: translateY(-8%);">
-            <div class="eg-img-wrap" style="height: 55vh;">
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=90&fit=crop" alt="Volunta"
-                class="eg-img">
-              <div class="eg-hover-content">
-                <h3 class="eg-hover-title">Volunta</h3>
-                <p class="eg-hover-sub">Public Welfare</p>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Sequence 03: Trio Dynamic -->
-        <div class="eg-row eg-row--trio">
-          <a href="/portfolio/gt-movel/" class="eg-card reveal-up" style="margin-top: 5rem;">
-            <div class="eg-img-wrap" style="height: 48vh;">
-              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85&fit=crop" alt="GT Móvel"
-                class="eg-img">
-              <div class="eg-hover-content">
-                <h3 class="eg-hover-title" style="font-size: 2.2rem;">GT Móvel</h3>
-              </div>
-            </div>
-          </a>
-          <a href="/portfolio/expolive/" class="eg-card reveal-up">
-            <div class="eg-img-wrap" style="height: 68vh;">
-              <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1100&q=85&fit=crop"
-                alt="ExpoLive" class="eg-img">
-              <div class="sc-anno" style="bottom: 12%; left: 8%;">
-                <span>STATUS: READY</span>
-                <div class="sc-anno-line"></div>
-              </div>
-              <div class="eg-hover-content">
-                <h3 class="eg-hover-title" style="font-size: 2.2rem;">ExpoLive</h3>
-              </div>
-            </div>
-          </a>
-          <a href="/portfolio/hugo-brito/" class="eg-card reveal-up" style="margin-top: 10rem;">
-            <div class="eg-img-wrap" style="height: 52vh;">
-              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1000&q=85&fit=crop" alt="Hugo Brito"
-                class="eg-img">
-              <div class="eg-hover-content">
-                <h3 class="eg-hover-title" style="font-size: 2.2rem;">Hugo Brito</h3>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Sequence 04: Reverse Asymmetry -->
-        <div class="eg-row eg-row--asym-2">
-          <a href="/portfolio/wise-wallet/" class="eg-card reveal-up" style="transform: translateY(-15%);">
-            <div class="eg-img-wrap" style="height: 50vh;">
-              <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1000&q=85&fit=crop"
-                alt="Wise Wallet" class="eg-img">
-              <div class="eg-hover-content">
-                <h3 class="eg-hover-title">Wise Wallet</h3>
-                <p class="eg-hover-sub">Personal Finance AI</p>
-              </div>
-            </div>
-          </a>
-          <a href="/portfolio/cristal-terminal/" class="eg-card reveal-up" style="transform: translateY(5%);">
-            <div class="eg-img-wrap" style="height: 70vh;">
-              <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1300&q=95&fit=crop"
-                alt="Cristal Terminal" class="eg-img">
-              <div class="eg-hover-content">
-                <h3 class="eg-hover-title" style="font-size: 3.5rem;">Cristal Terminal</h3>
-                <p class="eg-hover-sub">Quant Engine Evolution</p>
-              </div>
-            </div>
-          </a>
-          <!-- Sequence 05: Final Pair -->
-          <div class="eg-row eg-row--asym-1">
-            <a href="/portfolio/tec-n-cool/" class="eg-card reveal-up">
-              <div class="eg-img-wrap" style="height: 45vh;">
-                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1000&q=85&fit=crop"
-                  alt="Tec N' Cool" class="eg-img">
-                <div class="eg-hover-content">
-                  <h3 class="eg-hover-title">Tec N' Cool</h3>
-                  <p class="eg-hover-sub">ISCAP Platform</p>
-                </div>
+            <!-- Item 1: Cristal Capital Terminal -->
+            <a href="#" class="gallery-item w-full aspect-[4/5] md:aspect-square group cursor-pointer show-on-scroll">
+              <img src="../assets/p_img_1.png" alt="Terminal UI" class="gallery-img">
+              <div class="gallery-content">
+                <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/70 g-tags mb-3">01 — Quant
+                  Finance / WASM</span>
+                <h3 class="font-serif italic text-4xl md:text-5xl lg:text-6xl text-paper g-title leading-none">Cristal
+                  Capital Terminal</h3>
               </div>
             </a>
-            <a href="/portfolio/estudas-comigo/" class="eg-card reveal-up" style="transform: translateY(15%);">
-              <div class="eg-img-wrap" style="height: 55vh;">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000&q=85&fit=crop"
-                  alt="Estudas Comigo" class="eg-img">
-                <div class="eg-hover-content">
-                  <h3 class="eg-hover-title">Estudas Comigo</h3>
-                  <p class="eg-hover-sub">Education Hub</p>
-                </div>
+
+            <!-- Item 3: Cristal Capital (PAP Excelência) -->
+            <a href="#" class="gallery-item w-full aspect-square group cursor-pointer show-on-scroll">
+              <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2070&auto=format&fit=crop"
+                alt="Architecture" class="gallery-img">
+              <div class="gallery-content">
+                <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/70 g-tags mb-3">03 — Laravel /
+                  Inertia</span>
+                <h3 class="font-serif italic text-4xl md:text-5xl lg:text-6xl text-paper g-title leading-none">Cristal
+                  Capital</h3>
               </div>
             </a>
+
+            <!-- Item 5: Estudas Comigo -->
+            <a href="#" class="gallery-item w-full aspect-[4/3] group cursor-pointer show-on-scroll">
+              <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop"
+                alt="Corporate" class="gallery-img">
+              <div class="gallery-content">
+                <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/70 g-tags mb-3">05 — Static /
+                  Tailwind</span>
+                <h3 class="font-serif italic text-4xl md:text-5xl lg:text-6xl text-paper g-title leading-none">Estudas
+                  Comigo</h3>
+              </div>
+            </a>
+
+            <!-- Item 7: Hugo Brito -->
+            <a href="#" class="gallery-item w-full aspect-[3/4] group cursor-pointer show-on-scroll">
+              <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop"
+                alt="Fashion Editorial" class="gallery-img">
+              <div class="gallery-content">
+                <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/70 g-tags mb-3">07 — Luxury
+                  Fashion / GSAP</span>
+                <h3 class="font-serif italic text-4xl md:text-5xl lg:text-6xl text-paper g-title leading-none">Hugo
+                  Brito</h3>
+              </div>
+            </a>
+
           </div>
+
+          <!-- Column 2 -->
+          <div class="flex flex-col gap-4 md:gap-8">
+
+            <!-- Item 2: Electro 2000 v2 -->
+            <a href="#" class="gallery-item w-full aspect-square md:aspect-[4/5] group cursor-pointer show-on-scroll">
+              <img src="../assets/p_img_2.png" alt="AI Interface" class="gallery-img">
+              <div class="gallery-content">
+                <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/70 g-tags mb-3">02 —
+                  Artificial Intelligence / React</span>
+                <h3 class="font-serif italic text-4xl md:text-5xl lg:text-6xl text-paper g-title leading-none">Electro
+                  2000 v2</h3>
+              </div>
+            </a>
+
+            <!-- Item 4: Alojamento Gi -->
+            <a href="#" class="gallery-item w-full aspect-[4/3] group cursor-pointer show-on-scroll">
+              <img src="https://images.unsplash.com/photo-1551882547-ff40c0d5c9f4?q=80&w=2083&auto=format&fit=crop"
+                alt="Luxury Hotel" class="gallery-img">
+              <div class="gallery-content">
+                <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/70 g-tags mb-3">04 —
+                  E-Commerce / IfthenPay</span>
+                <h3 class="font-serif italic text-4xl md:text-5xl lg:text-6xl text-paper g-title leading-none">
+                  Alojamento Gi</h3>
+              </div>
+            </a>
+
+            <!-- Item 6: GT Móvel -->
+            <a href="#" class="gallery-item w-full aspect-[3/4] group cursor-pointer show-on-scroll">
+              <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=2064&auto=format&fit=crop"
+                alt="Classic Interior" class="gallery-img">
+              <div class="gallery-content">
+                <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/70 g-tags mb-3">06 — UI
+                  Clássico / SEO</span>
+                <h3 class="font-serif italic text-4xl md:text-5xl lg:text-6xl text-paper g-title leading-none">GT Móvel
+                </h3>
+              </div>
+            </a>
+
+            <!-- Item 8: Volunta / Expolive (Combo impression) -->
+            <a href="#" class="gallery-item w-full aspect-square group cursor-pointer show-on-scroll">
+              <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=2069&auto=format&fit=crop"
+                alt="Event Tech" class="gallery-img">
+              <div class="gallery-content">
+                <span class="font-mono text-[0.6rem] uppercase tracking-widest text-paper/70 g-tags mb-3">08 — GovTech /
+                  CMS</span>
+                <h3 class="font-serif italic text-4xl md:text-5xl lg:text-6xl text-paper g-title leading-none">Volunta &
+                  Expolive</h3>
+              </div>
+            </a>
+
+          </div>
+
         </div>
 
-    </section>
-
-    <section id="pf-cta" class="relative overflow-hidden"
-      style="min-height:clamp(600px,80vh,900px);display:flex;align-items:center;justify-content:center;">
-      <div class="absolute top-0 left-0 right-0 flex items-center gap-2.5 z-30"
-        style="padding:clamp(2rem,4vh,4rem) clamp(1.5rem,5vw,6rem);">
-        <div class="crosshair-mark text-ink"></div><span class="t-label">04 &mdash; Pr&oacute;ximo Passo</span>
-      </div>
-      <div class="cta-chevron cta-chevron--left">
-        <div class="cta-chevron-line" style="top:0.0%;"></div>
-        <div class="cta-chevron-line" style="top:2.857142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:5.714285714285714%;"></div>
-        <div class="cta-chevron-line" style="top:8.571428571428571%;"></div>
-        <div class="cta-chevron-line" style="top:11.428571428571429%;"></div>
-        <div class="cta-chevron-line" style="top:14.285714285714285%;"></div>
-        <div class="cta-chevron-line" style="top:17.142857142857142%;"></div>
-        <div class="cta-chevron-line" style="top:20.0%;"></div>
-        <div class="cta-chevron-line" style="top:22.857142857142858%;"></div>
-        <div class="cta-chevron-line" style="top:25.71428571428571%;"></div>
-        <div class="cta-chevron-line" style="top:28.57142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:31.428571428571427%;"></div>
-        <div class="cta-chevron-line" style="top:34.285714285714285%;"></div>
-        <div class="cta-chevron-line" style="top:37.142857142857146%;"></div>
-        <div class="cta-chevron-line" style="top:40.0%;"></div>
-        <div class="cta-chevron-line" style="top:42.857142857142854%;"></div>
-        <div class="cta-chevron-line" style="top:45.714285714285715%;"></div>
-        <div class="cta-chevron-line" style="top:48.57142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:51.42857142857142%;"></div>
-        <div class="cta-chevron-line" style="top:54.285714285714285%;"></div>
-        <div class="cta-chevron-line" style="top:57.14285714285714%;"></div>
-        <div class="cta-chevron-line" style="top:60.0%;"></div>
-        <div class="cta-chevron-line" style="top:62.857142857142854%;"></div>
-        <div class="cta-chevron-line" style="top:65.71428571428571%;"></div>
-        <div class="cta-chevron-line" style="top:68.57142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:71.42857142857143%;"></div>
-        <div class="cta-chevron-line" style="top:74.28571428571429%;"></div>
-        <div class="cta-chevron-line" style="top:77.14285714285715%;"></div>
-        <div class="cta-chevron-line" style="top:80.0%;"></div>
-        <div class="cta-chevron-line" style="top:82.85714285714286%;"></div>
-        <div class="cta-chevron-line" style="top:85.71428571428571%;"></div>
-        <div class="cta-chevron-line" style="top:88.57142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:91.42857142857143%;"></div>
-        <div class="cta-chevron-line" style="top:94.28571428571428%;"></div>
-        <div class="cta-chevron-line" style="top:97.14285714285714%;"></div>
-      </div>
-      <div class="cta-chevron cta-chevron--right">
-        <div class="cta-chevron-line" style="top:0.0%;"></div>
-        <div class="cta-chevron-line" style="top:2.857142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:5.714285714285714%;"></div>
-        <div class="cta-chevron-line" style="top:8.571428571428571%;"></div>
-        <div class="cta-chevron-line" style="top:11.428571428571429%;"></div>
-        <div class="cta-chevron-line" style="top:14.285714285714285%;"></div>
-        <div class="cta-chevron-line" style="top:17.142857142857142%;"></div>
-        <div class="cta-chevron-line" style="top:20.0%;"></div>
-        <div class="cta-chevron-line" style="top:22.857142857142858%;"></div>
-        <div class="cta-chevron-line" style="top:25.71428571428571%;"></div>
-        <div class="cta-chevron-line" style="top:28.57142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:31.428571428571427%;"></div>
-        <div class="cta-chevron-line" style="top:34.285714285714285%;"></div>
-        <div class="cta-chevron-line" style="top:37.142857142857146%;"></div>
-        <div class="cta-chevron-line" style="top:40.0%;"></div>
-        <div class="cta-chevron-line" style="top:42.857142857142854%;"></div>
-        <div class="cta-chevron-line" style="top:45.714285714285715%;"></div>
-        <div class="cta-chevron-line" style="top:48.57142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:51.42857142857142%;"></div>
-        <div class="cta-chevron-line" style="top:54.285714285714285%;"></div>
-        <div class="cta-chevron-line" style="top:57.14285714285714%;"></div>
-        <div class="cta-chevron-line" style="top:60.0%;"></div>
-        <div class="cta-chevron-line" style="top:62.857142857142854%;"></div>
-        <div class="cta-chevron-line" style="top:65.71428571428571%;"></div>
-        <div class="cta-chevron-line" style="top:68.57142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:71.42857142857143%;"></div>
-        <div class="cta-chevron-line" style="top:74.28571428571429%;"></div>
-        <div class="cta-chevron-line" style="top:77.14285714285715%;"></div>
-        <div class="cta-chevron-line" style="top:80.0%;"></div>
-        <div class="cta-chevron-line" style="top:82.85714285714286%;"></div>
-        <div class="cta-chevron-line" style="top:85.71428571428571%;"></div>
-        <div class="cta-chevron-line" style="top:88.57142857142857%;"></div>
-        <div class="cta-chevron-line" style="top:91.42857142857143%;"></div>
-        <div class="cta-chevron-line" style="top:94.28571428571428%;"></div>
-        <div class="cta-chevron-line" style="top:97.14285714285714%;"></div>
-      </div>
-      <div class="dome-stage absolute inset-0 flex items-center justify-center" id="dome-stage" aria-hidden="true"
-        style="z-index: 5; cursor: grab;">
-        <div class="dome-sphere" id="dome-sphere" style="width:1px;height:1px;"></div>
-      </div>
-      <div class="absolute inset-0 z-20 pointer-events-none"
-        style="background:radial-gradient(ellipse 55% 50% at 50% 50%,transparent 30%,var(--color-paper) 100%);"></div>
-      <div class="absolute top-0 left-0 right-0 h-40 z-20 pointer-events-none"
-        style="background:linear-gradient(to bottom,var(--color-paper),transparent);"></div>
-      <div class="absolute bottom-0 left-0 right-0 h-40 z-20 pointer-events-none"
-        style="background:linear-gradient(to top,var(--color-paper),transparent);"></div>
-      <div class="relative text-center flex flex-col items-center"
-        style="padding:0 clamp(1.5rem,5vw,4rem); isolation: isolate; z-index: 100;">
-        <h2 class="font-serif italic reveal-up"
-          style="font-size:clamp(2.8rem,7vw,7rem);line-height:0.88;letter-spacing:-0.03em;margin-bottom:1.5rem;">O
-          pr&oacute;ximo<br>&eacute; o seu.</h2>
-        <p class="font-mono text-ink/45 reveal-up"
-          style="font-size:clamp(0.68rem,0.9vw,0.82rem);max-width:38ch;margin-bottom:2.5rem;">Cada projecto
-          come&ccedil;a com uma conversa.</p>
-        <div class="flex flex-wrap items-center justify-center gap-4 reveal-up">
-          <a href="/contactos/" class="cta-btn cta-btn--primary">Iniciar projecto</a>
-          <a href="/servicos/" class="cta-btn cta-btn--outline">Ver Servi&ccedil;os</a>
-        </div>
       </div>
     </section>
   </main>
-  <footer class="bg-ink rounded-t-[4rem] pt-24 pb-8 relative z-30 text-paper overflow-hidden" style="
-    padding-left:clamp(1.5rem,5vw,6rem); padding-right:clamp(1.5rem,5vw,6rem);">
-    <div class="footer-dots absolute inset-0 pointer-events-none opacity-[0.24]" style="
-      background-image:radial-gradient(circle,rgba(235,233,228,0.5) 1px,transparent 1px); background-size:24px 24px;">
+
+  <!-- Footer -->
+  <footer class="bg-ink rounded-t-[4rem] pt-24 pb-8 relative z-30 text-paper overflow-hidden"
+    style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
+    <div class="absolute inset-0 pointer-events-none opacity-[0.24]"
+      style="background-image: radial-gradient(circle, rgba(235, 233, 228, 0.5) 1px, transparent 1px); background-size: 24px 24px;">
     </div>
 
-    <div class="footer-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
       <div class="lg:col-span-1">
         <div class="flex items-center gap-4 mb-6">
           <div class="w-12 h-12 flex items-center justify-content text-paper">
             <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
               <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
               <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
-              <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7" />
               <circle cx="20" cy="19" r="1.5" fill="currentColor" />
             </svg>
           </div>
           <span class="font-sans font-extrabold text-paper select-none"
-            style="font-size:clamp(20px,1.8vw,28px); letter-spacing:0.15em;">M O N R I O N</span>
+            style="font-size: clamp(20px, 1.8vw, 28px); letter-spacing: 0.15em;">M O N R I O N</span>
         </div>
-        <p class="text-paper/50 text-sm leading-relaxed max-w-xs">
-          Design orgânico para um futuro digital sustentável. Sediados no Porto, a cultivar para o mundo.
-        </p>
+        <p class="text-paper/50 text-sm leading-relaxed max-w-xs">Design orgânico para um futuro digital sustentável.
+          Sediados no Porto.</p>
       </div>
+
       <div>
         <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Páginas</h4>
         <ul class="space-y-3">
@@ -1580,280 +448,81 @@
           <li><a href="/contactos/" class="text-paper/70 text-sm footer-link">Contactos</a></li>
         </ul>
       </div>
+
       <div>
         <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Contacto</h4>
         <ul class="space-y-3">
-          <li class="flex items-center gap-2">
-            <i data-lucide="mail" class="w-3.5 h-3.5 text-paper/40"></i>
-            <a href="mailto:geral@monrion.com" class="text-paper/70 text-sm footer-link">geral@monrion.com</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <i data-lucide="phone" class="w-3.5 h-3.5 text-paper/40"></i>
-            <a href="tel:+351000000000" class="text-paper/70 text-sm footer-link">+351 000 000 000</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <i data-lucide="instagram" class="w-3.5 h-3.5 text-paper/40"></i>
-            <a href="#" class="text-paper/70 text-sm footer-link">@monrion</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <i data-lucide="linkedin" class="w-3.5 h-3.5 text-paper/40"></i>
-            <a href="#" class="text-paper/70 text-sm footer-link">Monrion</a>
-          </li>
+          <li class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-paper/40"></i><a
+              href="mailto:geral@monrion.com" class="text-paper/70 text-sm footer-link">geral@monrion.com</a></li>
+          <li class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-paper/40"></i><a
+              href="tel:+351000000000" class="text-paper/70 text-sm footer-link">+351 000 000 000</a></li>
+          <li class="flex items-center gap-2"><i data-lucide="instagram" class="w-3.5 h-3.5 text-paper/40"></i><a
+              href="#" class="text-paper/70 text-sm footer-link">@monrion</a></li>
         </ul>
       </div>
+
       <div>
         <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Localização</h4>
         <div class="space-y-4">
-          <div class="flex items-start gap-2">
-            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-paper/40 mt-0.5"></i>
+          <div class="flex items-start gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-paper/40 mt-0.5"></i>
             <p class="text-paper/70 text-sm leading-relaxed">Porto, Portugal</p>
           </div>
-          <div class="flex items-center gap-2">
-            <i data-lucide="clock" class="w-3.5 h-3.5 text-paper/40"></i>
-            <span class="font-mono text-sm text-paper/70" id="footer-gmt-time">--:--</span>
-            <span class="font-mono text-xs text-paper/40">GMT+0</span>
-          </div>
-          <div class="flex items-center gap-2 mt-2">
-            <div class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
-            <span class="font-mono text-xs text-paper/40 uppercase tracking-wider">Disponível</span>
-          </div>
+          <div class="flex items-center gap-2"><i data-lucide="clock" class="w-3.5 h-3.5 text-paper/40"></i><span
+              class="font-mono text-sm text-paper/70" id="footer-gmt-time">--:--</span><span
+              class="font-mono text-xs text-paper/40">GMT+0</span></div>
         </div>
       </div>
     </div>
 
-    <div
-      class="footer-bottom border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="text-paper/30 font-mono text-xs tracking-wide">© 2026 Monrion. Todos os direitos reservados.</p>
       <div class="flex items-center gap-6">
         <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Termos e
           Condições</a>
-        <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Política
-          de Privacidade</a>
       </div>
     </div>
   </footer>
 
   <script type="module" src="../assets/js/page.js"></script>
+
+  <!-- ── Portfolio Animations ──────────────────────────────────────── -->
   <script type="module">
-    window.PROJECTS = [{ "id": "cristal-terminal", "n": "01", "name": "Cristal Terminal", "sub": "Terminal Financeiro Profissional", "tp": "Pessoal", "yr": "2025", "st": "Em Desenvolvimento", "gr": "135deg,#0a0e17,#1a1f3a", "ini": "C", "tags": ["Next.js 15", "React 19", "TypeScript", "C++/WASM", "Python", "Ollama AI"], "stk": "Next.js · React · TypeScript", "desc": "Terminal financeiro de nível profissional inspirado no Bloomberg Terminal. Motor quant tri-camada, integração IA local via Ollama e 8 temas visuais.", "wh": "QUANT ENGINE // WASM", "img": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop" }, { "id": "casa-gi", "n": "02", "name": "Casa do Gi", "sub": "Reservas e E-commerce", "tp": "Comercial", "yr": "2025", "st": "Em Produção", "gr": "160deg,#1a150e,#2a1f0e", "ini": "G", "tags": ["PHP 8", "MySQL", "IfthenPay", "Tailwind CSS"], "stk": "PHP · MySQL · IfthenPay", "desc": "Website para alojamento local com sistema de reservas, pagamentos IfthenPay e painel de administração.", "wh": "HMAC-SHA256 // IFTHEN", "img": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop" }, { "id": "eletro2000", "n": "03", "name": "Eletro 2000 v2", "sub": "Gestão de Retalho com IA", "tp": "Académico", "yr": "2025", "st": "Concluído", "gr": "200deg,#0e1a16,#0a2e20", "ini": "E", "tags": ["Laravel 12", "React 19", "Gemini AI", "MySQL"], "stk": "Laravel · React · Gemini", "desc": "Sistema full-stack com IA autónoma via Google Gemini. Motor de decisão em tempo real.", "wh": "GEMINI API // AUTONOMOUS", "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" }, { "id": "cristal-capital", "n": "04", "name": "Cristal Capital", "sub": "Plataforma Financeira — PAP", "tp": "Académico", "yr": "2025", "st": "Concluído", "gr": "120deg,#141018,#1e1630", "ini": "C", "tags": ["Laravel 12", "Inertia.js", "Docker", "Sanctum"], "stk": "Laravel · Inertia · Docker", "desc": "Plataforma de gestão financeira com Laravel 12, Sanctum e Inertia.js.", "wh": "LARAVEL 12 // SANCTUM", "img": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop" }, { "id": "volunta", "n": "05", "name": "Volunta", "sub": "Câmara Municipal V.N. Gaia", "tp": "Institucional", "yr": "2025", "st": "Em Desenvolvimento", "gr": "180deg,#181410,#28221a", "ini": "V", "tags": ["PHP", "Laravel", "MySQL", "Tailwind CSS"], "stk": "PHP · Laravel · MySQL", "desc": "Plataforma de voluntariado para a Câmara Municipal de Vila Nova de Gaia.", "wh": "CÂMARA VNG // CIVIC", "img": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop" }, { "id": "estudas-comigo", "n": "06", "name": "Estudas Comigo", "sub": "Centro de Estudos", "tp": "Comercial", "yr": "2024", "st": "Em Produção", "gr": "145deg,#0d1018,#162030", "ini": "E", "tags": ["HTML5", "Tailwind CSS", "JavaScript"], "stk": "HTML · Tailwind · JS", "desc": "Website moderno para centro de estudos com design responsivo.", "wh": "STATIC // GH-PAGES", "img": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop" }, { "id": "gt-movel", "n": "07", "name": "GT Móvel", "sub": "Móveis e Eletrodomésticos", "tp": "Comercial", "yr": "2024", "st": "Em Produção", "gr": "170deg,#100e0e,#2a1a1a", "ini": "G", "tags": ["HTML5", "CSS3", "JavaScript", "SEO"], "stk": "HTML · CSS · JS", "desc": "Website para empresa de móveis desde 1977. Catálogo e SEO optimizado.", "wh": "SINCE 1977 // SEO", "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop" }, { "id": "hugo-brito", "n": "08", "name": "Hugo Brito", "sub": "Luxury Fashion Brand", "tp": "Académico", "yr": "2024", "st": "Concluído", "gr": "155deg,#0e0e14,#1a1a28", "ini": "H", "tags": ["HTML5", "GSAP 3", "Tailwind CSS"], "stk": "HTML · GSAP · Tailwind", "desc": "Website conceito para marca de moda de luxo. Design cinematográfico com GSAP.", "wh": "LUXURY // GSAP", "img": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop" }, { "id": "tec-n-cool", "n": "09", "name": "Tec N' Cool", "sub": "Plataforma ISCAP / CEI", "tp": "Institucional", "yr": "2024", "st": "Em Produção", "gr": "190deg,#10140e,#1e2a18", "ini": "T", "tags": ["HTML5", "CSS3", "JavaScript", "JSON"], "stk": "HTML · CSS · JS", "desc": "Plataforma educativa para o ISCAP/CEI com catálogo de 250+ itens.", "wh": "250+ ITEMS // ISCAP", "img": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop" }, { "id": "expolive", "n": "10", "name": "ExpoLive", "sub": "Gestão de Eventos e CMS", "tp": "Académico", "yr": "2023–25", "st": "Concluído", "gr": "130deg,#18100e,#30201a", "ini": "X", "tags": ["PHP", "MySQL", "REST API", "IA"], "stk": "PHP · MySQL · IA", "desc": "Plataforma de gestão de eventos com 30+ páginas admin e chatbot IA.", "wh": "30+ PAGES // 2 YEARS", "img": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop" }, { "id": "wise-wallet", "n": "11", "name": "Wise Wallet", "sub": "Gestão Financeira Pessoal", "tp": "Académico", "yr": "2024", "st": "Concluído", "gr": "210deg,#0e1018,#182030", "ini": "W", "tags": ["PHP", "Chart.js", "DomPDF", "Ollama"], "stk": "PHP · Chart.js · Ollama", "desc": "Dashboard financeiro com gráficos Chart.js e IA local via Ollama.", "wh": "CHARTS // PDF // OLLAMA", "img": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop" }, { "id": "portable-world", "n": "12", "name": "Portable World", "sub": "Website Corporativo", "tp": "Comercial", "yr": "2024", "st": "Em Renovação", "gr": "165deg,#0e1214,#1a2428", "ini": "P", "tags": ["HTML5", "CSS3", "JavaScript"], "stk": "HTML · CSS · JS", "desc": "Website institucional para Portable World. Em renovação.", "wh": "CORPORATE // BRANDING", "img": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop" }];
-    import { gsap } from "gsap";
+    import gsap from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
+
     gsap.registerPlugin(ScrollTrigger);
 
-    function initAnimations() {
-      try {
-        // ── HERO ──
-        const heroTL = gsap.timeline({ defaults: { ease: "power4.out" } });
-        heroTL.to(["#hero-line-l", "#hero-line-r"], { scaleX: 1, duration: 1.5 }, 0);
-        heroTL.to("#hero-label", { opacity: 1, duration: 1 }, 0.1);
-        heroTL.to(["#hero-w1", "#hero-w2"], { y: "0%", duration: 1.6, stagger: 0.15 }, 0.2);
-        heroTL.to("#hero-desc", { opacity: 1, duration: 1.2 }, 0.75);
-        heroTL.to(["#hero-ref-tl", "#hero-ref-tr"], { opacity: 1, y: 0, duration: 1, stagger: 0.12, ease: "power3.out" }, 1.05);
-        heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.55);
-
-
-        // Wireframe blueprint entrance
-        gsap.from(".wf-rect, .wf-rect--strong", { opacity: 0, scale: 0.85, duration: 2, stagger: 0.08, ease: "power3.out", delay: 0.4 });
-        gsap.from(".wf-circle", { opacity: 0, scale: 0, duration: 1.8, stagger: 0.06, ease: "elastic.out(1,0.6)", delay: 0.6 });
-        gsap.from(".wf-line", { scaleX: 0, opacity: 0, duration: 1.5, stagger: 0.05, ease: "power3.out", delay: 0.5 });
-        gsap.from(".wf-dot", { opacity: 0, scale: 0, duration: 1.2, stagger: 0.03, ease: "back.out(2)", delay: 0.8 });
-        gsap.from(".wf-bar", { scaleX: 0, opacity: 0, duration: 1.8, stagger: 0.06, ease: "power3.out", delay: 0.7, transformOrigin: "left" });
-        // wf-text labels removed per user request
-
-        // Floating animation for wireframe components
-        document.querySelectorAll(".wf-rect, .wf-rect--strong, .wf-circle").forEach(el => {
-          gsap.to(el, {
-            x: `random(-15, 15)`,
-            y: `random(-15, 15)`,
-            rotation: `random(-8, 8)`,
-            duration: `random(6, 12)`,
-            repeat: -1, yoyo: true, ease: "sine.inOut"
-          });
-        });
-        gsap.to(".wf-line", {
-          rotation: "+=3",
-          duration: `random(8, 14)`,
-          repeat: -1, yoyo: true, ease: "sine.inOut"
-        });
-
-        // Pinned showcase removed per user request
-
-
-        // ── SECTION REVEALS ──
-        ["#pf-grid"].forEach(id => {
-          const sect = document.querySelector(id);
-          if (!sect) return;
-          const label = sect.querySelector(".t-label");
-          const h2 = sect.querySelector("h2");
-          const hline = sect.querySelector(".h-line");
-          if (label || h2) gsap.fromTo([label, h2].filter(Boolean), { opacity: 0, y: 30 }, { scrollTrigger: { trigger: sect, start: "top 85%", once: true }, opacity: 1, y: 0, duration: 1.5, stagger: 0.18, ease: "power4.out" });
-          if (hline) gsap.to(hline, { scrollTrigger: { trigger: sect, start: "top 85%", once: true }, scaleX: 1, duration: 1.5, delay: 0.2, ease: "power4.out" });
-        });
-
-        // ── CARD REVEALS ──
-        gsap.set(".reveal-up", { opacity: 0, y: 50 });
-        ScrollTrigger.batch(".eg-card.reveal-up", {
-          onEnter: b => gsap.to(b, { opacity: 1, y: 0, duration: 1.2, stagger: 0.12, ease: "power4.out", overwrite: true }),
-          start: "top 90%", once: true
-        });
-        ScrollTrigger.batch(".reveal-up:not(.eg-card)", {
-          onEnter: b => gsap.to(b, { opacity: 1, y: 0, duration: 1.4, stagger: 0.15, ease: "power4.out", overwrite: true }),
-          start: "top 88%", once: true
-        });
-
-        // Image Parallax disabled per user request
-        /*
-        document.querySelectorAll(".eg-img").forEach(img => {
-            gsap.fromTo(img, { y: "-5%" }, { y: "5%", ease: "none", scrollTrigger: { trigger: img.closest(".eg-card"), start: "top bottom", end: "bottom top", scrub: 0.6 } });
-        });
-        */
-
-        // ── CTA CHEVRONS ──
-        gsap.from(".cta-chevron-line", {
-          scrollTrigger: { trigger: "#pf-cta", start: "top 75%", once: true },
-          scaleX: 0, opacity: 0, duration: 1.2, stagger: 0.025, ease: "power3.out"
-        });
-
-        // ── CTA ──
-        const ctaS = document.getElementById("pf-cta");
-        if (ctaS) {
-          const cr = ctaS.querySelectorAll(".reveal-up");
-          if (cr.length) gsap.fromTo(cr, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.4, stagger: 0.18, ease: "power4.out", scrollTrigger: { trigger: ctaS, start: "top 65%", once: true } });
-        }
-
-        // ── FOOTER ──
-        gsap.from(".footer-dots", { scrollTrigger: { trigger: "footer", start: "top 85%" }, opacity: 0, duration: 1.5, ease: "power2.out" });
-        gsap.from(".footer-grid > *, .footer-bottom", { scrollTrigger: { trigger: "footer", start: "top 85%" }, y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" });
-
-        window.addEventListener("load", () => ScrollTrigger.refresh());
-      } catch (err) { console.error("initAnimations:", err); }
+    function onPageReady(cb) {
+      if (document.body.style.visibility === "visible") { cb(); return; }
+      const mo = new MutationObserver((_, obs) => {
+        if (document.body.style.visibility === "visible") { obs.disconnect(); cb(); }
+      });
+      mo.observe(document.body, { attributes: true, attributeFilter: ["style"] });
     }
 
-    // ── FILTER ──
-    function initFilter() {
-      const btns = document.querySelectorAll(".gal-filter");
-      const cards = document.querySelectorAll(".eg-card");
-      btns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          btns.forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          const f = btn.dataset.filter;
-          cards.forEach(c => {
-            const show = f === "Todos" || c.dataset.type === f;
-            gsap.to(c, { opacity: show ? 1 : 0.08, scale: show ? 1 : 0.97, duration: 0.5, ease: "power2.out" });
-            c.style.pointerEvents = show ? "auto" : "none";
-          });
+    onPageReady(() => {
+      /* Hero timeline */
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.to("#hero-rule", { opacity: 1, y: 0, duration: 1.2 }, 0.2)
+        .to(".hero-title-word", { y: "0%", duration: 1.6, stagger: 0.15 }, 0.4);
+
+      /* Gallery Scroll Animation */
+      const items = document.querySelectorAll(".show-on-scroll");
+      items.forEach((item) => {
+        gsap.from(item, {
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+          },
+          y: 80,
+          opacity: 0,
+          duration: 1.4,
+          ease: "expo.out"
         });
       });
-    }
-
-    // ── DOME ──
-    function initDome() {
-      const stage = document.getElementById("dome-stage");
-      const sphere = document.getElementById("dome-sphere");
-      if (!stage || !sphere) return;
-      const N = 20, PHI = Math.PI * (Math.sqrt(5) - 1);
-      const radius = Math.min(window.innerWidth, window.innerHeight) * 0.55;
-      const tW = Math.max(90, radius * 0.38), tH = tW * 0.65;
-      const imgs = [
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=70&fit=crop",
-        "https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&q=70&fit=crop",
-      ];
-      const tiles = [];
-      for (let i = 0; i < N; i++) {
-        const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), theta = PHI * i;
-        const x = Math.cos(theta) * r, z = Math.sin(theta) * r;
-        const tile = document.createElement("div");
-        tile.className = "dome-tile";
-        tile.style.cssText = `width:${tW}px;height:${tH}px;left:${-tW / 2}px;top:${-tH / 2}px;`;
-        const im = document.createElement("img");
-        im.src = imgs[i % imgs.length]; im.alt = ""; im.loading = "lazy";
-        im.draggable = false;
-        tile.appendChild(im); sphere.appendChild(tile);
-        tiles.push({ el: tile, x: x * radius, y: y * radius, z: z * radius });
-      }
-      let rotY = 0, rotX = 0, tRY = 0, tRX = 0, auto = true, dragging = false, lastX, lastY;
-
-      const handleStart = (clientX, clientY) => {
-        dragging = true; lastX = clientX; lastY = clientY; auto = false;
-        stage.style.cursor = "grabbing";
-        stage.classList.add("is-dragging");
-      };
-
-      const ctaSection = document.getElementById("pf-cta");
-      ctaSection.addEventListener("mousedown", (e) => {
-        if (e.target.closest(".cta-btn")) return;
-        handleStart(e.clientX, e.clientY);
-      });
-      window.addEventListener("mousemove", (e) => {
-        if (!dragging) return;
-        const dx = e.clientX - lastX, dy = e.clientY - lastY;
-        tRY += dx * 0.006; tRX -= dy * 0.004;
-        lastX = e.clientX; lastY = e.clientY;
-      });
-      window.addEventListener("mouseup", () => {
-        if (!dragging) return;
-        dragging = false; auto = true;
-        stage.style.cursor = "grab";
-        stage.classList.remove("is-dragging");
-        setTimeout(() => { if (!dragging) tRX = 0; }, 1200);
-      });
-
-      // Touch
-      ctaSection.addEventListener("touchstart", (e) => {
-        if (e.touches.length !== 1 || e.target.closest(".cta-btn")) return;
-        handleStart(e.touches[0].clientX, e.touches[0].clientY);
-      }, { passive: true });
-      window.addEventListener("touchmove", (e) => {
-        if (!dragging || e.touches.length !== 1) return;
-        const dx = e.touches[0].clientX - lastX, dy = e.touches[0].clientY - lastY;
-        tRY += dx * 0.006; tRX -= dy * 0.004;
-        lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
-      }, { passive: true });
-      window.addEventListener("touchend", () => {
-        if (!dragging) return;
-        dragging = false; auto = true;
-        stage.classList.remove("is-dragging");
-      });
-
-      let raf;
-      function render() {
-        if (auto) { tRY += 0.0018; tRX *= 0.98; }
-        rotY += (tRY - rotY) * 0.065; rotX += (tRX - rotX) * 0.065;
-        tiles.forEach(t => {
-          const cY = Math.cos(rotY), sY = Math.sin(rotY), cX = Math.cos(rotX), sX = Math.sin(rotX);
-          let x1 = t.x * cY + t.z * sY, z1 = t.z * cY - t.x * sY, y1 = t.y * cX - z1 * sX, z2 = z1 * cX + t.y * sX;
-          const sc = 900 / (900 + z2), op = Math.max(0.12, (z2 + radius) / (2 * radius));
-          t.el.style.transform = `translate3d(${x1}px,${y1}px,${z2}px) scale(${sc})`;
-          t.el.style.opacity = op;
-        });
-        raf = requestAnimationFrame(render);
-      }
-      ScrollTrigger.create({ trigger: "#pf-cta", start: "top bottom+=200", onEnter: () => { if (!raf) render(); }, onLeaveBack: () => { if (raf) { cancelAnimationFrame(raf); raf = null; } } });
-    }
-
-    // ── INIT ──
-    const obs = new MutationObserver(() => {
-      if (document.body.style.visibility !== "") {
-        obs.disconnect();
-        requestAnimationFrame(() => {
-          initAnimations();
-          initFilter();
-          setTimeout(() => initDome(), 150);
-        });
-      }
-    });
-    obs.observe(document.body, { attributes: true, attributeFilter: ["style"] });
-
+    }); 
   </script>
+
 </body>
 
 </html>
