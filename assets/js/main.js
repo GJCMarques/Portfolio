@@ -12,8 +12,31 @@ createIcons({
   icons: { Menu, X, ArrowRight, Microscope, Activity, Sprout, Mail, Phone, Instagram, Linkedin, MapPin, Clock }
 });
 
-// ── Global Custom Cursor and Morph Leave Transition ───────────────
+// ── Global Effects ────────────────────────────────────────────────
 initGlobalEffects();
+
+// Global ScrollReveal for elements with .reveal-up class
+const initScrollReveal = () => {
+  const revealElements = document.querySelectorAll('.reveal-up');
+  revealElements.forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+  });
+};
+
+initScrollReveal();
 
 // --- Navbar Logic ---
 const navbar = document.getElementById("navbar");
@@ -469,28 +492,61 @@ initFloatingWireframes();
 const initPinnedShowcase = () => {
   const scSection = document.getElementById("pf-showcase");
   const panels = document.querySelectorAll(".sc-panel");
-  const dots = document.querySelectorAll(".sc-dot");
+  const dots = document.querySelectorAll(".sc-dot-v");
   if (!scSection || !panels.length) return;
 
   const count = panels.length;
   gsap.set(panels, { opacity: 0, visibility: "visible" });
   gsap.set(panels[0], { opacity: 1 });
 
-  // Image parallax within panels
+  // 3D & Parallax Effect on Scroll
   panels.forEach(panel => {
-    const img = panel.querySelector(".sc-img");
-    if (img) {
-      gsap.to(img, {
-        scale: 1.25,
+    const frame = panel.querySelector(".sc-img-frame");
+    const img = panel.querySelector(".sc-img-main");
+    const annos = panel.querySelectorAll(".sc-anno");
+    const content = panel.querySelector(".sc-content-wrap");
+
+    if (frame) {
+      gsap.to(frame, {
+        rotationY: 10,
+        rotationX: -5,
         ease: "none",
         scrollTrigger: {
           trigger: scSection,
           start: "top top",
           end: "bottom bottom",
-          scrub: 1
+          scrub: 1.2
         }
       });
     }
+
+    if (img) {
+      gsap.to(img, {
+        scale: 1.3,
+        yPercent: 10,
+        ease: "none",
+        scrollTrigger: {
+          trigger: scSection,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.8
+        }
+      });
+    }
+
+    annos.forEach((anno, i) => {
+      gsap.to(anno, {
+        y: i % 2 === 0 ? -120 : 120,
+        x: i % 2 === 0 ? -40 : 40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: scSection,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.5 + (i * 0.2)
+        }
+      });
+    });
   });
 
   // Master timeline for switching panels
@@ -503,31 +559,27 @@ const initPinnedShowcase = () => {
     }
   });
 
+  const featuredProjectLinks = [
+    "/portfolio/cristal-terminal/",
+    "/portfolio/casa-do-gi/",
+    "/portfolio/expolive/"
+  ];
+
   for (let i = 0; i < count - 1; i++) {
     const curr = panels[i];
     const next = panels[i + 1];
-    const currC = curr.querySelector(".sc-content");
-    const nextC = next.querySelector(".sc-content");
-    const nextI = next.querySelector(".sc-initial");
+    const currFrame = curr.querySelector(".sc-img-frame");
+    const nextInner = next.querySelector(".sc-inner");
 
-    masterTL.to(currC, { y: -50, opacity: 0, duration: 0.4, ease: "power2.in" }, i);
-    masterTL.to(curr, { opacity: 0, duration: 0.5, ease: "power2.inOut" }, i + 0.3);
-    masterTL.fromTo(next, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, i + 0.4);
-
-    if (nextC) {
-      masterTL.fromTo(nextC.children,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "power3.out" },
-        i + 0.5
-      );
-    }
-
-
+    masterTL.to(curr, { opacity: 0, scale: 0.95, duration: 0.5, ease: "power2.inOut" }, i);
+    masterTL.fromTo(next,
+      { opacity: 0, scale: 1.05 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: "power2.inOut" },
+      i + 0.4
+    );
   }
 
   // Update dots and view button link
-  const featuredProjectIds = ["cristal-terminal", "casa-gi", "expolive"];
-
   ScrollTrigger.create({
     trigger: scSection,
     start: "top top",
@@ -535,33 +587,12 @@ const initPinnedShowcase = () => {
     scrub: true,
     onUpdate: (self) => {
       const idx = Math.min(Math.floor(self.progress * count), count - 1);
-      dots.forEach((d, i) => {
-        d.classList.toggle("active", i === idx);
-      });
+      dots.forEach((d, i) => d.classList.toggle("active", i === idx));
 
       const viewBtn = document.querySelector(".sc-view-btn a");
-      if (viewBtn) {
-        viewBtn.href = "/portfolio/" + featuredProjectIds[idx] + "/";
-      }
+      if (viewBtn) viewBtn.href = featuredProjectLinks[idx];
     }
   });
-
-  // Entrance animation for first panel
-  const firstC = panels[0].querySelector(".sc-content");
-  if (firstC) {
-    gsap.from(firstC.children, {
-      y: 40,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: scSection,
-        start: "top 80%",
-        once: true
-      }
-    });
-  }
 };
 
 initPinnedShowcase();

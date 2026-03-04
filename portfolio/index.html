@@ -606,41 +606,41 @@
         box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.3);
     }
 
-    /* ══ EDITORIAL GRID ══ */
+    /* ══ EDITORIAL STAGGERED GRID ══ */
     .eg-grid {
         display: flex;
         flex-direction: column;
-        gap: clamp(6px, 0.6vw, 10px);
+        gap: 8rem;
     }
 
     .eg-row {
         display: grid;
-        gap: clamp(6px, 0.6vw, 10px);
+        gap: 4rem;
+        width: 100%;
     }
 
     .eg-row--full {
         grid-template-columns: 1fr;
     }
 
-    .eg-row--pair {
-        grid-template-columns: 7fr 5fr;
+    .eg-row--asym-1 {
+        grid-template-columns: 0.62fr 0.38fr;
     }
 
-    .eg-row--pair-r {
-        grid-template-columns: 5fr 7fr;
+    .eg-row--asym-2 {
+        grid-template-columns: 0.38fr 0.62fr;
     }
 
     .eg-row--trio {
         grid-template-columns: 1fr 1fr 1fr;
     }
 
-    @media(max-width:768px) {
-
-        .eg-row--pair,
-        .eg-row--pair-r,
-        .eg-row--trio {
-            grid-template-columns: 1fr;
+    @media(max-width:1024px) {
+        .eg-row {
+            grid-template-columns: 1fr !important;
+            gap: 4rem;
         }
+        .eg-grid { gap: 4rem; }
     }
 
     .eg-card {
@@ -692,24 +692,7 @@
 
 
 
-    .eg-initial {
-        position: absolute;
-        right: 5%;
-        top: 50%;
-        transform: translateY(-50%);
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: clamp(8rem, 16vw, 14rem);
-        color: rgba(255, 255, 255, 0.04);
-        pointer-events: none;
-        z-index: 3;
-        transition: color .6s, transform .6s;
-    }
 
-    .eg-card:hover .eg-initial {
-        color: rgba(255, 255, 255, 0.08);
-        transform: translateY(-50%) scale(1.05);
-    }
 
     .eg-badge-row {
         position: absolute;
@@ -1327,272 +1310,134 @@
         </div>
       </div>
       <div class="eg-grid">
-        <div class="eg-row eg-row--full"><a href="/portfolio/eletro2000/" class="eg-card eg-full reveal-up"
-            data-type="Académico">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop"
-                alt="Eletro 2000 v2" class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
+        <!-- Sequence 01: Hero Center Archive -->
+        <div class="eg-row eg-row--full">
+          <a href="/portfolio/eletro2000/" class="eg-card reveal-up">
+            <div class="eg-img-wrap" style="height: 78vh;">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=95&fit=crop"
+                alt="Eletro 2000" class="eg-img">
+              <div class="sc-anno" style="top: 8%; right: 8%; align-items: flex-end;">
+                <span style="color: #c9a84c;">ARCHIVE ID // 01</span>
+                <div class="sc-anno-line" style="background: #c9a84c;"></div>
               </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(200deg,#0e1a16,#0a2e20);opacity:0.4;mix-blend-mode:multiply;"></div>
-              <div class="eg-grid-pattern"></div>
-              <span class="eg-initial">E</span>
-              <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2025</span></div>
-              <span class="eg-whisper">GEMINI API // AUTONOMOUS</span>
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
               <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">03 — Laravel ·
-                  React · Gemini</span>
-                <h3 class="eg-hover-title">Eletro 2000 v2</h3>
-                <p class="eg-hover-sub">Gestão de Retalho com IA</p>
-                <p class="eg-hover-desc">Sistema full-stack com IA autónoma via Google Gemini. Motor de decisão em tempo
-                  real.</p>
-                <div class="eg-hover-tags"><span class="eg-tag">Laravel 12</span> <span class="eg-tag">React 19</span>
-                  <span class="eg-tag">Gemini AI</span>
+                <h3 class="eg-hover-title" style="font-size: clamp(4rem, 9vw, 12rem); transform: translateX(-40px);">
+                  Eletro 2000</h3>
+                <p class="eg-hover-sub">Autonomous Retail Intelligence</p>
+                <div class="eg-hover-tags">
+                  <span class="eg-tag">Laravel 12</span>
+                  <span class="eg-tag">Google Gemini AI</span>
                 </div>
               </div>
             </div>
-          </a></div>
-        <div class="eg-row eg-row--pair"><a href="/portfolio/cristal-capital/" class="eg-card eg-wide reveal-up"
-            data-type="Académico">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop"
-                alt="Cristal Capital" class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
-              </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(120deg,#141018,#1e1630);opacity:0.4;mix-blend-mode:multiply;"></div>
-              <div class="eg-grid-pattern"></div>
-              <span class="eg-initial">C</span>
-              <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2025</span></div>
-              <span class="eg-whisper">LARAVEL 12 // SANCTUM</span>
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
+          </a>
+        </div>
+
+        <!-- Sequence 02: Asymmetric Split -->
+        <div class="eg-row eg-row--asym-1">
+          <a href="/portfolio/cristal-capital/" class="eg-card reveal-up" style="transform: translateY(12%);">
+            <div class="eg-img-wrap" style="height: 62vh;">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=90&fit=crop"
+                alt="Cristal Capital" class="eg-img">
               <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">04 — Laravel ·
-                  Inertia · Docker</span>
                 <h3 class="eg-hover-title">Cristal Capital</h3>
-                <p class="eg-hover-sub">Plataforma Financeira — PAP</p>
-                <p class="eg-hover-desc">Plataforma de gestão financeira com Laravel 12, Sanctum e Inertia.js.</p>
-                <div class="eg-hover-tags"><span class="eg-tag">Laravel 12</span> <span class="eg-tag">Inertia.js</span>
-                  <span class="eg-tag">Docker</span>
-                </div>
+                <p class="eg-hover-sub">Financial Architecture</p>
               </div>
             </div>
-          </a><a href="/portfolio/volunta/" class="eg-card eg-narrow reveal-up" data-type="Institucional">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop" alt="Volunta"
-                class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
-              </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(180deg,#181410,#28221a);opacity:0.4;mix-blend-mode:multiply;"></div>
-              <div class="eg-grid-pattern"></div>
-              <span class="eg-initial">V</span>
-              <div class="eg-badge-row"><span class="eg-badge">Institucional</span><span class="eg-year">2025</span>
-              </div>
-              <span class="eg-whisper">CÂMARA VNG // CIVIC</span>
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
+          </a>
+          <a href="/portfolio/volunta/" class="eg-card reveal-up" style="transform: translateY(-8%);">
+            <div class="eg-img-wrap" style="height: 55vh;">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=90&fit=crop" alt="Volunta"
+                class="eg-img">
               <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">05 — PHP ·
-                  Laravel · MySQL</span>
                 <h3 class="eg-hover-title">Volunta</h3>
-                <p class="eg-hover-sub">Câmara Municipal V.N. Gaia</p>
-                <p class="eg-hover-desc">Plataforma de voluntariado para a Câmara Municipal de Vila Nova de Gaia.</p>
-                <div class="eg-hover-tags"><span class="eg-tag">PHP</span> <span class="eg-tag">Laravel</span> <span
-                    class="eg-tag">MySQL</span></div>
+                <p class="eg-hover-sub">Public Welfare</p>
               </div>
             </div>
-          </a></div>
-        <div class="eg-row eg-row--trio"><a href="/portfolio/estudas-comigo/" class="eg-card  reveal-up"
-            data-type="Comercial">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop"
-                alt="Estudas Comigo" class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
-              </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(145deg,#0d1018,#162030);opacity:0.4;mix-blend-mode:multiply;"></div>
-              <div class="eg-grid-pattern"></div>
-              <span class="eg-initial">E</span>
-              <div class="eg-badge-row"><span class="eg-badge">Comercial</span><span class="eg-year">2024</span></div>
-              <span class="eg-whisper">STATIC // GH-PAGES</span>
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
-              <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">06 — HTML ·
-                  Tailwind · JS</span>
-                <h3 class="eg-hover-title">Estudas Comigo</h3>
-                <p class="eg-hover-sub">Centro de Estudos</p>
-                <p class="eg-hover-desc">Website moderno para centro de estudos com design responsivo.</p>
-                <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">Tailwind CSS</span>
-                  <span class="eg-tag">JavaScript</span>
-                </div>
-              </div>
-            </div>
-          </a><a href="/portfolio/gt-movel/" class="eg-card  reveal-up" data-type="Comercial">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop" alt="GT Móvel"
-                class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
-              </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(170deg,#100e0e,#2a1a1a);opacity:0.4;mix-blend-mode:multiply;"></div>
-              <div class="eg-grid-pattern"></div>
-              <span class="eg-initial">G</span>
-              <div class="eg-badge-row"><span class="eg-badge">Comercial</span><span class="eg-year">2024</span></div>
-              <span class="eg-whisper">SINCE 1977 // SEO</span>
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
-              <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">07 — HTML · CSS ·
-                  JS</span>
-                <h3 class="eg-hover-title">GT Móvel</h3>
-                <p class="eg-hover-sub">Móveis e Eletrodomésticos</p>
-                <p class="eg-hover-desc">Website para empresa de móveis desde 1977. Catálogo e SEO optimizado.</p>
-                <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">CSS3</span> <span
-                    class="eg-tag">JavaScript</span></div>
-              </div>
-            </div>
-          </a><a href="/portfolio/hugo-brito/" class="eg-card  reveal-up" data-type="Académico">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop" alt="Hugo Brito"
-                class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
-              </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(155deg,#0e0e14,#1a1a28);opacity:0.4;mix-blend-mode:multiply;"></div>
-              <div class="eg-grid-pattern"></div>
+          </a>
+        </div>
 
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
+        <!-- Sequence 03: Trio Dynamic -->
+        <div class="eg-row eg-row--trio">
+          <a href="/portfolio/gt-movel/" class="eg-card reveal-up" style="margin-top: 5rem;">
+            <div class="eg-img-wrap" style="height: 48vh;">
+              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85&fit=crop" alt="GT Móvel"
+                class="eg-img">
               <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">08 — HTML · GSAP
-                  · Tailwind</span>
-                <h3 class="eg-hover-title">Hugo Brito</h3>
-                <p class="eg-hover-sub">Luxury Fashion Brand</p>
-                <p class="eg-hover-desc">Website conceito para marca de moda de luxo. Design cinematográfico com GSAP.
-                </p>
-                <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">GSAP 3</span> <span
-                    class="eg-tag">Tailwind CSS</span></div>
+                <h3 class="eg-hover-title" style="font-size: 2.2rem;">GT Móvel</h3>
               </div>
             </div>
-          </a></div>
-        <div class="eg-row eg-row--pair-r"><a href="/portfolio/tec-n-cool/" class="eg-card eg-narrow reveal-up"
-            data-type="Institucional">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop"
-                alt="Tec N' Cool" class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
+          </a>
+          <a href="/portfolio/expolive/" class="eg-card reveal-up">
+            <div class="eg-img-wrap" style="height: 68vh;">
+              <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1100&q=85&fit=crop"
+                alt="ExpoLive" class="eg-img">
+              <div class="sc-anno" style="bottom: 12%; left: 8%;">
+                <span>STATUS: READY</span>
+                <div class="sc-anno-line"></div>
               </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(190deg,#10140e,#1e2a18);opacity:0.4;mix-blend-mode:multiply;"></div>
-              <div class="eg-grid-pattern"></div>
-              <span class="eg-initial">T</span>
-              <div class="eg-badge-row"><span class="eg-badge">Institucional</span><span class="eg-year">2024</span>
-              </div>
-              <span class="eg-whisper">250+ ITEMS // ISCAP</span>
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
               <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">09 — HTML · CSS ·
-                  JS</span>
-                <h3 class="eg-hover-title">Tec N' Cool</h3>
-                <p class="eg-hover-sub">Plataforma ISCAP / CEI</p>
-                <p class="eg-hover-desc">Plataforma educativa para o ISCAP/CEI com catálogo de 250+ itens.</p>
-                <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">CSS3</span> <span
-                    class="eg-tag">JavaScript</span></div>
+                <h3 class="eg-hover-title" style="font-size: 2.2rem;">ExpoLive</h3>
               </div>
             </div>
-          </a><a href="/portfolio/wise-wallet/" class="eg-card eg-wide reveal-up" data-type="Académico">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop"
-                alt="Wise Wallet" class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
-              </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(210deg,#0e1018,#182030);opacity:0.4;mix-blend-mode:multiply;"></div>
-              <div class="eg-grid-pattern"></div>
-              <span class="eg-initial">W</span>
-              <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2024</span></div>
-              <span class="eg-whisper">CHARTS // PDF // OLLAMA</span>
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
+          </a>
+          <a href="/portfolio/hugo-brito/" class="eg-card reveal-up" style="margin-top: 10rem;">
+            <div class="eg-img-wrap" style="height: 52vh;">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1000&q=85&fit=crop" alt="Hugo Brito"
+                class="eg-img">
               <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">11 — PHP ·
-                  Chart.js · Ollama</span>
+                <h3 class="eg-hover-title" style="font-size: 2.2rem;">Hugo Brito</h3>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Sequence 04: Reverse Asymmetry -->
+        <div class="eg-row eg-row--asym-2">
+          <a href="/portfolio/wise-wallet/" class="eg-card reveal-up" style="transform: translateY(-15%);">
+            <div class="eg-img-wrap" style="height: 50vh;">
+              <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1000&q=85&fit=crop"
+                alt="Wise Wallet" class="eg-img">
+              <div class="eg-hover-content">
                 <h3 class="eg-hover-title">Wise Wallet</h3>
-                <p class="eg-hover-sub">Gestão Financeira Pessoal</p>
-                <p class="eg-hover-desc">Dashboard financeiro com gráficos Chart.js e IA local via Ollama.</p>
-                <div class="eg-hover-tags"><span class="eg-tag">PHP</span> <span class="eg-tag">Chart.js</span> <span
-                    class="eg-tag">DomPDF</span></div>
+                <p class="eg-hover-sub">Personal Finance AI</p>
               </div>
             </div>
-          </a></div>
-        <div class="eg-row eg-row--pair"><a href="/portfolio/portable-world/" class="eg-card eg-wide reveal-up"
-            data-type="Comercial">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop"
-                alt="Portable World" class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
-              </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(165deg,#0e1214,#1a2428);opacity:0.4;mix-blend-mode:multiply;"></div>
-
-              <span class="eg-initial">P</span>
-              <div class="eg-badge-row"><span class="eg-badge">Comercial</span><span class="eg-year">2024</span></div>
-              <span class="eg-whisper">CORPORATE // BRANDING</span>
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
+          </a>
+          <a href="/portfolio/cristal-terminal/" class="eg-card reveal-up" style="transform: translateY(5%);">
+            <div class="eg-img-wrap" style="height: 70vh;">
+              <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1300&q=95&fit=crop"
+                alt="Cristal Terminal" class="eg-img">
               <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">12 — HTML · CSS ·
-                  JS</span>
-                <h3 class="eg-hover-title">Portable World</h3>
-                <p class="eg-hover-sub">Website Corporativo</p>
-                <p class="eg-hover-desc">Website institucional para Portable World. Em renovação.</p>
-                <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">CSS3</span> <span
-                    class="eg-tag">JavaScript</span></div>
+                <h3 class="eg-hover-title" style="font-size: 3.5rem;">Cristal Terminal</h3>
+                <p class="eg-hover-sub">Quant Engine Evolution</p>
               </div>
             </div>
-          </a><a href="/portfolio/cristal-terminal/" class="eg-card eg-narrow reveal-up" data-type="Pessoal">
-            <div class="eg-img-wrap">
-              <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop"
-                alt="Cristal Terminal" class="eg-img" loading="lazy">
-              <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);">
-              </div>
-              <div class="eg-color-overlay"
-                style="background:linear-gradient(135deg,#0a0e17,#1a1f3a);opacity:0.4;mix-blend-mode:multiply;"></div>
-
-
-              <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg></div>
-              <div class="eg-hover-content">
-                <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">01 — Next.js ·
-                  React · TypeScript</span>
-                <h3 class="eg-hover-title">Cristal Terminal</h3>
-                <p class="eg-hover-sub">Terminal Financeiro Profissional</p>
-                <p class="eg-hover-desc">Terminal financeiro de nível profissional inspirado no Bloomberg Terminal.
-                  Motor quant tri-camada, integração IA local via Ollama e 8 temas visuais.</p>
-                <div class="eg-hover-tags"><span class="eg-tag">Next.js 15</span> <span class="eg-tag">React 19</span>
-                  <span class="eg-tag">TypeScript</span>
+          </a>
+          <!-- Sequence 05: Final Pair -->
+          <div class="eg-row eg-row--asym-1">
+            <a href="/portfolio/tec-n-cool/" class="eg-card reveal-up">
+              <div class="eg-img-wrap" style="height: 45vh;">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1000&q=85&fit=crop"
+                  alt="Tec N' Cool" class="eg-img">
+                <div class="eg-hover-content">
+                  <h3 class="eg-hover-title">Tec N' Cool</h3>
+                  <p class="eg-hover-sub">ISCAP Platform</p>
                 </div>
               </div>
-            </div>
-          </a></div>
-      </div>
+            </a>
+            <a href="/portfolio/estudas-comigo/" class="eg-card reveal-up" style="transform: translateY(15%);">
+              <div class="eg-img-wrap" style="height: 55vh;">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000&q=85&fit=crop"
+                  alt="Estudas Comigo" class="eg-img">
+                <div class="eg-hover-content">
+                  <h3 class="eg-hover-title">Estudas Comigo</h3>
+                  <p class="eg-hover-sub">Education Hub</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
 
     </section>
 

@@ -440,201 +440,255 @@
           opacity: 1;
           visibility: visible;
       }
-      .sc-img-wrap {
-          position: absolute;
-          inset: 0;
-          overflow: hidden;
-      }
-      .sc-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transform: scale(1.1);
-          will-change: transform;
-          filter: brightness(0.6) saturate(0.8);
-      }
-      .sc-img-overlay {
-          position: absolute;
-          inset: 0;
-          mix-blend-mode: multiply;
-      }
-      .sc-img-gradient {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 100%);
-      }
-      .sc-content {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          z-index: 5;
-          padding: clamp(2rem, 5vw, 5rem);
-          max-width: 55rem;
-      }
-      .sc-num {
-          font-family: var(--font-mono);
-          font-size: clamp(0.55rem, 0.7vw, .65rem);
-          letter-spacing: 0.2em;
-          color: rgba(255, 255, 255, 0.35);
-          display: block;
-          margin-bottom: 1rem;
-      }
-      .sc-title {
-          font-family: var(--font-serif);
-          font-style: italic;
-          font-weight: 400;
-          font-size: clamp(3rem, 8vw, 7.5rem);
-          line-height: 0.88;
-          color: white;
-          margin-bottom: 0.5rem;
-      }
-      .sc-sub {
-          font-family: var(--font-mono);
-          font-size: clamp(0.55rem, 0.75vw, .7rem);
-          letter-spacing: 0.12em;
-          color: rgba(255, 255, 255, 0.4);
-          margin-bottom: 1.5rem;
-          text-transform: uppercase;
-      }
-      .sc-desc {
-          font-size: clamp(0.8rem, 1vw, .92rem);
-          line-height: 1.7;
-          color: rgba(255, 255, 255, 0.55);
-          max-width: 42ch;
-          margin-bottom: 1.25rem;
-      }
-      .sc-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.35rem;
-          margin-bottom: 1rem;
-      }
-      .sc-tag {
-          font-family: var(--font-mono);
-          font-size: 0.45rem;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          padding: 0.2rem 0.5rem;
-          color: rgba(255, 255, 255, 0.45);
-      }
-      .sc-status {
-          font-family: var(--font-mono);
-          font-size: 0.5rem;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.3);
-      }
-      .sc-initial {
-          position: absolute;
-          right: 5%;
-          top: 50%;
-          transform: translateY(-50%);
-          font-family: var(--font-serif);
-          font-style: italic;
-          font-size: clamp(14rem, 25vw, 22rem);
-          color: rgba(255, 255, 255, 0.03);
-          pointer-events: none;
-          z-index: 2;
-      }
-      .sc-whisper {
-          position: absolute;
-          bottom: clamp(1.5rem, 3vw, 2.5rem);
-          right: clamp(1.5rem, 3vw, 2.5rem);
-          font-family: var(--font-mono);
-          font-size: 0.42rem;
-          letter-spacing: 0.18em;
-          color: rgba(255, 255, 255, 0.1);
-          z-index: 3;
-          text-transform: uppercase;
-      }
-      .sc-progress {
-          position: absolute;
-          right: clamp(1.5rem, 3vw, 2.5rem);
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 10;
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-      }
-      .sc-dot {
-          width: 2.5rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 0;
-      }
-      .sc-dot-fill {
-          width: 2px;
-          height: 2rem;
-          background: rgba(255, 255, 255, 0.15);
-          position: relative;
-          overflow: hidden;
-          flex-shrink: 0;
-      }
-      .sc-dot-fill::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: white;
-          transform: scaleY(0);
-          transform-origin: top;
-          transition: transform .5s cubic-bezier(.25, .46, .45, .94);
-      }
-      .sc-dot.active .sc-dot-fill::after {
-          transform: scaleY(1);
-      }
-      .sc-dot-label {
-          font-family: var(--font-mono);
-          font-size: 0.42rem;
-          letter-spacing: 0.12em;
-          color: rgba(255, 255, 255, 0.2);
-      }
-      .sc-dot.active .sc-dot-label {
-          color: rgba(255, 255, 255, 0.6);
-      }
-      .sc-section-label {
-          position: absolute;
-          top: clamp(1.5rem, 3vh, 2.5rem);
-          left: clamp(1.5rem, 3vw, 2.5rem);
-          z-index: 10;
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-      }
-      .sc-view-btn {
-          position: absolute;
-          bottom: clamp(2rem, 5vw, 4rem);
-          right: clamp(6rem, 12vw, 12rem);
-          z-index: 10;
-      }
-      .sc-view-btn a {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.6rem;
-          font-family: var(--font-mono);
-          font-size: 0.6rem;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: white;
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          padding: 0.75rem 1.8rem;
-          transition: all .35s cubic-bezier(.25, .46, .45, .94);
-          text-decoration: none;
-          backdrop-filter: blur(8px);
-          background: rgba(255, 255, 255, 0.04);
-      }
-      .sc-view-btn a:hover {
-          color: white;
-          border-color: rgba(255, 255, 255, 0.6);
-          background: rgba(255, 255, 255, 0.1);
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.3);
-      }
+    /* ══ EDITORIAL SHOWCASE (REENGINEERED) ══ */
+    #pf-showcase {
+        position: relative;
+        background: #111;
+        color: white;
+        overflow: hidden;
+    }
+
+    .sc-sticky {
+        height: 100vh;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 1500px;
+        background: #0a0a0a;
+    }
+
+    .sc-panels {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .sc-panel {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform-style: preserve-3d;
+    }
+
+    .sc-panel.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+    }
+
+    .sc-inner {
+        position: relative;
+        width: 90%;
+        max-width: 1400px;
+        height: 80vh;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+        gap: clamp(2rem, 5vw, 6rem);
+    }
+
+    .sc-img-frame {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: rotateY(-15deg) rotateX(5deg);
+        box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.8);
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sc-panel.active .sc-img-frame {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+
+    .sc-img-main {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.15);
+        transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+        filter: brightness(0.75);
+    }
+
+    .sc-panel.active .sc-img-main {
+        transform: scale(1);
+        filter: brightness(0.9);
+    }
+
+    .sc-content-wrap {
+        position: relative;
+        z-index: 10;
+        padding-left: 1rem;
+    }
+
+    .sc-title-big {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(3rem, 6.5vw, 7.5rem);
+        line-height: 0.85;
+        margin-bottom: 2rem;
+        color: white;
+        transform: translateX(50px);
+        opacity: 0;
+        transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    }
+
+    .sc-panel.active .sc-title-big {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .sc-anno {
+        position: absolute;
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        font-size: 0.5rem;
+        letter-spacing: 0.25em;
+        color: rgba(255, 255, 255, 0.35);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        pointer-events: none;
+        z-index: 20;
+    }
+
+    .sc-anno-line {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.15);
+        width: 0;
+        transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+    }
+
+    .sc-panel.active .sc-anno-line {
+        width: 100px;
+    }
+
+    .sc-meta-item {
+        margin-bottom: 2.2rem;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sc-panel.active .sc-meta-item {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .sc-meta-item:nth-child(2) { transition-delay: 0.5s; }
+    .sc-meta-item:nth-child(3) { transition-delay: 0.7s; }
+
+    .sc-tag-pill {
+        display: inline-block;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 0.3rem 0.85rem;
+        font-size: 0.48rem;
+        font-family: var(--font-mono);
+        color: rgba(255, 255, 255, 0.4);
+        margin-right: 0.6rem;
+        margin-bottom: 0.6rem;
+        border-radius: 2px;
+    }
+
+    .sc-progress-v {
+        position: absolute;
+        left: clamp(2rem, 5vw, 5rem);
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        z-index: 100;
+    }
+
+    .sc-dot-v {
+        width: 40px;
+        height: 1.5px;
+        background: rgba(255, 255, 255, 0.08);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        cursor: pointer;
+    }
+
+    .sc-dot-v.active {
+        width: 80px;
+        background: #c9a84c;
+    }
+
+    .sc-dot-v::before {
+        content: attr(data-num);
+        position: absolute;
+        left: -45px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        color: rgba(255, 255, 255, 0.15);
+        transition: color 0.5s;
+    }
+
+    .sc-dot-v.active::before {
+        color: #c9a84c;
+    }
+
+    .sc-section-label {
+        position: absolute;
+        top: clamp(1.5rem, 4vh, 3rem);
+        left: clamp(2rem, 5vw, 5rem);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .sc-view-btn {
+        position: absolute;
+        bottom: clamp(1.5rem, 5vh, 3.5rem);
+        right: clamp(1.5rem, 5vw, 5rem);
+        z-index: 100;
+    }
+
+    .sc-view-btn a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 0.5rem;
+        transition: all .4s ease;
+        text-decoration: none;
+    }
+
+    .sc-view-btn a:hover {
+        border-color: #c9a84c;
+        color: #c9a84c;
+        padding-right: 1rem;
+    }
+
+    @media (max-width: 1024px) {
+        .sc-inner {
+            grid-template-columns: 1fr;
+            height: auto;
+            gap: 2.5rem;
+            padding: 4rem 1rem;
+        }
+        .sc-img-frame { height: 45vh; transform: none !important; }
+        .sc-progress-v { display: none; }
+        .sc-title-big { font-size: 3rem; }
+    }
       .proj-btn:hover {
         background: var(--color-ink);
         border-color: var(--color-ink);
@@ -969,92 +1023,128 @@
     <div class="sc-sticky">
       <div class="sc-panels">
         <!-- Panel 01 -->
-        <div class="sc-panel" data-panel="0">
-          <div class="sc-img-wrap">
-            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop"
-              alt="Cristal Terminal" class="sc-img" loading="eager">
-            <div class="sc-img-overlay"
-              style="background:linear-gradient(135deg,#0a0e17,#1a1f3a,transparent);opacity:0.65;"></div>
-            <div class="sc-img-gradient"></div>
-          </div>
-          <div class="sc-content">
-            <span class="sc-num">01</span>
-            <h3 class="sc-title">Cristal Terminal</h3>
-            <p class="sc-sub">Terminal Financeiro Profissional</p>
-            <p class="sc-desc">Terminal financeiro de nível profissional inspirado no Bloomberg Terminal. Motor quant
-              tri-camada, integração IA local via Ollama e 8 temas visuais.</p>
-            <div class="sc-tags">
-              <span class="sc-tag">Next.js 15</span>
-              <span class="sc-tag">React 19</span>
-              <span class="sc-tag">TypeScript</span>
-              <span class="sc-tag">C++/WASM</span>
+        <div class="sc-panel active" data-panel="0">
+          <div class="sc-inner">
+            <div class="sc-img-frame">
+              <img src="https://images.unsplash.com/photo-1541888941259-79ad73220392?w=1400&q=90&fit=crop"
+                alt="Cristal Terminal" class="sc-img-main">
+              <!-- Technical Annotations -->
+              <div class="sc-anno" style="top: 15%; left: 10%;">
+                <span>Geometry: 1/48 SCALE</span>
+                <div class="sc-anno-line"></div>
+              </div>
+              <div class="sc-anno" style="bottom: 10%; right: 15%; align-items: flex-end;">
+                <div class="sc-anno-line"></div>
+                <span>Ref: CRT-2025-V2</span>
+              </div>
             </div>
-            <span class="sc-status">Em Desenvolvimento</span>
+            <div class="sc-content-wrap">
+              <div class="sc-meta-item">
+                <span class="font-mono text-white/30 block mb-2" style="font-size: 0.6rem; letter-spacing: 0.3em;">01 /
+                  03</span>
+                <h3 class="sc-title-big">Cristal Terminal</h3>
+              </div>
+              <div class="sc-meta-item">
+                <p class="font-mono uppercase mb-4" style="font-size: 0.55rem; color: #c9a84c;">Plataforma Logística &
+                  Fintech</p>
+                <p class="text-white/50 leading-relaxed max-w-sm mb-6" style="font-size: 0.85rem;">
+                  Um ecossistema digital robusto para gestão de terminais, integrando visualização de dados em tempo
+                  real e automação de fluxos.
+                </p>
+              </div>
+              <div class="sc-meta-item">
+                <div class="flex flex-wrap">
+                  <span class="sc-tag-pill">React</span>
+                  <span class="sc-tag-pill">Node.js</span>
+                  <span class="sc-tag-pill">Docker</span>
+                </div>
+              </div>
+            </div>
           </div>
-
         </div>
+
         <!-- Panel 02 -->
         <div class="sc-panel" data-panel="1">
-          <div class="sc-img-wrap">
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop"
-              alt="Casa do Gi" class="sc-img" loading="lazy">
-            <div class="sc-img-overlay"
-              style="background:linear-gradient(160deg,#1a150e,#2a1f0e,transparent);opacity:0.65;"></div>
-            <div class="sc-img-gradient"></div>
-          </div>
-          <div class="sc-content">
-            <span class="sc-num">02</span>
-            <h3 class="sc-title">Casa do Gi</h3>
-            <p class="sc-sub">Reservas e E-commerce</p>
-            <p class="sc-desc">Website para alojamento local com sistema de reservas, pagamentos IfthenPay e painel de
-              administração.</p>
-            <div class="sc-tags">
-              <span class="sc-tag">PHP 8</span>
-              <span class="sc-tag">MySQL</span>
-              <span class="sc-tag">IfthenPay</span>
+          <div class="sc-inner">
+            <div class="sc-img-frame">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&q=90&fit=crop"
+                alt="Casa do Gi" class="sc-img-main">
+              <div class="sc-anno" style="top: 20%; right: 5%; align-items: flex-end;">
+                <div class="sc-anno-line"></div>
+                <span>Grid: 12 COL OFFSET</span>
+              </div>
             </div>
-            <span class="sc-status">Em Produção</span>
+            <div class="sc-content-wrap">
+              <div class="sc-meta-item">
+                <span class="font-mono text-white/30 block mb-2" style="font-size: 0.6rem; letter-spacing: 0.3em;">02 /
+                  03</span>
+                <h3 class="sc-title-big">Casa do Gi</h3>
+              </div>
+              <div class="sc-meta-item">
+                <p class="font-mono uppercase mb-4" style="font-size: 0.55rem; color: #c9a84c;">Reservas & E-commerce
+                </p>
+                <p class="text-white/50 leading-relaxed max-w-sm mb-6" style="font-size: 0.85rem;">
+                  Experiência boutique para alojamento local, focada na conversão e na narrativa visual da marca.
+                </p>
+              </div>
+              <div class="sc-meta-item">
+                <div class="flex flex-wrap">
+                  <span class="sc-tag-pill">PHP 8</span>
+                  <span class="sc-tag-pill">Tailwind</span>
+                  <span class="sc-tag-pill">IfthenPay</span>
+                </div>
+              </div>
+            </div>
           </div>
-
         </div>
+
         <!-- Panel 03 -->
         <div class="sc-panel" data-panel="2">
-          <div class="sc-img-wrap">
-            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop" alt="ExpoLive"
-              class="sc-img" loading="lazy">
-            <div class="sc-img-overlay"
-              style="background:linear-gradient(130deg,#18100e,#30201a,transparent);opacity:0.65;"></div>
-            <div class="sc-img-gradient"></div>
-          </div>
-          <div class="sc-content">
-            <span class="sc-num">10</span>
-            <h3 class="sc-title">ExpoLive</h3>
-            <p class="sc-sub">Gestão de Eventos e CMS</p>
-            <p class="sc-desc">Plataforma de gestão de eventos com 30+ páginas admin e chatbot IA.</p>
-            <div class="sc-tags">
-              <span class="sc-tag">PHP</span>
-              <span class="sc-tag">MySQL</span>
-              <span class="sc-tag">REST API</span>
-              <span class="sc-tag">IA</span>
+          <div class="sc-inner">
+            <div class="sc-img-frame">
+              <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1400&q=90&fit=crop"
+                alt="ExpoLive" class="sc-img-main">
+              <div class="sc-anno" style="bottom: 20%; left: 5%;">
+                <span>Status: OPTIMIZED</span>
+                <div class="sc-anno-line"></div>
+              </div>
             </div>
-            <span class="sc-status">Concluído</span>
+            <div class="sc-content-wrap">
+              <div class="sc-meta-item">
+                <span class="font-mono text-white/30 block mb-2" style="font-size: 0.6rem; letter-spacing: 0.3em;">03 /
+                  03</span>
+                <h3 class="sc-title-big">ExpoLive</h3>
+              </div>
+              <div class="sc-meta-item">
+                <p class="font-mono uppercase mb-4" style="font-size: 0.55rem; color: #c9a84c;">Eventos & CMS Core</p>
+                <p class="text-white/50 leading-relaxed max-w-sm mb-6" style="font-size: 0.85rem;">
+                  Plataforma escalável para gestão de grandes eventos, com arquitetura modular e performance crítica.
+                </p>
+              </div>
+              <div class="sc-meta-item">
+                <div class="flex flex-wrap">
+                  <span class="sc-tag-pill">Laravel</span>
+                  <span class="sc-tag-pill">Alpine.js</span>
+                  <span class="sc-tag-pill">Livewire</span>
+                </div>
+              </div>
+            </div>
           </div>
-
         </div>
       </div>
-      <div class="sc-progress">
-        <button class="sc-dot active" data-idx="0"><span class="sc-dot-fill"></span><span
-            class="sc-dot-label">01</span></button>
-        <button class="sc-dot" data-idx="1"><span class="sc-dot-fill"></span><span
-            class="sc-dot-label">02</span></button>
-        <button class="sc-dot" data-idx="2"><span class="sc-dot-fill"></span><span
-            class="sc-dot-label">10</span></button>
+
+      <div class="sc-progress-v">
+        <div class="sc-dot-v active" data-num="01"></div>
+        <div class="sc-dot-v" data-num="02"></div>
+        <div class="sc-dot-v" data-num="03"></div>
       </div>
+
       <div class="sc-section-label">
-        <div class="crosshair-mark text-paper"></div>
-        <span class="t-label" style="color:rgba(235,233,228,0.35);">02 &mdash; Em Destaque</span>
+        <div class="crosshair-mark text-silver"></div>
+        <span class="t-label" style="color:rgba(255,255,255,0.25);">SELECTED ARCHIVES // 2026</span>
       </div>
-      <div class="sc-view-btn"><a href="/portfolio/cristal-terminal/">Ver Projecto &rarr;</a></div>
+
+      <div class="sc-view-btn"><a href="/portfolio/cristal-terminal/">Entrar no Projecto</a></div>
     </div>
   </section>
 
