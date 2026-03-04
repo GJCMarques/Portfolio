@@ -1,0 +1,1318 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Portfólio Monrion — projectos de design digital, branding e desenvolvimento web feitos em Porto, Portugal." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <title>Monrion | Cristal Capital</title>
+  <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="../../assets/favicon.ico" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { paper: "#EBE9E4", ink: "#121212", silver: "#8C8C8C", carbon: "#333333" },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', "sans-serif"],
+            serif: ['"Cormorant Garamond"', "serif"],
+            mono: ['"IBM Plex Mono"', "monospace"],
+          },
+          borderRadius: { "2xl": "2rem", "3xl": "3rem" },
+        },
+      },
+    };
+  </script>
+  <script type="importmap">{"imports":{"gsap":"https://esm.sh/gsap@3.12.5","gsap/ScrollTrigger":"https://esm.sh/gsap@3.12.5/ScrollTrigger","lucide":"https://esm.sh/lucide@0.344.0"}}</script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+  <style type="text/tailwindcss">
+    :root {
+        --bg-color: #ebe9e4;
+        --color-paper: #ebe9e4;
+        --color-ink: #121212;
+        --color-silver: #8c8c8c;
+        --font-sans: "Plus Jakarta Sans", sans-serif;
+        --font-serif: "Cormorant Garamond", serif;
+        --font-mono: "IBM Plex Mono", monospace;
+    }
+
+    body {
+        background: var(--bg-color);
+        color: var(--color-ink);
+        font-family: var(--font-sans);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        visibility: hidden;
+    }
+
+    .noise-overlay {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.05;
+        filter: url(#noiseFilter);
+        mix-blend-mode: overlay;
+    }
+
+    /* Navbar */
+    #navbar {
+        transition: background-color .5s, border-color .5s, backdrop-filter .5s, box-shadow .5s, padding .5s;
+        border: 1px solid transparent;
+    }
+
+    #navbar.scrolled {
+        background: rgba(235, 233, 228, 0.85);
+        backdrop-filter: blur(16px);
+        border-color: rgba(18, 18, 18, 0.08);
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        padding-top: 0.55rem;
+        padding-bottom: 0.55rem;
+    }
+
+    .nav-link {
+        font-family: var(--font-mono);
+        font-size: clamp(0.7rem, 0.85vw, 0.95rem);
+        font-weight: 500;
+        color: var(--color-ink);
+        position: relative;
+        padding: 0.2rem 0;
+        text-decoration: none !important;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .nav-link::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--color-ink);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform .4s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--color-ink);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .4s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .nav-link:hover::before,
+    .nav-link.active::before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+
+    .logo-link {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .logo-container {
+        width: clamp(2.5rem, 3.2vw, 4.2rem);
+        height: clamp(2.5rem, 3.2vw, 4.2rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-text {
+        display: block;
+        font-size: clamp(15px, 1.4vw, 24px);
+        font-weight: 800;
+        text-transform: uppercase;
+        font-family: var(--font-sans);
+        user-select: none;
+        letter-spacing: 0.06em;
+        transition: letter-spacing .55s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .logo-link:hover .logo-text {
+        letter-spacing: 0.38em;
+    }
+
+    .logo-container svg {
+        transition: transform .5s cubic-bezier(.34, 1.56, .64, 1);
+        width: 100%;
+        height: 100%;
+    }
+
+    .logo-link:hover .logo-container svg {
+        transform: scale(1.1) rotate(-5deg);
+    }
+
+    .btn-contact {
+        font-family: var(--font-sans);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border: 1px solid var(--color-ink);
+        transition: all .3s;
+        cursor: pointer;
+    }
+
+    .btn-contact:hover {
+        background: transparent;
+        color: var(--color-ink);
+    }
+
+    /* Footer */
+    .footer-link {
+        position: relative;
+        display: inline-block;
+        transition: color .3s, transform .3s;
+    }
+
+    .footer-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: rgba(235, 233, 228, 0.5);
+        transition: width .4s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .footer-link:hover {
+        color: rgba(235, 233, 228, 1) !important;
+        transform: translateX(4px);
+    }
+
+    .footer-link:hover::after {
+        width: 100%;
+    }
+
+    /* ══ COMMON ══ */
+    .bp-grid {
+        background-image: linear-gradient(rgba(18, 18, 18, 0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 18, 18, 0.028) 1px, transparent 1px);
+        background-size: 80px 80px;
+    }
+
+    .t-label {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(18, 18, 18, 0.32);
+    }
+
+    .crosshair-mark {
+        position: relative;
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+    }
+
+    .crosshair-mark::before,
+    .crosshair-mark::after {
+        content: "";
+        position: absolute;
+        background: currentColor;
+        opacity: 0.22;
+    }
+
+    .crosshair-mark::before {
+        width: 1px;
+        height: 100%;
+        left: 50%;
+    }
+
+    .crosshair-mark::after {
+        height: 1px;
+        width: 100%;
+        top: 50%;
+    }
+
+    .hero-ghost {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 300;
+        line-height: 0.85;
+        letter-spacing: -0.02em;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(18, 18, 18, 0.045);
+        user-select: none;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .h-line {
+        height: 1px;
+        background: rgba(18, 18, 18, 0.12);
+        transform-origin: left;
+        transform: scaleX(0);
+    }
+
+    @keyframes scroll-cue {
+
+        0%,
+        100% {
+            transform: translateY(0);
+            opacity: .3
+        }
+
+        50% {
+            transform: translateY(10px);
+            opacity: .08
+        }
+    }
+
+    .scroll-cue-line {
+        width: 1px;
+        height: 48px;
+        background: var(--color-ink);
+        opacity: .3;
+        animation: scroll-cue 2.2s ease-in-out infinite;
+    }
+
+    .hero-word {
+        display: inline-block;
+        transform: translateY(105%);
+    }
+
+    .clip-wrap {
+        overflow: hidden;
+        display: block;
+    }
+
+    .reveal-up {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    /* ══ HERO CODE GLYPHS (unique to portfolio) ══ */
+    .code-glyph {
+        position: absolute;
+        font-family: var(--font-mono);
+        pointer-events: none;
+        user-select: none;
+        line-height: 1;
+    }
+
+    .code-glyph--bracket {
+        color: rgba(18, 18, 18, 0.055);
+        font-weight: 300;
+    }
+
+    .code-glyph--tag {
+        color: rgba(18, 18, 18, 0.04);
+        font-weight: 400;
+    }
+
+    .code-glyph--dot {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: rgba(18, 18, 18, 0.04);
+        pointer-events: none;
+    }
+
+    .code-glyph--line {
+        position: absolute;
+        height: 1px;
+        background: rgba(18, 18, 18, 0.025);
+        pointer-events: none;
+        transform-origin: left;
+    }
+
+    /* ══ PINNED SHOWCASE ══ */
+    .sc-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .sc-panels {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .sc-panel {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+    }
+
+    .sc-panel:first-child {
+        opacity: 1;
+    }
+
+    .sc-img-wrap {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+    }
+
+    .sc-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+        will-change: transform;
+        filter: brightness(0.65) saturate(0.85);
+    }
+
+    .sc-img-overlay {
+        position: absolute;
+        inset: 0;
+        mix-blend-mode: multiply;
+    }
+
+    .sc-img-gradient {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.7) 100%);
+    }
+
+    .sc-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 5;
+        padding: clamp(2rem, 5vw, 5rem);
+        max-width: 55rem;
+    }
+
+    .sc-num {
+        font-family: var(--font-mono);
+        font-size: clamp(0.55rem, 0.7vw, .65rem);
+        letter-spacing: 0.2em;
+        color: rgba(255, 255, 255, 0.35);
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .sc-title {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(3rem, 8vw, 7.5rem);
+        line-height: 0.88;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .sc-sub {
+        font-family: var(--font-mono);
+        font-size: clamp(0.55rem, 0.75vw, .7rem);
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+    }
+
+    .sc-desc {
+        font-size: clamp(0.8rem, 1vw, .92rem);
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.55);
+        max-width: 42ch;
+        margin-bottom: 1.25rem;
+    }
+
+    .sc-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-bottom: 1rem;
+    }
+
+    .sc-tag {
+        font-family: var(--font-mono);
+        font-size: 0.45rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 0.2rem 0.5rem;
+        color: rgba(255, 255, 255, 0.45);
+    }
+
+    .sc-status {
+        font-family: var(--font-mono);
+        font-size: 0.5rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .sc-initial {
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(14rem, 25vw, 22rem);
+        color: rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .sc-whisper {
+        position: absolute;
+        bottom: clamp(1.5rem, 3vw, 2.5rem);
+        right: clamp(1.5rem, 3vw, 2.5rem);
+        font-family: var(--font-mono);
+        font-size: 0.42rem;
+        letter-spacing: 0.18em;
+        color: rgba(255, 255, 255, 0.1);
+        z-index: 3;
+        text-transform: uppercase;
+    }
+
+    .sc-progress {
+        position: absolute;
+        right: clamp(1.5rem, 3vw, 2.5rem);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .sc-dot {
+        width: 2.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .sc-dot-fill {
+        width: 2px;
+        height: 2rem;
+        background: rgba(255, 255, 255, 0.15);
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+        transition: background .3s;
+    }
+
+    .sc-dot-fill::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: white;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform .5s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .sc-dot.active .sc-dot-fill::after {
+        transform: scaleY(1);
+    }
+
+    .sc-dot-label {
+        font-family: var(--font-mono);
+        font-size: 0.42rem;
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.2);
+        transition: color .3s;
+    }
+
+    .sc-dot.active .sc-dot-label {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .sc-section-label {
+        position: absolute;
+        top: clamp(1.5rem, 3vh, 2.5rem);
+        left: clamp(1.5rem, 3vw, 2.5rem);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .sc-view-btn {
+        position: absolute;
+        bottom: clamp(2rem, 5vw, 4rem);
+        right: clamp(6rem, 12vw, 12rem);
+        z-index: 10;
+    }
+
+    .sc-view-btn a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 0.75rem 1.8rem;
+        transition: all .35s cubic-bezier(.25, .46, .45, .94);
+        text-decoration: none;
+        backdrop-filter: blur(8px);
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .sc-view-btn a:hover {
+        color: white;
+        border-color: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ══ EDITORIAL GRID ══ */
+    .eg-grid {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(6px, 0.6vw, 10px);
+    }
+
+    .eg-row {
+        display: grid;
+        gap: clamp(6px, 0.6vw, 10px);
+    }
+
+    .eg-row--full {
+        grid-template-columns: 1fr;
+    }
+
+    .eg-row--pair {
+        grid-template-columns: 7fr 5fr;
+    }
+
+    .eg-row--pair-r {
+        grid-template-columns: 5fr 7fr;
+    }
+
+    .eg-row--trio {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media(max-width:768px) {
+
+        .eg-row--pair,
+        .eg-row--pair-r,
+        .eg-row--trio {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .eg-card {
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+        text-decoration: none;
+        display: block;
+    }
+
+    .eg-img-wrap {
+        position: relative;
+        height: clamp(320px, 45vh, 560px);
+        overflow: hidden;
+    }
+
+    .eg-full .eg-img-wrap {
+        height: clamp(420px, 58vh, 680px);
+    }
+
+    .eg-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s cubic-bezier(.25, .46, .45, .94), filter .8s;
+        filter: brightness(0.72) saturate(0.85);
+    }
+
+    .eg-card:hover .eg-img {
+        transform: scale(1.06);
+        filter: brightness(0.45) saturate(1);
+    }
+
+    .eg-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .eg-color-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .eg-grid-pattern {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    .eg-initial {
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(8rem, 16vw, 14rem);
+        color: rgba(255, 255, 255, 0.04);
+        pointer-events: none;
+        z-index: 3;
+        transition: color .6s, transform .6s;
+    }
+
+    .eg-card:hover .eg-initial {
+        color: rgba(255, 255, 255, 0.08);
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .eg-badge-row {
+        position: absolute;
+        top: 14px;
+        left: 16px;
+        z-index: 5;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .eg-badge {
+        font-family: var(--font-mono);
+        font-size: 0.48rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.55);
+        padding: 0.2rem 0.5rem;
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .eg-year {
+        font-family: var(--font-mono);
+        font-size: 0.48rem;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.12em;
+    }
+
+    .eg-whisper {
+        position: absolute;
+        bottom: 14px;
+        right: 16px;
+        font-family: var(--font-mono);
+        font-size: 0.42rem;
+        letter-spacing: 0.18em;
+        color: rgba(255, 255, 255, 0.1);
+        z-index: 5;
+        text-transform: uppercase;
+    }
+
+    .eg-hover-content {
+        position: absolute;
+        inset: 0;
+        z-index: 6;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: clamp(1.2rem, 2.5vw, 2rem);
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity .5s cubic-bezier(.25, .46, .45, .94), transform .5s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .eg-card:hover .eg-hover-content {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .eg-hover-title {
+        font-family: var(--font-serif);
+        font-style: italic;
+        color: white;
+        font-size: clamp(1.8rem, 3.5vw, 3rem);
+        line-height: .92;
+        margin: .25rem 0;
+    }
+
+    .eg-hover-sub {
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        letter-spacing: .1em;
+        color: rgba(255, 255, 255, .45);
+        margin-bottom: .5rem;
+    }
+
+    .eg-hover-desc {
+        font-size: .78rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, .55);
+        max-width: 42ch;
+        margin-bottom: .75rem;
+    }
+
+    .eg-hover-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .3rem;
+    }
+
+    .eg-tag {
+        font-family: var(--font-mono);
+        font-size: .42rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, .15);
+        padding: .18rem .45rem;
+        color: rgba(255, 255, 255, .45);
+    }
+
+    .eg-view-arrow {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        z-index: 7;
+        width: 28px;
+        height: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translate(-4px, -4px);
+        transition: all .4s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .eg-card:hover .eg-view-arrow {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    .eg-view-arrow svg {
+        width: 12px;
+        height: 12px;
+        stroke: rgba(255, 255, 255, 0.55);
+    }
+
+    @media(max-width:768px) {
+        .eg-hover-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .eg-hover-desc,
+        .eg-hover-tags {
+            display: none;
+        }
+
+        .eg-view-arrow {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+    }
+
+    /* Filter */
+    .gal-filter {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+        border: 1px solid rgba(18, 18, 18, 0.12);
+        color: rgba(18, 18, 18, 0.4);
+        background: transparent;
+        cursor: pointer;
+        transition: all .3s;
+    }
+
+    .gal-filter:hover {
+        border-color: rgba(18, 18, 18, 0.3);
+        color: var(--color-ink);
+    }
+
+    .gal-filter.active {
+        background: var(--color-ink);
+        color: var(--color-paper);
+        border-color: var(--color-ink);
+    }
+
+    /* ══ CTA ══ */
+    .cta-chevron {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: clamp(200px, 28vw, 400px);
+        pointer-events: none;
+        z-index: 5;
+        overflow: hidden;
+    }
+
+    .cta-chevron--left {
+        left: 0;
+    }
+
+    .cta-chevron--right {
+        right: 0;
+    }
+
+    .cta-chevron-line {
+        position: absolute;
+        width: 100%;
+        height: 1.5px;
+        background: rgba(18, 18, 18, 0.18);
+        transform-origin: center;
+    }
+
+    .cta-chevron--left .cta-chevron-line {
+        transform: rotate(-20deg);
+    }
+
+    .cta-chevron--right .cta-chevron-line {
+        transform: rotate(20deg);
+    }
+
+    .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-sans);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+        padding: clamp(0.85rem, 1.2vw, 1.1rem) clamp(2rem, 3vw, 2.8rem);
+        position: relative;
+        overflow: hidden;
+        transition: transform .3s cubic-bezier(.25, .46, .45, .94), box-shadow .3s;
+        z-index: 50;
+        text-decoration: none;
+    }
+
+    .cta-btn:hover {
+        transform: scale(1.03);
+    }
+
+    .cta-btn--primary {
+        background: var(--color-ink);
+        color: var(--color-paper);
+        border: 1px solid var(--color-ink);
+    }
+
+    .cta-btn--primary:hover {
+        box-shadow: 0 12px 40px -8px rgba(18, 18, 18, 0.3);
+    }
+
+    .cta-btn--outline {
+        background: var(--color-paper);
+        color: var(--color-ink);
+        border: 1px solid rgba(18, 18, 18, 0.2);
+    }
+
+    .cta-btn--outline:hover {
+        border-color: rgba(18, 18, 18, 0.6);
+        box-shadow: 0 8px 30px -6px rgba(18, 18, 18, 0.15);
+    }
+
+    /* Dome */
+    .dome-stage {
+        perspective: 900px;
+        perspective-origin: 50% 50%;
+    }
+
+    .dome-sphere {
+        transform-style: preserve-3d;
+        will-change: transform;
+        position: relative;
+    }
+
+    .dome-tile {
+        position: absolute;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+    }
+
+    .dome-tile img {
+        filter: grayscale(100%) brightness(0.95);
+        border-radius: 8px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* ══ PROJECT PAGE ══ */
+    .proj-hero-img {
+        width: 100%;
+        height: clamp(400px, 55vh, 650px);
+        object-fit: cover;
+        filter: brightness(0.7) saturate(0.85);
+    }
+
+    .proj-detail-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(6px, 0.6vw, 10px);
+    }
+
+    @media(max-width:768px) {
+        .proj-detail-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .proj-detail-img {
+        width: 100%;
+        height: clamp(280px, 40vh, 450px);
+        object-fit: cover;
+        filter: brightness(0.75);
+        transition: filter .5s;
+    }
+
+    .proj-detail-img:hover {
+        filter: brightness(0.9);
+    }
+
+    .breadcrumb-link {
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(18, 18, 18, 0.4);
+        transition: color .3s;
+        text-decoration: none;
+    }
+
+    .breadcrumb-link:hover {
+        color: var(--color-ink);
+    }
+
+    .breadcrumb-sep {
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        color: rgba(18, 18, 18, 0.2);
+        margin: 0 0.5rem;
+    }
+
+    .tech-icon {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 4px;
+        opacity: 0.7;
+    }
+
+    .proj-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-ink);
+        border: 1px solid rgba(18, 18, 18, 0.15);
+        padding: 0.6rem 1.2rem;
+        transition: all .3s;
+        text-decoration: none;
+    }
+
+    .proj-link:hover {
+        border-color: var(--color-ink);
+        background: var(--color-ink);
+        color: var(--color-paper);
+    }
+
+    .proj-link svg {
+        width: 14px;
+        height: 14px;
+    }
+  </style>
+</head>
+
+<body class="bg-paper text-ink">
+  <svg class="hidden"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.6" stitchTiles="stitch" /></filter></svg>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <nav id="navbar" class="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] rounded-full flex items-center justify-between"
+    style="top:clamp(0.75rem,2vh,1.5rem); max-width:clamp(500px,88vw,76rem); padding:clamp(0.85rem,1.5vw,1.4rem) clamp(1.5rem,3vw,2.5rem);">
+    <a href="/" class="logo-link group relative z-20">
+      <div class="logo-container text-ink">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" class="opacity-100" />
+          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7" class="opacity-100" />
+          <circle cx="20" cy="19" r="1.5" fill="currentColor" class="opacity-100" />
+        </svg>
+      </div>
+      <span class="logo-text block text-[22px] font-extrabold uppercase text-ink font-sans select-none group-hover:text-carbon">MONRION</span>
+    </a>
+    <div class="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+      style="gap:clamp(1.5rem,2.5vw,2.5rem)">
+      <a href="/portfolio/" class="nav-link active">Portfólio</a>
+      <a href="/sobre/" class="nav-link">Sobre Nós</a>
+      <a href="/servicos/" class="nav-link">Serviços</a>
+    </div>
+    <div class="hidden md:flex relative z-20 items-center">
+      <a href="/contactos/"
+        class="btn-contact group relative rounded-full bg-ink text-paper font-semibold overflow-hidden flex items-center justify-center leading-none"
+        style="padding:clamp(0.6rem,1vw,0.85rem) clamp(1.5rem,2.5vw,2.25rem); font-size:clamp(0.8rem,0.9vw,1rem);">
+        <span class="relative z-10 group-hover:text-ink transition-colors duration-300">Contactar</span>
+        <span class="absolute inset-0 bg-paper translate-y-[102%] group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+      </a>
+    </div>
+    <button class="md:hidden text-ink cursor-pointer relative z-20" id="menu-btn">
+      <i data-lucide="menu"></i>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu"
+    class="fixed inset-0 z-40 bg-paper/95 backdrop-blur-xl transform translate-y-full transition-transform duration-500 flex flex-col items-center justify-center gap-8 md:hidden">
+    <button id="close-menu-btn" class="absolute top-8 right-8 text-ink cursor-pointer">
+      <i data-lucide="x"></i>
+    </button>
+    <a href="/portfolio/" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Portfólio</a>
+    <a href="/sobre/" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Sobre Nós</a>
+    <a href="/servicos/" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Serviços</a>
+    <a href="/contactos/"
+      class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block flex items-center justify-center leading-none">Contactar</a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <main class="relative z-10" style="background-color:#EBE9E4;">
+    <div class="relative z-10" style="padding:clamp(7rem,10vh,9rem) clamp(1.5rem,5vw,6rem) 1.5rem;">
+      <nav class="flex items-center flex-wrap">
+        <a href="/" class="breadcrumb-link">Início</a><span class="breadcrumb-sep">/</span>
+        <a href="/portfolio/" class="breadcrumb-link">Portfólio</a><span class="breadcrumb-sep">/</span>
+        <span class="font-mono text-ink" style="font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;">Cristal Capital</span>
+      </nav>
+    </div>
+
+    <section class="relative" style="padding:0 clamp(1.5rem,5vw,6rem) clamp(3rem,5vh,4rem);">
+      <div class="flex items-center gap-2.5 mb-6"><div class="crosshair-mark text-ink"></div><span class="t-label">04 &mdash; Académico</span><div class="h-line flex-1 ml-4" style="transform:scaleX(1);"></div></div>
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-8">
+        <div>
+          <h1 class="font-serif italic" style="font-size:clamp(3rem,8vw,8rem);line-height:0.88;letter-spacing:-0.03em;margin-bottom:0.5rem;">Cristal Capital</h1>
+          <p class="font-mono text-ink/40" style="font-size:clamp(0.6rem,0.8vw,0.75rem);letter-spacing:0.1em;text-transform:uppercase;">Plataforma Financeira — PAP</p>
+        </div>
+        <div class="flex items-center gap-3 mt-4 lg:mt-0">
+          <span class="eg-badge" style="border-color:rgba(18,18,18,0.12);color:rgba(18,18,18,0.5);background:rgba(18,18,18,0.03);">Concluído</span>
+          <span class="font-mono text-ink/30" style="font-size:0.5rem;letter-spacing:0.12em;">2025</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:0 clamp(1.5rem,5vw,6rem);">
+      <div class="overflow-hidden" style="position:relative;">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop" alt="Cristal Capital" class="proj-hero-img" loading="eager">
+        <div style="position:absolute;inset:0;background:linear-gradient(120deg,#141018,#1e1630,transparent);opacity:0.35;mix-blend-mode:multiply;pointer-events:none;"></div>
+      </div>
+    </section>
+
+    <section style="padding:clamp(3rem,6vh,5rem) clamp(1.5rem,5vw,6rem);">
+      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20">
+        <div class="flex-1">
+          <h2 class="font-serif italic" style="font-size:clamp(1.8rem,3vw,2.8rem);line-height:0.92;margin-bottom:1.5rem;">Sobre o Projecto</h2>
+          <p class="text-ink/60 leading-relaxed" style="font-size:clamp(0.85rem,1vw,0.95rem);max-width:55ch;margin-bottom:2rem;">O Cristal Capital foi o projecto de Prova de Aptidão Profissional (PAP). Uma plataforma financeira completa construída com Laravel 12, autenticação Sanctum, e renderização server-side via Inertia.js. Containerizada com Docker.</p>
+          <div class="flex flex-wrap gap-2 mb-6"><span class="eg-tag" style="border-color:rgba(18,18,18,0.15);color:rgba(18,18,18,0.5);display:inline-flex;align-items:center;gap:4px;"><i class="devicon-laravel-original tech-icon"></i>Laravel 12</span> <span class="eg-tag" style="border-color:rgba(18,18,18,0.15);color:rgba(18,18,18,0.5);display:inline-flex;align-items:center;gap:4px;"><i class="devicon-vuejs-plain tech-icon"></i>Inertia.js</span> <span class="eg-tag" style="border-color:rgba(18,18,18,0.15);color:rgba(18,18,18,0.5);display:inline-flex;align-items:center;gap:4px;"><i class="devicon-docker-plain tech-icon"></i>Docker</span> <span class="eg-tag" style="border-color:rgba(18,18,18,0.15);color:rgba(18,18,18,0.5);display:inline-flex;align-items:center;gap:4px;"><i class="devicon-laravel-original tech-icon"></i>Sanctum</span> </div>
+          <div class="flex flex-wrap gap-3"><a href="https://github.com/GJCMarques" target="_blank" rel="noopener" class="proj-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> GitHub</a>
+</div>
+        </div>
+        <div style="flex-shrink:0;width:clamp(200px,25vw,300px);">
+          <div class="mb-6">
+            <span class="font-mono text-ink/30" style="font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:0.5rem;">Ano</span>
+            <span class="font-mono text-ink" style="font-size:0.75rem;">2025</span>
+          </div>
+          <div class="mb-6">
+            <span class="font-mono text-ink/30" style="font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:0.5rem;">Categoria</span>
+            <span class="font-mono text-ink" style="font-size:0.75rem;">Académico</span>
+          </div>
+          <div class="mb-6">
+            <span class="font-mono text-ink/30" style="font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:0.5rem;">Estado</span>
+            <span class="font-mono text-ink" style="font-size:0.75rem;">Concluído</span>
+          </div>
+          <div>
+            <span class="font-mono text-ink/30" style="font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:0.5rem;">Stack</span>
+            <span class="font-mono text-ink" style="font-size:0.75rem;">Laravel · Inertia · Docker</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:0 clamp(1.5rem,5vw,6rem) clamp(3rem,6vh,5rem);">
+      <div class="proj-detail-grid"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80&fit=crop" alt="Cristal Capital" class="proj-detail-img" loading="lazy">
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&fit=crop" alt="Cristal Capital" class="proj-detail-img" loading="lazy">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80&fit=crop" alt="Cristal Capital" class="proj-detail-img" loading="lazy">
+</div>
+    </section>
+
+    <section style="padding:clamp(2rem,4vh,3rem) clamp(1.5rem,5vw,6rem);border-top:1px solid rgba(18,18,18,0.06);">
+      <div class="flex justify-between items-center">
+        <a href="/portfolio/eletro2000/" class="group flex items-center gap-3 text-decoration-none">
+          <span class="font-mono text-ink/30 group-hover:text-ink transition-colors" style="font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;">&larr; Anterior</span>
+          <span class="font-serif italic text-ink/50 group-hover:text-ink transition-colors" style="font-size:clamp(1.2rem,2vw,1.8rem);">Eletro 2000 v2</span>
+        </a>
+        <a href="/portfolio/" class="font-mono text-ink/30 hover:text-ink transition-colors" style="font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;">Todos</a>
+        <a href="/portfolio/volunta/" class="group flex items-center gap-3 text-decoration-none">
+          <span class="font-serif italic text-ink/50 group-hover:text-ink transition-colors" style="font-size:clamp(1.2rem,2vw,1.8rem);">Volunta</span>
+          <span class="font-mono text-ink/30 group-hover:text-ink transition-colors" style="font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;">Seguinte &rarr;</span>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-ink rounded-t-[4rem] pt-24 pb-8 relative z-30 text-paper overflow-hidden" style="
+    padding-left:clamp(1.5rem,5vw,6rem); padding-right:clamp(1.5rem,5vw,6rem);">
+    <div class="footer-dots absolute inset-0 pointer-events-none opacity-[0.24]" style="
+      background-image:radial-gradient(circle,rgba(235,233,228,0.5) 1px,transparent 1px); background-size:24px 24px;"></div>
+
+    <div class="footer-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 flex items-center justify-content text-paper">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
+              <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+              <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" stroke="currentColor" stroke-width="0.7" />
+              <circle cx="20" cy="19" r="1.5" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="font-sans font-extrabold text-paper select-none" style="font-size:clamp(20px,1.8vw,28px); letter-spacing:0.15em;">M O N R I O N</span>
+        </div>
+        <p class="text-paper/50 text-sm leading-relaxed max-w-xs">
+          Design orgânico para um futuro digital sustentável. Sediados no Porto, a cultivar para o mundo.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Páginas</h4>
+        <ul class="space-y-3">
+          <li><a href="/" class="text-paper/70 text-sm footer-link">Início</a></li>
+          <li><a href="/portfolio/" class="text-paper/70 text-sm footer-link">Portfólio</a></li>
+          <li><a href="/sobre/" class="text-paper/70 text-sm footer-link">Sobre Nós</a></li>
+          <li><a href="/servicos/" class="text-paper/70 text-sm footer-link">Serviços</a></li>
+          <li><a href="/contactos/" class="text-paper/70 text-sm footer-link">Contactos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Contacto</h4>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-2">
+            <i data-lucide="mail" class="w-3.5 h-3.5 text-paper/40"></i>
+            <a href="mailto:geral@monrion.com" class="text-paper/70 text-sm footer-link">geral@monrion.com</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <i data-lucide="phone" class="w-3.5 h-3.5 text-paper/40"></i>
+            <a href="tel:+351000000000" class="text-paper/70 text-sm footer-link">+351 000 000 000</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <i data-lucide="instagram" class="w-3.5 h-3.5 text-paper/40"></i>
+            <a href="#" class="text-paper/70 text-sm footer-link">@monrion</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <i data-lucide="linkedin" class="w-3.5 h-3.5 text-paper/40"></i>
+            <a href="#" class="text-paper/70 text-sm footer-link">Monrion</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-mono text-xs uppercase tracking-[0.2em] text-paper/40 mb-6">Localização</h4>
+        <div class="space-y-4">
+          <div class="flex items-start gap-2">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-paper/40 mt-0.5"></i>
+            <p class="text-paper/70 text-sm leading-relaxed">Porto, Portugal</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-paper/40"></i>
+            <span class="font-mono text-sm text-paper/70" id="footer-gmt-time">--:--</span>
+            <span class="font-mono text-xs text-paper/40">GMT+0</span>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
+            <span class="font-mono text-xs text-paper/40 uppercase tracking-wider">Disponível</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-paper/30 font-mono text-xs tracking-wide">© 2026 Monrion. Todos os direitos reservados.</p>
+      <div class="flex items-center gap-6">
+        <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Termos e Condições</a>
+        <a href="#" class="text-paper/30 hover:text-paper/60 transition-colors font-mono text-xs tracking-wide">Política de Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../../assets/js/page.js"></script>
+  <script type="module">
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+    const obs = new MutationObserver(() => {
+      if (document.body.style.visibility !== "") {
+        obs.disconnect();
+        requestAnimationFrame(() => {
+          gsap.from("h1", { y: 50, opacity: 0, duration: 1.5, ease: "power4.out" });
+          gsap.from(".proj-hero-img", { scale: 1.05, opacity: 0, duration: 1.8, ease: "power3.out", delay: 0.2 });
+          gsap.from(".breadcrumb-link, .breadcrumb-sep", { y: 15, opacity: 0, duration: 0.8, stagger: 0.05, ease: "power3.out" });
+          gsap.to(".proj-hero-img", { y: "8%", ease: "none", scrollTrigger: { trigger: ".proj-hero-img", start: "top bottom", end: "bottom top", scrub: 0.6 } });
+          gsap.from(".proj-detail-img", { scrollTrigger: { trigger: ".proj-detail-grid", start: "top 80%", once: true }, y: 60, opacity: 0, duration: 1.2, stagger: 0.15, ease: "power4.out" });
+          gsap.from(".proj-link", { scrollTrigger: { trigger: ".proj-link", start: "top 90%", once: true }, y: 20, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" });
+          gsap.from(".footer-grid > *, .footer-bottom", { scrollTrigger: { trigger: "footer", start: "top 85%" }, y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" });
+          window.addEventListener("load", () => ScrollTrigger.refresh());
+        });
+      }
+    });
+    obs.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+  </script>
+</body>
+</html>

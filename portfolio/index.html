@@ -184,10 +184,6 @@
         color: var(--color-ink);
     }
 
-    .btn-contact span.absolute {
-        background: var(--color-paper);
-    }
-
     /* Footer */
     .footer-link {
         position: relative;
@@ -311,6 +307,42 @@
     .reveal-up {
         opacity: 0;
         transform: translateY(50px);
+    }
+
+    /* ══ HERO CODE GLYPHS (unique to portfolio) ══ */
+    .code-glyph {
+        position: absolute;
+        font-family: var(--font-mono);
+        pointer-events: none;
+        user-select: none;
+        line-height: 1;
+    }
+
+    .code-glyph--bracket {
+        color: rgba(18, 18, 18, 0.055);
+        font-weight: 300;
+    }
+
+    .code-glyph--tag {
+        color: rgba(18, 18, 18, 0.04);
+        font-weight: 400;
+    }
+
+    .code-glyph--dot {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: rgba(18, 18, 18, 0.04);
+        pointer-events: none;
+    }
+
+    .code-glyph--line {
+        position: absolute;
+        height: 1px;
+        background: rgba(18, 18, 18, 0.025);
+        pointer-events: none;
+        transform-origin: left;
     }
 
     /* ══ PINNED SHOWCASE ══ */
@@ -527,397 +559,48 @@
         gap: 0.6rem;
     }
 
-    /* ══ MANIFESTO ══ */
-    .mf-sticky {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        background: var(--color-ink);
-    }
-
-    .mf-bg-grid {
+    .sc-view-btn {
         position: absolute;
-        inset: 0;
-        background-image: linear-gradient(rgba(235, 233, 228, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(235, 233, 228, 0.03) 1px, transparent 1px);
-        background-size: 60px 60px;
-    }
-
-    .mf-word {
-        display: inline-block;
-        opacity: 0.06;
-        transition: none;
-        font-family: var(--font-serif);
-        font-style: italic;
-        color: var(--color-paper);
-    }
-
-    .mf-word.active {
-        opacity: 1;
-    }
-
-    .mf-accent {
-        color: #C9A84C;
-    }
-
-    .mf-counter {
-        position: absolute;
-        bottom: clamp(2rem, 4vh, 3rem);
-        right: clamp(2rem, 4vw, 4rem);
-        font-family: var(--font-mono);
-        font-size: 0.5rem;
-        letter-spacing: 0.15em;
-        color: rgba(235, 233, 228, 0.15);
-    }
-
-    /* ══ CAROUSEL ══ */
-    .cr-track {
-        display: flex;
-        gap: clamp(3px, 0.4vw, 6px);
-        width: max-content;
-        animation: cr-scroll 50s linear infinite;
-    }
-
-    @keyframes cr-scroll {
-        from {
-            transform: translateX(0)
-        }
-
-        to {
-            transform: translateX(-50%)
-        }
-    }
-
-    .cr-item {
-        position: relative;
-        width: clamp(180px, 22vw, 280px);
-        height: clamp(110px, 14vw, 170px);
-        overflow: hidden;
-        flex-shrink: 0;
-    }
-
-    .cr-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: grayscale(100%) brightness(0.6);
-        transition: filter .5s, transform .5s;
-    }
-
-    .cr-item:hover img {
-        filter: grayscale(0%) brightness(0.8);
-        transform: scale(1.05);
-    }
-
-    .cr-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 0.6rem 0.75rem;
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-        display: flex;
-        align-items: baseline;
-        gap: 0.5rem;
-    }
-
-    .cr-num {
-        font-family: var(--font-mono);
-        font-size: 0.4rem;
-        letter-spacing: 0.12em;
-        color: rgba(255, 255, 255, 0.35);
-    }
-
-    .cr-name {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: clamp(0.75rem, 1.2vw, 1rem);
-        color: rgba(255, 255, 255, 0.75);
-    }
-
-    /* ══ HORIZONTAL SCROLL GALLERY ══ */
-    .hsg-sticky {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    .hsg-track {
-        display: flex;
-        gap: clamp(1rem, 2vw, 2.5rem);
-        height: 100%;
-        align-items: center;
-        will-change: transform;
-        padding: 0 10vw;
-    }
-
-    .hsg-slide {
-        flex-shrink: 0;
-        position: relative;
-        height: 72vh;
-        overflow: hidden;
-    }
-
-    .hsg-slide--lg {
-        width: clamp(500px, 55vw, 750px);
-    }
-
-    .hsg-slide--md {
-        width: clamp(350px, 38vw, 520px);
-    }
-
-    .hsg-slide--sm {
-        width: clamp(280px, 30vw, 400px);
-    }
-
-    .hsg-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: brightness(0.75) saturate(0.85);
-        transition: filter .6s, transform 1s cubic-bezier(.25, .46, .45, .94);
-    }
-
-    .hsg-slide:hover img {
-        filter: brightness(0.55) saturate(1);
-        transform: scale(1.04);
-    }
-
-    .hsg-slide-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.65) 100%);
-        pointer-events: none;
-    }
-
-    .hsg-slide-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding: clamp(1.2rem, 2.5vw, 2.5rem);
-        z-index: 2;
-    }
-
-    .hsg-slide-num {
-        font-family: var(--font-mono);
-        font-size: 0.42rem;
-        letter-spacing: 0.2em;
-        color: rgba(255, 255, 255, 0.3);
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-
-    .hsg-slide-title {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: clamp(1.6rem, 3vw, 2.8rem);
-        color: white;
-        line-height: 0.92;
-        margin-bottom: 0.3rem;
-    }
-
-    .hsg-slide-sub {
-        font-family: var(--font-mono);
-        font-size: 0.5rem;
-        letter-spacing: 0.1em;
-        color: rgba(255, 255, 255, 0.4);
-        text-transform: uppercase;
-    }
-
-    .hsg-progress {
-        position: absolute;
-        bottom: clamp(1.5rem, 3vh, 2.5rem);
-        left: 50%;
-        transform: translateX(-50%);
+        bottom: clamp(2rem, 5vw, 4rem);
+        right: clamp(6rem, 12vw, 12rem);
         z-index: 10;
-        display: flex;
+    }
+
+    .sc-view-btn a {
+        display: inline-flex;
         align-items: center;
-        gap: 1.5rem;
-    }
-
-    .hsg-prog-line {
-        width: 120px;
-        height: 1px;
-        background: rgba(18, 18, 18, 0.12);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hsg-prog-fill {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        background: var(--color-ink);
-        width: 0%;
-        transition: width 0.1s linear;
-    }
-
-    .hsg-prog-label {
+        gap: 0.6rem;
         font-family: var(--font-mono);
-        font-size: 0.45rem;
-        letter-spacing: 0.15em;
-        color: rgba(18, 18, 18, 0.3);
-    }
-
-    /* ══ STACKING CARDS ══ */
-    .stk-sticky {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        perspective: 1200px;
-    }
-
-    .stk-card {
-        position: absolute;
-        width: min(85vw, 900px);
-        height: min(65vh, 550px);
-        overflow: hidden;
-        will-change: transform, filter;
-    }
-
-    .stk-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: brightness(0.6) saturate(0.8);
-    }
-
-    .stk-card-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.75) 100%);
-    }
-
-    .stk-card-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding: clamp(2rem, 4vw, 4rem);
-        z-index: 2;
-    }
-
-    .stk-card-step {
-        font-family: var(--font-mono);
-        font-size: clamp(0.6rem, 0.8vw, 0.75rem);
-        letter-spacing: 0.2em;
-        color: rgba(255, 255, 255, 0.3);
-        margin-bottom: 0.75rem;
-        display: block;
-    }
-
-    .stk-card-title {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: clamp(2.2rem, 5vw, 4.5rem);
-        color: white;
-        line-height: 0.88;
-        margin-bottom: 0.5rem;
-    }
-
-    .stk-card-desc {
-        font-size: clamp(0.78rem, 0.95vw, 0.88rem);
-        line-height: 1.65;
-        color: rgba(255, 255, 255, 0.5);
-        max-width: 42ch;
-    }
-
-    .stk-card-accent {
-        position: absolute;
-        top: clamp(1.5rem, 3vw, 2.5rem);
-        right: clamp(1.5rem, 3vw, 2.5rem);
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: clamp(6rem, 12vw, 10rem);
-        color: rgba(255, 255, 255, 0.04);
-        z-index: 1;
-    }
-
-    /* ══ STATS COUNTER ══ */
-    .stats-section {
-        background: var(--color-ink);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1px;
-        background: rgba(235, 233, 228, 0.06);
-    }
-
-    @media(max-width:768px) {
-        .stats-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    .stat-cell {
-        background: var(--color-ink);
-        padding: clamp(3rem, 6vh, 5rem) clamp(1.5rem, 3vw, 3rem);
-        text-align: center;
-        position: relative;
-    }
-
-    .stat-num {
-        font-family: var(--font-mono);
-        font-size: clamp(3rem, 7vw, 5.5rem);
-        font-weight: 300;
-        color: var(--color-paper);
-        letter-spacing: -0.02em;
-        line-height: 1;
-        margin-bottom: 0.75rem;
-    }
-
-    .stat-suffix {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: clamp(1.5rem, 3vw, 2.5rem);
-        color: #C9A84C;
-    }
-
-    .stat-label {
-        font-family: var(--font-mono);
-        font-size: 0.5rem;
-        letter-spacing: 0.2em;
+        font-size: 0.6rem;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: rgba(235, 233, 228, 0.25);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 0.75rem 1.8rem;
+        transition: all .35s cubic-bezier(.25, .46, .45, .94);
+        text-decoration: none;
+        backdrop-filter: blur(8px);
+        background: rgba(255, 255, 255, 0.04);
     }
 
-    .stat-cell::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 1px;
-        height: 0;
-        background: rgba(235, 233, 228, 0.04);
-        transform: translate(-50%, -50%);
-        transition: height 1.5s cubic-bezier(.25, .46, .45, .94);
-    }
-
-    .stat-cell.active::after {
-        height: 120%;
+    .sc-view-btn a:hover {
+        color: white;
+        border-color: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.3);
     }
 
     /* ══ EDITORIAL GRID ══ */
     .eg-grid {
         display: flex;
         flex-direction: column;
-        gap: clamp(4px, 0.5vw, 8px);
+        gap: clamp(6px, 0.6vw, 10px);
     }
 
     .eg-row {
         display: grid;
-        gap: clamp(4px, 0.5vw, 8px);
+        gap: clamp(6px, 0.6vw, 10px);
     }
 
     .eg-row--full {
@@ -936,10 +619,6 @@
         grid-template-columns: 1fr 1fr 1fr;
     }
 
-    .eg-row--duo {
-        grid-template-columns: 1fr;
-    }
-
     @media(max-width:768px) {
 
         .eg-row--pair,
@@ -952,16 +631,19 @@
     .eg-card {
         cursor: pointer;
         overflow: hidden;
+        position: relative;
+        text-decoration: none;
+        display: block;
     }
 
     .eg-img-wrap {
         position: relative;
-        height: clamp(300px, 42vh, 520px);
+        height: clamp(320px, 45vh, 560px);
         overflow: hidden;
     }
 
     .eg-full .eg-img-wrap {
-        height: clamp(400px, 55vh, 650px);
+        height: clamp(420px, 58vh, 680px);
     }
 
     .eg-img {
@@ -969,12 +651,12 @@
         height: 100%;
         object-fit: cover;
         transition: transform 1.2s cubic-bezier(.25, .46, .45, .94), filter .8s;
-        filter: brightness(0.7) saturate(0.8);
+        filter: brightness(0.72) saturate(0.85);
     }
 
     .eg-card:hover .eg-img {
         transform: scale(1.06);
-        filter: brightness(0.5) saturate(1);
+        filter: brightness(0.45) saturate(1);
     }
 
     .eg-overlay {
@@ -1119,6 +801,33 @@
         color: rgba(255, 255, 255, .45);
     }
 
+    .eg-view-arrow {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        z-index: 7;
+        width: 28px;
+        height: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translate(-4px, -4px);
+        transition: all .4s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .eg-card:hover .eg-view-arrow {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    .eg-view-arrow svg {
+        width: 12px;
+        height: 12px;
+        stroke: rgba(255, 255, 255, 0.55);
+    }
+
     @media(max-width:768px) {
         .eg-hover-content {
             opacity: 1;
@@ -1128,6 +837,11 @@
         .eg-hover-desc,
         .eg-hover-tags {
             display: none;
+        }
+
+        .eg-view-arrow {
+            opacity: 1;
+            transform: translate(0, 0);
         }
     }
 
@@ -1156,6 +870,83 @@
         border-color: var(--color-ink);
     }
 
+    /* ══ CTA ══ */
+    .cta-chevron {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: clamp(200px, 28vw, 400px);
+        pointer-events: none;
+        z-index: 5;
+        overflow: hidden;
+    }
+
+    .cta-chevron--left {
+        left: 0;
+    }
+
+    .cta-chevron--right {
+        right: 0;
+    }
+
+    .cta-chevron-line {
+        position: absolute;
+        width: 100%;
+        height: 1.5px;
+        background: rgba(18, 18, 18, 0.18);
+        transform-origin: center;
+    }
+
+    .cta-chevron--left .cta-chevron-line {
+        transform: rotate(-20deg);
+    }
+
+    .cta-chevron--right .cta-chevron-line {
+        transform: rotate(20deg);
+    }
+
+    .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-sans);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+        padding: clamp(0.85rem, 1.2vw, 1.1rem) clamp(2rem, 3vw, 2.8rem);
+        position: relative;
+        overflow: hidden;
+        transition: transform .3s cubic-bezier(.25, .46, .45, .94), box-shadow .3s;
+        z-index: 50;
+        text-decoration: none;
+    }
+
+    .cta-btn:hover {
+        transform: scale(1.03);
+    }
+
+    .cta-btn--primary {
+        background: var(--color-ink);
+        color: var(--color-paper);
+        border: 1px solid var(--color-ink);
+    }
+
+    .cta-btn--primary:hover {
+        box-shadow: 0 12px 40px -8px rgba(18, 18, 18, 0.3);
+    }
+
+    .cta-btn--outline {
+        background: var(--color-paper);
+        color: var(--color-ink);
+        border: 1px solid rgba(18, 18, 18, 0.2);
+    }
+
+    .cta-btn--outline:hover {
+        border-color: rgba(18, 18, 18, 0.6);
+        box-shadow: 0 8px 30px -6px rgba(18, 18, 18, 0.15);
+    }
+
     /* Dome */
     .dome-stage {
         perspective: 900px;
@@ -1180,6 +971,94 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    /* ══ PROJECT PAGE ══ */
+    .proj-hero-img {
+        width: 100%;
+        height: clamp(400px, 55vh, 650px);
+        object-fit: cover;
+        filter: brightness(0.7) saturate(0.85);
+    }
+
+    .proj-detail-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(6px, 0.6vw, 10px);
+    }
+
+    @media(max-width:768px) {
+        .proj-detail-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .proj-detail-img {
+        width: 100%;
+        height: clamp(280px, 40vh, 450px);
+        object-fit: cover;
+        filter: brightness(0.75);
+        transition: filter .5s;
+    }
+
+    .proj-detail-img:hover {
+        filter: brightness(0.9);
+    }
+
+    .breadcrumb-link {
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(18, 18, 18, 0.4);
+        transition: color .3s;
+        text-decoration: none;
+    }
+
+    .breadcrumb-link:hover {
+        color: var(--color-ink);
+    }
+
+    .breadcrumb-sep {
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        color: rgba(18, 18, 18, 0.2);
+        margin: 0 0.5rem;
+    }
+
+    .tech-icon {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 4px;
+        opacity: 0.7;
+    }
+
+    .proj-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-ink);
+        border: 1px solid rgba(18, 18, 18, 0.15);
+        padding: 0.6rem 1.2rem;
+        transition: all .3s;
+        text-decoration: none;
+    }
+
+    .proj-link:hover {
+        border-color: var(--color-ink);
+        background: var(--color-ink);
+        color: var(--color-paper);
+    }
+
+    .proj-link svg {
+        width: 14px;
+        height: 14px;
     }
   </style>
 </head>
@@ -1243,8 +1122,79 @@
 
 
 
+
+
+
+
+
+
   <main class="relative z-10" style="background-color:#EBE9E4;">
     <section id="pf-hero" class="relative min-h-screen flex flex-col justify-end bp-grid overflow-hidden" style="padding:clamp(7rem,12vh,10rem) clamp(1.5rem,5vw,6rem) clamp(3.5rem,6vh,5.5rem);">
+      <div class="absolute inset-0 pointer-events-none select-none" aria-hidden="true"><span class="code-glyph code-glyph--bracket" style="left:85%;top:20%;font-size:3.6rem;transform:rotate(-32deg);">&lt;/&gt;</span>
+<span class="code-glyph code-glyph--bracket" style="left:35%;top:34%;font-size:3.6rem;transform:rotate(-18deg);">{ }</span>
+<span class="code-glyph code-glyph--bracket" style="left:90%;top:75%;font-size:3.1rem;transform:rotate(-24deg);">&lt;&gt;</span>
+<span class="code-glyph code-glyph--bracket" style="left:8%;top:9%;font-size:1.9rem;transform:rotate(-24deg);">//</span>
+<span class="code-glyph code-glyph--bracket" style="left:68%;top:83%;font-size:3.1rem;transform:rotate(-32deg);">( )</span>
+<span class="code-glyph code-glyph--bracket" style="left:87%;top:75%;font-size:1.9rem;transform:rotate(18deg);">[ ]</span>
+<span class="code-glyph code-glyph--bracket" style="left:79%;top:41%;font-size:3.7rem;transform:rotate(-35deg);">&lt;div&gt;</span>
+<span class="code-glyph code-glyph--bracket" style="left:24%;top:60%;font-size:2.1rem;transform:rotate(8deg);">fn()</span>
+<span class="code-glyph code-glyph--bracket" style="left:31%;top:49%;font-size:1.5rem;transform:rotate(-22deg);">#</span>
+<span class="code-glyph code-glyph--bracket" style="left:16%;top:51%;font-size:3.2rem;transform:rotate(9deg);">::</span>
+<span class="code-glyph code-glyph--bracket" style="left:9%;top:64%;font-size:1.6rem;transform:rotate(33deg);">=&gt;</span>
+<span class="code-glyph code-glyph--bracket" style="left:52%;top:16%;font-size:2.2rem;transform:rotate(35deg);">&&</span>
+<span class="code-glyph code-glyph--tag" style="left:84%;top:85%;font-size:3.1rem;transform:rotate(11deg);">||</span>
+<span class="code-glyph code-glyph--tag" style="left:12%;top:11%;font-size:3.8rem;transform:rotate(-6deg);">.*</span>
+<span class="code-glyph code-glyph--tag" style="left:14%;top:35%;font-size:2.5rem;transform:rotate(-23deg);">$_</span>
+<span class="code-glyph code-glyph--tag" style="left:62%;top:87%;font-size:1.7rem;transform:rotate(11deg);">%%</span>
+<span class="code-glyph code-glyph--tag" style="left:49%;top:32%;font-size:3.5rem;transform:rotate(-1deg);">&lt;/&gt;</span>
+<span class="code-glyph code-glyph--tag" style="left:91%;top:88%;font-size:3.2rem;transform:rotate(-26deg);">{ }</span>
+<span class="code-glyph code-glyph--tag" style="left:25%;top:74%;font-size:1.7rem;transform:rotate(-4deg);">&lt;&gt;</span>
+<span class="code-glyph code-glyph--tag" style="left:52%;top:40%;font-size:3.5rem;transform:rotate(-7deg);">//</span>
+<span class="code-glyph code-glyph--tag" style="left:11%;top:35%;font-size:3.9rem;transform:rotate(-31deg);">( )</span>
+<span class="code-glyph code-glyph--tag" style="left:55%;top:40%;font-size:1.9rem;transform:rotate(-27deg);">[ ]</span>
+<span class="code-glyph--dot" style="left:75%;top:94%;"></span>
+<span class="code-glyph--dot" style="left:43%;top:30%;"></span>
+<span class="code-glyph--dot" style="left:86%;top:66%;"></span>
+<span class="code-glyph--dot" style="left:53%;top:85%;"></span>
+<span class="code-glyph--dot" style="left:61%;top:21%;"></span>
+<span class="code-glyph--dot" style="left:36%;top:20%;"></span>
+<span class="code-glyph--dot" style="left:34%;top:74%;"></span>
+<span class="code-glyph--dot" style="left:71%;top:36%;"></span>
+<span class="code-glyph--dot" style="left:77%;top:57%;"></span>
+<span class="code-glyph--dot" style="left:77%;top:54%;"></span>
+<span class="code-glyph--dot" style="left:49%;top:31%;"></span>
+<span class="code-glyph--dot" style="left:20%;top:68%;"></span>
+<span class="code-glyph--dot" style="left:66%;top:14%;"></span>
+<span class="code-glyph--dot" style="left:9%;top:17%;"></span>
+<span class="code-glyph--dot" style="left:22%;top:83%;"></span>
+<span class="code-glyph--dot" style="left:23%;top:90%;"></span>
+<span class="code-glyph--dot" style="left:57%;top:79%;"></span>
+<span class="code-glyph--dot" style="left:11%;top:52%;"></span>
+<span class="code-glyph--dot" style="left:51%;top:79%;"></span>
+<span class="code-glyph--dot" style="left:62%;top:70%;"></span>
+<span class="code-glyph--dot" style="left:35%;top:73%;"></span>
+<span class="code-glyph--dot" style="left:4%;top:90%;"></span>
+<span class="code-glyph--dot" style="left:95%;top:17%;"></span>
+<span class="code-glyph--dot" style="left:90%;top:71%;"></span>
+<span class="code-glyph--dot" style="left:37%;top:85%;"></span>
+<span class="code-glyph--dot" style="left:46%;top:17%;"></span>
+<span class="code-glyph--dot" style="left:40%;top:58%;"></span>
+<span class="code-glyph--dot" style="left:23%;top:61%;"></span>
+<span class="code-glyph--dot" style="left:3%;top:95%;"></span>
+<span class="code-glyph--dot" style="left:95%;top:36%;"></span>
+<span class="code-glyph--line" style="left:69%;top:27%;width:189px;transform:rotate(28deg);"></span>
+<span class="code-glyph--line" style="left:18%;top:85%;width:136px;transform:rotate(23deg);"></span>
+<span class="code-glyph--line" style="left:69%;top:82%;width:110px;transform:rotate(-21deg);"></span>
+<span class="code-glyph--line" style="left:52%;top:25%;width:198px;transform:rotate(19deg);"></span>
+<span class="code-glyph--line" style="left:72%;top:5%;width:142px;transform:rotate(1deg);"></span>
+<span class="code-glyph--line" style="left:7%;top:19%;width:152px;transform:rotate(26deg);"></span>
+<span class="code-glyph--line" style="left:44%;top:35%;width:74px;transform:rotate(-15deg);"></span>
+<span class="code-glyph--line" style="left:77%;top:15%;width:81px;transform:rotate(16deg);"></span>
+<span class="code-glyph--line" style="left:67%;top:13%;width:196px;transform:rotate(19deg);"></span>
+<span class="code-glyph--line" style="left:21%;top:21%;width:181px;transform:rotate(30deg);"></span>
+<span class="code-glyph--line" style="left:75%;top:26%;width:127px;transform:rotate(3deg);"></span>
+<span class="code-glyph--line" style="left:82%;top:59%;width:114px;transform:rotate(29deg);"></span>
+</div>
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true"><span class="hero-ghost" style="font-size:clamp(20vw,28vw,38vw)">Portfolio</span></div>
       <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none" style="top:clamp(7.5rem,11vh,10.5rem);left:clamp(1.5rem,5vw,6rem);opacity:0;"><div class="crosshair-mark text-ink"></div><span class="t-label">REF: MON-PF-001 / 2026</span></div>
       <div id="hero-ref-tr" class="absolute flex items-center gap-2.5 pointer-events-none justify-end" style="top:clamp(7.5rem,11vh,10.5rem);right:clamp(1.5rem,5vw,6rem);opacity:0;"><span class="t-label">41.15&deg; N &middot; 8.61&deg; W &middot; Porto</span><div class="crosshair-mark text-ink"></div></div>
@@ -1277,84 +1227,15 @@
           <div class="sc-img-wrap"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop" alt="ExpoLive" class="sc-img" loading="lazy"><div class="sc-img-overlay" style="background:linear-gradient(130deg,#18100e,#30201a,transparent);opacity:0.65;"></div><div class="sc-img-gradient"></div></div>
           <div class="sc-content"><span class="sc-num">10</span><h3 class="sc-title">ExpoLive</h3><p class="sc-sub">Gestão de Eventos e CMS</p><p class="sc-desc">Plataforma de gestão de eventos com 30+ páginas admin e chatbot IA.</p><div class="sc-tags"><span class="sc-tag">PHP</span> <span class="sc-tag">MySQL</span> <span class="sc-tag">REST API</span> <span class="sc-tag">IA</span></div><span class="sc-status">Concluído</span></div>
           <span class="sc-initial">X</span><span class="sc-whisper">30+ PAGES // 2 YEARS</span>
-        </div>
-        </div>
+        </div></div>
         <div class="sc-progress"><button class="sc-dot active" data-idx="0"><span class="sc-dot-fill"></span><span class="sc-dot-label">01</span></button><button class="sc-dot" data-idx="1"><span class="sc-dot-fill"></span><span class="sc-dot-label">02</span></button><button class="sc-dot" data-idx="2"><span class="sc-dot-fill"></span><span class="sc-dot-label">10</span></button></div>
         <div class="sc-section-label"><div class="crosshair-mark text-paper"></div><span class="t-label" style="color:rgba(235,233,228,0.35);">02 &mdash; Em Destaque</span></div>
-      </div>
-    </section>
-
-    <section id="pf-manifesto" class="relative" style="height:400vh;">
-      <div class="mf-sticky">
-        <div class="mf-bg-grid"></div>
-        <div class="absolute top-0 left-0 flex items-center gap-2.5 z-10" style="padding:clamp(2rem,4vh,3rem) clamp(2rem,4vw,4rem);"><div class="crosshair-mark text-paper" style="opacity:0.3;"></div><span class="t-label" style="color:rgba(235,233,228,0.2);">03 &mdash; Manifesto</span></div>
-        <div class="relative z-10 text-center" style="max-width:min(80vw,800px);padding:0 2rem;">
-          <p style="font-size:clamp(2rem,4.5vw,4rem);line-height:1.25;letter-spacing:-0.01em;"><span class="mf-word">Não</span> <span class="mf-word">construímos</span> <span class="mf-word">websites.</span> <span class="mf-word">Construímos</span> <span class="mf-word">experiências</span> <span class="mf-word">digitais</span> <span class="mf-word">que</span> <span class="mf-word mf-accent">respiram,</span> <span class="mf-word">que</span> <span class="mf-word mf-accent">sentem,</span> <span class="mf-word">que</span> <span class="mf-word mf-accent">vivem.</span> <span class="mf-word">Cada</span> <span class="mf-word">pixel</span> <span class="mf-word">é</span> <span class="mf-word">uma</span> <span class="mf-word mf-accent">decisão.</span> <span class="mf-word">Cada</span> <span class="mf-word">animação,</span> <span class="mf-word">uma</span> <span class="mf-word mf-accent">intenção.</span> </p>
-        </div>
-        <span class="mf-counter">0%</span>
-      </div>
-    </section>
-
-    <section class="relative overflow-hidden" style="padding:clamp(2rem,4vh,4rem) 0;background:var(--color-ink);">
-      <div class="cr-track"><div class="cr-item"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop" alt="Cristal Terminal" loading="lazy"><div class="cr-info"><span class="cr-num">01</span><span class="cr-name">Cristal Terminal</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop" alt="Casa do Gi" loading="lazy"><div class="cr-info"><span class="cr-num">02</span><span class="cr-name">Casa do Gi</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" alt="Eletro 2000 v2" loading="lazy"><div class="cr-info"><span class="cr-num">03</span><span class="cr-name">Eletro 2000 v2</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop" alt="Cristal Capital" loading="lazy"><div class="cr-info"><span class="cr-num">04</span><span class="cr-name">Cristal Capital</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop" alt="Volunta" loading="lazy"><div class="cr-info"><span class="cr-num">05</span><span class="cr-name">Volunta</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop" alt="Estudas Comigo" loading="lazy"><div class="cr-info"><span class="cr-num">06</span><span class="cr-name">Estudas Comigo</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop" alt="GT Móvel" loading="lazy"><div class="cr-info"><span class="cr-num">07</span><span class="cr-name">GT Móvel</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop" alt="Hugo Brito" loading="lazy"><div class="cr-info"><span class="cr-num">08</span><span class="cr-name">Hugo Brito</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop" alt="Tec N' Cool" loading="lazy"><div class="cr-info"><span class="cr-num">09</span><span class="cr-name">Tec N' Cool</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop" alt="ExpoLive" loading="lazy"><div class="cr-info"><span class="cr-num">10</span><span class="cr-name">ExpoLive</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop" alt="Wise Wallet" loading="lazy"><div class="cr-info"><span class="cr-num">11</span><span class="cr-name">Wise Wallet</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop" alt="Portable World" loading="lazy"><div class="cr-info"><span class="cr-num">12</span><span class="cr-name">Portable World</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop" alt="Cristal Terminal" loading="lazy"><div class="cr-info"><span class="cr-num">01</span><span class="cr-name">Cristal Terminal</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop" alt="Casa do Gi" loading="lazy"><div class="cr-info"><span class="cr-num">02</span><span class="cr-name">Casa do Gi</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" alt="Eletro 2000 v2" loading="lazy"><div class="cr-info"><span class="cr-num">03</span><span class="cr-name">Eletro 2000 v2</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop" alt="Cristal Capital" loading="lazy"><div class="cr-info"><span class="cr-num">04</span><span class="cr-name">Cristal Capital</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop" alt="Volunta" loading="lazy"><div class="cr-info"><span class="cr-num">05</span><span class="cr-name">Volunta</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop" alt="Estudas Comigo" loading="lazy"><div class="cr-info"><span class="cr-num">06</span><span class="cr-name">Estudas Comigo</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop" alt="GT Móvel" loading="lazy"><div class="cr-info"><span class="cr-num">07</span><span class="cr-name">GT Móvel</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop" alt="Hugo Brito" loading="lazy"><div class="cr-info"><span class="cr-num">08</span><span class="cr-name">Hugo Brito</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop" alt="Tec N' Cool" loading="lazy"><div class="cr-info"><span class="cr-num">09</span><span class="cr-name">Tec N' Cool</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop" alt="ExpoLive" loading="lazy"><div class="cr-info"><span class="cr-num">10</span><span class="cr-name">ExpoLive</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop" alt="Wise Wallet" loading="lazy"><div class="cr-info"><span class="cr-num">11</span><span class="cr-name">Wise Wallet</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop" alt="Portable World" loading="lazy"><div class="cr-info"><span class="cr-num">12</span><span class="cr-name">Portable World</span></div></div></div>
-    </section>
-
-    <section id="pf-hscroll" class="relative" style="height:350vh;">
-      <div class="hsg-sticky">
-        <div class="absolute top-0 left-0 flex items-center gap-2.5 z-10" style="padding:clamp(2rem,4vh,3rem) clamp(2rem,4vw,4rem);"><div class="crosshair-mark text-ink"></div><span class="t-label">04 &mdash; Galeria</span></div>
-        <div class="hsg-track"><div class="hsg-slide hsg-slide--lg">
-  <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop" alt="Cristal Terminal" loading="lazy">
-  <div class="hsg-slide-overlay"></div>
-  <div class="hsg-slide-content"><span class="hsg-slide-num">01</span><h3 class="hsg-slide-title">Cristal Terminal</h3><span class="hsg-slide-sub">Terminal Financeiro Profissional</span></div>
-</div><div class="hsg-slide hsg-slide--md">
-  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" alt="Eletro 2000 v2" loading="lazy">
-  <div class="hsg-slide-overlay"></div>
-  <div class="hsg-slide-content"><span class="hsg-slide-num">03</span><h3 class="hsg-slide-title">Eletro 2000 v2</h3><span class="hsg-slide-sub">Gestão de Retalho com IA</span></div>
-</div><div class="hsg-slide hsg-slide--sm">
-  <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop" alt="Volunta" loading="lazy">
-  <div class="hsg-slide-overlay"></div>
-  <div class="hsg-slide-content"><span class="hsg-slide-num">05</span><h3 class="hsg-slide-title">Volunta</h3><span class="hsg-slide-sub">Câmara Municipal V.N. Gaia</span></div>
-</div><div class="hsg-slide hsg-slide--lg">
-  <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop" alt="Hugo Brito" loading="lazy">
-  <div class="hsg-slide-overlay"></div>
-  <div class="hsg-slide-content"><span class="hsg-slide-num">08</span><h3 class="hsg-slide-title">Hugo Brito</h3><span class="hsg-slide-sub">Luxury Fashion Brand</span></div>
-</div><div class="hsg-slide hsg-slide--md">
-  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop" alt="Cristal Capital" loading="lazy">
-  <div class="hsg-slide-overlay"></div>
-  <div class="hsg-slide-content"><span class="hsg-slide-num">04</span><h3 class="hsg-slide-title">Cristal Capital</h3><span class="hsg-slide-sub">Plataforma Financeira — PAP</span></div>
-</div><div class="hsg-slide hsg-slide--sm">
-  <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop" alt="ExpoLive" loading="lazy">
-  <div class="hsg-slide-overlay"></div>
-  <div class="hsg-slide-content"><span class="hsg-slide-num">10</span><h3 class="hsg-slide-title">ExpoLive</h3><span class="hsg-slide-sub">Gestão de Eventos e CMS</span></div>
-</div></div>
-        <div class="hsg-progress"><div class="hsg-prog-line"><div class="hsg-prog-fill"></div></div><span class="hsg-prog-label">0 / 6</span></div>
-      </div>
-    </section>
-
-    <section id="pf-stacking" class="relative" style="height:400vh;background:var(--color-ink);">
-      <div class="stk-sticky">
-        <div class="absolute top-0 left-0 flex items-center gap-2.5 z-10" style="padding:clamp(2rem,4vh,3rem) clamp(2rem,4vw,4rem);"><div class="crosshair-mark text-paper" style="opacity:0.3;"></div><span class="t-label" style="color:rgba(235,233,228,0.2);">05 &mdash; Processo</span></div>
-        <div class="stk-card" style="z-index:10;">
-  <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80&fit=crop" alt="Descoberta" loading="lazy">
-  <div class="stk-card-overlay"></div>
-  <div class="stk-card-content"><span class="stk-card-step">FASE 01</span><h3 class="stk-card-title">Descoberta</h3><p class="stk-card-desc">Cada projecto começa com uma conversa. Entendemos o problema antes de desenhar a solução.</p></div>
-  <span class="stk-card-accent">D</span>
-</div><div class="stk-card" style="z-index:11;">
-  <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80&fit=crop" alt="Arquitectura" loading="lazy">
-  <div class="stk-card-overlay"></div>
-  <div class="stk-card-content"><span class="stk-card-step">FASE 02</span><h3 class="stk-card-title">Arquitectura</h3><p class="stk-card-desc">Desenhamos sistemas que escalam. Código limpo, componentes modulares, infraestrutura sólida.</p></div>
-  <span class="stk-card-accent">A</span>
-</div><div class="stk-card" style="z-index:12;">
-  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80&fit=crop" alt="Execução" loading="lazy">
-  <div class="stk-card-overlay"></div>
-  <div class="stk-card-content"><span class="stk-card-step">FASE 03</span><h3 class="stk-card-title">Execução</h3><p class="stk-card-desc">Do protótipo ao deploy. Cada detalhe visual é deliberado, cada interacção é testada.</p></div>
-  <span class="stk-card-accent">E</span>
-</div>
+        <div class="sc-view-btn"><a href="/portfolio/cristal-terminal/">Ver Projecto &rarr;</a></div>
       </div>
     </section>
 
     <section id="pf-grid" class="relative" style="padding:clamp(5rem,10vh,10rem) clamp(1.5rem,5vw,6rem);">
-      <div class="flex items-center gap-2.5 mb-4 reveal-up"><div class="crosshair-mark text-ink"></div><span class="t-label">06 &mdash; Arquivo Completo</span><div class="h-line flex-1 ml-4" id="grid-hline"></div></div>
+      <div class="flex items-center gap-2.5 mb-4 reveal-up"><div class="crosshair-mark text-ink"></div><span class="t-label">03 &mdash; Arquivo Completo</span><div class="h-line flex-1 ml-4" id="grid-hline"></div></div>
       <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10">
         <h2 class="font-serif italic reveal-up" style="font-size:clamp(2.2rem,5vw,4.5rem);line-height:0.92;letter-spacing:-0.02em;">Todos os<br>Projectos</h2>
         <div class="flex flex-wrap gap-2 mt-4 lg:mt-0 reveal-up">
@@ -1366,7 +1247,7 @@
         </div>
       </div>
       <div class="eg-grid">
-<div class="eg-row eg-row--full"><div class="eg-card eg-full reveal-up" data-type="Académico">
+<div class="eg-row eg-row--full"><a href="/portfolio/eletro2000/" class="eg-card eg-full reveal-up" data-type="Académico">
   <div class="eg-img-wrap">
     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" alt="Eletro 2000 v2" class="eg-img" loading="lazy">
     <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
@@ -1375,6 +1256,7 @@
     <span class="eg-initial">E</span>
     <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2025</span></div>
     <span class="eg-whisper">GEMINI API // AUTONOMOUS</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     <div class="eg-hover-content">
       <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">03 — Laravel · React · Gemini</span>
       <h3 class="eg-hover-title">Eletro 2000 v2</h3>
@@ -1383,8 +1265,8 @@
       <div class="eg-hover-tags"><span class="eg-tag">Laravel 12</span> <span class="eg-tag">React 19</span> <span class="eg-tag">Gemini AI</span></div>
     </div>
   </div>
-</div></div>
-<div class="eg-row eg-row--pair"><div class="eg-card eg-wide reveal-up" data-type="Académico">
+</a></div>
+<div class="eg-row eg-row--pair"><a href="/portfolio/cristal-capital/" class="eg-card eg-wide reveal-up" data-type="Académico">
   <div class="eg-img-wrap">
     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop" alt="Cristal Capital" class="eg-img" loading="lazy">
     <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
@@ -1393,6 +1275,7 @@
     <span class="eg-initial">C</span>
     <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2025</span></div>
     <span class="eg-whisper">LARAVEL 12 // SANCTUM</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     <div class="eg-hover-content">
       <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">04 — Laravel · Inertia · Docker</span>
       <h3 class="eg-hover-title">Cristal Capital</h3>
@@ -1401,7 +1284,7 @@
       <div class="eg-hover-tags"><span class="eg-tag">Laravel 12</span> <span class="eg-tag">Inertia.js</span> <span class="eg-tag">Docker</span></div>
     </div>
   </div>
-</div><div class="eg-card eg-narrow reveal-up" data-type="Institucional">
+</a><a href="/portfolio/volunta/" class="eg-card eg-narrow reveal-up" data-type="Institucional">
   <div class="eg-img-wrap">
     <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop" alt="Volunta" class="eg-img" loading="lazy">
     <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
@@ -1410,6 +1293,7 @@
     <span class="eg-initial">V</span>
     <div class="eg-badge-row"><span class="eg-badge">Institucional</span><span class="eg-year">2025</span></div>
     <span class="eg-whisper">CÂMARA VNG // CIVIC</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     <div class="eg-hover-content">
       <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">05 — PHP · Laravel · MySQL</span>
       <h3 class="eg-hover-title">Volunta</h3>
@@ -1418,8 +1302,8 @@
       <div class="eg-hover-tags"><span class="eg-tag">PHP</span> <span class="eg-tag">Laravel</span> <span class="eg-tag">MySQL</span></div>
     </div>
   </div>
-</div></div>
-<div class="eg-row eg-row--trio"><div class="eg-card  reveal-up" data-type="Comercial">
+</a></div>
+<div class="eg-row eg-row--trio"><a href="/portfolio/estudas-comigo/" class="eg-card  reveal-up" data-type="Comercial">
   <div class="eg-img-wrap">
     <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop" alt="Estudas Comigo" class="eg-img" loading="lazy">
     <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
@@ -1428,6 +1312,7 @@
     <span class="eg-initial">E</span>
     <div class="eg-badge-row"><span class="eg-badge">Comercial</span><span class="eg-year">2024</span></div>
     <span class="eg-whisper">STATIC // GH-PAGES</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     <div class="eg-hover-content">
       <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">06 — HTML · Tailwind · JS</span>
       <h3 class="eg-hover-title">Estudas Comigo</h3>
@@ -1436,7 +1321,7 @@
       <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">Tailwind CSS</span> <span class="eg-tag">JavaScript</span></div>
     </div>
   </div>
-</div><div class="eg-card  reveal-up" data-type="Comercial">
+</a><a href="/portfolio/gt-movel/" class="eg-card  reveal-up" data-type="Comercial">
   <div class="eg-img-wrap">
     <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop" alt="GT Móvel" class="eg-img" loading="lazy">
     <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
@@ -1445,6 +1330,7 @@
     <span class="eg-initial">G</span>
     <div class="eg-badge-row"><span class="eg-badge">Comercial</span><span class="eg-year">2024</span></div>
     <span class="eg-whisper">SINCE 1977 // SEO</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     <div class="eg-hover-content">
       <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">07 — HTML · CSS · JS</span>
       <h3 class="eg-hover-title">GT Móvel</h3>
@@ -1453,7 +1339,7 @@
       <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">CSS3</span> <span class="eg-tag">JavaScript</span></div>
     </div>
   </div>
-</div><div class="eg-card  reveal-up" data-type="Académico">
+</a><a href="/portfolio/hugo-brito/" class="eg-card  reveal-up" data-type="Académico">
   <div class="eg-img-wrap">
     <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop" alt="Hugo Brito" class="eg-img" loading="lazy">
     <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
@@ -1462,6 +1348,7 @@
     <span class="eg-initial">H</span>
     <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2024</span></div>
     <span class="eg-whisper">LUXURY // GSAP</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     <div class="eg-hover-content">
       <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">08 — HTML · GSAP · Tailwind</span>
       <h3 class="eg-hover-title">Hugo Brito</h3>
@@ -1470,8 +1357,8 @@
       <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">GSAP 3</span> <span class="eg-tag">Tailwind CSS</span></div>
     </div>
   </div>
-</div></div>
-<div class="eg-row eg-row--pair-r"><div class="eg-card eg-narrow reveal-up" data-type="Institucional">
+</a></div>
+<div class="eg-row eg-row--pair-r"><a href="/portfolio/tec-n-cool/" class="eg-card eg-narrow reveal-up" data-type="Institucional">
   <div class="eg-img-wrap">
     <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop" alt="Tec N' Cool" class="eg-img" loading="lazy">
     <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
@@ -1480,6 +1367,7 @@
     <span class="eg-initial">T</span>
     <div class="eg-badge-row"><span class="eg-badge">Institucional</span><span class="eg-year">2024</span></div>
     <span class="eg-whisper">250+ ITEMS // ISCAP</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     <div class="eg-hover-content">
       <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">09 — HTML · CSS · JS</span>
       <h3 class="eg-hover-title">Tec N' Cool</h3>
@@ -1488,7 +1376,7 @@
       <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">CSS3</span> <span class="eg-tag">JavaScript</span></div>
     </div>
   </div>
-</div><div class="eg-card eg-wide reveal-up" data-type="Académico">
+</a><a href="/portfolio/wise-wallet/" class="eg-card eg-wide reveal-up" data-type="Académico">
   <div class="eg-img-wrap">
     <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop" alt="Wise Wallet" class="eg-img" loading="lazy">
     <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
@@ -1497,6 +1385,7 @@
     <span class="eg-initial">W</span>
     <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2024</span></div>
     <span class="eg-whisper">CHARTS // PDF // OLLAMA</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     <div class="eg-hover-content">
       <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">11 — PHP · Chart.js · Ollama</span>
       <h3 class="eg-hover-title">Wise Wallet</h3>
@@ -1505,8 +1394,8 @@
       <div class="eg-hover-tags"><span class="eg-tag">PHP</span> <span class="eg-tag">Chart.js</span> <span class="eg-tag">DomPDF</span></div>
     </div>
   </div>
-</div></div>
-<div class="eg-row eg-row--duo"><div class="eg-card  reveal-up" data-type="Comercial">
+</a></div>
+<div class="eg-row eg-row--pair"><a href="/portfolio/portable-world/" class="eg-card eg-wide reveal-up" data-type="Comercial">
   <div class="eg-img-wrap">
     <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop" alt="Portable World" class="eg-img" loading="lazy">
     <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
@@ -1515,6 +1404,7 @@
     <span class="eg-initial">P</span>
     <div class="eg-badge-row"><span class="eg-badge">Comercial</span><span class="eg-year">2024</span></div>
     <span class="eg-whisper">CORPORATE // BRANDING</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     <div class="eg-hover-content">
       <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">12 — HTML · CSS · JS</span>
       <h3 class="eg-hover-title">Portable World</h3>
@@ -1523,33 +1413,43 @@
       <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">CSS3</span> <span class="eg-tag">JavaScript</span></div>
     </div>
   </div>
-</div></div>
+</a><a href="/portfolio/cristal-terminal/" class="eg-card eg-narrow reveal-up" data-type="Pessoal">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop" alt="Cristal Terminal" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(135deg,#0a0e17,#1a1f3a);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">C</span>
+    <div class="eg-badge-row"><span class="eg-badge">Pessoal</span><span class="eg-year">2025</span></div>
+    <span class="eg-whisper">QUANT ENGINE // WASM</span>
+    <div class="eg-view-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">01 — Next.js · React · TypeScript</span>
+      <h3 class="eg-hover-title">Cristal Terminal</h3>
+      <p class="eg-hover-sub">Terminal Financeiro Profissional</p>
+      <p class="eg-hover-desc">Terminal financeiro de nível profissional inspirado no Bloomberg Terminal. Motor quant tri-camada, integração IA local via Ollama e 8 temas visuais.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">Next.js 15</span> <span class="eg-tag">React 19</span> <span class="eg-tag">TypeScript</span></div>
+    </div>
+  </div>
+</a></div>
 </div>
 
     </section>
 
-    <section id="pf-stats" class="stats-section" style="padding:0;">
-      <div class="flex items-center gap-2.5" style="padding:clamp(2rem,4vh,3rem) clamp(2rem,4vw,4rem);"><div class="crosshair-mark text-paper" style="opacity:0.3;"></div><span class="t-label" style="color:rgba(235,233,228,0.2);">07 &mdash; Em N&uacute;meros</span></div>
-      <div class="stats-grid">
-        <div class="stat-cell"><div class="stat-num" data-target="12" data-suffix="+">0</div><div class="stat-label">Projectos Entregues</div></div>
-        <div class="stat-cell"><div class="stat-num" data-target="8" data-suffix="">0</div><div class="stat-label">Tecnologias Dominadas</div></div>
-        <div class="stat-cell"><div class="stat-num" data-target="3" data-suffix="">0</div><div class="stat-label">Anos de Experi&ecirc;ncia</div></div>
-        <div class="stat-cell"><div class="stat-num" data-target="100" data-suffix="%">0</div><div class="stat-label">Dedica&ccedil;&atilde;o</div></div>
-      </div>
-    </section>
-
     <section id="pf-cta" class="relative overflow-hidden" style="min-height:clamp(600px,80vh,900px);display:flex;align-items:center;justify-content:center;">
-      <div class="absolute top-0 left-0 right-0 flex items-center gap-2.5 z-30" style="padding:clamp(2rem,4vh,4rem) clamp(1.5rem,5vw,6rem);"><div class="crosshair-mark text-ink"></div><span class="t-label">08 &mdash; Pr&oacute;ximo Passo</span></div>
+      <div class="absolute top-0 left-0 right-0 flex items-center gap-2.5 z-30" style="padding:clamp(2rem,4vh,4rem) clamp(1.5rem,5vw,6rem);"><div class="crosshair-mark text-ink"></div><span class="t-label">04 &mdash; Pr&oacute;ximo Passo</span></div>
+      <div class="cta-chevron cta-chevron--left"><div class="cta-chevron-line" style="top:0.0%;"></div><div class="cta-chevron-line" style="top:2.857142857142857%;"></div><div class="cta-chevron-line" style="top:5.714285714285714%;"></div><div class="cta-chevron-line" style="top:8.571428571428571%;"></div><div class="cta-chevron-line" style="top:11.428571428571429%;"></div><div class="cta-chevron-line" style="top:14.285714285714285%;"></div><div class="cta-chevron-line" style="top:17.142857142857142%;"></div><div class="cta-chevron-line" style="top:20.0%;"></div><div class="cta-chevron-line" style="top:22.857142857142858%;"></div><div class="cta-chevron-line" style="top:25.71428571428571%;"></div><div class="cta-chevron-line" style="top:28.57142857142857%;"></div><div class="cta-chevron-line" style="top:31.428571428571427%;"></div><div class="cta-chevron-line" style="top:34.285714285714285%;"></div><div class="cta-chevron-line" style="top:37.142857142857146%;"></div><div class="cta-chevron-line" style="top:40.0%;"></div><div class="cta-chevron-line" style="top:42.857142857142854%;"></div><div class="cta-chevron-line" style="top:45.714285714285715%;"></div><div class="cta-chevron-line" style="top:48.57142857142857%;"></div><div class="cta-chevron-line" style="top:51.42857142857142%;"></div><div class="cta-chevron-line" style="top:54.285714285714285%;"></div><div class="cta-chevron-line" style="top:57.14285714285714%;"></div><div class="cta-chevron-line" style="top:60.0%;"></div><div class="cta-chevron-line" style="top:62.857142857142854%;"></div><div class="cta-chevron-line" style="top:65.71428571428571%;"></div><div class="cta-chevron-line" style="top:68.57142857142857%;"></div><div class="cta-chevron-line" style="top:71.42857142857143%;"></div><div class="cta-chevron-line" style="top:74.28571428571429%;"></div><div class="cta-chevron-line" style="top:77.14285714285715%;"></div><div class="cta-chevron-line" style="top:80.0%;"></div><div class="cta-chevron-line" style="top:82.85714285714286%;"></div><div class="cta-chevron-line" style="top:85.71428571428571%;"></div><div class="cta-chevron-line" style="top:88.57142857142857%;"></div><div class="cta-chevron-line" style="top:91.42857142857143%;"></div><div class="cta-chevron-line" style="top:94.28571428571428%;"></div><div class="cta-chevron-line" style="top:97.14285714285714%;"></div></div>
+      <div class="cta-chevron cta-chevron--right"><div class="cta-chevron-line" style="top:0.0%;"></div><div class="cta-chevron-line" style="top:2.857142857142857%;"></div><div class="cta-chevron-line" style="top:5.714285714285714%;"></div><div class="cta-chevron-line" style="top:8.571428571428571%;"></div><div class="cta-chevron-line" style="top:11.428571428571429%;"></div><div class="cta-chevron-line" style="top:14.285714285714285%;"></div><div class="cta-chevron-line" style="top:17.142857142857142%;"></div><div class="cta-chevron-line" style="top:20.0%;"></div><div class="cta-chevron-line" style="top:22.857142857142858%;"></div><div class="cta-chevron-line" style="top:25.71428571428571%;"></div><div class="cta-chevron-line" style="top:28.57142857142857%;"></div><div class="cta-chevron-line" style="top:31.428571428571427%;"></div><div class="cta-chevron-line" style="top:34.285714285714285%;"></div><div class="cta-chevron-line" style="top:37.142857142857146%;"></div><div class="cta-chevron-line" style="top:40.0%;"></div><div class="cta-chevron-line" style="top:42.857142857142854%;"></div><div class="cta-chevron-line" style="top:45.714285714285715%;"></div><div class="cta-chevron-line" style="top:48.57142857142857%;"></div><div class="cta-chevron-line" style="top:51.42857142857142%;"></div><div class="cta-chevron-line" style="top:54.285714285714285%;"></div><div class="cta-chevron-line" style="top:57.14285714285714%;"></div><div class="cta-chevron-line" style="top:60.0%;"></div><div class="cta-chevron-line" style="top:62.857142857142854%;"></div><div class="cta-chevron-line" style="top:65.71428571428571%;"></div><div class="cta-chevron-line" style="top:68.57142857142857%;"></div><div class="cta-chevron-line" style="top:71.42857142857143%;"></div><div class="cta-chevron-line" style="top:74.28571428571429%;"></div><div class="cta-chevron-line" style="top:77.14285714285715%;"></div><div class="cta-chevron-line" style="top:80.0%;"></div><div class="cta-chevron-line" style="top:82.85714285714286%;"></div><div class="cta-chevron-line" style="top:85.71428571428571%;"></div><div class="cta-chevron-line" style="top:88.57142857142857%;"></div><div class="cta-chevron-line" style="top:91.42857142857143%;"></div><div class="cta-chevron-line" style="top:94.28571428571428%;"></div><div class="cta-chevron-line" style="top:97.14285714285714%;"></div></div>
       <div class="dome-stage absolute inset-0 flex items-center justify-center" id="dome-stage" aria-hidden="true"><div class="dome-sphere" id="dome-sphere" style="width:1px;height:1px;"></div></div>
-      <div class="absolute inset-0 z-10 pointer-events-none" style="background:radial-gradient(ellipse 65% 60% at 50% 50%,transparent 40%,var(--color-paper) 100%);"></div>
-      <div class="absolute top-0 left-0 right-0 h-32 z-10 pointer-events-none" style="background:linear-gradient(to bottom,var(--color-paper),transparent);"></div>
-      <div class="absolute bottom-0 left-0 right-0 h-32 z-10 pointer-events-none" style="background:linear-gradient(to top,var(--color-paper),transparent);"></div>
-      <div class="relative z-20 text-center flex flex-col items-center" style="padding:0 clamp(1.5rem,5vw,4rem);">
+      <div class="absolute inset-0 z-20 pointer-events-none" style="background:radial-gradient(ellipse 55% 50% at 50% 50%,transparent 30%,var(--color-paper) 100%);"></div>
+      <div class="absolute top-0 left-0 right-0 h-40 z-20 pointer-events-none" style="background:linear-gradient(to bottom,var(--color-paper),transparent);"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-40 z-20 pointer-events-none" style="background:linear-gradient(to top,var(--color-paper),transparent);"></div>
+      <div class="relative z-40 text-center flex flex-col items-center" style="padding:0 clamp(1.5rem,5vw,4rem);">
         <h2 class="font-serif italic reveal-up" style="font-size:clamp(2.8rem,7vw,7rem);line-height:0.88;letter-spacing:-0.03em;margin-bottom:1.5rem;">O pr&oacute;ximo<br>&eacute; o seu.</h2>
         <p class="font-mono text-ink/45 reveal-up" style="font-size:clamp(0.68rem,0.9vw,0.82rem);max-width:38ch;margin-bottom:2.5rem;">Cada projecto come&ccedil;a com uma conversa.</p>
         <div class="flex flex-wrap items-center justify-center gap-4 reveal-up">
-          <a href="/contactos/" class="inline-flex items-center justify-center bg-ink text-paper font-sans font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:scale-[1.03]" style="padding:clamp(0.85rem,1.2vw,1.1rem) clamp(2rem,3vw,2.8rem);letter-spacing:0.08em;font-size:clamp(0.72rem,0.85vw,0.82rem);">Iniciar projecto</a>
-          <a href="/servicos/" class="inline-flex items-center justify-center border border-ink/20 text-ink font-sans font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:border-ink/60 hover:scale-[1.03]" style="padding:clamp(0.85rem,1.2vw,1.1rem) clamp(2rem,3vw,2.8rem);letter-spacing:0.08em;font-size:clamp(0.72rem,0.85vw,0.82rem);">Ver Servi&ccedil;os</a>
+          <a href="/contactos/" class="cta-btn cta-btn--primary">Iniciar projecto</a>
+          <a href="/servicos/" class="cta-btn cta-btn--outline">Ver Servi&ccedil;os</a>
         </div>
       </div>
     </section>
@@ -1638,7 +1538,7 @@
 
   <script type="module" src="../assets/js/page.js"></script>
   <script type="module">
-const PROJECTS = [{"id": "cristal-terminal", "n": "01", "name": "Cristal Terminal", "sub": "Terminal Financeiro Profissional", "tp": "Pessoal", "yr": "2025", "st": "Em Desenvolvimento", "gr": "135deg,#0a0e17,#1a1f3a", "ini": "C", "tags": ["Next.js 15", "React 19", "TypeScript", "C++/WASM", "Python", "Ollama AI"], "stk": "Next.js · React · TypeScript", "desc": "Terminal financeiro de nível profissional inspirado no Bloomberg Terminal. Motor quant tri-camada, integração IA local via Ollama e 8 temas visuais.", "wh": "QUANT ENGINE // WASM", "img": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop"}, {"id": "casa-gi", "n": "02", "name": "Casa do Gi", "sub": "Reservas e E-commerce", "tp": "Comercial", "yr": "2025", "st": "Em Produção", "gr": "160deg,#1a150e,#2a1f0e", "ini": "G", "tags": ["PHP 8", "MySQL", "IfthenPay", "Tailwind CSS"], "stk": "PHP · MySQL · IfthenPay", "desc": "Website para alojamento local com sistema de reservas, pagamentos IfthenPay e painel de administração.", "wh": "HMAC-SHA256 // IFTHEN", "img": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop"}, {"id": "eletro2000", "n": "03", "name": "Eletro 2000 v2", "sub": "Gestão de Retalho com IA", "tp": "Académico", "yr": "2025", "st": "Concluído", "gr": "200deg,#0e1a16,#0a2e20", "ini": "E", "tags": ["Laravel 12", "React 19", "Gemini AI", "MySQL"], "stk": "Laravel · React · Gemini", "desc": "Sistema full-stack com IA autónoma via Google Gemini. Motor de decisão em tempo real.", "wh": "GEMINI API // AUTONOMOUS", "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop"}, {"id": "cristal-capital", "n": "04", "name": "Cristal Capital", "sub": "Plataforma Financeira — PAP", "tp": "Académico", "yr": "2025", "st": "Concluído", "gr": "120deg,#141018,#1e1630", "ini": "C", "tags": ["Laravel 12", "Inertia.js", "Docker", "Sanctum"], "stk": "Laravel · Inertia · Docker", "desc": "Plataforma de gestão financeira com Laravel 12, Sanctum e Inertia.js.", "wh": "LARAVEL 12 // SANCTUM", "img": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop"}, {"id": "volunta", "n": "05", "name": "Volunta", "sub": "Câmara Municipal V.N. Gaia", "tp": "Institucional", "yr": "2025", "st": "Em Desenvolvimento", "gr": "180deg,#181410,#28221a", "ini": "V", "tags": ["PHP", "Laravel", "MySQL", "Tailwind"], "stk": "PHP · Laravel · MySQL", "desc": "Plataforma de voluntariado para a Câmara Municipal de Vila Nova de Gaia.", "wh": "CÂMARA VNG // CIVIC", "img": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop"}, {"id": "estudas-comigo", "n": "06", "name": "Estudas Comigo", "sub": "Centro de Estudos", "tp": "Comercial", "yr": "2024", "st": "Em Produção", "gr": "145deg,#0d1018,#162030", "ini": "E", "tags": ["HTML5", "Tailwind CSS", "JavaScript"], "stk": "HTML · Tailwind · JS", "desc": "Website moderno para centro de estudos com design responsivo.", "wh": "STATIC // GH-PAGES", "img": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop"}, {"id": "gt-movel", "n": "07", "name": "GT Móvel", "sub": "Móveis e Eletrodomésticos", "tp": "Comercial", "yr": "2024", "st": "Em Produção", "gr": "170deg,#100e0e,#2a1a1a", "ini": "G", "tags": ["HTML5", "CSS3", "JavaScript", "SEO"], "stk": "HTML · CSS · JS", "desc": "Website para empresa de móveis desde 1977. Catálogo e SEO optimizado.", "wh": "SINCE 1977 // SEO", "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop"}, {"id": "hugo-brito", "n": "08", "name": "Hugo Brito", "sub": "Luxury Fashion Brand", "tp": "Académico", "yr": "2024", "st": "Concluído", "gr": "155deg,#0e0e14,#1a1a28", "ini": "H", "tags": ["HTML5", "GSAP 3", "Tailwind CSS"], "stk": "HTML · GSAP · Tailwind", "desc": "Website conceito para marca de moda de luxo. Design cinematográfico com GSAP.", "wh": "LUXURY // GSAP", "img": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop"}, {"id": "tec-n-cool", "n": "09", "name": "Tec N' Cool", "sub": "Plataforma ISCAP / CEI", "tp": "Institucional", "yr": "2024", "st": "Em Produção", "gr": "190deg,#10140e,#1e2a18", "ini": "T", "tags": ["HTML5", "CSS3", "JavaScript", "JSON"], "stk": "HTML · CSS · JS", "desc": "Plataforma educativa para o ISCAP/CEI com catálogo de 250+ itens.", "wh": "250+ ITEMS // ISCAP", "img": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop"}, {"id": "expolive", "n": "10", "name": "ExpoLive", "sub": "Gestão de Eventos e CMS", "tp": "Académico", "yr": "2023–25", "st": "Concluído", "gr": "130deg,#18100e,#30201a", "ini": "X", "tags": ["PHP", "MySQL", "REST API", "IA"], "stk": "PHP · MySQL · IA", "desc": "Plataforma de gestão de eventos com 30+ páginas admin e chatbot IA.", "wh": "30+ PAGES // 2 YEARS", "img": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop"}, {"id": "wise-wallet", "n": "11", "name": "Wise Wallet", "sub": "Gestão Financeira Pessoal", "tp": "Académico", "yr": "2024", "st": "Concluído", "gr": "210deg,#0e1018,#182030", "ini": "W", "tags": ["PHP", "Chart.js", "DomPDF", "Ollama"], "stk": "PHP · Chart.js · Ollama", "desc": "Dashboard financeiro com gráficos Chart.js e IA local via Ollama.", "wh": "CHARTS // PDF // OLLAMA", "img": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop"}, {"id": "portable-world", "n": "12", "name": "Portable World", "sub": "Website Corporativo", "tp": "Comercial", "yr": "2024", "st": "Em Renovação", "gr": "165deg,#0e1214,#1a2428", "ini": "P", "tags": ["HTML5", "CSS3", "JavaScript"], "stk": "HTML · CSS · JS", "desc": "Website institucional para Portable World. Em renovação.", "wh": "CORPORATE // BRANDING", "img": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop"}];
+window.PROJECTS = [{"id": "cristal-terminal", "n": "01", "name": "Cristal Terminal", "sub": "Terminal Financeiro Profissional", "tp": "Pessoal", "yr": "2025", "st": "Em Desenvolvimento", "gr": "135deg,#0a0e17,#1a1f3a", "ini": "C", "tags": ["Next.js 15", "React 19", "TypeScript", "C++/WASM", "Python", "Ollama AI"], "stk": "Next.js · React · TypeScript", "desc": "Terminal financeiro de nível profissional inspirado no Bloomberg Terminal. Motor quant tri-camada, integração IA local via Ollama e 8 temas visuais.", "wh": "QUANT ENGINE // WASM", "img": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop"}, {"id": "casa-gi", "n": "02", "name": "Casa do Gi", "sub": "Reservas e E-commerce", "tp": "Comercial", "yr": "2025", "st": "Em Produção", "gr": "160deg,#1a150e,#2a1f0e", "ini": "G", "tags": ["PHP 8", "MySQL", "IfthenPay", "Tailwind CSS"], "stk": "PHP · MySQL · IfthenPay", "desc": "Website para alojamento local com sistema de reservas, pagamentos IfthenPay e painel de administração.", "wh": "HMAC-SHA256 // IFTHEN", "img": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop"}, {"id": "eletro2000", "n": "03", "name": "Eletro 2000 v2", "sub": "Gestão de Retalho com IA", "tp": "Académico", "yr": "2025", "st": "Concluído", "gr": "200deg,#0e1a16,#0a2e20", "ini": "E", "tags": ["Laravel 12", "React 19", "Gemini AI", "MySQL"], "stk": "Laravel · React · Gemini", "desc": "Sistema full-stack com IA autónoma via Google Gemini. Motor de decisão em tempo real.", "wh": "GEMINI API // AUTONOMOUS", "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop"}, {"id": "cristal-capital", "n": "04", "name": "Cristal Capital", "sub": "Plataforma Financeira — PAP", "tp": "Académico", "yr": "2025", "st": "Concluído", "gr": "120deg,#141018,#1e1630", "ini": "C", "tags": ["Laravel 12", "Inertia.js", "Docker", "Sanctum"], "stk": "Laravel · Inertia · Docker", "desc": "Plataforma de gestão financeira com Laravel 12, Sanctum e Inertia.js.", "wh": "LARAVEL 12 // SANCTUM", "img": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop"}, {"id": "volunta", "n": "05", "name": "Volunta", "sub": "Câmara Municipal V.N. Gaia", "tp": "Institucional", "yr": "2025", "st": "Em Desenvolvimento", "gr": "180deg,#181410,#28221a", "ini": "V", "tags": ["PHP", "Laravel", "MySQL", "Tailwind CSS"], "stk": "PHP · Laravel · MySQL", "desc": "Plataforma de voluntariado para a Câmara Municipal de Vila Nova de Gaia.", "wh": "CÂMARA VNG // CIVIC", "img": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop"}, {"id": "estudas-comigo", "n": "06", "name": "Estudas Comigo", "sub": "Centro de Estudos", "tp": "Comercial", "yr": "2024", "st": "Em Produção", "gr": "145deg,#0d1018,#162030", "ini": "E", "tags": ["HTML5", "Tailwind CSS", "JavaScript"], "stk": "HTML · Tailwind · JS", "desc": "Website moderno para centro de estudos com design responsivo.", "wh": "STATIC // GH-PAGES", "img": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop"}, {"id": "gt-movel", "n": "07", "name": "GT Móvel", "sub": "Móveis e Eletrodomésticos", "tp": "Comercial", "yr": "2024", "st": "Em Produção", "gr": "170deg,#100e0e,#2a1a1a", "ini": "G", "tags": ["HTML5", "CSS3", "JavaScript", "SEO"], "stk": "HTML · CSS · JS", "desc": "Website para empresa de móveis desde 1977. Catálogo e SEO optimizado.", "wh": "SINCE 1977 // SEO", "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop"}, {"id": "hugo-brito", "n": "08", "name": "Hugo Brito", "sub": "Luxury Fashion Brand", "tp": "Académico", "yr": "2024", "st": "Concluído", "gr": "155deg,#0e0e14,#1a1a28", "ini": "H", "tags": ["HTML5", "GSAP 3", "Tailwind CSS"], "stk": "HTML · GSAP · Tailwind", "desc": "Website conceito para marca de moda de luxo. Design cinematográfico com GSAP.", "wh": "LUXURY // GSAP", "img": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop"}, {"id": "tec-n-cool", "n": "09", "name": "Tec N' Cool", "sub": "Plataforma ISCAP / CEI", "tp": "Institucional", "yr": "2024", "st": "Em Produção", "gr": "190deg,#10140e,#1e2a18", "ini": "T", "tags": ["HTML5", "CSS3", "JavaScript", "JSON"], "stk": "HTML · CSS · JS", "desc": "Plataforma educativa para o ISCAP/CEI com catálogo de 250+ itens.", "wh": "250+ ITEMS // ISCAP", "img": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop"}, {"id": "expolive", "n": "10", "name": "ExpoLive", "sub": "Gestão de Eventos e CMS", "tp": "Académico", "yr": "2023–25", "st": "Concluído", "gr": "130deg,#18100e,#30201a", "ini": "X", "tags": ["PHP", "MySQL", "REST API", "IA"], "stk": "PHP · MySQL · IA", "desc": "Plataforma de gestão de eventos com 30+ páginas admin e chatbot IA.", "wh": "30+ PAGES // 2 YEARS", "img": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop"}, {"id": "wise-wallet", "n": "11", "name": "Wise Wallet", "sub": "Gestão Financeira Pessoal", "tp": "Académico", "yr": "2024", "st": "Concluído", "gr": "210deg,#0e1018,#182030", "ini": "W", "tags": ["PHP", "Chart.js", "DomPDF", "Ollama"], "stk": "PHP · Chart.js · Ollama", "desc": "Dashboard financeiro com gráficos Chart.js e IA local via Ollama.", "wh": "CHARTS // PDF // OLLAMA", "img": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop"}, {"id": "portable-world", "n": "12", "name": "Portable World", "sub": "Website Corporativo", "tp": "Comercial", "yr": "2024", "st": "Em Renovação", "gr": "165deg,#0e1214,#1a2428", "ini": "P", "tags": ["HTML5", "CSS3", "JavaScript"], "stk": "HTML · CSS · JS", "desc": "Website institucional para Portable World. Em renovação.", "wh": "CORPORATE // BRANDING", "img": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop"}];
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -1654,6 +1554,11 @@ function initAnimations() {
         heroTL.to(["#hero-ref-tl", "#hero-ref-tr"], { opacity: 1, y: 0, duration: 1, stagger: 0.12, ease: "power3.out" }, 1.05);
         heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.55);
         gsap.from(".hero-ghost", { opacity: 0, y: 60, scale: 0.92, duration: 2.5, ease: "power3.out" });
+
+        // Code glyphs entrance
+        gsap.from(".code-glyph", { opacity: 0, scale: 0.85, duration: 2.2, stagger: 0.06, ease: "power3.out", delay: 0.5 });
+        gsap.from(".code-glyph--dot", { opacity: 0, scale: 0, duration: 1.5, stagger: 0.03, ease: "elastic.out(1,0.5)", delay: 0.8 });
+        gsap.from(".code-glyph--line", { scaleX: 0, duration: 1.8, stagger: 0.05, ease: "power3.out", delay: 0.6 });
 
         // ── PINNED SHOWCASE ──
         const panels = document.querySelectorAll(".sc-panel");
@@ -1689,119 +1594,16 @@ function initAnimations() {
                 onUpdate: (self) => {
                     const idx = Math.min(Math.floor(self.progress * count), count - 1);
                     dots.forEach((d, i) => { d.classList.toggle("active", i === idx); });
+                    const viewBtn = document.querySelector(".sc-view-btn a");
+                    if (viewBtn && window.PROJECTS) {
+                        const featured = [0, 1, 9];
+                        viewBtn.href = "/portfolio/" + window.PROJECTS[featured[idx]].id + "/";
+                    }
                 }
             });
 
             const firstC = panels[0].querySelector(".sc-content");
             if (firstC) gsap.from(firstC.children, { y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: scSection, start: "top 80%", once: true } });
-        }
-
-        // ── MANIFESTO WORD REVEAL ──
-        const mfSection = document.getElementById("pf-manifesto");
-        if (mfSection) {
-            const words = mfSection.querySelectorAll(".mf-word");
-            if (words.length) {
-                ScrollTrigger.create({
-                    trigger: mfSection, start: "top top", end: "bottom bottom", scrub: 0.3,
-                    onUpdate: (self) => {
-                        const p = self.progress;
-                        const activeCount = Math.floor(p * words.length);
-                        words.forEach((w, i) => {
-                            if (i < activeCount) { w.classList.add("active"); }
-                            else { w.classList.remove("active"); }
-                        });
-                        // Update counter
-                        const counter = mfSection.querySelector(".mf-counter");
-                        if (counter) counter.textContent = `${Math.round(p * 100)}%`;
-                    }
-                });
-            }
-        }
-
-        // ── HORIZONTAL SCROLL GALLERY ──
-        const hsgSection = document.getElementById("pf-hscroll");
-        if (hsgSection) {
-            const track = hsgSection.querySelector(".hsg-track");
-            const slides = hsgSection.querySelectorAll(".hsg-slide");
-            if (track && slides.length) {
-                const totalW = track.scrollWidth - window.innerWidth;
-                gsap.to(track, {
-                    x: -totalW, ease: "none",
-                    scrollTrigger: {
-                        trigger: hsgSection, start: "top top", end: "bottom bottom",
-                        scrub: 0.5, invalidateOnRefresh: true,
-                    }
-                });
-
-                // Progress bar
-                const progFill = hsgSection.querySelector(".hsg-prog-fill");
-                const progLabel = hsgSection.querySelector(".hsg-prog-label");
-                if (progFill) {
-                    ScrollTrigger.create({
-                        trigger: hsgSection, start: "top top", end: "bottom bottom", scrub: true,
-                        onUpdate: (self) => {
-                            progFill.style.width = (self.progress * 100) + "%";
-                            if (progLabel) progLabel.textContent = Math.round(self.progress * slides.length) + " / " + slides.length;
-                        }
-                    });
-                }
-
-                // Parallax on each slide image
-                slides.forEach(slide => {
-                    const img = slide.querySelector("img");
-                    if (img) gsap.fromTo(img, { x: "8%" }, { x: "-8%", ease: "none", scrollTrigger: { trigger: hsgSection, start: "top top", end: "bottom bottom", scrub: 0.8 } });
-                });
-            }
-        }
-
-        // ── STACKING CARDS ──
-        const stkSection = document.getElementById("pf-stacking");
-        if (stkSection) {
-            const cards = stkSection.querySelectorAll(".stk-card");
-            if (cards.length > 1) {
-                const count = cards.length;
-                // Initial: all cards centered, stacked by z-index, only first visible
-                gsap.set(cards, { y: "100%", opacity: 0 });
-                gsap.set(cards[0], { y: "0%", opacity: 1 });
-
-                const stkTL = gsap.timeline({
-                    scrollTrigger: { trigger: stkSection, start: "top top", end: "bottom bottom", scrub: 0.5 }
-                });
-
-                for (let i = 0; i < count - 1; i++) {
-                    // Scale down + blur current
-                    stkTL.to(cards[i], { scale: 0.88, filter: "blur(8px) brightness(0.5)", duration: 0.5, ease: "power2.inOut" }, i);
-                    // Bring in next card from below
-                    stkTL.fromTo(cards[i + 1], { y: "100%", opacity: 0 }, { y: "0%", opacity: 1, duration: 0.6, ease: "power3.out" }, i + 0.2);
-                }
-            }
-        }
-
-        // ── STATS COUNTER ──
-        const statsSection = document.getElementById("pf-stats");
-        if (statsSection) {
-            const cells = statsSection.querySelectorAll(".stat-cell");
-            const nums = statsSection.querySelectorAll(".stat-num");
-
-            ScrollTrigger.create({
-                trigger: statsSection, start: "top 75%", once: true,
-                onEnter: () => {
-                    cells.forEach(c => c.classList.add("active"));
-                    nums.forEach(el => {
-                        const target = parseInt(el.dataset.target);
-                        gsap.fromTo(el, { innerText: 0 }, {
-                            innerText: target, duration: 2.5, ease: "power2.out", snap: { innerText: 1 },
-                            onUpdate: function () {
-                                const suffix = el.querySelector(".stat-suffix");
-                                const sfx = el.dataset.suffix || "";
-                                el.textContent = Math.round(this.targets()[0].innerText) + sfx;
-                            }
-                        });
-                    });
-                }
-            });
-
-            gsap.from(cells, { scrollTrigger: { trigger: statsSection, start: "top 80%", once: true }, y: 60, opacity: 0, duration: 1.2, stagger: 0.15, ease: "power4.out" });
         }
 
         // ── SECTION REVEALS ──
@@ -1829,6 +1631,12 @@ function initAnimations() {
         // ── IMAGE PARALLAX on grid ──
         document.querySelectorAll(".eg-img").forEach(img => {
             gsap.fromTo(img, { y: "-5%" }, { y: "5%", ease: "none", scrollTrigger: { trigger: img.closest(".eg-card"), start: "top bottom", end: "bottom top", scrub: 0.6 } });
+        });
+
+        // ── CTA CHEVRONS ──
+        gsap.from(".cta-chevron-line", {
+            scrollTrigger: { trigger: "#pf-cta", start: "top 75%", once: true },
+            scaleX: 0, opacity: 0, duration: 1.2, stagger: 0.025, ease: "power3.out"
         });
 
         // ── CTA ──
@@ -1862,14 +1670,6 @@ function initFilter() {
             });
         });
     });
-}
-
-// ── CAROUSEL ──
-function initCarousel() {
-    const track = document.querySelector(".cr-track");
-    if (!track) return;
-    track.addEventListener("mouseenter", () => track.style.animationPlayState = "paused");
-    track.addEventListener("mouseleave", () => track.style.animationPlayState = "running");
 }
 
 // ── DOME ──
@@ -1930,7 +1730,6 @@ const obs = new MutationObserver(() => {
         requestAnimationFrame(() => {
             initAnimations();
             initFilter();
-            initCarousel();
             setTimeout(() => initDome(), 150);
         });
     }
