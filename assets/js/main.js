@@ -441,6 +441,113 @@ gsap.from(".cta-anim", {
   ease: "power3.out"
 });
 
+// --- Pinned Showcase (Featured Projects) ---
+const initPinnedShowcase = () => {
+  const scSection = document.getElementById("pf-showcase");
+  const panels = document.querySelectorAll(".sc-panel");
+  const dots = document.querySelectorAll(".sc-dot");
+  if (!scSection || !panels.length) return;
+
+  const count = panels.length;
+  gsap.set(panels, { opacity: 0, visibility: "visible" });
+  gsap.set(panels[0], { opacity: 1 });
+
+  // Image parallax within panels
+  panels.forEach(panel => {
+    const img = panel.querySelector(".sc-img");
+    if (img) {
+      gsap.to(img, {
+        scale: 1.25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: scSection,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1
+        }
+      });
+    }
+  });
+
+  // Master timeline for switching panels
+  const masterTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: scSection,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.6
+    }
+  });
+
+  for (let i = 0; i < count - 1; i++) {
+    const curr = panels[i];
+    const next = panels[i + 1];
+    const currC = curr.querySelector(".sc-content");
+    const nextC = next.querySelector(".sc-content");
+    const nextI = next.querySelector(".sc-initial");
+
+    masterTL.to(currC, { y: -50, opacity: 0, duration: 0.4, ease: "power2.in" }, i);
+    masterTL.to(curr, { opacity: 0, duration: 0.5, ease: "power2.inOut" }, i + 0.3);
+    masterTL.fromTo(next, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, i + 0.4);
+
+    if (nextC) {
+      masterTL.fromTo(nextC.children,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "power3.out" },
+        i + 0.5
+      );
+    }
+
+    if (nextI) {
+      masterTL.fromTo(nextI,
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" },
+        i + 0.45
+      );
+    }
+  }
+
+  // Update dots and view button link
+  const featuredProjectIds = ["cristal-terminal", "casa-gi", "expolive"];
+
+  ScrollTrigger.create({
+    trigger: scSection,
+    start: "top top",
+    end: "bottom bottom",
+    scrub: true,
+    onUpdate: (self) => {
+      const idx = Math.min(Math.floor(self.progress * count), count - 1);
+      dots.forEach((d, i) => {
+        d.classList.toggle("active", i === idx);
+      });
+
+      const viewBtn = document.querySelector(".sc-view-btn a");
+      if (viewBtn) {
+        viewBtn.href = "/portfolio/" + featuredProjectIds[idx] + "/";
+      }
+    }
+  });
+
+  // Entrance animation for first panel
+  const firstC = panels[0].querySelector(".sc-content");
+  if (firstC) {
+    gsap.from(firstC.children, {
+      y: 40,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: scSection,
+        start: "top 80%",
+        once: true
+      }
+    });
+  }
+};
+
+initPinnedShowcase();
+
 // --- Elegant Portfolio Showcase ---
 const initElegantCarousel = () => {
   const container = document.getElementById('proj-container');
