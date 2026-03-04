@@ -34,180 +34,844 @@
   </script>
   <script type="importmap">{"imports":{"gsap":"https://esm.sh/gsap@3.12.5","gsap/ScrollTrigger":"https://esm.sh/gsap@3.12.5/ScrollTrigger","lucide":"https://esm.sh/lucide@0.344.0"}}</script>
 
+
   <style type="text/tailwindcss">
     :root {
-      --bg-color: #ebe9e4;
-      --color-paper: #ebe9e4;
-      --color-ink: #121212;
-      --color-silver: #8c8c8c;
-      --color-carbon: #333333;
-      --font-sans: "Plus Jakarta Sans", sans-serif;
-      --font-serif: "Cormorant Garamond", serif;
-      --font-mono: "IBM Plex Mono", monospace;
+        --bg-color: #ebe9e4;
+        --color-paper: #ebe9e4;
+        --color-ink: #121212;
+        --color-silver: #8c8c8c;
+        --font-sans: "Plus Jakarta Sans", sans-serif;
+        --font-serif: "Cormorant Garamond", serif;
+        --font-mono: "IBM Plex Mono", monospace;
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--color-ink);
-      font-family: var(--font-sans);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      visibility: hidden;
+        background: var(--bg-color);
+        color: var(--color-ink);
+        font-family: var(--font-sans);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        visibility: hidden;
     }
 
-    .gpu-accel { transform: translateZ(0); backface-visibility: hidden; perspective: 1000px; will-change: transform, opacity; }
-
-    /* ── Noise overlay ───────────────────── */
-    .noise-overlay { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999; opacity:0.05; filter:url(#noiseFilter); mix-blend-mode:overlay; }
-
-    /* ── Navbar ────────────────────────── */
-    #navbar { transition: background-color 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.5s ease, padding 0.5s ease; border: 1px solid transparent; }
-    #navbar.scrolled { background-color: rgba(235,233,228,0.85); backdrop-filter: blur(16px); border-color: rgba(18,18,18,0.08); box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05); padding-top: 0.55rem; padding-bottom: 0.55rem; }
-    .nav-link { font-family: var(--font-mono); font-size: clamp(0.7rem,0.85vw,0.95rem); font-weight:500; color:var(--color-ink); position:relative; padding:0.2rem 0; text-decoration:none !important; border-bottom:none !important; box-shadow:none !important; letter-spacing:0.05em; text-transform:uppercase; }
-    .nav-link:hover { text-decoration:none !important; }
-    .nav-link::before { content:""; position:absolute; top:0; left:0; width:100%; height:1px; background-color:var(--color-ink); transform:scaleX(0) translateZ(0); transform-origin:right; transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); will-change:transform; }
-    .nav-link::after { content:""; position:absolute; bottom:0; left:0; width:100%; height:1px; background-color:var(--color-ink); transform:scaleX(0) translateZ(0); transform-origin:left; transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); will-change:transform; }
-    .nav-link:hover::before, .nav-link.active::before { transform:scaleX(1) translateZ(0); transform-origin:left; }
-    .nav-link:hover::after, .nav-link.active::after { transform:scaleX(1) translateZ(0); transform-origin:right; }
-    .logo-link { display:flex; align-items:center; gap:1.5rem; }
-    .logo-container { width:clamp(2.5rem,3.2vw,4.2rem); height:clamp(2.5rem,3.2vw,4.2rem); display:flex; align-items:center; justify-content:center; }
-    .logo-text { display:block; font-size:clamp(15px,1.4vw,24px); font-weight:800; text-transform:uppercase; font-family:var(--font-sans); user-select:none; letter-spacing:0.06em; transition:letter-spacing 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .logo-link:hover .logo-text { letter-spacing:0.38em; }
-    .logo-container svg { transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1); width:100%; height:100%; }
-    .logo-link:hover .logo-container svg { transform:scale(1.1) rotate(-5deg); }
-    .btn-contact { font-family:var(--font-sans); font-weight:700; letter-spacing:0.05em; text-transform:uppercase; border:1px solid var(--color-ink); transition:all 0.3s ease; cursor:pointer; background-clip:padding-box; }
-    .btn-contact:hover { background-color:transparent; color:var(--color-ink); }
-    .btn-contact span.absolute { background-color:var(--color-paper); }
-    .btn-contact:active { transform:scale(0.96) translateY(1px); }
-
-    /* ── Footer ─────────────────────────── */
-    .footer-link { position:relative; display:inline-block; transition:color 0.3s ease, transform 0.3s ease; }
-    .footer-link::after { content:""; position:absolute; bottom:-2px; left:0; width:0; height:1px; background-color:rgba(235,233,228,0.5); transition:width 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .footer-link:hover { color:rgba(235,233,228,1) !important; transform:translateX(4px); }
-    .footer-link:hover::after { width:100%; }
-
-    /* ══════════════════════════════════════════════════
-       PORTFÓLIO — PAGE-SPECIFIC STYLES
-    ══════════════════════════════════════════════════ */
-
-    /* Blueprint grid */
-    .bp-grid { background-image: linear-gradient(rgba(18,18,18,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(18,18,18,0.028) 1px, transparent 1px); background-size:80px 80px; }
-    .bp-grid-dark { background-image: linear-gradient(rgba(235,233,228,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(235,233,228,0.025) 1px, transparent 1px); background-size:80px 80px; }
-
-    /* Technical label */
-    .t-label { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(18,18,18,0.32); }
-    .t-label-light { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(235,233,228,0.3); }
-
-    /* Crosshair mark */
-    .crosshair-mark { position:relative; width:13px; height:13px; flex-shrink:0; }
-    .crosshair-mark::before { content:""; position:absolute; width:1px; height:100%; left:50%; background:currentColor; opacity:0.22; }
-    .crosshair-mark::after  { content:""; position:absolute; height:1px; width:100%; top:50%;  background:currentColor; opacity:0.22; }
-
-    /* Hero ghost text */
-    .hero-ghost { font-family:var(--font-serif); font-style:italic; font-weight:300; line-height:0.85; letter-spacing:-0.02em; color:transparent; -webkit-text-stroke:1px rgba(18,18,18,0.045); user-select:none; pointer-events:none; white-space:nowrap; }
-
-    /* H-line (drawn by GSAP) */
-    .h-line { height:1px; background:rgba(18,18,18,0.12); transform-origin:left center; transform:scaleX(0); }
-
-    /* Scroll cue */
-    @keyframes scroll-cue { 0%,100%{transform:translateY(0);opacity:0.3;} 50%{transform:translateY(10px);opacity:0.08;} }
-    .scroll-cue-line { width:1px; height:48px; background:var(--color-ink); opacity:0.3; animation:scroll-cue 2.2s ease-in-out infinite; }
-
-    /* Hero clip/word reveal */
-    .hero-word { display:inline-block; transform:translateY(105%); }
-    .clip-wrap { overflow:hidden; display:block; }
-
-    /* ── Timeline ────────────────────────── */
-    .tl-container { position:relative; max-width:76rem; margin:0 auto; }
-    .tl-line { position:absolute; left:clamp(5.5rem,8vw,8rem); top:0; bottom:0; width:2px; background:rgba(18,18,18,0.08); }
-    .tl-line-fill { position:absolute; top:0; left:0; width:100%; height:0%; background:var(--color-ink); }
-    .tl-dot { width:14px; height:14px; border-radius:50%; background:var(--color-paper); border:2px solid var(--color-ink); position:absolute; left:clamp(calc(5.5rem - 6px),calc(8vw - 6px),calc(8rem - 6px)); top:0.35rem; z-index:5; transform:scale(0); }
-    .tl-year { position:absolute; left:0; top:0; width:clamp(4.5rem,7vw,7rem); text-align:right; padding-right:1.25rem; font-family:var(--font-serif); font-style:italic; font-size:clamp(0.9rem,1.1vw,1.15rem); color:rgba(18,18,18,0.55); font-weight:600; line-height:1.4; letter-spacing:0.02em; }
-    .tl-entry { position:relative; padding:clamp(4rem,8vh,8rem) 0; padding-left:clamp(7.5rem,10vw,11rem); }
-    .tl-entry:first-child { padding-top:0; }
-    .tl-ghost-num { position:absolute; left:clamp(6.5rem,9vw,10rem); top:50%; transform:translateY(-50%); font-family:var(--font-serif); font-style:italic; font-weight:300; font-size:clamp(12rem,22vw,28rem); line-height:0.75; color:transparent; -webkit-text-stroke:1px rgba(18,18,18,0.025); pointer-events:none; user-select:none; z-index:0; }
-    .tl-tag { font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.15em; text-transform:uppercase; border:1px solid rgba(18,18,18,0.14); padding:0.28rem 0.65rem; border-radius:100px; color:rgba(18,18,18,0.45); display:inline-block; }
-    .tl-divider { height:1px; background:rgba(18,18,18,0.08); margin:1.25rem 0; }
-    .tl-meta { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.1em; color:rgba(18,18,18,0.35); }
-    .tl-img-placeholder { background:rgba(18,18,18,0.04); border:1px solid rgba(18,18,18,0.06); border-radius:0.75rem; overflow:hidden; aspect-ratio:16/10; display:flex; align-items:center; justify-content:center; }
-    .tl-img-placeholder span { font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(18,18,18,0.18); }
-
-    @media (max-width: 768px) {
-      .tl-line { left:14px; }
-      .tl-dot { left:8px; width:12px; height:12px; }
-      .tl-year { display:none; }
-      .tl-entry { padding-left:clamp(2.5rem,8vw,4rem); }
-      .tl-ghost-num { display:none; }
+    .noise-overlay {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.05;
+        filter: url(#noiseFilter);
+        mix-blend-mode: overlay;
     }
 
-    /* ── Archive ──────────────────────────── */
-    .arc-row { position:relative; border-bottom:1px solid rgba(18,18,18,0.07); cursor:pointer; }
-    .arc-header { display:flex; align-items:center; gap:clamp(0.75rem,2vw,2.5rem); padding:clamp(1.4rem,2.5vw,2.2rem) 0; position:relative; }
-    .arc-bar { position:absolute; bottom:-1px; left:0; height:1px; width:0; background:var(--color-ink); transition:width 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .arc-row:hover .arc-bar { width:100%; }
-    .arc-num { font-family:var(--font-mono); font-size:clamp(0.55rem,0.7vw,0.68rem); letter-spacing:0.14em; color:rgba(18,18,18,0.22); flex-shrink:0; min-width:1.75rem; }
-    .arc-title { font-family:var(--font-sans); font-weight:700; font-size:clamp(1rem,2.5vw,1.5rem); line-height:1.1; color:var(--color-ink); flex:1; min-width:0; transition:transform 0.42s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .arc-row:hover .arc-title { transform:translateX(10px); }
-    .arc-type { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.15em; text-transform:uppercase; border:1px solid rgba(18,18,18,0.22); padding:0.25rem 0.6rem; border-radius:100px; color:rgba(18,18,18,0.6); flex-shrink:0; white-space:nowrap; }
-    .arc-stack { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.08em; color:rgba(18,18,18,0.5); flex-shrink:0; white-space:nowrap; display:none; }
-    @media (min-width: 768px) { .arc-stack { display:block; } }
-    .arc-year { font-family:var(--font-mono); font-size:0.6rem; color:rgba(18,18,18,0.5); flex-shrink:0; font-weight:500; }
-    .arc-chevron { flex-shrink:0; width:18px; height:18px; color:rgba(18,18,18,0.3); transition:color 0.3s ease; }
-    .arc-row:hover .arc-chevron { color:rgba(18,18,18,0.6); }
-    .arc-row.is-open .arc-chevron { color:var(--color-ink); }
+    /* Navbar */
+    #navbar {
+        transition: background-color .5s, border-color .5s, backdrop-filter .5s, box-shadow .5s, padding .5s;
+        border: 1px solid transparent;
+    }
 
-    /* Accordion body — grid row collapse */
-    .arc-body { display:grid; grid-template-rows:0fr; transition:grid-template-rows 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .arc-row.is-open .arc-body { grid-template-rows:1fr; }
-    .arc-body-inner { overflow:hidden; }
-    .arc-detail { padding:0 0 clamp(1.5rem,3vw,2.5rem) 0; opacity:0; transform:translateY(-8px); transition:opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s; }
-    .arc-row.is-open .arc-detail { opacity:1; transform:translateY(0); }
-    .arc-desc { font-family:var(--font-sans); font-size:clamp(0.85rem,1.1vw,1rem); line-height:1.65; color:rgba(18,18,18,0.65); max-width:42rem; margin-bottom:1.25rem; }
+    #navbar.scrolled {
+        background: rgba(235, 233, 228, 0.85);
+        backdrop-filter: blur(16px);
+        border-color: rgba(18, 18, 18, 0.08);
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        padding-top: 0.55rem;
+        padding-bottom: 0.55rem;
+    }
 
-    /* Carousel */
-    .arc-carousel { display:flex; gap:0.75rem; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:0.5rem; margin-bottom:1.25rem; scrollbar-width:thin; scrollbar-color:rgba(18,18,18,0.12) transparent; }
-    .arc-carousel::-webkit-scrollbar { height:4px; }
-    .arc-carousel::-webkit-scrollbar-track { background:transparent; }
-    .arc-carousel::-webkit-scrollbar-thumb { background:rgba(18,18,18,0.12); border-radius:4px; }
-    .arc-slide { scroll-snap-align:start; flex-shrink:0; width:clamp(200px,28vw,320px); aspect-ratio:16/10; background:rgba(18,18,18,0.04); border:1px solid rgba(18,18,18,0.06); border-radius:0.75rem; display:flex; align-items:center; justify-content:center; }
-    .arc-slide span { font-family:var(--font-mono); font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(18,18,18,0.18); }
+    .nav-link {
+        font-family: var(--font-mono);
+        font-size: clamp(0.7rem, 0.85vw, 0.95rem);
+        font-weight: 500;
+        color: var(--color-ink);
+        position: relative;
+        padding: 0.2rem 0;
+        text-decoration: none !important;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
 
-    /* Tags */
-    .arc-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.25rem; }
-    .arc-tag { font-family:var(--font-mono); font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; border:1px solid rgba(18,18,18,0.12); padding:0.22rem 0.55rem; border-radius:100px; color:rgba(18,18,18,0.45); }
+    .nav-link::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--color-ink);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform .4s cubic-bezier(.25, .46, .45, .94);
+    }
 
-    /* Action buttons */
-    .arc-actions { display:flex; gap:0.6rem; flex-wrap:wrap; }
-    .arc-btn { font-family:var(--font-mono); font-size:0.6rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; padding:0.5rem 1.2rem; border-radius:100px; border:1px solid var(--color-ink); color:var(--color-ink); background:transparent; text-decoration:none; transition:all 0.3s ease; display:inline-flex; align-items:center; gap:0.4rem; cursor:pointer; }
-    .arc-btn:hover { background:var(--color-ink); color:var(--color-paper); }
-    .arc-btn--muted { border-color:rgba(18,18,18,0.18); color:rgba(18,18,18,0.45); }
-    .arc-btn--muted:hover { background:rgba(18,18,18,0.06); color:var(--color-ink); border-color:rgba(18,18,18,0.3); }
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--color-ink);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .4s cubic-bezier(.25, .46, .45, .94);
+    }
 
-    /* Open state bg tint */
-    .arc-row.is-open { background:rgba(18,18,18,0.015); border-radius:0.5rem; margin:0 -1rem; padding:0 1rem; }
+    .nav-link:hover::before,
+    .nav-link.active::before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
 
-    /* ── CTA Dome ─────────────────────────── */
-    .dome-stage { perspective:900px; perspective-origin:50% 50%; }
-    .dome-sphere { transform-style:preserve-3d; will-change:transform; position:relative; }
-    .dome-tile { position:absolute; transform-style:preserve-3d; backface-visibility:hidden; }
-    .dome-tile img { filter:grayscale(100%) brightness(0.95); border-radius:8px; width:100%; height:100%; object-fit:cover; transition:filter 0.5s ease; }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        transform: scaleX(1);
+        transform-origin: right;
+    }
 
-    /* ── Reveal classes ───────────────────── */
-    .reveal-up { opacity:0; transform:translateY(50px); }
-    .reveal-fade { opacity:0; }
+    .logo-link {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .logo-container {
+        width: clamp(2.5rem, 3.2vw, 4.2rem);
+        height: clamp(2.5rem, 3.2vw, 4.2rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-text {
+        display: block;
+        font-size: clamp(15px, 1.4vw, 24px);
+        font-weight: 800;
+        text-transform: uppercase;
+        font-family: var(--font-sans);
+        user-select: none;
+        letter-spacing: 0.06em;
+        transition: letter-spacing .55s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .logo-link:hover .logo-text {
+        letter-spacing: 0.38em;
+    }
+
+    .logo-container svg {
+        transition: transform .5s cubic-bezier(.34, 1.56, .64, 1);
+        width: 100%;
+        height: 100%;
+    }
+
+    .logo-link:hover .logo-container svg {
+        transform: scale(1.1) rotate(-5deg);
+    }
+
+    .btn-contact {
+        font-family: var(--font-sans);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border: 1px solid var(--color-ink);
+        transition: all .3s;
+        cursor: pointer;
+    }
+
+    .btn-contact:hover {
+        background: transparent;
+        color: var(--color-ink);
+    }
+
+    .btn-contact span.absolute {
+        background: var(--color-paper);
+    }
+
+    /* Footer */
+    .footer-link {
+        position: relative;
+        display: inline-block;
+        transition: color .3s, transform .3s;
+    }
+
+    .footer-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: rgba(235, 233, 228, 0.5);
+        transition: width .4s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .footer-link:hover {
+        color: rgba(235, 233, 228, 1) !important;
+        transform: translateX(4px);
+    }
+
+    .footer-link:hover::after {
+        width: 100%;
+    }
+
+    /* ══ COMMON ══ */
+    .bp-grid {
+        background-image: linear-gradient(rgba(18, 18, 18, 0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 18, 18, 0.028) 1px, transparent 1px);
+        background-size: 80px 80px;
+    }
+
+    .t-label {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(18, 18, 18, 0.32);
+    }
+
+    .crosshair-mark {
+        position: relative;
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+    }
+
+    .crosshair-mark::before,
+    .crosshair-mark::after {
+        content: "";
+        position: absolute;
+        background: currentColor;
+        opacity: 0.22;
+    }
+
+    .crosshair-mark::before {
+        width: 1px;
+        height: 100%;
+        left: 50%;
+    }
+
+    .crosshair-mark::after {
+        height: 1px;
+        width: 100%;
+        top: 50%;
+    }
+
+    .hero-ghost {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 300;
+        line-height: 0.85;
+        letter-spacing: -0.02em;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(18, 18, 18, 0.045);
+        user-select: none;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .h-line {
+        height: 1px;
+        background: rgba(18, 18, 18, 0.12);
+        transform-origin: left;
+        transform: scaleX(0);
+    }
+
+    @keyframes scroll-cue {
+
+        0%,
+        100% {
+            transform: translateY(0);
+            opacity: .3
+        }
+
+        50% {
+            transform: translateY(10px);
+            opacity: .08
+        }
+    }
+
+    .scroll-cue-line {
+        width: 1px;
+        height: 48px;
+        background: var(--color-ink);
+        opacity: .3;
+        animation: scroll-cue 2.2s ease-in-out infinite;
+    }
+
+    .hero-word {
+        display: inline-block;
+        transform: translateY(105%);
+    }
+
+    .clip-wrap {
+        overflow: hidden;
+        display: block;
+    }
+
+    .reveal-up {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    /* ══ PINNED SHOWCASE ══ */
+    .sc-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .sc-panels {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .sc-panel {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+    }
+
+    .sc-panel:first-child {
+        opacity: 1;
+    }
+
+    .sc-img-wrap {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+    }
+
+    .sc-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+        will-change: transform;
+        filter: brightness(0.65) saturate(0.85);
+    }
+
+    .sc-img-overlay {
+        position: absolute;
+        inset: 0;
+        mix-blend-mode: multiply;
+    }
+
+    .sc-img-gradient {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.7) 100%);
+    }
+
+    .sc-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 5;
+        padding: clamp(2rem, 5vw, 5rem);
+        max-width: 55rem;
+    }
+
+    .sc-num {
+        font-family: var(--font-mono);
+        font-size: clamp(0.55rem, 0.7vw, .65rem);
+        letter-spacing: 0.2em;
+        color: rgba(255, 255, 255, 0.35);
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .sc-title {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(3rem, 8vw, 7.5rem);
+        line-height: 0.88;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .sc-sub {
+        font-family: var(--font-mono);
+        font-size: clamp(0.55rem, 0.75vw, .7rem);
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+    }
+
+    .sc-desc {
+        font-size: clamp(0.8rem, 1vw, .92rem);
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.55);
+        max-width: 42ch;
+        margin-bottom: 1.25rem;
+    }
+
+    .sc-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-bottom: 1rem;
+    }
+
+    .sc-tag {
+        font-family: var(--font-mono);
+        font-size: 0.45rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 0.2rem 0.5rem;
+        color: rgba(255, 255, 255, 0.45);
+    }
+
+    .sc-status {
+        font-family: var(--font-mono);
+        font-size: 0.5rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .sc-initial {
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(14rem, 25vw, 22rem);
+        color: rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .sc-whisper {
+        position: absolute;
+        bottom: clamp(1.5rem, 3vw, 2.5rem);
+        right: clamp(1.5rem, 3vw, 2.5rem);
+        font-family: var(--font-mono);
+        font-size: 0.42rem;
+        letter-spacing: 0.18em;
+        color: rgba(255, 255, 255, 0.1);
+        z-index: 3;
+        text-transform: uppercase;
+    }
+
+    .sc-progress {
+        position: absolute;
+        right: clamp(1.5rem, 3vw, 2.5rem);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .sc-dot {
+        width: 2.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .sc-dot-fill {
+        width: 2px;
+        height: 2rem;
+        background: rgba(255, 255, 255, 0.15);
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+        transition: background .3s;
+    }
+
+    .sc-dot-fill::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: white;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform .5s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .sc-dot.active .sc-dot-fill::after {
+        transform: scaleY(1);
+    }
+
+    .sc-dot-label {
+        font-family: var(--font-mono);
+        font-size: 0.42rem;
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.2);
+        transition: color .3s;
+    }
+
+    .sc-dot.active .sc-dot-label {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .sc-section-label {
+        position: absolute;
+        top: clamp(1.5rem, 3vh, 2.5rem);
+        left: clamp(1.5rem, 3vw, 2.5rem);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    /* ══ CAROUSEL ══ */
+    .cr-track {
+        display: flex;
+        gap: clamp(3px, 0.4vw, 6px);
+        width: max-content;
+        animation: cr-scroll 50s linear infinite;
+    }
+
+    @keyframes cr-scroll {
+        from {
+            transform: translateX(0)
+        }
+
+        to {
+            transform: translateX(-50%)
+        }
+    }
+
+    .cr-item {
+        position: relative;
+        width: clamp(180px, 22vw, 280px);
+        height: clamp(110px, 14vw, 170px);
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .cr-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%) brightness(0.6);
+        transition: filter .5s, transform .5s;
+    }
+
+    .cr-item:hover img {
+        filter: grayscale(0%) brightness(0.8);
+        transform: scale(1.05);
+    }
+
+    .cr-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0.6rem 0.75rem;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+    }
+
+    .cr-num {
+        font-family: var(--font-mono);
+        font-size: 0.4rem;
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.35);
+    }
+
+    .cr-name {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(0.75rem, 1.2vw, 1rem);
+        color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* ══ EDITORIAL GRID ══ */
+    .eg-grid {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(4px, 0.5vw, 8px);
+    }
+
+    .eg-row {
+        display: grid;
+        gap: clamp(4px, 0.5vw, 8px);
+    }
+
+    .eg-row--full {
+        grid-template-columns: 1fr;
+    }
+
+    .eg-row--pair {
+        grid-template-columns: 7fr 5fr;
+    }
+
+    .eg-row--pair-r {
+        grid-template-columns: 5fr 7fr;
+    }
+
+    .eg-row--trio {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .eg-row--duo {
+        grid-template-columns: 1fr;
+    }
+
+    @media(max-width:768px) {
+
+        .eg-row--pair,
+        .eg-row--pair-r,
+        .eg-row--trio {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .eg-card {
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .eg-img-wrap {
+        position: relative;
+        height: clamp(300px, 42vh, 520px);
+        overflow: hidden;
+    }
+
+    .eg-full .eg-img-wrap {
+        height: clamp(400px, 55vh, 650px);
+    }
+
+    .eg-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s cubic-bezier(.25, .46, .45, .94), filter .8s;
+        filter: brightness(0.7) saturate(0.8);
+    }
+
+    .eg-card:hover .eg-img {
+        transform: scale(1.06);
+        filter: brightness(0.5) saturate(1);
+    }
+
+    .eg-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .eg-color-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .eg-grid-pattern {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    .eg-initial {
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(8rem, 16vw, 14rem);
+        color: rgba(255, 255, 255, 0.04);
+        pointer-events: none;
+        z-index: 3;
+        transition: color .6s, transform .6s;
+    }
+
+    .eg-card:hover .eg-initial {
+        color: rgba(255, 255, 255, 0.08);
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .eg-badge-row {
+        position: absolute;
+        top: 14px;
+        left: 16px;
+        z-index: 5;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .eg-badge {
+        font-family: var(--font-mono);
+        font-size: 0.48rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.55);
+        padding: 0.2rem 0.5rem;
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .eg-year {
+        font-family: var(--font-mono);
+        font-size: 0.48rem;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.12em;
+    }
+
+    .eg-whisper {
+        position: absolute;
+        bottom: 14px;
+        right: 16px;
+        font-family: var(--font-mono);
+        font-size: 0.42rem;
+        letter-spacing: 0.18em;
+        color: rgba(255, 255, 255, 0.1);
+        z-index: 5;
+        text-transform: uppercase;
+    }
+
+    .eg-hover-content {
+        position: absolute;
+        inset: 0;
+        z-index: 6;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: clamp(1.2rem, 2.5vw, 2rem);
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity .5s cubic-bezier(.25, .46, .45, .94), transform .5s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .eg-card:hover .eg-hover-content {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .eg-hover-title {
+        font-family: var(--font-serif);
+        font-style: italic;
+        color: white;
+        font-size: clamp(1.8rem, 3.5vw, 3rem);
+        line-height: .92;
+        margin: .25rem 0;
+    }
+
+    .eg-hover-sub {
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        letter-spacing: .1em;
+        color: rgba(255, 255, 255, .45);
+        margin-bottom: .5rem;
+    }
+
+    .eg-hover-desc {
+        font-size: .78rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, .55);
+        max-width: 42ch;
+        margin-bottom: .75rem;
+    }
+
+    .eg-hover-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .3rem;
+    }
+
+    .eg-tag {
+        font-family: var(--font-mono);
+        font-size: .42rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, .15);
+        padding: .18rem .45rem;
+        color: rgba(255, 255, 255, .45);
+    }
+
+    @media(max-width:768px) {
+        .eg-hover-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .eg-hover-desc,
+        .eg-hover-tags {
+            display: none;
+        }
+    }
+
+    /* Filter */
+    .gal-filter {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+        border: 1px solid rgba(18, 18, 18, 0.12);
+        color: rgba(18, 18, 18, 0.4);
+        background: transparent;
+        cursor: pointer;
+        transition: all .3s;
+    }
+
+    .gal-filter:hover {
+        border-color: rgba(18, 18, 18, 0.3);
+        color: var(--color-ink);
+    }
+
+    .gal-filter.active {
+        background: var(--color-ink);
+        color: var(--color-paper);
+        border-color: var(--color-ink);
+    }
+
+    /* Dome */
+    .dome-stage {
+        perspective: 900px;
+        perspective-origin: 50% 50%;
+    }
+
+    .dome-sphere {
+        transform-style: preserve-3d;
+        will-change: transform;
+        position: relative;
+    }
+
+    .dome-tile {
+        position: absolute;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+    }
+
+    .dome-tile img {
+        filter: grayscale(100%) brightness(0.95);
+        border-radius: 8px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
   </style>
 </head>
 
 <body class="bg-paper text-ink">
-  <!-- Noise filter -->
-  <svg class="hidden">
-    <filter id="noiseFilter">
-      <feTurbulence type="fractalNoise" baseFrequency="0.6" stitchTiles="stitch" />
-    </filter>
-  </svg>
+  <svg class="hidden"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.6" stitchTiles="stitch" /></filter></svg>
   <div class="noise-overlay" aria-hidden="true"></div>
 
-  <!-- ── Navbar ────────────────────────────────────── -->
   <nav id="navbar" class="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] rounded-full flex items-center justify-between"
     style="top:clamp(0.75rem,2vh,1.5rem); max-width:clamp(500px,88vw,76rem); padding:clamp(0.85rem,1.5vw,1.4rem) clamp(1.5rem,3vw,2.5rem);">
     <a href="/" class="logo-link group relative z-20">
@@ -253,630 +917,311 @@
       class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block flex items-center justify-center leading-none">Contactar</a>
   </div>
 
-  <!-- ══════════════════════════════════════════════════
-       PORTFÓLIO — CONTEÚDO PRINCIPAL
-  ═══════════════════════════════════════════════════ -->
-  <main class="relative z-10 overflow-hidden" style="background-color:#EBE9E4;">
 
-    <!-- ── 01. HERO ─────────────────────────────────────────── -->
-    <section id="pf-hero" class="relative min-h-screen flex flex-col justify-end bp-grid overflow-hidden" style="
-      padding: clamp(7rem,12vh,10rem) clamp(1.5rem,5vw,6rem) clamp(3.5rem,6vh,5.5rem);
-      background-color: #EBE9E4;
-    ">
-      <!-- Ghost text -->
+
+
+
+
+
+
+
+  <main class="relative z-10" style="background-color:#EBE9E4;">
+    <section id="pf-hero" class="relative min-h-screen flex flex-col justify-end bp-grid overflow-hidden" style="padding:clamp(7rem,12vh,10rem) clamp(1.5rem,5vw,6rem) clamp(3.5rem,6vh,5.5rem);">
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
         <span class="hero-ghost" style="font-size:clamp(20vw,28vw,38vw)">Portfolio</span>
       </div>
-
-      <!-- Top-left technical ref -->
-      <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none" style="
-        top:clamp(7.5rem,11vh,10.5rem); left:clamp(1.5rem,5vw,6rem); opacity:0;">
-        <div class="crosshair-mark text-ink"></div>
-        <span class="t-label">REF: MON-PF-001 / 2026</span>
+      <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none" style="top:clamp(7.5rem,11vh,10.5rem);left:clamp(1.5rem,5vw,6rem);opacity:0;">
+        <div class="crosshair-mark text-ink"></div><span class="t-label">REF: MON-PF-001 / 2026</span>
       </div>
-
-      <!-- Top-right coordinates -->
-      <div id="hero-ref-tr" class="absolute flex items-center gap-2.5 pointer-events-none justify-end" style="
-        top:clamp(7.5rem,11vh,10.5rem); right:clamp(1.5rem,5vw,6rem); opacity:0;">
-        <span class="t-label">41.15° N · 8.61° W · Porto</span>
-        <div class="crosshair-mark text-ink"></div>
+      <div id="hero-ref-tr" class="absolute flex items-center gap-2.5 pointer-events-none justify-end" style="top:clamp(7.5rem,11vh,10.5rem);right:clamp(1.5rem,5vw,6rem);opacity:0;">
+        <span class="t-label">41.15&deg; N &middot; 8.61&deg; W &middot; Porto</span><div class="crosshair-mark text-ink"></div>
       </div>
-
-      <!-- Content -->
       <div class="relative z-10">
-        <!-- Label row -->
         <div class="flex items-center gap-2.5 mb-16">
-          <span class="t-label" id="hero-label" style="opacity:0">01 — Portfólio</span>
+          <span class="t-label" id="hero-label" style="opacity:0;">01 &mdash; Portf&oacute;lio</span>
           <div class="h-line flex-1 ml-4" id="hero-line-l"></div>
         </div>
-
-        <!-- Headline -->
-        <h1 style="font-family:var(--font-serif); font-style:italic; font-size:clamp(3.5rem,10vw,14rem); line-height:0.88; letter-spacing:-0.03em; margin-bottom:2.5rem;">
+        <h1 style="font-family:var(--font-serif);font-style:italic;font-size:clamp(3.5rem,10vw,14rem);line-height:0.88;letter-spacing:-0.03em;margin-bottom:2.5rem;">
           <span class="clip-wrap"><span class="hero-word" id="hero-w1">Do conceito</span></span>
           <span class="clip-wrap" style="margin-left:clamp(1rem,6vw,8rem)"><span class="hero-word" id="hero-w2">ao pixel.</span></span>
         </h1>
-
-        <div class="h-line" id="hero-line-r" style="max-width:320px; margin-bottom:2rem;"></div>
-
-        <p id="hero-desc" class="font-mono text-ink/40 leading-relaxed" style="font-size:clamp(0.68rem,0.9vw,0.82rem); max-width:46ch; opacity:0;">
-          Cada projecto é uma conversa entre forma e função.
-          Aqui está o resultado dessas conversas — do conceito à implementação.
-        </p>
+        <div class="h-line" id="hero-line-r" style="max-width:320px;margin-bottom:2rem;"></div>
+        <p id="hero-desc" class="font-mono text-ink/40 leading-relaxed" style="font-size:clamp(0.68rem,0.9vw,0.82rem);max-width:46ch;opacity:0;">Cada projecto &eacute; uma conversa entre forma e fun&ccedil;&atilde;o.<br>Aqui est&aacute; o resultado dessas conversas.</p>
       </div>
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10" id="hero-scroll-cue" style="opacity:0"><span class="t-label">Scroll</span><div class="scroll-cue-line"></div></div>
+    </section>
 
-      <!-- Stats strip -->
-      <div class="flex items-center gap-8 md:gap-16 mt-16 relative z-10">
-        <div id="stat-1" style="opacity:0; transform:translateY(30px)">
-          <div class="font-serif italic text-ink" style="font-size:clamp(2.2rem,4vw,4.2rem); line-height:1; letter-spacing:-0.02em">11+</div>
-          <div class="t-label mt-1">Projectos</div>
+    <!-- ══ 02. PINNED SHOWCASE ══ -->
+    <section id="pf-showcase" class="relative" style="height:300vh;">
+      <div class="sc-sticky">
+        <div class="sc-panels">
+        <div class="sc-panel active" data-panel="0">
+          <div class="sc-img-wrap">
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop" alt="Cristal Terminal" class="sc-img" loading="eager">
+            <div class="sc-img-overlay" style="background:linear-gradient(135deg,#0a0e17,#1a1f3a,transparent);opacity:0.65;"></div>
+            <div class="sc-img-gradient"></div>
+          </div>
+          <div class="sc-content">
+            <span class="sc-num">01</span>
+            <h3 class="sc-title">Cristal Terminal</h3>
+            <p class="sc-sub">Terminal Financeiro Profissional</p>
+            <p class="sc-desc">Terminal financeiro de nível profissional inspirado no Bloomberg Terminal. Motor quant tri-camada, integração IA local via Ollama e 8 temas visuais.</p>
+            <div class="sc-tags"><span class="sc-tag">Next.js 15</span> <span class="sc-tag">React 19</span> <span class="sc-tag">TypeScript</span> <span class="sc-tag">C++/WASM</span></div>
+            <span class="sc-status">Em Desenvolvimento</span>
+          </div>
+          <span class="sc-initial">C</span>
+          <span class="sc-whisper">QUANT ENGINE // WASM</span>
         </div>
-        <div class="w-px h-12 bg-ink/[0.08]"></div>
-        <div id="stat-2" style="opacity:0; transform:translateY(30px)">
-          <div class="font-serif italic text-ink" style="font-size:clamp(2.2rem,4vw,4.2rem); line-height:1; letter-spacing:-0.02em">3+</div>
-          <div class="t-label mt-1">Clientes</div>
+        <div class="sc-panel" data-panel="1">
+          <div class="sc-img-wrap">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop" alt="Casa do Gi" class="sc-img" loading="lazy">
+            <div class="sc-img-overlay" style="background:linear-gradient(160deg,#1a150e,#2a1f0e,transparent);opacity:0.65;"></div>
+            <div class="sc-img-gradient"></div>
+          </div>
+          <div class="sc-content">
+            <span class="sc-num">02</span>
+            <h3 class="sc-title">Casa do Gi</h3>
+            <p class="sc-sub">Reservas e E-commerce</p>
+            <p class="sc-desc">Website para alojamento local com sistema de reservas, pagamentos IfthenPay e painel de administração.</p>
+            <div class="sc-tags"><span class="sc-tag">PHP 8</span> <span class="sc-tag">MySQL</span> <span class="sc-tag">IfthenPay</span> <span class="sc-tag">Tailwind CSS</span></div>
+            <span class="sc-status">Em Produção</span>
+          </div>
+          <span class="sc-initial">G</span>
+          <span class="sc-whisper">HMAC-SHA256 // IFTHEN</span>
         </div>
-        <div class="w-px h-12 bg-ink/[0.08]"></div>
-        <div id="stat-3" style="opacity:0; transform:translateY(30px)">
-          <div class="font-serif italic text-ink" style="font-size:clamp(2.2rem,4vw,4.2rem); line-height:1; letter-spacing:-0.02em">2+</div>
-          <div class="t-label mt-1">Anos</div>
+        <div class="sc-panel" data-panel="2">
+          <div class="sc-img-wrap">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop" alt="ExpoLive" class="sc-img" loading="lazy">
+            <div class="sc-img-overlay" style="background:linear-gradient(130deg,#18100e,#30201a,transparent);opacity:0.65;"></div>
+            <div class="sc-img-gradient"></div>
+          </div>
+          <div class="sc-content">
+            <span class="sc-num">10</span>
+            <h3 class="sc-title">ExpoLive</h3>
+            <p class="sc-sub">Gestão de Eventos e CMS</p>
+            <p class="sc-desc">Plataforma de gestão de eventos com 30+ páginas admin e chatbot IA.</p>
+            <div class="sc-tags"><span class="sc-tag">PHP</span> <span class="sc-tag">MySQL</span> <span class="sc-tag">REST API</span> <span class="sc-tag">IA</span></div>
+            <span class="sc-status">Concluído</span>
+          </div>
+          <span class="sc-initial">X</span>
+          <span class="sc-whisper">30+ PAGES // 2 YEARS</span>
         </div>
-      </div>
-
-      <!-- Scroll cue -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10" id="hero-scroll-cue" style="opacity:0" aria-hidden="true">
-        <span class="t-label">Scroll</span>
-        <div class="scroll-cue-line"></div>
+        </div>
+        <div class="sc-progress"><button class="sc-dot active" data-idx="0"><span class="sc-dot-fill"></span><span class="sc-dot-label">01</span></button><button class="sc-dot" data-idx="1"><span class="sc-dot-fill"></span><span class="sc-dot-label">02</span></button><button class="sc-dot" data-idx="2"><span class="sc-dot-fill"></span><span class="sc-dot-label">10</span></button></div>
+        <div class="sc-section-label">
+          <div class="crosshair-mark text-paper"></div>
+          <span class="t-label" style="color:rgba(235,233,228,0.35);">02 &mdash; Em Destaque</span>
+        </div>
       </div>
     </section>
 
+    <!-- ══ CAROUSEL STRIP ══ -->
+    <section class="relative overflow-hidden" style="padding:clamp(2rem,4vh,4rem) 0;background:var(--color-ink);">
+      <div class="cr-track"><div class="cr-item"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop" alt="Cristal Terminal" loading="lazy"><div class="cr-info"><span class="cr-num">01</span><span class="cr-name">Cristal Terminal</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop" alt="Casa do Gi" loading="lazy"><div class="cr-info"><span class="cr-num">02</span><span class="cr-name">Casa do Gi</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" alt="Eletro 2000 v2" loading="lazy"><div class="cr-info"><span class="cr-num">03</span><span class="cr-name">Eletro 2000 v2</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop" alt="Cristal Capital" loading="lazy"><div class="cr-info"><span class="cr-num">04</span><span class="cr-name">Cristal Capital</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop" alt="Volunta" loading="lazy"><div class="cr-info"><span class="cr-num">05</span><span class="cr-name">Volunta</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop" alt="Estudas Comigo" loading="lazy"><div class="cr-info"><span class="cr-num">06</span><span class="cr-name">Estudas Comigo</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop" alt="GT Móvel" loading="lazy"><div class="cr-info"><span class="cr-num">07</span><span class="cr-name">GT Móvel</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop" alt="Hugo Brito" loading="lazy"><div class="cr-info"><span class="cr-num">08</span><span class="cr-name">Hugo Brito</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop" alt="Tec N' Cool" loading="lazy"><div class="cr-info"><span class="cr-num">09</span><span class="cr-name">Tec N' Cool</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop" alt="ExpoLive" loading="lazy"><div class="cr-info"><span class="cr-num">10</span><span class="cr-name">ExpoLive</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop" alt="Wise Wallet" loading="lazy"><div class="cr-info"><span class="cr-num">11</span><span class="cr-name">Wise Wallet</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop" alt="Portable World" loading="lazy"><div class="cr-info"><span class="cr-num">12</span><span class="cr-name">Portable World</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop" alt="Cristal Terminal" loading="lazy"><div class="cr-info"><span class="cr-num">01</span><span class="cr-name">Cristal Terminal</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop" alt="Casa do Gi" loading="lazy"><div class="cr-info"><span class="cr-num">02</span><span class="cr-name">Casa do Gi</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" alt="Eletro 2000 v2" loading="lazy"><div class="cr-info"><span class="cr-num">03</span><span class="cr-name">Eletro 2000 v2</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop" alt="Cristal Capital" loading="lazy"><div class="cr-info"><span class="cr-num">04</span><span class="cr-name">Cristal Capital</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop" alt="Volunta" loading="lazy"><div class="cr-info"><span class="cr-num">05</span><span class="cr-name">Volunta</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop" alt="Estudas Comigo" loading="lazy"><div class="cr-info"><span class="cr-num">06</span><span class="cr-name">Estudas Comigo</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop" alt="GT Móvel" loading="lazy"><div class="cr-info"><span class="cr-num">07</span><span class="cr-name">GT Móvel</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop" alt="Hugo Brito" loading="lazy"><div class="cr-info"><span class="cr-num">08</span><span class="cr-name">Hugo Brito</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop" alt="Tec N' Cool" loading="lazy"><div class="cr-info"><span class="cr-num">09</span><span class="cr-name">Tec N' Cool</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop" alt="ExpoLive" loading="lazy"><div class="cr-info"><span class="cr-num">10</span><span class="cr-name">ExpoLive</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop" alt="Wise Wallet" loading="lazy"><div class="cr-info"><span class="cr-num">11</span><span class="cr-name">Wise Wallet</span></div></div><div class="cr-item"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop" alt="Portable World" loading="lazy"><div class="cr-info"><span class="cr-num">12</span><span class="cr-name">Portable World</span></div></div></div>
+    </section>
 
-    <!-- ── 02. PROJECTOS EM DESTAQUE (Timeline) ────────────── -->
-    <section id="pf-featured" class="relative" style="padding:clamp(5rem,10vh,10rem) clamp(1.5rem,5vw,6rem);">
-      <!-- Section heading -->
+    <!-- ══ 03. EDITORIAL GRID ══ -->
+    <section id="pf-grid" class="relative" style="padding:clamp(5rem,10vh,10rem) clamp(1.5rem,5vw,6rem);">
       <div class="flex items-center gap-2.5 mb-4 reveal-up">
         <div class="crosshair-mark text-ink"></div>
-        <span class="t-label">02 — Em Destaque</span>
-        <div class="h-line flex-1 ml-4" id="feat-hline"></div>
+        <span class="t-label">03 &mdash; Arquivo Completo</span>
+        <div class="h-line flex-1 ml-4" id="grid-hline"></div>
       </div>
-      <h2 class="font-serif italic reveal-up" style="font-size:clamp(2.2rem,5vw,4.5rem); line-height:0.92; letter-spacing:-0.02em; margin-bottom:clamp(3rem,6vh,6rem);">
-        Projectos Seleccionados
-      </h2>
-
-      <!-- Timeline container -->
-      <div class="tl-container">
-        <!-- Vertical progress line -->
-        <div class="tl-line" aria-hidden="true">
-          <div class="tl-line-fill" id="tl-fill"></div>
-        </div>
-
-        <!-- ─── Entry 1: Cristal Terminal ─── -->
-        <div class="tl-entry" data-tl-entry>
-          <div class="tl-year">2025</div>
-          <div class="tl-dot" data-tl-dot></div>
-          <div class="tl-ghost-num" aria-hidden="true">01</div>
-          <div class="relative z-10">
-            <span class="t-label mb-3 block">01 / 03 — Terminal Financeiro</span>
-            <h3 class="font-serif italic" style="font-size:clamp(2rem,5vw,4rem); line-height:0.92; letter-spacing:-0.02em; margin-bottom:0.75rem;">
-              Cristal Terminal
-            </h3>
-            <div class="tl-divider"></div>
-            <p class="text-ink/50 leading-relaxed mt-4 mb-4" style="font-size:clamp(0.82rem,1vw,0.95rem); max-width:56ch;">
-              Terminal financeiro inspirado no Bloomberg, construído para análise de mercados em tempo real.
-              Interface com múltiplos painéis, gráficos avançados e integração com IA local via Ollama.
-            </p>
-            <div class="tl-meta mb-4">2025 · Projecto Pessoal · Em desenvolvimento</div>
-            <div class="flex flex-wrap gap-2 mb-8">
-              <span class="tl-tag">Next.js 15</span>
-              <span class="tl-tag">React 19</span>
-              <span class="tl-tag">TypeScript</span>
-              <span class="tl-tag">C++ / WASM</span>
-              <span class="tl-tag">Python</span>
-              <span class="tl-tag">Ollama AI</span>
-            </div>
-            <!-- Image grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-tl-images>
-              <div class="tl-img-placeholder"><span>Imagem 1</span></div>
-              <div class="tl-img-placeholder"><span>Imagem 2</span></div>
-              <div class="tl-img-placeholder"><span>Imagem 3</span></div>
-              <div class="tl-img-placeholder"><span>Imagem 4</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ─── Entry 2: Casa do Gi ─── -->
-        <div class="tl-entry" data-tl-entry>
-          <div class="tl-year">2025</div>
-          <div class="tl-dot" data-tl-dot></div>
-          <div class="tl-ghost-num" aria-hidden="true">02</div>
-          <div class="relative z-10">
-            <span class="t-label mb-3 block">02 / 03 — Website Comercial</span>
-            <h3 class="font-serif italic" style="font-size:clamp(1.8rem,4vw,3.5rem); line-height:0.92; letter-spacing:-0.02em; margin-bottom:0.75rem;">
-              Casa do Gi
-            </h3>
-            <div class="tl-divider"></div>
-            <p class="text-ink/50 leading-relaxed mt-4 mb-4" style="font-size:clamp(0.82rem,1vw,0.95rem); max-width:56ch;">
-              Plataforma de e-commerce para alojamento local premium com integração de pagamentos IfthenPay,
-              sistema de reservas e painel de administração completo.
-            </p>
-            <div class="tl-meta mb-4">2025 · Comercial · Em produção</div>
-            <div class="flex flex-wrap gap-2 mb-8">
-              <span class="tl-tag">PHP</span>
-              <span class="tl-tag">MySQL</span>
-              <span class="tl-tag">IfthenPay</span>
-              <span class="tl-tag">Tailwind CSS</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-tl-images>
-              <div class="tl-img-placeholder"><span>Imagem 1</span></div>
-              <div class="tl-img-placeholder"><span>Imagem 2</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ─── Entry 3: ExpoLive ─── -->
-        <div class="tl-entry" data-tl-entry>
-          <div class="tl-year">2023–25</div>
-          <div class="tl-dot" data-tl-dot></div>
-          <div class="tl-ghost-num" aria-hidden="true">03</div>
-          <div class="relative z-10">
-            <span class="t-label mb-3 block">03 / 03 — Plataforma Académica</span>
-            <h3 class="font-serif italic" style="font-size:clamp(1.8rem,4vw,3.5rem); line-height:0.92; letter-spacing:-0.02em; margin-bottom:0.75rem;">
-              ExpoLive
-            </h3>
-            <div class="tl-divider"></div>
-            <p class="text-ink/50 leading-relaxed mt-4 mb-4" style="font-size:clamp(0.82rem,1vw,0.95rem); max-width:56ch;">
-              Plataforma de gestão e transmissão de exposições para escolas profissionais,
-              com votação em tempo real, streaming integrado e geração de relatórios por IA.
-            </p>
-            <div class="tl-meta mb-4">2023–2025 · Académico · Concluído</div>
-            <div class="flex flex-wrap gap-2 mb-8">
-              <span class="tl-tag">PHP</span>
-              <span class="tl-tag">MySQL</span>
-              <span class="tl-tag">IA</span>
-              <span class="tl-tag">Streaming</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-tl-images>
-              <div class="tl-img-placeholder"><span>Imagem 1</span></div>
-              <div class="tl-img-placeholder"><span>Imagem 2</span></div>
-            </div>
-          </div>
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10">
+        <h2 class="font-serif italic reveal-up" style="font-size:clamp(2.2rem,5vw,4.5rem);line-height:0.92;letter-spacing:-0.02em;">Todos os<br>Projectos</h2>
+        <div class="flex flex-wrap gap-2 mt-4 lg:mt-0 reveal-up">
+          <button class="gal-filter active" data-filter="Todos">Todos</button>
+          <button class="gal-filter" data-filter="Comercial">Comercial</button>
+          <button class="gal-filter" data-filter="Acad&eacute;mico">Acad&eacute;mico</button>
+          <button class="gal-filter" data-filter="Pessoal">Pessoal</button>
+          <button class="gal-filter" data-filter="Institucional">Institucional</button>
         </div>
       </div>
+      <div class="eg-grid">
+<div class="eg-row eg-row--full"><div class="eg-card eg-full reveal-up" data-type="Académico">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop" alt="Eletro 2000 v2" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(200deg,#0e1a16,#0a2e20);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">E</span>
+    <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2025</span></div>
+    <span class="eg-whisper">GEMINI API // AUTONOMOUS</span>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">03 — Laravel · React · Gemini</span>
+      <h3 class="eg-hover-title">Eletro 2000 v2</h3>
+      <p class="eg-hover-sub">Gestão de Retalho com IA</p>
+      <p class="eg-hover-desc">Sistema full-stack com IA autónoma via Google Gemini. Motor de decisão em tempo real.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">Laravel 12</span> <span class="eg-tag">React 19</span> <span class="eg-tag">Gemini AI</span></div>
+    </div>
+  </div>
+</div></div>
+<div class="eg-row eg-row--pair"><div class="eg-card eg-wide reveal-up" data-type="Académico">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop" alt="Cristal Capital" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(120deg,#141018,#1e1630);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">C</span>
+    <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2025</span></div>
+    <span class="eg-whisper">LARAVEL 12 // SANCTUM</span>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">04 — Laravel · Inertia · Docker</span>
+      <h3 class="eg-hover-title">Cristal Capital</h3>
+      <p class="eg-hover-sub">Plataforma Financeira — PAP</p>
+      <p class="eg-hover-desc">Plataforma de gestão financeira com Laravel 12, Sanctum e Inertia.js.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">Laravel 12</span> <span class="eg-tag">Inertia.js</span> <span class="eg-tag">Docker</span></div>
+    </div>
+  </div>
+</div><div class="eg-card eg-narrow reveal-up" data-type="Institucional">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop" alt="Volunta" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(180deg,#181410,#28221a);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">V</span>
+    <div class="eg-badge-row"><span class="eg-badge">Institucional</span><span class="eg-year">2025</span></div>
+    <span class="eg-whisper">CÂMARA VNG // CIVIC</span>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">05 — PHP · Laravel · MySQL</span>
+      <h3 class="eg-hover-title">Volunta</h3>
+      <p class="eg-hover-sub">Câmara Municipal V.N. Gaia</p>
+      <p class="eg-hover-desc">Plataforma de voluntariado para a Câmara Municipal de Vila Nova de Gaia.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">PHP</span> <span class="eg-tag">Laravel</span> <span class="eg-tag">MySQL</span></div>
+    </div>
+  </div>
+</div></div>
+<div class="eg-row eg-row--trio"><div class="eg-card  reveal-up" data-type="Comercial">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop" alt="Estudas Comigo" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(145deg,#0d1018,#162030);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">E</span>
+    <div class="eg-badge-row"><span class="eg-badge">Comercial</span><span class="eg-year">2024</span></div>
+    <span class="eg-whisper">STATIC // GH-PAGES</span>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">06 — HTML · Tailwind · JS</span>
+      <h3 class="eg-hover-title">Estudas Comigo</h3>
+      <p class="eg-hover-sub">Centro de Estudos</p>
+      <p class="eg-hover-desc">Website moderno para centro de estudos com design responsivo.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">Tailwind CSS</span> <span class="eg-tag">JavaScript</span></div>
+    </div>
+  </div>
+</div><div class="eg-card  reveal-up" data-type="Comercial">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop" alt="GT Móvel" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(170deg,#100e0e,#2a1a1a);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">G</span>
+    <div class="eg-badge-row"><span class="eg-badge">Comercial</span><span class="eg-year">2024</span></div>
+    <span class="eg-whisper">SINCE 1977 // SEO</span>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">07 — HTML · CSS · JS</span>
+      <h3 class="eg-hover-title">GT Móvel</h3>
+      <p class="eg-hover-sub">Móveis e Eletrodomésticos</p>
+      <p class="eg-hover-desc">Website para empresa de móveis desde 1977. Catálogo e SEO optimizado.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">CSS3</span> <span class="eg-tag">JavaScript</span></div>
+    </div>
+  </div>
+</div><div class="eg-card  reveal-up" data-type="Académico">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop" alt="Hugo Brito" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(155deg,#0e0e14,#1a1a28);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">H</span>
+    <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2024</span></div>
+    <span class="eg-whisper">LUXURY // GSAP</span>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">08 — HTML · GSAP · Tailwind</span>
+      <h3 class="eg-hover-title">Hugo Brito</h3>
+      <p class="eg-hover-sub">Luxury Fashion Brand</p>
+      <p class="eg-hover-desc">Website conceito para marca de moda de luxo. Design cinematográfico com GSAP.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">GSAP 3</span> <span class="eg-tag">Tailwind CSS</span></div>
+    </div>
+  </div>
+</div></div>
+<div class="eg-row eg-row--pair-r"><div class="eg-card eg-narrow reveal-up" data-type="Institucional">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop" alt="Tec N' Cool" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(190deg,#10140e,#1e2a18);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">T</span>
+    <div class="eg-badge-row"><span class="eg-badge">Institucional</span><span class="eg-year">2024</span></div>
+    <span class="eg-whisper">250+ ITEMS // ISCAP</span>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">09 — HTML · CSS · JS</span>
+      <h3 class="eg-hover-title">Tec N' Cool</h3>
+      <p class="eg-hover-sub">Plataforma ISCAP / CEI</p>
+      <p class="eg-hover-desc">Plataforma educativa para o ISCAP/CEI com catálogo de 250+ itens.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">CSS3</span> <span class="eg-tag">JavaScript</span></div>
+    </div>
+  </div>
+</div><div class="eg-card eg-wide reveal-up" data-type="Académico">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop" alt="Wise Wallet" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(210deg,#0e1018,#182030);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">W</span>
+    <div class="eg-badge-row"><span class="eg-badge">Académico</span><span class="eg-year">2024</span></div>
+    <span class="eg-whisper">CHARTS // PDF // OLLAMA</span>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">11 — PHP · Chart.js · Ollama</span>
+      <h3 class="eg-hover-title">Wise Wallet</h3>
+      <p class="eg-hover-sub">Gestão Financeira Pessoal</p>
+      <p class="eg-hover-desc">Dashboard financeiro com gráficos Chart.js e IA local via Ollama.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">PHP</span> <span class="eg-tag">Chart.js</span> <span class="eg-tag">DomPDF</span></div>
+    </div>
+  </div>
+</div></div>
+<div class="eg-row eg-row--duo"><div class="eg-card  reveal-up" data-type="Comercial">
+  <div class="eg-img-wrap">
+    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop" alt="Portable World" class="eg-img" loading="lazy">
+    <div class="eg-overlay" style="background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,0.8) 100%);"></div>
+    <div class="eg-color-overlay" style="background:linear-gradient(165deg,#0e1214,#1a2428);opacity:0.4;mix-blend-mode:multiply;"></div>
+    <div class="eg-grid-pattern"></div>
+    <span class="eg-initial">P</span>
+    <div class="eg-badge-row"><span class="eg-badge">Comercial</span><span class="eg-year">2024</span></div>
+    <span class="eg-whisper">CORPORATE // BRANDING</span>
+    <div class="eg-hover-content">
+      <span class="font-mono text-white/35" style="font-size:0.48rem;letter-spacing:0.16em;">12 — HTML · CSS · JS</span>
+      <h3 class="eg-hover-title">Portable World</h3>
+      <p class="eg-hover-sub">Website Corporativo</p>
+      <p class="eg-hover-desc">Website institucional para Portable World. Em renovação.</p>
+      <div class="eg-hover-tags"><span class="eg-tag">HTML5</span> <span class="eg-tag">CSS3</span> <span class="eg-tag">JavaScript</span></div>
+    </div>
+  </div>
+</div></div>
+</div>
+
     </section>
 
-
-    <!-- ── 03. ARQUIVO COMPLETO ─────────────────────────────── -->
-    <section id="pf-archive" class="relative" style="padding:clamp(5rem,10vh,10rem) clamp(1.5rem,5vw,6rem);">
-      <!-- Section heading -->
-      <div class="flex items-center gap-2.5 mb-4 reveal-up">
-        <div class="crosshair-mark text-ink"></div>
-        <span class="t-label">03 — Arquivo Completo</span>
-        <div class="h-line flex-1 ml-4" id="arc-hline"></div>
-      </div>
-      <h2 class="font-serif italic reveal-up" style="font-size:clamp(2.2rem,5vw,4.5rem); line-height:0.92; letter-spacing:-0.02em; margin-bottom:clamp(2.5rem,5vh,5rem);">
-        Todos os Projectos
-      </h2>
-
-      <!-- Archive list -->
-      <div class="arc-list" style="border-top:1px solid rgba(18,18,18,0.07);">
-
-        <!-- 01 — Cristal Terminal -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">01</span>
-            <span class="arc-title">Cristal Terminal</span>
-            <span class="arc-type">Pessoal</span>
-            <span class="arc-stack">Next.js · React · TypeScript</span>
-            <span class="arc-year">2025</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">Terminal financeiro Bloomberg-inspired com dados em tempo real. Plataforma completa de análise financeira com motor de cálculo em C++/WASM e assistente IA via Ollama. Em desenvolvimento activo.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">Next.js 15</span>
-                  <span class="arc-tag">React 19</span>
-                  <span class="arc-tag">TypeScript</span>
-                  <span class="arc-tag">C++ / WASM</span>
-                  <span class="arc-tag">Python</span>
-                  <span class="arc-tag">Ollama AI</span>
-                </div>
-                <div class="arc-actions">
-                  <span class="arc-btn arc-btn--muted">Em Desenvolvimento</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 02 — Casa do Gi -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">02</span>
-            <span class="arc-title">Casa do Gi</span>
-            <span class="arc-type">Comercial</span>
-            <span class="arc-stack">PHP · MySQL · IfthenPay</span>
-            <span class="arc-year">2025</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">E-commerce para alojamento local com sistema de reservas e pagamentos integrados via IfthenPay. Design focado em conversão e experiência de reserva simplificada.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">PHP</span>
-                  <span class="arc-tag">MySQL</span>
-                  <span class="arc-tag">IfthenPay</span>
-                  <span class="arc-tag">Tailwind CSS</span>
-                </div>
-                <div class="arc-actions">
-                  <a href="#" class="arc-btn">Ver Website ↗</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 03 — Eletro 2000 v2 -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">03</span>
-            <span class="arc-title">Eletro 2000 v2</span>
-            <span class="arc-type">Académico</span>
-            <span class="arc-stack">Laravel · React · Gemini AI</span>
-            <span class="arc-year">2025</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">Plataforma de gestão de reparações electrónicas com diagnóstico assistido por IA. Sistema completo de tracking de reparações, inventário e facturação.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">Laravel</span>
-                  <span class="arc-tag">React</span>
-                  <span class="arc-tag">Gemini AI</span>
-                </div>
-                <div class="arc-actions">
-                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 04 — Cristal Capital -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">04</span>
-            <span class="arc-title">Cristal Capital</span>
-            <span class="arc-type">Académico</span>
-            <span class="arc-stack">Laravel · Inertia · Docker</span>
-            <span class="arc-year">2025</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">PAP — plataforma de investimentos simulados com portfólios virtuais, cotações em tempo real e análise de performance. Projecto de Aptidão Profissional.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">Laravel</span>
-                  <span class="arc-tag">Inertia.js</span>
-                  <span class="arc-tag">Docker</span>
-                </div>
-                <div class="arc-actions">
-                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 05 — Volunta -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">05</span>
-            <span class="arc-title">Volunta</span>
-            <span class="arc-type">Institucional</span>
-            <span class="arc-stack">PHP · Laravel · MySQL</span>
-            <span class="arc-year">2025</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">Plataforma de voluntariado institucional para gestão de voluntários, eventos e horas de serviço. Painel administrativo com relatórios e certificados automáticos.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">PHP</span>
-                  <span class="arc-tag">Laravel</span>
-                  <span class="arc-tag">MySQL</span>
-                </div>
-                <div class="arc-actions">
-                  <span class="arc-btn arc-btn--muted">Projecto Institucional</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 06 — Estudas Comigo -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">06</span>
-            <span class="arc-title">Estudas Comigo</span>
-            <span class="arc-type">Comercial</span>
-            <span class="arc-stack">HTML · Tailwind · JS</span>
-            <span class="arc-year">2024</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">Plataforma de explicações online que liga estudantes a explicadores qualificados. Sistema de pesquisa, agendamento e perfis de explicadores.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">HTML</span>
-                  <span class="arc-tag">Tailwind CSS</span>
-                  <span class="arc-tag">JavaScript</span>
-                </div>
-                <div class="arc-actions">
-                  <a href="#" class="arc-btn">Ver Website ↗</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 07 — GT Móvel -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">07</span>
-            <span class="arc-title">GT Móvel</span>
-            <span class="arc-type">Comercial</span>
-            <span class="arc-stack">HTML · CSS · JS</span>
-            <span class="arc-year">2024</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">Website comercial para empresa de reparação de telemóveis. Design focado em confiança, rapidez de contacto e apresentação de serviços.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">HTML</span>
-                  <span class="arc-tag">CSS</span>
-                  <span class="arc-tag">JavaScript</span>
-                </div>
-                <div class="arc-actions">
-                  <a href="#" class="arc-btn">Ver Website ↗</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 08 — Hugo Brito -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">08</span>
-            <span class="arc-title">Hugo Brito</span>
-            <span class="arc-type">Académico</span>
-            <span class="arc-stack">HTML · GSAP · Tailwind</span>
-            <span class="arc-year">2024</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">Portfólio pessoal para fotógrafo com galeria imersiva, transições cinematográficas e animações GSAP. Foco na apresentação visual do trabalho fotográfico.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">HTML</span>
-                  <span class="arc-tag">GSAP</span>
-                  <span class="arc-tag">Tailwind CSS</span>
-                </div>
-                <div class="arc-actions">
-                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 09 — Tec N' Cool -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">09</span>
-            <span class="arc-title">Tec N' Cool</span>
-            <span class="arc-type">Institucional</span>
-            <span class="arc-stack">HTML · CSS · JS</span>
-            <span class="arc-year">2024</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">Website institucional para escola profissional. Apresentação de cursos, notícias, calendário escolar e informações para alunos e encarregados de educação.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">HTML</span>
-                  <span class="arc-tag">CSS</span>
-                  <span class="arc-tag">JavaScript</span>
-                </div>
-                <div class="arc-actions">
-                  <span class="arc-btn arc-btn--muted">Projecto Institucional</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 10 — ExpoLive -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">10</span>
-            <span class="arc-title">ExpoLive</span>
-            <span class="arc-type">Académico</span>
-            <span class="arc-stack">PHP · MySQL · IA</span>
-            <span class="arc-year">2023–25</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">Plataforma de exposições com streaming ao vivo e curadoria assistida por IA. Sistema de gestão de eventos, galerias virtuais e transmissão em directo.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">PHP</span>
-                  <span class="arc-tag">MySQL</span>
-                  <span class="arc-tag">IA</span>
-                  <span class="arc-tag">Streaming</span>
-                </div>
-                <div class="arc-actions">
-                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 11 — Wise Wallet -->
-        <div class="arc-row reveal-up" data-arc>
-          <div class="arc-header">
-            <span class="arc-num">11</span>
-            <span class="arc-title">Wise Wallet</span>
-            <span class="arc-type">Académico</span>
-            <span class="arc-stack">PHP · Chart.js · Ollama</span>
-            <span class="arc-year">2024</span>
-            <svg class="arc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            <div class="arc-bar"></div>
-          </div>
-          <div class="arc-body">
-            <div class="arc-body-inner">
-              <div class="arc-detail">
-                <p class="arc-desc">Gestor financeiro pessoal com análise de despesas assistida por IA. Dashboards interactivos, categorização automática e previsões financeiras via Ollama.</p>
-                <div class="arc-carousel">
-                  <div class="arc-slide"><span>Screenshot 1</span></div>
-                  <div class="arc-slide"><span>Screenshot 2</span></div>
-                  <div class="arc-slide"><span>Screenshot 3</span></div>
-                </div>
-                <div class="arc-tags">
-                  <span class="arc-tag">PHP</span>
-                  <span class="arc-tag">Chart.js</span>
-                  <span class="arc-tag">Ollama</span>
-                </div>
-                <div class="arc-actions">
-                  <span class="arc-btn arc-btn--muted">Projecto Académico</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ── 04. CTA + PHOTO DOME ─────────────────────────────── -->
-    <section id="pf-cta" class="relative overflow-hidden" style="min-height:clamp(600px,80vh,900px); display:flex; align-items:center; justify-content:center;">
-      <!-- Section label -->
+    <!-- ══ 04. CTA + DOME ══ -->
+    <section id="pf-cta" class="relative overflow-hidden" style="min-height:clamp(600px,80vh,900px);display:flex;align-items:center;justify-content:center;">
       <div class="absolute top-0 left-0 right-0 flex items-center gap-2.5 z-30" style="padding:clamp(2rem,4vh,4rem) clamp(1.5rem,5vw,6rem);">
-        <div class="crosshair-mark text-ink"></div>
-        <span class="t-label">04 — Próximo Passo</span>
+        <div class="crosshair-mark text-ink"></div><span class="t-label">04 &mdash; Pr&oacute;ximo Passo</span>
       </div>
-
-      <!-- Dome stage -->
       <div class="dome-stage absolute inset-0 flex items-center justify-center" id="dome-stage" aria-hidden="true">
-        <div class="dome-sphere" id="dome-sphere" style="width:1px; height:1px;"></div>
+        <div class="dome-sphere" id="dome-sphere" style="width:1px;height:1px;"></div>
       </div>
-
-      <!-- Radial vignette overlay -->
-      <div class="absolute inset-0 z-10 pointer-events-none" style="background:radial-gradient(ellipse 65% 60% at 50% 50%, transparent 40%, var(--color-paper) 100%);"></div>
-      <!-- Top fade -->
-      <div class="absolute top-0 left-0 right-0 h-32 z-10 pointer-events-none" style="background:linear-gradient(to bottom, var(--color-paper), transparent);"></div>
-      <!-- Bottom fade -->
-      <div class="absolute bottom-0 left-0 right-0 h-32 z-10 pointer-events-none" style="background:linear-gradient(to top, var(--color-paper), transparent);"></div>
-
-      <!-- CTA overlay -->
+      <div class="absolute inset-0 z-10 pointer-events-none" style="background:radial-gradient(ellipse 65% 60% at 50% 50%,transparent 40%,var(--color-paper) 100%);"></div>
+      <div class="absolute top-0 left-0 right-0 h-32 z-10 pointer-events-none" style="background:linear-gradient(to bottom,var(--color-paper),transparent);"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-32 z-10 pointer-events-none" style="background:linear-gradient(to top,var(--color-paper),transparent);"></div>
       <div class="relative z-20 text-center flex flex-col items-center" style="padding:0 clamp(1.5rem,5vw,4rem);">
-        <h2 class="font-serif italic reveal-up" style="font-size:clamp(2.8rem,7vw,7rem); line-height:0.88; letter-spacing:-0.03em; margin-bottom:1.5rem;">
-          O próximo<br>é o seu.
-        </h2>
-        <p class="font-mono text-ink/45 reveal-up" style="font-size:clamp(0.68rem,0.9vw,0.82rem); max-width:38ch; margin-bottom:2.5rem;">
-          Cada projecto começa com uma conversa. Vamos começar a sua.
-        </p>
+        <h2 class="font-serif italic reveal-up" style="font-size:clamp(2.8rem,7vw,7rem);line-height:0.88;letter-spacing:-0.03em;margin-bottom:1.5rem;">O pr&oacute;ximo<br>&eacute; o seu.</h2>
+        <p class="font-mono text-ink/45 reveal-up" style="font-size:clamp(0.68rem,0.9vw,0.82rem);max-width:38ch;margin-bottom:2.5rem;">Cada projecto come&ccedil;a com uma conversa.</p>
         <div class="flex flex-wrap items-center justify-center gap-4 reveal-up">
-          <a href="/contactos/"
-            class="inline-flex items-center justify-center rounded-full bg-ink text-paper font-sans font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:scale-[1.03]"
-            style="padding:clamp(0.85rem,1.2vw,1.1rem) clamp(2rem,3vw,2.8rem); letter-spacing:0.08em; font-size:clamp(0.72rem,0.85vw,0.82rem);">
-            Iniciar projecto
-          </a>
-          <a href="/servicos/"
-            class="inline-flex items-center justify-center rounded-full border border-ink/20 text-ink font-sans font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:border-ink/60 hover:scale-[1.03]"
-            style="padding:clamp(0.85rem,1.2vw,1.1rem) clamp(2rem,3vw,2.8rem); letter-spacing:0.08em; font-size:clamp(0.72rem,0.85vw,0.82rem);">
-            Ver Serviços
-          </a>
+          <a href="/contactos/" class="inline-flex items-center justify-center bg-ink text-paper font-sans font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:scale-[1.03]" style="padding:clamp(0.85rem,1.2vw,1.1rem) clamp(2rem,3vw,2.8rem);letter-spacing:0.08em;font-size:clamp(0.72rem,0.85vw,0.82rem);">Iniciar projecto</a>
+          <a href="/servicos/" class="inline-flex items-center justify-center border border-ink/20 text-ink font-sans font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:border-ink/60 hover:scale-[1.03]" style="padding:clamp(0.85rem,1.2vw,1.1rem) clamp(2rem,3vw,2.8rem);letter-spacing:0.08em;font-size:clamp(0.72rem,0.85vw,0.82rem);">Ver Servi&ccedil;os</a>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- ── Footer ─────────────────────────────────────────────── -->
   <footer class="bg-ink rounded-t-[4rem] pt-24 pb-8 relative z-30 text-paper overflow-hidden" style="
     padding-left:clamp(1.5rem,5vw,6rem); padding-right:clamp(1.5rem,5vw,6rem);">
     <div class="footer-dots absolute inset-0 pointer-events-none opacity-[0.24]" style="
@@ -959,183 +1304,174 @@
     </div>
   </footer>
 
-  <!-- ── Scripts ────────────────────────────────────────────── -->
   <script type="module" src="../assets/js/page.js"></script>
-
   <script type="module">
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-    gsap.registerPlugin(ScrollTrigger);
+const PROJECTS = [{"id": "cristal-terminal", "n": "01", "name": "Cristal Terminal", "sub": "Terminal Financeiro Profissional", "tp": "Pessoal", "yr": "2025", "st": "Em Desenvolvimento", "gr": "135deg,#0a0e17,#1a1f3a", "ini": "C", "tags": ["Next.js 15", "React 19", "TypeScript", "C++/WASM", "Python", "Ollama AI"], "stk": "Next.js · React · TypeScript", "desc": "Terminal financeiro de nível profissional inspirado no Bloomberg Terminal. Motor quant tri-camada, integração IA local via Ollama e 8 temas visuais.", "wh": "QUANT ENGINE // WASM", "img": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&fit=crop"}, {"id": "casa-gi", "n": "02", "name": "Casa do Gi", "sub": "Reservas e E-commerce", "tp": "Comercial", "yr": "2025", "st": "Em Produção", "gr": "160deg,#1a150e,#2a1f0e", "ini": "G", "tags": ["PHP 8", "MySQL", "IfthenPay", "Tailwind CSS"], "stk": "PHP · MySQL · IfthenPay", "desc": "Website para alojamento local com sistema de reservas, pagamentos IfthenPay e painel de administração.", "wh": "HMAC-SHA256 // IFTHEN", "img": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop"}, {"id": "eletro2000", "n": "03", "name": "Eletro 2000 v2", "sub": "Gestão de Retalho com IA", "tp": "Académico", "yr": "2025", "st": "Concluído", "gr": "200deg,#0e1a16,#0a2e20", "ini": "E", "tags": ["Laravel 12", "React 19", "Gemini AI", "MySQL"], "stk": "Laravel · React · Gemini", "desc": "Sistema full-stack com IA autónoma via Google Gemini. Motor de decisão em tempo real.", "wh": "GEMINI API // AUTONOMOUS", "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop"}, {"id": "cristal-capital", "n": "04", "name": "Cristal Capital", "sub": "Plataforma Financeira — PAP", "tp": "Académico", "yr": "2025", "st": "Concluído", "gr": "120deg,#141018,#1e1630", "ini": "C", "tags": ["Laravel 12", "Inertia.js", "Docker", "Sanctum"], "stk": "Laravel · Inertia · Docker", "desc": "Plataforma de gestão financeira com Laravel 12, Sanctum e Inertia.js.", "wh": "LARAVEL 12 // SANCTUM", "img": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop"}, {"id": "volunta", "n": "05", "name": "Volunta", "sub": "Câmara Municipal V.N. Gaia", "tp": "Institucional", "yr": "2025", "st": "Em Desenvolvimento", "gr": "180deg,#181410,#28221a", "ini": "V", "tags": ["PHP", "Laravel", "MySQL", "Tailwind"], "stk": "PHP · Laravel · MySQL", "desc": "Plataforma de voluntariado para a Câmara Municipal de Vila Nova de Gaia.", "wh": "CÂMARA VNG // CIVIC", "img": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop"}, {"id": "estudas-comigo", "n": "06", "name": "Estudas Comigo", "sub": "Centro de Estudos", "tp": "Comercial", "yr": "2024", "st": "Em Produção", "gr": "145deg,#0d1018,#162030", "ini": "E", "tags": ["HTML5", "Tailwind CSS", "JavaScript"], "stk": "HTML · Tailwind · JS", "desc": "Website moderno para centro de estudos com design responsivo.", "wh": "STATIC // GH-PAGES", "img": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop"}, {"id": "gt-movel", "n": "07", "name": "GT Móvel", "sub": "Móveis e Eletrodomésticos", "tp": "Comercial", "yr": "2024", "st": "Em Produção", "gr": "170deg,#100e0e,#2a1a1a", "ini": "G", "tags": ["HTML5", "CSS3", "JavaScript", "SEO"], "stk": "HTML · CSS · JS", "desc": "Website para empresa de móveis desde 1977. Catálogo e SEO optimizado.", "wh": "SINCE 1977 // SEO", "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80&fit=crop"}, {"id": "hugo-brito", "n": "08", "name": "Hugo Brito", "sub": "Luxury Fashion Brand", "tp": "Académico", "yr": "2024", "st": "Concluído", "gr": "155deg,#0e0e14,#1a1a28", "ini": "H", "tags": ["HTML5", "GSAP 3", "Tailwind CSS"], "stk": "HTML · GSAP · Tailwind", "desc": "Website conceito para marca de moda de luxo. Design cinematográfico com GSAP.", "wh": "LUXURY // GSAP", "img": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80&fit=crop"}, {"id": "tec-n-cool", "n": "09", "name": "Tec N' Cool", "sub": "Plataforma ISCAP / CEI", "tp": "Institucional", "yr": "2024", "st": "Em Produção", "gr": "190deg,#10140e,#1e2a18", "ini": "T", "tags": ["HTML5", "CSS3", "JavaScript", "JSON"], "stk": "HTML · CSS · JS", "desc": "Plataforma educativa para o ISCAP/CEI com catálogo de 250+ itens.", "wh": "250+ ITEMS // ISCAP", "img": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&fit=crop"}, {"id": "expolive", "n": "10", "name": "ExpoLive", "sub": "Gestão de Eventos e CMS", "tp": "Académico", "yr": "2023–25", "st": "Concluído", "gr": "130deg,#18100e,#30201a", "ini": "X", "tags": ["PHP", "MySQL", "REST API", "IA"], "stk": "PHP · MySQL · IA", "desc": "Plataforma de gestão de eventos com 30+ páginas admin e chatbot IA.", "wh": "30+ PAGES // 2 YEARS", "img": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop"}, {"id": "wise-wallet", "n": "11", "name": "Wise Wallet", "sub": "Gestão Financeira Pessoal", "tp": "Académico", "yr": "2024", "st": "Concluído", "gr": "210deg,#0e1018,#182030", "ini": "W", "tags": ["PHP", "Chart.js", "DomPDF", "Ollama"], "stk": "PHP · Chart.js · Ollama", "desc": "Dashboard financeiro com gráficos Chart.js e IA local via Ollama.", "wh": "CHARTS // PDF // OLLAMA", "img": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80&fit=crop"}, {"id": "portable-world", "n": "12", "name": "Portable World", "sub": "Website Corporativo", "tp": "Comercial", "yr": "2024", "st": "Em Renovação", "gr": "165deg,#0e1214,#1a2428", "ini": "P", "tags": ["HTML5", "CSS3", "JavaScript"], "stk": "HTML · CSS · JS", "desc": "Website institucional para Portable World. Em renovação.", "wh": "CORPORATE // BRANDING", "img": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80&fit=crop"}];
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
-    function initAnimations() {
-      try {
-        // ── Mid-page refresh fix ──────────────────────────────
-        const scrolledOnLoad = window.scrollY > 0;
-        const inViewportOnLoad = new Set();
-        if (scrolledOnLoad) {
-          const vH = window.innerHeight;
-          document.querySelectorAll(".reveal-up, .reveal-fade, [data-tl-entry], .arc-row").forEach(el => {
-            const r = el.getBoundingClientRect();
-            if (r.top < vH && r.bottom > 0) inViewportOnLoad.add(el);
-          });
-        }
-
-        // ── HERO ENTRANCE ─────────────────────────────────────
+function initAnimations() {
+    try {
+        // ── HERO ──
         const heroTL = gsap.timeline({ defaults: { ease: "power4.out" } });
-        heroTL.to(["#hero-line-l", "#hero-line-r"], { scaleX: 1, duration: 1.5, stagger: 0 }, 0);
-        heroTL.to("#hero-label", { opacity: 1, duration: 1.0 }, 0.1);
+        heroTL.to(["#hero-line-l", "#hero-line-r"], { scaleX: 1, duration: 1.5 }, 0);
+        heroTL.to("#hero-label", { opacity: 1, duration: 1 }, 0.1);
         heroTL.to(["#hero-w1", "#hero-w2"], { y: "0%", duration: 1.6, stagger: 0.15 }, 0.2);
         heroTL.to("#hero-desc", { opacity: 1, duration: 1.2 }, 0.75);
-        heroTL.fromTo(["#stat-1", "#stat-2", "#stat-3"],
-          { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.15 }, 0.9);
-        heroTL.to(["#hero-ref-tl", "#hero-ref-tr"],
-          { opacity: 1, y: 0, duration: 1.0, stagger: 0.12, ease: "power3.out" }, 1.05);
+        heroTL.to(["#hero-ref-tl", "#hero-ref-tr"], { opacity: 1, y: 0, duration: 1, stagger: 0.12, ease: "power3.out" }, 1.05);
         heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.55);
         gsap.from(".hero-ghost", { opacity: 0, y: 60, scale: 0.92, duration: 2.5, ease: "power3.out" });
 
-        // ── SECTION HEADING REVEALS ───────────────────────────
-        ["#pf-featured", "#pf-archive"].forEach(id => {
-          const sect = document.querySelector(id);
-          if (!sect) return;
-          const label = sect.querySelector(".t-label");
-          const h2 = sect.querySelector("h2");
-          const hline = sect.querySelector(".h-line");
-          if (label || h2) {
-            gsap.fromTo([label, h2].filter(Boolean),
-              { opacity: 0, y: 30 },
-              { scrollTrigger: { trigger: sect, start: "top 85%", once: true },
-                opacity: 1, y: 0, duration: 1.5, stagger: 0.18, ease: "power4.out" }
-            );
-          }
-          if (hline) {
-            gsap.to(hline, {
-              scrollTrigger: { trigger: sect, start: "top 85%", once: true },
-              scaleX: 1, duration: 1.5, delay: 0.2, ease: "power4.out"
+        // ── PINNED SHOWCASE ──
+        const panels = document.querySelectorAll(".sc-panel");
+        const dots = document.querySelectorAll(".sc-dot");
+        if (panels.length > 1) {
+            const scSection = document.getElementById("pf-showcase");
+            const count = panels.length;
+
+            // Set initial states — all panels visible, stacked, only first one opaque
+            gsap.set(panels, { opacity: 0, visibility: "visible" });
+            gsap.set(panels[0], { opacity: 1 });
+
+            // Image parallax on all panel images
+            panels.forEach(panel => {
+                const img = panel.querySelector(".sc-img");
+                if (img) gsap.to(img, { scale: 1.2, ease: "none", scrollTrigger: { trigger: scSection, start: "top top", end: "bottom bottom", scrub: 1 } });
             });
-          }
-        });
 
-        // ── REVEAL SYSTEM ─────────────────────────────────────
-        gsap.set(".reveal-up", { opacity: 0, y: 50 });
-        gsap.set(".reveal-fade", { opacity: 0 });
+            // Build a master timeline for panel crossfades
+            const masterTL = gsap.timeline({
+                scrollTrigger: {
+                    trigger: scSection,
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.6,
+                }
+            });
 
-        ScrollTrigger.batch(".reveal-up", {
-          onEnter: batch => gsap.to(batch, {
-            opacity: 1, y: 0, duration: 1.4, stagger: 0.15, ease: "power4.out", overwrite: true
-          }),
-          start: "top 88%", once: true
-        });
-        ScrollTrigger.batch(".reveal-fade", {
-          onEnter: batch => gsap.to(batch, {
-            opacity: 1, duration: 1.2, stagger: 0.1, ease: "power2.out", overwrite: true
-          }),
-          start: "top 88%", once: true
-        });
+            // For each transition: fade out current panel content + image, fade in next
+            for (let i = 0; i < count - 1; i++) {
+                const curr = panels[i];
+                const next = panels[i + 1];
+                const currContent = curr.querySelector(".sc-content");
+                const nextContent = next.querySelector(".sc-content");
+                const currImg = curr.querySelector(".sc-img");
+                const nextImg = next.querySelector(".sc-img");
+                const nextInitial = next.querySelector(".sc-initial");
 
-        // ── TIMELINE PROGRESS LINE ────────────────────────────
-        const tlContainer = document.querySelector(".tl-container");
-        const tlFill = document.getElementById("tl-fill");
-        if (tlContainer && tlFill) {
-          gsap.to(tlFill, {
-            height: "100%",
-            ease: "none",
-            scrollTrigger: {
-              trigger: tlContainer,
-              start: "top 60%",
-              end: "bottom 40%",
-              scrub: 0.3,
+                // Phase: fade out current
+                masterTL.to(currContent, { y: -50, opacity: 0, duration: 0.4, ease: "power2.in" }, i);
+                masterTL.to(curr, { opacity: 0, duration: 0.5, ease: "power2.inOut" }, i + 0.3);
+
+                // Phase: fade in next
+                masterTL.fromTo(next, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, i + 0.4);
+                masterTL.fromTo(nextContent.children, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "power3.out" }, i + 0.5);
+                if (nextInitial) masterTL.fromTo(nextInitial, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" }, i + 0.45);
             }
-          });
+
+            // Update dot indicators based on scroll progress
+            ScrollTrigger.create({
+                trigger: scSection,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true,
+                onUpdate: (self) => {
+                    const idx = Math.min(Math.floor(self.progress * count), count - 1);
+                    dots.forEach((d, i) => {
+                        if (i === idx) d.classList.add("active");
+                        else d.classList.remove("active");
+                    });
+                }
+            });
+
+            // First panel entrance
+            const firstContent = panels[0].querySelector(".sc-content");
+            if (firstContent) {
+                gsap.from(firstContent.children, {
+                    y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out",
+                    scrollTrigger: { trigger: scSection, start: "top 80%", once: true }
+                });
+            }
         }
 
-        // ── TIMELINE ENTRY REVEALS ────────────────────────────
-        document.querySelectorAll("[data-tl-entry]").forEach((entry, i) => {
-          const dot = entry.querySelector("[data-tl-dot]");
-          const content = entry.querySelector(".relative.z-10");
-          const images = entry.querySelectorAll("[data-tl-images] > *");
-
-          // Dot scale in
-          if (dot) {
-            gsap.to(dot, {
-              scale: 1, duration: 0.6, ease: "back.out(2)",
-              scrollTrigger: { trigger: entry, start: "top 70%", once: true }
-            });
-          }
-
-          // Content reveal
-          if (content) {
-            gsap.fromTo(content,
-              { opacity: 0, y: 50 },
-              { opacity: 1, y: 0, duration: 1.4, ease: "power4.out",
-                scrollTrigger: { trigger: entry, start: "top 75%", once: true } }
-            );
-          }
-
-          // Image parallax
-          if (images.length) {
-            images.forEach(img => {
-              gsap.fromTo(img,
-                { y: 40 },
-                { y: 0, ease: "none",
-                  scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: 0.5 } }
-              );
-            });
-          }
+        // ── SECTION REVEALS ──
+        ["#pf-grid"].forEach(id => {
+            const sect = document.querySelector(id);
+            if (!sect) return;
+            const label = sect.querySelector(".t-label");
+            const h2 = sect.querySelector("h2");
+            const hline = sect.querySelector(".h-line");
+            if (label || h2) gsap.fromTo([label, h2].filter(Boolean), { opacity: 0, y: 30 }, { scrollTrigger: { trigger: sect, start: "top 85%", once: true }, opacity: 1, y: 0, duration: 1.5, stagger: 0.18, ease: "power4.out" });
+            if (hline) gsap.to(hline, { scrollTrigger: { trigger: sect, start: "top 85%", once: true }, scaleX: 1, duration: 1.5, delay: 0.2, ease: "power4.out" });
         });
 
-        // ── ARCHIVE ROW REVEALS ───────────────────────────────
-        ScrollTrigger.batch(".arc-row", {
-          onEnter: batch => gsap.to(batch, {
-            opacity: 1, y: 0, duration: 1.0, stagger: 0.08, ease: "power4.out", overwrite: true
-          }),
-          start: "top 90%", once: true
+        // ── CARD REVEALS ──
+        gsap.set(".reveal-up", { opacity: 0, y: 50 });
+        ScrollTrigger.batch(".eg-card.reveal-up", {
+            onEnter: b => gsap.to(b, { opacity: 1, y: 0, duration: 1.2, stagger: 0.12, ease: "power4.out", overwrite: true }),
+            start: "top 90%", once: true
+        });
+        ScrollTrigger.batch(".reveal-up:not(.eg-card)", {
+            onEnter: b => gsap.to(b, { opacity: 1, y: 0, duration: 1.4, stagger: 0.15, ease: "power4.out", overwrite: true }),
+            start: "top 88%", once: true
         });
 
-        // ── CTA REVEALS ───────────────────────────────────────
-        const ctaSection = document.getElementById("pf-cta");
-        if (ctaSection) {
-          const ctaReveals = ctaSection.querySelectorAll(".reveal-up");
-          if (ctaReveals.length) {
-            gsap.fromTo(ctaReveals,
-              { opacity: 0, y: 40 },
-              { opacity: 1, y: 0, duration: 1.4, stagger: 0.18, ease: "power4.out",
-                scrollTrigger: { trigger: ctaSection, start: "top 65%", once: true } }
-            );
-          }
+        // ── IMAGE PARALLAX on grid cards ──
+        document.querySelectorAll(".eg-img").forEach(img => {
+            gsap.fromTo(img, { y: "-5%" }, { y: "5%", ease: "none", scrollTrigger: { trigger: img.closest(".eg-card"), start: "top bottom", end: "bottom top", scrub: 0.6 } });
+        });
+
+        // ── CTA REVEALS ──
+        const ctaS = document.getElementById("pf-cta");
+        if (ctaS) {
+            const cr = ctaS.querySelectorAll(".reveal-up");
+            if (cr.length) gsap.fromTo(cr, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.4, stagger: 0.18, ease: "power4.out", scrollTrigger: { trigger: ctaS, start: "top 65%", once: true } });
         }
 
-        // ── Fix mid-page refresh: force visible for already-in-view ──
-        if (inViewportOnLoad.size) {
-          requestAnimationFrame(() => {
-            inViewportOnLoad.forEach(el => {
-              gsap.set(el, { clearProps: "all" });
-            });
-            ScrollTrigger.refresh();
-          });
-        }
+        // ── FOOTER ──
+        gsap.from(".footer-dots", { scrollTrigger: { trigger: "footer", start: "top 85%" }, opacity: 0, duration: 1.5, ease: "power2.out" });
+        gsap.from(".footer-grid > *, .footer-bottom", { scrollTrigger: { trigger: "footer", start: "top 85%" }, y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" });
 
-        // Refresh on full load
         window.addEventListener("load", () => ScrollTrigger.refresh());
+    } catch (err) { console.error("initAnimations:", err); }
+}
 
-      } catch (err) {
-        console.error("Portfolio initAnimations error:", err);
-      }
-    }
+// ── FILTER ──
+function initFilter() {
+    const btns = document.querySelectorAll(".gal-filter");
+    const cards = document.querySelectorAll(".eg-card");
+    btns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            btns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const f = btn.dataset.filter;
+            cards.forEach(c => {
+                const show = f === "Todos" || c.dataset.type === f;
+                gsap.to(c, { opacity: show ? 1 : 0.08, scale: show ? 1 : 0.97, duration: 0.5, ease: "power2.out" });
+                c.style.pointerEvents = show ? "auto" : "none";
+            });
+        });
+    });
+}
 
-    // ── PHOTO DOME ──────────────────────────────────────────
-    function initDome() {
-      const stage = document.getElementById("dome-stage");
-      const sphere = document.getElementById("dome-sphere");
-      if (!stage || !sphere) return;
+// ── CAROUSEL PAUSE ON HOVER ──
+function initCarousel() {
+    const track = document.querySelector(".cr-track");
+    if (!track) return;
+    track.addEventListener("mouseenter", () => track.style.animationPlayState = "paused");
+    track.addEventListener("mouseleave", () => track.style.animationPlayState = "running");
+}
 
-      const N = 20;
-      const PHI = Math.PI * (Math.sqrt(5) - 1); // golden angle
-      const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
-      const tileW = Math.max(80, radius * 0.42);
-      const tileH = tileW * 0.65;
-
-      // Placeholder images (architecture/interior — user will replace)
-      const imgs = [
+// ── DOME ──
+function initDome() {
+    const stage = document.getElementById("dome-stage");
+    const sphere = document.getElementById("dome-sphere");
+    if (!stage || !sphere) return;
+    const N = 20, PHI = Math.PI * (Math.sqrt(5) - 1);
+    const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
+    const tW = Math.max(80, radius * 0.42), tH = tW * 0.65;
+    const imgs = [
         "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70&fit=crop",
         "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=300&q=70&fit=crop",
         "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&q=70&fit=crop",
@@ -1146,103 +1482,52 @@
         "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&q=70&fit=crop",
         "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=70&fit=crop",
         "https://images.unsplash.com/photo-1547658719-da2b51169166?w=300&q=70&fit=crop",
-      ];
-
-      const tiles = [];
-
-      for (let i = 0; i < N; i++) {
-        const y = 1 - (i / (N - 1)) * 2; // y goes from 1 to -1
-        const r = Math.sqrt(1 - y * y);
-        const theta = PHI * i;
-        const x = Math.cos(theta) * r;
-        const z = Math.sin(theta) * r;
-
+    ];
+    const tiles = [];
+    for (let i = 0; i < N; i++) {
+        const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), theta = PHI * i;
+        const x = Math.cos(theta) * r, z = Math.sin(theta) * r;
         const tile = document.createElement("div");
         tile.className = "dome-tile";
-        tile.style.width = tileW + "px";
-        tile.style.height = tileH + "px";
-        tile.style.left = -tileW / 2 + "px";
-        tile.style.top = -tileH / 2 + "px";
-
-        const img = document.createElement("img");
-        img.src = imgs[i % imgs.length];
-        img.alt = "";
-        img.loading = "lazy";
-        tile.appendChild(img);
-        sphere.appendChild(tile);
-
+        tile.style.cssText = `width:${tW}px;height:${tH}px;left:${-tW / 2}px;top:${-tH / 2}px;`;
+        const im = document.createElement("img");
+        im.src = imgs[i % imgs.length]; im.alt = ""; im.loading = "lazy";
+        tile.appendChild(im); sphere.appendChild(tile);
         tiles.push({ el: tile, x: x * radius, y: y * radius, z: z * radius });
-      }
-
-      let rotY = 0;
-      let rotX = 0;
-      let targetRY = 0;
-      let targetRX = 0;
-      let autoRotate = true;
-
-      stage.addEventListener("mousemove", e => {
-        const rect = stage.getBoundingClientRect();
-        const mx = (e.clientX - rect.left) / rect.width - 0.5;
-        const my = (e.clientY - rect.top) / rect.height - 0.5;
-        targetRY = mx * 0.8;
-        targetRX = -my * 0.4;
-        autoRotate = false;
-      });
-      stage.addEventListener("mouseleave", () => { autoRotate = true; });
-
-      let raf;
-      function render() {
-        if (autoRotate) {
-          targetRY += 0.002;
-          targetRX *= 0.98; // slowly return to 0
-        }
-        rotY += (targetRY - rotY) * 0.04;
-        rotX += (targetRX - rotX) * 0.04;
-
-        tiles.forEach(t => {
-          // Apply rotation around Y axis
-          const cosY = Math.cos(rotY);
-          const sinY = Math.sin(rotY);
-          const cosX = Math.cos(rotX);
-          const sinX = Math.sin(rotX);
-
-          let x1 = t.x * cosY + t.z * sinY;
-          let z1 = t.z * cosY - t.x * sinY;
-          let y1 = t.y * cosX - z1 * sinX;
-          let z2 = z1 * cosX + t.y * sinX;
-
-          const scale = 900 / (900 + z2);
-          const opacity = Math.max(0.15, (z2 + radius) / (2 * radius));
-
-          t.el.style.transform = `translate3d(${x1}px, ${y1}px, ${z2}px) scale(${scale})`;
-          t.el.style.opacity = opacity;
-          t.el.style.zIndex = Math.round(z2 + radius);
-        });
-
-        raf = requestAnimationFrame(render);
-      }
-
-      // Only start dome when section is near viewport
-      ScrollTrigger.create({
-        trigger: "#pf-cta",
-        start: "top bottom+=200",
-        onEnter: () => { if (!raf) render(); },
-        onLeaveBack: () => { if (raf) { cancelAnimationFrame(raf); raf = null; } }
-      });
     }
+    let rotY = 0, rotX = 0, tRY = 0, tRX = 0, auto = true;
+    stage.addEventListener("mousemove", e => { const r = stage.getBoundingClientRect(); tRY = ((e.clientX - r.left) / r.width - .5) * .8; tRX = -((e.clientY - r.top) / r.height - .5) * .4; auto = false; });
+    stage.addEventListener("mouseleave", () => { auto = true; });
+    let raf;
+    function render() {
+        if (auto) { tRY += .002; tRX *= .98; }
+        rotY += (tRY - rotY) * .04; rotX += (tRX - rotX) * .04;
+        tiles.forEach(t => {
+            const cY = Math.cos(rotY), sY = Math.sin(rotY), cX = Math.cos(rotX), sX = Math.sin(rotX);
+            let x1 = t.x * cY + t.z * sY, z1 = t.z * cY - t.x * sY, y1 = t.y * cX - z1 * sX, z2 = z1 * cX + t.y * sX;
+            const sc = 900 / (900 + z2), op = Math.max(.15, (z2 + radius) / (2 * radius));
+            t.el.style.transform = `translate3d(${x1}px,${y1}px,${z2}px) scale(${sc})`;
+            t.el.style.opacity = op; t.el.style.zIndex = Math.round(z2 + radius);
+        });
+        raf = requestAnimationFrame(render);
+    }
+    ScrollTrigger.create({ trigger: "#pf-cta", start: "top bottom+=200", onEnter: () => { if (!raf) render(); }, onLeaveBack: () => { if (raf) { cancelAnimationFrame(raf); raf = null; } } });
+}
 
-    // ── INIT PATTERN (wait for page.js loader) ──────────────
-    const obs = new MutationObserver(() => {
-      if (document.body.style.visibility !== "") {
+// ── INIT ──
+const obs = new MutationObserver(() => {
+    if (document.body.style.visibility !== "") {
         obs.disconnect();
         requestAnimationFrame(() => {
-          initAnimations();
-          setTimeout(() => initDome(), 150);
+            initAnimations();
+            initFilter();
+            initCarousel();
+            setTimeout(() => initDome(), 150);
         });
-      }
-    });
-    obs.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+    }
+});
+obs.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+
   </script>
 </body>
-
 </html>
