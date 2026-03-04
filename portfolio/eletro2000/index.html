@@ -1145,6 +1145,10 @@
 
 
 
+
+
+
+
   <main class="relative z-10" style="background-color:#EBE9E4;">
     <div class="relative z-10" style="padding:clamp(7rem,10vh,9rem) clamp(1.5rem,5vw,6rem) 1.5rem;">
       <nav class="flex items-center flex-wrap">
@@ -1322,7 +1326,7 @@
           gsap.from(".breadcrumb-link, .breadcrumb-sep", { y: 15, opacity: 0, duration: 0.8, stagger: 0.05, ease: "power3.out" });
           gsap.to(".proj-hero-img", { y: "8%", ease: "none", scrollTrigger: { trigger: ".proj-hero-img", start: "top bottom", end: "bottom top", scrub: 0.6 } });
           gsap.from(".proj-detail-img", { scrollTrigger: { trigger: ".proj-detail-grid", start: "top 80%", once: true }, y: 60, opacity: 0, duration: 1.2, stagger: 0.15, ease: "power4.out" });
-          gsap.from(".proj-link", { scrollTrigger: { trigger: ".proj-link", start: "top 90%", once: true }, y: 20, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" });
+          /* proj-link is visible without animation */
           gsap.from(".footer-grid > *, .footer-bottom", { scrollTrigger: { trigger: "footer", start: "top 85%" }, y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" });
           window.addEventListener("load", () => ScrollTrigger.refresh());
         });
