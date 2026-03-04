@@ -309,40 +309,54 @@
         transform: translateY(50px);
     }
 
-    /* ══ HERO CODE GLYPHS (unique to portfolio) ══ */
-    .code-glyph {
+    /* ══ HERO WIREFRAME BLUEPRINT (unique to portfolio) ══ */
+    .wf-el {
         position: absolute;
-        font-family: var(--font-mono);
         pointer-events: none;
         user-select: none;
-        line-height: 1;
     }
 
-    .code-glyph--bracket {
-        color: rgba(18, 18, 18, 0.055);
-        font-weight: 300;
+    .wf-rect {
+        border: 1.5px solid rgba(18, 18, 18, 0.06);
+        border-radius: 6px;
     }
 
-    .code-glyph--tag {
-        color: rgba(18, 18, 18, 0.04);
-        font-weight: 400;
+    .wf-rect--strong {
+        border-color: rgba(18, 18, 18, 0.09);
+        border-radius: 10px;
     }
 
-    .code-glyph--dot {
-        position: absolute;
-        width: 4px;
-        height: 4px;
+    .wf-circle {
+        border: 1.5px solid rgba(18, 18, 18, 0.05);
         border-radius: 50%;
-        background: rgba(18, 18, 18, 0.04);
-        pointer-events: none;
     }
 
-    .code-glyph--line {
-        position: absolute;
-        height: 1px;
-        background: rgba(18, 18, 18, 0.025);
-        pointer-events: none;
+    .wf-line {
+        height: 1.5px;
+        background: rgba(18, 18, 18, 0.04);
         transform-origin: left;
+    }
+
+    .wf-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(18, 18, 18, 0.06);
+    }
+
+    .wf-bar {
+        height: 3px;
+        border-radius: 2px;
+        background: rgba(18, 18, 18, 0.04);
+    }
+
+    .wf-text {
+        font-family: var(--font-mono);
+        font-size: 0.5rem;
+        letter-spacing: 0.15em;
+        color: rgba(18, 18, 18, 0.05);
+        text-transform: uppercase;
+        white-space: nowrap;
     }
 
     /* ══ PINNED SHOWCASE ══ */
@@ -1128,72 +1142,68 @@
 
 
 
+
+
   <main class="relative z-10" style="background-color:#EBE9E4;">
     <section id="pf-hero" class="relative min-h-screen flex flex-col justify-end bp-grid overflow-hidden" style="padding:clamp(7rem,12vh,10rem) clamp(1.5rem,5vw,6rem) clamp(3.5rem,6vh,5.5rem);">
-      <div class="absolute inset-0 pointer-events-none select-none" aria-hidden="true"><span class="code-glyph code-glyph--bracket" style="left:85%;top:20%;font-size:3.6rem;transform:rotate(-32deg);">&lt;/&gt;</span>
-<span class="code-glyph code-glyph--bracket" style="left:35%;top:34%;font-size:3.6rem;transform:rotate(-18deg);">{ }</span>
-<span class="code-glyph code-glyph--bracket" style="left:90%;top:75%;font-size:3.1rem;transform:rotate(-24deg);">&lt;&gt;</span>
-<span class="code-glyph code-glyph--bracket" style="left:8%;top:9%;font-size:1.9rem;transform:rotate(-24deg);">//</span>
-<span class="code-glyph code-glyph--bracket" style="left:68%;top:83%;font-size:3.1rem;transform:rotate(-32deg);">( )</span>
-<span class="code-glyph code-glyph--bracket" style="left:87%;top:75%;font-size:1.9rem;transform:rotate(18deg);">[ ]</span>
-<span class="code-glyph code-glyph--bracket" style="left:79%;top:41%;font-size:3.7rem;transform:rotate(-35deg);">&lt;div&gt;</span>
-<span class="code-glyph code-glyph--bracket" style="left:24%;top:60%;font-size:2.1rem;transform:rotate(8deg);">fn()</span>
-<span class="code-glyph code-glyph--bracket" style="left:31%;top:49%;font-size:1.5rem;transform:rotate(-22deg);">#</span>
-<span class="code-glyph code-glyph--bracket" style="left:16%;top:51%;font-size:3.2rem;transform:rotate(9deg);">::</span>
-<span class="code-glyph code-glyph--bracket" style="left:9%;top:64%;font-size:1.6rem;transform:rotate(33deg);">=&gt;</span>
-<span class="code-glyph code-glyph--bracket" style="left:52%;top:16%;font-size:2.2rem;transform:rotate(35deg);">&&</span>
-<span class="code-glyph code-glyph--tag" style="left:84%;top:85%;font-size:3.1rem;transform:rotate(11deg);">||</span>
-<span class="code-glyph code-glyph--tag" style="left:12%;top:11%;font-size:3.8rem;transform:rotate(-6deg);">.*</span>
-<span class="code-glyph code-glyph--tag" style="left:14%;top:35%;font-size:2.5rem;transform:rotate(-23deg);">$_</span>
-<span class="code-glyph code-glyph--tag" style="left:62%;top:87%;font-size:1.7rem;transform:rotate(11deg);">%%</span>
-<span class="code-glyph code-glyph--tag" style="left:49%;top:32%;font-size:3.5rem;transform:rotate(-1deg);">&lt;/&gt;</span>
-<span class="code-glyph code-glyph--tag" style="left:91%;top:88%;font-size:3.2rem;transform:rotate(-26deg);">{ }</span>
-<span class="code-glyph code-glyph--tag" style="left:25%;top:74%;font-size:1.7rem;transform:rotate(-4deg);">&lt;&gt;</span>
-<span class="code-glyph code-glyph--tag" style="left:52%;top:40%;font-size:3.5rem;transform:rotate(-7deg);">//</span>
-<span class="code-glyph code-glyph--tag" style="left:11%;top:35%;font-size:3.9rem;transform:rotate(-31deg);">( )</span>
-<span class="code-glyph code-glyph--tag" style="left:55%;top:40%;font-size:1.9rem;transform:rotate(-27deg);">[ ]</span>
-<span class="code-glyph--dot" style="left:75%;top:94%;"></span>
-<span class="code-glyph--dot" style="left:43%;top:30%;"></span>
-<span class="code-glyph--dot" style="left:86%;top:66%;"></span>
-<span class="code-glyph--dot" style="left:53%;top:85%;"></span>
-<span class="code-glyph--dot" style="left:61%;top:21%;"></span>
-<span class="code-glyph--dot" style="left:36%;top:20%;"></span>
-<span class="code-glyph--dot" style="left:34%;top:74%;"></span>
-<span class="code-glyph--dot" style="left:71%;top:36%;"></span>
-<span class="code-glyph--dot" style="left:77%;top:57%;"></span>
-<span class="code-glyph--dot" style="left:77%;top:54%;"></span>
-<span class="code-glyph--dot" style="left:49%;top:31%;"></span>
-<span class="code-glyph--dot" style="left:20%;top:68%;"></span>
-<span class="code-glyph--dot" style="left:66%;top:14%;"></span>
-<span class="code-glyph--dot" style="left:9%;top:17%;"></span>
-<span class="code-glyph--dot" style="left:22%;top:83%;"></span>
-<span class="code-glyph--dot" style="left:23%;top:90%;"></span>
-<span class="code-glyph--dot" style="left:57%;top:79%;"></span>
-<span class="code-glyph--dot" style="left:11%;top:52%;"></span>
-<span class="code-glyph--dot" style="left:51%;top:79%;"></span>
-<span class="code-glyph--dot" style="left:62%;top:70%;"></span>
-<span class="code-glyph--dot" style="left:35%;top:73%;"></span>
-<span class="code-glyph--dot" style="left:4%;top:90%;"></span>
-<span class="code-glyph--dot" style="left:95%;top:17%;"></span>
-<span class="code-glyph--dot" style="left:90%;top:71%;"></span>
-<span class="code-glyph--dot" style="left:37%;top:85%;"></span>
-<span class="code-glyph--dot" style="left:46%;top:17%;"></span>
-<span class="code-glyph--dot" style="left:40%;top:58%;"></span>
-<span class="code-glyph--dot" style="left:23%;top:61%;"></span>
-<span class="code-glyph--dot" style="left:3%;top:95%;"></span>
-<span class="code-glyph--dot" style="left:95%;top:36%;"></span>
-<span class="code-glyph--line" style="left:69%;top:27%;width:189px;transform:rotate(28deg);"></span>
-<span class="code-glyph--line" style="left:18%;top:85%;width:136px;transform:rotate(23deg);"></span>
-<span class="code-glyph--line" style="left:69%;top:82%;width:110px;transform:rotate(-21deg);"></span>
-<span class="code-glyph--line" style="left:52%;top:25%;width:198px;transform:rotate(19deg);"></span>
-<span class="code-glyph--line" style="left:72%;top:5%;width:142px;transform:rotate(1deg);"></span>
-<span class="code-glyph--line" style="left:7%;top:19%;width:152px;transform:rotate(26deg);"></span>
-<span class="code-glyph--line" style="left:44%;top:35%;width:74px;transform:rotate(-15deg);"></span>
-<span class="code-glyph--line" style="left:77%;top:15%;width:81px;transform:rotate(16deg);"></span>
-<span class="code-glyph--line" style="left:67%;top:13%;width:196px;transform:rotate(19deg);"></span>
-<span class="code-glyph--line" style="left:21%;top:21%;width:181px;transform:rotate(30deg);"></span>
-<span class="code-glyph--line" style="left:75%;top:26%;width:127px;transform:rotate(3deg);"></span>
-<span class="code-glyph--line" style="left:82%;top:59%;width:114px;transform:rotate(29deg);"></span>
+      <div class="absolute inset-0 pointer-events-none select-none" aria-hidden="true"><div class="wf-el wf-rect--strong" style="left:72%;top:8%;width:220px;height:160px;transform:rotate(-8deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:54px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:43px;"></span><span class="wf-el wf-bar" style="left:8px;top:46px;width:75px;"></span><span class="wf-el wf-bar" style="left:8px;top:58px;width:71px;"></span></div>
+<div class="wf-el wf-rect" style="left:5%;top:12%;width:140px;height:100px;transform:rotate(5deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:57px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:53px;"></span></div>
+<div class="wf-el wf-rect" style="left:85%;top:55%;width:80px;height:140px;transform:rotate(3deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:57px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:42px;"></span><span class="wf-el wf-bar" style="left:8px;top:46px;width:58px;"></span><span class="wf-el wf-bar" style="left:8px;top:58px;width:53px;"></span></div>
+<div class="wf-el wf-rect--strong" style="left:55%;top:70%;width:200px;height:130px;transform:rotate(-4deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:43px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:51px;"></span></div>
+<div class="wf-el wf-rect" style="left:15%;top:65%;width:120px;height:80px;transform:rotate(7deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:54px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:72px;"></span></div>
+<div class="wf-el wf-rect" style="left:40%;top:15%;width:100px;height:70px;transform:rotate(-12deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:41px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:75px;"></span><span class="wf-el wf-bar" style="left:8px;top:46px;width:52px;"></span><span class="wf-el wf-bar" style="left:8px;top:58px;width:74px;"></span></div>
+<div class="wf-el wf-rect" style="left:90%;top:28%;width:60px;height:90px;transform:rotate(0deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:40px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:40px;"></span><span class="wf-el wf-bar" style="left:8px;top:46px;width:40px;"></span></div>
+<div class="wf-el wf-rect" style="left:30%;top:85%;width:160px;height:50px;transform:rotate(2deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:60px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:94px;"></span></div>
+<div class="wf-el wf-rect" style="left:65%;top:40%;width:90px;height:60px;transform:rotate(-6deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:48px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:44px;"></span><span class="wf-el wf-bar" style="left:8px;top:46px;width:46px;"></span></div>
+<div class="wf-el wf-rect--strong" style="left:8%;top:42%;width:70px;height:120px;transform:rotate(10deg);"><span class="wf-el wf-dot" style="left:8px;top:8px;"></span><span class="wf-el wf-dot" style="left:18px;top:8px;"></span><span class="wf-el wf-dot" style="left:28px;top:8px;"></span><span class="wf-el wf-bar" style="left:8px;top:22px;width:41px;"></span><span class="wf-el wf-bar" style="left:8px;top:34px;width:41px;"></span><span class="wf-el wf-bar" style="left:8px;top:46px;width:46px;"></span></div>
+<div class="wf-el wf-circle" style="left:25%;top:30%;width:35px;height:35px;"></div>
+<div class="wf-el wf-circle" style="left:78%;top:75%;width:25px;height:25px;"></div>
+<div class="wf-el wf-circle" style="left:50%;top:50%;width:20px;height:20px;"></div>
+<div class="wf-el wf-circle" style="left:92%;top:12%;width:30px;height:30px;"></div>
+<div class="wf-el wf-circle" style="left:12%;top:82%;width:22px;height:22px;"></div>
+<div class="wf-el wf-circle" style="left:60%;top:22%;width:15px;height:15px;"></div>
+<div class="wf-el wf-circle" style="left:45%;top:92%;width:18px;height:18px;"></div>
+<span class="wf-el wf-line" style="left:18%;top:35%;width:140px;transform:rotate(15deg);"></span>
+<span class="wf-el wf-line" style="left:70%;top:25%;width:100px;transform:rotate(-20deg);"></span>
+<span class="wf-el wf-line" style="left:55%;top:80%;width:180px;transform:rotate(5deg);"></span>
+<span class="wf-el wf-line" style="left:35%;top:45%;width:90px;transform:rotate(30deg);"></span>
+<span class="wf-el wf-line" style="left:80%;top:65%;width:120px;transform:rotate(-10deg);"></span>
+<span class="wf-el wf-line" style="left:10%;top:55%;width:200px;transform:rotate(-5deg);"></span>
+<span class="wf-el wf-line" style="left:45%;top:10%;width:160px;transform:rotate(8deg);"></span>
+<span class="wf-el wf-line" style="left:65%;top:90%;width:100px;transform:rotate(-15deg);"></span>
+<span class="wf-el wf-dot" style="left:17%;top:50%;"></span>
+<span class="wf-el wf-dot" style="left:49%;top:82%;"></span>
+<span class="wf-el wf-dot" style="left:38%;top:10%;"></span>
+<span class="wf-el wf-dot" style="left:63%;top:73%;"></span>
+<span class="wf-el wf-dot" style="left:20%;top:53%;"></span>
+<span class="wf-el wf-dot" style="left:15%;top:75%;"></span>
+<span class="wf-el wf-dot" style="left:42%;top:85%;"></span>
+<span class="wf-el wf-dot" style="left:84%;top:51%;"></span>
+<span class="wf-el wf-dot" style="left:78%;top:29%;"></span>
+<span class="wf-el wf-dot" style="left:95%;top:13%;"></span>
+<span class="wf-el wf-dot" style="left:10%;top:89%;"></span>
+<span class="wf-el wf-dot" style="left:34%;top:42%;"></span>
+<span class="wf-el wf-dot" style="left:15%;top:34%;"></span>
+<span class="wf-el wf-dot" style="left:17%;top:53%;"></span>
+<span class="wf-el wf-dot" style="left:40%;top:63%;"></span>
+<span class="wf-el wf-dot" style="left:86%;top:51%;"></span>
+<span class="wf-el wf-dot" style="left:25%;top:52%;"></span>
+<span class="wf-el wf-dot" style="left:50%;top:31%;"></span>
+<span class="wf-el wf-dot" style="left:90%;top:39%;"></span>
+<span class="wf-el wf-dot" style="left:94%;top:92%;"></span>
+<span class="wf-el wf-dot" style="left:87%;top:14%;"></span>
+<span class="wf-el wf-dot" style="left:82%;top:86%;"></span>
+<span class="wf-el wf-dot" style="left:26%;top:73%;"></span>
+<span class="wf-el wf-dot" style="left:36%;top:25%;"></span>
+<span class="wf-el wf-dot" style="left:64%;top:53%;"></span>
+<span class="wf-el wf-text" style="left:42%;top:89%;">header</span>
+<span class="wf-el wf-text" style="left:79%;top:36%;">nav</span>
+<span class="wf-el wf-text" style="left:49%;top:15%;">hero</span>
+<span class="wf-el wf-text" style="left:37%;top:12%;">grid</span>
+<span class="wf-el wf-text" style="left:48%;top:59%;">card</span>
+<span class="wf-el wf-text" style="left:42%;top:16%;">footer</span>
+<span class="wf-el wf-text" style="left:35%;top:80%;">sidebar</span>
+<span class="wf-el wf-text" style="left:48%;top:35%;">modal</span>
 </div>
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true"><span class="hero-ghost" style="font-size:clamp(20vw,28vw,38vw)">Portfolio</span></div>
       <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none" style="top:clamp(7.5rem,11vh,10.5rem);left:clamp(1.5rem,5vw,6rem);opacity:0;"><div class="crosshair-mark text-ink"></div><span class="t-label">REF: MON-PF-001 / 2026</span></div>
@@ -1555,10 +1565,13 @@ function initAnimations() {
         heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.55);
         gsap.from(".hero-ghost", { opacity: 0, y: 60, scale: 0.92, duration: 2.5, ease: "power3.out" });
 
-        // Code glyphs entrance
-        gsap.from(".code-glyph", { opacity: 0, scale: 0.85, duration: 2.2, stagger: 0.06, ease: "power3.out", delay: 0.5 });
-        gsap.from(".code-glyph--dot", { opacity: 0, scale: 0, duration: 1.5, stagger: 0.03, ease: "elastic.out(1,0.5)", delay: 0.8 });
-        gsap.from(".code-glyph--line", { scaleX: 0, duration: 1.8, stagger: 0.05, ease: "power3.out", delay: 0.6 });
+        // Wireframe blueprint entrance
+        gsap.from(".wf-rect, .wf-rect--strong", { opacity: 0, scale: 0.85, duration: 2, stagger: 0.08, ease: "power3.out", delay: 0.4 });
+        gsap.from(".wf-circle", { opacity: 0, scale: 0, duration: 1.8, stagger: 0.06, ease: "elastic.out(1,0.6)", delay: 0.6 });
+        gsap.from(".wf-line", { scaleX: 0, opacity: 0, duration: 1.5, stagger: 0.05, ease: "power3.out", delay: 0.5 });
+        gsap.from(".wf-dot", { opacity: 0, scale: 0, duration: 1.2, stagger: 0.03, ease: "back.out(2)", delay: 0.8 });
+        gsap.from(".wf-bar", { scaleX: 0, opacity: 0, duration: 1.8, stagger: 0.06, ease: "power3.out", delay: 0.7, transformOrigin: "left" });
+        gsap.from(".wf-text", { opacity: 0, x: -10, duration: 1.4, stagger: 0.08, ease: "power3.out", delay: 0.9 });
 
         // ── PINNED SHOWCASE ──
         const panels = document.querySelectorAll(".sc-panel");

@@ -310,40 +310,54 @@
         transform: translateY(50px);
     }
 
-    /* ══ HERO CODE GLYPHS (unique to portfolio) ══ */
-    .code-glyph {
+    /* ══ HERO WIREFRAME BLUEPRINT (unique to portfolio) ══ */
+    .wf-el {
         position: absolute;
-        font-family: var(--font-mono);
         pointer-events: none;
         user-select: none;
-        line-height: 1;
     }
 
-    .code-glyph--bracket {
-        color: rgba(18, 18, 18, 0.055);
-        font-weight: 300;
+    .wf-rect {
+        border: 1.5px solid rgba(18, 18, 18, 0.06);
+        border-radius: 6px;
     }
 
-    .code-glyph--tag {
-        color: rgba(18, 18, 18, 0.04);
-        font-weight: 400;
+    .wf-rect--strong {
+        border-color: rgba(18, 18, 18, 0.09);
+        border-radius: 10px;
     }
 
-    .code-glyph--dot {
-        position: absolute;
-        width: 4px;
-        height: 4px;
+    .wf-circle {
+        border: 1.5px solid rgba(18, 18, 18, 0.05);
         border-radius: 50%;
-        background: rgba(18, 18, 18, 0.04);
-        pointer-events: none;
     }
 
-    .code-glyph--line {
-        position: absolute;
-        height: 1px;
-        background: rgba(18, 18, 18, 0.025);
-        pointer-events: none;
+    .wf-line {
+        height: 1.5px;
+        background: rgba(18, 18, 18, 0.04);
         transform-origin: left;
+    }
+
+    .wf-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(18, 18, 18, 0.06);
+    }
+
+    .wf-bar {
+        height: 3px;
+        border-radius: 2px;
+        background: rgba(18, 18, 18, 0.04);
+    }
+
+    .wf-text {
+        font-family: var(--font-mono);
+        font-size: 0.5rem;
+        letter-spacing: 0.15em;
+        color: rgba(18, 18, 18, 0.05);
+        text-transform: uppercase;
+        white-space: nowrap;
     }
 
     /* ══ PINNED SHOWCASE ══ */
@@ -1112,6 +1126,8 @@
     <a href="/contactos/"
       class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block flex items-center justify-center leading-none">Contactar</a>
   </div>
+
+
 
 
 
