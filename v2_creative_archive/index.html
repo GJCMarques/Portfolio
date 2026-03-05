@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+
+  <title>Monrion | Digital Haute Couture</title>
+
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/favicon.ico" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { paper: "#EBE9E4", ink: "#121212", silver: "#8C8C8C", carbon: "#333333", "accent-muted": "#8C8A85" },
+          fontFamily: { sans: ['"Plus Jakarta Sans"', "sans-serif"], serif: ['"Cormorant Garamond"', "serif"], mono: ['"IBM Plex Mono"', "monospace"] },
+        },
+      },
+    };
+  </script>
+
+  <!-- GSAP & Lenis handled in monrion.js, but ThreeJS needed for CTA -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://esm.sh/three@0.160.0"
+      }
+    }
+  </script>
+
+  <!-- Digital Haute Couture Core Engine -->
+  <link rel="stylesheet" href="assets/css/monrion.css" />
+  <script type="module" src="assets/js/monrion.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Specific Landing Overrides */
+    .hero-bg-text {
+      font-size: clamp(12rem, 25vw, 35rem);
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(18, 18, 18, 0.03);
+      line-height: 0.75;
+      pointer-events: none;
+      user-select: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      z-index: 0;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-paper text-ink selection:bg-ink selection:text-paper overflow-x-hidden">
+
+  <!-- THE GLASS CAPSULE HEADER -->
+  <nav
+    class="fixed left-1/2 -translate-x-1/2 top-[1.5rem] z-50 w-[92%] max-w-[1200px] rounded-full flex items-center justify-between bg-paper/85 backdrop-blur-xl border border-ink/10 shadow-sm"
+    style="padding: 0.8rem 2rem;">
+    <a href="index.html" class="flex items-center gap-4 group interactive">
+      <div class="w-8 h-8 text-ink transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
+          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+        </svg>
+      </div>
+      <span
+        class="font-sans font-bold text-[16px] uppercase tracking-[0.15em] group-hover:tracking-[0.3em] transition-all duration-500">Monrion</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <a href="portfolio/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest hover:opacity-50 transition-opacity">Portfólio</a>
+      <a href="sobre/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest hover:opacity-50 transition-opacity">Sobre
+        Nós</a>
+      <a href="servicos/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest hover:opacity-50 transition-opacity">Serviços</a>
+    </div>
+
+    <div class="hidden md:block">
+      <a href="contactos/index.html"
+        class="magnetic inline-block font-sans font-bold text-[10px] uppercase tracking-widest bg-ink text-paper px-6 py-2.5 rounded-full hover:bg-transparent hover:text-ink border border-ink transition-colors cursor-none">Contactar</a>
+    </div>
+  </nav>
+
+  <!-- ==============================================
+       1. HERO SECTION (Digital Haute Couture)
+       ============================================== -->
+  <main
+    class="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 overflow-hidden border-b border-ink/10">
+    <div class="hero-bg-text font-serif italic kerning-tight block overflow-hidden"><span
+        class="reveal-text-word">Ether</span></div>
+
+    <div class="relative z-10 w-full pt-12 md:pt-0 mx-auto max-w-[1600px]">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <!-- Main Title -->
+        <div class="lg:col-span-8 stagger-title">
+          <div class="flex items-center gap-4 mb-8">
+            <span class="h-px w-10 bg-ink"></span>
+            <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent-muted">Digital Alta-Costura</span>
+          </div>
+
+          <h1 class="font-serif italic text-6xl md:text-8xl lg:text-[9rem] leading-[0.85] kerning-tight">
+            <span class="reveal-text-line block"><span class="reveal-text-word">Refining the</span></span><br>
+            <span class="reveal-text-line block"><span class="reveal-text-word not-italic pl-[0.3em]">Digital
+                Ether.</span></span>
+          </h1>
+        </div>
+
+        <!-- Meta info -->
+        <div class="lg:col-span-4 lg:text-right flex flex-col items-start lg:items-end gap-6 pb-2 reveal-on-scroll">
+          <p
+            class="font-mono text-[10px] uppercase tracking-widest text-accent-muted leading-relaxed max-w-[250px] text-left lg:text-right">
+            ESTABLISHED 2024<br>
+            DESIGN SUSTENTÁVEL<br>
+            LOC: 41.1579° N, 8.6291° W
+          </p>
+          <div class="w-full h-px bg-ink/10 my-2 max-w-[250px]"></div>
+          <p class="max-w-xs text-sm font-light leading-[1.8] opacity-75 text-left lg:text-right">
+            Crafting mathematically precise digital experiences through institutional elegance and fluid, purposeful
+            motion. We operate at the intersection of architecture and interface.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==============================================
+       2. REFINED CATALOGUE (Soft Brutalism Grid)
+       ============================================== -->
+  <section class="px-6 md:px-12 lg:px-24 py-32 bg-paper">
+    <div class="max-w-[1600px] mx-auto">
+
+      <div
+        class="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-ink/10 pb-8 reveal-on-scroll">
+        <div>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-accent-muted block mb-2">Catalogue
+            Raissoné</span>
+          <h2 class="font-serif italic text-5xl md:text-6xl kerning-tight font-medium">Selected Works</h2>
+        </div>
+        <div class="hidden md:block">
+          <a href="portfolio/index.html"
+            class="magnetic inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest border border-ink px-6 py-3 hover:bg-ink hover:text-paper transition-colors">
+            View Complete Archive <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-y-24 gap-x-0 md:gap-x-12">
+
+        <!-- P1: Large Asymmetrical -->
+        <a href="portfolio/index.html" class="col-span-1 md:col-span-8 group project-card block interactive">
+          <div class="aspect-[16/10] bg-ink/5 overflow-hidden border border-ink/5">
+            <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2070&auto=format&fit=crop"
+              alt="Cristal Capital" class="w-full h-full object-cover">
+          </div>
+          <div
+            class="mt-6 flex flex-col md:flex-row justify-between md:items-baseline border-b border-ink/5 pb-4 gap-2">
+            <h3 class="font-serif italic text-4xl">01. Cristal Capital</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-accent-muted">Finanças / Web App</span>
+          </div>
+        </a>
+
+        <!-- P2: Vertical Narrow -->
+        <a href="portfolio/index.html" class="col-span-1 md:col-span-4 md:mt-48 group project-card block interactive">
+          <div class="aspect-[3/4] bg-ink/5 overflow-hidden border border-ink/5">
+            <img src="assets/p_img_2.png" alt="Electro 2000" class="w-full h-full object-cover">
+          </div>
+          <div class="mt-6 border-b border-ink/5 pb-4">
+            <h3 class="font-serif italic text-3xl">02. Electro 2000 v2</h3>
+            <span class="inline-block mt-2 font-mono text-[10px] uppercase tracking-widest text-accent-muted">Artificial
+              Intelligence</span>
+          </div>
+        </a>
+
+        <!-- P3: Offset Center -->
+        <a href="portfolio/index.html"
+          class="col-span-1 md:col-start-3 md:col-span-6 group project-card block interactive">
+          <div class="aspect-square bg-ink/5 overflow-hidden border border-ink/5">
+            <img src="assets/p_img_1.png" alt="Cristal Terminal" class="w-full h-full object-cover">
+          </div>
+          <div class="mt-6 border-l pl-6 border-ink/20">
+            <h3 class="font-serif italic text-3xl mb-1">03. Cristal Terminal</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-accent-muted">WASM / High
+              Performance</span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="mt-20 flex justify-center md:hidden reveal-on-scroll">
+        <a href="portfolio/index.html"
+          class="font-mono text-[10px] uppercase tracking-widest border border-ink px-8 py-4 w-full text-center">
+          View Complete Archive
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==============================================
+       3. INTERACTIVE CTA (THE GLOBE)
+       ============================================== -->
+  <section id="contacto"
+    class="relative min-h-[100dvh] w-full overflow-hidden flex items-center justify-center bg-[#ddd9d2]">
+
+    <!-- Three.js Shader Canvas -->
+    <div id="cta-canvas-container" class="absolute inset-0 z-0"></div>
+
+    <!-- Gradient overlays for depth -->
+    <div class="absolute inset-0 z-10 opacity-20 bg-gradient-to-b from-[#ddd9d2] via-transparent to-[#ddd9d2]"></div>
+    <div class="absolute inset-0 z-10 opacity-15 bg-gradient-to-r from-[#ddd9d280] via-transparent to-[#ddd9d280]">
+    </div>
+
+    <!-- Ambient light orbs -->
+    <div class="absolute inset-0 pointer-events-none z-10">
+      <div class="absolute top-1/4 left-1/3 w-40 h-40 bg-carbon/[0.04] rounded-full blur-3xl animate-pulse"
+        style="animation-duration: 4s"></div>
+      <div class="absolute bottom-1/3 right-1/4 w-32 h-32 bg-ink/[0.03] rounded-full blur-2xl animate-pulse"
+        style="animation-duration: 3s; animation-delay: 1s"></div>
+    </div>
+
+    <!-- CTA Content -->
+    <div class="relative z-20 text-center px-6 md:px-12 reveal-on-scroll" style="max-width: clamp(320px, 60vw, 800px)">
+      <span class="font-mono uppercase text-accent-muted tracking-[0.25em] block text-[10px] mb-8">Vamos
+        Conversar</span>
+
+      <h2 class="flex flex-col items-center">
+        <span class="font-sans font-bold tracking-tighter text-ink leading-[0.9]"
+          style="font-size: clamp(2.2rem, 5vw, 6rem)">Pronto para criar</span>
+        <span class="font-serif italic font-light text-carbon kerning-tight leading-[0.9]"
+          style="font-size: clamp(2.8rem, 6vw, 7.5rem)">algo extraordinário?</span>
+      </h2>
+
+      <div class="mt-8 md:mt-12">
+        <p class="text-ink/60 font-light leading-[1.8] tracking-wide mx-auto"
+          style="font-size: clamp(0.85rem, 1vw, 1.125rem); max-width: 520px">
+          Cada projeto começa com uma conversa. Conte-nos a sua visão e juntos cultivamos a solução digital que a sua
+          marca merece.
+        </p>
+      </div>
+
+      <div class="flex items-center justify-center gap-6 mt-12 flex-col sm:flex-row">
+        <!-- Primary -->
+        <a href="contactos/index.html"
+          class="magnetic group relative rounded-full bg-ink text-paper font-sans font-bold uppercase transition-transform px-10 py-4 text-xs tracking-widest interactive">
+          <span>Contactar</span>
+        </a>
+        <!-- Secondary -->
+        <a href="mailto:geral@monrion.com"
+          class="interactive group flex items-center gap-3 font-mono text-xs tracking-widest text-ink/60 hover:text-ink transition-colors pb-1 border-b border-transparent hover:border-ink">
+          <span>geral@monrion.com</span>
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       4. MASSIVE TYPOGRAPHY FOOTER
+       ============================================== -->
+  <footer
+    class="bg-ink rounded-t-[4rem] pt-24 pb-8 mt-[-3rem] relative z-30 text-paper overflow-hidden px-6 md:px-12 lg:px-24">
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.24]"
+      style="background-image: radial-gradient(circle, rgba(235, 233, 228, 0.5) 1px, transparent 1px); background-size: 24px 24px;">
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 flex items-center justify-center text-paper">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
+              <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+              <circle cx="20" cy="19" r="1.5" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="font-sans font-extrabold text-[24px] tracking-widest uppercase">M O N R I O N</span>
+        </div>
+        <p class="text-paper/50 text-sm leading-relaxed max-w-xs font-light">
+          Design orgânico para um futuro digital sustentável. Sediados no Porto, a cultivar para o mundo.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-paper/40 mb-6 border-b border-paper/10 pb-2">
+          Páginas</h4>
+        <ul class="space-y-3 font-mono text-xs uppercase tracking-widest">
+          <li><a href="index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Início</a></li>
+          <li><a href="portfolio/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Portfólio</a></li>
+          <li><a href="sobre/index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Sobre
+              Nós</a></li>
+          <li><a href="servicos/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Serviços</a></li>
+          <li><a href="contactos/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Contactos</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-paper/40 mb-6 border-b border-paper/10 pb-2">
+          Contacto</h4>
+        <ul class="space-y-4 font-mono text-xs uppercase tracking-widest">
+          <li class="flex items-center gap-3">
+            <i data-lucide="mail" class="w-4 h-4 text-paper/40"></i>
+            <a href="mailto:geral@monrion.com"
+              class="interactive text-paper/70 hover:text-paper transition-colors">geral@monrion.com</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="phone" class="w-4 h-4 text-paper/40"></i>
+            <a href="tel:+351000000000" class="interactive text-paper/70 hover:text-paper transition-colors">+351 000
+              000 000</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="instagram" class="w-4 h-4 text-paper/40"></i>
+            <a href="#" class="interactive text-paper/70 hover:text-paper transition-colors">@monrion</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-paper/40 mb-6 border-b border-paper/10 pb-2">
+          Localização</h4>
+        <div class="space-y-4 font-mono text-xs uppercase tracking-widest text-paper/70">
+          <div class="flex items-start gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-paper/40 mt-0.5"></i>
+            <p>Porto, Portugal</p>
+          </div>
+          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-paper/40"></i>
+            <div class="flex items-center gap-2">
+              <span id="footer-gmt-time">--:--</span><span class="text-paper/40">GMT+0</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-4">
+            <div class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
+            <span class="text-paper/40">Disponível</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+      <p class="text-paper/30 font-mono text-[10px] uppercase tracking-widest">© 2026 Monrion. Todos os direitos
+        reservados.</p>
+      <div class="flex items-center gap-6">
+        <a href="#"
+          class="interactive text-paper/30 hover:text-paper/60 transition-colors font-mono text-[10px] uppercase tracking-widest">Termos
+          e Condições</a>
+        <a href="#"
+          class="interactive text-paper/30 hover:text-paper/60 transition-colors font-mono text-[10px] uppercase tracking-widest">Política
+          de Privacidade</a>
+      </div>
+    </div>
+
+    <!-- Massive Text -->
+    <div
+      class="absolute bottom-[-5%] left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden z-0">
+      <span
+        class="font-sans font-extrabold text-[20vw] leading-none whitespace-nowrap tracking-tighter mix-blend-overlay">MONRION</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    lucide.createIcons();
+    // Simple GMT Clock
+    setInterval(() => {
+      const el = document.getElementById("footer-gmt-time");
+      if (el) {
+        const now = new Date();
+        el.textContent = String(now.getUTCHours()).padStart(2, "0") + ":" + String(now.getUTCMinutes()).padStart(2, "0");
+      }
+    }, 1000);
+  </script>
+
+  <!-- Old Three.js logic mapped strictly to CTA Canvas -->
+  <script type="module">
+    import * as THREE from 'three';
+    function initCTA() {
+      const container = document.getElementById('cta-canvas-container');
+      if (!container) return;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+
+      const geometry = new THREE.SphereGeometry(15, 64, 64);
+      const material = new THREE.MeshPhysicalMaterial({
+        color: 0x8C8A85,
+        metalness: 0.1,
+        roughness: 0.8,
+        transmission: 0.2,
+        transparent: true,
+        wireframe: true,
+        wireframeLinewidth: 1
+      });
+      const sphere = new THREE.Mesh(geometry, material);
+      scene.add(sphere);
+
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(5, 5, 5);
+      scene.add(light);
+
+      camera.position.z = 30;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        sphere.rotation.x += 0.001;
+        sphere.rotation.y += 0.002;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+    }
+    initCTA();
+  </script>
+</body>
+
+</html>

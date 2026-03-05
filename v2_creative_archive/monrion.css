@@ -1,0 +1,220 @@
+/**
+ * Monrion Digital Haute Couture
+ * Core Stylesheet
+ * 
+ * Defines global variables, structural resets, typography, Lenis scrolling rules, 
+ * the magnetic cursor, and the film grain overlay.
+ */
+
+:root {
+    /* Core Colors */
+    --monrion-paper: #EBE9E4;
+    /* Off-white / Bone */
+    --monrion-ink: #121212;
+    /* Deep Black */
+    --monrion-accent-muted: #8C8A85;
+    /* Technical Gray */
+
+    /* Typography */
+    --font-serif: "Cormorant Garamond", serif;
+    --font-sans: "Plus Jakarta Sans", sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+
+    /* Easing */
+    --ease-haute: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background-color: var(--monrion-paper);
+    color: var(--monrion-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent horizontal scroll from magnetic offsets */
+    overflow-x: hidden;
+    scroll-behavior: initial;
+    /* Managed by Lenis */
+    cursor: none;
+    /* Replaced by custom cursor */
+}
+
+/* Make links and buttons inherit cursor: none to avoid flickering */
+a,
+button,
+input,
+textarea,
+select {
+    cursor: none !important;
+}
+
+/* ==========================================================================
+   Lenis Smooth Scrolling
+   ========================================================================== */
+.lenis.lenis-smooth {
+    height: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   Magnetic Custom Cursor
+   ========================================================================== */
+#monrion-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background-color: var(--monrion-paper);
+    /* Visible against dark thanks to difference */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    /* Centered on JS coords */
+    will-change: transform, width, height;
+    /* The smoothing is handled by GSAP quickTo in JS, but we transition state changes */
+    transition: width 0.3s var(--ease-haute), height 0.3s var(--ease-haute), background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0px;
+    /* Hidden default */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: transparent;
+}
+
+/* Default state when over images (Wait for JS to add classes) */
+#monrion-cursor.state-hover {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid var(--monrion-paper);
+}
+
+/* State text when over portfolio items */
+#monrion-cursor.state-view {
+    width: 80px;
+    height: 80px;
+    background-color: var(--monrion-paper);
+    color: var(--monrion-ink);
+    font-size: 10px;
+    mix-blend-mode: normal;
+    /* Turn off difference so text is readable */
+}
+
+/* Disable custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+
+    html,
+    body,
+    a,
+    button {
+        cursor: auto !important;
+    }
+
+    #monrion-cursor {
+        display: none !important;
+    }
+}
+
+/* ==========================================================================
+   Film Grain Overlay (Global Texture)
+   ========================================================================== */
+.film-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.045;
+    /* Extremely subtle */
+    mix-blend-mode: difference;
+}
+
+/* ==========================================================================
+   Typography & Layout Utilities (Digital Haute Couture)
+   ========================================================================== */
+.font-display {
+    font-family: var(--font-sans);
+}
+
+.font-serif {
+    font-family: var(--font-serif);
+}
+
+.font-mono {
+    font-family: var(--font-mono);
+}
+
+/* Technical borders (Soft Brutalism) */
+.border-ink {
+    border-color: rgba(18, 18, 18, 0.15) !important;
+}
+
+.border-paper {
+    border-color: rgba(235, 233, 228, 0.15) !important;
+}
+
+/* Tight Letter Spacing for huge serif titles */
+.kerning-tight {
+    letter-spacing: -0.04em;
+}
+
+/* GSAP Reveal Utilities */
+.reveal-text-line {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.reveal-text-word {
+    display: inline-block;
+    transform: translateY(110%);
+    will-change: transform;
+}
+
+/* ==========================================================================
+   Image Parallax & Distortions
+   ========================================================================== */
+.project-card {
+    overflow: hidden;
+    position: relative;
+}
+
+.project-card img {
+    transform: translateY(-8%) scale(1.1);
+    /* Starts slightly offset for parallax */
+    will-change: transform;
+    filter: grayscale(100%);
+    transition: filter 0.8s var(--ease-haute);
+}
+
+.project-card:hover img {
+    filter: grayscale(0%);
+}
+
+/* Note: SVG Liquid distortion filter is applied via inline SVG + CSS in standard files */

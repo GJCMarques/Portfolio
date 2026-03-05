@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+
+  <title>Monrion | Filosofia & Arsenal</title>
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="../assets/favicon.ico" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { paper: "#EBE9E4", ink: "#121212", silver: "#8C8C8C", carbon: "#333333", "accent-muted": "#8C8A85" },
+          fontFamily: { sans: ['"Plus Jakarta Sans"', "sans-serif"], serif: ['"Cormorant Garamond"', "serif"], mono: ['"IBM Plex Mono"', "monospace"] },
+        },
+      },
+    };
+  </script>
+
+  <!-- Digital Haute Couture Core Engine -->
+  <link rel="stylesheet" href="../assets/css/monrion.css" />
+  <script type="module" src="../assets/js/monrion.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Premium Technical Matrix Grid */
+    .tech-matrix {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid rgba(18, 18, 18, 0.1);
+      border-left: 1px solid rgba(18, 18, 18, 0.1);
+    }
+
+    @media (min-width: 1024px) {
+      .tech-matrix {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .tech-cell {
+      border-right: 1px solid rgba(18, 18, 18, 0.1);
+      border-bottom: 1px solid rgba(18, 18, 18, 0.1);
+      padding: 3rem 2rem;
+      transition: background-color 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 250px;
+    }
+
+    .tech-cell:hover {
+      background-color: rgba(18, 18, 18, 0.02);
+    }
+
+    .grid-lines {
+      background-image:
+        linear-gradient(rgba(18, 18, 18, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 18, 18, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-paper text-ink selection:bg-ink selection:text-paper overflow-x-hidden">
+
+  <!-- THE GLASS CAPSULE HEADER -->
+  <nav
+    class="fixed left-1/2 -translate-x-1/2 top-[1.5rem] z-50 w-[92%] max-w-[1200px] rounded-full flex items-center justify-between bg-paper/85 backdrop-blur-xl border border-ink/10 shadow-sm"
+    style="padding: 0.8rem 2rem;">
+    <a href="../index.html" class="flex items-center gap-4 group interactive">
+      <div class="w-8 h-8 text-ink transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
+          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+        </svg>
+      </div>
+      <span
+        class="font-sans font-bold text-[16px] uppercase tracking-[0.15em] group-hover:tracking-[0.3em] transition-all duration-500">Monrion</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <a href="../portfolio/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest hover:opacity-50 transition-opacity">Portfólio</a>
+      <a href="../sobre/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest opacity-30 hover:opacity-100 transition-opacity">Sobre
+        Nós</a>
+      <a href="../servicos/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest hover:opacity-50 transition-opacity">Serviços</a>
+    </div>
+
+    <div class="hidden md:block">
+      <a href="../contactos/index.html"
+        class="magnetic inline-block font-sans font-bold text-[10px] uppercase tracking-widest bg-ink text-paper px-6 py-2.5 rounded-full hover:bg-transparent hover:text-ink border border-ink transition-colors cursor-none">Contactar</a>
+    </div>
+  </nav>
+
+  <!-- ==============================================
+       1. HERO SECTION
+       ============================================== -->
+  
+  <main class="relative pt-48 pb-24 px-6 md:px-12 lg:px-24 border-b border-ink/10 grid-lines overflow-hidden">
+    <!-- Blueprint decorative elements -->
+    <div class="absolute right-0 top-32 w-1/3 h-[120%] border-l border-ink/10 pointer-events-none hidden lg:block opacity-30 transform -skew-x-[15deg]"></div>
+    
+    <div class="relative z-10 w-full mx-auto max-w-[1600px]">
+      <div class="flex items-center gap-4 mb-16 reveal-on-scroll">
+        <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-ink/40">03 — Filosofia</span>
+        <span class="flex-1 h-[1px] bg-ink/10"></span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end relative">
+        <div class="lg:col-span-8 stagger-title relative z-20">
+          <h1 class="font-serif italic text-[clamp(4rem,9vw,11rem)] leading-[0.8] kerning-tight text-ink tracking-tighter">
+            <span class="reveal-text-line block"><span class="reveal-text-word">Precisão</span></span>
+            <span class="reveal-text-line block"><span class="reveal-text-word not-italic pl-[0.2em]">Absoluta.</span></span>
+          </h1>
+        </div>
+
+        <div class="lg:col-span-4 lg:text-right pb-4 reveal-on-scroll relative z-20">
+          <p class="font-mono text-[9px] uppercase tracking-[0.2em] text-ink/40 leading-relaxed text-left lg:text-right border-l lg:border-l-0 lg:border-r border-ink/20 pl-4 lg:pl-0 lg:pr-4">
+            CRAFTED IN PORTO<br>
+            NO TEMPLATES<br>
+            PURE CODE
+          </p>
+          <div class="w-full h-[1px] bg-ink/10 my-6 hidden lg:block"></div>
+          <p class="max-w-xs text-[0.85rem] font-sans text-ink/65 leading-[1.8] text-left lg:text-right ml-0 lg:ml-auto">
+            Acreditamos que a lentidão e a saturação visual destroem o valor percecionado. Construímos aspetos e infraestruturas digitais desenhadas sob uma métrica rigorosa: perfeição em cada pixel.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- ==============================================
+       2. MANIFESTO
+       ============================================== -->
+  <section class="px-6 md:px-12 lg:px-24 py-32 bg-[#e4e2dc] text-ink border-b border-ink/40 relative overflow-hidden">
+    <!-- Dark void background with subtle texture -->
+    <div class="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2564&auto=format&fit=crop"
+        alt="Noir Texture" class="w-full h-full object-cover grayscale" />
+    </div>
+
+    <div class="max-w-[1600px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Left side sticky title -->
+      <div class="lg:col-span-4 reveal-on-scroll">
+        <div class="sticky top-32">
+          <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-ink/40 block mb-6">Manifesto</span>
+          <h2 class="font-sans font-bold text-4xl leading-tight">A arte de remover<br>o supérfluo.</h2>
+        </div>
+      </div>
+
+      <!-- Right side typography -->
+      <div class="lg:col-span-8 space-y-16 reveal-on-scroll">
+        <p class="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-[1.1] kerning-tight text-ink">
+          Design não é decoração.<br>É a intenção materializada.
+        </p>
+        <p class="font-sans font-light text-ink/60 leading-relaxed text-xl max-w-2xl">
+          Recusamos o uso de construtores visuais arrastáveis (drag-and-drop) ou templates inflados. Acreditamos que a
+          identidade digital de uma marca premium deve refletir a mesma exclusividade do seu produto físico.
+        </p>
+        <p class="font-sans font-light text-ink/60 leading-relaxed text-xl max-w-2xl">
+          Escrevemos cada linha de código manualmente. Cada transição é coreografada. O resultado é um produto que
+          domina os motores de busca pela sua velocidade extrema, enquanto submerge o visitante numa aura de
+          indiscutível valor percecionado.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       3. PREMIUM TECHNICAL MATRIX (Arsenal)
+       ============================================== -->
+  <section class="px-6 md:px-12 lg:px-24 py-32 bg-paper">
+    <div class="max-w-[1600px] mx-auto">
+
+      <div
+        class="flex flex-col md:flex-row justify-between items-end mb-24 pb-8 reveal-on-scroll border-b border-ink/10">
+        <div>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-accent-muted block mb-2">Arsenal
+            Técnico</span>
+          <h2 class="font-serif italic text-5xl md:text-6xl kerning-tight font-medium">As Ferramentas que Dominamos</h2>
+        </div>
+        <p class="max-w-xs text-sm font-light text-ink/60 mt-6 md:mt-0">
+          Não nos limitamos ao padrão da indústria. Integramos ferramentas modernas desenvolvidas para lidar com
+          computação avançada no navegador e infraestrutura Edge.
+        </p>
+      </div>
+
+      <!-- Technical Grid -->
+      <div class="tech-matrix reveal-on-scroll">
+
+        <!-- Cell 1 -->
+        <div class="tech-cell interactive group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="font-mono text-[10px] text-accent-muted">01. ENV</span>
+            <span class="font-mono text-[9px] uppercase tracking-widest bg-ink/5 px-2 py-1">Environment</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-2xl tracking-tight mb-2 group-hover:text-ink transition-colors">
+              Visual Studio Code</h3>
+            <p class="font-mono text-[10px] uppercase text-accent-muted tracking-wide">Configuração Estrita / ESLint /
+              Prettier</p>
+          </div>
+        </div>
+
+        <!-- Cell 2 -->
+        <div class="tech-cell interactive group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="font-mono text-[10px] text-accent-muted">02. FRM</span>
+            <span class="font-mono text-[9px] uppercase tracking-widest bg-ink/5 px-2 py-1">Framework</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-2xl tracking-tight mb-2 group-hover:text-ink transition-colors">
+              React & Next.js</h3>
+            <p class="font-mono text-[10px] uppercase text-accent-muted tracking-wide">App Router / Server Components
+            </p>
+          </div>
+        </div>
+
+        <!-- Cell 3 -->
+        <div class="tech-cell interactive group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="font-mono text-[10px] text-accent-muted">03. UI</span>
+            <span class="font-mono text-[9px] uppercase tracking-widest bg-ink/5 px-2 py-1">Design System</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-2xl tracking-tight mb-2 group-hover:text-ink transition-colors">
+              Figma Pro</h3>
+            <p class="font-mono text-[10px] uppercase text-accent-muted tracking-wide">Auto-layout / Variables /
+              Prototyping</p>
+          </div>
+        </div>
+
+        <!-- Cell 4 -->
+        <div class="tech-cell interactive group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="font-mono text-[10px] text-accent-muted">04. ANI</span>
+            <span class="font-mono text-[9px] uppercase tracking-widest bg-ink/5 px-2 py-1">Cinematics</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-2xl tracking-tight mb-2 group-hover:text-ink transition-colors">
+              GSAP Core</h3>
+            <p class="font-mono text-[10px] uppercase text-accent-muted tracking-wide">ScrollTrigger / SplitText /
+              QuickTo</p>
+          </div>
+        </div>
+
+        <!-- Cell 5 -->
+        <div class="tech-cell interactive group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="font-mono text-[10px] text-accent-muted">05. CSS</span>
+            <span class="font-mono text-[9px] uppercase tracking-widest bg-ink/5 px-2 py-1">Styling</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-2xl tracking-tight mb-2 group-hover:text-ink transition-colors">
+              Tailwind v3</h3>
+            <p class="font-mono text-[10px] uppercase text-accent-muted tracking-wide">Utility-First / JIT Compilation
+            </p>
+          </div>
+        </div>
+
+        <!-- Cell 6 -->
+        <div class="tech-cell interactive group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="font-mono text-[10px] text-accent-muted">06. 3D</span>
+            <span class="font-mono text-[9px] uppercase tracking-widest bg-ink/5 px-2 py-1">WebGL</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-2xl tracking-tight mb-2 group-hover:text-ink transition-colors">
+              Three.js</h3>
+            <p class="font-mono text-[10px] uppercase text-accent-muted tracking-wide">Canvas / GLSL Shaders / Geometry
+            </p>
+          </div>
+        </div>
+
+        <!-- Cell 7 -->
+        <div class="tech-cell interactive group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="font-mono text-[10px] text-accent-muted">07. BD</span>
+            <span class="font-mono text-[9px] uppercase tracking-widest bg-ink/5 px-2 py-1">Database</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-2xl tracking-tight mb-2 group-hover:text-ink transition-colors">
+              Supabase / Prisma</h3>
+            <p class="font-mono text-[10px] uppercase text-accent-muted tracking-wide">PostgreSQL / Edge Functions</p>
+          </div>
+        </div>
+
+        <!-- Cell 8 -->
+        <div class="tech-cell interactive group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="font-mono text-[10px] text-accent-muted">08. CLD</span>
+            <span class="font-mono text-[9px] uppercase tracking-widest bg-ink/5 px-2 py-1">Deployment</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-2xl tracking-tight mb-2 group-hover:text-ink transition-colors">
+              Vercel Networks</h3>
+            <p class="font-mono text-[10px] uppercase text-accent-muted tracking-wide">Edge Distribution / Serverless
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================================
+       4. RETAINED CTA SECTION (Minimal Text)
+       ============================================== -->
+  <section class="relative bg-paper text-ink overflow-hidden border-t border-ink/10"
+    style="padding: clamp(7rem, 13vh, 13rem) clamp(1.5rem, 5vw, 6rem);">
+
+    <!-- Ghost word -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
+      aria-hidden="true">
+      <span class="font-serif italic text-ink/5"
+        style="font-size: clamp(18vw, 26vw, 36vw); white-space: nowrap; line-height: 0.85;">Init</span>
+    </div>
+
+    <div class="relative z-10 text-center reveal-on-scroll">
+      <div class="flex flex-col items-center gap-2 mb-8">
+        <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent-muted block">04 / Próximo Passo</span>
+      </div>
+
+      <h2 class="font-serif italic text-ink mb-6"
+        style="font-size: clamp(3.5rem, 8vw, 10rem); line-height: 0.88; letter-spacing: -0.02em;">
+        <span class="block transform transition-transform duration-700">Vamos criar <span class="not-italic">algo
+            notável.</span></span>
+      </h2>
+
+      <p class="font-mono text-[10px] uppercase tracking-widest text-silver mb-12 mx-auto leading-relaxed max-w-sm">
+        Uma conversa de 15 minutos é suficiente para perceber se somos a escolha certa.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+        <a href="../contactos/index.html"
+          class="magnetic interactive inline-flex items-center justify-center gap-3 font-mono bg-ink text-paper px-10 py-4"
+          style="font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;">
+          <span>Iniciar projecto</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+        <a href="mailto:geral@monrion.com"
+          class="interactive inline-flex items-center justify-center gap-3 font-mono border border-ink/20 text-ink hover:bg-ink hover:text-paper hover:border-ink transition-colors px-10 py-4"
+          style="font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;">
+          <span>geral@monrion.com</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       5. MASSIVE TYPOGRAPHY FOOTER
+       ============================================== -->
+  <footer class="bg-ink rounded-t-[4rem] pt-24 pb-8 relative z-30 text-paper overflow-hidden px-6 md:px-12 lg:px-24">
+    <div class="absolute inset-0 pointer-events-none opacity-[0.24]"
+      style="background-image: radial-gradient(circle, rgba(235, 233, 228, 0.5) 1px, transparent 1px); background-size: 24px 24px;">
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 flex items-center justify-center text-paper">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
+              <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+              <circle cx="20" cy="19" r="1.5" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="font-sans font-extrabold text-[24px] tracking-widest uppercase">M O N R I O N</span>
+        </div>
+        <p class="text-paper/50 text-sm leading-relaxed max-w-xs font-light">
+          Design orgânico para um futuro digital sustentável. Sediados no Porto, a cultivar para o mundo.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-ink/40 mb-6 border-b border-paper/10 pb-2">
+          Páginas</h4>
+        <ul class="space-y-3 font-mono text-xs uppercase tracking-widest">
+          <li><a href="../index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Início</a>
+          </li>
+          <li><a href="../portfolio/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Portfólio</a></li>
+          <li><a href="index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Sobre Nós</a>
+          </li>
+          <li><a href="../servicos/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Serviços</a></li>
+          <li><a href="../contactos/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Contactos</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-ink/40 mb-6 border-b border-paper/10 pb-2">
+          Contacto</h4>
+        <ul class="space-y-4 font-mono text-xs uppercase tracking-widest">
+          <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4 text-ink/40"></i><a
+              href="mailto:geral@monrion.com"
+              class="interactive text-paper/70 hover:text-paper transition-colors">geral@monrion.com</a></li>
+          <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4 text-ink/40"></i><a
+              href="tel:+351000000000" class="interactive text-paper/70 hover:text-paper transition-colors">+351 000 000
+              000</a></li>
+          <li class="flex items-center gap-3"><i data-lucide="instagram" class="w-4 h-4 text-ink/40"></i><a href="#"
+              class="interactive text-paper/70 hover:text-paper transition-colors">@monrion</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-ink/40 mb-6 border-b border-paper/10 pb-2">
+          Localização</h4>
+        <div class="space-y-4 font-mono text-xs uppercase tracking-widest text-paper/70">
+          <div class="flex items-start gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-ink/40 mt-0.5"></i>
+            <p>Porto, Portugal</p>
+          </div>
+          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-ink/40"></i>
+            <div class="flex items-center gap-2"><span id="footer-gmt-time">--:--</span><span
+                class="text-ink/40">GMT+0</span></div>
+          </div>
+          <div class="flex items-center gap-3 mt-4">
+            <div class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div><span
+              class="text-ink/40">Disponível</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+      <p class="text-paper/30 font-mono text-[10px] uppercase tracking-widest">© 2026 Monrion. Todos os direitos
+        reservados.</p>
+      <div class="flex items-center gap-6">
+        <a href="#"
+          class="interactive text-paper/30 hover:text-ink/60 transition-colors font-mono text-[10px] uppercase tracking-widest">Termos
+          e Condições</a>
+        <a href="#"
+          class="interactive text-paper/30 hover:text-ink/60 transition-colors font-mono text-[10px] uppercase tracking-widest">Política
+          de Privacidade</a>
+      </div>
+    </div>
+
+    <!-- Massive Text -->
+    <div
+      class="absolute bottom-[-5%] left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden z-0">
+      <span
+        class="font-sans font-extrabold text-[20vw] leading-none whitespace-nowrap tracking-tighter mix-blend-overlay">MONRION</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    lucide.createIcons();
+    setInterval(() => {
+      const el = document.getElementById("footer-gmt-time");
+      if (el) {
+        const now = new Date();
+        el.textContent = String(now.getUTCHours()).padStart(2, "0") + ":" + String(now.getUTCMinutes()).padStart(2, "0");
+      }
+    }, 1000);
+  </script>
+</body>
+
+</html>

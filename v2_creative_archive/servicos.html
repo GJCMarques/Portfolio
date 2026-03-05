@@ -1,0 +1,2516 @@
+﻿<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+
+  <title>Monrion | Serviços</title>
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="../assets/favicon.ico" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { paper: "#EBE9E4", ink: "#121212", silver: "#8C8C8C", carbon: "#333333", "accent-muted": "#8C8A85" },
+          fontFamily: { sans: ['"Plus Jakarta Sans"', "sans-serif"], serif: ['"Cormorant Garamond"', "serif"], mono: ['"IBM Plex Mono"', "monospace"] },
+        },
+      },
+    };
+  </script>
+
+  <!-- Digital Haute Couture Core Engine -->
+  <link rel="stylesheet" href="../assets/css/monrion.css" />
+  <script type="module" src="../assets/js/monrion.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  
+</head>
+
+<body class="font-display bg-paper text-ink selection:bg-ink selection:text-paper overflow-x-hidden">
+  <!-- Noise Overlay -->
+  <div class="noise-overlay"></div>
+  <svg class="hidden">
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" stitchTiles="stitch" />
+    </filter>
+  </svg>
+
+  <!-- Navbar -->
+  <nav
+    class="fixed left-1/2 -translate-x-1/2 top-[1.5rem] z-50 w-[92%] max-w-[1200px] rounded-full flex items-center justify-between bg-paper/85 backdrop-blur-xl border border-ink/10 shadow-sm"
+    style="padding: 0.8rem 2rem;">
+    <a href="../index.html" class="flex items-center gap-4 group interactive">
+      <div class="w-8 h-8 text-ink transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
+          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+        </svg>
+      </div>
+      <span
+        class="font-sans font-bold text-[16px] uppercase tracking-[0.15em] group-hover:tracking-[0.3em] transition-all duration-500">Monrion</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <a href="../portfolio/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest opacity-30 hover:opacity-100 transition-opacity">Portfólio</a>
+      <a href="../sobre/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest hover:opacity-50 transition-opacity">Sobre
+        Nós</a>
+      <a href="../servicos/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest hover:opacity-50 transition-opacity">Serviços</a>
+    </div>
+
+    <div class="hidden md:block">
+      <a href="../contactos/index.html"
+        class="magnetic inline-block font-sans font-bold text-[10px] uppercase tracking-widest bg-ink text-paper px-6 py-2.5 rounded-full hover:bg-transparent hover:text-ink border border-ink transition-colors cursor-none">Contactar</a>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <!-- Mobile Menu -->
+  <div id="mobile-menu"
+    class="fixed inset-0 z-40 bg-paper/95 backdrop-blur-xl transform translate-y-full transition-transform duration-500 flex flex-col items-center justify-center gap-8 md:hidden">
+    <button id="close-menu-btn" class="absolute top-8 right-8 text-ink cursor-pointer">
+      <i data-lucide="x"></i>
+    </button>
+    <a href="/portfolio/" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Portfólio</a>
+    <a href="/sobre/" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Sobre Nós</a>
+    <a href="/servicos/" class="text-2xl font-medium text-ink hover:text-carbon nav-link">Serviços</a>
+    <a href="/contactos/"
+      class="btn-contact px-8 py-3 rounded-full bg-ink text-paper font-bold text-lg inline-block flex items-center justify-center leading-none">Contactar</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SERVIÇOS — CONTEÚDO PRINCIPAL
+  ═══════════════════════════════════════════════════ -->
+  <main class="relative z-10 overflow-hidden" style="background-color:#EBE9E4;">
+    <!-- ── 01. HERO ─────────────────────────────────────────── -->
+    <section id="svc-hero" class="relative min-h-screen flex flex-col justify-end overflow-hidden" style="
+          padding: clamp(7rem, 12vh, 10rem) clamp(1.5rem, 5vw, 6rem)
+            clamp(3.5rem, 6vh, 5.5rem);
+          background-color: #EBE9E4;
+          background-image:
+            radial-gradient(ellipse 75% 55% at 72% 8%,  rgba(18,18,18,0.03) 0%, transparent 65%),
+            radial-gradient(ellipse 50% 60% at 8%  88%, rgba(18,18,18,0.06)   0%, transparent 60%),
+            radial-gradient(ellipse 60% 45% at 90% 75%, rgba(18,18,18,0.03) 0%, transparent 55%);
+        ">
+      <!-- Geometric shapes loop -->
+      <canvas id="hero-canvas" aria-hidden="true"
+        style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+      <!-- Ghost text -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
+        <span class="hero-ghost" style="font-size: clamp(20vw, 28vw, 38vw)">Serviços</span>
+      </div>
+
+      <!-- Top-left technical ref -->
+      <div id="hero-ref-tl" class="absolute flex items-center gap-2.5 pointer-events-none" style="
+            top: clamp(7.5rem, 11vh, 10.5rem);
+            left: clamp(1.5rem, 5vw, 6rem);
+            opacity: 0;
+          ">
+        <div class="crosshair-mark text-ink"></div>
+        <span class="t-label">REF: MON-SRV-001 / 2026</span>
+      </div>
+
+      <!-- Top-right coordinates -->
+      <div id="hero-ref-tr" class="absolute flex items-center gap-2.5 pointer-events-none justify-end" style="
+            top: clamp(7.5rem, 11vh, 10.5rem);
+            right: clamp(1.5rem, 5vw, 6rem);
+            opacity: 0;
+          ">
+        <span class="t-label">41.15° N · 8.61° W · Porto</span>
+        <div class="crosshair-mark text-ink"></div>
+      </div>
+
+      <!-- Hero main content (bottom-aligned) -->
+      <div class="relative z-10">
+        <!-- Dividing rule + label -->
+        <div class="flex items-center gap-5 mb-10" id="hero-rule">
+          <div class="h-line flex-1" id="hero-line-l"></div>
+          <span class="t-label whitespace-nowrap">01 — CRIAÇÃO DIGITAL</span>
+          <div class="h-line flex-1" id="hero-line-r"></div>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="font-serif italic leading-[0.88] text-ink mb-10 overflow-hidden"
+          style="font-size: clamp(3.5rem, 8.5vw, 14rem)">
+          <span class="block overflow-hidden">
+            <span class="block" id="hero-w1" style="transform: translateY(110%); will-change: transform">Websites</span>
+          </span>
+          <span class="block overflow-hidden" style="padding-left: clamp(0px, 13%, 18%)">
+            <span class="block" id="hero-w2" style="transform: translateY(110%); will-change: transform">que
+              Vendem.</span>
+          </span>
+        </h1>
+
+        <!-- Bottom row: description + stats -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-16">
+          <p id="hero-desc" class="font-mono text-silver leading-[1.8] max-w-xs"
+            style="font-size: clamp(0.68rem, 0.82vw, 0.8rem); opacity: 0">
+            Design estratégico aliado a desenvolvimento<br />
+            de precisão. Cada pixel com propósito.<br />
+            Cada linha de código, com intenção.
+          </p>
+          <div class="flex items-start gap-10 md:gap-14">
+            <div id="stat-1" style="opacity: 0; transform: translateY(20px)">
+              <div class="font-mono font-light text-ink" style="
+                    font-size: clamp(1.8rem, 3.2vw, 4rem);
+                    letter-spacing: -0.03em;
+                    line-height: 1;
+                  ">
+                20+
+              </div>
+              <div class="t-label mt-1.5">Projectos</div>
+            </div>
+            <div id="stat-2" style="opacity: 0; transform: translateY(20px)">
+              <div class="font-mono font-light text-ink" style="
+                    font-size: clamp(1.8rem, 3.2vw, 4rem);
+                    letter-spacing: -0.03em;
+                    line-height: 1;
+                  ">
+                3
+              </div>
+              <div class="t-label mt-1.5">Anos Activo</div>
+            </div>
+            <div id="stat-3" style="opacity: 0; transform: translateY(20px)">
+              <div class="font-mono font-light text-ink" style="
+                    font-size: clamp(1.8rem, 3.2vw, 4rem);
+                    letter-spacing: -0.03em;
+                    line-height: 1;
+                  ">
+                100%
+              </div>
+              <div class="t-label mt-1.5">Satisfação</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scroll cue -->
+        <div class="flex items-center gap-3 mt-14" id="hero-scroll-cue" style="opacity: 0">
+          <div class="scroll-cue-line"></div>
+          <span class="t-label">Scroll</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── 03. DIGITAL ATELIER: O QUE CRIAMOS ─────────────────── -->
+    <section id="svc-list" class="relative overflow-hidden bg-paper" style="padding: 0 0 clamp(6rem, 12vh, 12rem) 0;">
+      <!-- Floating Background Elements: Living Instrument Feel -->
+      <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <!-- Vertical Measuring Guides (Animated) -->
+        <div class="absolute left-[5%] top-0 bottom-0 w-[1px] bg-ink/[0.04] hidden lg:block"></div>
+        <div class="absolute right-[5%] top-0 bottom-0 w-[1px] bg-ink/[0.04] hidden lg:block"></div>
+
+        <!-- Drifting Large Labels -->
+        <div
+          class="absolute top-[10%] -left-12 font-serif italic text-ink/[0.03] text-[20vw] leading-none select-none rotate-90 transform-gpu"
+          id="bg-drift-1">Monrion</div>
+        <div
+          class="absolute bottom-[10%] -right-12 font-serif italic text-ink/[0.03] text-[20vw] leading-none select-none -rotate-90 transform-gpu"
+          id="bg-drift-2">Atelier</div>
+
+        <!-- Floating Points and Crosses -->
+        <div class="absolute top-1/4 left-1/4 text-ink/[0.1] reveal-fade" id="bg-cross-1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+            <path d="M12 4V20M4 12H20" />
+          </svg>
+        </div>
+        <div class="absolute top-3/4 right-1/4 text-ink/[0.1] reveal-fade" id="bg-cross-2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+            <path d="M12 4V20M4 12H20" />
+          </svg>
+        </div>
+
+        <!-- Animated Scanning Lines (Laser Scan Effect) -->
+        <div class="absolute left-0 w-full h-[1px] bg-ink/[0.05] pointer-events-none" id="bg-laser-h1" style="top: 20%">
+        </div>
+        <div class="absolute left-0 w-full h-[1px] bg-ink/[0.05] pointer-events-none" id="bg-laser-h2" style="top: 80%">
+        </div>
+        <div class="absolute top-0 h-full w-[1px] bg-ink/[0.05] pointer-events-none" id="bg-laser-v1" style="left: 30%">
+        </div>
+        <div class="absolute top-0 h-full w-[1px] bg-ink/[0.05] pointer-events-none" id="bg-laser-v2" style="left: 70%">
+        </div>
+      </div>
+      </div>
+
+      <!-- Background Vertical Guide Line -->
+      <div
+        class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-ink/[0.03] -translate-x-1/2 hidden lg:block pointer-events-none">
+      </div>
+
+      <!-- Section Header: Editorial Style -->
+      <div class="px-[clamp(1.5rem,5vw,6rem)] mb-[clamp(6rem,12vh,12rem)] relative z-10">
+        <div
+          class="flex flex-col lg:flex-row lg:items-stretch justify-between gap-12 relative min-h-[clamp(16rem,30vw,38rem)]">
+
+          <!-- Left: title -->
+          <div class="relative z-10 flex flex-col justify-end">
+            <span class="font-mono text-[0.65rem] tracking-[0.4em] uppercase text-silver mb-8 block reveal-fade">Atelier
+              Monrion — Collection 01</span>
+            <h2 class="font-serif italic text-ink leading-[0.8] m-0 reveal-up"
+              style="font-size: clamp(4rem, 12vw, 15rem)">
+              L'Art de <br /> <span class="pl-[15%]">Créer.</span>
+            </h2>
+          </div>
+
+          <!-- Right: Scattered decorative area — absolutely positioned fragments -->
+          <div class="hidden lg:block absolute inset-y-0 pointer-events-none" style="left: 45%; right: 0;">
+
+            <!-- SVG Geometric background shapes -->
+            <svg class="absolute inset-0 w-full h-full opacity-[0.06]" viewBox="0 0 600 400" fill="none"
+              preserveAspectRatio="xMidYMid meet">
+              <!-- Large thin circle -->
+              <circle cx="320" cy="200" r="160" stroke="#121212" stroke-width="0.6" />
+              <!-- Smaller concentric circle -->
+              <circle cx="320" cy="200" r="90" stroke="#121212" stroke-width="0.4" stroke-dasharray="3 6" />
+              <!-- Diamond rotated square -->
+              <rect x="260" y="140" width="120" height="120" stroke="#121212" stroke-width="0.5"
+                transform="rotate(45 320 200)" />
+              <!-- Horizontal rule -->
+              <line x1="60" y1="200" x2="200" y2="200" stroke="#121212" stroke-width="0.5" />
+              <!-- Tiny crosshair top-right -->
+              <line x1="500" y1="60" x2="540" y2="60" stroke="#121212" stroke-width="0.6" />
+              <line x1="520" y1="40" x2="520" y2="80" stroke="#121212" stroke-width="0.6" />
+              <!-- Angled line bottom-left -->
+              <line x1="80" y1="320" x2="180" y2="360" stroke="#121212" stroke-width="0.4" />
+              <!-- Arc bottom-right -->
+              <path d="M 480 280 Q 560 320 540 380" stroke="#121212" stroke-width="0.5" fill="none" />
+              <!-- Dot cluster -->
+              <circle cx="150" cy="80" r="1.5" fill="#121212" />
+              <circle cx="162" cy="80" r="1.5" fill="#121212" />
+              <circle cx="174" cy="80" r="1.5" fill="#121212" />
+            </svg>
+
+            <!-- Technical Spec label — top left of right area -->
+            <div class="absolute top-16 left-[5%] opacity-20">
+              <span class="font-mono text-[0.5rem] tracking-[0.8em] uppercase block mb-1">Technical Spec</span>
+              <div class="h-[1px] w-16 bg-ink"></div>
+              <span class="font-mono text-[0.42rem] block opacity-60 mt-1">Scale: 1:1 Precise Architecture</span>
+            </div>
+
+            <!-- Spinning circle — center of right area -->
+            <div class="absolute top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2 opacity-15">
+              <div
+                class="relative w-20 h-20 border border-ink/[0.3] rounded-full flex items-center justify-center animate-spin-slow">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-full h-[0.5px] bg-ink/[0.3]"></div>
+                  <div class="w-full h-[0.5px] bg-ink/[0.3] rotate-90"></div>
+                </div>
+                <span class="font-mono text-[7px] tracking-widest bg-paper px-1.5 z-10">ATELIER</span>
+              </div>
+            </div>
+
+            <!-- Measurement arm — mid right -->
+            <div class="absolute top-[30%] right-[20%] opacity-15">
+              <div class="flex flex-col items-end gap-1">
+                <span class="font-mono text-[0.42rem] tracking-widest uppercase">MON / 2026</span>
+                <div class="h-[1px] w-12 bg-ink"></div>
+                <div class="flex items-center gap-1">
+                  <div class="w-[1px] h-4 bg-ink"></div>
+                  <span class="font-mono text-[0.38rem] opacity-60">±0.001</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- L'excellence Digitale — bottom center of right area, away from text block -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-15 whitespace-nowrap">
+              <span class="font-serif italic" style="font-size: clamp(0.9rem, 1.3vw, 1.25rem)">L'excellence
+                Digitale</span>
+            </div>
+
+            <!-- Small crosshair bottom left of right area -->
+            <div class="absolute bottom-[15%] left-[8%] opacity-15">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="0" x2="10" y2="20" stroke="#121212" stroke-width="0.7" />
+                <line x1="0" y1="10" x2="20" y2="10" stroke="#121212" stroke-width="0.7" />
+                <circle cx="10" cy="10" r="2.5" stroke="#121212" stroke-width="0.6" />
+              </svg>
+            </div>
+
+          </div>
+
+          <!-- Text block bottom right -->
+          <div class="lg:w-[260px] pb-4 reveal-fade z-10 self-end flex-shrink-0">
+            <div class="h-[1px] w-12 bg-ink mb-6"></div>
+            <p class="font-sans text-ink/70 text-sm leading-relaxed uppercase tracking-wider">
+              A alta-costura aplicada ao <br /> código e à estética digital. <br />
+              Um atelier de precisão absoluta.
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- LUXURY EDITORIAL BLOCKS -->
+      <div class="space-y-[clamp(10rem,20vh,25rem)] px-[clamp(1.5rem,5vw,6rem)] relative z-10">
+
+        <!-- BLOCK 01: ARQUITETURA DIGITAL (Asymmetrical Right-Heavy) -->
+        <div
+          class="atelier-block group flex flex-col lg:flex-row lg:items-stretch justify-end gap-16 lg:gap-32 relative">
+          <!-- Background Large Number -->
+          <span
+            class="absolute -left-12 top-0 font-serif italic text-ink/[0.02] text-[25vw] leading-none pointer-events-none hidden lg:block">01</span>
+
+          <div class="w-full lg:w-[380px] atelier-info pt-12 order-2 lg:order-1">
+            <div class="flex items-center gap-3 mb-6">
+              <span class="w-8 h-[1px] bg-silver/30"></span>
+              <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-40">Section d'Or</span>
+            </div>
+            <h3 class="font-serif italic text-ink text-6xl mb-8 leading-tight">Arquitetura <br /> Digital</h3>
+            <p class="font-sans text-ink/60 text-[0.95rem] mb-12 leading-relaxed">
+              Ecossistemas concebidos com a precisão de um projeto brutalista e a leveza de um editorial de luxo. A sua
+              marca elevada ao estado de arte.
+            </p>
+            <div class="atelier-list space-y-1">
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">I</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Websites
+                  Custom-Built</span>
+              </div>
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">II</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Venture Landing
+                  Pages</span>
+              </div>
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">III</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Editorial
+                  Portfolioss</span>
+              </div>
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">IV</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Premium Web Apps &
+                  Dashboards</span>
+              </div>
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">V</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Plataformas E-Commerce
+                  Luxe</span>
+              </div>
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">VI</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Experimental 3D
+                  Layouts</span>
+              </div>
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">VII</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Headless CMS
+                  Integration</span>
+              </div>
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">VIII</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Dynamic Product
+                  Pages</span>
+              </div>
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">IX</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">Creative UI/UX
+                  Motion</span>
+              </div>
+              <div
+                class="atelier-item py-1.5 border-b border-ink/[0.05] flex justify-between items-end group/item cursor-default">
+                <span
+                  class="font-mono text-[0.65rem] font-semibold opacity-60 tracking-widest transform transition-all group-hover/item:translate-x-1 group-hover/item:opacity-90">X</span>
+                <span class="font-sans text-[0.85rem] uppercase tracking-widest text-ink/80">SEO & Technical
+                  Scaling</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-[60%] relative order-1 lg:order-2 lg:self-stretch flex flex-col">
+            <!-- Tailoring Measurements Marks -->
+            <div
+              class="absolute -left-8 top-12 bottom-12 w-[1px] bg-ink/10 flex flex-col justify-between items-center py-2 opacity-40">
+              <span class="font-mono text-[6px] rotate-90">0cm</span>
+              <div class="w-1 h-[1px] bg-ink"></div>
+              <div class="w-1 h-[1px] bg-ink"></div>
+              <span class="font-mono text-[6px] rotate-90">45cm</span>
+              <div class="w-1 h-[1px] bg-ink"></div>
+              <div class="w-1 h-[1px] bg-ink"></div>
+              <span class="font-mono text-[6px] rotate-90">90cm</span>
+            </div>
+
+            <div
+              class="flex-1 min-h-[280px] overflow-hidden bg-ink/5 relative shadow-2xl reveal-fade border border-ink/5">
+              <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070&auto=format&fit=crop"
+                alt="Architecture" class="w-full h-full object-cover grayscale atelier-img"
+                style="position:absolute;inset:0;" />
+            </div>
+            <!-- Technical Coordinate Labels -->
+            <div
+              class="absolute -bottom-10 right-0 font-mono text-[0.55rem] tracking-widest text-silver uppercase flex gap-8">
+              <span>Ref: MOD-01_ARC</span>
+              <span>Pos: 38.7223° N / 9.1393° W</span>
+            </div>
+          </div>
+        </div>
+
+    </section>
+
+
+    <section id="svc-diff" class="relative overflow-hidden"
+      style="padding: clamp(4rem, 7vh, 7rem) clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem)">
+
+      <!-- Ghost background text -->
+      <span
+        class="absolute -right-8 top-1/2 -translate-y-1/2 font-serif italic text-ink/[0.025] leading-none pointer-events-none select-none hidden lg:block"
+        style="font-size: clamp(8rem, 18vw, 22rem); writing-mode: vertical-rl">Diferença</span>
+
+      <!-- Section label -->
+      <div class="flex items-center gap-6 mb-16 relative z-10">
+        <span class="t-label">03 — DIFERENCIAIS</span>
+        <div class="flex-1 h-[1px] bg-ink/[0.06]"></div>
+        <span class="font-mono text-[0.5rem] tracking-[0.6em] uppercase text-ink/30">Monrion Standard</span>
+      </div>
+
+      <!-- Editorial List -->
+      <div class="relative z-10">
+
+        <!-- Diff Item 01 -->
+        <div
+          class="diff-card group relative grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-24 py-14 border-t border-ink/[0.07] reveal-up">
+          <!-- Left: number + label + title -->
+          <div class="flex items-start gap-6">
+            <span class="font-serif italic text-ink/[0.08] leading-none select-none flex-shrink-0 mt-1"
+              style="font-size: clamp(3rem, 5vw, 5.5rem)">01</span>
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="w-5 h-[1px] bg-ink/30"></span>
+                <span class="font-mono text-[0.52rem] tracking-[0.4em] uppercase text-ink/40">Delivery</span>
+              </div>
+              <h3 class="font-serif italic text-ink leading-tight" style="font-size: clamp(1.6rem, 2.2vw, 2.4rem)">
+                Entrega<br>Garantida</h3>
+            </div>
+          </div>
+          <!-- Right: body -->
+          <div class="flex flex-col justify-center gap-6">
+            <p class="font-sans text-ink/60 leading-relaxed"
+              style="font-size: clamp(0.88rem, 1vw, 1rem); max-width: 56ch">
+              Prazos reais, comunicados com clareza. Nenhum projecto fica parado sem razão — e mantemos comunicação
+              constante sobre o estado do trabalho.
+            </p>
+            <span class="font-sans text-[0.7rem] uppercase tracking-[0.22em] text-ink/50 font-medium">Prazos
+              Verificados</span>
+          </div>
+        </div>
+
+        <!-- Diff Item 02 -->
+        <div
+          class="diff-card group relative grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-24 py-14 border-t border-ink/[0.07] reveal-up">
+          <div class="flex items-start gap-6">
+            <span class="font-serif italic text-ink/[0.08] leading-none select-none flex-shrink-0 mt-1"
+              style="font-size: clamp(3rem, 5vw, 5.5rem)">02</span>
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="w-5 h-[1px] bg-ink/30"></span>
+                <span class="font-mono text-[0.52rem] tracking-[0.4em] uppercase text-ink/40">Propriedade</span>
+              </div>
+              <h3 class="font-serif italic text-ink leading-tight" style="font-size: clamp(1.6rem, 2.2vw, 2.4rem)">
+                Código<br>Proprietário</h3>
+            </div>
+          </div>
+          <div class="flex flex-col justify-center gap-6">
+            <p class="font-sans text-ink/60 leading-relaxed"
+              style="font-size: clamp(0.88rem, 1vw, 1rem); max-width: 56ch">
+              Desenvolvemos com boas práticas e código limpo. O seu website não fica refém de uma plataforma ou de um
+              programador específico.
+            </p>
+            <span class="font-sans text-[0.7rem] uppercase tracking-[0.22em] text-ink/50 font-medium">Código
+              Limpo</span>
+          </div>
+        </div>
+
+        <!-- Diff Item 03 -->
+        <div
+          class="diff-card group relative grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-24 py-14 border-t border-b border-ink/[0.07] reveal-up">
+          <div class="flex items-start gap-6">
+            <span class="font-serif italic text-ink/[0.08] leading-none select-none flex-shrink-0 mt-1"
+              style="font-size: clamp(3rem, 5vw, 5.5rem)">03</span>
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="w-5 h-[1px] bg-ink/30"></span>
+                <span class="font-mono text-[0.52rem] tracking-[0.4em] uppercase text-ink/40">Suporte</span>
+              </div>
+              <h3 class="font-serif italic text-ink leading-tight" style="font-size: clamp(1.6rem, 2.2vw, 2.4rem)">
+                Suporte<br>Real</h3>
+            </div>
+          </div>
+          <div class="flex flex-col justify-center gap-6">
+            <p class="font-sans text-ink/60 leading-relaxed"
+              style="font-size: clamp(0.88rem, 1vw, 1rem); max-width: 56ch">
+              Uma pessoa real, com resposta rápida. Sem tickets perdidos. Sem intermediários. Directamente com quem
+              criou o seu projecto.
+            </p>
+            <span class="font-sans text-[0.7rem] uppercase tracking-[0.22em] text-ink/50 font-medium">Resposta &lt;
+              24h</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 04. PRICING ───────────────────────────────────────── -->
+
+    <section id="svc-pricing" class="relative overflow-hidden"
+      style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem)">
+
+      <!-- Ghost background text -->
+      <span
+        class="absolute -right-4 bottom-0 font-serif italic text-ink/[0.025] leading-none pointer-events-none select-none hidden lg:block"
+        style="font-size: clamp(8rem, 16vw, 20rem); writing-mode: vertical-rl">Investimento</span>
+
+      <!-- Section label -->
+      <div class="flex items-center gap-6 mb-16">
+        <span class="t-label">04 — INVESTIMENTO</span>
+        <div class="flex-1 h-[1px] bg-ink/[0.06]"></div>
+        <span class="font-mono text-[0.5rem] tracking-[0.6em] uppercase text-ink/30 hidden lg:block">Sem
+          Surpresas</span>
+      </div>
+      <div class="mb-14">
+        <h2 class="font-serif italic text-ink" style="font-size: clamp(2rem, 4.5vw, 4.5rem); line-height: 1.1">
+          Preços transparentes
+        </h2>
+        <p class="font-sans text-ink/50 leading-relaxed mt-4" style="font-size: 0.82rem; max-width: 40ch">
+          Sem surpresas. Sem letras pequenas.
+        </p>
+      </div>
+
+      <!-- Premium Horizontal Layout -->
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 w-full max-w-7xl mx-auto mb-16 items-stretch">
+        <!-- Arranque -->
+        <div
+          class="price-card bg-paper border border-ink/15 p-8 md:p-10 flex flex-col hover:-translate-y-2 transition-all duration-500 relative group rounded-none"
+          id="pc-arranque">
+
+          <!-- Architectural Lines -->
+          <div
+            class="absolute left-0 top-0 w-3 h-3 border-t border-l border-ink/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
+          </div>
+          <div
+            class="absolute right-0 top-0 w-3 h-3 border-t border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
+          </div>
+          <div
+            class="absolute left-0 bottom-0 w-3 h-3 border-b border-l border-ink/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:translate-y-1">
+          </div>
+          <div
+            class="absolute right-0 bottom-0 w-3 h-3 border-b border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
+          </div>
+
+          <div class="w-full relative z-10 flex-grow-0">
+            <!-- Ghost number -->
+            <span class="absolute -right-2 -top-2 font-serif italic text-ink/[0.05] leading-none select-none"
+              style="font-size: clamp(4rem,7vw,7rem)">01</span>
+            <span class="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-ink/40 block mb-4">Essencial</span>
+            <div class="flex items-center gap-3 mb-1">
+              <span class="w-5 h-[1px] bg-ink/30"></span>
+              <span class="font-mono text-[0.52rem] tracking-[0.3em] uppercase text-ink/30">Custo Inicial</span>
+            </div>
+            <h3 class="font-serif italic text-ink mb-2" style="font-size: clamp(2rem, 3vw, 3rem); line-height: 1">
+              Arranque</h3>
+            <div class="font-sans font-light text-ink mb-4 tracking-tight"
+              style="font-size: clamp(2.5rem, 4vw, 3.5rem)">€800</div>
+            <div
+              class="font-mono text-[0.6rem] text-ink/50 py-2 border-y border-ink/[0.08] block mb-6 uppercase tracking-widest text-center">
+              &#8764; 3 a 4 Semanas</div>
+          </div>
+          <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-10">
+            <div class="space-y-4 mb-8">
+              <details class="group/acc" data-acc-group="acc-arranque">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Design
+                    personalizado e único (Sem Templates)</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Desenhamos a interface no Figma exclusivamente para a sua marca. Nada de temas comprados instalados em
+                  duplicado noutras empresas.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-arranque">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Landing
+                    Page otimizada para SEO e Performance</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  O código é compilado microscopicamente e os assets otimizados para garantir pontuações PageSpeed
+                  extremas e melhor ranking orgânico.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-arranque">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Efeitos
+                    GSAP suaves e interações modernas</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Implementamos animações elegantes baseadas no scroll do utilizador e micro-interações, criando um
+                  aspeto premium e incrivelmente satisfatório.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-arranque">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Até
+                    5 secções funcionais e estratégicas</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Estrutura onepage completa pensada para conversão: Cabeçalho com forte apelo, sobre a empresa,
+                  serviços detalhados, FAQ e contacto.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-arranque">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Alojamento,
+                    domínio e certificado SSL incluídos</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Tratamos da configuração técnica completa: alojamento, registos DNS e certificado HTTPS — o seu site
+                  entra online no primeiro dia, sem qualquer custo oculto adicional.
+                </div>
+              </details>
+            </div>
+            <a href="/contactos/"
+              class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono border border-ink/20 px-6 py-4 text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:border-ink hover:text-paper rounded-none mt-auto">
+              <span
+                class="absolute inset-0 w-full h-full bg-ink translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Contactar</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Crescimento (Middle, featured) -->
+        <div
+          class="price-card bg-[#e4e2dc] border border-ink p-8 md:p-10 flex flex-col hover:-translate-y-4 transition-all duration-500 relative group rounded-none shadow-[0_30px_60px_rgba(18,18,18,0.05)] xl:-mt-8 xl:mb-2 z-20"
+          id="pc-crescimento">
+
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-paper/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+          </div>
+
+          <div
+            class="absolute top-0 right-0 bg-ink text-ink font-mono text-[0.6rem] uppercase px-5 py-2 tracking-[0.2em] border-l border-b border-ink z-20">
+            Popular
+          </div>
+
+          <!-- Architectural border for middle card -->
+          <div
+            class="absolute inset-2 border border-ink/10 pointer-events-none z-10 transition-colors duration-500 group-hover:border-ink/20">
+          </div>
+
+          <div
+            class="absolute left-0 top-0 w-3 h-3 border-t border-l border-ink/40 transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 z-10">
+          </div>
+          <div
+            class="absolute right-0 bottom-0 w-3 h-3 border-b border-r border-ink/40 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1 z-10">
+          </div>
+
+          <div class="w-full relative z-20 flex-grow-0">
+            <span class="absolute -right-2 -top-2 font-serif italic text-ink/[0.08] leading-none select-none"
+              style="font-size: clamp(4rem,7vw,7rem)">02</span>
+            <span
+              class="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-ink/50 block mb-4">Profissional</span>
+            <div class="flex items-center gap-3 mb-1">
+              <span class="w-5 h-[1px] bg-ink/40"></span>
+              <span class="font-mono text-[0.52rem] tracking-[0.3em] uppercase text-ink/40">Custo Inicial</span>
+            </div>
+            <h3 class="font-serif italic text-ink mb-2" style="font-size: clamp(2rem, 3vw, 3rem); line-height: 1">
+              Crescimento</h3>
+            <div class="font-sans font-light text-ink mb-4 tracking-tight"
+              style="font-size: clamp(2.5rem, 4vw, 3.5rem)">€1.800</div>
+            <div
+              class="font-mono text-[0.6rem] text-ink/50 py-2 border-y border-ink/[0.15] block mb-6 uppercase tracking-widest text-center mix-blend-screen">
+              &#8764; 6 a 8 Semanas</div>
+          </div>
+          <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-20">
+            <div class="space-y-4 mb-8">
+              <details class="group/acc" data-acc-group="acc-crescimento">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Website
+                    Multi-Página ou Single-Page Complexa</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/50 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Navegabilidade expandida com infinitas ramificações. Pode incluir páginas dedicadas por produto ou
+                  serviço para captação de tráfego ultra-específico.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-crescimento">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">CMS
+                    Integrado Custom (Sem código para editar)</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/50 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Painel de administração exclusivo onde a sua equipa poderá atualizar facilmente textos e novas fotos.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-crescimento">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Integração
+                    complexa de GSAP (Scroll, WebGL)</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/50 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Vanguardismo. Ligações imersivas interativas com possibilidade de integrar modelos complexos ou
+                  elementos webgl que reagem ao rato.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-crescimento">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Analytics
+                    e SEO Avançado Integrado nativamente</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/50 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Métricas de funil incorporadas num ecossistema fechado que otimiza automaticamente as meta-tags por
+                  cada
+                  página única.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-crescimento">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Suporte
+                    técnico pós-lançamento de 30 dias</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/50 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div
+                  class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed relative overflow-hidden transition-all duration-500 origin-top">
+                  Período de garantia após entrega em que corrigimos quaisquer anomalias identificadas e realizamos
+                  ajustes de pormenor sem custo adicional.
+                </div>
+              </details>
+            </div>
+            <a href="/contactos/"
+              class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono bg-ink text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] px-6 py-4 rounded-none mt-auto">
+              <span
+                class="absolute inset-0 w-full h-full bg-[#e0ded9] translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Contactar</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Empresa -->
+        <div
+          class="price-card bg-ink border border-ink/15 p-8 md:p-10 flex flex-col hover:-translate-y-2 transition-all duration-500 relative group rounded-none"
+          id="pc-empresa">
+
+          <!-- Architectural Lines -->
+          <div
+            class="absolute left-0 top-0 w-3 h-3 border-t border-l border-ink/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
+          </div>
+          <div
+            class="absolute right-0 top-0 w-3 h-3 border-t border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
+          </div>
+          <div
+            class="absolute left-0 bottom-0 w-3 h-3 border-b border-l border-ink/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:translate-y-1">
+          </div>
+          <div
+            class="absolute right-0 bottom-0 w-3 h-3 border-b border-r border-ink/30 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
+          </div>
+
+          <div class="w-full relative z-10 flex-grow-0">
+            <!-- Ghost number -->
+            <span class="absolute -right-2 -top-2 font-serif italic text-ink/[0.05] leading-none select-none"
+              style="font-size: clamp(4rem,7vw,7rem)">03</span>
+            <span class="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-ink/40 block mb-4">Custom</span>
+            <div class="flex items-center gap-3 mb-1">
+              <span class="w-5 h-[1px] bg-ink/30"></span>
+              <span class="font-mono text-[0.52rem] tracking-[0.3em] uppercase text-ink/30">Por Proposta</span>
+            </div>
+            <h3 class="font-serif italic text-ink mb-2" style="font-size: clamp(2rem, 3vw, 3rem); line-height: 1">
+              Empresa</h3>
+            <div class="font-sans font-light text-ink mb-4 tracking-tight" style="font-size: clamp(2rem, 3vw, 3rem)">
+              Orçamento</div>
+            <div
+              class="font-mono text-[0.6rem] text-ink/50 py-2 border-y border-ink/[0.08] block mb-6 uppercase tracking-widest text-center">
+              &#8764; Tempo Din&#226;mico</div>
+          </div>
+          <div class="w-full flex flex-col justify-between flex-grow mt-6 relative z-10">
+            <div class="space-y-4 mb-8">
+              <details class="group/acc" data-acc-group="acc-empresa">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">E-Commerce
+                    à medida ou Web App Base de Dados</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Plataformas de venda com fluxos de checkout rigorosamente desenhados via APIs independentes (Stripe) e
+                  gestão de dados relacionais estruturada.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-empresa">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Integrações
+                    de API exclusivas com CRM/ERPs globais</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Sincronização bidirecional automatizada entre o stock do armazém e APIs de faturação (Moloni, PHC) via
+                  sistemas lógicos altamente seguros.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-empresa">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Escalabilidade
+                    via arquiteturas Cloud (AWS, Edge)</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Infraestrutura montada para absorver tráfego exótico, replicando os assets na orla global para
+                  garantir zero falhas em picos Black Friday.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-empresa">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Prioridade
+                    máxima e SLA de intervenção em 2h</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Qualquer rutura provocada por sistemas integrados da terceiros é mitigada instantaneamente no próprio
+                  dia através de acesso direto aos programadores core.
+                </div>
+              </details>
+              <details class="group/acc" data-acc-group="acc-empresa">
+                <summary
+                  class="flex items-start gap-4 cursor-pointer outline-none list-none [&::-webkit-details-marker]:hidden">
+                  <div
+                    class="w-2 h-2 bg-transparent border border-ink mt-1 flex-shrink-0 transition-all duration-300 group-open/acc:bg-ink group-hover/acc:scale-110">
+                  </div>
+                  <span
+                    class="font-mono text-xs text-ink/80 leading-relaxed transition-colors group-hover/acc:text-ink">Auditoria
+                    de performance e segurança trimestral</span>
+                  <svg class="feat-arrow w-3 h-3 text-ink/40 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="pl-6 pt-3 pb-2 font-sans text-[0.8rem] text-ink/65 leading-relaxed">
+                  Relatórios detalhados de velocidade, SEO técnico e vulnerabilidades — a plataforma mantém-se sempre
+                  no pico da performance e protegida contra ameaças emergentes.
+                </div>
+              </details>
+            </div>
+            <a href="/contactos/"
+              class="group/btn relative w-full inline-flex flex-shrink-0 items-center justify-center font-mono border border-ink/20 px-6 py-4 text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:border-ink hover:bg-ink hover:text-ink rounded-none mt-auto">
+              <span
+                class="absolute inset-0 w-full h-full bg-ink translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"></span>
+              <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Contactar</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disclaimer: full width matching card grid -->
+      <div class="max-w-7xl mx-auto w-full reveal-fade" style="font-size: 0.68rem">
+        <div class="flex items-center justify-between gap-8">
+          <span class="font-mono text-silver/60">
+            Todos os valores são indicativos. Projectos complexos têm orçamento personalizado.
+          </span>
+          <span class="font-mono text-silver/60 whitespace-nowrap">
+            <a href="/contactos/"
+              class="text-ink/50 hover:text-ink underline underline-offset-2 transition-colors duration-200">Fale
+              connosco</a>
+            &nbsp;— respondemos em menos de 24h.
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── 05. TECNOLOGIAS ───────────────────────────────────── -->
+    <section id="svc-tech" class="text-ink relative overflow-hidden"
+      style="padding: clamp(5rem, 9vh, 9rem) clamp(1.5rem, 5vw, 6rem); background-color: #EBE9E4; background-image: linear-gradient(to bottom, #EBE9E4 0%, transparent 9rem), linear-gradient(to bottom, transparent calc(100% - 10rem), #e4e2dc 100%);">
+
+      <!-- ── Background Blueprint Graphics ────────────────── -->
+      <div class="absolute inset-0 pointer-events-none opacity-20" aria-hidden="true">
+        <!-- Floating Diamond Grid Fragment -->
+        <svg id="tech-bg-1" width="200" height="200" viewBox="0 0 100 100" class="absolute top-10 -right-20 opacity-30">
+          <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="none" stroke="currentColor" stroke-width="0.5" />
+          <path d="M50 25 L75 50 L50 75 L25 50 Z" fill="none" stroke="currentColor" stroke-width="0.3"
+            stroke-dasharray="2 2" />
+          <circle cx="50" cy="50" r="2" fill="currentColor" />
+        </svg>
+
+        <!-- Technical Corner Bracket -->
+        <svg id="tech-bg-2" width="150" height="150" viewBox="0 0 100 100"
+          class="absolute bottom-20 -left-10 opacity-20">
+          <path d="M10 30 V10 H30" fill="none" stroke="currentColor" stroke-width="1" />
+          <rect x="15" y="15" width="70" height="70" fill="none" stroke="currentColor" stroke-width="0.3"
+            stroke-dasharray="1 3" />
+          <path d="M90 70 V90 H70" fill="none" stroke="currentColor" stroke-width="1" />
+        </svg>
+
+        <!-- Technical Corner Bracket -->
+        <svg id="tech-bg-2" width="150" height="150" viewBox="0 0 100 100"
+          class="absolute bottom-20 -left-10 opacity-20">
+          <path d="M10 30 V10 H30" fill="none" stroke="currentColor" stroke-width="1" />
+          <rect x="15" y="15" width="70" height="70" fill="none" stroke="currentColor" stroke-width="0.3"
+            stroke-dasharray="1 3" />
+          <path d="M90 70 V90 H70" fill="none" stroke="currentColor" stroke-width="1" />
+        </svg>
+
+        <!-- Floating Dot Grid Fragment -->
+        <div id="tech-bg-5" class="absolute bottom-1/4 right-10 w-32 h-32 opacity-10"
+          style="background-image: radial-gradient(circle, currentColor 0.5px, transparent 0.5px); background-size: 8px 8px;">
+        </div>
+      </div>
+
+      <div
+        class="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-20 max-w-7xl mx-auto relative z-10">
+
+        <!-- Left: Context & Tech List Accordions -->
+        <div class="w-full lg:w-5/12">
+          <div class="flex items-center gap-6 mb-8">
+            <span class="t-label block">05 — TECNOLOGIAS</span>
+            <div class="flex-1 h-[1px] bg-ink/[0.06]"></div>
+          </div>
+          <h2 class="font-serif italic text-ink mb-6" style="font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.1">
+            Ferramentas certas
+          </h2>
+          <p class="font-sans text-ink/65 leading-relaxed mb-10" style="font-size: clamp(0.9rem, 1vw, 1rem)">
+            Não nos limitamos ao básico. Construímos arquiteturas robustas utilizando uma stack moderna e de elite,
+            desenhada para escalabilidade extrema e performance máxima em qualquer dispositivo.
+          </p>
+
+          <div class="tech-list border-t border-ink/10">
+            <!-- NextJS / React -->
+            <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
+              <summary
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-xs opacity-50 block w-6">01</span>
+                  <span>React & Next.js</span>
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full border border-ink/20 flex items-center justify-center transform transition-all duration-300 group-open:bg-ink group-open:text-paper">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
+              </summary>
+              <div class="pb-6 pl-10 pr-4 font-mono text-sm leading-relaxed opacity-70">
+                A espinha dorsal das nossas interfaces. Utilizamos Server-Side Rendering (SSR) e Static Site Generation
+                (SSG) para entregar páginas em milissegundos, com SEO perfeito e reatividade no ecossistema global.
+              </div>
+            </details>
+
+            <!-- GSAP -->
+            <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
+              <summary
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-xs opacity-50 block w-6">02</span>
+                  <span>GSAP Animations</span>
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full border border-ink/20 flex items-center justify-center transform transition-all duration-300 group-open:bg-ink group-open:text-paper">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
+              </summary>
+              <div class="pb-6 pl-10 pr-4 font-mono text-sm leading-relaxed opacity-70">
+                Movimento cinematográfico guiado matematicamente. Descartamos livrarias genéricas a favor de GSAP
+                ScrollTrigger para coreografias de front-end com 60FPS constantes e precisão pixel perfect.
+              </div>
+            </details>
+
+            <!-- Tailwind & CSS -->
+            <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
+              <summary
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-xs opacity-50 block w-6">03</span>
+                  <span>Tailwind & CSS</span>
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full border border-ink/20 flex items-center justify-center transform transition-all duration-300 group-open:bg-ink group-open:text-paper">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
+              </summary>
+              <div class="pb-6 pl-10 pr-4 font-mono text-sm leading-relaxed opacity-70">
+                Ondas de estilo utilitário e Vanilla CSS puro convergidos para eliminar código morto. Sem sobreposição
+                de estilos (specificity wars), apenas ficheiros leves para carregamentos imediatos.
+              </div>
+            </details>
+
+            <!-- Vercel & Cloud -->
+            <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
+              <summary
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-xs opacity-50 block w-6">04</span>
+                  <span>Vercel / AWS</span>
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full border border-ink/20 flex items-center justify-center transform transition-all duration-300 group-open:bg-ink group-open:text-paper">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
+              </summary>
+              <div class="pb-6 pl-10 pr-4 font-mono text-sm leading-relaxed opacity-70">
+                Distribuição via Edge Networks. O seu site no ar a partir de datacenters distribuídos globais garantem
+                uma segurança contra ataques DDoS e tempos de resposta instantâneos globalmente.
+              </div>
+            </details>
+
+            <!-- Stripe / APIs -->
+            <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
+              <summary
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-xs opacity-50 block w-6">05</span>
+                  <span>Integrações (Stripe, APIs)</span>
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full border border-ink/20 flex items-center justify-center transform transition-all duration-300 group-open:bg-ink group-open:text-paper">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
+              </summary>
+              <div class="pb-6 pl-10 pr-4 font-mono text-sm leading-relaxed opacity-70">
+                Interligamos os seus sistemas através de APIs REST e GraphQL. Implementamos pagamentos complexos
+                via Stripe para E-Commerce, ou autenticação serverless com Supabase/Firebase.
+              </div>
+            </details>
+
+            <!-- Analytics & SEO -->
+            <details data-group="tech" class="group border-b border-ink/10 overflow-hidden text-ink acc-smooth">
+              <summary
+                class="flex items-center justify-between py-5 font-serif italic text-xl cursor-pointer outline-none hover:pl-2 transition-all duration-300">
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-xs opacity-50 block w-6">06</span>
+                  <span>Analytics Avançado & SEO</span>
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full border border-ink/20 flex items-center justify-center transform transition-all duration-300 group-open:bg-ink group-open:text-paper">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
+              </summary>
+              <div class="pb-6 pl-10 pr-4 font-mono text-sm leading-relaxed opacity-70">
+                Tratamos de Structured Data (Schema.org), sitemaps automáticos e auditorias Lighthouse. O seu
+                website sai equipado de fábrica com tudo o que precisa para dominar o motor de busca orgânico.
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- Right: The Interactive Icon Cloud -->
+        <div class="w-full lg:w-7/12 flex justify-center items-start min-h-[500px] lg:min-h-[750px] lg:pl-10">
+          <div
+            class="sticky top-[10vh] w-full max-w-[100%] lg:max-w-3xl mx-auto
+            h-[500px] lg:h-[750px] border border-ink/10 bg-ink/[0.02] rounded-[3rem] overflow-hidden group cursor-crosshair flex flex-col items-center justify-center">
+
+            <div
+              class="absolute inset-0 z-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-ink via-transparent to-transparent scale-150 group-hover:scale-110 transition-transform duration-1000">
+            </div>
+
+            <div class="ikon-cloud-container relative z-10 flex-col items-center justify-center m-0 w-full"
+              id="icon-sphere">
+              <!-- Icons injected via JS -->
+            </div>
+
+            <div
+              class="mt-auto mb-6 bg-ink text-paper text-xs font-mono py-1.5 px-4 rounded-full opacity-60 pointer-events-none group-hover:opacity-0 transition-opacity z-20">
+              Mova o rato
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 06. PERGUNTAS FREQUENTES ──────────────────────────── -->
+    <section id="svc-faq"
+      style="position:relative; padding: 0 clamp(1.5rem, 5vw, 6rem) clamp(5rem, 9vh, 9rem); background-color: #e4e2dc; background-image: linear-gradient(to top, #EBE9E4 0%, transparent 9rem);">
+
+      <!-- ── Decorative geometric shapes ─────────────────────── -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+
+        <!-- Circle — bleeds off left edge, mid-height -->
+        <svg width="190" height="190" fill="none"
+          style="position:absolute;top:48%;left:0;transform:translate(-55%,-50%)">
+          <circle cx="95" cy="95" r="88" stroke="#121212" stroke-width="1.0" opacity="0.09" />
+        </svg>
+
+        <!-- Equilateral triangle — bleeds off right edge, upper area -->
+        <svg width="130" height="114" fill="none"
+          style="position:absolute;top:30%;right:0;transform:translate(30%,-50%)">
+          <polygon points="65,6 124,110 6,110" stroke="#121212" stroke-width="0.9" opacity="0.09" />
+        </svg>
+
+        <!-- Hexagon — left side, lower area -->
+        <svg width="108" height="124" fill="none"
+          style="position:absolute;top:65%;left:6%;transform:translate(-50%,-50%)">
+          <polygon points="54,4 104,30 104,94 54,120 4,94 4,30" stroke="#121212" stroke-width="0.9" opacity="0.10" />
+        </svg>
+
+        <!-- Rectangle rotated ~12° — bleeds off right edge, lower area -->
+        <svg width="160" height="100" fill="none"
+          style="position:absolute;top:70%;right:0;transform:translate(28%,-50%)">
+          <rect x="6" y="6" width="148" height="88" stroke="#121212" stroke-width="0.9" opacity="0.09"
+            transform="rotate(12,80,50)" />
+        </svg>
+
+        <!-- Square rotated 20° — upper center-right, fully visible -->
+        <svg width="100" height="100" fill="none"
+          style="position:absolute;top:26%;left:66%;transform:translate(-50%,-50%)">
+          <rect x="8" y="8" width="84" height="84" stroke="#121212" stroke-width="0.9" opacity="0.09"
+            transform="rotate(20,50,50)" />
+        </svg>
+
+        <!-- Pentagon — upper-left interior -->
+        <svg width="96" height="92" fill="none"
+          style="position:absolute;top:27%;left:20%;transform:translate(-50%,-50%)">
+          <polygon points="48,4 92,34 74,86 22,86 4,34" stroke="#121212" stroke-width="0.9" opacity="0.09" />
+        </svg>
+
+        <!-- Ellipse rotated ~30° — center of section -->
+        <svg width="120" height="60" fill="none"
+          style="position:absolute;top:50%;left:46%;transform:translate(-50%,-50%) rotate(30deg)">
+          <ellipse cx="60" cy="30" rx="56" ry="24" stroke="#121212" stroke-width="0.9" opacity="0.08" />
+        </svg>
+
+        <!-- Parallelogram — lower center -->
+        <svg width="130" height="70" fill="none"
+          style="position:absolute;top:76%;left:53%;transform:translate(-50%,-50%)">
+          <polygon points="22,4 126,4 108,66 4,66" stroke="#121212" stroke-width="0.9" opacity="0.09" />
+        </svg>
+
+        <!-- ── New Additions for Density ── -->
+        <!-- Blueprint Crosshair -->
+        <svg id="faq-bg-cross" width="100" height="100" viewBox="0 0 100 100"
+          class="absolute top-[40%] left-[10%] opacity-10">
+          <line x1="50" y1="0" x2="50" y2="100" stroke="#121212" stroke-width="0.5" />
+          <line x1="0" y1="50" x2="100" y2="50" stroke="#121212" stroke-width="0.5" />
+          <circle cx="50" cy="50" r="15" fill="none" stroke="#121212" stroke-width="0.5" />
+        </svg>
+
+        <!-- Blueprint Dots Matrix -->
+        <div id="faq-bg-dots" class="absolute top-[10%] left-[35%] w-24 h-24 opacity-[0.08]"
+          style="background-image: radial-gradient(circle, #121212 0.5px, transparent 0.5px); background-size: 10px 10px;">
+        </div>
+
+        <!-- Technical Plus Marker -->
+        <svg id="faq-bg-plus" width="30" height="30" viewBox="0 0 100 100"
+          class="absolute bottom-[15%] left-[25%] opacity-10">
+          <path d="M50 0 V100 M0 50 H100" stroke="#121212" stroke-width="3" />
+        </svg>
+
+        <!-- Small L-Bracket -->
+        <svg id="faq-bg-bracket" width="40" height="40" viewBox="0 0 100 100"
+          class="absolute top-[35%] right-[15%] opacity-10">
+          <path d="M0 100 V0 H100" fill="none" stroke="#121212" stroke-width="4" />
+        </svg>
+      </div>
+      <!-- ──────────────────────────────────────────────────────── -->
+
+      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-24">
+
+        <!-- Left: Title and Desc -->
+        <div class="lg:w-1/3">
+          <div class="sticky top-32">
+            <div class="flex items-center gap-6 mb-6">
+              <span class="t-label block">06 — DÚVIDAS</span>
+              <div class="flex-1 h-[1px] bg-ink/[0.06]"></div>
+            </div>
+            <h2 class="font-serif italic text-ink mb-6" style="font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.1">
+              Perguntas Frequentes
+            </h2>
+            <p class="font-sans text-ink/65 leading-relaxed mb-10" style="font-size: clamp(0.9rem, 1vw, 1rem)">
+              Esclareça todas as dúvidas logísticas, de propriedade intelectual e processo metodológico. Para questões
+              adicionais, não hesite em contactar.
+            </p>
+            <!-- Outer wrapper: overflow-visible so tapes protrude outside frame -->
+            <div class="relative w-full aspect-[4/5] group cursor-crosshair">
+
+              <!-- TAPE strip: top-right corner — exits frame -->
+              <div class="absolute top-0 right-0 z-30 pointer-events-none"
+                style="transform: translate(30%, -40%) rotate(45deg); width: 90px; height: 24px;">
+                <div
+                  style="width:100%;height:100%;background:rgba(242,237,218,0.75);border-left:1px solid rgba(180,165,130,0.3);border-right:1px solid rgba(180,165,130,0.3);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+                  <div
+                    style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 4px,rgba(180,165,130,0.12) 4px,rgba(180,165,130,0.12) 5px);">
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAPE strip: bottom-left corner — exits frame -->
+              <div class="absolute bottom-0 left-0 z-30 pointer-events-none"
+                style="transform: translate(-30%, 40%) rotate(45deg); width: 90px; height: 24px;">
+                <div
+                  style="width:100%;height:100%;background:rgba(242,237,218,0.75);border-left:1px solid rgba(180,165,130,0.3);border-right:1px solid rgba(180,165,130,0.3);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+                  <div
+                    style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 4px,rgba(180,165,130,0.12) 4px,rgba(180,165,130,0.12) 5px);">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Inner image container: overflow-hidden clips the photo -->
+              <div class="absolute inset-0 overflow-hidden bg-ink/5 border border-ink/10">
+                <!-- Overlay -->
+                <div
+                  class="absolute inset-0 bg-paper/10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-700 z-10 pointer-events-none">
+                </div>
+                <!-- Blueprint corner marks -->
+                <div
+                  class="absolute top-5 left-5 w-5 h-5 border-t border-l border-paper/60 z-20 mix-blend-difference transition-transform duration-700 group-hover:-translate-x-1.5 group-hover:-translate-y-1.5 opacity-40 group-hover:opacity-100">
+                </div>
+                <div
+                  class="absolute top-5 right-5 w-5 h-5 border-t border-r border-paper/60 z-20 mix-blend-difference transition-transform duration-700 group-hover:translate-x-1.5 group-hover:-translate-y-1.5 opacity-40 group-hover:opacity-100">
+                </div>
+                <div
+                  class="absolute bottom-5 left-5 w-5 h-5 border-b border-l border-paper/60 z-20 mix-blend-difference transition-transform duration-700 group-hover:-translate-x-1.5 group-hover:translate-y-1.5 opacity-40 group-hover:opacity-100">
+                </div>
+                <div
+                  class="absolute bottom-5 right-5 w-5 h-5 border-b border-r border-paper/60 z-20 mix-blend-difference transition-transform duration-700 group-hover:translate-x-1.5 group-hover:translate-y-1.5 opacity-40 group-hover:opacity-100">
+                </div>
+                <!-- Interactive prompt -->
+                <div
+                  class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 mix-blend-difference">
+                  <div class="w-1.5 h-1.5 rounded-full bg-paper animate-pulse"></div>
+                  <span class="font-mono text-[0.6rem] tracking-[0.25em] text-paper uppercase">Explorar</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
+                  alt="Monrion FAQ interior"
+                  class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Right: Accordions -->
+        <div class="lg:w-2/3 border-t border-ink/10">
+          <details data-group="faq" class="faq-item group">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
+              Quanto tempo demora a criar o website?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              O tempo médio de desenvolvimento varia conforme a complexidade do projecto. Uma Landing Page pode levar
+              entre 3 a 4 semanas. Un website mais complexo demora cerca de 6 a 8 semanas. Estabelecemos prazos claros
+              após aprovação do conceito visual.
+            </div>
+          </details>
+
+          <details data-group="faq" class="faq-item group">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
+              Eu serei o dono do meu código ou fico dependente de vocês?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              O código é 100% seu. Após o lançamento e conclusão do projecto, pode solicitar todos os repositórios fonte
+              para a sua propriedade. Não aplicamos bloqueios proprietários (vendor lock-in).
+            </div>
+          </details>
+
+          <details data-group="faq" class="faq-item group">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
+              Poderei actualizar o conteúdo (textos, imagens) do meu site de forma autónoma?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              Sim. A partir do plano Crescimento (ou mediante pedido), integramos o website com um gestor de conteúdo
+              (CMS) intuito ("Content Management System"). Fornecemos instruções para que consiga alterar imagens e
+              texto sem qualquer necessidade de mexer em código.
+            </div>
+          </details>
+
+          <details data-group="faq" class="faq-item group">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
+              Do que precisam para iniciar o meu projecto?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              Preferencialmente precisaremos do manual de marca (cores, logótipos em vector) e os textos base em
+              português para alimentar os primeiros protótipos. Posteriormente alinhamos fotografias. Se não tiver nada
+              disto pronto, também prestamos suporte nessa fase de ideação.
+            </div>
+          </details>
+
+          <details class="faq-item group" data-group="faq">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
+              Gostaria de ter efeitos e movimentos avançados (GSAP, 3D). É possível?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              Absolutamente. Utilizamos bibliotecas nativas de animação (como GSAP ou WebGL/Three.js) que nos permitem
+              orquestrar movimento dinâmico sem prejudicar a performance ou tempo de carregamento da página, elevando o
+              projeto a um nível internacional.
+            </div>
+          </details>
+
+          <details class="faq-item group" data-group="faq">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
+              Posso efectuar integrações ou melhorar o site mais tarde?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              Sendo código proprietário de raíz, o projecto é totalmente seu e tem liberdade para expandi-lo no futuro.
+              A arquitetura adotada é tão flexível que nos permite escalar o seu ecossistema digital gradualmente de
+              acordo com o crescimento real do seu negócio.
+            </div>
+          </details>
+
+          <details class="faq-item group" data-group="faq">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
+              Qual é a diferença funcional frente a templates de mercado (WordPress, Elementor, construtores de arrastar
+              e largar)?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              Todos os nossos projetos são desenhados de forma customizada e "headless" com arquitetura de performance
+              imaculada. Ao contrário de templates pesados com plugins (que abrandam massivamente o site, reduzem a taxa
+              de conversão e geram vulnerabilidades de segurança), o nosso código é puro e otimizado ao milésimo de
+              segundo.
+            </div>
+          </details>
+
+          <details class="faq-item group" data-group="faq">
+            <summary class="font-serif italic text-xl md:text-2xl text-ink faq-hover-anim">
+              Como garantem que a arquitetura suporta tráfego elevado?
+              <svg class="faq-icon w-5 h-5 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="font-sans text-ink/65 leading-relaxed pt-6">
+              Assumimos uma postura de infraestrutura "Edge". Na nossa camada de engenharia moderna, minimizamos os
+              pedidos bloqueantes ao servidor. Com isto as distribuições do site fluem através de servidores regionais
+              globais; os ficheiros chegam diretos ao consumidor com tempos de resposta mínimos tornando o seu website
+              quase virtualmente inquebrável a picos de acessos.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 08. CTA FINAL ─────────────────────────────────────── -->
+    <section id="svc-cta" class="relative bg-paper text-ink overflow-hidden bp-grid" style="
+          padding: clamp(7rem, 13vh, 13rem) clamp(1.5rem, 5vw, 6rem)
+            clamp(7rem, 13vh, 13rem);
+          border-top: 1px solid rgba(18, 18, 18, 0.07);
+        ">
+      <!-- Ghost word -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
+        aria-hidden="true">
+        <span class="font-serif italic text-ink" style="
+              font-size: clamp(18vw, 26vw, 36vw);
+              opacity: 0.028;
+              white-space: nowrap;
+              line-height: 0.85;
+            ">Início</span>
+      </div>
+
+      <!-- Top technical callout -->
+      <div class="absolute flex items-center gap-2.5 pointer-events-none"
+        style="top: clamp(3rem, 6vh, 5rem); left: clamp(1.5rem, 5vw, 6rem)">
+        <div class="crosshair-mark" style="color: rgba(18, 18, 18, 0.3)"></div>
+        <span class="t-label">07 — PRÓXIMO PASSO</span>
+      </div>
+
+      <div class="relative z-10 text-center">
+        <h2 id="cta-headline" class="font-serif italic text-ink mb-6" style="
+              font-size: clamp(3.5rem, 9.5vw, 12rem);
+              line-height: 0.88;
+              letter-spacing: -0.02em;
+            ">
+          <span class="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
+            <span class="block cta-word" style="transform: translateY(130%); will-change: transform">Vamos criar</span>
+          </span>
+          <span class="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
+            <span class="block cta-word" style="transform: translateY(130%); will-change: transform">algo
+              notável.</span>
+          </span>
+        </h2>
+
+        <p class="font-mono text-silver mb-12 mx-auto leading-relaxed reveal-fade"
+          style="font-size: clamp(0.68rem, 0.9vw, 0.82rem); max-width: 38ch">
+          Uma conversa de 15 minutos é suficiente para perceber<br />
+          se somos a escolha certa para o seu projecto.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-5 reveal-fade mt-2">
+          <a href="/contactos/"
+            class="group relative inline-flex items-center justify-center gap-3 font-mono bg-ink text-paper px-9 py-[1.125rem] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-[0_12px_24px_-6px_rgba(18,18,18,0.25)] hover:bg-[#1a1a1a]"
+            style="
+                font-size: 0.65rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+              ">
+            <span class="relative z-10 block transition-transform duration-500 group-hover:scale-[1.02]">Iniciar
+              projecto</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              class="relative z-10 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:translate-x-1">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="mailto:geral@monrion.com"
+            class="group relative inline-flex items-center justify-center gap-3 font-mono border border-ink/20 px-9 py-[1.125rem] text-ink overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:border-ink hover:bg-ink hover:text-paper hover:shadow-[0_12px_24px_-8px_rgba(18,18,18,0.2)]"
+            style="
+                font-size: 0.65rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+              ">
+            <span
+              class="relative z-10 block transition-transform duration-500 group-hover:scale-[1.02]">geral@monrion.com</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="bg-ink pt-24 pb-8 relative z-30 text-paper overflow-hidden px-6 md:px-12 lg:px-24">
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.24]"
+      style="background-image: radial-gradient(circle, rgba(235, 233, 228, 0.5) 1px, transparent 1px); background-size: 24px 24px;">
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 flex items-center justify-center text-paper">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
+              <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+              <circle cx="20" cy="19" r="1.5" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="font-sans font-extrabold text-[24px] tracking-widest uppercase">M O N R I O N</span>
+        </div>
+        <p class="text-paper/50 text-sm leading-relaxed max-w-xs font-light">
+          Design orgânico para um futuro digital sustentável. Sediados no Porto, a cultivar para o mundo.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-paper/40 mb-6 border-b border-paper/10 pb-2">
+          Páginas</h4>
+        <ul class="space-y-3 font-mono text-xs uppercase tracking-widest">
+          <li><a href="../index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Início</a>
+          </li>
+          <li><a href="index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Portfólio</a>
+          </li>
+          <li><a href="../sobre/index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Sobre
+              Nós</a></li>
+          <li><a href="../servicos/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Serviços</a></li>
+          <li><a href="../contactos/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Contactos</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-paper/40 mb-6 border-b border-paper/10 pb-2">
+          Contacto</h4>
+        <ul class="space-y-4 font-mono text-xs uppercase tracking-widest">
+          <li class="flex items-center gap-3">
+            <i data-lucide="mail" class="w-4 h-4 text-paper/40"></i>
+            <a href="mailto:geral@monrion.com"
+              class="interactive text-paper/70 hover:text-paper transition-colors">geral@monrion.com</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="phone" class="w-4 h-4 text-paper/40"></i>
+            <a href="tel:+351000000000" class="interactive text-paper/70 hover:text-paper transition-colors">+351 000
+              000 000</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="instagram" class="w-4 h-4 text-paper/40"></i>
+            <a href="#" class="interactive text-paper/70 hover:text-paper transition-colors">@monrion</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-paper/40 mb-6 border-b border-paper/10 pb-2">
+          Localização</h4>
+        <div class="space-y-4 font-mono text-xs uppercase tracking-widest text-paper/70">
+          <div class="flex items-start gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-paper/40 mt-0.5"></i>
+            <p>Porto, Portugal</p>
+          </div>
+          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-paper/40"></i>
+            <div class="flex items-center gap-2">
+              <span id="footer-gmt-time">--:--</span><span class="text-paper/40">GMT+0</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-4">
+            <div class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
+            <span class="text-paper/40">Disponível</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+      <p class="text-paper/30 font-mono text-[10px] uppercase tracking-widest">© 2026 Monrion. Todos os direitos
+        reservados.</p>
+      <div class="flex items-center gap-6">
+        <a href="#"
+          class="interactive text-paper/30 hover:text-paper/60 transition-colors font-mono text-[10px] uppercase tracking-widest">Termos
+          e Condições</a>
+        <a href="#"
+          class="interactive text-paper/30 hover:text-paper/60 transition-colors font-mono text-[10px] uppercase tracking-widest">Política
+          de Privacidade</a>
+      </div>
+    </div>
+
+    <!-- Massive Text -->
+    <div
+      class="absolute bottom-[-5%] left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden z-0">
+      <span
+        class="font-sans font-extrabold text-[20vw] leading-none whitespace-nowrap tracking-tighter mix-blend-overlay">MONRION</span>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <!-- page.js removed, handled by monrion.js -->
+
+  <script type="module">
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+
+    function initAnimations() {
+      try {
+
+        // ── PRE-INIT: mid-page refresh fix ───────────────────────
+        // If the page loaded with scroll > 0, elements already in the viewport
+        // will be hidden by GSAP's immediateRender:true before ScrollTrigger fires.
+        // Solution: snapshot which elements are visible NOW (before GSAP touches them),
+        // then after GSAP initialises, force those specific elements to clearProps.
+        const scrolledOnLoad = window.scrollY > 0;
+        const inViewportOnLoad = new Set();
+        if (scrolledOnLoad) {
+          const vH = window.innerHeight;
+          document.querySelectorAll(
+            '.reveal-fade, .reveal-up, .atelier-item, .atelier-info, .diff-card, .process-step, .price-card, [id^="pc-"]'
+          ).forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.top < vH && r.bottom > 0) inViewportOnLoad.add(el);
+          });
+        }
+
+        // ── Background Floating Elements ─────────────────────────
+        const processSect = document.getElementById("svc-process");
+        if (processSect && !document.querySelector('.float-shape')) {
+          const processBg = document.createElement("div");
+          processBg.className = "absolute inset-0 pointer-events-none overflow-hidden z-0";
+          processBg.innerHTML = `
+            <div class="float-shape absolute w-64 h-64 border border-ink/5 rounded-full" style="top: -10%; left: 15%;"></div>
+            <div class="float-shape-reverse absolute w-[40vw] h-[40vw] border border-ink/5 rounded-[4rem] rotate-12" style="bottom: -15%; right: -5%;"></div>
+          `;
+          processSect.style.position = "relative";
+          processSect.prepend(processBg);
+
+          gsap.to(processBg.querySelector(".float-shape"), {
+            y: 40, rotation: "+=20", duration: 8, repeat: -1, yoyo: true, ease: "sine.inOut"
+          });
+          gsap.to(processBg.querySelector(".float-shape-reverse"), {
+            y: -50, rotation: "-=15", duration: 12, repeat: -1, yoyo: true, ease: "sine.inOut"
+          });
+        }
+
+        const faqSect = document.getElementById("svc-faq");
+        if (faqSect && !document.querySelector('#svc-faq .float-shape')) {
+          const faqBg = document.createElement("div");
+          faqBg.className = "absolute inset-0 pointer-events-none overflow-hidden z-0";
+          faqBg.innerHTML = `
+            <div class="float-shape absolute w-72 h-72 border border-ink/5 rounded-full" style="top: 20%; right: -10%;"></div>
+          `;
+          faqSect.style.position = "relative";
+          faqSect.prepend(faqBg);
+
+          gsap.to(faqBg.querySelector(".float-shape"), {
+            y: 40, rotation: "+=20", duration: 8, repeat: -1, yoyo: true, ease: "sine.inOut"
+          });
+        }
+
+        // ── §3 svc-list background ───────────────────────────────
+        const listSect = document.getElementById("svc-list");
+        if (listSect) { // Removed the check for .svc-list-bg as elements are now in HTML
+          listSect.style.position = "relative";
+          listSect.style.overflow = "hidden";
+          // Removed the creation of listBg and its innerHTML as elements are now in HTML
+
+          // Animations for the new background elements in HTML
+          const listGrid = document.getElementById("svc-list-grid");
+          ScrollTrigger.create({
+            trigger: "#svc-list", start: "top 80%", once: true,
+            onEnter() { if (listGrid) listGrid.style.opacity = "1"; }
+          });
+          // #svc-list-ghost no longer exists in HTML — removed to avoid GSAP warning
+        }
+
+        // ── §3 svc-diff background ───────────────────────────────
+        const diffSect = document.getElementById("svc-diff");
+        if (diffSect && !document.querySelector('#svc-diff .svc-diff-bg')) {
+          diffSect.style.position = "relative";
+          diffSect.style.overflow = "hidden";
+          const diffBg = document.createElement("div");
+          diffBg.className = "svc-diff-bg";
+          diffBg.style.cssText = "position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;";
+          diffBg.innerHTML = `
+            <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 48px,rgba(18,18,18,0.013) 48px,rgba(18,18,18,0.013) 49px);"></div>
+            <div id="svc-diff-ghost" style="position:absolute;font-family:'IBM Plex Mono',monospace;font-size:clamp(18rem,30vw,38rem);font-weight:400;letter-spacing:-0.08em;line-height:0.75;color:rgba(18,18,18,0.015);pointer-events:none;user-select:none;left:-2rem;top:-4rem;will-change:transform;">03</div>
+            <div id="svc-diff-mh" style="position:absolute;height:1px;background:rgba(18,18,18,0.07);clip-path:inset(0 100% 0 0);left:0;right:0;top:4rem;"></div>
+          `;
+          diffSect.prepend(diffBg);
+
+          gsap.to("#svc-diff-ghost", {
+            scrollTrigger: { trigger: "#svc-diff", start: "top bottom", end: "bottom top", scrub: 1 },
+            y: -65, ease: "none"
+          });
+          gsap.to("#svc-diff-mh", {
+            scrollTrigger: { trigger: "#svc-diff", start: "top 78%" },
+            clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "power4.out"
+          });
+        }
+
+        // ── Hero Canvas — Geometric Shapes Loop ─────────
+        const heroCanvas = document.getElementById('hero-canvas');
+        if (heroCanvas && !heroCanvas._hInit) {
+          heroCanvas._hInit = true;
+          const hCtx = heroCanvas.getContext('2d');
+          let hW = 0, hH = 0, hDpr = 1;
+
+          function resizeHeroC() {
+            hDpr = window.devicePixelRatio || 1;
+            hW = heroCanvas.parentElement.offsetWidth;
+            hH = heroCanvas.parentElement.offsetHeight;
+            heroCanvas.width = Math.round(hW * hDpr);
+            heroCanvas.height = Math.round(hH * hDpr);
+            hCtx.resetTransform();
+            hCtx.scale(hDpr, hDpr);
+          }
+          resizeHeroC();
+          window.addEventListener('resize', resizeHeroC, { passive: true });
+
+          // cx/cy = center (0–1), rw/rh = size (fraction of canvas), op = opacity,
+          // rs = rotation speed (rad/frame), rp = initial angle,
+          // dax/day = drift amplitude, ds = drift speed, dp = drift phase
+          const shapes = [
+            { cx: 0.80, cy: 0.35, rw: 0.13, rh: 0.42, op: 0.11, rs: -0.0012, rp: 0.3, dax: 0.030, day: 0.018, ds: 0.0018, dp: 0.0 },
+            { cx: 0.18, cy: 0.75, rw: 0.28, rh: 0.09, op: 0.10, rs: 0.0010, rp: 1.1, dax: 0.022, day: 0.015, ds: 0.0015, dp: 1.8 },
+            { cx: 0.14, cy: 0.25, rw: 0.14, rh: 0.14, op: 0.12, rs: -0.0016, rp: 2.4, dax: 0.016, day: 0.020, ds: 0.0022, dp: 3.5 },
+            { cx: 0.50, cy: 0.55, rw: 0.05, rh: 0.50, op: 0.08, rs: 0.0007, rp: 0.9, dax: 0.012, day: 0.010, ds: 0.0012, dp: 2.2 },
+            { cx: 0.72, cy: 0.72, rw: 0.12, rh: 0.12, op: 0.09, rs: 0.0014, rp: 3.8, dax: 0.018, day: 0.016, ds: 0.0019, dp: 4.0 },
+            { cx: 0.45, cy: 0.12, rw: 0.32, rh: 0.07, op: 0.09, rs: -0.0008, rp: 1.6, dax: 0.014, day: 0.011, ds: 0.0014, dp: 1.0 },
+            { cx: 0.92, cy: 0.58, rw: 0.08, rh: 0.08, op: 0.10, rs: -0.0018, rp: 4.5, dax: 0.011, day: 0.014, ds: 0.0024, dp: 5.2 },
+          ];
+
+          let hT = 0;
+          (function drawHeroC() {
+            hT++;
+            if (!hW || !hH) {
+              heroCanvas._raf = requestAnimationFrame(drawHeroC);
+              return;
+            }
+
+            // Performance: completely pause if the hero is not visible
+            const rect = heroCanvas.getBoundingClientRect();
+            if (rect.bottom < 0) return; // Stop the loop completely if scrolled past
+            if (rect.top > window.innerHeight) {
+              heroCanvas._raf = requestAnimationFrame(drawHeroC);
+              return;
+            }
+
+            hCtx.clearRect(0, 0, hW, hH);
+
+            shapes.forEach(s => {
+              const rot = hT * s.rs + s.rp;
+              const drift = hT * s.ds + s.dp;
+              const px = s.cx * hW + Math.cos(drift) * s.dax * hW;
+              const py = s.cy * hH + Math.sin(drift * 0.73) * s.day * hH;
+              const hw = s.rw * hW * 0.5;
+              const hh = s.rh * hH * 0.5;
+
+              hCtx.save();
+              hCtx.translate(px, py);
+              hCtx.rotate(rot);
+              hCtx.strokeStyle = `rgba(18,18,18,${s.op})`;
+              hCtx.lineWidth = 1.2;
+              hCtx.strokeRect(-hw, -hh, hw * 2, hh * 2);
+              hCtx.restore();
+            });
+            heroCanvas._raf = requestAnimationFrame(drawHeroC);
+          })();
+
+          // Restart Raf when entering hero (if it was stopped)
+          ScrollTrigger.create({
+            trigger: heroCanvas,
+            start: "top bottom",
+            onEnter: () => {
+              if (!heroCanvas._raf) drawHeroC();
+            }
+          });
+        }
+
+        // ── Hero entrance ──────────────────────────────────────
+        const heroTL = gsap.timeline({ defaults: { ease: "power4.out" } });
+        // Horizontal rules draw out
+        heroTL.to(["#hero-line-l", "#hero-line-r"], { scaleX: 1, duration: 1.5, stagger: 0 }, 0);
+        // Headline words rise up
+        heroTL.to(["#hero-w1", "#hero-w2"], { y: "0%", duration: 1.6, stagger: 0.15 }, 0.2);
+        // Description fades in
+        heroTL.to("#hero-desc", { opacity: 1, duration: 1.2 }, 0.75);
+        // Stats stagger up
+        heroTL.fromTo(["#stat-1", "#stat-2", "#stat-3"],
+          { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.15 }, 0.9);
+        // Technical ref labels materialise
+        heroTL.to(["#hero-ref-tl", "#hero-ref-tr"],
+          { opacity: 1, y: 0, duration: 1.0, stagger: 0.12, ease: "power3.out" }, 1.05);
+        // Scroll cue last
+        heroTL.to("#hero-scroll-cue", { opacity: 1, duration: 1 }, 1.55);
+
+        // Ghost text drifts in on load
+        gsap.from(".hero-ghost", { opacity: 0, y: 60, scale: 0.92, duration: 2.5, ease: "power3.out" });
+
+        // ── Section headings scroll entrance ───────────────────
+        ["#svc-list", "#svc-diff", "#svc-pricing", "#svc-tech", "#svc-faq"].forEach(id => {
+          const sect = document.querySelector(id);
+          if (!sect) return;
+          const label = sect.querySelector(".t-label");
+          const h2 = sect.querySelector("h2");
+
+          if (label || h2) {
+            gsap.fromTo([label, h2].filter(Boolean),
+              { opacity: 0, y: 30 },
+              {
+                scrollTrigger: { trigger: sect, start: "top 85%", once: true },
+                opacity: 1, y: 0, duration: 1.5, stagger: 0.18, ease: "power4.out"
+              }
+            );
+          }
+        });
+
+        // ── Batched Global Reveal system (Better Performance) ───
+        ScrollTrigger.batch(".reveal-up", {
+          onEnter: batch => gsap.to(batch, {
+            opacity: 1, y: 0,
+            duration: 1.4,
+            stagger: 0.15,
+            ease: "power4.out",
+            overwrite: true
+          }),
+          start: "top 88%",
+          once: true
+        });
+
+        ScrollTrigger.batch(".reveal-fade", {
+          onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.1,
+            ease: "power2.out",
+            overwrite: true
+          }),
+          start: "top 88%",
+          once: true
+        });
+
+        // Ensure elements starts at initial state
+        gsap.set(".reveal-up", { opacity: 0, y: 50 });
+        gsap.set(".reveal-fade", { opacity: 0 });
+
+        // Refresh on full load to avoid 'stuck' triggers due to lazy-loaded images
+        window.addEventListener('load', () => {
+          ScrollTrigger.refresh();
+        });
+
+        // ── Background drift animations ────────────────────────
+        gsap.to("#bg-drift-1", { x: 50, duration: 25, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to("#bg-drift-2", { x: -50, duration: 20, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(["#bg-cross-1", "#bg-cross-2"], { rotation: 90, duration: 15, repeat: -1, ease: "none" });
+
+        // Removed laser scanning lines - now static geometric background
+
+        // ── Tech background floating ──────────────────────────
+        ScrollTrigger.create({
+          trigger: "#svc-tech",
+          start: "top bottom",
+          onEnter: () => {
+            gsap.to("#tech-bg-1", { y: -30, rotation: 15, duration: 8, repeat: -1, yoyo: true, ease: "sine.inOut" });
+            gsap.to("#tech-bg-2", { x: 20, y: -20, duration: 6, repeat: -1, yoyo: true, ease: "sine.inOut" });
+            gsap.to("#tech-bg-4", { y: 20, duration: 5, repeat: -1, yoyo: true, ease: "sine.inOut" });
+            gsap.to("#tech-bg-5", { x: -20, y: 30, duration: 7, repeat: -1, yoyo: true, ease: "sine.inOut" });
+          }
+        });
+
+        // ── FAQ background floating ──────────────────────────
+        ScrollTrigger.create({
+          trigger: "#svc-faq",
+          start: "top bottom",
+          onEnter: () => {
+            gsap.to("#faq-bg-cross", { rotation: 90, duration: 12, repeat: -1, ease: "none" });
+            gsap.to("#faq-bg-dots", { y: 15, x: -10, duration: 5, repeat: -1, yoyo: true, ease: "sine.inOut" });
+            gsap.to("#faq-bg-plus", { scale: 1.3, opacity: 0.1, duration: 4, repeat: -1, yoyo: true, ease: "power1.inOut" });
+            gsap.to("#faq-bg-bracket", { x: -15, y: -15, duration: 6, repeat: -1, yoyo: true, ease: "sine.inOut" });
+          }
+        });
+
+        // ── FAQ: description + image (not covered by heading loop) ──
+        const faqSticky = document.querySelector("#svc-faq .sticky");
+        if (faqSticky) {
+          const faqDesc = faqSticky.querySelector("p");
+          const faqImg = faqDesc && faqDesc.nextElementSibling;
+          if (faqDesc) {
+            gsap.from(faqDesc, {
+              scrollTrigger: { trigger: "#svc-faq", start: "top 80%", once: true },
+              opacity: 0, y: 22, duration: 1.3, delay: 0.2, ease: "power3.out"
+            });
+          }
+          if (faqImg) {
+            gsap.from(faqImg, {
+              scrollTrigger: { trigger: "#svc-faq", start: "top 80%", once: true },
+              opacity: 0, y: 36, duration: 1.5, delay: 0.4, ease: "power3.out"
+            });
+          }
+        }
+
+        // ── Service list atelier blocks reveal ─────────────────
+        gsap.utils.toArray(".atelier-block").forEach((block) => {
+          const img = block.querySelector(".atelier-img");
+          const info = block.querySelector(".atelier-info");
+          const items = block.querySelectorAll(".atelier-item");
+          const techLines = block.querySelectorAll(".tech-line");
+          const techTexts = block.querySelectorAll(".tech-text");
+          const techFrame = block.querySelector(".tech-frame");
+
+          // Image parallax & Scale (scrub) - Optimized scrub
+          if (img) {
+            // Scrub only parallax (Scroll physics)
+            gsap.from(img, {
+              scrollTrigger: {
+                trigger: block,
+                start: "top bottom",
+                scrub: 1.5
+              },
+              y: 50
+            });
+          }
+
+          // Reveal Block Details
+          if (info) {
+            const blockTL = gsap.timeline({
+              scrollTrigger: {
+                trigger: block,
+                start: "top 85%",
+                once: true
+              }
+            });
+
+            // Fast technical details reveal
+            if (techLines.length) blockTL.fromTo(techLines, { opacity: 0 }, { opacity: 0.4, duration: 1, stagger: 0.08 }, 0);
+            if (techTexts.length) blockTL.fromTo(techTexts, { opacity: 0 }, { opacity: 0.3, duration: 0.8 }, 0.3);
+            if (techFrame) blockTL.fromTo(techFrame, { opacity: 0 }, { opacity: 1, duration: 1.2 }, 0.1);
+
+            // Sequential text reveal
+            const label = info.querySelector("span");
+            const title = info.querySelector("h3");
+            const desc = info.querySelector("p");
+
+            if (label) blockTL.fromTo(label, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.7 }, 0.4);
+            if (title) blockTL.fromTo(title, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
+            if (desc) blockTL.fromTo(desc, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5");
+
+            if (items.length) {
+              blockTL.fromTo(items,
+                { opacity: 0, x: (i) => block.classList.contains('lg:flex-row-reverse') ? 20 : -20 },
+                {
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.8,
+                  stagger: 0.08,
+                  ease: "power3.out",
+                  clearProps: "all"
+                }, "-=0.4");
+            }
+          }
+        });
+
+        // Optimization: Global ScrollTrigger defaults
+        ScrollTrigger.config({ limitCallbacks: true });
+        ScrollTrigger.defaults({
+          fastScrollEnd: true,
+          preventOverlaps: true
+        });
+        window.addEventListener('resize', () => ScrollTrigger.refresh());
+
+        // ── Pricing cards ──────────────────────────────────────
+        ["#pc-arranque", "#pc-crescimento", "#pc-empresa"].forEach((sel, i) => {
+          const el = document.querySelector(sel);
+          if (!el) return;
+          gsap.from(el, {
+            scrollTrigger: { trigger: "#svc-pricing", start: "top 80%", once: true },
+            opacity: 0, y: 60, duration: 1.4, delay: i * 0.2, ease: "power4.out"
+          });
+        });
+        // reveal-fade: fromTo required (CSS sets opacity:0, from→0 would be 0→0)
+        gsap.fromTo("#svc-pricing .reveal-fade",
+          { opacity: 0 },
+          {
+            scrollTrigger: { trigger: "#svc-pricing", start: "top 75%", once: true },
+            opacity: 1, duration: 1.2, ease: "power3.out"
+          }
+        );
+
+        // ── Differentiators ────────────────────────────────────
+        gsap.utils.toArray("#svc-diff .diff-card").forEach((card, i) => {
+          gsap.fromTo(card,
+            { opacity: 0, y: 40 },
+            {
+              scrollTrigger: { trigger: "#svc-diff", start: "top 82%", once: true },
+              opacity: 1, y: 0, duration: 1.2, delay: i * 0.18, ease: "power3.out"
+            }
+          );
+        });
+
+        // ── Process steps ──────────────────────────────────────
+        gsap.utils.toArray(".process-step").forEach((step, i) => {
+          gsap.from(step, {
+            scrollTrigger: { trigger: "#svc-process", start: "top 80%", once: true },
+            opacity: 0, y: 30, duration: 1.1, delay: i * 0.12, ease: "power3.out"
+          });
+        });
+
+        // ── Tech section: slide left panel in from left, right from right ──
+        const techInner = document.querySelector("#svc-tech > div");
+        if (techInner && techInner.children.length >= 2) {
+          gsap.from(techInner.children[0], {
+            scrollTrigger: { trigger: "#svc-tech", start: "top 78%", once: true },
+            opacity: 0, x: -40, duration: 1.4, ease: "power3.out"
+          });
+          gsap.from(techInner.children[1], {
+            scrollTrigger: { trigger: "#svc-tech", start: "top 78%", once: true },
+            opacity: 0, x: 40, duration: 1.4, delay: 0.15, ease: "power3.out"
+          });
+        }
+
+        // ── CTA section ────────────────────────────────────────
+        const ctaTL = gsap.timeline({
+          scrollTrigger: { trigger: "#svc-cta", start: "top 78%" }
+        });
+        ctaTL.to(".cta-word", { y: "0%", duration: 1.5, stagger: 0.15, ease: "power4.out" }, 0);
+        ctaTL.fromTo("#svc-cta .reveal-fade",
+          { opacity: 0 },
+          { opacity: 1, duration: 1.2, stagger: 0.15, ease: "power3.out" },
+          0.5
+        );
+
+        // ── Footer ───────────────────────────────────────────────
+        gsap.from(".footer-dots", {
+          scrollTrigger: { trigger: "footer", start: "top 85%" },
+          opacity: 0, duration: 2, ease: "power2.out",
+        });
+        gsap.from(".footer-grid > div, .footer-bottom", {
+          scrollTrigger: { trigger: "footer", start: "top 85%" },
+          y: 50, opacity: 0, duration: 1.3, stagger: 0.12, ease: "power3.out",
+        });
+
+        // Recalculate all scroll trigger positions after layout stabilises
+        ScrollTrigger.refresh();
+
+        // ── Fix: mid-page refresh ─────────────────────────────────
+        if (scrolledOnLoad) {
+          // Stage 1: complete ScrollTrigger animations whose trigger is already past
+          setTimeout(() => {
+            const vH = window.innerHeight;
+            ScrollTrigger.getAll().forEach(st => {
+              if (!st.trigger) return;
+              const rect = st.trigger.getBoundingClientRect();
+              // Trigger is above fold (already passed) or in view
+              if (rect.top < vH && st.animation) {
+                st.animation.progress(1, false);
+              }
+            });
+          }, 0);
+
+          // Stage 2: clear any lingering GSAP inline styles on the pre-snapshotted elements
+          // Uses a slight delay so GSAP's fromTo immediateRender:true has already applied its
+          // initial state — we then wipe it, leaving the element in its natural CSS state.
+          setTimeout(() => {
+            inViewportOnLoad.forEach(el => gsap.set(el, { clearProps: 'all' }));
+          }, 60);
+        }
+      } catch (err) {
+        console.error("Animations init error:", err);
+      }
+    }
+
+    function initAccordions() {
+      try {
+        const detailsElements = document.querySelectorAll("details");
+
+        // Setup FAQ items GSAP animation, triggering on the PARENT to prevent shifting trigger rects
+        const faqItems = document.querySelectorAll(".faq-item");
+        if (faqItems.length > 0) {
+          gsap.from(faqItems, {
+            scrollTrigger: {
+              trigger: "#svc-faq",
+              start: "top 80%",
+            },
+            opacity: 0,
+            y: 36,
+            duration: 1.2,
+            stagger: 0.18,
+            ease: "power3.out"
+          });
+        }
+
+        detailsElements.forEach((detail) => {
+          const summary = detail.querySelector("summary");
+          let rawContent = summary.nextElementSibling;
+
+          let isOpen = false;
+          summary.style.listStyle = "none";
+
+          // Smooth GSAP wrapper fixing padding-jump glitch
+          let contentWrapper;
+          if (rawContent && !rawContent.classList.contains("acc-smooth-wrap")) {
+            contentWrapper = document.createElement("div");
+            contentWrapper.className = "acc-smooth-wrap";
+            contentWrapper.style.overflow = "hidden";
+            contentWrapper.style.height = "0px";
+            contentWrapper.style.opacity = "0";
+
+            detail.insertBefore(contentWrapper, rawContent);
+            contentWrapper.appendChild(rawContent);
+          } else {
+            contentWrapper = rawContent;
+          }
+
+          // Ensure chevron exists and is an SVG so we don't depend on external lucide JS library running
+          let chevron = summary.querySelector("i, svg");
+          if (chevron && chevron.tagName.toLowerCase() === 'i') {
+            const svgHolder = document.createElement("div");
+            svgHolder.innerHTML = `<svg class="w-4 h-4 opacity-50 transition-transform duration-300 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
+            chevron.replaceWith(svgHolder.firstElementChild);
+            chevron = summary.querySelector("svg");
+          } else if (!chevron) {
+            const svgHolder = document.createElement("div");
+            svgHolder.innerHTML = `<svg class="w-5 h-5 opacity-50 transition-transform duration-300 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
+            summary.appendChild(svgHolder.firstElementChild);
+            chevron = summary.querySelector("svg");
+          }
+
+          detail.isOpen_state = false;
+
+          summary.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (detail.isAnimating || !contentWrapper) return;
+            detail.isAnimating = true;
+
+            if (detail.isOpen_state) {
+              // Close
+              gsap.to(contentWrapper, {
+                height: 0,
+                opacity: 0,
+                duration: 0.4,
+                ease: "power2.inOut",
+                onComplete: () => {
+                  detail.removeAttribute("open");
+                  detail.isOpen_state = false;
+                  detail.isAnimating = false;
+                }
+              });
+              if (chevron) gsap.to(chevron, { rotation: 0, duration: 0.4, ease: "power2.inOut" });
+            } else {
+              // Check if it belongs to a group
+              const name = detail.getAttribute("data-group");
+              if (name) {
+                const group = document.querySelectorAll(`details[data-group="${name}"]`);
+                group.forEach(otherDetail => {
+                  if (otherDetail !== detail && otherDetail.isOpen_state) {
+                    otherDetail.isAnimating = true;
+                    const otherWrapper = otherDetail.querySelector(".acc-smooth-wrap");
+                    const otherChevron = otherDetail.querySelector("summary svg, summary i");
+                    if (otherWrapper) {
+                      gsap.to(otherWrapper, {
+                        height: 0,
+                        opacity: 0,
+                        duration: 0.4,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                          otherDetail.removeAttribute("open");
+                          otherDetail.isOpen_state = false;
+                          otherDetail.isAnimating = false;
+                        }
+                      });
+                    }
+                    if (otherChevron) {
+                      gsap.to(otherChevron, { rotation: 0, duration: 0.4, ease: "power2.inOut" });
+                    }
+                  }
+                });
+              }
+
+              // Open
+              detail.setAttribute("open", "");
+              detail.isOpen_state = true;
+              gsap.to(contentWrapper, {
+                height: "auto",
+                opacity: 1,
+                duration: 0.4,
+                ease: "power2.inOut",
+                onComplete: () => detail.isAnimating = false
+              });
+              if (chevron) gsap.to(chevron, { rotation: 180, duration: 0.4, ease: "power2.inOut" });
+            }
+          });
+        });
+      } catch (err) {
+        console.error("Accordion init error:", err);
+      }
+    }
+
+    function initIconCloud() {
+      try {
+        const container = document.getElementById('icon-sphere');
+        if (!container) return;
+
+        const icons = [
+
+          'javascript', 'html5', 'css', 'nodedotjs', 'express',
+          'nextdotjs', 'react', 'vercel', 'vuedotjs', 'docker',
+          'git', 'github', 'figma', 'tailwindcss', 'python',
+          'googlecloud', 'linux', 'digitalocean', 'stripe', 'mongodb', 'postgresql'
+
+        ];
+
+        const radius = window.innerWidth < 768 ? 140 : 250;
+        let alpha = 0.005;
+        let beta = 0.005;
+        const tags = [];
+        let isMouseOver = false;
+
+        icons.forEach((iconName, i) => {
+          const div = document.createElement('div');
+          div.className = 'ikon-tag';
+          const img = document.createElement('img');
+          img.src = `https://cdn.simpleicons.org/${iconName}/121212`;
+          img.alt = iconName;
+          div.appendChild(img);
+          container.appendChild(div);
+
+          const phi = Math.acos(1 - (2 * i) / icons.length);
+          const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+
+          tags.push({
+            el: div,
+            x: radius * Math.cos(theta) * Math.sin(phi),
+            y: radius * Math.sin(theta) * Math.sin(phi),
+            z: radius * Math.cos(phi),
+          });
+        });
+
+        container.addEventListener('mousemove', (e) => {
+          const rect = container.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left - rect.width / 2;
+          const mouseY = e.clientY - rect.top - rect.height / 2;
+          alpha = -(mouseY / (rect.height / 2)) * 0.02;
+          beta = (mouseX / (rect.width / 2)) * 0.02;
+          isMouseOver = true;
+        });
+
+        container.addEventListener('mouseleave', () => {
+          isMouseOver = false;
+        });
+
+        function render() {
+          if (!isMouseOver) {
+            alpha = alpha * 0.95 + 0.004 * 0.05;
+            beta = beta * 0.95 + 0.004 * 0.05;
+          }
+
+          const cosA = Math.cos(alpha);
+          const sinA = Math.sin(alpha);
+          const cosB = Math.cos(beta);
+          const sinB = Math.sin(beta);
+
+          tags.forEach(t => {
+            let y1 = t.y * cosA - t.z * sinA;
+            let z1 = t.z * cosA + t.y * sinA;
+            let x2 = t.x * cosB + z1 * sinB;
+            let z2 = z1 * cosB - t.x * sinB;
+
+            t.x = x2;
+            t.y = y1;
+            t.z = z2;
+
+            let scale = 450 / (450 + t.z);
+            t.el.style.transform = `translate3d(${t.x}px, ${t.y}px, ${t.z}px) scale(${scale})`;
+            t.el.style.zIndex = Math.round(t.z + radius);
+
+            let depth = (t.z + radius) / (2 * radius);
+            t.el.style.opacity = Math.max(0.2, depth * 0.8 + 0.2);
+          });
+
+          requestAnimationFrame(render);
+        }
+        render();
+      } catch (err) {
+        console.error("Icon Cloud init error:", err);
+      }
+    }
+
+    // Wait for page.js initLoader callback (body becomes visible)
+    const obs = new MutationObserver(() => {
+      if (document.body.style.visibility !== "") {
+        obs.disconnect();
+        // Performance Staggering: don't boot everything on a single frame
+        requestAnimationFrame(() => {
+          initAnimations();
+          setTimeout(() => {
+            initAccordions();
+            initIconCloud();
+          }, 150);
+        });
+      }
+    });
+    obs.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["style"],
+    });
+  </script>
+
+  <!-- Pricing accordion: convert <details> → <div>/<button> for smooth animation -->
+  <script>
+    (function () {
+      document.querySelectorAll('details[data-acc-group]').forEach(function (details) {
+        var group = details.dataset.accGroup;
+        var summary = details.querySelector('summary');
+        var content = summary && summary.nextElementSibling;
+        if (!summary || !content) return;
+
+        // ── Build replacement elements ─────────────────────────────────────
+
+        // Wrapper div (replaces <details>)
+        var item = document.createElement('div');
+        item.className = 'price-acc-item';
+        item.dataset.accGroup = group;
+
+        // Button (replaces <summary>)
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'price-acc-btn';
+        btn.setAttribute('aria-expanded', 'false');
+        // Move all children from <summary> into the button
+        while (summary.firstChild) btn.appendChild(summary.firstChild);
+
+        // Collapsible body (outer = grid container, inner = overflow clip)
+        var body = document.createElement('div');
+        body.className = 'price-acc-body';
+        var inner = document.createElement('div');
+        inner.appendChild(content); // content div moves here (keeps its classes/text)
+        body.appendChild(inner);
+
+        item.appendChild(btn);
+        item.appendChild(body);
+
+        // Replace the original <details> in the DOM
+        details.parentNode.replaceChild(item, details);
+
+        // ── Click handler ─────────────────────────────────────────────────
+        btn.addEventListener('click', function () {
+          var isOpen = item.classList.contains('is-open');
+
+          if (!isOpen) {
+            // Close siblings in the same group first
+            document.querySelectorAll('.price-acc-item[data-acc-group="' + group + '"].is-open')
+              .forEach(function (sib) {
+                sib.classList.remove('is-open');
+                sib.querySelector('.price-acc-btn').setAttribute('aria-expanded', 'false');
+              });
+          }
+
+          // Toggle this item
+          item.classList.toggle('is-open', !isOpen);
+          btn.setAttribute('aria-expanded', String(!isOpen));
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

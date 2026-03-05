@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="bg-paper text-ink antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos &amp; Condi&ccedil;&otilde;es &mdash; Monrion</title>
+    <meta name="description"
+        content="Termos e condi&ccedil;&otilde;es de servi&ccedil;o da Monrion. Saiba mais sobre as nossas pol&iacute;ticas e compromissos.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+
+    <!-- Global Monrion CSS Ecosystem -->
+    <link rel="stylesheet" href="../assets/css/monrion.css">
+
+    <!-- Local overrides for Legal pages -->
+    <style>
+        .legal-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            color: #121212;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-content p {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: rgba(18, 18, 18, 0.7);
+            margin-bottom: 1.5rem;
+            max-width: 75ch;
+        }
+
+        .legal-content ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 2rem;
+        }
+
+        .legal-content li {
+            position: relative;
+            padding-left: 1.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: rgba(18, 18, 18, 0.7);
+            margin-bottom: 0.75rem;
+        }
+
+        .legal-content li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 4px;
+            height: 4px;
+            background-color: #121212;
+            border-radius: 50%;
+        }
+
+        .legal-content a {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            color: #121212;
+            transition: opacity 0.3s ease;
+        }
+
+        .legal-content a:hover {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-paper text-ink font-sans antialiased overflow-x-hidden relative selection:bg-carbon selection:text-paper"
+    data-route="legal">
+    <!-- Magnetic Cursor Elements -->
+    <div id="magnetic-cursor"></div>
+    <div id="cursor-dot"></div>
+
+    <!-- Global Loader -->
+    <div id="global-loader" class="fixed inset-0 z-[100] bg-paper flex items-center justify-center pointer-events-none">
+        <div class="flex flex-col items-center">
+            <div class="font-serif italic text-ink text-4xl mb-4 overflow-hidden mask-container">
+                <span class="inline-block loader-text" style="clip-path: inset(0 100% 0 0);">MONRION</span>
+            </div>
+            <div class="w-24 h-[1px] bg-ink/10 relative overflow-hidden">
+                <div class="absolute top-0 left-0 h-full bg-ink w-full loader-bar"
+                    style="transform: scaleX(0); transform-origin: left;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ UNIFIED GLOBAL NAVBAR ══ -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent flex justify-center mt-6 px-4 pointer-events-none">
+        <div
+            class="w-full max-w-7xl mx-auto flex items-center justify-between pointer-events-auto rounded-full px-6 py-4 border border-transparent backdrop-blur-none transition-all duration-500 nav-container bg-paper/80 backdrop-blur-md">
+            <a href="/"
+                class="nav-logo data-magnetic cursor-none flex items-center gap-4 group transition-transform duration-500">
+                <div
+                    class="w-10 h-10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2L36 11V29L20 38L4 29V11L20 2Z" stroke="#121212" stroke-width="1.2"
+                            stroke-linejoin="round" />
+                        <path d="M20 8L31 14.5V25.5L20 32L9 25.5V14.5L20 8Z" stroke="#121212" stroke-width="0.8"
+                            stroke-linejoin="round" stroke-dasharray="2 2" />
+                        <circle cx="20" cy="20" r="2.5" fill="#121212" />
+                    </svg>
+                </div>
+                <span
+                    class="font-mono text-ink text-xs uppercase tracking-[0.2em] opacity-0 -ml-4 transition-all duration-500 group-hover:opacity-100 group-hover:ml-0 font-medium">MONRION</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+                <a href="/portfolio/"
+                    class="nav-link data-magnetic cursor-none font-sans text-sm text-ink/70 hover:text-ink transition-colors relative">
+                    Portf&oacute;lio
+                </a>
+                <a href="/sobre/"
+                    class="nav-link data-magnetic cursor-none font-sans text-sm text-ink/70 hover:text-ink transition-colors relative">
+                    Sobre N&oacute;s
+                </a>
+                <a href="/servicos/"
+                    class="nav-link data-magnetic cursor-none font-sans text-sm text-ink/70 hover:text-ink transition-colors relative">
+                    Servi&ccedil;os
+                </a>
+            </div>
+
+            <a href="/contactos/"
+                class="nav-btn data-magnetic cursor-none bg-carbon text-paper px-6 py-2.5 rounded-full font-sans text-sm hover:bg-ink transition-colors relative overflow-hidden group">
+                <span class="relative z-10 font-medium">Contactar</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Smooth Scroll Wrapper -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <main>
+
+                <!-- HEADER SECTION -->
+                <section class="relative bg-paper pt-48 pb-16 px-4 md:px-12 lg:px-24">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="crosshair-mark text-ink mb-6 reveal-fade"></div>
+                        <div class="stagger-title mb-6">
+                            <h1 class="font-serif italic text-ink overflow-hidden pb-4"
+                                style="font-size:clamp(3.5rem,7vw,6rem);line-height:0.9;">
+                                <span class="reveal-text-word inline-block transform translate-y-full">Termos
+                                    &amp;</span>
+                                <span
+                                    class="reveal-text-word inline-block transform translate-y-full pl-8 lg:pl-16">Condi&ccedil;&otilde;es.</span>
+                            </h1>
+                        </div>
+                        <div class="flex items-center gap-6 mt-12 reveal-fade">
+                            <span class="font-mono text-xs uppercase tracking-[0.1em] text-ink/50">Data de Entrada em
+                                Vigor:</span>
+                            <span
+                                class="font-mono text-xs uppercase tracking-[0.1em] text-ink border border-ink/10 rounded-full px-4 py-1">5
+                                Mar&ccedil;o, 2026</span>
+                        </div>
+                        <div style="height:1px;background:rgba(18,18,18,0.08);margin-top:3rem;" class="reveal-fade">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CONTENT SECTION -->
+                <section class="relative bg-paper pb-32 px-4 md:px-12 lg:px-24">
+                    <div class="max-w-3xl mx-auto legal-content reveal-up">
+
+                        <p>Estes Termos e Condi&ccedil;&otilde;es ("Termos") regulam a contrata&ccedil;&atilde;o de
+                            servi&ccedil;os de design digital, desenvolvimento web e consultoria de software fornecidos
+                            pela Monrion ("Ag&ecirc;ncia", "n&oacute;s" ou "nosso"), com sede no Porto, Portugal, aos
+                            seus clientes ("Cliente", "v&oacute;s" ou "vosso"). Ao aceitar uma proposta comercial, pagar
+                            uma fatura ou assinar um contrato connosco, concorda em ficar vinculado a estes Termos.</p>
+
+                        <h2>1. Presta&ccedil;&atilde;o de Servi&ccedil;os</h2>
+                        <p>A Monrion compromete-se a prestar os servi&ccedil;os descritos na proposta aprovada pelo
+                            Cliente, atuando com o m&aacute;ximo de profissionalismo, dilig&ecirc;ncia e de acordo com
+                            as melhores pr&aacute;ticas da ind&uacute;stria. A natureza digital (haute couture / soft
+                            brutalism) do nosso trabalho requer autonomia criativa, pelo que a Ag&ecirc;ncia ter&aacute;
+                            o direito de tomar decis&otilde;es de design que melhor sirvam os objetivos estabelecidos do
+                            projeto.</p>
+
+                        <h2>2. Fases do Projeto e Aprova&ccedil;&otilde;es</h2>
+                        <p>O desenvolvimento do projeto ocorrer&aacute; em fases distintas (Planeamento, Design,
+                            Desenvolvimento, Lan&ccedil;amento). A transi&ccedil;&atilde;o entre as fases
+                            cr&iacute;ticas est&aacute; sujeita &agrave; aprova&ccedil;&atilde;o formal do Cliente.
+                            Qualquer atraso na resposta ou aprova&ccedil;&atilde;o por parte do Cliente resultar&aacute;
+                            numa extens&atilde;o correspondente do prazo de entrega.</p>
+                        <ul>
+                            <li>Revis&otilde;es est&atilde;o limitadas ao n&uacute;mero estipulado na proposta inicial
+                                (tipicamente duas rondas por fase de design).</li>
+                            <li>Mudan&ccedil;as de escopo solicitadas ap&oacute;s a aprova&ccedil;&atilde;o de uma fase
+                                estar&atilde;o sujeitas a or&ccedil;amenta&ccedil;&atilde;o adicional e
+                                prolongar&atilde;o os prazos.</li>
+                        </ul>
+
+                        <h2>3. Condi&ccedil;&otilde;es de Pagamento</h2>
+                        <p>Os projetos standard requerem um sinal inicial de 50% antes do in&iacute;cio de qualquer
+                            trabalho. Os restantes 50% ser&atilde;o faturados na conclus&atilde;o do projeto, antes da
+                            publica&ccedil;&atilde;o do website final (Go-Live) ou da entrega dos ficheiros fonte.</p>
+                        <ul>
+                            <li>Todas as faturas s&atilde;o pag&aacute;veis a 15 dias da data de emiss&atilde;o, exceto
+                                acordo em contr&aacute;rio.</li>
+                            <li>Em caso de mora prolongada superior a 30 dias na fase final, a Monrion reserva-se no
+                                direito de suspender os servi&ccedil;os ou colocar a plataforma em
+                                manuten&ccedil;&atilde;o se a mesma for hospedada por n&oacute;s.</li>
+                        </ul>
+
+                        <h2>4. Propriedade Intelectual (IP)</h2>
+                        <p>A Monrion garante que todo o trabalho fornecido &eacute; original. Ap&oacute;s o pagamento
+                            integral de todas as faturas relativas a um projeto, os direitos de propriedade intelectual
+                            sobre o website final transitam para o Cliente.</p>
+                        <p>No entanto, a Ag&ecirc;ncia reserva-se o direito de:</p>
+                        <ul>
+                            <li>Exibir todo o trabalho de design e desenvolvimento no seu portf&oacute;lio, websites,
+                                publica&ccedil;&otilde;es ou materials promocionais, como exemplo de excel&ecirc;ncia
+                                t&eacute;cnica ("showcase").</li>
+                            <li>Reter a autoria e licenciamento de qualquer "C&oacute;digo Base" (scripts, bibliotecas
+                                ou m&oacute;dulos backend preexistentes ou criados genericamente) que n&atilde;o
+                                constitua a identidade &uacute;nica da marca do cliente.</li>
+                        </ul>
+
+                        <h2>5. Terminologia e Rescis&atilde;o</h2>
+                        <p>Em caso de cancelamento prematuro por parte do cliente por razoes alheias &agrave; Monrion, o
+                            dep&oacute;sito inicial de 50% n&atilde;o ser&aacute; reembolsado e cobrir&aacute; o volume
+                            de trabalho j&aacute; desenvolvido na fase preparat&oacute;ria e estrat&eacute;gica do
+                            projeto. Se o valor do trabalho j&aacute; efetuado exceder o sional inicial, efetuaremos
+                            cobran&ccedil;a do excedente.</p>
+
+                        <h2>6. Responsabilidade Legal</h2>
+                        <p>Construindo ferramentas digitais complexas, n&atilde;o garantimos que a plataforma seja
+                            eternamente isenta de falhas ("bugs") quando sujeita as iteracoes futuras dos browsers que
+                            lhe s&atilde;o superiores e fora de controlo do programador. Nao existe qualquer garantia
+                            impl&iacute;cita sobre o seu impacto comercial. A nossa responsabilidade, num caso remoto de
+                            incumprimento grave atestado, nunca exceder&aacute; o valor total at&eacute; ao momento pago
+                            pelo cliente pelos respetivos servi&ccedil;os.</p>
+
+                        <h2 style="font-size: 2rem;">7. Fale Connosco</h2>
+                        <p>Se tiver quest&otilde;es relativas as nossas pol&iacute;ticas, sinta-se &agrave; vontade para
+                            nos interpelar atrav&eacute;s da via direta email: <a
+                                href="mailto:contact@monrion.com">contact@monrion.com</a>.</p>
+
+                    </div>
+                </section>
+            </main>
+
+            <!-- ══ UNIFIED GLOBAL FOOTER ══ -->
+            <footer class="relative bg-ink text-paper overflow-hidden font-sans border-t border-carbon"
+                style="padding: clamp(4rem, 8vh, 8rem) clamp(1.5rem, 5vw, 6rem) clamp(2rem, 4vh, 4rem);">
+                <!-- Footer Blueprint Background -->
+                <div class="absolute inset-0 z-0 pointer-events-none opacity-5">
+                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="footer-blueprint" width="40" height="40" patternUnits="userSpaceOnUse">
+                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#EBE9E4" stroke-width="0.5" />
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#footer-blueprint)" />
+                    </svg>
+                </div>
+
+                <div class="relative z-10 w-full max-w-[1600px] mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-24 footer-grid">
+
+                        <!-- Col 1: Logo & Brand -->
+                        <div class="md:col-span-12 lg:col-span-4 flex flex-col justify-between">
+                            <div>
+                                <a href="/" class="inline-flex items-center gap-4 mb-6 group data-magnetic">
+                                    <div class="w-12 h-12 flex items-center justify-center">
+                                        <svg width="48" height="48" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 2L36 11V29L20 38L4 29V11L20 2Z" stroke="#EBE9E4"
+                                                stroke-width="1.2" stroke-linejoin="round" />
+                                            <path d="M20 8L31 14.5V25.5L20 32L9 25.5V14.5L20 8Z" stroke="#EBE9E4"
+                                                stroke-width="0.8" stroke-linejoin="round" stroke-dasharray="2 2" />
+                                            <circle cx="20" cy="20" r="2.5" fill="#EBE9E4" />
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="font-mono text-[1.1rem] uppercase tracking-[0.3em] font-medium text-paper">M
+                                        O N R I O N</span>
+                                </a>
+                                <p class="font-serif italic text-paper/60 leading-relaxed max-w-sm mt-4"
+                                    style="font-size: clamp(1rem, 1.5vw, 1.25rem);">
+                                    Digital Haute Couture.<br>Engenharia de Precisão Tátil.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Col 2: Navigation -->
+                        <div class="md:col-span-4 lg:col-span-2 lg:col-start-6 flex flex-col gap-4">
+                            <span
+                                class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-paper/40 mb-2">Navegação</span>
+                            <a href="/" class="text-paper/70 hover:text-paper transition-colors w-fit data-magnetic"
+                                style="font-size: 0.95rem;">Início</a>
+                            <a href="/portfolio/"
+                                class="text-paper/70 hover:text-paper transition-colors w-fit data-magnetic"
+                                style="font-size: 0.95rem;">Trabalhos</a>
+                            <a href="/sobre/"
+                                class="text-paper/70 hover:text-paper transition-colors w-fit data-magnetic"
+                                style="font-size: 0.95rem;">Sobre Nós</a>
+                            <a href="/servicos/"
+                                class="text-paper/70 hover:text-paper transition-colors w-fit data-magnetic"
+                                style="font-size: 0.95rem;">Serviços</a>
+                        </div>
+
+                        <!-- Col 3: Contact & Socials -->
+                        <div class="md:col-span-4 lg:col-span-3 flex flex-col gap-4">
+                            <span
+                                class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-paper/40 mb-2">Contacto</span>
+                            <a href="mailto:hello@monrion.com"
+                                class="text-paper/70 hover:text-paper transition-colors w-fit data-magnetic"
+                                style="font-size: 0.95rem;">hello@monrion.com</a>
+                            <a href="tel:+351123456789"
+                                class="text-paper/70 hover:text-paper transition-colors w-fit data-magnetic"
+                                style="font-size: 0.95rem;">+351 123 456 789</a>
+                            <div class="flex flex-col gap-3 mt-4">
+                                <a href="#"
+                                    class="text-paper/50 hover:text-paper transition-colors flex items-center gap-2 w-fit data-magnetic font-mono text-[0.75rem] uppercase tracking-wider">
+                                    <i data-lucide="instagram" class="w-4 h-4"></i> Instagram
+                                </a>
+                                <a href="#"
+                                    class="text-paper/50 hover:text-paper transition-colors flex items-center gap-2 w-fit data-magnetic font-mono text-[0.75rem] uppercase tracking-wider">
+                                    <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Col 4: Location & Status -->
+                        <div class="md:col-span-4 lg:col-span-2 flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 mb-8 lg:mb-0">
+                                <span
+                                    class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-paper/40 mb-2">Sede</span>
+                                <span class="text-paper/70" style="font-size: 0.95rem;">Porto, Portugal</span>
+                                <span class="font-mono text-paper/40 mt-1" style="font-size: 0.75rem;">(41.1579° N,
+                                    8.6291° W)</span>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <span class="font-mono text-paper" style="font-size: 1.25rem; letter-spacing: -0.02em;"
+                                    id="gmt-time">14:05 GMT</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-paper/50 animate-pulse"></div>
+                                    <span class="text-paper/50 text-xs font-mono">Status: Operacional</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Bar -->
+                <div
+                    class="pt-8 border-t border-paper/10 flex flex-col md:flex-row items-center justify-between gap-4 relative z-10 footer-bottom">
+                    <p class="font-mono text-xs text-paper/40">
+                        &copy; <span id="current-year">2026</span> Monrion. All rights reserved.
+                    </p>
+                    <div class="flex gap-6">
+                        <a href="/termos-e-condicoes/"
+                            class="font-mono text-xs text-paper/40 hover:text-paper transition-colors data-magnetic footer-link">Termos
+                            e Condições</a>
+                        <a href="/politica-de-privacidade/"
+                            class="font-mono text-xs text-paper/40 hover:text-paper transition-colors data-magnetic footer-link">Política
+                            de Privacidade</a>
+                    </div>
+                </div>
+            </footer>
+
+        </div> <!-- End Smooth Content -->
+    </div> <!-- End Smooth Wrapper -->
+
+    <script type="module" src="../assets/js/monrion.js"></script>
+</body>
+
+</html>

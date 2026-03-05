@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+
+  <title>Monrion | Portfólio Central</title>
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="../assets/favicon.ico" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { paper: "#EBE9E4", ink: "#121212", silver: "#8C8C8C", carbon: "#333333", "accent-muted": "#8C8A85" },
+          fontFamily: { sans: ['"Plus Jakarta Sans"', "sans-serif"], serif: ['"Cormorant Garamond"', "serif"], mono: ['"IBM Plex Mono"', "monospace"] },
+        },
+      },
+    };
+  </script>
+
+  <!-- Digital Haute Couture Core Engine -->
+  <link rel="stylesheet" href="../assets/css/monrion.css" />
+  <script type="module" src="../assets/js/monrion.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Portfolio Specific Rules */
+    . {
+      filter: url('#water-displacement');
+    }
+
+    .project-card:hover . {
+      /* We animate the baseFrequency of turbulence via CSS/calc or GSAP ideally, 
+         but a simple CSS transition on scale creates a ripple shockwave effect */
+      transform: scale(1.05) translateY(-8%);
+      filter: url('#water-displacement') grayscale(0%);
+    }
+  </style>
+</head>
+
+<body class="font-display bg-paper text-ink selection:bg-ink selection:text-paper overflow-x-hidden">
+
+  <!-- THE GLASS CAPSULE HEADER -->
+  <nav
+    class="fixed left-1/2 -translate-x-1/2 top-[1.5rem] z-50 w-[92%] max-w-[1200px] rounded-full flex items-center justify-between bg-paper/85 backdrop-blur-xl border border-ink/10 shadow-sm"
+    style="padding: 0.8rem 2rem;">
+    <a href="../index.html" class="flex items-center gap-4 group interactive">
+      <div class="w-8 h-8 text-ink transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
+          <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+        </svg>
+      </div>
+      <span
+        class="font-sans font-bold text-[16px] uppercase tracking-[0.15em] group-hover:tracking-[0.3em] transition-all duration-500">Monrion</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <a href="../portfolio/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest opacity-30 hover:opacity-100 transition-opacity">Portfólio</a>
+      <a href="../sobre/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest hover:opacity-50 transition-opacity">Sobre
+        Nós</a>
+      <a href="../servicos/index.html"
+        class="interactive font-mono text-[11px] uppercase tracking-widest hover:opacity-50 transition-opacity">Serviços</a>
+    </div>
+
+    <div class="hidden md:block">
+      <a href="../contactos/index.html"
+        class="magnetic inline-block font-sans font-bold text-[10px] uppercase tracking-widest bg-ink text-paper px-6 py-2.5 rounded-full hover:bg-transparent hover:text-ink border border-ink transition-colors cursor-none">Contactar</a>
+    </div>
+  </nav>
+
+  <!-- ==============================================
+       1. HERO SECTION (Mid-Page Standard)
+       ============================================== -->
+  <main class="relative pt-48 pb-24 px-6 md:px-12 lg:px-24 border-b border-ink/10">
+    <!-- Blueprint subtle grid -->
+    <div class="absolute inset-0 pointer-events-none opacity-20"
+      style="background-image: linear-gradient(rgba(18, 18, 18, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 18, 18, 0.04) 1px, transparent 1px); background-size: 40px 40px;">
+    </div>
+
+    <div class="relative z-10 w-full mx-auto max-w-[1600px]">
+      <div class="flex items-center gap-4 mb-12">
+        <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent-muted">01 / Index</span>
+        <span class="flex-1 h-px bg-ink/10"></span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div class="lg:col-span-8 stagger-title">
+          <h1 class="font-serif italic text-6xl md:text-8xl leading-[0.85] kerning-tight">
+            <span class="reveal-text-line block"><span class="reveal-text-word">Catalogue</span></span><br>
+            <span class="reveal-text-line block"><span
+                class="reveal-text-word not-italic pl-[0.5em]">Raissoné.</span></span>
+          </h1>
+        </div>
+
+        <div class="lg:col-span-4 lg:text-right pb-2 reveal-on-scroll">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-accent-muted mb-4 text-left lg:text-right">
+            Filtro de Disciplinas
+          </p>
+          <div class="flex flex-wrap lg:justify-end gap-3 font-mono text-[9px] uppercase tracking-widest">
+            <button data-filter="all" class="filter-btn interactive border border-ink px-4 py-2 bg-ink text-paper transition-colors">Todos</button>
+            <button data-filter="web" class="filter-btn interactive border border-ink/20 text-ink/40 px-4 py-2 hover:border-ink hover:text-ink transition-colors">Web Dev</button>
+            <button data-filter="app" class="filter-btn interactive border border-ink/20 text-ink/40 px-4 py-2 hover:border-ink hover:text-ink transition-colors">Sistemas & Apps</button>
+            <button data-filter="design" class="filter-btn interactive border border-ink/20 text-ink/40 px-4 py-2 hover:border-ink hover:text-ink transition-colors">UI/UX Design</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==============================================
+       2. ASYMMETRICAL IMAGE GRID
+       ============================================== -->
+  <section class="px-6 md:px-12 lg:px-24 py-24 bg-paper">
+    <div class="max-w-[1600px] mx-auto">
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-y-32 gap-x-0 md:gap-x-12">
+
+        <!-- 01: Enormous Full Width -->
+        <a href="#" data-category="app" class="col-span-1 md:col-span-12 group project-card bg-transparent block interactive clip-reveal">
+          <div class="aspect-[21/9] bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2070&auto=format&fit=crop"
+              alt="Alojamento Gi" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-8 flex flex-col md:flex-row justify-between md:items-baseline border-b border-ink/20 pb-4">
+            <h3 class="font-serif italic text-5xl md:text-6xl mb-2 md:mb-0">01. Alojamento Gi</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Reservas & E-commerce</span>
+          </div>
+        </a>
+
+        <!-- 02: Vertical Left aligned -->
+        <a href="#" data-category="app" class="col-span-1 md:col-span-5 group project-card bg-transparent block interactive clip-reveal">
+          <div class="aspect-[3/4] bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1600&auto=format&fit=crop"
+              alt="Electro 2000 v2" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4">
+            <h3 class="font-serif italic text-4xl mb-2">02. Eletro 2000 v2</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Gestão com IA (Gemini)</span>
+          </div>
+        </a>
+
+        <!-- Text Block Right Aligned acting as a spacer -->
+        <div class="col-span-1 md:col-span-6 md:col-start-7 flex flex-col justify-center reveal-on-scroll">
+          <div class="mb-4">
+            <span class="material-symbols-outlined text-accent-muted text-4xl">architecture</span>
+          </div>
+          <p class="font-sans font-light text-2xl md:text-4xl leading-snug">
+            "Construímos sistemas que desafiam a gravidade tecnológica. Interfaces que respiram e reagem ao toque
+            orgânico."
+          </p>
+        </div>
+
+        <!-- 03: Offset Square -->
+        <a href="#"
+          class="col-span-1 md:col-start-3 md:col-span-6 group project-card bg-transparent block interactive clip-reveal">
+          <div class="aspect-square bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1600&auto=format&fit=crop"
+              alt="Cristal Capital" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4 flex flex-wrap justify-between items-baseline gap-2">
+            <h3 class="font-serif italic text-4xl mb-1">03. Cristal Capital</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Plataforma Financeira WEB
+              (PAP)</span>
+          </div>
+        </a>
+
+        <!-- 04: Standard Horizontal -->
+        <a href="#"
+          class="col-span-1 md:col-start-5 md:col-span-8 group project-card bg-transparent block interactive clip-reveal"
+          style="margin-top:-10%;">
+          <div class="aspect-video bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop"
+              alt="Volunta" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4 flex flex-wrap justify-between items-baseline gap-2">
+            <h3 class="font-serif italic text-4xl mb-1">04. Volunta</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Câmara Municipal V.N. Gaia</span>
+          </div>
+        </a>
+
+        <!-- 05: Vertical Right Aligned -->
+        <a href="#"
+          class="col-span-1 md:col-start-9 md:col-span-4 group project-card bg-transparent block interactive clip-reveal">
+          <div class="aspect-[3/4] bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop"
+              alt="Estudas Comigo" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4">
+            <h3 class="font-serif italic text-3xl mb-2">05. Estudas Comigo</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Landing Page Educacional</span>
+          </div>
+        </a>
+
+        <!-- 06: Deep Horizontal Left -->
+        <a href="#"
+          class="col-span-1 md:col-start-1 md:col-span-7 group project-card bg-transparent block interactive clip-reveal"
+          style="margin-top: -20%;">
+          <div class="aspect-video bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?q=80&w=1600&auto=format&fit=crop"
+              alt="GT Móvel" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4 flex justify-between items-baseline flex-wrap gap-2">
+            <h3 class="font-serif italic text-4xl mb-1">06. GT Móvel</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Catálogo Institucional</span>
+          </div>
+        </a>
+
+        <!-- 07: Massive Portrait Centered -->
+        <a href="#"
+          class="col-span-1 md:col-start-4 md:col-span-6 group project-card bg-transparent block interactive clip-reveal"
+          style="margin-top: 5%;">
+          <div class="aspect-[4/5] bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop"
+              alt="Hugo Brito" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4 text-center">
+            <h3 class="font-serif italic text-4xl mb-2">07. Hugo Brito</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Luxury Fashion Showcase</span>
+          </div>
+        </a>
+
+        <!-- 08: Standard Horizontal Right -->
+        <a href="#"
+          class="col-span-1 md:col-start-8 md:col-span-5 group project-card bg-transparent block interactive clip-reveal"
+          style="margin-top: -15%;">
+          <div class="aspect-video bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1600&auto=format&fit=crop"
+              alt="Tec N' Cool" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4">
+            <h3 class="font-serif italic text-3xl mb-1">08. Tec N' Cool</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Plataforma Educativa ISCAP</span>
+          </div>
+        </a>
+
+        <!-- 09: Vertical Left -->
+        <a href="#"
+          class="col-span-1 md:col-start-1 md:col-span-4 group project-card bg-transparent block interactive clip-reveal">
+          <div class="aspect-[3/4] bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop"
+              alt="Expolive" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4">
+            <h3 class="font-serif italic text-3xl mb-2">09. Expolive</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Gestão Eventos & Chatbot AI</span>
+          </div>
+        </a>
+
+        <!-- 10: Square Right -->
+        <a href="#"
+          class="col-span-1 md:col-start-6 md:col-span-7 group project-card bg-transparent block interactive clip-reveal"
+          style="margin-top: -10%;">
+          <div class="aspect-square bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop"
+              alt="Wise Wallet" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4 flex justify-between items-baseline flex-wrap gap-2">
+            <h3 class="font-serif italic text-4xl mb-1">10. Wise Wallet</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Dashboard Financeiro Pessoal</span>
+          </div>
+        </a>
+
+        <!-- 11: Standard Horizontal Left -->
+        <a href="#"
+          class="col-span-1 md:col-start-2 md:col-span-5 group project-card bg-transparent block interactive clip-reveal"
+          style="margin-top: 5%;">
+          <div class="aspect-video bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop"
+              alt="Portable World" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4">
+            <h3 class="font-serif italic text-3xl mb-1">11. Portable World</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Website Corporativo</span>
+          </div>
+        </a>
+
+        <!-- 12: Grand Finale (Cristal Terminal) Massive Right -->
+        <a href="#"
+          class="col-span-1 md:col-start-4 md:col-span-9 group project-card bg-transparent block interactive clip-reveal"
+          style="margin-top: 10%;">
+          <div class="aspect-[16/10] bg-ink/5 overflow-hidden border border-ink/5 relative">
+            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1600&auto=format&fit=crop"
+              alt="Cristal Capital Terminal" class="w-full h-full object-cover "
+              style="transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;">
+            <!-- Subtle Terminal overlay layer -->
+            <div class="absolute inset-0 bg-ink opacity-10 mix-blend-multiply"></div>
+          </div>
+          <div class="mt-6 border-b border-ink/20 pb-4 flex justify-between items-baseline flex-wrap gap-2">
+            <h3 class="font-serif italic text-5xl mb-1 group-hover:text-ink/60 transition-colors duration-500">12.
+              Cristal Capital Terminal</h3>
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-60 text-right">Plataforma Quant /
+              Terminal Financeiro Profissional</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       SVG Filters (Liquid Distortion)
+       ============================================== -->
+  
+  <!-- ==============================================
+       INTERACTIVE CTA 
+       ============================================== -->
+  <section class="relative bg-paper text-ink overflow-hidden border-t border-ink/10"
+    style="padding: clamp(7rem, 13vh, 13rem) clamp(1.5rem, 5vw, 6rem);">
+
+    <!-- Ghost word -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
+      aria-hidden="true">
+      <span class="font-serif italic text-ink/5"
+        style="font-size: clamp(18vw, 26vw, 36vw); white-space: nowrap; line-height: 0.85;">Nex</span>
+    </div>
+
+    <div class="relative z-10 text-center reveal-on-scroll">
+      <div class="flex flex-col items-center gap-2 mb-8">
+        <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent-muted block">02 / Colaboração</span>
+      </div>
+
+      <h2 class="font-serif italic text-ink mb-6"
+        style="font-size: clamp(3.5rem, 8vw, 10rem); line-height: 0.88; letter-spacing: -0.02em;">
+        <span class="block transform transition-transform duration-700">Vamos criar <span class="not-italic">algo
+            notável.</span></span>
+      </h2>
+
+      <p class="font-mono text-[10px] uppercase tracking-widest text-silver mb-12 mx-auto leading-relaxed max-w-sm text-balance">
+        O seu projecto merece excelência arquitectónica.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+        <a href="../contactos/index.html"
+          class="magnetic interactive inline-flex items-center justify-center gap-3 font-mono bg-ink text-paper px-10 py-4"
+          style="font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;">
+          <span>Iniciar projecto</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+<!-- ==============================================
+       3. MASSIVE TYPOGRAPHY FOOTER (Linked from Main)
+       ============================================== -->
+  <!-- Note: Removing top margin since it follows a solid section in Portfolio, not the CTA -->
+  <footer class="bg-ink pt-24 pb-8 relative z-30 text-paper overflow-hidden px-6 md:px-12 lg:px-24">
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.24]"
+      style="background-image: radial-gradient(circle, rgba(235, 233, 228, 0.5) 1px, transparent 1px); background-size: 24px 24px;">
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20 relative z-10">
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 flex items-center justify-center text-paper">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <path d="M20 3L35 11.5V28.5L20 37L5 28.5V11.5L20 3Z" stroke="currentColor" stroke-width="1" />
+              <path d="M20 10L28 14.5V23.5L20 28L12 23.5V14.5L20 10Z" fill="currentColor" class="opacity-20" />
+              <circle cx="20" cy="19" r="1.5" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="font-sans font-extrabold text-[24px] tracking-widest uppercase">M O N R I O N</span>
+        </div>
+        <p class="text-paper/50 text-sm leading-relaxed max-w-xs font-light">
+          Design orgânico para um futuro digital sustentável. Sediados no Porto, a cultivar para o mundo.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-paper/40 mb-6 border-b border-paper/10 pb-2">
+          Páginas</h4>
+        <ul class="space-y-3 font-mono text-xs uppercase tracking-widest">
+          <li><a href="../index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Início</a>
+          </li>
+          <li><a href="index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Portfólio</a>
+          </li>
+          <li><a href="../sobre/index.html" class="interactive text-paper/70 hover:text-paper transition-colors">Sobre
+              Nós</a></li>
+          <li><a href="../servicos/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Serviços</a></li>
+          <li><a href="../contactos/index.html"
+              class="interactive text-paper/70 hover:text-paper transition-colors">Contactos</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-paper/40 mb-6 border-b border-paper/10 pb-2">
+          Contacto</h4>
+        <ul class="space-y-4 font-mono text-xs uppercase tracking-widest">
+          <li class="flex items-center gap-3">
+            <i data-lucide="mail" class="w-4 h-4 text-paper/40"></i>
+            <a href="mailto:geral@monrion.com"
+              class="interactive text-paper/70 hover:text-paper transition-colors">geral@monrion.com</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="phone" class="w-4 h-4 text-paper/40"></i>
+            <a href="tel:+351000000000" class="interactive text-paper/70 hover:text-paper transition-colors">+351 000
+              000 000</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="instagram" class="w-4 h-4 text-paper/40"></i>
+            <a href="#" class="interactive text-paper/70 hover:text-paper transition-colors">@monrion</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-[10px] uppercase tracking-widest text-paper/40 mb-6 border-b border-paper/10 pb-2">
+          Localização</h4>
+        <div class="space-y-4 font-mono text-xs uppercase tracking-widest text-paper/70">
+          <div class="flex items-start gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-paper/40 mt-0.5"></i>
+            <p>Porto, Portugal</p>
+          </div>
+          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-paper/40"></i>
+            <div class="flex items-center gap-2">
+              <span id="footer-gmt-time">--:--</span><span class="text-paper/40">GMT+0</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-4">
+            <div class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
+            <span class="text-paper/40">Disponível</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+      <p class="text-paper/30 font-mono text-[10px] uppercase tracking-widest">© 2026 Monrion. Todos os direitos
+        reservados.</p>
+      <div class="flex items-center gap-6">
+        <a href="#"
+          class="interactive text-paper/30 hover:text-paper/60 transition-colors font-mono text-[10px] uppercase tracking-widest">Termos
+          e Condições</a>
+        <a href="#"
+          class="interactive text-paper/30 hover:text-paper/60 transition-colors font-mono text-[10px] uppercase tracking-widest">Política
+          de Privacidade</a>
+      </div>
+    </div>
+
+    <!-- Massive Text -->
+    <div
+      class="absolute bottom-[-5%] left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden z-0">
+      <span
+        class="font-sans font-extrabold text-[20vw] leading-none whitespace-nowrap tracking-tighter mix-blend-overlay">MONRION</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    lucide.createIcons();
+    // Simple GMT Clock
+    setInterval(() => {
+      const el = document.getElementById("footer-gmt-time");
+      if (el) {
+        const now = new Date();
+        el.textContent = String(now.getUTCHours()).padStart(2, "0") + ":" + String(now.getUTCMinutes()).padStart(2, "0");
+      }
+    }, 1000);
+
+    // Filter Logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Active state
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-ink', 'text-paper');
+          b.classList.add('border-ink/20', 'text-ink/40');
+        });
+        btn.classList.add('bg-ink', 'text-paper');
+        btn.classList.remove('border-ink/20', 'text-ink/40');
+
+        const cat = btn.getAttribute('data-filter');
+        
+        projects.forEach(p => {
+           const pCat = p.getAttribute('data-category');
+           if(cat === 'all' || pCat.includes(cat)) {
+              p.style.display = 'block';
+              gsap.fromTo(p, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.5, ease: 'power2.out'});
+           } else {
+              p.style.display = 'none';
+           }
+           ScrollTrigger.refresh();
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
